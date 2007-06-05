@@ -22,7 +22,6 @@ b.addPartAttr("macrosize")
 
 syncPart = b.getSyncParticle()
 syncPart.pz(100.0)
-syncPart.rfFrequency(1.0123456789123456e+12)
 syncPart.time(333.333)
 
 b1 = Bunch()

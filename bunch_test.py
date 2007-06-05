@@ -27,10 +27,10 @@ print "bunch size=",b.getSize()," total=",b.getTotalCount()," capacity=",b.getCa
 n = 0
 
 while(1 > 0):
-	for i in xrange(10000):
+	for i in xrange(100000):
 		b.addParticle(0.1+i,0.2+i,0.3+i,0.4+i,0.5+i,0.6+i)
 	b.compress()
-	for i in xrange(10000):
+	for i in xrange(100000):
 		b.deleteParticleFast(i)
 	if(n%10 == 0):
 		print "n=",n," bunch size=",b.getSize()," total=",b.getTotalCount()," capacity=",b.getCapacity()

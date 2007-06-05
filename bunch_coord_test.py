@@ -19,7 +19,7 @@ b.compress()
 print "bunch size=",b.getSize()," total=",b.getTotalCount()," capacity=",b.getCapacity()
 print "======coords test==========="
 for i in xrange(nParts):
-	print "i=",i," x=",b.x(i)," y=",b.y(i)," z=",b.z(i)," phi=",b.phi(i),\
+	print "i=",i," x=",b.x(i)," y=",b.y(i)," z=",b.z(i),\
 	" px=",b.px(i)," py=",b.py(i)," pz=",b.pz(i)," dE=",b.dE(i)," flag=",b.flag(i)
 
 nParts = b.getSize()
@@ -33,7 +33,7 @@ for i in xrange(nParts):
 	b.py(i,2*b.py(i))
 	b.pz(i,2*b.pz(i))
 	#b.flag(i,0)
-	print "i=",i," x=",b.x(i)," y=",b.y(i)," z=",b.z(i)," phi=",b.phi(i),\
+	print "i=",i," x=",b.x(i)," y=",b.y(i)," z=",b.z(i),\
 	" px=",b.px(i)," py=",b.py(i)," pz=",b.pz(i)," dE=",b.dE(i)," flag=",b.flag(i)
 print "======after deleteAllParticles()==========="
 b.deleteAllParticles()

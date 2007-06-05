@@ -45,8 +45,6 @@ for i in xrange(nIter):
 	e = syncPart.kinEnergy()
 	p = syncPart.energyToMomentum(e)
 	e = syncPart.momentumToEnergy(p)
-	f = syncPart.rfFrequency()
-	syncPart.rfFrequency(f)
 	if i % 1000 == 0:
 		print "i=",i
 

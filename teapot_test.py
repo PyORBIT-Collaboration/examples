@@ -11,11 +11,11 @@ b.addParticle(0.0,1.0e-3,0.0,0.0,0.0,0.0)
 b.addParticle(0.0,0.0,1.0e-3,0.0,0.0,0.0)
 b.addParticle(0.0,0.0,0.0,1.0e-3,0.0,0.0)
 b.addParticle(0.0,0.0,0.0,0.0,1.0,0.0)
-b.addParticle(0.0,0.0,0.0,0.0,0.0,1.0)
+b.addParticle(0.0,0.0,0.0,0.0,0.0,1.0e-3)
 b.compress()
 
 syncPart = b.getSyncParticle()
-energy = 1.0e+3                          #energy in MeV
+energy = 1.0                          #energy in GeV
 #p = syncPart.energyToMomentum(energy)
 #syncPart.pz(p)
 syncPart.kinEnergy(energy)
@@ -69,11 +69,6 @@ elem6.getParam("skews").append(0)
 
 latt.initialize()
 
-#set phase scale
-ringLength = 2.7
-c = 2.99792458e+8
-syncPart.rfFrequency((syncPart.beta()*c)/ringLength)
-
 print "==============BEFORE============================"
 #b.dumpBunch()
 print "=========================================="
@@ -85,9 +80,16 @@ def stopAction(paramsDict):
     actions = paramsDict["actions"]
     if(node == elem4):
         actions.setShouldStop(True)
-    
+
+#=====check energy action ============
+def printdE(paramsDict):
+	node = paramsDict["node"]
+	bunch	= paramsDict["bunch"]
+	print "debug erg=",bunch.dE(0)," node=",node.getName()
+
 accContainer = AccActionsConatainer()
-accContainer.addEntranceAction(stopAction)
+#accContainer.addEntranceAction(stopAction)
+#accContainer.addEntranceAction(printdE)
 
 latt.trackBunch(b)
 #latt.trackBunch(b,accContainer)
@@ -102,9 +104,6 @@ print "TEAPOT time[sec]=",b.getSyncParticle().time()
 print "SIMPLE time[sec]=",latt.getLength()/(b.getSyncParticle().beta()*2.99792458e+8)
 print "Stop."
 
-#========================================================
-#         TEST OUTPUT
-#========================================================
 #==============BEFORE============================
 #==========================================
 #=============AFTER=============================
@@ -112,20 +111,26 @@ print "Stop."
 #% BUNCH_ATTRIBUTE_DOUBLE charge   1
 #% BUNCH_ATTRIBUTE_DOUBLE classical_radius   1.5347e-18
 #% BUNCH_ATTRIBUTE_DOUBLE macro_size   0
-#% BUNCH_ATTRIBUTE_DOUBLE mass   938.272
+#% BUNCH_ATTRIBUTE_DOUBLE mass   0.938272
 #%  SYNC_PART_COORDS 0 0 0  x, y, z positions in [m]
-#%  SYNC_PART_MOMENTUM 0 0 1696.037912  px, py, pz momentum component in MeV/c
-#%  info only: energy of the synchronous particle [MeV] = 1000
-#%  info only: momentum of the synchronous particle [MeV/c] = 1696.037912
+#%  SYNC_PART_MOMENTUM 0 0 1.696037912  px, py, pz momentum component in GeV/c
+#%  info only: energy of the synchronous particle [GeV] = 1
+#%  info only: momentum of the synchronous particle [GeV/c] = 1.696037912
 #%  info only: beta=v/c of the synchronous particle = 0.8750256155
 #%  info only: gamma=1/sqrt(1-(v/c)**2) of the synchronous particle = 2.065788684
-#%  SYNC_PART_TIME 0  time in [sec]
-#%  SYNC_PART_RF_FREQUENCY 97157807.44  rf frequency in [Hz]
-#% x[m] px[rad] y[m] py[rad] (z_or_phi or pz_or_dE)
-#0.0008284196 -0.00015325622 0 0 0.00069582754 -2.1657666e-13
-#0.002363176 0.00076945303 0 0 0.0010010072 -2.1665711e-13
-#2.3859816e-08 1.3257048e-07 0.0010236879 4.1172715e-05 1.0454023e-07 -2.1657666e-13
-#-4.7883175e-07 6.8646526e-07 0.0028841539 0.0010928603 3.6930219e-06 -2.1673757e-13
-#-2.7891822e-17 -2.6327478e-17 0 0 1 -2.1657666e-13
-#0.00023639448 0.00019942888 0 0 -0.00096634215 1
+#%  SYNC_PART_TIME 1.029253363e-08  time in [sec]
+#% x[m] px[rad] y[m] py[rad] z[m]  (pz or dE [GeV])
+#0.00083495963 -0.00014617443 0 0 0.00029913076 0
+#0.0023686752 0.00077560247 0 0 0.0004302311 0
+#6.4433079e-06 7.0981428e-06 0.0010236896 4.1175958e-05 1.6227413e-07 0
+#5.9408389e-06 7.6521437e-06 0.0028841578 0.0010928678 1.704316e-06 0
+#6.419405e-06 6.9655678e-06 0 0 1.0000001 0
+#0.00023639448 0.00019942888 0 0 -0.00041525495 0.001
+#==========================================
+#lattice length= 2.7
+#beta= 0.875025615499
+#TEAPOT time[sec]= 1.02925336251e-08
+#SIMPLE time[sec]= 1.02925336251e-08
+#Stop.
+
 
