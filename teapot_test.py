@@ -1,7 +1,6 @@
-import teapot
+from orbit import teapot
+from orbit.lattice import AccLattice, AccLine, AccElement, AccActionsConatainer
 from bunch import Bunch
-
-from lattice import AccLattice, AccLine, AccElement, AccActionsConatainer
 
 print "Start."
 

@@ -2,7 +2,7 @@ import sys
 import math
 import posix
 
-from lattice import AccLattice, AccLine, AccElement, AccActionsConatainer
+from orbit.lattice import AccLattice, AccLine, AccElement, AccActionsConatainer
 
 lat = AccLattice("test_lattice")
 
@@ -57,7 +57,7 @@ def Blanks(n):
     for i in xrange(n):
         s += " "
     return s
-    
+
 nLevel = 0
 
 def funcEntrance(paramsDict):
@@ -73,7 +73,7 @@ def funcExit(paramsDict):
     if(paramsDict.has_key("print") and paramsDict["print"] == True):
         print Blanks(nLevel),"EXIT  level=",nLevel," node=",node.getName()
     nLevel -= 1
-    
+
 def funcTrack(paramsDict):
     global nLevel
     node = paramsDict["node"]

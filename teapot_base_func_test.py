@@ -1,4 +1,4 @@
-import teapot
+from orbit import teapot
 from bunch import Bunch
 
 print "Start."
@@ -8,9 +8,12 @@ nParts = 1000
 for i in xrange(nParts):
 	b.addParticle(0.1+i,0.2+i,0.3+i,0.4+i,0.5+i,0.6+i)
 
+print "Start Tracking."
+
 count = 0
 while(1< 2):
-	#teapot.TPB.phasewrap(b)
+	ring_length = 100.
+	b.ringwrap(ring_length)
 	#------------------------------------
 	teapot.TPB.rotatexy(b, 0.5)
 	#------------------------------------
