@@ -5,11 +5,15 @@ from bunch import SyncParticle
 #Memory leak test - creates and destroys empty bunches
 #-----------------------------------------------------
 
-print "Start."
+print "Start.1"
 
 b = Bunch()
 
+print "Start.2"
+
 syncPart = b.getSyncParticle()
+print "Start.3"
+
 m = syncPart.mass()
 print "m=",m
 syncPart.x(0.1)
