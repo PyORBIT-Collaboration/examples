@@ -1,0 +1,1425 @@
+!*************************************************  
+!*      Spallation Neutron Source  
+!*      1.3 GeV  Compatible Accumulator Ring Lattice  
+!*      18 October 2000  
+!*      Created by Kip GARDNER  
+!*      Most recent update by S. Cousineau, 08/07/2003
+!*************************************************  
+!* Missing elements:  
+! - Skew quadrupole correctors  
+! - Skew sextupole correctors  
+! - Collimators  
+! - Extraction kickers  
+! - RF cavities  
+! - Magnet Errors  
+!* Elements to be reviewed:  
+! - Magnetic lengths of all elements, reflecting magnet models/measurements  
+! - New values for kicks in injection chicane and bumps  
+!  
+!* List compiled by Y.Papaphilippou 02/2002  
+!------------------------------------------------------------  
+! Bending Magnets (32, each split into left and right half)   
+! Magnetic length changed by Y.Papaphilippou 08/2001  
+! Magnetic length changed by S. Tepikian 03/26/2002  
+! Converted to SiteWideNames as per M. Hemmer spreadsheet,  
+!                            S. Tepikian 05/01/2003  
+!------------------------------------------------------------  
+! Modifications by S. Cousineau on 08/07/2003:
+!	-Added quadrupole correctors
+!	-Added skew quadrupole correctors
+!	-Added skew sextupole correctors
+!	-Added correct power supply families for octopules 
+!	-Added Collimators 
+!	-Modified final lattice to start at injection point
+!-----------------------------------------------------------
+! Modifications by S. Cousineau on 07/18/2005
+!	-Adding markers for diagnostic elements.  Locations
+!	given at center of element by J. Error.  
+!	Elements added:
+!		-BCM, WCM 
+!		-Tune kickers & pickups	
+!		-QMM kicker & pickups
+!		-IPM
+!		-Halo monitor
+!		-Wire scanner
+!------------------------------------------------------------ 
+! Modifications by S. Cousineau on 11/02/2005
+!	- Moved BPM centers to the centerpoint of the BPM
+!         stripline kicker, as given in Brookhaven drawings 
+!         and in drawings obtained by J. Error.
+!         The positions are correct to within the 
+!         approximation that the kicker stripline begins at
+!         the rf feed. 
+!------------------------------------------------------------
+  ANG:= 2*PI/32   
+  EE := ANG/2  
+!  LBEND := 1.4342   
+  LBEND := 1.4407  
+  BL:  Sbend, L=LBEND/2, Angle=EE, E1=0., E2=0.  
+  BR:  Sbend, L=LBEND/2, Angle=EE, E1=0., E2=0.  
+  BND: Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  RHOB:=LBEND/ANG ; Value RHOB  
+  BBND:=Brho/RHOB ; Value BBND  
+!------------------------------------------------------------  
+! Generic Half-Quads  
+!------------------------------------------------------------  
+   LF:=0.25  
+   LD:=0.25  
+ LF26:=0.2705  
+ LD26:=0.2705  
+  LDE:=0.25  
+ LDEE:=0.25  
+!------------------------------------------------------------
+! New quad lengths: Jeff Holmes, 10/2000
+! Updated lengths: Steve Tepikian 8/7/2003
+!------------------------------------------------------------
+  LDC:=0.2665
+  LFC:=0.3365
+!------------------------------------------------------------  
+! Initial Quad Strengths (for matching)  
+!------------------------------------------------------------  
+   KF= 3.882808E+00  
+   KD:=-4.123195E+00  
+  KDE:=-2.00  
+  KDC:=-4.00  
+  KFC:= 4.00  
+ KDEE:=0.5*(KDE+KD)  
+ KF26:=KF*(LF/LF26)  
+ KD26:=KD*(LD/LD26)  
+!------------------------------------------------------------  
+ KVX1:=KDEE  
+ KHX2:=KF  
+ KVX3:=KD  
+ KHX4:=KF26  
+ KVX5:=KD  
+ KHX6:=KF26  
+ KVX7:=KD  
+ KHX8:=KF  
+ KVX9:=KDEE  
+ KHX10:=KFC  
+ KVX11:=KDC  
+ KVX12:=KDC  
+ KHX13:=KFC   
+!------------------------------------------------------------  
+! Initial Sextupole and Octupole Strengths  
+! Strengths for 8 separately powered Octupoles added 
+! by S. Cousineau 08/06/2003
+!------------------------------------------------------------  
+ CHRM3:=0.0  
+ CHRM4:=0.0  
+ CHRM5:=0.0  
+ CHRM6:=0.0  
+ CHRM7:=CHRM3  
+ KSV1:=0.0  
+ KSH2:=0.0  
+ KSV3:=CHRM3  
+ KSH4:=CHRM4  
+ KSV5:=CHRM5  
+ KSH6:=CHRM6  
+ KSV7:=CHRM7  
+ KOH8:=0.0  
+ KOV9:=0.0  
+ KO_A08:=0.0
+ KO_A09:=0.0
+ KO_B08:=0.0
+ KO_B09:=0.0
+ KO_C08:=0.0
+ KO_C09:=0.0
+ KO_D08:=0.0
+ KO_D09:=0.0
+!------------------------------------------------------------
+! Initial Trim Quadrupole Strengths 
+! Added by S. Cousineau 08/05/2003
+! Power supply families are taken from BNL technote 89.
+! Example: KTA2C8 is strength for correctors A2, A8, C2, C8,
+! which are in one power supply family but may have different
+! polarities.
+!------------------------------------------------------------
+ KTA2C8 := 0.0
+ KTB2D8 := 0.0
+ KTA4B6 := 0.0
+ KTC4D6 := 0.0
+ KTA10B13 := 0.0
+ KTC10D13 := 0.0
+ KTA11C12 := 0.0
+ KTB11D12 := 0.0
+ KTA1_9 := 0.0
+ KTB1_9 := 0.0
+ KTC1_9 := 0.0
+ KTD1_9 := 0.0
+ KTA357 := 0.0
+ KTB357 := 0.0
+ KTC357 := 0.0
+ KTD357 := 0.0
+!------------------------------------------------------------
+! Initial Skew Qaudrupole Strengths
+! Added by S. Cousineau 08/05/2003
+! All are on individual power supplies (See BNL technote 89).
+!------------------------------------------------------------
+ KSC_A01 := 0.0
+ KSC_A02 := 0.0
+ KSC_A03 := 0.0
+ KSC_A05 := 0.0
+ KSC_A07 := 0.0
+ KSC_A08 := 0.0
+ KSC_A09 := 0.0
+ KSC_B01 := 0.0
+ KSC_B02 := 0.0
+ KSC_B03 := 0.0
+ KSC_B05 := 0.0
+ KSC_B07 := 0.0
+ KSC_B08 := 0.0
+ KSC_B09 := 0.0
+ KSC_C01 := 0.0
+ KSC_C02 := 0.0
+ KSC_C03 := 0.0
+ KSC_C05 := 0.0
+ KSC_C07 := 0.0
+ KSC_C08 := 0.0
+ KSC_C09 := 0.0
+ KSC_D01 := 0.0
+ KSC_D02 := 0.0
+ KSC_D03 := 0.0
+ KSC_D05 := 0.0
+ KSC_D07 := 0.0
+ KSC_D08 := 0.0
+ KSC_D09 := 0.0
+!------------------------------------------------------------
+! Initial Skew Sextupole Strengths
+! Added by S. Cousineau 08/05/2003
+! Power supply families are taken from BNL technote 89.
+! Example: KSSA1_9 connects A1 and A9
+!------------------------------------------------------------
+ KSSA1_9:=0.0
+ KSSA2_8:=0.0
+ KSSB1_9:=0.0
+ KSSB2_8:=0.0
+ KSSC1_9:=0.0
+ KSSC2_8:=0.0
+ KSSD1_9:=0.0
+ KSSD2_8:=0.0
+!------------------------------------------------------------
+   QF:  Quad,  L=LF,   K1=KF/Brho  
+   QD:  Quad,  L=LD,   K1=KD/Brho  
+  QDE:  Quad,  L=LDE,  K1=KDE/Brho  
+ QDEE:  Quad,  L=LDEE, K1=KDEE/Brho  
+  QDC:  Quad,  L=LDC,  K1=KDC/Brho  
+  QFC:  Quad,  L=LFC,  K1=KFC/Brho  
+ QF26:  Quad,  L=LF26,   K1=KF26/Brho  
+ QD26:  Quad,  L=LD26,   K1=KD26/Brho  
+!------------------------------------------------------------  
+! Generic Whole-Quads  
+!------------------------------------------------------------  
+   LLF:=2.0*LF  
+   LLD:=2.0*LD  
+ LLDEE:=2.0*LDEE  
+  LLDC:=2.0*LDC  
+  LLFC:=2.0*LFC  
+ LLF26:=2.0*LF26  
+ LLD26:=2.0*LD26  
+   QQF:  Quad,  L=LLF,   K1=KF/Brho  
+   QQD:  Quad,  L=LLD,   K1=KD/Brho  
+ QQDEE:  Quad,  L=LLDEE, K1=KDEE/Brho  
+  QQDC:  Quad,  L=LLDC,  K1=KDC/Brho  
+  QQFC:  Quad,  L=LLFC,  K1=KFC/Brho  
+!------------------------------------------------------------  
+! Individual Whole-Quads  
+! Polarities for quad trim correctors chosen by 
+! S. Cousineau, 08/05/2003
+!------------------------------------------------------------  
+  QTV_X01: Quad,  L=LLD,   K1=KVX1/Brho  
+  QTH_X02: Quad,  L=LLF,   K1=KHX2/Brho  
+  QTV_X03: Quad,  L=LLD,   K1=KVX3/Brho  
+  QTH_X04: Quad,  L=LLF26, K1=KHX4/Brho  
+  QTV_X05: Quad,  L=LLD,   K1=KVX5/Brho  
+  QTH_X06: Quad,  L=LLF26, K1=KHX6/Brho  
+  QTV_X07: Quad,  L=LLD,   K1=KVX7/Brho  
+  QTH_X08: Quad,  L=LLF,   K1=KHX8/Brho  
+  QTV_X09: Quad,  L=LLDEE, K1=KVX9/Brho  
+  QTH_X10: Quad,  L=LLFC,  K1=KHX10/Brho  
+  QTV_X11: Quad,  L=LLDC,  K1=KVX11/Brho  
+  QTV_X12: Quad,  L=LLDC,  K1=KVX12/Brho  
+  QTH_X13: Quad,  L=LLFC,  K1=KHX13/Brho  
+!  
+  QTV_A01: Quad,  L=LLD,   K1=(KVX1+KTA1_9)/Brho  
+  QTH_A02: Quad,  L=LLF,   K1=(KHX2+KTA2C8)/Brho  
+  QTV_A03: Quad,  L=LLD,   K1=(KVX3+KTA357)/Brho  
+  QTH_A04: Quad,  L=LLF26, K1=(KHX4+KTA4B6)/Brho  
+  QTV_A05: Quad,  L=LLD,   K1=(KVX5+KTA357)/Brho  
+  QTH_A06: Quad,  L=LLF26, K1=(KHX6+KTA4B6)/Brho  
+  QTV_A07: Quad,  L=LLD,   K1=(KVX7+KTA357)/Brho  
+  QTH_A08: Quad,  L=LLF,   K1=(KHX8+KTA2C8)/Brho  
+  QTV_A09: Quad,  L=LLDEE, K1=(KVX9+KTA1_9)/Brho  
+  QTH_A10: Quad,  L=LLFC,  K1=(KHX10+KTA10B13)/Brho  
+  QTV_A11: Quad,  L=LLDC,  K1=(KVX11+KTA11C12)/Brho  
+  QTV_A12: Quad,  L=LLDC,  K1=(KVX12+KTA11C12)/Brho  
+  QTH_A13: Quad,  L=LLFC,  K1=(KHX13+KTA10B13)/Brho  
+!  
+  QTV_B01: Quad,  L=LLD,   K1=(KVX1+KTB1_9)/Brho  
+  QTH_B02: Quad,  L=LLF,   K1=(KHX2+KTB2D8)/Brho  
+  QTV_B03: Quad,  L=LLD,   K1=(KVX3+KTB357)/Brho  
+  QTH_B04: Quad,  L=LLF26, K1=(KHX4-KTA4B6)/Brho  
+  QTV_B05: Quad,  L=LLD,   K1=(KVX5+KTB357)/Brho  
+  QTH_B06: Quad,  L=LLF26, K1=(KHX6-KTA4B6)/Brho  
+  QTV_B07: Quad,  L=LLD,   K1=(KVX7+KTB357)/Brho  
+  QTH_B08: Quad,  L=LLF,   K1=(KHX8+KTB2D8)/Brho  
+  QTV_B09: Quad,  L=LLDEE, K1=(KVX9+KTB1_9)/Brho  
+  QTH_B10: Quad,  L=LLFC,  K1=(KHX10-KTA10B13)/Brho  
+  QTV_B11: Quad,  L=LLDC,  K1=(KVX11+KTB11D12)/Brho  
+  QTV_B12: Quad,  L=LLDC,  K1=(KVX12+KTB11D12)/Brho  
+  QTH_B13: Quad,  L=LLFC,  K1=(KHX13-KTA10B13)/Brho  
+!  
+  QTV_C01: Quad,  L=LLD,   K1=(KVX1+KTC1_9)/Brho  
+  QTH_C02: Quad,  L=LLF,   K1=(KHX2+KTA2C8)/Brho  
+  QTV_C03: Quad,  L=LLD,   K1=(KVX3+KTC357)/Brho  
+  QTH_C04: Quad,  L=LLF26, K1=(KHX4+KTC4D6)/Brho  
+  QTV_C05: Quad,  L=LLD,   K1=(KVX5+KTC357)/Brho  
+  QTH_C06: Quad,  L=LLF26, K1=(KHX6+KTC4D6)/Brho  
+  QTV_C07: Quad,  L=LLD,   K1=(KVX7+KTC357)/Brho  
+  QTH_C08: Quad,  L=LLF,   K1=(KHX8+KTA2C8)/Brho  
+  QTV_C09: Quad,  L=LLDEE, K1=(KVX9+KTC1_9)/Brho  
+  QTH_C10: Quad,  L=LLFC,  K1=(KHX10+KTC10D13)/Brho  
+  QTV_C11: Quad,  L=LLDC,  K1=(KVX11-KTA11C12)/Brho  
+  QTV_C12: Quad,  L=LLDC,  K1=(KVX12-KTA11C12)/Brho  
+  QTH_C13: Quad,  L=LLFC,  K1=(KHX13+KTC10D13)/Brho  
+!  
+  QTV_D01: Quad,  L=LLD,   K1=(KVX1+KTD1_9)/Brho  
+  QTH_D02: Quad,  L=LLF,   K1=(KHX2+KTB2D8)/Brho  
+  QTV_D03: Quad,  L=LLD,   K1=(KVX3+KTD357)/Brho  
+  QTH_D04: Quad,  L=LLF26, K1=(KHX4-KTC4D6)/Brho  
+  QTV_D05: Quad,  L=LLD,   K1=(KVX5+KTD357)/Brho  
+  QTH_D06: Quad,  L=LLF26, K1=(KHX6-KTC4D6)/Brho  
+  QTV_D07: Quad,  L=LLD,   K1=(KVX7+KTD357)/Brho  
+  QTH_D08: Quad,  L=LLF,   K1=(KHX8+KTB2D8)/Brho  
+  QTV_D09: Quad,  L=LLDEE, K1=(KVX9+KTD1_9)/Brho  
+  QTH_D10: Quad,  L=LLFC,  K1=(KHX10-KTC10D13)/Brho  
+  QTV_D11: Quad,  L=LLDC,  K1=(KVX11-KTB11D12)/Brho  
+  QTV_D12: Quad,  L=LLDC,  K1=(KVX12-KTB11D12)/Brho  
+  QTH_D13: Quad,  L=LLFC,  K1=(KHX13-KTC10D13)/Brho  
+!------------------------------------------------------------  
+! Individual Dipoles  
+!------------------------------------------------------------  
+  DH_A01:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_A02:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_A03:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_A04:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_A06:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_A07:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_A08:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_A09:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+!  
+  DH_B01:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_B02:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_B03:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_B04:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_B06:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_B07:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_B08:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_B09:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+!  
+  DH_C01:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_C02:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_C03:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_C04:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_C06:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_C07:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_C08:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_C09:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+!  
+  DH_D01:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_D02:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_D03:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_D04:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_D06:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_D07:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_D08:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+  DH_D09:  Sbend, L=LBEND, Angle=ANG, E1=0.0, E2=0.0  
+!-------------------------------------------------------------------------  
+! Drifts   
+! drift lengths between quad and dipole changed by Y.Papaphilippou 08/2001  
+! drift lengths about the dipoles adjusted to freeze geometry when  
+! the dipole changes by S. Tepikian 3/2002  
+!-------------------------------------------------------------------------   
+  SO:=1.0 + (1.5 - LBEND) * tan(EE) / ANG  
+  SOO:=1.0 + (1.5 - LBEND) * tan(EE) / ANG  
+  SO26:=SO + LF - LF26  
+  SOO26:=SOO + LF - LF26  
+  DSO:=0.0  
+  DSOO:=0.0  
+  O: Drift, L=SO+DSO  
+  OO: Drift, L=SOO+DSOO  
+  O26: Drift, L=SO26+DSO  
+  OO26: Drift, L=SOO26+DSOO  
+  DUU:= 0.0  
+  LV:=1.025-LFC-LDC  
+  L4U:=7.45-LDEE-LFC  
+  LU:=DUU+L4U/4.0  
+  L4W:=13.05-LDC-LDC  
+  LW:=L4W/4.0  
+  UU: Drift, L=LU  
+  VV: Drift, L=LV  
+  WW: Drift, L=LW  
+  
+!------------------------------------------------------------  
+! Injection Bends and Drifts:  
+! Modified by Jeff Holmes: 10/2000 with parameters from   
+! BNL Technote 76 with updates from Nuria Catalan-Lasheras  
+  SCAL:=1.0  
+!------------------------------------------------------------  
+! New Bend Angles: From Nuria Catalan-Lasheras  
+!------------------------------------------------------------  
+     PHI1:=-42.0E-03*SCAL  
+     PHI2:= 45.0E-03*SCAL  
+     PHI3:= 43.6E-03*SCAL  
+     PHI4:=-46.6E-03*SCAL  
+!------------------------------------------------------------  
+! New Bend Lengths (X-Projections): From Technote 76  
+!------------------------------------------------------------  
+     LPI1:=0.863  
+     LPI2:=0.872  
+     LPI3:=0.990  
+     LPI4:=0.890  
+!------------------------------------------------------------  
+! New Radii of Curvature: From above information  
+!------------------------------------------------------------  
+     RHO1:=-LPI1/SIN(PHI1)  
+     RHO2:= LPI2/(SIN(PHI2+PHI1)-SIN(PHI1))  
+     RHO3:= LPI3/(SIN(PHI3+PHI2+PHI1)-SIN(PHI2+PHI1))  
+     RHO4:=-LPI4/(SIN(PHI4+PHI3+PHI2+PHI1)-SIN(PHI3+PHI2+PHI1))  
+!------------------------------------------------------------  
+! New Bend Path Lengths: From above information  
+!------------------------------------------------------------  
+     LBI1:=-RHO1*PHI1  
+     LBI2:= RHO2*PHI2  
+     LBI3:= RHO3*PHI3  
+     LBI4:=-RHO4*PHI4  
+!------------------------------------------------------------  
+! New Bend Fields: From above information  
+!------------------------------------------------------------  
+     BBI1:=Brho/RHO1  
+     BBI2:=Brho/RHO2  
+     BBI3:=Brho/RHO3  
+     BBI4:=Brho/RHO4  
+!------------------------------------------------------------  
+! New Chicane Bends: From above information  
+!------------------------------------------------------------  
+   DH_A10: Sbend, L=LBI1, Angle=PHI1, E1=0.0, E2=PHI1  
+   DH_A11: Sbend, L=LBI2, Angle=PHI2, E1=-PHI1, E2=PHI2+PHI1  
+   DH_A12: Sbend, L=LBI3, Angle=PHI3, E1=-(PHI2+PHI1), &  
+                  E2=PHI3+PHI2+PHI1  
+   DH_A13: Sbend, L=LBI4, Angle=PHI4, E1=-(PHI3+PHI2+PHI1), &  
+                  E2=(PHI4+PHI3+PHI2+PHI1) 
+!------------------------------------------------------------  
+! New Inter-Bend Drift Lengths: From Technote 76  
+!------------------------------------------------------------  
+     LC12:=2.381-LPI1/2.0-LPI2/2.0  
+     LB12:=LC12/COS(-PHI1)  
+     LC23:=1.814-LPI2/2.0-LPI3/2.0  
+     LB23:=LC23/COS(PHI2+PHI1)  
+     LC34:=2.029-LPI3/2.0-LPI4/2.0  
+     LB34:=LC34/COS(PHI3+PHI2+PHI1)  
+! Chicane Width:  
+     LSHC:=LPI1+LC12+LPI2+LC23+LPI3+LC34+LPI4  
+! Quad-to-Bend and Bend-to-Quad Lengths:   
+     LQTB:=3.230-LDC-LPI1/2.0  
+!     LBTQ:=12.500-LQTB-LSHC  
+     LBTQ:=13.050-2.0*LDC-LQTB-LSHC
+!------------------------------------------------------------  
+! New Injection Drifts: From above information  
+!------------------------------------------------------------  
+     DQTB: Drift, L=LQTB  
+     DB12: Drift, L=LB12  
+     DB23: Drift, L=LB23  
+     DB34: Drift, L=LB34  
+     DBTQ: Drift, L=LBTQ  
+!------------------------------------------------------------  
+! New Injection Kickers: From Technote 76  
+!                        and Nuria Catalan-Lasheras  
+!------------------------------------------------------------  
+!    HKCK10:=9.390715E-03  
+!    HKCK11:=-2.943608E-03  
+!    HKCK12:=-2.943608E-03  
+!    HKCK13:=9.390715E-03  
+!    VKCK10:=7.327221E-03  
+!    VKCK11:=-4.827632E-03  
+!    VKCK12:=-4.827632E-03  
+!    VKCK13:=7.327221E-03  
+  HKCK10:=0.0  
+  HKCK11:=0.0  
+  HKCK12:=0.0  
+  HKCK13:=0.0  
+  VKCK10:=0.0  
+  VKCK11:=0.0  
+  VKCK12:=0.0  
+  VKCK13:=0.0  
+  LHKCK10:=0.839  
+  LHKCK11:=0.428  
+  LHKCK12:=0.428  
+  LHKCK13:=0.839  
+  LVKCK10:=0.839  
+  LVKCK11:=0.428  
+  LVKCK12:=0.428  
+  LVKCK13:=0.839  
+ IkickH_A10: HKICKER, KICK= HKCK10, L= LHKCK10  
+ IkickH_A11: HKICKER, KICK= HKCK11, L= LHKCK11  
+ IkickH_A12: HKICKER, KICK= HKCK12, L= LHKCK12  
+ IkickH_A13: HKICKER, KICK= HKCK13, L= LHKCK13  
+ IkickV_A10: VKICKER, KICK= VKCK10, L= LVKCK10  
+ IkickV_A11: VKICKER, KICK= VKCK11, L= LVKCK11  
+ IkickV_A12: VKICKER, KICK= VKCK12, L= LVKCK12  
+ IkickV_A13: VKICKER, KICK= VKCK13, L= LVKCK13  
+!------------------------------------------------------------  
+! Drifts between injection kickers:   
+! Modified by Jeff Holmes, 10/2000, information from  
+! BNL Technote 76 and Nuria Catalan-Lasheras  
+!------------------------------------------------------------  
+     DLI1:=1.650-LDEE-LHKCK10/2.0  
+     DLI2:=1.160-LHKCK10/2.0-LVKCK10/2.0  
+     DLI3:=1.530-LVKCK10/2.0-LHKCK11/2.0  
+     DLI4:=0.540-LHKCK11/2.0-LVKCK11/2.0  
+     DLI5:=2.570-LVKCK11/2.0-LFC  
+     DKH1: Drift, L=DLI1  
+     DKV1: Drift, L=DLI2  
+     DKH2: Drift, L=DLI3  
+     DKV2: Drift, L=DLI4  
+     DQFC: Drift, L=DLI5  
+     DKV3: Drift, L=DLI5  
+     DKH3: Drift, L=DLI4  
+     DKV4: Drift, L=DLI3  
+     DKH4: Drift, L=DLI2  
+     DQDE: Drift, L=DLI1  
+! ------------------------------------------------  
+! RF Cavities  
+! ------------------------------------------------  
+   LCAV := 2.1466
+    LCAVsep := 0.1506
+   Cav_01: RFCAVITY, L = LCAV, HARMON = 1, VOLT =  0.0133  
+   Cav_02: RFCAVITY, L = LCAV, HARMON = 1, VOLT =  0.0133  
+   Cav_03: RFCAVITY, L = LCAV, HARMON = 1, VOLT =  0.0133  
+   Cav_04: RFCAVITY, L = LCAV, HARMON = 2, VOLT = -0.020  
+ 
+   Orf: DRIFT, L = LCAVsep
+   Orfe: DRIFT, L = (L4W - 4.0*LCAV - 3.0*LCAVsep) / 2.0
+
+!------------------------------------------------------------  
+! Bare Four-fold Symmetric Ring:  
+! Arc Cell (AC); Straight Cell (SC); Superperiod (SP)  
+!------------------------------------------------------------  
+       AC: Line = (QD,OO,BL,BR,O,QF,QF,OO,BL,BR,O,QD)  
+     AC26: Line = (QD,OO,BL,BR,O26,QF26,QF26,OO26,BL,BR,O,QD)  
+      ACL: Line = (QDEE,OO,BL,BR,O,QF,QF,OO,BL,BR,O,QD)  
+      ACR: Line = (QD,OO,BL,BR,O,QF,QF,OO,BL,BR,O,QDEE)  
+      ARC: Line = (ACL,AC26,AC26,ACR)  
+      SCL: Line = (QDE,UU,UU,UU,UU,QFC,QFC,VV,QDC,QDC,WW,WW)  
+      SCR: Line = (WW,WW,QDC,QDC,VV,QFC,QFC,UU,UU,UU,UU,QDE)  
+     SCLL: Line = (QDEE,UU,UU,UU,UU,QFC,QFC,VV,QDC,QDC,WW,WW)  
+     SCRR: Line = (WW,WW,QDC,QDC,VV,QFC,QFC,UU,UU,UU,UU,QDEE)  
+     INRF1: Line = (Orfe,Cav_01,Orf,Cav_02,Orf,Cav_03,Orf)
+     INRF2: Line = (Cav_04,Orfe)
+   SCLLRF: Line = (QDEE,UU,UU,UU,UU,QFC,QFC,VV,QDC,QDC,INRF1)  
+   SCRRRF: Line = (INRF2,QDC,QDC,VV,QFC,QFC,UU,UU,UU,UU,QDEE)  
+       SC: Line = (SCL, SCR)  
+      SCC: Line = (SCLL, SCRR)  
+    SCCRF: Line = (SCLLRF, SCRRRF)  
+      SPP: Line = (SC,AC,AC26,AC26,AC)  
+       SP: Line = (SCC, ARC)  
+     SPRF: Line = (SCCRF, ARC)  
+!     RING: Line = (4*SP)  
+!------------------------------------------------------------  
+! Bare Ring with Injection Chicane and Kickers:  
+!------------------------------------------------------------  
+!  Put in Injection Chicane (CJG 11 Nov 1999):   
+!  Put in Injection Kickers (CJG 30 Nov 1999):  
+    INJM1: Marker  
+    INJM2: Marker  
+!      SIL: Line = (QDEE,UU,UU,UU,UU,QFC,QFC,VV,QDC,QDC)  
+     SILA: Line = (QDEE,DKH1,IkickH_A10,DKV1,IkickV_A10,DKH2,IkickH_A11)  
+     SILB: Line = (DKV2,IkickV_A11,DQFC,QFC,QFC,VV,QDC,QDC)  
+      SIL: Line = (SILA,SILB)  
+!    SINJL: Line = (DQTB,DH_A10,DB12,DH_A11)  
+!    SINJR: Line = (INJM1,DB23,DH_A12,DB34,DH_A13,DBTQ)  
+     SINJL: Line = (DQTB,DH_A10,DB12,DH_A11)  
+     SINJR: Line = (INJM1,DB23,DH_A12,DB34,DH_A13,DBTQ)  
+!      SIR: Line = (QDC,QDC,VV,QFC,QFC,UU,UU,UU,UU,QDEE)  
+     SIRA: Line = (QDC,QDC,VV,QFC,QFC,DKV3,IkickV_A12,DKH3,IkickH_A12)  
+     SIRB: Line = (DKV4,IkickV_A13,DKH4,IkickH_A13,DQDE,QDEE,INJM2)  
+      SIR: Line = (SIRA,SIRB)  
+  SISINJL: Line = (SIL,SINJL)  
+  SISINJR: Line = (SINJR,SIR)  
+     SINJ: Line = (SISINJL,SISINJR)  
+    SPINJ: Line = (SISINJL,SISINJR,ARC)  
+     RING: Line = (SPINJ,SP,SP,SP)  
+  RINGINJ: Line = (SISINJR, ARC, SP, SP, SP, SISINJL)
+!------------------------------------------------------------  
+! Ring for Beam Dynamics with Injection Foil at Beginning  
+! Jeff Holmes, 10/2000  
+!------------------------------------------------------------  
+!   RNGOBT: Line = (SISINJR,ARC,SP,SP,SP,SISINJL)  
+   RNGOBT: Line = (SISINJR,ARC,SP,SP,SPRF,SISINJL)  
+!------------------------------------------------------------  
+! Bare lattice with Chromaticity Sextupoles  
+! Jeff Holmes and Yannis Papaphilippou, 01/2001  
+!------------------------------------------------------------  
+   ACLSX1: Line = (QD,Q3D,SV_X03,Q3B3,BL,BR,O26,QF26)  
+   ACLSX2: Line = (QF26,Q4D,SH_X04,Q4B4,BL,BR,B4Q5,SV_X05,Q5U,QD)  
+   ACRSX1: Line = (QD,OO,BL,BR,B6Q6,SH_X06,Q6U,QF26)  
+   ACRSX2: Line = (QF26,OO26,BL,BR,B7Q7,SV_X07,Q7U,QD)  
+    ARCSX: Line = (ACL,ACLSX1,ACLSX2,ACRSX1,ACRSX2,ACR)  
+     SPSX: Line = (SCC,ARCSX)  
+   RINGSX: Line = (4*SPSX)
+  
+!------------------------------------------------------------
+!   Extraction Kickers and drifts:
+!   Steve Tepikian and Nick Tsoupas, 12/2003
+!   Adjusted to reflect installed positions on 11/2005 (Cousineau)
+!------------------------------------------------------------
+  EKick01: VKick, L = 0.4000
+  EKick02: VKick, L = 0.4000
+  EKick03: VKick, L = 0.4000
+  EKick04: VKick, L = 0.5050
+  EKick05: VKick, L = 0.5050
+  EKick06: VKick, L = 0.5050
+  EKick07: VKick, L = 0.5050
+
+  EKick08: VKick, L = 0.4275
+  EKick09: VKick, L = 0.4275
+  EKick10: VKick, L = 0.4275
+  EKick11: VKick, L = 0.4275
+  EKick12: VKick, L = 0.3900
+  EKick13: VKick, L = 0.3900
+  EKick14: VKick, L = 0.3900
+
+ RTBTMark: Drift, L = 1.6035
+ SEKLbeg1: Drift, L = 1.814288 - RTBTMark[L] - 0.0130
+    SEK02: Drift, L = 0.080000
+    SEK03: Drift, L = 0.080000
+    SEK04: Drift, L = 0.080500
+    SEK05: Drift, L = 0.080000
+    SEK06: Drift, L = 0.080000
+    SEK07: Drift, L = 0.080000
+ SEKLend1: Drift, L = 0.119204 + 0.013
+
+ SEKLbeg2: Drift, L = 0.458750 + 0.0090
+    SEK09: Drift, L = 0.079500 + 0.002
+    SEK10: Drift, L = 0.080500 + 0.002
+    SEK11: Drift, L = 0.079500 - 0.001
+    SEK12: Drift, L = 0.080250 + 0.0003
+    SEK13: Drift, L = 0.080000 - 0.0007 
+    SEK14: Drift, L = 0.080000 + 0.0011
+ SEKLend2: Drift, L = 2.440000 - 0.0127
+
+  EKLine1: Line=(RTBTMark, SEKLbeg1, EKick01, SEK02, EKick02, SEK03, &
+                 EKick03, SEK04, EKick04, SEK05, EKick05, SEK06, EKick06, &
+                 SEK07, EKick07, SEKLend1)
+  EKLine2: Line=(SEKLbeg2, EKick08, SEK09, EKick09, SEK10, EKick10, SEK11, &
+                 EKick11, SEK12, EKick12, SEK13, EKick13, SEK14, EKick14, &
+                 SEKLend2)
+!------------------------------------------------------------  
+!   Assemble Superperiod with PUE's and Correctors:  
+!------------------------------------------------------------  
+! value of sextupole and sextupole magnetic length changed,  
+! Y.Papaphilippou, 01/2001  
+! added length differences for the 26cm quadrupoles,  
+! S. Tepikian, 06/2002  
+!------------------------------------------------------------  
+! Magnetic lengths of correctors  
+!------------------------------------------------------------  
+     LSXT:=0.317  
+   LSXTCR:=0.354  
+   LSXT26:=0.33  
+     LOCT:=0.33  
+   LM16CD:=0.330  
+  LM27CDM:=0.585  
+  LM36CDM:=0.618  
+!------------------------------------------------------------
+! Reduced the length of the corrector 4cm since this led to
+! a negative driftspace length relative to the quadrupole
+! S. Cousineau, M. Hemmer, S. Tepikian, N. Tsoupas, 8/12/2003
+!------------------------------------------------------------
+!  LM41CDM:=0.673
+  LM41CDM:=0.633 
+!------------------------------------------------------------  
+! Center to center distance of correctors from quads  
+!------------------------------------------------------------  
+    L16CD:=0.520192  
+   L27CDM:=0.553212  
+   L36CDM:=0.585724  
+   L41CDM:=0.653796  
+     LSTQ:=0.534162  
+   LSTQCR:=0.553212  
+   LSTQ26:=0.604774  
+     LOTQ:=0.553212  
+!------------------------------------------------------------  
+     LSV1:=LSXTCR  
+     LCV1:=LM27CDM  
+     SQ1D:=LSTQCR-LSV1/2.0-LD  
+     SQ1U:=L27CDM-LD-LCV1/2.0  
+   KDVTX1:=0.0  
+  SCV_X01: Sextupole, L=LSV1, K2=KSV1  
+      Q1U: Drift, L=SQ1U   
+  BPM_X01: Monitor  
+      Q1D: Drift, L=SQ1D  
+DDMCV_X01: Drift, L=LCV1/2.0
+DDMCV_X01a: Drift, L=L27CDM - 0.3581326
+DDMCV_X01b: Drift, L=DDMCV_X01[L] - DDMCV_X01a[L]
+ DMCV_X01: VKICKER, L=0.0, KICK=KDVTX1  
+      QX1: Line = (DDMCV_X01,DMCV_X01,DDMCV_X01a,BPM_X01,&
+                   DDMCV_X01b,Q1U,QTV_X01,Q1D,SCV_X01)  
+     Q1B1: Drift, L=SOO+DSOO-SQ1D-LSV1  
+!------------------------------------------------------------  
+     LSH2:=LSXTCR  
+     LCH2:=LM27CDM  
+     SQ2D:=LSTQCR-LSH2/2.0-LF  
+     SQ2U:=L27CDM-LF-LCH2/2.0  
+   KDHTX2:=0.0  
+  SCH_X02: Sextupole, L=LSH2, K2=KSH2  
+      Q2U: Drift, L=SQ2U   
+  BPM_X02: Monitor  
+      Q2D: Drift, L=SQ2D  
+DDMCH_X02: Drift, L=LCH2/2.0  
+DDMCH_X02a: Drift, L=L27CDM - 0.3612895
+DDMCH_X02b: Drift, L=DDMCH_X02[L] - DDMCH_X02a[L]
+ DMCH_X02: HKICKER, L=0.0, KICK=KDHTX2  
+     B1Q2: Drift, L=SO+DSO-SQ2U-LCH2  
+      QX2: Line = (DDMCH_X02,DMCH_X02,DDMCH_X02a,BPM_X02,&
+                   DDMCH_X02b,Q2U,QTH_X02,Q2D,SCH_X02)  
+     Q2B2: Drift, L=SOO+DSOO-SQ2D-LSH2  
+!------------------------------------------------------------  
+     SQ3U:=L27CDM-LD-LCV3/2.0  
+     SQ3D:=LSTQ-LSV3/2.0-LD  
+     LCV3:=LM27CDM  
+     LSV3:=LSXT  
+   KDVTX3:=0.0  
+DDMCV_X03: Drift, L=LCV3/2.0
+DDMCV_X03a: Drift, L=L27CDM - 0.36481
+DDMCV_X03b: Drift, L=DDMCV_X03[L] - DDMCV_X03a[L]
+ DMCV_X03: VKICKER, L=0.0, KICK=KDVTX3  
+      Q3U: Drift, L=SQ3U   
+  BPM_X03: Monitor  
+      Q3D: Drift, L=SQ3D  
+   SV_X03: Sextupole, L=LSV3, K2=KSV3  
+     B2Q3: Drift, L=SO+DSO-SQ3U-LCV3  
+      QX3: Line = (DDMCV_X03,DMCV_X03,DDMCV_X03a,&
+                   BPM_X03,DDMCV_X03b,Q3U,QTV_X03,Q3D,SV_X03)  
+     Q3B3: Drift, L=SOO+DSOO-SQ3D-LSV3  
+!------------------------------------------------------------  
+     SQ4U:=L36CDM-LF26-LCH4/2.0  
+     SQ4D:=LSTQ26-LSH4/2.0-LF26  
+     LCH4:=LM36CDM  
+     LSH4:=LSXT26  
+   KDHTX4:=0.0  
+DDMCH_X04: Drift, L=LCH4/2.0
+DDMCH_X04a: Drift, L=L36CDM - 0.3618575
+DDMCH_X04b: Drift, L=DDMCH_X04[L] - DDMCH_X04a[L]
+ DMCH_X04: HKICKER, L=0.0, KICK=KDHTX4  
+      Q4U: Drift, L=SQ4U   
+  BPM_X04: Monitor  
+      Q4D: Drift, L=SQ4D  
+   SH_X04: Sextupole, L=LSH4, K2=KSH4  
+     B3Q4: Drift, L=SO26+DSO-SQ4U-LCH4  
+      QX4: Line = (DDMCH_X04,DMCH_X04,DDMCH_X04a,BPM_X04,&
+                   DDMCH_X04b,Q4U,QTH_X04,Q4D,SH_X04)  
+     Q4B4: Drift, L=SOO26+DSOO-SQ4D-LSH4  
+!------------------------------------------------------------  
+     LSV5:=LSXT  
+     LCV5:=LM27CDM  
+     SQ5U:=LSTQ-LSV5/2.0-LD  
+     SQ5D:=L27CDM-LD-LCV5/2.0  
+   KDVTX5:=0.0  
+   SV_X05: Sextupole, L=LSV5, K2=KSV5  
+      Q5U: Drift, L=SQ5U   
+  BPM_X05: Monitor  
+      Q5D: Drift, L=SQ5D  
+DDMCV_X05: Drift, L=LCV5/2.0
+DDMCV_X05a: Drift, L=L27CDM - 0.36481
+DDMCV_X05b: Drift, L=DDMCV_X05[L] - DDMCV_X05a[L]
+ DMCV_X05: VKICKER, L=0.0, KICK=KDVTX5  
+     B4Q5: Drift, L=SO+DSO-LSV5-SQ5U  
+      QX5: Line = (SV_X05,Q5U,QTV_X05,Q5D,DDMCV_X05b,&
+                  BPM_X05,DDMCV_X05a,DMCV_X05,DDMCV_X05)  
+     Q5B6: Drift, L=SOO+DSOO-SQ5D-LCV5  
+!------------------------------------------------------------  
+     LSH6:=LSXT26  
+     LCH6:=LM36CDM  
+     SQ6U:=LSTQ26-LSH6/2.0-LF26  
+     SQ6D:=L36CDM-LF26-LCH6/2.0  
+   KDHTX6:=0.0  
+   SH_X06: Sextupole, L=LSH6, K2=KSH6  
+      Q6U: Drift, L=SQ6U   
+  BPM_X06: Monitor  
+      Q6D: Drift, L=SQ6D  
+DDMCH_X06: Drift, L=LCH6/2.0
+DDMCH_X06a: Drift, L=L36CDM - 0.3618575
+DDMCH_X06b: Drift, L=DDMCH_X06[L] - DDMCH_X06a[L]
+ DMCH_X06: HKICKER, L=0.0, KICK=KDHTX6  
+     B6Q6: Drift, L=SO26+DSO-LSH6-SQ6U  
+      QX6: Line = (SH_X06,Q6U,QTH_X06,Q6D,DDMCH_X06b,BPM_X06,&
+                   DDMCH_X06a,DMCH_X06,DDMCH_X06)  
+     Q6B7: Drift, L=SOO26+DSOO-SQ6D-LCH6  
+!------------------------------------------------------------  
+     LSV7:=LSXT  
+     LCV7:=LM27CDM  
+     SQ7U:=LSTQ-LSV7/2.0-LD  
+     SQ7D:=L27CDM-LD-LCV7/2.0  
+   KDVTX7:=0.0  
+   SV_X07: Sextupole, L=LSV7, K2=KSV7  
+      Q7U: Drift, L=SQ7U   
+  BPM_X07: Monitor  
+      Q7D: Drift, L=SQ7D  
+DDMCV_X07: Drift, L=LCV7/2.0
+ DMCV_X07: VKICKER, L=0.0, KICK=KDVTX7
+DDMCV_X07a: Drift, L=L27CDM - 0.36481
+DDMCV_X07b: Drift, L=DDMCV_X07[L] - DDMCV_X07a[L]
+     B7Q7: Drift, L=SO+DSO-LSV7-SQ7U  
+      QX7: Line = (SV_X07,Q7U,QTV_X07,Q7D,DDMCV_X07a,&
+                   BPM_X07,DDMCV_X07b,DMCV_X07,DDMCV_X07)  
+     Q7B8: Drift, L=SOO+DSOO-SQ7D-LCV7  
+!------------------------------------------------------------  
+     LOH8:=LOCT  
+     LCH8:=LM27CDM  
+     SQ8U:=LOTQ-LOH8/2.0-LF  
+     SQ8D:=L27CDM-LF-LCH8/2.0  
+   KDHTX8:=0.0  
+  OCT_X08: Octupole, L=LOH8, K3=KOH8  
+      Q8U: Drift, L=SQ8U   
+  BPM_X08: Monitor  
+      Q8D: Drift, L=SQ8D  
+DDMCH_X08: Drift, L=LCH8/2.0
+DDMCH_X08a: Drift, L=L27CDM - 0.3612895
+DDMCH_X08b: Drift, L=DDMCH_X08[L] - DDMCH_X08a[L]
+ DMCH_X08: HKICKER, L=0.0, KICK=KDHTX8  
+     B8Q8: Drift, L=SO+DSO-LOH8-SQ8U  
+      QX8: Line = (OCT_X08,Q8U,QTH_X08,Q8D,DDMCH_X08b,&
+                   BPM_X08,DDMCH_X08a,DMCH_X08,DDMCH_X08)  
+     Q8B9: Drift, L=SOO+DSOO-SQ8D-LCH8  
+!------------------------------------------------------------  
+     LOV9:=LOCT  
+     LCV9:=LM27CDM  
+     SQ9U:=LOTQ-LOV9/2.0-LDEE  
+     SQ9D:=L27CDM-LDEE-LCV9/2.0  
+   KDVTX9:=0.0  
+  OCT_X09: Octupole, L=LOV9, K3=KOV9  
+      Q9U: Drift, L=SQ9U  
+  BPM_X09: Monitor  
+      Q9D: Drift, L=SQ9D  
+DDMCV_X09: Drift, L=LCV9/2.0
+DDMCV_X09a: Drift, L=L27CDM - 0.3581326
+DDMCV_X09b: Drift, L=DDMCV_X09[L] - DDMCV_X09a[L]
+ DMCV_X09: VKICKER, L=0.0, KICK=KDVTX9  
+     B9Q9: Drift, L=SO+DSO-LOV9-SQ9U  
+      QX9: Line = (OCT_X09,Q9U,QTV_X09,Q9D,DDMCV_X09b,&
+                   BPM_X09,DDMCV_X09a,DMCV_X09,DDMCV_X09)  
+!------------------------------------------------------------  
+    ARCLX: Line = (QX1,Q1B1,BND,B1Q2,QX2,Q2B2,BND,B2Q3,QX3, &   
+                   Q3B3,BND,B3Q4,QX4,Q4B4,BND,B4Q5,QX5)  
+    ARCRX: Line = (Q5B6,BND,B6Q6,QX6,Q6B7,BND,B7Q7,QX7,Q7B8, &  
+                   BND,B8Q8,QX8,Q8B9,BND,B9Q9,QX9)  
+     ARCX: Line = (ARCLX,ARCRX)  
+!------------------------------------------------------------  
+   LCHV10:=LM41CDM  
+   LCHV13:=LM41CDM  
+    SQ10U:=L41CDM-LFC-LCHV10/2.0  
+    SQ13D:=L41CDM-LFC-LCHV13/2.0  
+      UU9: Drift, L=LU-SQ9D-LCV9  
+     UU10: Drift, L=LU-SQ10U-LCHV10  
+  KDHTX10:=0.0  
+  KDVTX10:=0.0  
+DDCHV_X10: Drift, L=LCHV10/2.0
+DDCHV_X10a: Drift, L=L41CDM - 0.5173725
+DDCHV_X10b: Drift, L=DDCHV_X10[L] - DDCHV_X10a[L]
+ DCHV_X10: KICKER, L=0.0, HKICK=KDHTX10, VKICK=KDVTX10  
+     Q10U: Drift, L=SQ10U  
+  BPM_X10: Monitor  
+  BPM_X13: Monitor  
+     Q13D: Drift, L=SQ13D  
+  KDVTX13:=0.0  
+  KDHTX13:=0.0  
+DDCHV_X13: Drift, L=LCHV13/2.0
+DDCHV_X13a: Drift, L=L41CDM - 0.5173725
+DDCHV_X13b: Drift, L=DDCHV_X13[L] - DDCHV_X13a[L]
+ DCHV_X13: KICKER, L=0.0, HKICK=KDHTX13, VKICK=KDVTX13  
+     UU13: Drift, L=LU-SQ13D-LCHV13  
+      UU1: Drift, L=LU-SQ1U-LCV1  
+     SSXL: Line = (UU9,UU,UU,UU10,DDCHV_X10,DCHV_X10,DDCHV_X10a,&
+                  Q10U, BPM_X10,DDCHV_X10b,QTH_X10,VV,QTV_X11,WW,WW)  
+     SSXR: Line = (WW,WW,QTV_X12,VV,QTH_X13,Q13D,DDCHV_X13b,&
+                   BPM_X13,DDCHV_X13a,DCHV_X13,DDCHV_X13,UU13,UU,UU,UU1)  
+     SSSX: Line = (SSXL,SSXR)  
+!------------------------------------------------------------  
+      SPX: Line =(SSSX,ARCX)  
+!------------------------------------------------------------  
+!   Assemble Superperiod A:  
+!------------------------------------------------------------  
+  SCV_A01: Sextupole, L=LSV1, K2=KSV1  
+  BPM_A01: Monitor  
+   KDVTA1:=0.0  
+ DMCV_A01: VKICKER, L=0.0, KICK=KDVTA1  
+  QSC_A01: MULTIPOLE, T1, K1L=KSC_A01 
+ SSXC_A01: MULTIPOLE, K2L=KSSA1_9, T2
+      QA1: Line = (DDMCV_X01,DMCV_A01,QSC_A01,SSXC_A01,&
+                   DDMCV_X01a,BPM_A01,DDMCV_X01b,Q1U,QTV_A01,&
+                   Q1D,SCV_A01)  
+!------------------------------------------------------------  
+  SCH_A02: Sextupole, L=LSH2, K2=KSH2  
+  BPM_A02: Monitor  
+   KDHTA2:=0.0  
+ DMCH_A02: HKICKER, L=0.0, KICK=KDHTA2 
+  QSC_A02: MULTIPOLE, K1L=KSC_A02, T1
+ SSXC_A02: MULTIPOLE, K2L=KSSA2_8, T2
+      QA2: Line = (DDMCH_X02,DMCH_A02,QSC_A02,SSXC_A02,DDMCH_X02a,&
+                   BPM_A02,DDMCH_X02b,Q2U,QTH_A02,Q2D,SCH_A02)  
+!------------------------------------------------------------  
+   KDVTA3:=0.0  
+ DMCV_A03: VKICKER, L=0.0, KICK=KDVTA3  
+  BPM_A03: Monitor  
+   SV_A03: Sextupole, L=LSV3, K2=KSV3 
+  QSC_A03: MULTIPOLE, K1L=KSC_A03, T1
+      QA3: Line = (DDMCV_X03,DMCV_A03,QSC_A03,DDMCV_X03a,&
+                   BPM_A03,DDMCV_X03b,Q3U,QTV_A03,Q3D,SV_A03)  
+!------------------------------------------------------------  
+   KDHTA4:=0.0  
+ DMCH_A04: HKICKER, L=0.0, KICK=KDHTA4  
+  BPM_A04: Monitor  
+   SH_A04: Sextupole, L=LSH4, K2=KSH4  
+      QA4: Line = (DDMCH_X04,DMCH_A04,DDMCH_X04a,BPM_A04,&
+                   DDMCH_X04b,Q4U,QTH_A04,Q4D,SH_A04)  
+!------------------------------------------------------------  
+   SV_A05: Sextupole, L=LSV5, K2=KSV5  
+  BPM_A05: Monitor  
+   KDVTA5:=0.0  
+ DMCV_A05: VKICKER, L=0.0, KICK=KDVTA5  
+  QSC_A05: MULTIPOLE, K1L=KSC_A05, T1
+      QA5: Line = (SV_A05,Q5U,QTV_A05,Q5D,DDMCV_X05b,BPM_A05,&
+                   DDMCV_X05a,DMCV_A05,QSC_A05,DDMCV_X05)  
+!------------------------------------------------------------  
+   SH_A06: Sextupole, L=LSH6, K2=KSH6  
+  BPM_A06: Monitor  
+   KDHTA6:=0.0  
+ DMCH_A06: HKICKER, L=0.0, KICK=KDHTA6  
+      QA6: Line = (SH_A06,Q6U,QTH_A06,Q6D,DDMCH_X06b,BPM_A06,&
+                   DDMCH_X06a,DMCH_A06,DDMCH_X06)  
+!------------------------------------------------------------  
+   SV_A07: Sextupole, L=LSV7, K2=KSV7  
+  BPM_A07: Monitor  
+   KDVTA7:=0.0  
+ DMCV_A07: VKICKER, L=0.0, KICK=KDVTA7  
+  QSC_A07: MULTIPOLE, K1L=KSC_A07, T1
+      QA7: Line = (SV_A07,Q7U,QTV_A07,Q7D,DDMCV_X07b,&
+                   BPM_A07,DDMCV_X07a,DMCV_A07,QSC_A07,&
+                   DDMCV_X07)  
+!------------------------------------------------------------  
+  OCT_A08: Octupole, L=LOH8, K3=KO_A08  
+  BPM_A08: Monitor  
+   KDHTA8:=0.0  
+ DMCH_A08: HKICKER, L=0.0, KICK=KDHTA8  
+  QSC_A08: MULTIPOLE, K1L=KSC_A08, T1
+ SSXC_A08: MULTIPOLE, K2L=KSSA2_8, T2
+      QA8: Line = (OCT_A08,Q8U,QTH_A08,Q8D,DDMCH_X08b,BPM_A08,&
+                   DDMCH_X08a,DMCH_A08,QSC_A08,SSXC_A08,& 
+                   DDMCH_X08)  
+!------------------------------------------------------------  
+  OCT_A09: Octupole, L=LOV9, K3=KO_A09  
+  BPM_A09: Monitor  
+   KDVTA9:=0.0  
+ DMCV_A09: VKICKER, L=0.0, KICK=KDVTA9  
+  QSC_A09: MULTIPOLE, K1L=KSC_A09, T1
+ SSXC_A09: MULTIPOLE, K2L=KSSA1_9, T2
+      QA9: Line = (OCT_A09,Q9U,QTV_A09,Q9D,DDMCV_X09b,&
+                   BPM_A09,DDMCV_X09a,DMCV_A09,QSC_A09,&
+                   SSXC_A09,DDMCV_X09)  
+!------------------------------------------------------------  
+    ARCLA: Line = (QA1,Q1B1,DH_A01,B1Q2,QA2,Q2B2,DH_A02,B2Q3,QA3, &   
+                   Q3B3,DH_A03,B3Q4,QA4,Q4B4,DH_A04,B4Q5,QA5)  
+    ARCRA: Line = (Q5B6,DH_A06,B6Q6,QA6,Q6B7,DH_A07,B7Q7,QA7,Q7B8, &  
+                   DH_A08,B8Q8,QA8,Q8B9,DH_A09,B9Q9,QA9)  
+     ARCA: Line = (ARCLA,ARCRA)  
+!------------------------------------------------------------  
+    DKH1S: Drift, L=DLI1-SQ9D-LCV9  
+    DQDES: Drift, L=DLI1-SQ1U-LCV1  
+    DKV3U: Drift, L=DLI5-SQ10U-LCHV10  
+    DKV3D: Drift, L=DLI5-SQ13D-LCHV13  
+  KDHTA10:=0.0  
+  KDVTA10:=0.0  
+ DCHV_A10: KICKER, L=0.0, HKICK=KDHTA10, VKICK=KDVTA10  
+  BPM_A10: Monitor  
+  BPM_A13: Monitor   
+  KDHTA13:=0.0  
+  KDVTA13:=0.0  
+  INJM3: Marker  
+  INJM4: Marker  
+ DCHV_A13: KICKER, L=0.0, HKICK=KDHTA13, VKICK=KDVTA13  
+     SSAL: Line = (UU9,UU,UU,UU10,DDCHV_X10,DCHV_A10,DDCHV_X10a,&
+                   BPM_A10,DDCHV_X10b,Q10U,& 
+                   QTH_A10,VV,QTV_A11,WW,WW)  
+     SSAR: Line = (WW,WW,QTV_A12,VV,QTH_A13,Q13D,DDCHV_X13b,&
+                   BPM_A13,DDCHV_X13a,DCHV_A13,DDCHV_X13,&  
+                   UU13,UU,UU,UU1)  
+     SSSA: Line = (SSXL,SSXR)  
+  
+    SSILA: Line = (DKH1S,IkickH_A10,DKV1,IkickV_A10,DKH2,IkickH_A11)  
+    SSILB: Line = (DKV2,IkickV_A11,DKV3U,DDCHV_X10,DCHV_A10,&
+                   DDCHV_X10a,BPM_A10,DDCHV_X10b,Q10U,QTH_A10,&  
+                   INJM3,VV,QTV_A11)  
+     SSIL: Line = (SSILA,SSILB)  
+   SSINJL: Line = (DQTB,DH_A10,DB12,DH_A11)  
+   SSINJR: Line = (INJM1,DB23,DH_A12,DB34,DH_A13,DBTQ) 
+    SSIRA: Line = (QTV_A12,VV,INJM4,QTH_A13,Q13D,DDCHV_X13b,&
+                   BPM_A13,DDCHV_X13a,DCHV_A13,DDCHV_X13,DKV3D,&  
+                   IkickV_A12,DKH3,IkickH_A12)  
+    SSIRB: Line = (DKV4,IkickV_A13,DKH4,IkickH_A13,INJM2,DQDES)  
+     SSIR: Line = (SSIRA,SSIRB)  
+ SSISINJL: Line = (SSIL,SSINJL)  
+ SSISINJR: Line = (SSINJR,SSIR)  
+    SSINJ: Line = (SSISINJL,SSISINJR)  
+!------------------------------------------------------------  
+      SPA: Line =(SSSA,ARCA)  
+!------------------------------------------------------------  
+!   Assemble Superperiod B:  
+!------------------------------------------------------------  
+  SCV_B01: Sextupole, L=LSV1, K2=KSV1  
+  BPM_B01: Monitor  
+   KDVTB1:=0.0  
+ DMCV_B01: VKICKER, L=0.0, KICK=KDVTB1  
+  QSC_B01: MULTIPOLE, K1L=KSC_B01, T1
+ SSXC_B01: MULTIPOLE, K2L=KSSB1_9, T2
+      QB1: Line = (DDMCV_X01,DMCV_B01,QSC_B01,SSXC_B01,&
+                   DDMCV_X01a,BPM_B01,DDMCV_X01b,&
+                   Q1U,QTV_B01,Q1D,SCV_B01)  
+!------------------------------------------------------------  
+  SCH_B02: Sextupole, L=LSH2, K2=KSH2  
+  BPM_B02: Monitor  
+   KDHTB2:=0.0  
+ DMCH_B02: HKICKER, L=0.0, KICK=KDHTB2 
+  QSC_B02: MULTIPOLE, K1L=KSC_B02, T1
+ SSXC_B02: MULTIPOLE, K2L=KSSB2_8, T2
+      QB2: Line = (DDMCH_X02,DMCH_B02,QSC_B02,SSXC_B02,&
+                   DDMCH_X02a,BPM_B02,DDMCH_X02b,&
+                   Q2U,BPM_B02,QTH_B02,Q2D,SCH_B02)  
+!------------------------------------------------------------  
+   KDVTB3:=0.0  
+ DMCV_B03: VKICKER, L=0.0, KICK=KDVTB3  
+  BPM_B03: Monitor  
+   SV_B03: Sextupole, L=LSV3, K2=KSV3
+  QSC_B03: MULTIPOLE, K1L=KSC_B03, T1
+      QB3: Line = (DDMCV_X03,DMCV_B03,QSC_B03,DDMCV_X03a,&
+                   BPM_B03,DDMCV_X03b,Q3U,QTV_B03,Q3D,SV_B03)  
+!------------------------------------------------------------  
+   KDHTB4:=0.0  
+ DMCH_B04: HKICKER, L=0.0, KICK=KDHTB4  
+  BPM_B04: Monitor  
+   SH_B04: Sextupole, L=LSH4, K2=KSH4  
+      QB4: Line = (DDMCH_X04,DMCH_B04,DDMCH_X04a,&
+                   BPM_B04,DDMCH_X04b,Q4U,QTH_B04,Q4D,SH_B04)  
+!------------------------------------------------------------  
+   SV_B05: Sextupole, L=LSV5, K2=KSV5  
+  BPM_B05: Monitor  
+   KDVTB5:=0.0  
+ DMCV_B05: VKICKER, L=0.0, KICK=KDVTB5
+  QSC_B05: MULTIPOLE, K1L=KSC_B05, T1
+      QB5: Line = (SV_B05,Q5U,QTV_B05,Q5D,DDMCV_X05b,&
+                   BPM_B05,DDMCV_X05a,DMCV_B05,QSC_B05,&
+                   DDMCV_X05)  
+!------------------------------------------------------------  
+   SH_B06: Sextupole, L=LSH6, K2=KSH6  
+  BPM_B06: Monitor  
+   KDHTB6:=0.0  
+ DMCH_B06: HKICKER, L=0.0, KICK=KDHTB6  
+      QB6: Line = (SH_B06,Q6U,QTH_B06,Q6D,DDMCH_X06b,BPM_B06,&
+                   DDMCH_X06a,DMCH_B06,DDMCH_X06)  
+!------------------------------------------------------------  
+   SV_B07: Sextupole, L=LSV7, K2=KSV7  
+  BPM_B07: Monitor  
+   KDVTB7:=0.0  
+ DMCV_B07: VKICKER, L=0.0, KICK=KDVTB7  
+  QSC_B07: MULTIPOLE, K1L=KSC_B07, T1
+      QB7: Line = (SV_B07,Q7U,QTV_B07,Q7D,DDMCV_X07b,BPM_B07,&
+                   DDMCV_X07a,DMCV_B07,QSC_B07,DDMCV_X07)  
+!------------------------------------------------------------  
+  OCT_B08: Octupole, L=LOH8, K3=KO_B08  
+  BPM_B08: Monitor  
+   KDHTB8:=0.0  
+ DMCH_B08: HKICKER, L=0.0, KICK=KDHTB8
+  QSC_B08: MULTIPOLE, K1L=KSC_B08, T1
+ SSXC_B08: MULTIPOLE, K2L=KSSB2_8, T2
+      QB8: Line = (OCT_B08,Q8U,QTH_B08,Q8D,DDMCH_X08b,&
+                   BPM_B08,DDMCH_X08a,DMCH_B08,QSC_B08,SSXC_B08,&
+                   DDMCH_X08)  
+!------------------------------------------------------------  
+  OCT_B09: Octupole, L=LOV9, K3=KO_B09  
+  BPM_B09: Monitor  
+   KDVTB9:=0.0  
+ DMCV_B09: VKICKER, L=0.0, KICK=KDVTB9  
+  QSC_B09: MULTIPOLE, K1L=KSC_B09, T1
+ SSXC_B09: MULTIPOLE, K2L=KSSB1_9, T2
+      QB9: Line = (OCT_B09,Q9U,QTV_B09,Q9D,DDMCV_X09b,&
+                   BPM_B09,DDMCV_X09a,DMCV_B09,QSC_B09,&
+                   SSXC_B09,DDMCV_X09)  
+!------------------------------------------------------------  
+    ARCLB: Line = (QB1,Q1B1,DH_B01,B1Q2,QB2,Q2B2,DH_B02,B2Q3,QB3, &   
+                   Q3B3,DH_B03,B3Q4,QB4,Q4B4,DH_B04,B4Q5,QB5)  
+    ARCRB: Line = (Q5B6,DH_B06,B6Q6,QB6,Q6B7,DH_B07,B7Q7,QB7,Q7B8, &  
+                   DH_B08,B8Q8,QB8,Q8B9,DH_B09,B9Q9,QB9)  
+     ARCB: Line = (ARCLB,ARCRB)  
+!------------------------------------------------------------  
+  KDHTB10:=0.0  
+  KDVTB10:=0.0  
+  DCHV_B10: KICKER, L=0.0, HKICK=KDHTB10, VKICK=KDVTB10  
+  BPM_B10: Monitor  
+  BPM_B13: Monitor  
+  KDHTB13:=0.0  
+  KDVTB13:=0.0  
+  LConst:= LFC + 2*DDCHV_X13[L] + Q13D[L]
+  LQ13D_a:= 3.158826 - LConst
+  LQ13D_b:= 3.658825 - LConst - LQ13D_a 
+  LQ13D_c:= 4.283817 - LConst - LQ13D_b - LQ13D_a
+  LQ13D_d:= 5.408808 - LConst - LQ13D_c - LQ13D_b - LQ13D_a
+  LQ13D_e:= UU13[L]+UU[L]+UU[L]+UU1[L]-LQ13D_d-LQ13D_c-LQ13D_b-LQ13D_a
+  Q13D_a: Drift, L=LQ13D_a
+  Q13D_b: Drift, L=LQ13D_b
+  Q13D_c: Drift, L=LQ13D_c
+  Q13D_d: Drift, L=LQ13D_d
+  Q13D_e: Drift, L=LQ13D_e
+  DampKicker1: Marker
+  DampKicker2: Marker
+  QMMKicker: Marker
+  TuneKicker: Marker
+ 
+ DCHV_B13: KICKER, L=0.0, HKICK=KDHTB13, VKICK=KDVTB13  
+     SSBL: Line = (UU9,UU,UU,UU10,DDCHV_X10,DCHV_B10,DDCHV_X10a,&
+                   BPM_B10,DDCHV_X10b,Q10U,&  
+                   QTH_B10,VV,QTV_B11,WW,WW)  
+!     SSBR: Line = (WW,WW,QTV_B12,VV,QTH_B13,Q13D,DDCHV_X13b,&
+!                    BPM_B13,DDCHV_X13a,DCHV_B13,DDCHV_X13,&  
+!                   UU13,UU,UU,UU1)  
+     SSBR: Line = (WW,WW,QTV_B12,VV,QTH_B13,Q13D,DDCHV_X13b,&
+                   BPM_B13,DDCHV_X13a,DCHV_B13,DDCHV_X13,Q13D_a,&
+                   DampKicker1,Q13D_b,DampKicker2,Q13D_c,QMMKicker,Q13D_d,&
+                   TuneKicker,Q13D_e) 
+     SSSB: Line = (SSBL,SSBR)  
+!------------------------------------------------------------
+! Straight Section B with collimators as drift spaces
+! Most numbers taken from collimator drawings as of 08/06/2003. 
+! Collimator 1 (just shielding) and distances between scrapers 
+! are not in drawing and are taken from old MAD files.
+!------------------------------------------------------------
+!Begin defining first portion of straight section (primary collimators)
+LCOLSSB1:=UU9[L]+2*UU[L]+UU10[L]
+Col1Shld: DRIFT, L=0.6
+Col2: DRIFT, L=1.8
+Col2Shld: DRIFT, L=0.32
+ScpT: DRIFT, L=0.0045
+ScpC: DRIFT, L=0.01455
+DriftScpA: DRIFT, L=0.0254
+DriftScpB: DRIFT, L=5.3*0.0254
+Drift2: DRIFT, L=0.215
+Drift1: DRIFT, L=3.68-(DriftScpB[L]/2.0+2*(ScpT[L]+ScpC[L])+DriftScpA[L]&
+                 +Drift2[L]+Col1Shld[L]+Q9D[L]+2*DDMCV_X09[L]+(QTV_B09[L]/2.0))
+Drift1_short: DRIFT, L=Drift1[L]/5.0
+!The next drift adjusted so that distances match official collimator drawing
+Drift3: DRIFT, L=0.62-0.32-(2*(ScpT[L]+2*ScpC[L])+DriftScpA[L]&
+                 +DriftScpB[L]/2.0)+0.029
+Drift4: DRIFT, L=LCOLSSB1-(Col1Shld[L]+Col2[L]+4*ScpT[L]+4*ScpC[L]&
+                 +2*Col2Shld[L]+Drift1[L]+Drift2[L]+2*DriftScpA[L]&
+                 +DriftScpB[L]+Drift3[L])
+!End defining first portion of straight section
+
+!Begin defining second portion of straight section (secondary collimators)
+LCOLSSB2:=4*WW[L]
+Col3_4: DRIFT, L=1.19
+Col3_4Shld: DRIFT, L=1.01
+Drift5: DRIFT, L=2.10-(QTV_B11[L]/2.0+Col3_4Shld[L])
+Drift6: DRIFT, L=(8.85-(2*Col3_4[L]+2*Col3_4Shld[L]))
+Drift6_short: DRIFT, L=Drift6[L]/(10.0)
+Drift7: DRIFT, L=LCOLSSB2 - (2*Col3_4[L]+4*Col3_4Shld[L]+Drift5[L]+Drift6[L])
+!End defining second portion of straight section
+
+!Begin defining third portion of straight section.  No collimators here.
+!Shorten drifts for loss tracking with ORBIT code.
+LCOLSSB3:=UU13[L]+2*UU[L]+UU1[L]
+Drift8_short: DRIFT, L=LCOLSSB3/9.0
+
+!Define the line for the entire straight section with collimators
+
+SSSBCol: Line = (5*Drift1_short,Col1Shld,Drift2,ScpT,ScpC,DriftScpA,&
+                 ScpT,ScpC,DriftScpB,ScpT,ScpC,DriftScpA,ScpT,ScpC,Drift3,&
+                 Col2Shld,Col2,Col2Shld,Drift4,DDCHV_X10,DCHV_B10,&
+                 DDCHV_X10a,BPM_B10,DDCHV_X10b,Q10U,&  
+                 QTH_B10,VV,QTV_B11,Drift5,Col3_4Shld,Col3_4,Col3_4Shld,&
+                 10*Drift6_short,Col3_4Shld,Col3_4,Col3_4Shld,Drift7,&
+                 QTV_B12,VV,QTH_B13,Q13D,DDCHV_X13b,BPM_B13,&
+                 DDCHV_X13a,DCHV_B13,DDCHV_X13,Q13D_a,DampKicker1,&
+                 Q13D_b,DampKicker2,Q13D_c,QMMKicker,Q13D_d,TuneKicker,&
+                 Q13D_e)  
+!------------------------------------------------------------  
+      SPB: Line =(SSSB,ARCB)
+   SPBCol: Line =(SSSBCol,ARCB)
+!------------------------------------------------------------  
+!   Assemble Superperiod C:  
+!------------------------------------------------------------  
+  SCV_C01: Sextupole, L=LSV1, K2=KSV1  
+  BPM_C01: Monitor  
+   KDVTC1:=0.0  
+ DMCV_C01: VKICKER, L=0.0, KICK=KDVTC1  
+  QSC_C01: MULTIPOLE, K1L=KSC_C01, T1
+ SSXC_C01: MULTIPOLE, K2L=KSSC1_9, T2
+      QC1: Line = (DDMCV_X01,DMCV_C01,QSC_C01,SSXC_C01,&
+                   DDMCV_X01a,BPM_C01,DDMCV_X01b,Q1U,QTV_C01,&
+                   Q1D,SCV_C01)  
+!------------------------------------------------------------  
+  SCH_C02: Sextupole, L=LSH2, K2=KSH2  
+  BPM_C02: Monitor  
+   KDHTC2:=0.0  
+ DMCH_C02: HKICKER, L=0.0, KICK=KDHTC2
+  QSC_C02: MULTIPOLE, K1L=KSC_C02, T1
+ SSXC_C02: MULTIPOLE, K2L=KSSC2_8, T2
+      QC2: Line = (DDMCH_X02,DMCH_C02,SSXC_C02,QSC_C02,&
+                   DDMCH_X02a,BPM_C02,DDMCH_X02b,&
+                   Q2U,QTH_C02,Q2D,SCH_C02)  
+!------------------------------------------------------------  
+   KDVTC3:=0.0  
+ DMCV_C03: VKICKER, L=0.0, KICK=KDVTC3  
+  BPM_C03: Monitor  
+   SV_C03: Sextupole, L=LSV3, K2=KSV3
+  QSC_C03: MULTIPOLE, K1L=KSC_C03, T1
+      QC3: Line = (DDMCV_X03,DMCV_C03,QSC_C03,DDMCV_X03a,&
+                   BPM_C03,DDMCV_X03b,Q3U,QTV_C03,Q3D,SV_C03)  
+!------------------------------------------------------------  
+   KDHTC4:=0.0  
+ DMCH_C04: HKICKER, L=0.0, KICK=KDHTC4  
+  BPM_C04: Monitor  
+   SH_C04: Sextupole, L=LSH4, K2=KSH4  
+      QC4: Line = (DDMCH_X04,DMCH_C04,DDMCH_X04a,BPM_C04,&
+                   DDMCH_X04b,Q4U,QTH_C04,Q4D,SH_C04)  
+!------------------------------------------------------------  
+   SV_C05: Sextupole, L=LSV5, K2=KSV5  
+  BPM_C05: Monitor  
+   KDVTC5:=0.0  
+ DMCV_C05: VKICKER, L=0.0, KICK=KDVTC5
+  QSC_C05: MULTIPOLE, K1L=KSC_C05, T1
+      QC5: Line = (SV_C05,Q5U,QTV_C05,Q5D,DDMCV_X05b,&
+                   BPM_C05,DDMCV_X05a,DMCV_C05,QSC_C05,DDMCV_X05)  
+!------------------------------------------------------------  
+   SH_C06: Sextupole, L=LSH6, K2=KSH6  
+  BPM_C06: Monitor  
+   KDHTC6:=0.0  
+ DMCH_C06: HKICKER, L=0.0, KICK=KDHTC6  
+      QC6: Line = (SH_C06,Q6U,QTH_C06,Q6D,DDMCH_X06b,BPM_C06,&
+                   DDMCH_X06a,DMCH_C06,DDMCH_X06)  
+!------------------------------------------------------------  
+   SV_C07: Sextupole, L=LSV7, K2=KSV7  
+  BPM_C07: Monitor  
+   KDVTC7:=0.0  
+ DMCV_C07: VKICKER, L=0.0, KICK=KDVTC7
+  QSC_C07: MULTIPOLE, K1L=KSC_C07, T1
+      QC7: Line = (SV_C07,Q7U,QTV_C07,Q7D,DDMCV_X07b,BPM_C07,&
+                   DDMCV_X07a,DMCV_C07,QSC_C07,DDMCV_X07)  
+!------------------------------------------------------------  
+  OCT_C08: Octupole, L=LOH8, K3=KO_C08  
+  BPM_C08: Monitor  
+   KDHTC8:=0.0  
+ DMCH_C08: HKICKER, L=0.0, KICK=KDHTC8
+  QSC_C08: MULTIPOLE, K1L=KSC_C08, T1
+ SSXC_C08: MULTIPOLE, K2L=KSSC2_8, T2
+      QC8: Line = (OCT_C08,Q8U,QTH_C08,Q8D,DDMCH_X08b,BPM_C08,&
+                   DDMCH_X08a,DMCH_C08,QSC_C08,SSXC_C08,DDMCH_X08)  
+!------------------------------------------------------------  
+  OCT_C09: Octupole, L=LOV9, K3=KO_C09  
+  BPM_C09: Monitor  
+   KDVTC9:=0.0  
+ DMCV_C09: VKICKER, L=0.0, KICK=KDVTC9
+  QSC_C09: MULTIPOLE, K1L=KSC_C09, T1
+ SSXC_C09: MULTIPOLE, K2L=KSSC1_9, T2  
+      QC9: Line = (OCT_C09,Q9U,QTV_C09,Q9D,DDMCV_X09b,&
+                   BPM_C09,DDMCV_X09a,DMCV_C09,QSC_C09,SSXC_C09,&
+                   DDMCV_X09)  
+!------------------------------------------------------------  
+    ARCLC: Line = (QC1,Q1B1,DH_C01,B1Q2,QC2,Q2B2,DH_C02,B2Q3,QC3, &   
+                   Q3B3,DH_C03,B3Q4,QC4,Q4B4,DH_C04,B4Q5,QC5)  
+    ARCRC: Line = (Q5B6,DH_C06,B6Q6,QC6,Q6B7,DH_C07,B7Q7,QC7,Q7B8, &  
+                   DH_C08,B8Q8,QC8,Q8B9,DH_C09,B9Q9,QC9)  
+     ARCC: Line = (ARCLC,ARCRC)  
+!------------------------------------------------------------  
+  KDHTC10:=0.0  
+  KDVTC10:=0.0   
+  DCHV_C10: KICKER, L=0.0, HKICK=KDHTC10, VKICK=KDVTC10
+  BPM_C10: Monitor  
+  BPM_C13: Monitor  
+  KDHTC13:=0.0  
+  KDVTC13:=0.0  
+  KDVTC13:=0.0
+  LQ13D_f:=3.909088 - LConst
+  LQ13D_g:=UU13[L]+2*UU[L]+UU1[L] - Q13D_f[L]
+  Q13D_f: DRIFT, L=LQ13D_f
+  Q13D_g: DRIFT, L=LQ13D_g
+  BIGKicker: Marker
+  DCHV_C13: KICKER, L=0.0, HKICK=KDHTC13, VKICK=KDVTC13
+     SSCL: Line = (EKLine1,DDCHV_X10,DCHV_C10,DDCHV_X10a,&
+                   BPM_C10,DDCHV_X10b,Q10U,&
+                   QTH_C10,VV,QTV_C11,EKLine2)
+!     SSCR: Line = (WW,WW,QTV_C12,VV,QTH_C13,Q13D,DDCHV_X13b,&
+!                   BPM_C13,DDCHV_X13a,DCHV_C13,DDCHV_X13,&  
+!                   UU13,UU,UU,UU1)  
+     SSCR: Line = (WW,WW,QTV_C12,VV,QTH_C13,Q13D,DDCHV_X13b,&
+                   BPM_C13,DDCHV_X13a,DCHV_C13,DDCHV_X13,&
+                   Q13D_f,BIGKicker,Q13D_g)  
+     SSSC: Line = (SSCL,SSCR)  
+!------------------------------------------------------------  
+      SPC: Line =(SSSC,ARCC)  
+!------------------------------------------------------------  
+!   Assemble Superperiod D:  
+!------------------------------------------------------------  
+  SCV_D01: Sextupole, L=LSV1, K2=KSV1  
+  BPM_D01: Monitor  
+   KDVTD1:=0.0  
+ DMCV_D01: VKICKER, L=0.0, KICK=KDVTD1
+  QSC_D01: MULTIPOLE, K1L=KSC_D01, T1
+ SSXC_D01: MULTIPOLE, K2L=KSSD1_9, T2
+      QD1: Line = (DDMCV_X01,DMCV_D01,QSC_D01,SSXC_D01,&
+                   DDMCV_X01a,BPM_D01,DDMCV_X01b,&
+                   Q1U,QTV_D01,Q1D,SCV_D01)  
+!------------------------------------------------------------  
+  SCH_D02: Sextupole, L=LSH2, K2=KSH2  
+  BPM_D02: Monitor  
+   KDHTD2:=0.0  
+ DMCH_D02: HKICKER, L=0.0, KICK=KDHTD2  
+  QSC_D02: MULTIPOLE, K1L=KSC_D02, T1
+ SSXC_D02: MULTIPOLE, K2L=KSSD2_8, T2
+      QD2: Line = (DDMCH_X02,DMCH_D02,QSC_D02,SSXC_D02,&
+                   DDMCH_X02a,BPM_D02,DDMCH_X02b,Q2U,&
+                   QTH_D02,Q2D,SCH_D02)  
+!------------------------------------------------------------  
+   KDVTD3:=0.0  
+ DMCV_D03: VKICKER, L=0.0, KICK=KDVTD3  
+  BPM_D03: Monitor  
+   SV_D03: Sextupole, L=LSV3, K2=KSV3 
+  QSC_D03: MULTIPOLE, K1L=KSC_D03, T1
+      QD3: Line = (DDMCV_X03,DMCV_D03,QSC_D03,DDMCV_X03a,&
+                  BPM_D03,DDMCV_X03b,Q3U,QTV_D03,Q3D,SV_D03)  
+!------------------------------------------------------------  
+   KDHTD4:=0.0  
+ DMCH_D04: HKICKER, L=0.0, KICK=KDHTD4  
+  BPM_D04: Monitor  
+   SH_D04: Sextupole, L=LSH4, K2=KSH4  
+      QD4: Line = (DDMCH_X04,DMCH_D04,DDMCH_X04a,&
+                   BPM_D04,DDMCH_X04b,Q4U,QTH_D04,Q4D,SH_D04)  
+!------------------------------------------------------------  
+   SV_D05: Sextupole, L=LSV5, K2=KSV5  
+  BPM_D05: Monitor  
+   KDVTD5:=0.0  
+ DMCV_D05: VKICKER, L=0.0, KICK=KDVTD5  
+  QSC_D05: MULTIPOLE, K1L=KSC_D05, T1
+      QD5: Line = (SV_D05,Q5U,QTV_D05,Q5D,DDMCV_X05b,&
+                   BPM_D05,DDMCV_X05a,DMCV_D05,QSC_D05,DDMCV_X05)  
+!------------------------------------------------------------  
+   SH_D06: Sextupole, L=LSH6, K2=KSH6  
+  BPM_D06: Monitor  
+   KDHTD6:=0.0  
+ DMCH_D06: HKICKER, L=0.0, KICK=KDHTD6  
+      QD6: Line = (SH_D06,Q6U,QTH_D06,Q6D,DDMCH_X06b,BPM_D06,&
+                  DDMCH_X06a,DMCH_D06,DDMCH_X06)  
+!------------------------------------------------------------  
+   SV_D07: Sextupole, L=LSV7, K2=KSV7
+  BPM_D07: Monitor  
+   KDVTD7:=0.0  
+ DMCV_D07: VKICKER, L=0.0, KICK=KDVTD7
+  QSC_D07: MULTIPOLE, K1L=KSC_D07, T1
+      QD7: Line = (SV_D07,Q7U,QTV_D07,Q7D,DDMCV_X07b,BPM_D07,&
+                   DDMCV_X07a,DMCV_D07,QSC_D07,DDMCV_X07)  
+!------------------------------------------------------------  
+  OCT_D08: Octupole, L=LOH8, K3=KO_D08  
+  BPM_D08: Monitor  
+   KDHTD8:=0.0  
+ DMCH_D08: HKICKER, L=0.0, KICK=KDHTD8  
+  QSC_D08: MULTIPOLE, K1L=KSC_D08, T1
+ SSXC_D08: MULTIPOLE, K2L=KSSD2_8, T2
+      QD8: Line = (OCT_D08,Q8U,QTH_D08,Q8D,DDMCH_X08b,&
+                   BPM_D08,DDMCH_X08a,DMCH_D08,QSC_D08,&
+                   SSXC_D08,DDMCH_X08)  
+!------------------------------------------------------------  
+  OCT_D09: Octupole, L=LOV9, K3=KO_D09  
+  BPM_D09: Monitor  
+   KDVTD9:=0.0  
+ DMCV_D09: VKICKER, L=0.0, KICK=KDVTD9
+  QSC_D09: MULTIPOLE, K1L=KSC_D09, T1
+ SSXC_D09: MULTIPOLE, K2L=KSSD1_9, T2
+      QD9: Line = (OCT_D09,Q9U,QTV_D09,Q9D,DDMCV_X09b,&
+                   BPM_D09,DDMCV_X09a,DMCV_D09,QSC_D09,&
+                   SSXC_D09,DDMCV_X09)  
+!------------------------------------------------------------  
+    ARCLD: Line = (QD1,Q1B1,DH_D01,B1Q2,QD2,Q2B2,DH_D02,B2Q3,QD3, &   
+                   Q3B3,DH_D03,B3Q4,QD4,Q4B4,DH_D04,B4Q5,QD5)  
+    ARCRD: Line = (Q5B6,DH_D06,B6Q6,QD6,Q6B7,DH_D07,B7Q7,QD7,Q7B8, &  
+                   DH_D08,B8Q8,QD8,Q8B9,DH_D09,B9Q9,QD9)  
+     ARCD: Line = (ARCLD,ARCRD)  
+!------------------------------------------------------------  
+  KDHTD10:=0.0  
+  KDVTD10:=0.0  
+  DCHV_D10: KICKER, L=0.0, HKICK=KDHTD10, VKICK=KDVTD10  
+  BPM_D10: Monitor  
+  BPM_D13: Monitor  
+  KDHTD13:=0.0  
+  KDVTD13:=0.0  
+  Lmags:=QTV_D09[L]/2.0 + Q9D[L] + 2*DDMCV_X09[L]
+  LUU_a:= 2.062745 - Lmags
+  LUU_b:= 3.187737 - Lmags - LUU_a
+  LUU_c:= 4.29341 - Lmags - LUU_b - LUU_a
+  LUU_d:= 5.279786 - Lmags - LUU_c - LUU_b - LUU_a
+  LUU_e:= UU9[L] + 2*UU[L] + UU10[L] - LUU_a - LUU_b - LUU_c - LUU_d
+  UU_a: Drift, L=LUU_a
+  UU_b: Drift, L=LUU_b
+  UU_c: Drift, L=LUU_c
+  UU_d: Drift, L=LUU_d
+  UU_e: Drift, L=LUU_e
+  TunePickup: Marker
+  QMMPickup: Marker
+  WCM: Marker
+  BCM: Marker
+  DCHV_D13: KICKER, L=0.0, HKICK=KDHTD13, VKICK=KDVTD13  
+!     SSDL: Line = (UU9,UU,UU,UU10,DDCHV_X10,DCHV_D10,DDCHV_D10a,&
+!                   BPM_D10,DDCHV_D10b,Q10U,&  
+!                   QTH_D10,VV,QTV_D11,INRF1)  
+     SSDL: Line = (UU_a,TunePickup,UU_b,QMMPickup,UU_c,WCM,UU_d,BCM,&
+                   UU_e,DDCHV_X10,DCHV_D10,DDCHV_X10a,&
+                   BPM_D10,DDCHV_X10b,Q10U,QTH_D10,VV,QTV_D11,INRF1) 
+  LQ13D_h:= 2.418332 - LConst
+  LQ13D_i:= 2.596437 - LConst - LQ13D_h
+  LQ13D_j:= 2.974859 - LConst - LQ13D_i - LQ13D_h
+  LQ13D_k:= 5.278944 - LConst - LQ13D_j - LQ13D_i - LQ13D_h
+  LQ13D_l:= 5.657366 - LConst - LQ13D_k - LQ13D_j - LQ13D_i - LQ13D_h
+  LQ13D_m:= 5.83547 - LConst - LQ13D_l - LQ13D_k - LQ13D_j - LQ13D_i- LQ13D_h
+  LQ13D_n:= UU13[L]+2*UU[L]+UU1[L]-5.83547 + LConst
+  Q13D_h: Drift, L=LQ13D_h
+  Q13D_i: Drift, L=LQ13D_i
+  Q13D_j: Drift, L=LQ13D_j
+  Q13D_k: Drift, L=LQ13D_k
+  Q13D_l: Drift, L=LQ13D_l 
+  Q13D_m: Drift, L=LQ13D_m
+  Q13D_n: Drift, L=LQ13D_n
+  Haloscanner1: Marker
+  Wirescanner1: Marker
+  IPM1: Marker
+  IPM2: Marker
+  Wirescanner2: Marker
+  Haloscanner2: Marker 
+!     SSDR: Line = (INRF2,QTV_D12,VV,QTH_D13,Q13D,&  
+!                   DDCHV_X13b,BPM_D13,DDCHV_X13a,DCHV_D13,
+!                   DDCHV_X13,UU13,UU,UU,UU1)  
+     SSDR: Line = (INRF2,QTV_D12,VV,QTH_D13,Q13D,DDCHV_X13b,&
+                   BPM_D13,DDCHV_X13a,DCHV_D13,DDCHV_X13,Q13D_h,&
+                   Haloscanner1,Q13D_i,Wirescanner1,Q13D_j,IPM1,Q13D_k,&
+                   IPM2,Q13D_l,Wirescanner2,Q13D_m,Haloscanner2,Q13D_n)  
+     SSSD: Line = (SSDL,SSDR)  
+!------------------------------------------------------------  
+      SPD: Line =(SSSD,ARCD)  
+!------------------------------------------------------------  
+     SPAA: Line = (SSINJ,ARCB)  
+!     SPAA: Line = (SSSA,ARCB)  
+!     SPBB: Line = (SSSB,ARCC) 
+     SPBB: Line = (SSSBCol,ARCC)
+     SPCC: Line = (SSSC,ARCD)  
+     SPDD: Line = (SSSD,ARCA)  
+     RNG: Line = (SPAA,SPBB,SPCC,SPDD)  
+   RNGINJ: Line = (SSISINJR,ARCB,SPBB,SPCC,SPDD,SSISINJL)
+!------------------------------------------------------------  
+!  
+Return  

@@ -1,0 +1,272 @@
+  Title, "SNS Linac Accumulator Ring"  
+!------------------------------------------------------------
+! Note: BEAM statement is excluded until after HARMON performed
+! because the ENERGY definition leads to an error in the routine.
+!------------------------------------------------------------  
+!------------Physical costants-------------------------------  
+  E0    := 0.938272310   !proton mass [GeV]  
+  C     := 2.99792458e8  !speed of light [m/sec]  
+  PI    := 3.141592654  
+  DTR   := PI/180.  
+  
+  EK    := 1.00          ![GeV] injection kinetic Energy  
+  
+  PC    := sqrt(EK*(EK+2*E0))       ;  Value PC  
+  BRHO  := 1.e9*PC/C                ;  Value BRHO  
+  GAMMA := 1+EK/E0                  ;  Value GAMMA      
+  BETA  := sqrt(1-1/(GAMMA*GAMMA))  ;  Value BETA  
+!--------------Select Nominal Tunes--------------------------  
+  QH:=6.23
+  QV:=6.20
+  MUH:=QH/4.0  
+  MUV:=QV/4.0  
+!--------------Ring Center-----------------------------------
+  RX0:=10110.611218
+  RY0:= 2000.000000
+  RZ0:=19964.669100
+  RQDEAXIS:=15.0  !Distance from QDEE center to central axis.
+!------------------------------------------------------------
+!------------------------------------------------------------   
+  Call file='SNSring.lat'  
+!------------------------------------------------------------  
+! Three methods are available for optimization in this MAD 
+! file. 
+! Method 1: Good for finding tunes near (6.23, 6.20), or most
+!           tunes where Q_x > 6.0.
+!
+! Method 2: Good for finding tunes away from (6.23, 6.20), or
+!           where Q_x < 5.0. Requires apriori optimization of arc 
+!           in a separate MAD file
+! Method 3: Good for finding any tune when approximate quad
+!           strengths are known. 
+!------------------------------------------------------------  
+! Begin Method 1
+!------------------------------------------------------------
+! This is S. Tepikians method for finding tunes in the vicinity
+! of (6.23, 6.20), or most tunes where Q_x > 6.0
+!-------------------------------------------------------------
+  CMUX:=0.252  
+  CMUY:=0.272 
+  SCMUH:=MUH-4.0*CMUX  
+  SCMUV:=MUV-4.0*CMUY  
+  BHMAX:=27.0  
+!------------------------------------------------------------  
+  Use, AC  
+     KF = 2.529636E+00
+     KD = -3.102721E+00 
+     Cell  
+        Vary, KF, step=.00001, lower=0.0, upper=6.0  
+        Vary, KD, step=.00001, lower=-6.0, upper=0.0  
+  
+        Constraint, Range=#E, MUX=CMUX, MUY=CMUY  
+  
+        Simplex, calls=2000, Tolerance=1.0E-10  
+     Endmatch  
+!------------------------------------------------------------  
+  Use, SP  
+     Cell  
+        Vary, KDE, step=0.00001, lower=-8.0, upper=0.0  
+        Vary, KFC, step=0.00001, lower=0.0, upper=8.0  
+        Vary, KDC, step=0.00001, lower=-8.0, upper=0.0  
+        Vary, KF, step=0.00001, lower=0.0, upper=6.0  
+        Vary, KD, step=0.00001, lower=-6.0, upper=0.0  
+  
+        WEIGHT, DX = 0.0, DPX = 0.0, DY = 0.0, DPY = 0.0  
+        WEIGHT, MUX = 10.0, MUY = 10.0, T = 0.0, PT = 0.0  
+        Couple, Range = AC26[1]  
+  
+        WEIGHT, DX = 1.0, DPX = 10.0  
+        Constraint, Range=QFC[1], DX = 0.0, DPX = 0.0  
+        Constraint, Range=#E, MUX=MUH, MUY=MUV  
+  
+        Simplex, calls=2000, Tolerance=1.0E-10  
+        Lmdif, calls=2000, Tolerance=1.0E-10  
+        Simplex, calls=2000, Tolerance=1.0E-10  
+        Lmdif, calls=2000, Tolerance=1.0E-10  
+     Endmatch  
+!------------------------------------------------------------  
+  Use, SP  
+     Cell  
+        Vary, KF, step=.00001, lower=0.0, upper=6.0  
+        Vary, KD, step=.00001, lower=-6.0, upper=0.0  
+        Vary, KFC, step=0.00001, lower=0.0, upper=8.0  
+  
+        Constraint, Range=QFC[1], DX = 0.0, DPX = 0.0  
+        Constraint, Range=#E, MUX=MUH, MUY=MUV  
+  
+        Lmdif, calls=2000, Tolerance=1.0E-10  
+     Endmatch  
+!------------------------------------------------------------
+! End Method 1
+!------------------------------------------------------------
+! Begin Method 2.  
+!------------------------------------------------------------
+! This method adapted from K. Gardner's original
+! optimization process.  Requires output quarter-arc phase 
+! advance,  matching parameters, and arc quad strengths from 
+! file Arc.mad to begin optimization.
+!------------------------------------------------------------
+!  CMUX:=0.252
+!  CMUY:=0.272
+!  SCMUH:=MUH-4.0*CMUX  
+!  SCMUV:=MUV-4.0*CMUY  
+!  BHMAX:=27.0
+!  BXMCH:=1.963
+!  BYMCH:=14.307
+!  KF26 = 3.645254E+00
+!  KF =  3.965712E+00
+!  KD = -4.400142E+00
+!  KDEE = -4.319874E+00
+!-----------------------------------------------------------
+!  Use, ARC
+!  Cell
+!  Vary, KF26, step=.00001, lower=0.0, upper=6.0
+!  Vary, KFS, step=.00001, lower=0.0, upper=6.0
+!  Vary, KD, step=.00001, lower=-6.0, upper=0.0
+!  Vary, KDEE, step=.00001, lower=-8.0, upper=0.0
+!  Constraint, Range=#E, MUX=4*CMUX, MUY=4*CMUY
+!  Simplex, calls=2000, Tolerance=1.0E-10
+!  Endmatch
+!------------------------------------------------------------
+!  Use, SCC
+!  Match, Line=ARC, ALFX=0.0, ALFY=0.0, DX=0.0, DY=0.0
+!  Vary, KDEE, step=.00001, lower=-8.0, upper=0.0
+!  Vary, KFC, step=.00001, lower=0.0, upper=8.0
+!  Vary, KDC, step=.00001, lower=-8.0, upper=0.0
+!  Constraint, Range=QFC, BETX < BHMAX
+!  Constraint, Range=#E, BETY=BYMCH, BETX=BXMCH
+!  Constraint, Range=#E, MUX=SCMUH, MUY=SCMUV
+!  Simplex, calls=2000, Tolerance=1.0E-10
+!  Endmatch
+!------------------------------------------------------------
+!  SET, KDEE, 0.5*(KDE+KD)
+!  Use, SP
+!  Cell
+!  Vary, KDEE, step=.00001, lower=-8.0, upper=0.0
+!  Vary, KFC, step=.00001, lower=0.0, upper=8.0
+!  Vary, KDC, step=.00001, lower=-8.0, upper=0.0
+!  Constraint, Range=#E, MUX=MUH, MUY=MUV
+!  Constraint, Range=#E, BETY=BYMCH, BETX=BXMCH
+!  Simplex, calls=2000, Tolerance=1.0E-10
+!  Endmatch
+!------------------------------------------------------------
+!  Use, SP
+!  Cell
+!  Vary, KFC, step=.00001, lower=0.0, upper=8.0
+!  Vary, KDC, step=.00001, lower=-8.0, upper=0.0
+!  Constraint, Range=#E, MUX=MUH, MUY=MUV
+!  Constraint, Range=#E, MUY=MUV
+!  Simplex, calls=2000, Tolerance=1.0E-10
+!  Endmatch
+!------------------------------------------------------------
+!  Use, RING
+!  Cell
+!  Vary, KDEE, step=.00001, lower=-8.0, upper=0.0
+!  Vary, KFC, step=.00001, lower=0.0, upper=8.0
+!  Vary, KDC, step=.00001, lower=-8.0, upper=0.0
+!  Constraint, Range=#E, MUX=QH, MUY=QV
+!  Constraint, Range=#E, MUY=QV
+!  Simplex, calls=2000, Tolerance=1.0E-10
+!  Endmatch
+!------------------------------------------------------------
+! End Method 2
+!------------------------------------------------------------
+! Begin Method 3
+!------------------------------------------------------------
+! This method is takes user-defined quad strengths and runs the
+! ring command once, varying the straight section quads to 
+! match tune. Quad strengths defined must be near accurate
+! for succesful tune match to occur.
+!------------------------------------------------------------  
+!!KD=-4.457336E+00
+!!KF=3.952558E+00 
+!!KF26=3.952558E+00*(0.25/0.2705)
+!!KDEE=0.5*(-1.488697E+00-4.457336E+00)
+!!KDC=-3.725815E+00*(0.275/0.2665)
+!!KFC=3.502234E+00*(0.35/0.3365) 
+!!Use, RING
+!!Cell
+!!Vary, KFC, step=.00001, lower=0.0, upper=8.0
+!!Vary, KDC, step=.00001, lower=-8.0, upper=0.0
+!!Constraint, Range=#E, MUX=QH, MUY=QV
+!!Constraint, Range=#E, MUY=QV
+!!Simplex, calls=2000, Tolerance=1.0E-10
+!!Endmatch
+! Or just enter in values from ring optics application
+KD=-4.25
+KF= 3.91
+KF26=3.6172
+KDEE=-3.024
+KDC=-4.1166
+KFC= 3.7663
+!-------------------------------------------------------------
+!End Method choice 3
+!-------------------------------------------------------------
+!------------------ Chromaticity correction ------------------  
+  
+Use,RNG  
+    HARMON  
+       HCHROMATICITY  
+  
+       HVARY, NAME=CHRM3,STEP=0.001  
+       HVARY, NAME=CHRM4,STEP=0.001  
+       HVARY, NAME=CHRM5,STEP=0.001  
+       HVARY, NAME=CHRM6,STEP=0.001  
+  
+       HFUNCTION  
+       HTUNE, QX'=0, QY'=0  
+       HWEIGHT, QX'=1.0,QY'=1.0,QX''=0.005,QY''=0.005  
+       HCELL, QX'=0,QY'=0,QX''=0.0,QY''=0.0  
+    ENDHARMON  
+  
+!------------------------------------------------------------
+! Print the final output.  Put the BEAM statement in here
+! to generate the correct lattices.
+!------------------------------------------------------------  
+BEAM, PARTICLE=PROTON, ENERGY=EK+E0, EXN=0.00012, EYN=0.00012, &  
+       SIGE=13E-09*C/PC, BUNCHED  
+
+USE,RNGINJ
+SAVELINE, NAME=RINGINJ, FILENAME=LATTICE
+
+  SELECT, OPTICS, RANGE = #S/#E
+  OPTICS,FILENAME = "optics",&
+  COLUMNS = NAME,KEYWORD,S,L,K1L,BETX,DX,BETY,DY
+
+  PRINT, FULL
+  SELECT, FLAG=SECOND, RANGE=#S/E
+  TWISS, SAVE, DELTAP=0.00, TAPE=twiss
+
+ setplot post=2 xsize=24 ysize=16 ascale=1.5 rscale=1.5
+ PLOT, HAXIS=S, VAXIS1=BETX,BETY, RANGE=#S/#E, STYLE=100
+ PLOT, HAXIS=S, VAXIS1=BETX, RANGE=#S/#E, STYLE=100
+ PLOT, HAXIS=S, VAXIS1=BETY, RANGE=#S/#E, STYLE=100
+ PLOT, HAXIS=S, VAXIS1=DX,DY,   RANGE=#S/#E, STYLE=100
+ PLOT, HAXIS=S, VAXIS1=DX,   RANGE=#S/#E, STYLE=100
+ PLOT, HAXIS=S, VAXIS1=DY,   RANGE=#S/#E, STYLE=100
+ PLOT, HAXIS=S, VAXIS1=X,Y,   RANGE=#S/#E, STYLE=100
+ PLOT, HAXIS=S, VAXIS1=X,   RANGE=#S/#E, STYLE=100
+ PLOT, HAXIS=S, VAXIS1=Y,   RANGE=#S/#E, STYLE=100
+
+ VALUE, QD[K1] * Brho
+ VALUE, QF[K1] * Brho
+ VALUE, QF26[K1] * Brho
+ VALUE, QDEE[K1] * Brho
+ VALUE, QDC[K1] * Brho
+ VALUE, QFC[K1] * Brho
+
+! Use for global coords
+!USE, RNG
+!    PRINT, FULL
+!    SURVEY, X0=RX0-(RQDEAXIS-LCV9/2.0-L27CDM), Y0=RY0, Z0=RZ0, &
+!            THETA0=PI/2.0, TAPE = "623_620.survey"
+!
+!    SELECT, OPTICS, RANGE = #S/#E
+!    OPTICS, FILENAME = "623_620.optics",deltap=0, &
+!            COLUMNS = NAME, KEYWORD, S, L, K1L, BETX,DX,X,BETY,DY,Y
+!
+!    SELECT, FLAG=FIRST, RANGE=#S/E
+!    TWISS, SAVE, DELTAP=0.00, TAPE = "623_620.twiss"
+
+
+stop
