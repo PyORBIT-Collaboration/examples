@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #---------------------------------------------------------
-#This test will read MAD file and parse it
+#This test will read SAD file and parse it
 #We have rcs_2.601.sad
 #---------------------------------------------------------
 
@@ -13,10 +13,10 @@ if( len(sys.argv) != 2 ):
 	print "Example: >python sad_parser_test.py rsc_2.601.sad"
 	sys.exit(1)
 
-mad_file = sys.argv[1]
+sad_file = sys.argv[1]
 
 parser = SAD_Parser()
-parser.parse(mad_file)
+parser.parse(sad_file)
 
 
 lines = parser.getSAD_Lines()
