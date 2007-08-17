@@ -36,6 +36,7 @@ def quadTranslator(elm):
 	SAD - K1 = K1mad*L
 	SAD - ROTATE in DEG, but parser already changed it to RAD
 	MAD - TILT in RAD
+	SAD - MAD have different sign in K1 !!!!
 	"""
 	L = elm.getParameter("L")
 	K1 = elm.getParameter("K1")
@@ -45,7 +46,7 @@ def quadTranslator(elm):
 	elm.getParameters().clear()
 	elm.getParameters()["L"] = L
 	if(L != 0.):
-		elm.getParameters()["K1"] = K1/L
+		elm.getParameters()["K1"] = - K1/L
 	else:
 		elm.getParameters()["K1"] = 0.
 	if(TILT != 0.):
@@ -117,7 +118,7 @@ def bendTranslator(elm):
 		elm.setType("DRIFT")
 		return
 	if(K1 != 0. and L != 0.):
-		elm.getParameters()["K1"] = K1/L
+		elm.getParameters()["K1"] = - K1/L
 	elm.getParameters()["ANGLE"] = ANGLE
 	if(TILT != 0.):
 		elm.getParameters()["TILT"] = TILT
@@ -140,7 +141,7 @@ def sextTranslator(elm):
 	elm.getParameters().clear()
 	elm.getParameters()["L"] = L
 	if(L != 0.):
-		elm.getParameters()["K2"] = K2/L
+		elm.getParameters()["K2"] = - K2/L
 	else:
 		elm.getParameters()["K2"] = 0.
 	if(TILT != 0.):
@@ -168,10 +169,10 @@ def multTranslator(elm):
 	elm.getParameters().clear()
 	for kn in knList:
 		(val,i) = kn
-		elm.getParameters()["K"+str(i)+"L"] = val
+		elm.getParameters()["K"+str(i)+"L"] = - val
 	for skn in sknList:
 		(val,i) = skn
-		elm.getParameters()["K"+str(i)+"L"] = val
+		elm.getParameters()["K"+str(i)+"L"] = - val
 		elm.getParameters()["T"+str(i)] = math.pi/(2*i+2)
 
 #The CAVI Translator
@@ -236,7 +237,7 @@ def SAD_to_MAD_ElementTranslator(elems):
 # Main code
 #===========================================
 if( len(sys.argv) != 3 ):
-	print "Usage: >python sad_parser_test.py <name of SAD file to read> <name of MAD file to write>"
+	print "Usage: >python sad_parser_test.py <name of SAD file to read> <name of Lattice MAD file to write>"
 	sys.exit(1)
 
 sad_file_name = sys.argv[1]
@@ -256,17 +257,116 @@ print "Number of lattice accelerator elements  =",len(elems)
 print "Number of lattice accelerator variables =",len(variables)
 print "================================================"
 
-mad_file = open(mad_file_name,"w")
 #===================================================
-#write all variables and their values
-#===================================================
-for var in variables:
-	mad_file.write(var.getName()+" := "+str(var.getValue())+" \n")
-#===================================================
-#Translate elements from SAD to MAD and
-#write all elements with (key,val) parameters
+#Translate elements from SAD to MAD
 #===================================================
 SAD_to_MAD_ElementTranslator(elems)
+
+mad_file = open(mad_file_name,"w")
+#===================================================
+#write variables needed for tune fitting in MAD
+# They are the K1 parameters in QUADS for 7 families
+# QDL,QDN,QDX,  QFL,QFM,QFN,QFX
+# k1_values{abs(k1*1000000), [quadElements]}
+#===================================================
+lineRING = parser.getSAD_LinesDic()["RING"]
+elemsRING = lineRING.getElements()
+
+k1_values = {}
+for elem in elemsRING:
+	if(elem.getType() == "QUADRUPOLE" and elem.hasParameter("K1")):
+		if(elem.getParameter("K1") != 0.):
+			key = math.floor(math.fabs(elem.getParameter("K1"))*1000000.)
+			if(k1_values.has_key(key)):
+				k1_values[key].append(elem)
+			else:
+				k1_values[key] = []
+				k1_values[key].append(elem)
+
+print "=====quads families: ======="
+i = 0
+for key in k1_values.keys():
+	i = i + 1
+	print "i=",i," K1=",math.fabs(k1_values[key][0].getParameter("K1")),
+	print " nQuads=",len(k1_values[key])," nm=",k1_values[key][0].getName()
+	#for quad in k1_values[key]:
+	#	print "  name=",quad.getName()
+
+#now we replace numerical value of the parameter by variable names
+#and write the name := numerical value in the MAD file
+for key in k1_values.keys():
+	quads = k1_values[key]
+	varName = quads[0].getName()[0:3]+"K1"
+	val = math.fabs(quads[0].getParameter("K1"))
+	mad_file.write(varName+" := "+str(val)+" \n")
+	for quad in quads:
+		k1 = quad.getParameter("K1")
+		if(k1 >= 0.):
+			quad.getParameters()["K1"] = varName
+		else:
+			quad.getParameters()["K1"] = "-"+varName
+#---------------------------------------------------------
+#Here it will be shortcut. We will dump only elements that
+#belong to RING lattice line and we will remove MARKERs
+#----------------------------------------------------------
+mad_elemsDic = {}
+mad_elems = []
+for elem in elemsRING:
+	if(elem.getType() != "MARKER"):
+		if(elem.getType() != "RCOLLIMATOR"):
+			mad_elemsDic[elem.getName()] = elem
+			mad_elems.append(elem)
+
+print "MAD file will have ",len(mad_elemsDic)," elements."
+
+for elem in mad_elemsDic.values():
+	res = ""
+	res = res + elem.getName() + " : " + elem.getType()+" "
+	for key,val in elem.getParameters().iteritems():
+		res = res + ", " + key + " = " + str(val)+ " "
+	printMAD_String(mad_file,res)
+#--------------------------------------------------------
+# Now we create lines that includes not more then nMaxElems
+# and RING will consists of these lines
+#---------------------------------------------------------
+nMaxElems = 75
+n = 1 + len(mad_elems)/nMaxElems
+tmp_lines =[]
+for i in xrange(n):
+	tmp_elems = mad_elems[(i*nMaxElems):((i+1)*nMaxElems)]
+	if(len(tmp_elems) > 0):
+		line_name = "LINETMP0"+str(i)
+		res = line_name +" : Line = ( "
+		j = 0
+		for elem in tmp_elems:
+			j = j + 1
+			if(j != 1): res = res +" , "
+			res = res + elem.getName()
+		printMAD_String(mad_file,res+" ) ")
+		tmp_lines.append(line_name)
+#write RING line
+res = "RING : Line = ( "
+i = 0
+for line_name in tmp_lines:
+		i = i + 1
+		if(i != 1): res = res +" , "
+		res = res + line_name
+printMAD_String(mad_file,res+" ) ")
+print "The MAD lattice line RING has ",len(tmp_lines)," sublines and ",
+print len(mad_elems)," elements."
+#=======================================
+mad_file.close()
+print "Done."
+sys.exit(0)
+
+
+#---------------------------------------------------------------
+#This is a previous versions of the elements and lines dumping
+#to a MAD file. It will dump everything.
+#---------------------------------------------------------------
+#===================================================
+#write all elements with (key,val) parameters
+#===================================================
 for elem in elems:
 	res = ""
 	res = res + elem.getName() + " : " + elem.getType()+" "
@@ -307,7 +407,5 @@ for line in negativeLineList:
 		res = res + item.getName()
 	printMAD_String(mad_file,res + " ) ")
 #===================================================
-mad_file.close()
 
-print "Done."
-sys.exit(0)
+

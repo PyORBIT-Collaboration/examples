@@ -1,0 +1,1194 @@
+drift l 0.264 end 
+drift l 0.4 end 
+drift l 0.996 end 
+drift l 0.4 end 
+drift l 1.8455 end 
+drift l 0.2 end 
+drift l 0.36 end 
+drift l 0.2 end 
+drift l 0.164 end 
+drift l 0.15 end 
+drift l 0.12 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.168329216516 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 0.1645 end 
+drift l 0.4 end 
+drift l 0.24 end 
+drift l 0.4 end 
+drift l 0.57 end 
+drift l 0.4 end 
+drift l 0.24 end 
+drift l 0.4 end 
+drift l 0.108 end 
+drift l 0.237 end 
+drift l 0.237 end 
+drift l 0.108 end 
+drift l 0.4 end 
+drift l 0.24 end 
+drift l 0.4 end 
+drift l 0.57 end 
+drift l 0.4 end 
+drift l 0.24 end 
+drift l 0.4 end 
+drift l 0.2045 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.178591323778 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 0.164 end 
+drift l 0.15 end 
+drift l 0.12 end 
+drift l 0.4955 end 
+drift l 1.686 end 
+drift l 0.4 end 
+drift l 0.75 end 
+drift l 0.4 end 
+drift l 1.586 end 
+drift l 0.164 end 
+drift l 0.15 end 
+drift l 0.12 end 
+drift l 0.1235 end 
+drift l 0.13 end 
+drift l 0.1495 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.20819984608 l 1.041 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.1695 end 
+drift l 0.11 end 
+drift l 5.669 end 
+drift l 0.2 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.16 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.178591323778 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 5.719 end 
+drift l 0.2 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.16 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.168329216516 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 5.0995 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.295511065549 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.21314 end 
+sextupole k2 0.0 l 0.15 end 
+drift l 0.52086 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 1.043 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.184 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.683 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.28 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 1.5795 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.046 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 0.159 end 
+drift l 0.06 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.066 end 
+drift l 0.134 end 
+drift l 0.0 end 
+sextupole k2 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 1.9395 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.28 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.184 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 1.043 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.184 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.683 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.295511065549 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.044 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.183 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.044 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.183 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.28 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 1.5795 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.046 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 0.159 end 
+drift l 0.06 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.066 end 
+drift l 0.134 end 
+drift l 0.0 end 
+sextupole k2 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 1.9395 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.28 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.684 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.183 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.044 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.51986 end 
+sextupole k2 0.0 l 0.15 end 
+drift l 0.21314 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.295511065549 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.7705 end 
+drift l 0.63 end 
+drift l 0.155 end 
+drift l 0.63 end 
+drift l 0.155 end 
+drift l 0.63 end 
+drift l 0.769 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.168329216516 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 0.445 end 
+drift l 0.63 end 
+drift l 0.155 end 
+drift l 0.63 end 
+drift l 0.155 end 
+drift l 0.63 end 
+drift l 0.155 end 
+drift l 0.63 end 
+drift l 0.155 end 
+drift l 0.63 end 
+drift l 1.704 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.16 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.178591323778 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 0.2 end 
+drift l 2.14 end 
+drift l 0.09 end 
+drift l 0.09 end 
+drift l 0.09 end 
+drift l 0.09 end 
+drift l 0.09 end 
+drift l 0.09 end 
+drift l 0.09 end 
+drift l 0.09 end 
+drift l 0.09 end 
+drift l 0.09 end 
+drift l 0.5 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.4 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.1 end 
+drift l 0.169 end 
+drift l 0.13 end 
+drift l 0.1495 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.20819984608 l 1.041 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.1695 end 
+drift l 0.11 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.16 end 
+drift l 0.2 end 
+drift l 5.029 end 
+drift l 0.2 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.16 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.178591323778 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 5.719 end 
+drift l 0.2 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.16 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.168329216516 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 5.0995 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.295511065549 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.21314 end 
+sextupole k2 0.0 l 0.15 end 
+drift l 0.52086 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 1.043 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.184 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.683 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.28 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 1.5795 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.046 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 0.159 end 
+drift l 0.06 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.066 end 
+drift l 0.134 end 
+drift l 0.0 end 
+sextupole k2 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 1.9395 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.28 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.184 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 1.043 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.184 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.683 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.295511065549 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.044 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.183 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.044 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.183 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.28 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 1.5795 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.046 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 0.159 end 
+drift l 0.06 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.066 end 
+drift l 0.134 end 
+drift l 0.0 end 
+sextupole k2 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 1.9395 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.28 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.684 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.183 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.044 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.51986 end 
+sextupole k2 0.0 l 0.15 end 
+drift l 0.21314 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.295511065549 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 5.0995 end 
+rfcavity volt 0.14 freq 1.22738176121 l 0.0 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.168329216516 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 0.16 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.2 end 
+drift l 5.719 end 
+rfcavity volt 0.14 freq 1.22738176121 l 0.0 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.178591323778 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 0.16 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.2 end 
+drift l 5.029 end 
+drift l 0.2 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.16 end 
+rfcavity volt 0.14 freq 1.22738176121 l 0.0 end 
+drift l 0.13 end 
+drift l 0.1495 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.20819984608 l 1.041 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.1695 end 
+drift l 0.11 end 
+drift l 5.669 end 
+drift l 0.2 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.16 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.178591323778 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 5.719 end 
+drift l 0.2 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.16 end 
+drift l 0.08 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.168329216516 l 1.072 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.154 end 
+drift l 0.06 end 
+drift l 5.0995 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.295511065549 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.21314 end 
+sextupole k2 0.0 l 0.15 end 
+drift l 0.52086 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 1.043 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.184 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.683 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.28 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 1.5795 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.046 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 0.159 end 
+drift l 0.06 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.066 end 
+drift l 0.134 end 
+drift l 0.0 end 
+sextupole k2 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 1.9395 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.28 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.184 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 1.043 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.184 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.683 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.295511065549 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.044 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.183 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.044 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.183 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.28 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 1.5795 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.046 end 
+drift l 0.134 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 0.159 end 
+drift l 0.06 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.066 end 
+drift l 0.134 end 
+drift l 0.0 end 
+sextupole k2 0.0 l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.253106957578 l 0.64 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.129 end 
+drift l 0.051 end 
+drift l 1.9395 end 
+drift l 0.0545 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sextupole k2 0.0 l 0.411 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0545 end 
+drift l 0.28 end 
+drift l 0.096 end 
+drift l 0.14 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.280419203449 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.135 end 
+drift l 0.101 end 
+drift l 0.13 end 
+drift l 0.15 end 
+drift l 0.08 end 
+drift l 0.684 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.183 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 -0.272152760292 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+drift l 1.044 end 
+drift l 0.069 end 
+drift l 0.214 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+sbend angle 0.261799387833 l 2.946 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.245 end 
+drift l 0.039 end 
+drift l 0.51986 end 
+sextupole k2 0.0 l 0.15 end 
+drift l 0.21314 end 
+drift l 0.08 end 
+drift l 0.15 end 
+drift l 0.13 end 
+drift l 0.08 end 
+drift l 0.156 end 
+drift l 0.0 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+quadrupole k1 0.295511065549 l 0.828 end 
+multipole k6l 0.0 k4l 0.0 k5l 0.0 k2l 0.0 k3l 0.0 k1l 0.0 end 
+drift l 0.0 end 
+drift l 0.176 end 
+drift l 0.06 end 
+final 
