@@ -81,8 +81,14 @@ for key in k1_values.keys():
 	print " nQuads=",len(k1_values[key])," nm=",k1_values[key][0].getName()
 
 print "================================================="	
-
-
+print "RF Cavities Positions"
+s = 0.
+for elem in elems:
+	if(elem.hasParameter("L")):
+		s = s + elem.getParameter("L")
+	if(elem.getType() == "CAVI"):
+		print "cav=",elem.getName()," pos=",s
+	
 
 print "Done."
 sys.exit(0)
