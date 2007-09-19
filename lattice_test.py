@@ -2,7 +2,7 @@ import sys
 import math
 import posix
 
-from orbit.lattice import AccLattice, AccLine, AccElement, AccActionsConatainer
+from orbit.lattice import AccLattice, AccLine, AccElement, AccActionsContainer
 
 lat = AccLattice("test_lattice")
 
@@ -50,7 +50,7 @@ elem1_1.addChildNode(elem1_1_3)
 elem1_2 = AccElement("el-1-2")
 elem2.addChildNode(elem1_2)
 
-acts = AccActionsConatainer()
+acts = AccActionsContainer()
 
 def Blanks(n):
     s = ""
