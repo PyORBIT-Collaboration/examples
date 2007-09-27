@@ -19,7 +19,7 @@ energy = 1.0                          #energy in GeV
 #syncPart.pz(p)
 syncPart.kinEnergy(energy)
 
-latt = AccLattice("test_lattice")
+lattice = AccLattice("test_lattice")
 
 elem1 = teapot.DriftTEAPOT("drift1")
 elem2 = teapot.QuadTEAPOT("quad1")
@@ -28,12 +28,12 @@ elem4 = teapot.BendTEAPOT("bend1")
 elem5 = teapot.BendTEAPOT("bend2")
 elem6 = teapot.MultipoleTEAPOT("sextupole")
 
-latt.addChildNode(elem1)
-latt.addChildNode(elem2)
-latt.addChildNode(elem3)
-latt.addChildNode(elem4)
-latt.addChildNode(elem5)
-latt.addChildNode(elem6)
+lattice.insertChildNode(elem1)
+lattice.insertChildNode(elem2)
+lattice.insertChildNode(elem3)
+lattice.insertChildNode(elem4)
+lattice.insertChildNode(elem5)
+lattice.insertChildNode(elem6)
 
 #-----------------------------
 # Set TEAPOT nodes parameters
@@ -66,7 +66,7 @@ elem6.getParam("poles").append(2)
 elem6.getParam("kls").append(0.28)
 elem6.getParam("skews").append(0)
 
-latt.initialize()
+lattice.initialize()
 
 print "==============BEFORE============================"
 #b.dumpBunch()
@@ -87,20 +87,20 @@ def printdE(paramsDict):
 	print "debug erg=",bunch.dE(0)," node=",node.getName()
 
 accContainer = AccActionsContainer()
-#accContainer.addEntranceAction(stopAction)
-#accContainer.addEntranceAction(printdE)
+#accContainer.insertEntranceAction(stopAction)
+#accContainer.insertEntranceAction(printdE)
 
-latt.trackBunch(b)
-#latt.trackBunch(b,accContainer)
+lattice.trackBunch(b)
+#lattice.trackBunch(b,accContainer)
 
 print "=============AFTER============================="
 b.dumpBunch()
 print "=========================================="
 
-print "lattice length=",latt.getLength()
+print "lattice length=",lattice.getLength()
 print "beta=",b.getSyncParticle().beta()
 print "TEAPOT time[sec]=",b.getSyncParticle().time()
-print "SIMPLE time[sec]=",latt.getLength()/(b.getSyncParticle().beta()*2.99792458e+8)
+print "SIMPLE time[sec]=",lattice.getLength()/(b.getSyncParticle().beta()*2.99792458e+8)
 print "Stop."
 
 #==============BEFORE============================
