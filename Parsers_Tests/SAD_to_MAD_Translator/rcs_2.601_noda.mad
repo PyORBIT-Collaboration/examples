@@ -32,25 +32,25 @@ QV:=6.27
 !------------------------------------------------------------!
   Use, RING
   Cell
-  Vary, QFMK1, step=.01, lower=-10.0, upper=10.0
-  Vary, QFNK1, step=.01, lower=-10.0, upper=10.0
-  Vary, QFLK1, step=.01, lower=-10.0, upper=10.0
-  Vary, QDNK1, step=.01, lower=-10.0, upper=10.0
-  Vary, QDLK1, step=.01, lower=-10.0, upper=10.0
-  Vary, QFXK1, step=.01, lower=-10.0, upper=10.0
-  Vary, QDXK1, step=.01, lower=-10.0, upper=10.0
-  Constraint, Range=#E, MUX=QH, MUY=QV
-  Simplex, calls=10000, Tolerance=1.0E-10
-  Endmatch
+!  Vary, QFMK1, step=.01, lower=-10.0, upper=10.0
+!  Vary, QFNK1, step=.01, lower=-10.0, upper=10.0
+!  Vary, QFLK1, step=.01, lower=-10.0, upper=10.0
+!  Vary, QDNK1, step=.01, lower=-10.0, upper=10.0
+!  Vary, QDLK1, step=.01, lower=-10.0, upper=10.0
+!  Vary, QFXK1, step=.01, lower=-10.0, upper=10.0
+!  Vary, QDXK1, step=.01, lower=-10.0, upper=10.0
+!  Constraint, Range=#E, MUX=QH, MUY=QV
+!  Simplex, calls=10000, Tolerance=1.0E-10
+!  Endmatch
 !------------------------------------------------------------
 
-  VALUE, QFMK1
-  VALUE, QFNK1
-  VALUE, QFLK1
-  VALUE, QDNK1
-  VALUE, QDLK1
-  VALUE, QFXK1
-  VALUE, QDXK1
+!  VALUE, QFMK1
+!  VALUE, QFNK1
+!  VALUE, QFLK1
+!  VALUE, QDNK1
+! ! VALUE, QDLK1
+!  VALUE, QFXK1
+!  VALUE, QDXK1
 
 USE,RING
 SAVELINE, NAME=RING, FILENAME=LATTICE

@@ -7,7 +7,7 @@
 
 import sys
 import math
-from orbit.parsers.sad_parser import SAD_Parser, SAD_LattElement, SAD_LattLine
+from sad_parser import SAD_Parser, SAD_LattElement, SAD_LattLine
 
 #===========================================
 # Definitions of auxiliary functions
@@ -46,7 +46,7 @@ def quadTranslator(elm):
 	elm.getParameters().clear()
 	elm.getParameters()["L"] = L
 	if(L != 0.):
-		elm.getParameters()["K1"] = - K1/L
+		elm.getParameters()["K1"] = K1/L
 	else:
 		elm.getParameters()["K1"] = 0.
 	if(TILT != 0.):
@@ -118,7 +118,11 @@ def bendTranslator(elm):
 		elm.setType("DRIFT")
 		return
 	if(K1 != 0. and L != 0.):
-		elm.getParameters()["K1"] = - K1/L
+		elm.getParameters()["K1"] = K1/L
+	if(E1 != 0.):
+		elm.getParameters()["E1"] = E1
+	if(E2 != 0.):
+		elm.getParameters()["E2"] = E2
 	elm.getParameters()["ANGLE"] = ANGLE
 	if(TILT != 0.):
 		elm.getParameters()["TILT"] = TILT
@@ -141,7 +145,7 @@ def sextTranslator(elm):
 	elm.getParameters().clear()
 	elm.getParameters()["L"] = L
 	if(L != 0.):
-		elm.getParameters()["K2"] = - K2/L
+		elm.getParameters()["K2"] = K2/L
 	else:
 		elm.getParameters()["K2"] = 0.
 	if(TILT != 0.):
@@ -169,10 +173,10 @@ def multTranslator(elm):
 	elm.getParameters().clear()
 	for kn in knList:
 		(val,i) = kn
-		elm.getParameters()["K"+str(i)+"L"] = - val
+		elm.getParameters()["K"+str(i)+"L"] = val
 	for skn in sknList:
 		(val,i) = skn
-		elm.getParameters()["K"+str(i)+"L"] = - val
+		elm.getParameters()["K"+str(i)+"L"] = val
 		elm.getParameters()["T"+str(i)] = math.pi/(2*i+2)
 
 #The CAVI Translator
@@ -190,7 +194,7 @@ def caviTranslator(elm):
 	elm.getParameters().clear()
 	elm.getParameters()["L"] = L
 	elm.getParameters()["HARM"] = HARM
-	elm.getParameters()["VOLT"] = VOLT/(1000.*1000.)
+	elm.getParameters()["VOLT"] = 0.
 
 #The MARKER Translator
 def markerTranslator(elm):

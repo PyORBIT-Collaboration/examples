@@ -9,14 +9,16 @@
 import sys
 from orbit.parsers.mad_parser import MAD_Parser, MAD_LattElement, MAD_LattLine
 
-if( len(sys.argv) != 4 ):
-	print "Usage: >python mad_parser_test.py <name of MAD Lattice file> <MAD Twiss File>  <ORBIT Teapot output file> "
-	print "Example: >python mad_parser_test.py LATTICE TWISS TEAPOT.LAT"
+if( len(sys.argv) != 5 ):
+	print "Usage: >python mad_parser_test.py <name of line> ",
+	print "<name of MAD Lattice file> <MAD Twiss File>  <ORBIT Teapot output file> "
+	print "Example: >python mad_parser_test.py RING LATTICE TWISS TEAPOT.LAT"
 	sys.exit(1)
 
-mad_file = sys.argv[1]
-twiss_file = sys.argv[2]
-teapot_file = sys.argv[3]
+NAME_LINE = sys.argv[1]
+mad_file = sys.argv[2]
+twiss_file = sys.argv[3]
+teapot_file = sys.argv[4]
 
 parser = MAD_Parser()
 parser.parse(mad_file)
@@ -31,13 +33,13 @@ print "Number of lattice accelerator lines     =",len(lines)
 print "Number of lattice accelerator elements  =",len(elems)
 print "Number of lattice accelerator variables =",len(variables)
 print "================================================"
-print "We will use RING lattice line."
+print "We will use ",NAME_LINE," lattice line."
 print "================================================"
 
 #get MAD lines dictionary
 linesDic = parser.getMAD_LinesDic()
 
-ring = linesDic["RING"]
+ring = linesDic[NAME_LINE]
 ring_elems = ring.getElements()
 ring_length = 0.
 for elem in ring_elems:
