@@ -37,7 +37,7 @@ print "Number of lattice accelerator variables =",len(variables)
 print "================================================"
 
 #get SAD lines dictionary
-linesDic = parser.getSAD_LinesDic()
+linesDict = parser.getSAD_LinesDict()
 lines = parser.getSAD_Lines()
 
 ring_lines = []
@@ -53,7 +53,7 @@ for ln in lines:
 
 
 print "================================================="
-line = linesDic["RING"]
+line = linesDict["RING"]
 print "Lattice Line:",line.getName()
 elems = line.getElements()
 angle = 0.

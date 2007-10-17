@@ -214,21 +214,21 @@ def SAD_to_MAD_ElementTranslator(elems):
 	#translation dictionary for types
 	#and translation functions
 	#----------------------------------
-	translDic = {}
-	translDic["QUAD"]  = ("QUADRUPOLE", quadTranslator)
-	translDic["DRIFT"] = ("DRIFT", driftTranslator)
-	translDic["APERT"] = ("RCOLLIMATOR", apertTranslator)
-	translDic["BEND"]  = ("SBEND", bendTranslator)
-	translDic["SEXT"]  = ("SEXTUPOLE", sextTranslator)
-	translDic["MULT"]  = ("MULTIPOLE", multTranslator)
-	translDic["CAVI"]  = ("RFCAVITY", caviTranslator)
-	translDic["MARK"]  = ("MARKER", markerTranslator)
+	translDict = {}
+	translDict["QUAD"]  = ("QUADRUPOLE", quadTranslator)
+	translDict["DRIFT"] = ("DRIFT", driftTranslator)
+	translDict["APERT"] = ("RCOLLIMATOR", apertTranslator)
+	translDict["BEND"]  = ("SBEND", bendTranslator)
+	translDict["SEXT"]  = ("SEXTUPOLE", sextTranslator)
+	translDict["MULT"]  = ("MULTIPOLE", multTranslator)
+	translDict["CAVI"]  = ("RFCAVITY", caviTranslator)
+	translDict["MARK"]  = ("MARKER", markerTranslator)
 	#----------------------------------
 	#Translation process
 	#----------------------------------
 	for elm in elems:
-		if(translDic.has_key(elm.getType())):
-			(newType,fn) = translDic[elm.getType()]
+		if(translDict.has_key(elm.getType())):
+			(newType,fn) = translDict[elm.getType()]
 			elm.setType(newType)
 			fn(elm)
 		else:
@@ -273,7 +273,7 @@ mad_file = open(mad_file_name,"w")
 # QDL,QDN,QDX,  QFL,QFM,QFN,QFX
 # k1_values{abs(k1*1000000), [quadElements]}
 #===================================================
-lineRING = parser.getSAD_LinesDic()["RING"]
+lineRING = parser.getSAD_LinesDict()["RING"]
 elemsRING = lineRING.getElements()
 
 k1_values = {}
@@ -313,17 +313,17 @@ for key in k1_values.keys():
 #Here it will be shortcut. We will dump only elements that
 #belong to RING lattice line and we will remove MARKERs
 #----------------------------------------------------------
-mad_elemsDic = {}
+mad_elemsDict = {}
 mad_elems = []
 for elem in elemsRING:
 	if(elem.getType() != "MARKER"):
 		if(elem.getType() != "RCOLLIMATOR"):
-			mad_elemsDic[elem.getName()] = elem
+			mad_elemsDict[elem.getName()] = elem
 			mad_elems.append(elem)
 
-print "MAD file will have ",len(mad_elemsDic)," elements."
+print "MAD file will have ",len(mad_elemsDict)," elements."
 
-for elem in mad_elemsDic.values():
+for elem in mad_elemsDict.values():
 	res = ""
 	res = res + elem.getName() + " : " + elem.getType()+" "
 	for key,val in elem.getParameters().iteritems():

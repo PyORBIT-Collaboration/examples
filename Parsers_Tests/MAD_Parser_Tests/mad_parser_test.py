@@ -31,9 +31,9 @@ print "Number of lattice accelerator variables =",len(variables)
 print "================================================"
 
 #get MAD lines dictionary
-linesDic = parser.getMAD_LinesDic()
+linesDict = parser.getMAD_LinesDict()
 
-ring = linesDic["RNG"]
+ring = linesDict["RNG"]
 ring_elems = ring.getElements()
 print "The line",ring.getName()," includes N elements=",len(ring_elems)
 

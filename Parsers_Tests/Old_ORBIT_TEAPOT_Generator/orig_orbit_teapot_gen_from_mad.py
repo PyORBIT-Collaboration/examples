@@ -37,9 +37,9 @@ print "We will use ",NAME_LINE," lattice line."
 print "================================================"
 
 #get MAD lines dictionary
-linesDic = parser.getMAD_LinesDic()
+linesDict = parser.getMAD_LinesDict()
 
-ring = linesDic[NAME_LINE]
+ring = linesDict[NAME_LINE]
 ring_elems = ring.getElements()
 ring_length = 0.
 for elem in ring_elems:

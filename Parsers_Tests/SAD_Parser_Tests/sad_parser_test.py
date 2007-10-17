@@ -31,9 +31,9 @@ print "Number of lattice accelerator variables =",len(variables)
 print "================================================"
 
 #get SAD lines dictionary
-linesDic = parser.getSAD_LinesDic()
+linesDict = parser.getSAD_LinesDict()
 
-ln = linesDic["INJLINEFL0"]
+ln = linesDict["INJLINEFL0"]
 ln_elems = ln.getElements()
 print "The line",ln.getName()," includes N elements=",len(ln_elems)
 
