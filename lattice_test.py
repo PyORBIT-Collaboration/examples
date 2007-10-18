@@ -40,15 +40,15 @@ elem1_1_2 = AccElement("el-1-1-2")
 elem1_1_3 = AccElement("el-1-1-3")
 elem1_1_4 = AccElement("el-1-1-4")
 
-elem1.insertChildNodeInBody(elem1_1)
-elem1_1.insertChildNodeAtEntrance(elem1_1_1)
-elem1_1.insertChildNodeAtExit(elem1_1_4)
-elem1_1.insertChildNodeInBody(elem1_1_2)
-elem1_1.insertChildNodeInBody(elem1_1_3)
+elem1.insertBodyChildNode(elem1_1)
+elem1_1.insertEntranceChildNode(elem1_1_1)
+elem1_1.insertExitChildNode(elem1_1_4)
+elem1_1.insertBodyChildNode(elem1_1_2)
+elem1_1.insertBodyChildNode(elem1_1_3)
 
 
 elem1_2 = AccElement("el-1-2")
-elem2.insertChildNodeInBody(elem1_2)
+elem2.insertBodyChildNode(elem1_2)
 
 acts = AccActionsContainer()
 
