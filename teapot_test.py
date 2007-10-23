@@ -28,12 +28,12 @@ elem4 = teapot.BendTEAPOT("bend1")
 elem5 = teapot.BendTEAPOT("bend2")
 elem6 = teapot.MultipoleTEAPOT("sextupole")
 
-lattice.insertChildNode(elem1)
-lattice.insertChildNode(elem2)
-lattice.insertChildNode(elem3)
-lattice.insertChildNode(elem4)
-lattice.insertChildNode(elem5)
-lattice.insertChildNode(elem6)
+lattice.appendChildNode(elem1)
+lattice.appendChildNode(elem2)
+lattice.appendChildNode(elem3)
+lattice.appendChildNode(elem4)
+lattice.appendChildNode(elem5)
+lattice.appendChildNode(elem6)
 
 #-----------------------------
 # Set TEAPOT nodes parameters
