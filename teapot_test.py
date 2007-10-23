@@ -87,8 +87,8 @@ def printdE(paramsDict):
 	print "debug erg=",bunch.dE(0)," node=",node.getName()
 
 accContainer = AccActionsContainer()
-#accContainer.insertEntranceAction(stopAction)
-#accContainer.insertEntranceAction(printdE)
+#accContainer.appendEntranceAction(stopAction)
+#accContainer.appendEntranceAction(printdE)
 
 lattice.trackBunch(b)
 #lattice.trackBunch(b,accContainer)

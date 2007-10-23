@@ -40,15 +40,15 @@ elem1_1_2 = AccElement("el-1-1-2")
 elem1_1_3 = AccElement("el-1-1-3")
 elem1_1_4 = AccElement("el-1-1-4")
 
-elem1.insertBodyChildNode(elem1_1)
-elem1_1.insertEntranceChildNode(elem1_1_1)
-elem1_1.insertExitChildNode(elem1_1_4)
-elem1_1.insertBodyChildNode(elem1_1_2)
-elem1_1.insertBodyChildNode(elem1_1_3)
+elem1.appendBodyChildNode(elem1_1)
+elem1_1.appendEntranceChildNode(elem1_1_1)
+elem1_1.appendExitChildNode(elem1_1_4)
+elem1_1.appendBodyChildNode(elem1_1_2)
+elem1_1.appendBodyChildNode(elem1_1_3)
 
 
 elem1_2 = AccElement("el-1-2")
-elem2.insertBodyChildNode(elem1_2)
+elem2.appendBodyChildNode(elem1_2)
 
 acts = AccActionsContainer()
 
@@ -81,9 +81,9 @@ def funcTrack(paramsDict):
     if(paramsDict.has_key("print") and paramsDict["print"] == True):
         print Blanks(nLevel),"TRACK through node =",node.getName()," level=",nLevel
 
-acts.insertEntranceAction(funcEntrance)
-acts.insertBodyAction(funcTrack)
-acts.insertExitAction(funcExit)
+acts.appendEntranceAction(funcEntrance)
+acts.appendBodyAction(funcTrack)
+acts.appendExitAction(funcExit)
 
 lattice.initialize()
 
