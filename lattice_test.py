@@ -2,20 +2,14 @@ import sys
 import math
 import posix
 
-from orbit.lattice import AccLattice, AccLine, AccElement, AccActionsContainer
+from orbit.lattice import AccLattice, AccElement, AccActionsContainer
 
 lattice = AccLattice("test_lattice")
-
-line1 = AccLine("line1")
-line2 = AccLine("line2")
-line3 = AccLine("line3")
-line4 = AccLine("line4")
 
 elem1 = AccElement("el-1")
 elem2 = AccElement("el-2")
 elem3 = AccElement("el-3")
 elem4 = AccElement("el-4")
-
 elem5 = AccElement("el-5")
 
 elem1.setLength(1.1)
@@ -23,15 +17,10 @@ elem2.setLength(2.1)
 elem3.setLength(3.1)
 elem4.setLength(4.1)
 
-line1.appendChildNode(elem1)
-line2.appendChildNode(elem2)
-line3.appendChildNode(elem3)
-line4.appendChildNode(elem4)
-
-lattice.appendChildNode(line1)
-lattice.appendChildNode(line2)
-lattice.appendChildNode(line3)
-lattice.appendChildNode(line4)
+lattice.appendChildNode(elem1)
+lattice.appendChildNode(elem2)
+lattice.appendChildNode(elem3)
+lattice.appendChildNode(elem4)
 lattice.appendChildNode(elem5)
 
 elem1_1 = AccElement("el-1-1")
