@@ -30,7 +30,7 @@ def printMAD_String(fl,res):
 			i_start = i_stop
 
 #The QUAD Translator
-def quadTranslator(elm):
+def quadTranslator(elem):
 	"""
 	MAD - K1=(1/B*pho)*d(B)/d(x)
 	SAD - K1 = K1mad*L
@@ -38,121 +38,121 @@ def quadTranslator(elm):
 	MAD - TILT in RAD
 	SAD - MAD have different sign in K1 !!!!
 	"""
-	L = elm.getParameter("L")
-	K1 = elm.getParameter("K1")
+	L = elem.getParameter("L")
+	K1 = elem.getParameter("K1")
 	TILT = 0.
-	if(elm.hasParameter("ROTATE")):
-		TILT = elm.getParameter("ROTATE")
-	elm.getParameters().clear()
-	elm.getParameters()["L"] = L
+	if(elem.hasParameter("ROTATE")):
+		TILT = elem.getParameter("ROTATE")
+	elem.getParameters().clear()
+	elem.getParameters()["L"] = L
 	if(L != 0.):
-		elm.getParameters()["K1"] = K1/L
+		elem.getParameters()["K1"] = K1/L
 	else:
-		elm.getParameters()["K1"] = 0.
+		elem.getParameters()["K1"] = 0.
 	if(TILT != 0.):
-		elm.getParameters()["TILT"] = TILT
+		elem.getParameters()["TILT"] = TILT
 
 #The DRIFT Translator
-def driftTranslator(elm):
+def driftTranslator(elem):
 	"""
 	MAD and SAD - L= length
 	"""
-	L = elm.getParameter("L")
-	elm.getParameters().clear()
-	elm.getParameters()["L"] = L
+	L = elem.getParameter("L")
+	elem.getParameters().clear()
+	elem.getParameters()["L"] = L
 
 #The APERT Translator
-def apertTranslator(elm):
+def apertTranslator(elem):
 	"""
 	MAD - L - length (0 by default)
 	MAD - XSIZE - horizontal half aperture
 	MAD - YSIZE - vertical half aperture
 	SAD - DX1,DX2 and DY1,DY2 - limits
 	"""
-	DX1 = elm.getParameter("DX1")
-	DX2 = elm.getParameter("DX2")
-	DY1 = elm.getParameter("DY1")
-	DY2 = elm.getParameter("DY2")
-	elm.getParameters().clear()
-	elm.getParameters()["L"] = 0.
-	elm.getParameters()["XSIZE"] = (max((DX1,DX2))-min((DX1,DX2)))/2.0
-	elm.getParameters()["YSIZE"] = (max((DY1,DY2))-min((DY1,DY2)))/2.0
+	DX1 = elem.getParameter("DX1")
+	DX2 = elem.getParameter("DX2")
+	DY1 = elem.getParameter("DY1")
+	DY2 = elem.getParameter("DY2")
+	elem.getParameters().clear()
+	elem.getParameters()["L"] = 0.
+	elem.getParameters()["XSIZE"] = (max((DX1,DX2))-min((DX1,DX2)))/2.0
+	elem.getParameters()["YSIZE"] = (max((DY1,DY2))-min((DY1,DY2)))/2.0
 
 #The BEND Translator
-def bendTranslator(elm):
+def bendTranslator(elem):
 	"""
 	MAD - E1,E2 see mad user gide
 	MAD and SAD - L - length
 	SAD - AE1,AE2,E1,E2,FINT,K1
 	"""
-	L = elm.getParameter("L")
+	L = elem.getParameter("L")
 	ANGLE = 0.
-	if(elm.hasParameter("ANGLE")):
-		ANGLE = elm.getParameter("ANGLE")
+	if(elem.hasParameter("ANGLE")):
+		ANGLE = elem.getParameter("ANGLE")
 	K1 = 0.
-	if(elm.hasParameter("K1")):
-		K1 = elm.getParameter("K1")
+	if(elem.hasParameter("K1")):
+		K1 = elem.getParameter("K1")
 	AE1 = 0.
-	if(elm.hasParameter("AE1")):
-		AE1 = elm.getParameter("AE1")
+	if(elem.hasParameter("AE1")):
+		AE1 = elem.getParameter("AE1")
 	AE2 = 0.
-	if(elm.hasParameter("AE2")):
-		AE2 = elm.getParameter("AE2")
+	if(elem.hasParameter("AE2")):
+		AE2 = elem.getParameter("AE2")
 	E1 = 0.
-	if(elm.hasParameter("E1")):
-		E1 = elm.getParameter("E1")*ANGLE + AE1
+	if(elem.hasParameter("E1")):
+		E1 = elem.getParameter("E1")*ANGLE + AE1
 	E2 = 0.
-	if(elm.hasParameter("E2")):
-		E2 = elm.getParameter("E2")*ANGLE + AE2
+	if(elem.hasParameter("E2")):
+		E2 = elem.getParameter("E2")*ANGLE + AE2
 	TILT = 0.
-	if(elm.hasParameter("ROTATE")):
-		TILT = elm.getParameter("ROTATE")
+	if(elem.hasParameter("ROTATE")):
+		TILT = elem.getParameter("ROTATE")
 	FINT = 0.
-	if(elm.hasParameter("FINT")):
-		FINT = elm.getParameter("FINT")
+	if(elem.hasParameter("FINT")):
+		FINT = elem.getParameter("FINT")
 	#put new key-val
-	elm.getParameters().clear()
-	elm.getParameters()["L"] = L
+	elem.getParameters().clear()
+	elem.getParameters()["L"] = L
 	if(math.fabs(ANGLE) < 1.0e-6):
 		#this will be DRIFT!!!!!
-		elm.setType("DRIFT")
+		elem.setType("DRIFT")
 		return
 	if(K1 != 0. and L != 0.):
-		elm.getParameters()["K1"] = K1/L
+		elem.getParameters()["K1"] = K1/L
 	if(E1 != 0.):
-		elm.getParameters()["E1"] = E1
+		elem.getParameters()["E1"] = E1
 	if(E2 != 0.):
-		elm.getParameters()["E2"] = E2
-	elm.getParameters()["ANGLE"] = ANGLE
+		elem.getParameters()["E2"] = E2
+	elem.getParameters()["ANGLE"] = ANGLE
 	if(TILT != 0.):
-		elm.getParameters()["TILT"] = TILT
+		elem.getParameters()["TILT"] = TILT
 	if(FINT != 0.):
-		elm.getParameters()["FINT"] = FINT
+		elem.getParameters()["FINT"] = FINT
 
 #The SEXT Translator
-def sextTranslator(elm):
+def sextTranslator(elem):
 	"""
 	MAD - K2,TILT
 	MAD and SAD - L - length
 	SAD - K2,ROTATE
 	"""
-	L = elm.getParameter("L")
-	K2 = elm.getParameter("K2")
+	L = elem.getParameter("L")
+	K2 = elem.getParameter("K2")
 	TILT = 0.
-	if(elm.hasParameter("ROTATE")):
-		TILT = elm.getParameter("ROTATE")
+	if(elem.hasParameter("ROTATE")):
+		TILT = elem.getParameter("ROTATE")
 	#put new key-val
-	elm.getParameters().clear()
-	elm.getParameters()["L"] = L
+	elem.getParameters().clear()
+	elem.getParameters()["L"] = L
 	if(L != 0.):
-		elm.getParameters()["K2"] = K2/L
+		elem.getParameters()["K2"] = K2/L
 	else:
-		elm.getParameters()["K2"] = 0.
+		elem.getParameters()["K2"] = 0.
 	if(TILT != 0.):
-		elm.getParameters()["TILT"] = TILT
+		elem.getParameters()["TILT"] = TILT
 
 #The MULT Translator
-def multTranslator(elm):
+def multTranslator(elem):
 	"""
 	MAD - up to 9 harmonics, names are KnL and Tn
 	MAD and SAD - L - length = 0 by DEFAULT!!!
@@ -162,46 +162,46 @@ def multTranslator(elm):
 	knList = []
 	for i in xrange(9):
 		key = "K"+str(i)
-		if(elm.hasParameter(key)):
-			knList.append((elm.getParameter(key),i))
+		if(elem.hasParameter(key)):
+			knList.append((elem.getParameter(key),i))
 	sknList = []
 	for i in xrange(9):
 		key = "SK"+str(i)
-		if(elm.hasParameter(key)):
-			knList.append((elm.getParameter(key),i))
+		if(elem.hasParameter(key)):
+			knList.append((elem.getParameter(key),i))
 	#put new key-val
-	elm.getParameters().clear()
+	elem.getParameters().clear()
 	for kn in knList:
 		(val,i) = kn
-		elm.getParameters()["K"+str(i)+"L"] = val
+		elem.getParameters()["K"+str(i)+"L"] = val
 	for skn in sknList:
 		(val,i) = skn
-		elm.getParameters()["K"+str(i)+"L"] = val
-		elm.getParameters()["T"+str(i)] = math.pi/(2*i+2)
+		elem.getParameters()["K"+str(i)+"L"] = val
+		elem.getParameters()["T"+str(i)] = math.pi/(2*i+2)
 
 #The CAVI Translator
-def caviTranslator(elm):
+def caviTranslator(elem):
 	"""
 	MAD and SAD - L - length
 	MAD - VOLT in MV
 	SAD - VOLT in V
 	SAD - has a lot of params, in MAD all will be ignored
 	"""
-	L = elm.getParameter("L")
-	HARM = elm.getParameter("HARM")
-	VOLT = elm.getParameter("VOLT")
+	L = elem.getParameter("L")
+	HARM = elem.getParameter("HARM")
+	VOLT = elem.getParameter("VOLT")
 	#put new key-val
-	elm.getParameters().clear()
-	elm.getParameters()["L"] = L
-	elm.getParameters()["HARM"] = HARM
-	elm.getParameters()["VOLT"] = 0.
+	elem.getParameters().clear()
+	elem.getParameters()["L"] = L
+	elem.getParameters()["HARM"] = HARM
+	elem.getParameters()["VOLT"] = 0.
 
 #The MARKER Translator
-def markerTranslator(elm):
+def markerTranslator(elem):
 	"""
 	MAD and SAD - nothing common
 	"""
-	elm.getParameters().clear()
+	elem.getParameters().clear()
 
 
 def SAD_to_MAD_ElementTranslator(elems):
@@ -226,13 +226,13 @@ def SAD_to_MAD_ElementTranslator(elems):
 	#----------------------------------
 	#Translation process
 	#----------------------------------
-	for elm in elems:
-		if(translDict.has_key(elm.getType())):
-			(newType,fn) = translDict[elm.getType()]
-			elm.setType(newType)
-			fn(elm)
+	for elem in elems:
+		if(translDict.has_key(elem.getType())):
+			(newType,fn) = translDict[elem.getType()]
+			elem.setType(newType)
+			fn(elem)
 		else:
-			print "Cannot SAD->MAD translate the type=",elm.getType()
+			print "Cannot SAD->MAD translate the type=",elem.getType()
 			print "Stop."
 			sys.exit(1)
 

@@ -48,7 +48,7 @@ for ln in lines:
 	for elem in elems:
 		length = length + getLength(elem)
 	if(math.fabs(length - 348.333) < 50.):
-		print "line:",ln.getName()," L=",length," nElm=",len(elems)
+		print "line:",ln.getName()," L=",length," nElem=",len(elems)
 		ring_lines.append(ln)
 
 
