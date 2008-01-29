@@ -36,6 +36,7 @@ print "p=",p
 #the amount of memory should be the same
 nIter = 100000000
 for i in xrange(nIter):
+	syncPart = b.getSyncParticle()
 	m = syncPart.mass()
 	p = syncPart.momentum()
 	syncPart.px(syncPart.px())

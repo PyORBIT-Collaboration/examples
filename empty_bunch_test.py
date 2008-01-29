@@ -8,7 +8,6 @@ from bunch import SyncParticle
 print "Start."
 
 b = Bunch()
-print "bunch->cpp_ptr =",b.cpp_ptr
 del b
 
 #memory test

@@ -17,6 +17,8 @@ step = 0.00000001*m
 nStep = int(0.01*m/step)
 
 diff_max = 0.
+diff_e_max = 0.
+
 p_max = 0.
 e_max = 0.
 
@@ -30,13 +32,14 @@ for i in xrange(nStep):
 		diff_max = diff
 		p_max = p
 	diff = abs(e1-e)/e
-	if(diff > diff_max):
-		diff_max = diff
+	if(diff > diff_e_max):
+		diff_e_max = diff
 		e_max = e
 	if(i%10000 == 0):
-		print "i=",i," p=",p0
+		print "i=",i," p0=",p0," p=",p," e=",e," e0=",e1
 
 print "diff. max=",diff_max
+print "diff. max e=",diff_e_max
 print "p_max =",p_max
 print "e_max =",e_max	
 
