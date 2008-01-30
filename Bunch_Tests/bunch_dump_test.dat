@@ -1,0 +1,22 @@
+% PARTICLE_ATTRIBUTES_CONTROLLERS_NAMES macrosize 
+% BUNCH_ATTRIBUTE_INT aaa   111 
+% BUNCH_ATTRIBUTE_INT bbb   444 
+% BUNCH_ATTRIBUTE_DOUBLE aaa   222 
+% BUNCH_ATTRIBUTE_DOUBLE bbb   333 
+% BUNCH_ATTRIBUTE_DOUBLE charge   1 
+% BUNCH_ATTRIBUTE_DOUBLE classical_radius   1.5347e-18 
+% BUNCH_ATTRIBUTE_DOUBLE macro_size   0 
+% BUNCH_ATTRIBUTE_DOUBLE mass   0.938272 
+%  SYNC_PART_COORDS 0 0 0  x, y, z positions in [m]
+%  SYNC_PART_MOMENTUM 0 0 0  px, py, pz momentum component in GeV/c
+%  info only: energy of the synchronous particle [GeV] = 0 
+%  info only: momentum of the synchronous particle [GeV/c] = 0 
+%  info only: beta=v/c of the synchronous particle = 0 
+%  info only: gamma=1/sqrt(1-(v/c)**2) of the synchronous particle = 1 
+%  SYNC_PART_TIME 0  time in [sec]
+% x[m] px[rad] y[m] py[rad] z[m]  (pz or dE [GeV]) macro_size 
+0.1 0.2 0.3 0.4 0.5 0.6 0 
+1.1 1.2 1.3 1.4 1.5 1.6 0 
+2.1 2.2 2.3 2.4 2.5 2.6 0 
+3.1 3.2 3.3 3.4 3.5 3.6 0 
+4.1 4.2 4.3 4.4 4.5 4.6 0 
