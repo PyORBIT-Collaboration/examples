@@ -32,7 +32,7 @@ group = orbit_mpi.MPI_Group_union(group_empty,group_world)
 
 if(rank == 0): print "=========================================="
 
-orbit_mpi.finalize("The test is done!")
+#orbit_mpi.finalize("The test is done!")
 
 #--------------------------
 # CHECK memory leak

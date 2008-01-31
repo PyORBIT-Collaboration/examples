@@ -50,7 +50,7 @@ main_rank = 0
 arr_new = orbit_mpi.MPI_Bcast(arr,data_type,main_rank,comm)
 if(rank == 1): print "bcast arr=",arr_new
 
-orbit_mpi.finalize("The test is done!")
+#orbit_mpi.finalize("The test is done!")
 
 #--------------------------
 # CHECK memory leak

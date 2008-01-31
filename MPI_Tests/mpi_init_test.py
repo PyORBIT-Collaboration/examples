@@ -45,7 +45,7 @@ if(rank == 0):
 else:
 	print "init=",mpi_init," rank=",rank," size=",size, " name=", cpu
 
-orbit_mpi.finalize("Test Error Message!")
+#orbit_mpi.finalize("Test Error Message!")
 #orbit_mpi.finalize()
 
 #--------------------------

@@ -51,7 +51,7 @@ print "name=",orbit_mpi.MPI_Comm_get_name(comm_new)
 
 if(rank == 0): print "=========================================="
 
-orbit_mpi.finalize("The test is done!")
+#orbit_mpi.finalize("The test is done!")
 
 #--------------------------
 # CHECK memory leak

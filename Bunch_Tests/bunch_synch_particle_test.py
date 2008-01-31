@@ -1,6 +1,9 @@
 import sys
 from bunch import Bunch
 from bunch import SyncParticle
+
+import orbit_mpi
+
 #-----------------------------------------------------
 #Memory leak test - it gets the synch. particle 
 #-----------------------------------------------------
@@ -32,6 +35,8 @@ print "pz=",syncPart.pz()
 p = syncPart.momentum()
 print "p=",p
 
+#orbit_mpi.finalize("The test is done!")
+
 #memory test
 #the amount of memory should be the same
 nIter = 100000000
@@ -54,4 +59,3 @@ for i in xrange(nIter):
 		print "i=",i
 
 print "Stop."
-
