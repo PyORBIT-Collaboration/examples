@@ -1,0 +1,1014 @@
+  Title, "SNS Linac Accumulator Ring "
+!------------------------------------------------------------
+!------------Physical costants-------------------------------
+  E0    := 0.938272310   !proton mass [GeV]
+  C     := 2.99792458e8  !speed of light [m/sec]
+  PI    := 3.141592654
+  DTR   := PI/180.
+
+  EK    := 1.00          ![GeV] injection kinetic Energy
+
+  PC    := sqrt(EK*(EK+2*E0))       ;  Value PC
+  BRHO  := 1.e9*PC/C                ;  Value BRHO
+  GAMMA := 1+EK/E0                  ;  Value GAMMA    
+  BETA  := sqrt(1-1/(GAMMA*GAMMA))  ;  Value BETA
+!
+!--------------Select Nominal Tunes--------------------------
+  QH:=6.230
+  QV:=6.200
+  MUH:=QH/4.0
+  MUV:=QV/4.0
+!------------------------------------------------------------
+!*************************************************
+!*      Pulsed Spallation Neutron Source
+!*      1 GeV Linac Accumulator Ring Lattice
+!*      18 October 2000
+!*************************************************
+!------------------------------------------------------------
+! Bending Magnets (32, each split into left and right half)
+!------------------------------------------------------------
+  ANG:= 2*PI/32 
+  EE := ANG/2
+  BL:  Sbend, L=1.50/2, Angle=EE, E1=0., E2=0.
+  BR:  Sbend, L=1.50/2, Angle=EE, E1=0., E2=0.
+  BND: Sbend, L=1.50, Angle=ANG, E1=0.0, E2=0.0
+  RHOB:=1.50/ANG ; Value RHOB
+  BBND:=Brho/RHOB ; Value BBND
+!------------------------------------------------------------
+! Initial Quad Strengths
+!------------------------------------------------------------
+   KF:= 3.882808E+00
+   KD:=-4.123195E+00
+  KDE:=-2.00
+  KDC:=-4.00
+  KFC:= 4.00
+ KDEE:=0.5*(KDE+KD)
+!------------------------------------------------------------
+ KVX1:=KDEE
+ KHX2:=KF
+ KVX3:=KD
+ KHX4:=KF
+ KVX5:=KD
+ KHX6:=KF
+ KVX7:=KD
+ KHX8:=KF
+ KVX9:=KDEE
+ KHX10:=KFC
+ KVX11:=KDC
+ KVX12:=KDC
+ KHX13:=KFC 
+!------------------------------------------------------------
+! Initial Sextupole and Octupole Strengths
+!------------------------------------------------------------
+ CHRM3:=0.0
+ CHRM4:=0.0
+ CHRM5:=0.0
+ CHRM6:=0.0
+ CHRM7:=CHRM3
+ KSVX1:=0.0
+ KSHX2:=0.0
+ KSV3:=CHRM3
+ KSH4:=CHRM4
+ KSV5:=CHRM5
+ KSH6:=CHRM6
+ KSV7:=CHRM7
+ KOH8:=0.0
+ KOV9:=0.0
+!------------------------------------------------------------
+! Generic Half-Quads
+!------------------------------------------------------------
+   LF:=0.25
+   LD:=0.25
+  LDE:=0.25
+ LDEE:=0.25
+!------------------------------------------------------------
+! New quad lengths: Jeff Holmes, 10/2000
+!------------------------------------------------------------
+!  LDC:=0.25
+!  LFC:=0.25
+  LDC:=0.275
+  LFC:=0.35
+!------------------------------------------------------------
+   QF:  Quad,  L=LF,   K1=KF/Brho
+   QD:  Quad,  L=LD,   K1=KD/Brho
+  QDE:  Quad,  L=LDE,  K1=KDE/Brho
+ QDEE:  Quad,  L=LDEE, K1=KDEE/Brho
+  QDC:  Quad,  L=LDC,  K1=KDC/Brho
+  QFC:  Quad,  L=LFC,  K1=KFC/Brho
+!------------------------------------------------------------
+! Generic Whole-Quads
+!------------------------------------------------------------
+   LLF:=2.0*LF
+   LLD:=2.0*LD
+ LLDEE:=2.0*LDEE
+  LLDC:=2.0*LDC
+  LLFC:=2.0*LFC
+   QQF:  Quad,  L=LLF,   K1=KF/Brho
+   QQD:  Quad,  L=LLD,   K1=KD/Brho
+ QQDEE:  Quad,  L=LLDEE, K1=KDEE/Brho
+  QQDC:  Quad,  L=LLDC,  K1=KDC/Brho
+  QQFC:  Quad,  L=LLFC,  K1=KFC/Brho
+!------------------------------------------------------------
+! Individual Whole-Quads
+!------------------------------------------------------------
+  QVX1:  Quad,  L=LLD,   K1=KVX1/Brho
+  QHX2:  Quad,  L=LLF,   K1=KHX2/Brho
+  QVX3:  Quad,  L=LLD,   K1=KVX3/Brho
+  QHX4:  Quad,  L=LLF,   K1=KHX4/Brho
+  QVX5:  Quad,  L=LLD,   K1=KVX5/Brho
+  QHX6:  Quad,  L=LLF,   K1=KHX6/Brho
+  QVX7:  Quad,  L=LLD,   K1=KVX7/Brho
+  QHX8:  Quad,  L=LLF,   K1=KHX8/Brho
+  QVX9:  Quad,  L=LLDEE, K1=KVX9/Brho
+  QHX10: Quad,  L=LLFC,  K1=KHX10/Brho
+  QVX11: Quad,  L=LLDC,  K1=KVX11/Brho
+  QVX12: Quad,  L=LLDC,  K1=KVX12/Brho
+  QHX13: Quad,  L=LLFC,  K1=KHX13/Brho
+!
+  QVA1:  Quad,  L=LLD,   K1=KVX1/Brho
+  QHA2:  Quad,  L=LLF,   K1=KHX2/Brho
+  QVA3:  Quad,  L=LLD,   K1=KVX3/Brho
+  QHA4:  Quad,  L=LLF,   K1=KHX4/Brho
+  QVA5:  Quad,  L=LLD,   K1=KVX5/Brho
+  QHA6:  Quad,  L=LLF,   K1=KHX6/Brho
+  QVA7:  Quad,  L=LLD,   K1=KVX7/Brho
+  QHA8:  Quad,  L=LLF,   K1=KHX8/Brho
+  QVA9:  Quad,  L=LLDEE, K1=KVX9/Brho
+  QHA10: Quad,  L=LLFC,  K1=KHX10/Brho
+  QVA11: Quad,  L=LLDC,  K1=KVX11/Brho
+  QVA12: Quad,  L=LLDC,  K1=KVX12/Brho
+  QHA13: Quad,  L=LLFC,  K1=KHX13/Brho
+!
+  QVB1:  Quad,  L=LLD,   K1=KVX1/Brho
+  QHB2:  Quad,  L=LLF,   K1=KHX2/Brho
+  QVB3:  Quad,  L=LLD,   K1=KVX3/Brho
+  QHB4:  Quad,  L=LLF,   K1=KHX4/Brho
+  QVB5:  Quad,  L=LLD,   K1=KVX5/Brho
+  QHB6:  Quad,  L=LLF,   K1=KHX6/Brho
+  QVB7:  Quad,  L=LLD,   K1=KVX7/Brho
+  QHB8:  Quad,  L=LLF,   K1=KHX8/Brho
+  QVB9:  Quad,  L=LLDEE, K1=KVX9/Brho
+  QHB10: Quad,  L=LLFC,  K1=KHX10/Brho
+  QVB11: Quad,  L=LLDC,  K1=KVX11/Brho
+  QVB12: Quad,  L=LLDC,  K1=KVX12/Brho
+  QHB13: Quad,  L=LLFC,  K1=KHX13/Brho
+!
+  QVC1:  Quad,  L=LLD,   K1=KVX1/Brho
+  QHC2:  Quad,  L=LLF,   K1=KHX2/Brho
+  QVC3:  Quad,  L=LLD,   K1=KVX3/Brho
+  QHC4:  Quad,  L=LLF,   K1=KHX4/Brho
+  QVC5:  Quad,  L=LLD,   K1=KVX5/Brho
+  QHC6:  Quad,  L=LLF,   K1=KHX6/Brho
+  QVC7:  Quad,  L=LLD,   K1=KVX7/Brho
+  QHC8:  Quad,  L=LLF,   K1=KHX8/Brho
+  QVC9:  Quad,  L=LLDEE, K1=KVX9/Brho
+  QHC10: Quad,  L=LLFC,  K1=KHX10/Brho
+  QVC11: Quad,  L=LLDC,  K1=KVX11/Brho
+  QVC12: Quad,  L=LLDC,  K1=KVX12/Brho
+  QHC13: Quad,  L=LLFC,  K1=KHX13/Brho
+!
+  QVD1:  Quad,  L=LLD, K1=KVX1/Brho
+  QHD2:  Quad,  L=LLF, K1=KHX2/Brho
+  QVD3:  Quad,  L=LLD, K1=KVX3/Brho
+  QHD4:  Quad,  L=LLF, K1=KHX4/Brho
+  QVD5:  Quad,  L=LLD, K1=KVX5/Brho
+  QHD6:  Quad,  L=LLF, K1=KHX6/Brho
+  QVD7:  Quad,  L=LLD, K1=KVX7/Brho
+  QHD8:  Quad,  L=LLF, K1=KHX8/Brho
+  QVD9:  Quad,  L=LLDEE, K1=KVX9/Brho
+  QHD10: Quad,  L=LLFC, K1=KHX10/Brho
+  QVD11: Quad,  L=LLDC, K1=KVX11/Brho
+  QVD12: Quad,  L=LLDC, K1=KVX12/Brho
+  QHD13: Quad,  L=LLFC, K1=KHX13/Brho
+!------------------------------------------------------------
+! Drifts
+!------------------------------------------------------------
+!  SO:=0.45
+!  SOO:=1.55
+  SO:=1.0
+  SOO:=1.0
+  DSO:=0.0
+  DSOO:=0.0
+   O: Drift, L=SO+DSO
+  OO: Drift, L=SOO+DSOO
+  DUU:= 0.0
+!   LV:=0.36
+!   LU:=1.3350+DUU+(0.5-LV)/4.0
+!   LW:=9.04/4.0
+!    LV:=0.86-LFC-LDC
+!   L4U:=5.98-LDEE-LFC
+!    LU:=DUU+L4U/4.0
+!   L4W:=9.54-LDC-LDC
+!    LW:=L4W/4.0
+    LV:=1.025-LFC-LDC
+   L4U:=7.45-LDEE-LFC
+    LU:=DUU+L4U/4.0
+   L4W:=13.05-LDC-LDC
+    LW:=L4W/4.0
+  UU: Drift, L=LU
+  VV: Drift, L=LV
+  WW: Drift, L=LW
+!------------------------------------------------------------
+!-Injection Bends and Drifts: (Parameters from Jie Wei)
+!------------------------------------------------------------
+!-Bend Fields:
+!  SCAL:=1.0
+!--------------
+!  BBI1:=0.3300*SCAL 
+!  BBI2:=0.3000*SCAL 
+!  BBI3:=0.2400*SCAL 
+!  BBI4:=0.3140*SCAL 
+!--------------
+!-Bend Angles:
+!-----------------
+!  PHI1:=-42.2E-03*SCAL
+!  PHI2:= 45.9E-03*SCAL
+!  PHI3:= 37.5E-03*SCAL
+!  PHI4:=-41.2E-03*SCAL
+!-----------------
+! Radii of Curvature:
+!------------------------------
+!  RHO1:=Brho/BBI1 ; Value RHO1
+!  RHO2:=Brho/BBI2 ; Value RHO2
+!  RHO3:=Brho/BBI3 ; Value RHO3
+!  RHO4:=Brho/BBI4 ; Value RHO4
+!------------------------------
+!-Bend Path Lengths:
+!------------------------------------
+!  LBI1:=-Brho*PHI1/BBI1 ; Value LBI1
+!  LBI2:= Brho*PHI2/BBI2 ; Value LBI2
+!  LBI3:= Brho*PHI3/BBI3 ; Value LBI3
+!  LBI4:=-Brho*PHI4/BBI4 ; Value LBI4
+!------------------------------------
+!-Bend Lengths (X-Projections):
+!------------------------------------
+!  LPI1:=RHO1*SIN(-PHI1) ; Value LPI1
+!  LXXX:=RHO2*TAN(0.5*PHI2)
+!  LXXA:=LXXX*COS(-PHI1)
+!  LXXB:=LXXX*COS(PHI2+PHI1)
+!  LPI2:=LXXA+LXXB; Value LPI2
+!  LYYY:=RHO3*TAN(0.5*PHI3)
+!  LYYA:=LYYY*COS(PHI2+PHI1)
+!  LYYB:=LYYY*COS(-PHI4)
+!  LPI3:=LYYA+LYYB; Value LPI3
+!  LPI4:=RHO4*SIN(-PHI4) ; Value LPI4
+!------------------------------------
+! Chicane Bends: 
+!-------------------------------------------------
+!  BMI1: Sbend, L=LBI1, Angle=PHI1, E1=0.0, E2=0.0
+!  BMI2: Sbend, L=LBI2, Angle=PHI2, E1=0.0, E2=0.0
+!  BMI3: Sbend, L=LBI3, Angle=PHI3, E1=0.0, E2=0.0
+!  BMI4: Sbend, L=LBI4, Angle=PHI4, E1=0.0, E2=0.0
+!-------------------------------------------------
+! Inter-Bend Drift Lengths:
+!-------------------------------------------------
+!  HITE:=60.0E-03*SCAL
+!  LC12:=HITE/TAN(-PHI1); Value LC12
+!  LB12:=LC12-0.5*(LPI1+LPI2); Value LB12
+!  LC23:=1.057
+!  LB23:=LC23-0.5*(LPI2+LPI3); Value LB23
+!  DPHI:=PHI2+PHI1; Value DPHI
+!  DHITE:=LC23*TAN(DPHI); Value DHITE
+!  LC34:=(HITE-DHITE)/TAN(-PHI4); Value LC34
+!  LB34:=LC34-0.5*(LPI3+LPI4); Value LB34
+! Chicane Width:
+!  LSHC:=LC12+LC23+LC34+0.5*(LPI1+LPI4); Value LSHC
+! Quad-to-Bend and Bend-to-Quad Lengths: 
+!  LQTB:=2.5184-0.25-0.5*LPI1; Value LQTB
+!  LBTQ:=9.040-LSHC-LQTB; Value LBTQ
+!---------------------------------------------------
+! Injection Drifts:
+!---------------------
+!  DQTB: Drift, L=LQTB
+!  DB12: Drift, L=LB12
+!  DB23: Drift, L=LB23
+!  DB34: Drift, L=LB34
+!  DBTQ: Drift, L=LBTQ
+!------------------------------------------------------------
+! Injection Kickers 
+!------------------------------------------------------------
+!  HKCK1:=10.947749E-03
+!  HKCK2:=-2.938635E-03
+!  HKCK3:=-3.001921E-03
+!  HKCK4:=11.003808E-03
+!  VKCK1:=8.087521E-03
+!  VKCK2:=-3.261395E-03
+!  VKCK3:=-0.681233E-03
+!  VKCK4:=4.932462E-03
+!  HKCK1:=0.00E-03
+!  HKCK2:=0.00E-03
+!  HKCK3:=0.00E-03
+!  HKCK4:=0.00E-03
+!  VKCK1:=0.00E-03
+!  VKCK2:=0.00E-03
+!  VKCK3:=0.00E-03
+!  VKCK4:=0.00E-03
+!  IKDH1: HKICKER, KICK= HKCK1
+!  IKDH2: HKICKER, KICK= HKCK2
+!  IKDH3: HKICKER, KICK= HKCK3
+!  IKDH4: HKICKER, KICK= HKCK4
+!  IKDV1: VKICKER, KICK= VKCK1
+!  IKDV2: VKICKER, KICK= VKCK2
+!  IKDV3: VKICKER, KICK= VKCK3
+!  IKDV4: VKICKER, KICK= VKCK4
+!------------------------------------------------------------
+! Drifts between injection kickers: 
+!------------------------------------------------------------
+!  DLI1:=1.345-0.25 
+!  DLI2:=1.0 
+!  DLI3:=0.827
+!  DLI4:=0.347
+!  DLI5:=L4U-DLI1-DLI2-DLI3-DLI4 ; Value DLI5
+!  DKH1: Drift, L=DLI1
+!  DKV1: Drift, L=DLI2
+!  DKH2: Drift, L=DLI3
+!  DKV2: Drift, L=DLI4
+!  DQFC: Drift, L=DLI5
+!  DKV3: Drift, L=DLI5
+!  DKH3: Drift, L=DLI4
+!  DKV4: Drift, L=DLI3
+!  DKH4: Drift, L=DLI2
+!  DQDE: Drift, L=DLI1
+!------------------------------------------------------------
+! Injection Bends and Drifts:
+! Modified by Jeff Holmes: 10/2000 with parameters from 
+! BNL Technote 76 with updates from Nuria Catalan-Lasheras
+  SCAL:=1.0
+!------------------------------------------------------------
+! New Bend Angles: From Nuria Catalan-Lasheras
+!------------------------------------------------------------
+  PHI1:=-42.0E-03*SCAL
+  PHI2:= 45.0E-03*SCAL
+  PHI3:= 43.6E-03*SCAL
+  PHI4:=-46.6E-03*SCAL
+!------------------------------------------------------------
+! New Bend Lengths (X-Projections): From Technote 76
+!------------------------------------------------------------
+  LPI1:=0.863
+  LPI2:=0.872
+  LPI3:=0.990
+  LPI4:=0.890
+!------------------------------------------------------------
+! New Radii of Curvature: From above information
+!------------------------------------------------------------
+  RHO1:=-LPI1/SIN(PHI1)
+  RHO2:= LPI2/(SIN(PHI2+PHI1)-SIN(PHI1))
+  RHO3:= LPI3/(SIN(PHI3+PHI2+PHI1)-SIN(PHI2+PHI1))
+  RHO4:=-LPI4/(SIN(PHI4+PHI3+PHI2+PHI1)-SIN(PHI3+PHI2+PHI1))
+!------------------------------------------------------------
+! New Bend Path Lengths: From above information
+!------------------------------------------------------------
+  LBI1:=-RHO1*PHI1
+  LBI2:= RHO2*PHI2
+  LBI3:= RHO3*PHI3
+  LBI4:=-RHO4*PHI4
+!------------------------------------------------------------
+! New Bend Fields: From above information
+!------------------------------------------------------------
+  BBI1:=Brho/RHO1
+  BBI2:=Brho/RHO2
+  BBI3:=Brho/RHO3
+  BBI4:=Brho/RHO4
+!------------------------------------------------------------
+! New Chicane Bends: From above information
+!------------------------------------------------------------
+  BMI1: Sbend, L=LBI1, Angle=PHI1, E1=0.0, E2=PHI1
+  BMI2: Sbend, L=LBI2, Angle=PHI2, E1=-PHI1, E2=PHI2+PHI1
+  BMI3: Sbend, L=LBI3, Angle=PHI3, E1=-(PHI2+PHI1), &
+E2=PHI3+PHI2+PHI1
+  BMI4: Sbend, L=LBI4, Angle=PHI4, E1=-(PHI3+PHI2+PHI1), &
+E2=(PHI4+PHI3+PHI2+PHI1)
+!------------------------------------------------------------
+! New Inter-Bend Drift Lengths: From Technote 76
+!------------------------------------------------------------
+  LC12:=2.381-LPI1/2.0-LPI2/2.0
+  LB12:=LC12/COS(-PHI1)
+  LC23:=1.814-LPI2/2.0-LPI3/2.0
+  LB23:=LC23/COS(PHI2+PHI1)
+  LC34:=2.029-LPI3/2.0-LPI4/2.0
+  LB34:=LC34/COS(PHI3+PHI2+PHI1)
+! Chicane Width:
+  LSHC:=LPI1+LC12+LPI2+LC23+LPI3+LC34+LPI4
+! Quad-to-Bend and Bend-to-Quad Lengths: 
+  LQTB:=3.230-LDC-LPI1/2.0
+  LBTQ:=12.500-LQTB-LSHC
+!------------------------------------------------------------
+! New Injection Drifts: From above information
+!------------------------------------------------------------
+  DQTB: Drift, L=LQTB
+  DB12: Drift, L=LB12
+  DB23: Drift, L=LB23
+  DB34: Drift, L=LB34
+  DBTQ: Drift, L=LBTQ
+!------------------------------------------------------------
+! New Injection Kickers: From Technote 76
+!                        and Nuria Catalan-Lasheras
+!------------------------------------------------------------
+!  HKCK1:= 9.39E-03
+!  HKCK2:= 0.25E-03
+!  HKCK3:= 0.25E-03
+!  HKCK4:= 9.39E-03
+!  VKCK1:=-8.17E-03
+!  VKCK2:= 3.68E-03
+!  VKCK3:= 3.68E-03
+!  VKCK4:=-8.17E-03
+  HKCK1:=0.00E-03
+  HKCK2:=0.00E-03
+  HKCK3:=0.00E-03
+  HKCK4:=0.00E-03
+  VKCK1:=0.00E-03
+  VKCK2:=0.00E-03
+  VKCK3:=0.00E-03
+  VKCK4:=0.00E-03
+  LHKCK1:=0.839
+  LHKCK2:=0.428
+  LHKCK3:=0.428
+  LHKCK4:=0.839
+  LVKCK1:=0.839
+  LVKCK2:=0.428
+  LVKCK3:=0.428
+  LVKCK4:=0.839
+  IKDH1: HKICKER, KICK= HKCK1, L= LHKCK1
+  IKDH2: HKICKER, KICK= HKCK2, L= LHKCK2
+  IKDH3: HKICKER, KICK= HKCK3, L= LHKCK3
+  IKDH4: HKICKER, KICK= HKCK4, L= LHKCK4
+  IKDV1: VKICKER, KICK= VKCK1, L= LVKCK1
+  IKDV2: VKICKER, KICK= VKCK2, L= LVKCK2
+  IKDV3: VKICKER, KICK= VKCK3, L= LVKCK3
+  IKDV4: VKICKER, KICK= VKCK4, L= LVKCK4
+!------------------------------------------------------------
+! Drifts between injection kickers: 
+! Modified by Jeff Holmes, 10/2000, information from
+! BNL Technote 76 and Nuria Catalan-Lasheras
+!------------------------------------------------------------
+  DLI1:=1.650-LDEE-LHKCK1/2.0
+  DLI2:=1.160-LHKCK1/2.0-LVKCK1/2.0
+  DLI3:=1.530-LVKCK1/2.0-LHKCK2/2.0
+  DLI4:=0.540-LHKCK2/2.0-LVKCK2/2.0
+  DLI5:=2.570-LVKCK2/2.0-LFC
+  DKH1: Drift, L=DLI1
+  DKV1: Drift, L=DLI2
+  DKH2: Drift, L=DLI3
+  DKV2: Drift, L=DLI4
+  DQFC: Drift, L=DLI5
+  DKV3: Drift, L=DLI5
+  DKH3: Drift, L=DLI4
+  DKV4: Drift, L=DLI3
+  DKH4: Drift, L=DLI2
+  DQDE: Drift, L=DLI1
+!------------------------------------------------------------
+! Bare Four-fold Symmetric Ring:
+! Arc Cell (AC); Straight Cell (SC); Superperiod (SP)
+!------------------------------------------------------------
+    AC: Line = (QD,OO,BL,BR,O,QF,QF,OO,BL,BR,O,QD)
+   ACL: Line = (QDEE,OO,BL,BR,O,QF,QF,OO,BL,BR,O,QD)
+   ACR: Line = (QD,OO,BL,BR,O,QF,QF,OO,BL,BR,O,QDEE)
+   ARC: Line = (ACL,AC,AC,ACR)
+   SCL: Line = (QDE,UU,UU,UU,UU,QFC,QFC,VV,QDC,QDC,WW,WW)
+   SCR: Line = (WW,WW,QDC,QDC,VV,QFC,QFC,UU,UU,UU,UU,QDE)
+  SCLL: Line = (QDEE,UU,UU,UU,UU,QFC,QFC,VV,QDC,QDC,WW,WW)
+  SCRR: Line = (WW,WW,QDC,QDC,VV,QFC,QFC,UU,UU,UU,UU,QDEE)
+    SC: Line = (SCL, SCR)
+   SCC: Line = (SCLL, SCRR)
+   SPP: Line = (SC,AC,AC,AC,AC)
+    SP: Line = (SCC, ARC)
+!  RING: Line = (4*SP)
+!------------------------------------------------------------
+! Bare Ring with Injection Chicane and Kickers:
+!------------------------------------------------------------
+!  Put in Injection Chicane (CJG 11 Nov 1999): 
+!  Put in Injection Kickers (CJG 30 Nov 1999):
+  INJM1: Marker
+  INJM2: Marker
+!   SIL: Line = (QDEE,UU,UU,UU,UU,QFC,QFC,VV,QDC,QDC)
+  SILA: Line = (QDEE,DKH1,IKDH1,DKV1,IKDV1,DKH2,IKDH2)
+  SILB: Line = (DKV2,IKDV2,DQFC,QFC,QFC,VV,QDC,QDC)
+   SIL: Line = (SILA,SILB)
+  SINJL: Line = (DQTB,BMI1,DB12,BMI2)
+  SINJR: Line = (INJM1,DB23,BMI3,DB34,BMI4,DBTQ)
+!   SIR: Line = (QDC,QDC,VV,QFC,QFC,UU,UU,UU,UU,QDEE)
+  SIRA: Line = (QDC,QDC,VV,QFC,QFC,DKV3,IKDV3,DKH3,IKDH3)
+  SIRB: Line = (DKV4,IKDV4,DKH4,IKDH4,DQDE,QDEE,INJM2)
+   SIR: Line = (SIRA,SIRB)
+  SISINJL: Line = (SIL,SINJL)
+  SISINJR: Line = (SINJR,SIR)
+  SINJ: Line = (SISINJL,SISINJR)
+  SPINJ: Line = (SISINJL,SISINJR,ARC)
+  RING: Line = (SPINJ,SP,SP,SP)
+!------------------------------------------------------------
+! Ring for Beam Dynamics with Injection Foil at Beginning
+! Jeff Holmes, 10/2000
+!------------------------------------------------------------
+  RNGOBT: Line = (SISINJR,ARC,SP,SP,SP,SISINJL)
+
+
+!------------------------------------------------------------
+! Bare lattice with Chromaticity Sextupoles
+! Jeff Holmes and Yannis Papaphilippou, 01/2001
+!------------------------------------------------------------
+  ACLSX1: Line = (QD,Q3D,SVX3,Q3B3,BL,BR,O,QF)
+  ACLSX2: Line = (QF,Q4D,SHX4,Q4B4,BL,BR,B4Q5,SVX5,Q5U,QD)
+  ACRSX1: Line = (QD,OO,BL,BR,B6Q6,SHX6,Q6U,QF)
+  ACRSX2: Line = (QF,OO,BL,BR,B7Q7,SVX7,Q7U,QD)
+   ARCSX: Line = (ACL,ACLSX1,ACLSX2,ACRSX1,ACRSX2,ACR)
+    SPSX: Line = (SCC,ARCSX)
+  RINGSX0: Line = (4*SPSX)
+
+  SPINJSX: Line = (SISINJL,SISINJR,ARCSX)
+  RINGSX: Line = (SPINJSX,SPSX,SPSX,SPSX)
+  RNGOBTSX: Line = (SISINJR,ARCSX,SPSX,SPSX,SPSX,SISINJL)
+
+!------------------------------------------------------------
+!   Assemble Superperiod with PUE's and Correctors:
+!------------------------------------------------------------
+! value of sextupole length changed, YP, 01/2001
+!
+  LSXT:=0.3
+  LCNT:=0.1
+  LSTQ:=0.01
+  LOCT:=0.1
+  LOTQ:=0.01
+   LSV1:=LSXT
+   SQ1U:=LSTQ
+   SQ1D:=LCNT
+ KDVTX1:=0.0
+   SVX1: Sextupole, L=LSV1, K2=KSVX1
+    Q1U: Drift, L=SQ1U 
+  BPMX1: Monitor
+    Q1D: Drift, L=SQ1D
+  DVTX1: VKICKER, KICK=KDVTX1
+    QX1: Line = (SVX1,Q1U,QVX1,BPMX1,Q1D,DVTX1)
+   Q1B1: Drift, L=SOO+DSOO-SQ1D
+!------------------------------------------------------------
+   LSH2:=LSXT
+   SQ2U:=LSTQ
+   SQ2D:=LCNT
+ KDHTX2:=0.0
+   SHX2: Sextupole, L=LSH2, K2=KSHX2
+    Q2U: Drift, L=SQ2U 
+  BPMX2: Monitor
+    Q2D: Drift, L=SQ2D
+  DHTX2: HKICKER, KICK=KDHTX2
+   B1Q2: Drift, L=SO+DSO-LSH2-SQ2U
+    QX2: Line = (SHX2,Q2U,QHX2,BPMX2,Q2D,DHTX2)
+   Q2B2: Drift, L=SOO+DSOO-SQ2D
+!------------------------------------------------------------
+   SQ3U:=LCNT
+   SQ3D:=LSTQ
+   LSV3:=LSXT
+ KDVTX3:=0.0
+  DVTX3: VKICKER, KICK=KDVTX3
+    Q3U: Drift, L=SQ3U 
+  BPMX3: Monitor
+    Q3D: Drift, L=SQ3D
+   SVX3: Sextupole, L=LSV3, K2=KSV3
+   B2Q3: Drift, L=SO+DSO-SQ3U
+    QX3: Line = (DVTX3,Q3U,QVX3,BPMX3,Q3D,SVX3)
+   Q3B3: Drift, L=SOO+DSOO-SQ3D-LSV3
+!------------------------------------------------------------
+   SQ4U:=LCNT
+   SQ4D:=LSTQ
+   LSH4:=LSXT
+ KDHTX4:=0.0
+  DHTX4: HKICKER, KICK=KDHTX4
+    Q4U: Drift, L=SQ4U 
+  BPMX4: Monitor
+    Q4D: Drift, L=SQ4D
+   SHX4: Sextupole, L=LSH4, K2=KSH4
+   B3Q4: Drift, L=SO+DSO-SQ4U
+    QX4: Line = (DHTX4,Q4U,QHX4,BPMX4,Q4D,SHX4)
+   Q4B4: Drift, L=SOO+DSOO-SQ4D-LSH4
+!------------------------------------------------------------
+   LSV5:=LSXT
+   SQ5U:=LSTQ
+   SQ5D:=LCNT
+ KDVTX5:=0.0
+   SVX5: Sextupole, L=LSV5, K2=KSV5
+    Q5U: Drift, L=SQ5U 
+  BPMX5: Monitor
+    Q5D: Drift, L=SQ5D
+  DVTX5: VKICKER, KICK=KDVTX5
+   B4Q5: Drift, L=SO+DSO-LSV5-SQ5U
+    QX5: Line = (SVX5,Q5U,QVX5,BPMX5,Q5D,DVTX5)
+   Q5B6: Drift, L=SOO+DSOO-SQ5D
+!------------------------------------------------------------
+   LSH6:=LSXT
+   SQ6U:=LSTQ
+   SQ6D:=LCNT
+ KDHTX6:=0.0
+   SHX6: Sextupole, L=LSH6, K2=KSH6
+    Q6U: Drift, L=SQ6U 
+  BPMX6: Monitor
+    Q6D: Drift, L=SQ6D
+  DHTX6: HKICKER, KICK=KDHTX6
+   B6Q6: Drift, L=SO+DSO-LSH6-SQ6U
+    QX6: Line = (SHX6,Q6U,QHX6,BPMX6,Q6D,DHTX6)
+   Q6B7: Drift, L=SOO+DSOO-SQ6D
+!------------------------------------------------------------
+   LSV7:=LSXT
+   SQ7U:=LSTQ
+   SQ7D:=LCNT
+ KDVTX7:=0.0
+   SVX7: Sextupole, L=LSV7, K2=KSV7
+    Q7U: Drift, L=SQ7U 
+  BPMX7: Monitor
+    Q7D: Drift, L=SQ7D
+  DVTX7: VKICKER, KICK=KDVTX7
+   B7Q7: Drift, L=SO+DSO-LSV7-SQ7U
+    QX7: Line = (SVX7,Q7U,QVX7,BPMX7,Q7D,DVTX7)
+   Q7B8: Drift, L=SOO+DSOO-SQ7D
+!------------------------------------------------------------
+   LOH8:=LOCT
+   SQ8U:=LOTQ
+   SQ8D:=LCNT
+ KDHTX8:=0.0
+   OHX8: Octupole, L=LOH8, K3=KOH8
+    Q8U: Drift, L=SQ8U 
+  BPMX8: Monitor
+    Q8D: Drift, L=SQ8D
+  DHTX8: HKICKER, KICK=KDHTX8
+   B8Q8: Drift, L=SO+DSO-LOH8-SQ8U
+    QX8: Line = (OHX8,Q8U,QHX8,BPMX8,Q8D,DHTX8)
+   Q8B9: Drift, L=SOO+DSOO-SQ6D
+!------------------------------------------------------------
+   LOV9:=LOCT
+   SQ9U:=LOTQ
+   SQ9D:=LCNT
+ KDVTX9:=0.0
+   OVX9: Octupole, L=LOV9, K3=KOV9
+    Q9U: Drift, L=SQ9U 
+  BPMX9: Monitor
+    Q9D: Drift, L=SQ9D
+  DVTX9: VKICKER, KICK=KDVTX9
+   B9Q9: Drift, L=SO+DSO-LOV9-SQ9U
+    QX9: Line = (OVX9,Q9U,QVX9,BPMX9,Q9D,DVTX9)
+!------------------------------------------------------------
+  ARCLX: Line = (QX1,Q1B1,BND,B1Q2,QX2,Q2B2,BND,B2Q3,QX3, & 
+                     Q3B3,BND,B3Q4,QX4,Q4B4,BND,B4Q5,QX5)
+  ARCRX: Line = (Q5B6,BND,B6Q6,QX6,Q6B7,BND,B7Q7,QX7,Q7B8, &
+                      BND,B8Q8,QX8,Q8B9,BND,B9Q9,QX9)
+   ARCX: Line = (ARCLX,ARCRX)
+!------------------------------------------------------------
+  SQ10U:=LCNT
+  SQ13D:=LCNT
+    UU9: Drift, L=LU-SQ9D
+   UU10: Drift, L=LU-SQ10U
+ KDHTX10:=0.0
+ KDVTX10:=0.0
+ DHTX10: HKICKER, KICK=KDHTX10
+ DVTX10: VKICKER, KICK=KDVTX10
+   Q10U: Drift, L=SQ10U
+ BPMX10: Monitor
+ BPMX13: Monitor
+   Q13D: Drift, L=SQ13D
+ KDVTX13:=0.0
+ KDHTX13:=0.0
+ DVTX13: VKICKER, KICK=KDVTX13
+ DHTX13: HKICKER, KICK=KDHTX13
+   UU13: Drift, L=LU-SQ13D
+    UU1: Drift, L=LU-SQ1U-LSV1
+   SSXL: Line = (UU9,UU,UU,UU10,DHTX10,DVTX10,Q10U,BPMX10,&
+                 QHX10,VV,QVX11,WW,WW)
+   SSXR: Line = (WW,WW,QVX12,VV,QHX13,BPMX13,Q13D,DHTX13,&
+                 DVTX13,UU13,UU,UU,UU1)
+   SSSX: Line = (SSXL,SSXR)
+!------------------------------------------------------------
+    SPX: Line =(SSSX,ARCX)
+!------------------------------------------------------------
+!   Assemble Superperiod A:
+!------------------------------------------------------------
+  KSVA1:=0.0
+   SVA1: Sextupole, L=LSV1, K2=KSVA1
+  BPMA1: Monitor
+  KDVTA1:=0.0
+  DVTA1: VKICKER, KICK=KDVTA1
+    QA1: Line = (SVA1,Q1U,QVA1,BPMA1,Q1D,DVTA1)
+!------------------------------------------------------------
+  KSHA2:=0.0
+   SHA2: Sextupole, L=LSH2, K2=KSHA2
+  BPMA2: Monitor
+  KDHTA2:=0.0
+  DHTA2: HKICKER, KICK=KDHTA2
+    QA2: Line = (SHA2,Q2U,QHA2,BPMA2,Q2D,DHTA2)
+!------------------------------------------------------------
+  KDVTA3:=0.0
+  DVTA3: VKICKER, KICK=KDVTA3
+  BPMA3: Monitor
+   SVA3: Sextupole, L=LSV3, K2=KSV3
+    QA3: Line = (DVTA3,Q3U,QVA3,BPMA3,Q3D,SVA3)
+!------------------------------------------------------------
+  KDHTA4:=0.0
+  DHTA4: HKICKER, KICK=KDHTA4
+  BPMA4: Monitor
+   SHA4: Sextupole, L=LSH4, K2=KSH4
+    QA4: Line = (DHTA4,Q4U,QHA4,BPMA4,Q4D,SHA4)
+!------------------------------------------------------------
+   SVA5: Sextupole, L=LSV5, K2=KSV5
+  BPMA5: Monitor
+  KDVTA5:=0.0
+  DVTA5: VKICKER, KICK=KDVTA5
+    QA5: Line = (SVA5,Q5U,QVA5,BPMA5,Q5D,DVTA5)
+!------------------------------------------------------------
+   SHA6: Sextupole, L=LSH6, K2=KSH6
+  BPMA6: Monitor
+  KDHTA6:=0.0
+  DHTA6: HKICKER, KICK=KDHTA6
+    QA6: Line = (SHA6,Q6U,QHA6,BPMA6,Q6D,DHTA6)
+!------------------------------------------------------------
+   SVA7: Sextupole, L=LSV7, K2=KSV7
+  BPMA7: Monitor
+  KDVTA7:=0.0
+  DVTA7: VKICKER, KICK=KDVTA7
+    QA7: Line = (SVA7,Q7U,QVA7,BPMA7,Q7D,DVTA7)
+!------------------------------------------------------------
+   OHA8: Octupole, L=LOH8, K3=KOH8
+  BPMA8: Monitor
+  KDHTA8:=0.0
+  DHTA8: HKICKER, KICK=KDHTA8
+    QA8: Line = (OHA8,Q8U,QHA8,BPMA8,Q8D,DHTA8)
+!------------------------------------------------------------
+   OVA9: Octupole, L=LOV9, K3=KOV9
+  BPMA9: Monitor
+  KDVTA9:=0.0
+  DVTA9: VKICKER, KICK=KDVTA9
+    QA9: Line = (OVA9,Q9U,QVA9,BPMA9,Q9D,DVTA9)
+!------------------------------------------------------------
+  ARCLA: Line = (QA1,Q1B1,BND,B1Q2,QA2,Q2B2,BND,B2Q3,QA3, & 
+                     Q3B3,BND,B3Q4,QA4,Q4B4,BND,B4Q5,QA5)
+  ARCRA: Line = (Q5B6,BND,B6Q6,QA6,Q6B7,BND,B7Q7,QA7,Q7B8, &
+                      BND,B8Q8,QA8,Q8B9,BND,B9Q9,QA9)
+   ARCA: Line = (ARCLA,ARCRA)
+!------------------------------------------------------------
+ KDHTA10:=0.0
+ KDVTA10:=0.0
+ DHTA10: HKICKER, KICK=KDHTA10
+ DVTA10: VKICKER, KICK=KDVTA10
+ BPMA10: Monitor
+ BPMA13: Monitor
+ KDHTA13:=0.0
+ KDVTA13:=0.0
+ DVTA13: VKICKER, KICK=KDVTA13
+ DHTA13: HKICKER, KICK=KDHTA13
+   SSAL: Line = (UU9,UU,UU,UU10,DHTA10,DVTA10,Q10U,BPMA10,&
+                 QHA10,VV,QVA11,WW,WW)
+   SSAR: Line = (WW,WW,QVA12,VV,QHA13,BPMA13,Q13D,DHTA13,&
+                 DVTA13,UU13,UU,UU,UU1)
+   SSSA: Line = (SSAL,SSAR)
+!------------------------------------------------------------
+    SPA: Line =(SSSA,ARCA)
+!------------------------------------------------------------
+!   Assemble Superperiod B:
+!------------------------------------------------------------
+  KSVB1:=0.0
+   SVB1: Sextupole, L=LSV1, K2=KSVB1
+  BPMB1: Monitor
+  KDVTB1:=0.0
+  DVTB1: VKICKER, KICK=KDVTB1
+    QB1: Line = (SVB1,Q1U,QVB1,BPMB1,Q1D,DVTB1)
+!------------------------------------------------------------
+  KSHB2:=0.0
+   SHB2: Sextupole, L=LSH2, K2=KSHB2
+  BPMB2: Monitor
+  KDHTB2:=0.0
+  DHTB2: HKICKER, KICK=KDHTB2
+    QB2: Line = (SHB2,Q2U,QHB2,BPMB2,Q2D,DHTB2)
+!------------------------------------------------------------
+  KDVTB3:=0.0
+  DVTB3: VKICKER, KICK=KDVTB3
+  BPMB3: Monitor
+   SVB3: Sextupole, L=LSV3, K2=KSV3
+    QB3: Line = (DVTB3,Q3U,QVB3,BPMB3,Q3D,SVB3)
+!------------------------------------------------------------
+  KDHTB4:=0.0
+  DHTB4: HKICKER, KICK=KDHTB4
+  BPMB4: Monitor
+   SHB4: Sextupole, L=LSH4, K2=KSH4
+    QB4: Line = (DHTB4,Q4U,QHB4,BPMB4,Q4D,SHB4)
+!------------------------------------------------------------
+   SVB5: Sextupole, L=LSV5, K2=KSV5
+  BPMB5: Monitor
+  KDVTB5:=0.0
+  DVTB5: VKICKER, KICK=KDVTB5
+    QB5: Line = (SVB5,Q5U,QVB5,BPMB5,Q5D,DVTB5)
+!------------------------------------------------------------
+   SHB6: Sextupole, L=LSH6, K2=KSH6
+  BPMB6: Monitor
+  KDHTB6:=0.0
+  DHTB6: HKICKER, KICK=KDHTB6
+    QB6: Line = (SHB6,Q6U,QHB6,BPMB6,Q6D,DHTB6)
+!------------------------------------------------------------
+   SVB7: Sextupole, L=LSV7, K2=KSV7
+  BPMB7: Monitor
+  KDVTB7:=0.0
+  DVTB7: VKICKER, KICK=KDVTB7
+    QB7: Line = (SVB7,Q7U,QVB7,BPMB7,Q7D,DVTB7)
+!------------------------------------------------------------
+   OHB8: Octupole, L=LOH8, K3=KOH8
+  BPMB8: Monitor
+  KDHTB8:=0.0
+  DHTB8: HKICKER, KICK=KDHTB8
+    QB8: Line = (OHB8,Q8U,QHB8,BPMB8,Q8D,DHTB8)
+!------------------------------------------------------------
+   OVB9: Octupole, L=LOV9, K3=KOV9
+  BPMB9: Monitor
+  KDVTB9:=0.0
+  DVTB9: VKICKER, KICK=KDVTB9
+    QB9: Line = (OVB9,Q9U,QVB9,BPMB9,Q9D,DVTB9)
+!------------------------------------------------------------
+  ARCLB: Line = (QB1,Q1B1,BND,B1Q2,QB2,Q2B2,BND,B2Q3,QB3, & 
+                     Q3B3,BND,B3Q4,QB4,Q4B4,BND,B4Q5,QB5)
+  ARCRB: Line = (Q5B6,BND,B6Q6,QB6,Q6B7,BND,B7Q7,QB7,Q7B8, &
+                      BND,B8Q8,QB8,Q8B9,BND,B9Q9,QB9)
+   ARCB: Line = (ARCLB,ARCRB)
+!------------------------------------------------------------
+ KDHTB10:=0.0
+ KDVTB10:=0.0
+ DHTB10: HKICKER, KICK=KDHTB10
+ DVTB10: VKICKER, KICK=KDVTB10
+ BPMB10: Monitor
+ BPMB13: Monitor
+ KDHTB13:=0.0
+ KDVTB13:=0.0
+ DVTB13: VKICKER, KICK=KDVTB13
+ DHTB13: HKICKER, KICK=KDHTB13
+   SSBL: Line = (UU9,UU,UU,UU10,DHTB10,DVTB10,Q10U,BPMB10,&
+                 QHB10,VV,QVB11,WW,WW)
+   SSBR: Line = (WW,WW,QVB12,VV,QHB13,BPMB13,Q13D,DHTB13,&
+                 DVTB13,UU13,UU,UU,UU1)
+   SSSB: Line = (SSBL,SSBR)
+!------------------------------------------------------------
+    SPB: Line =(SSSB,ARCB)
+!------------------------------------------------------------
+!   Assemble Superperiod C:
+!------------------------------------------------------------
+  KSVC1:=0.0
+   SVC1: Sextupole, L=LSV1, K2=KSVC1
+  BPMC1: Monitor
+  KDVTC1:=0.0
+  DVTC1: VKICKER, KICK=KDVTC1
+    QC1: Line = (SVC1,Q1U,QVC1,BPMC1,Q1D,DVTC1)
+!------------------------------------------------------------
+  KSHC2:=0.0
+   SHC2: Sextupole, L=LSH2, K2=KSHC2
+  BPMC2: Monitor
+  KDHTC2:=0.0
+  DHTC2: HKICKER, KICK=KDHTC2
+    QC2: Line = (SHC2,Q2U,QHC2,BPMC2,Q2D,DHTC2)
+!------------------------------------------------------------
+  KDVTC3:=0.0
+  DVTC3: VKICKER, KICK=KDVTC3
+  BPMC3: Monitor
+   SVC3: Sextupole, L=LSV3, K2=KSV3
+    QC3: Line = (DVTC3,Q3U,QVC3,BPMC3,Q3D,SVC3)
+!------------------------------------------------------------
+  KDHTC4:=0.0
+  DHTC4: HKICKER, KICK=KDHTC4
+  BPMC4: Monitor
+   SHC4: Sextupole, L=LSH4, K2=KSH4
+    QC4: Line = (DHTC4,Q4U,QHC4,BPMC4,Q4D,SHC4)
+!------------------------------------------------------------
+   SVC5: Sextupole, L=LSV5, K2=KSV5
+  BPMC5: Monitor
+  KDVTC5:=0.0
+  DVTC5: VKICKER, KICK=KDVTC5
+    QC5: Line = (SVC5,Q5U,QVC5,BPMC5,Q5D,DVTC5)
+!------------------------------------------------------------
+   SHC6: Sextupole, L=LSH6, K2=KSH6
+  BPMC6: Monitor
+  KDHTC6:=0.0
+  DHTC6: HKICKER, KICK=KDHTC6
+    QC6: Line = (SHC6,Q6U,QHC6,BPMC6,Q6D,DHTC6)
+!------------------------------------------------------------
+   SVC7: Sextupole, L=LSV7, K2=KSV7
+  BPMC7: Monitor
+  KDVTC7:=0.0
+  DVTC7: VKICKER, KICK=KDVTC7
+    QC7: Line = (SVC7,Q7U,QVC7,BPMC7,Q7D,DVTC7)
+!------------------------------------------------------------
+   OHC8: Octupole, L=LOH8, K3=KOH8
+  BPMC8: Monitor
+  KDHTC8:=0.0
+  DHTC8: HKICKER, KICK=KDHTC8
+    QC8: Line = (OHC8,Q8U,QHC8,BPMC8,Q8D,DHTC8)
+!------------------------------------------------------------
+   OVC9: Octupole, L=LOV9, K3=KOV9
+  BPMC9: Monitor
+  KDVTC9:=0.0
+  DVTC9: VKICKER, KICK=KDVTC9
+    QC9: Line = (OVC9,Q9U,QVC9,BPMC9,Q9D,DVTC9)
+!------------------------------------------------------------
+  ARCLC: Line = (QC1,Q1B1,BND,B1Q2,QC2,Q2B2,BND,B2Q3,QC3, & 
+                     Q3B3,BND,B3Q4,QC4,Q4B4,BND,B4Q5,QC5)
+  ARCRC: Line = (Q5B6,BND,B6Q6,QC6,Q6B7,BND,B7Q7,QC7,Q7B8, &
+                      BND,B8Q8,QC8,Q8B9,BND,B9Q9,QC9)
+   ARCC: Line = (ARCLC,ARCRC)
+!------------------------------------------------------------
+ KDHTC10:=0.0
+ KDVTC10:=0.0
+ DHTC10: HKICKER, KICK=KDHTC10
+ DVTC10: VKICKER, KICK=KDVTC10
+ BPMC10: Monitor
+ BPMC13: Monitor
+ KDHTC13:=0.0
+ KDVTC13:=0.0
+ DVTC13: VKICKER, KICK=KDVTC13
+ DHTC13: HKICKER, KICK=KDHTC13
+   SSCL: Line = (UU9,UU,UU,UU10,DHTC10,DVTC10,Q10U,BPMC10,&
+                 QHC10,VV,QVC11,WW,WW)
+   SSCR: Line = (WW,WW,QVC12,VV,QHC13,BPMC13,Q13D,DHTC13,&
+                 DVTC13,UU13,UU,UU,UU1)
+   SSSC: Line = (SSCL,SSCR)
+!------------------------------------------------------------
+    SPC: Line =(SSSC,ARCC)
+!------------------------------------------------------------
+!   Assemble Superperiod D:
+!------------------------------------------------------------
+  KSVD1:=0.0
+   SVD1: Sextupole, L=LSV1, K2=KSVD1
+  BPMD1: Monitor
+  KDVTD1:=0.0
+  DVTD1: VKICKER, KICK=KDVTD1
+    QD1: Line = (SVD1,Q1U,QVD1,BPMD1,Q1D,DVTD1)
+!------------------------------------------------------------
+  KSHD2:=0.0
+   SHD2: Sextupole, L=LSH2, K2=KSHD2
+  BPMD2: Monitor
+  KDHTD2:=0.0
+  DHTD2: HKICKER, KICK=KDHTD2
+    QD2: Line = (SHD2,Q2U,QHD2,BPMD2,Q2D,DHTD2)
+!------------------------------------------------------------
+  KDVTD3:=0.0
+  DVTD3: VKICKER, KICK=KDVTD3
+  BPMD3: Monitor
+   SVD3: Sextupole, L=LSV3, K2=KSV3
+    QD3: Line = (DVTD3,Q3U,QVD3,BPMD3,Q3D,SVD3)
+!------------------------------------------------------------
+  KDHTD4:=0.0
+  DHTD4: HKICKER, KICK=KDHTD4
+  BPMD4: Monitor
+   SHD4: Sextupole, L=LSH4, K2=KSH4
+    QD4: Line = (DHTD4,Q4U,QHD4,BPMD4,Q4D,SHD4)
+!------------------------------------------------------------
+   SVD5: Sextupole, L=LSV5, K2=KSV5
+  BPMD5: Monitor
+  KDVTD5:=0.0
+  DVTD5: VKICKER, KICK=KDVTD5
+    QD5: Line = (SVD5,Q5U,QVD5,BPMD5,Q5D,DVTD5)
+!------------------------------------------------------------
+   SHD6: Sextupole, L=LSH6, K2=KSH6
+  BPMD6: Monitor
+  KDHTD6:=0.0
+  DHTD6: HKICKER, KICK=KDHTD6
+    QD6: Line = (SHD6,Q6U,QHD6,BPMD6,Q6D,DHTD6)
+!------------------------------------------------------------
+   SVD7: Sextupole, L=LSV7, K2=KSV7
+  BPMD7: Monitor
+  KDVTD7:=0.0
+  DVTD7: VKICKER, KICK=KDVTD7
+    QD7: Line = (SVD7,Q7U,QVD7,BPMD7,Q7D,DVTD7)
+!------------------------------------------------------------
+   OHD8: Octupole, L=LOH8, K3=KOH8
+  BPMD8: Monitor
+  KDHTD8:=0.0
+  DHTD8: HKICKER, KICK=KDHTD8
+    QD8: Line = (OHD8,Q8U,QHD8,BPMD8,Q8D,DHTD8)
+!------------------------------------------------------------
+   OVD9: Octupole, L=LOV9, K3=KOV9
+  BPMD9: Monitor
+  KDVTD9:=0.0
+  DVTD9: VKICKER, KICK=KDVTD9
+    QD9: Line = (OVD9,Q9U,QVD9,BPMD9,Q9D,DVTD9)
+!------------------------------------------------------------
+  ARCLD: Line = (QD1,Q1B1,BND,B1Q2,QD2,Q2B2,BND,B2Q3,QD3, & 
+                     Q3B3,BND,B3Q4,QD4,Q4B4,BND,B4Q5,QD5)
+  ARCRD: Line = (Q5B6,BND,B6Q6,QD6,Q6B7,BND,B7Q7,QD7,Q7B8, &
+                      BND,B8Q8,QD8,Q8B9,BND,B9Q9,QD9)
+   ARCD: Line = (ARCLD,ARCRD)
+!------------------------------------------------------------
+ KDHTD10:=0.0
+ KDVTD10:=0.0
+ DHTD10: HKICKER, KICK=KDHTD10
+ DVTD10: VKICKER, KICK=KDVTD10
+ BPMD10: Monitor
+ BPMD13: Monitor
+ KDHTD13:=0.0
+ KDVTD13:=0.0
+ DVTD13: VKICKER, KICK=KDVTD13
+ DHTD13: HKICKER, KICK=KDHTD13
+   SSDL: Line = (UU9,UU,UU,UU10,DHTD10,DVTD10,Q10U,BPMD10,&
+                 QHD10,VV,QVD11,WW,WW)
+   SSDR: Line = (WW,WW,QVD12,VV,QHD13,BPMD13,Q13D,DHTD13,&
+                 DVTD13,UU13,UU,UU,UU1)
+   SSSD: Line = (SSDL,SSDR)
+!------------------------------------------------------------
+    SPD: Line =(SSSD,ARCD)
+!------------------------------------------------------------
+   SPAA: Line = (SSSA,ARCB)
+   SPBB: Line = (SSSB,ARCC)
+   SPCC: Line = (SSSC,ARCD)
+   SPDD: Line = (SSSD,ARCA)
+    RNG: Line = (SPAA,SPBB,SPCC,SPDD)
+! RNG = SSSA,ARCB,SSSB,ARCC,SSSC,ARCD,SSSD,ARCA
+   RNGABCD: Line = (ARCA,SSSA,ARCB,SSSB,ARCC,SSSC,ARCD,SSSD)
+!------------------------------------------------------------
+!
