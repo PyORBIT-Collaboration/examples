@@ -241,7 +241,7 @@ def SAD_to_MAD_ElementTranslator(elems):
 # Main code
 #===========================================
 if( len(sys.argv) != 3 ):
-	print "Usage: >python sad_parser_test.py <name of SAD file to read> <name of Lattice MAD file to write>"
+	print "Usage: >python rcs_sad_to_mad_translator.py <name of SAD file to read> <name of Lattice MAD file to write>"
 	sys.exit(1)
 
 sad_file_name = sys.argv[1]
