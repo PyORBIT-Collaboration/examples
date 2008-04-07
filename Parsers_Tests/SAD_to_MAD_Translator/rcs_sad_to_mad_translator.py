@@ -7,7 +7,7 @@
 
 import sys
 import math
-from sad_parser import SAD_Parser, SAD_LattElement, SAD_LattLine
+from orbit.parsers.sad_parser import SAD_Parser, SAD_LattElement, SAD_LattLine
 
 #===========================================
 # Definitions of auxiliary functions
@@ -223,6 +223,7 @@ def SAD_to_MAD_ElementTranslator(elems):
 	translDict["MULT"]  = ("MULTIPOLE", multTranslator)
 	translDict["CAVI"]  = ("RFCAVITY", caviTranslator)
 	translDict["MARK"]  = ("MARKER", markerTranslator)
+	translDict["MONI"]  = ("MARKER", markerTranslator)
 	#----------------------------------
 	#Translation process
 	#----------------------------------
@@ -274,6 +275,7 @@ mad_file = open(mad_file_name,"w")
 # k1_values{abs(k1*1000000), [quadElements]}
 #===================================================
 lineRING = parser.getSAD_LinesDict()["RING"]
+#lineRING = parser.getSAD_LinesDict()["RNG"]
 elemsRING = lineRING.getElements()
 
 k1_values = {}

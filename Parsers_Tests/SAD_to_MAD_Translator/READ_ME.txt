@@ -17,3 +17,4 @@ or
 The rcs_2.601_noda.mad does not include a tune matching,
 and therefore it does not have the same optics as for rcs_2.601.mad.
 
+The MR080221i.sad file is the Main Ring SAD file for JAERY. 
