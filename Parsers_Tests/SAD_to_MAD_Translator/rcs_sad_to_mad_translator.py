@@ -158,7 +158,14 @@ def multTranslator(elem):
 	MAD and SAD - L - length = 0 by DEFAULT!!!
 	SAD - up to 21  harmonics, but higher will be ignored
 	SAD - names Kn and SKn
+	If L > 0 in SAD it will be a drift in MAD
 	"""
+	L = 0.
+	if(elem.hasParameter("L")):
+		L = elem.getParameters()["L"]
+	if( L > 0.):
+		elem.setType("DRIFT")
+		elem.getParameters().clear()
 	knList = []
 	for i in xrange(9):
 		key = "K"+str(i)
@@ -171,6 +178,8 @@ def multTranslator(elem):
 			knList.append((elem.getParameter(key),i))
 	#put new key-val
 	elem.getParameters().clear()
+	if(L > 0.):
+		elem.getParameters()["L"] = L	
 	for kn in knList:
 		(val,i) = kn
 		elem.getParameters()["K"+str(i)+"L"] = val
@@ -241,12 +250,17 @@ def SAD_to_MAD_ElementTranslator(elems):
 #===========================================
 # Main code
 #===========================================
-if( len(sys.argv) != 3 ):
-	print "Usage: >python rcs_sad_to_mad_translator.py <name of SAD file to read> <name of Lattice MAD file to write>"
+if( len(sys.argv) != 3 and len(sys.argv) != 4 ):
+	print "Usage: >python ",sys.argv[0]," <name of SAD file to read> <name of MAD file to write> [<name of the line>]"
+	print "By default the name of the line will be RING"
 	sys.exit(1)
 
 sad_file_name = sys.argv[1]
 mad_file_name = sys.argv[2]
+
+line_name = "RING"
+if(len(sys.argv) == 4):
+	line_name = sys.argv[3]
 
 parser = SAD_Parser()
 parser.parse(sad_file_name)
@@ -274,9 +288,19 @@ mad_file = open(mad_file_name,"w")
 # QDL,QDN,QDX,  QFL,QFM,QFN,QFX
 # k1_values{abs(k1*1000000), [quadElements]}
 #===================================================
-lineRING = parser.getSAD_LinesDict()["RING"]
-#lineRING = parser.getSAD_LinesDict()["RNG"]
+if(not parser.getSAD_LinesDict().has_key(line_name)):
+	print "There is no line:",line_name," in the SAD file:",sad_file_name
+	print "Stop."
+	sys.exit(1)
+lineRING = parser.getSAD_LinesDict()[line_name]
+
 elemsRING = lineRING.getElements()
+
+L = 0.
+for elem in elemsRING:
+	if(elem.hasParameter("L")):
+		L = L + elem.getParameter("L")
+print "Length of the ",line_name," line=",L
 
 k1_values = {}
 for elem in elemsRING:
