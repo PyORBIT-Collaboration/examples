@@ -163,16 +163,13 @@ def multTranslator(elem):
 	L = 0.
 	if(elem.hasParameter("L")):
 		L = elem.getParameters()["L"]
-	if( L > 0.):
-		elem.setType("DRIFT")
-		elem.getParameters().clear()
 	knList = []
-	for i in xrange(9):
+	for i in xrange(0,9):
 		key = "K"+str(i)
 		if(elem.hasParameter(key)):
 			knList.append((elem.getParameter(key),i))
 	sknList = []
-	for i in xrange(9):
+	for i in xrange(0,9):
 		key = "SK"+str(i)
 		if(elem.hasParameter(key)):
 			knList.append((elem.getParameter(key),i))
