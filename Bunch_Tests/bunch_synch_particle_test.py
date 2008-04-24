@@ -32,10 +32,31 @@ print "px=",syncPart.px()
 print "py=",syncPart.py()
 print "pz=",syncPart.pz()
 
+print "pVect=",syncPart.pVector()
+print "rVect=",syncPart.rVector()
+print "nxVect=",syncPart.nxVector()
+(px,py,pz) = syncPart.pVector()
+(nx,ny,nz) = syncPart.nxVector()
+print "p*n=",(px*nx+py*ny+pz*nz)
+print "abs(n)=",(nx*nx+ny*ny+nz*nz)
+print "=============================="
+syncPart.pVector((2,3,4))
+syncPart.rVector((5,6,7))
+syncPart.nxVector((0,1,0))
+print "pVect=",syncPart.pVector()
+print "rVect=",syncPart.rVector()
+print "nxVect=",syncPart.nxVector()
+print "=============================="
+(px,py,pz) = syncPart.pVector()
+(nx,ny,nz) = syncPart.nxVector()
+print "p*n=",(px*nx+py*ny+pz*nz)
+print "abs(n)=",(nx*nx+ny*ny+nz*nz)
+print "=============================="
+
 p = syncPart.momentum()
 print "p=",p
 
-#orbit_mpi.finalize("The test is done!")
+orbit_mpi.finalize("The test is done!")
 
 #memory test
 #the amount of memory should be the same
