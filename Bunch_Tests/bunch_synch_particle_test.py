@@ -1,4 +1,5 @@
 import sys
+import math
 from bunch import Bunch
 from bunch import SyncParticle
 
