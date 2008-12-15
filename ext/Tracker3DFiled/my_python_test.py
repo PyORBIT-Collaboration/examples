@@ -47,7 +47,7 @@ n_step = 10000
 time_step = (2*3.1415926*R/(c_light*P/E))/n_step/1;
 time_step=(2*3.1415926/1e+12)/n_step;
 
-fS=BaseFieldSource()
+fS=CppBaseFieldSource()
 
 
 First = LasStripExternalEffects(0.0005,1,102.5e-9,"/home/tg4/transitions/",3)
