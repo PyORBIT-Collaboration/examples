@@ -6,8 +6,8 @@ import sys
 import math
 from bunch import Bunch
 
-from tracker3dfield import RungeKuttaTracker
-from tracker3dfield import PyExternalEffects
+from trackerrk4 import RungeKuttaTracker
+from trackerrk4 import PyExternalEffects
 from orbit_utils import PyBaseFieldSource
 
 #the implementation of the field source
