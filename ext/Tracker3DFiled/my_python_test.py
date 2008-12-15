@@ -45,9 +45,9 @@ R = P*1.0e9/(c_light*(b.charge()+1.0)*1.0)
 print "R[m] = ",R
 n_step = 10000
 time_step = (2*3.1415926*R/(c_light*P/E))/n_step/1;
-time_step=(2*3.1415926/1e+11)/n_step;
+time_step=(2*3.1415926/1e+12)/n_step;
 
-fS=CppBaseFieldSource()
+fS=BaseFieldSource()
 
 
 First = LasStripExternalEffects(0.0005,1,102.5e-9,"/home/tg4/transitions/",3)
@@ -70,7 +70,7 @@ print "Length[m]=",tracker.length()
 print "Start tracking."
 print "==========================================================================================="
 print "Step_Index    x                                y                              z "
-tracker.track(b,0,60*time_step*n_step, time_step,fS,First)
+tracker.track(b,0,10000*time_step*n_step, time_step,fS,First)
 print "==========================================================================================="
 print "Stop tracking.",time_step*n_step
 
