@@ -4,19 +4,16 @@
 import sys
 
 from spacecharge import Grid2D
-from spacecharge import Boundary2D
+from spacecharge import PoissonSolverFFT2D
 
 print "Start."
 
 count = 0
 while( 1 < 2):
-	grid = Grid2D(100,200)
-	boundary = Boundary2D(100,200,10.,20.,64,"Ellipse",20)
-	grid.setBoundary2D(boundary)
-	grid = Grid2D(boundary)
-	grid.setBoundary2D(boundary)
-	grid = Grid2D(-5.0,5.0,100,-10.,10.,200)
-	grid.setBoundary2D(boundary)
+	grid0 = Grid2D(100,200)
+	grid1 = Grid2D(100,200)
+	solver = PoissonSolverFFT2D(100,200)
+	solver.findPotential(grid0,grid1)
 	count = count + 1
 	if(count % 100 == 0): print "count=",count
 

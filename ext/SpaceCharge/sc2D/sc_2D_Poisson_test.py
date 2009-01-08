@@ -1,6 +1,5 @@
 #-----------------------------------------------------
-#Creates Grid2D for charge density and potential
-#Boundary2D instance for solving Poisson problem
+#Creates Grid2D for charge density and Poisson Solver
 #for a charged string (2D case) 
 #Copmares with the exact result.
 #-----------------------------------------------------
@@ -10,29 +9,29 @@ import math
 import orbit_mpi
 
 from spacecharge import Grid2D
-from spacecharge import Boundary2D
+from spacecharge import PoissonSolverFFT2D
 
 print "Start."
 
-nBinX = 200
-nBinY = 200
-xSize = 10.
-ySize = 10.
-nBoundaryPoints = 100
-BoundaryShape = "Circle"
-N_FreeSpaceModes = 20
+sizeX = 512
+sizeY = 512
+xMin = -5.0
+xMax = +5.0
+yMin = -5.0
+yMax = +5.0
 
-boundary = Boundary2D(nBinX,nBinY,xSize,ySize,nBoundaryPoints,BoundaryShape,N_FreeSpaceModes)
 
-gridRho = Grid2D(boundary)
-gridPhi = Grid2D(boundary)
+solver = PoissonSolverFFT2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
+
+gridRho = Grid2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
+gridPhi = Grid2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
 
 chrage_pos_x = 2.5
 chrage_pos_y = 0.0
 charge = 1.0
 gridRho.binValue(charge,chrage_pos_x,chrage_pos_y)
 
-gridRho.findPotential(gridPhi)
+solver.findPotential(gridRho,gridPhi)
 
 r_test = 4.0
 n_angle_steps = 10
