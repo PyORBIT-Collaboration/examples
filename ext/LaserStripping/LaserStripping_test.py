@@ -2,18 +2,22 @@
 #Track bunch with r and p through the external field 
 # The field is 1 T and has direction (0,1,0)
 #-----------------------------------------------------
+addr="/home/tg4/workspace/PyOrbit/ext/laserstripping/"
 import sys
+sys.path.append(addr+"/PyModules/")
 import math
 
 from bunch import *
 from trackerrk4 import *
 from laserstripping import *
 from orbit_utils import *
+
 import mygra
 import os
 import orbit_mpi
 
 
+#print sys.path
 #print dir()
 
 print "Start."
@@ -46,18 +50,26 @@ R = P*1.0e9/(c_light*(b.charge()+1.0)*1.0)
 print "R[m] = ",R
 
 
-fS=CppBaseFieldSource()
-LFS=GaussianLaserField()
 
-#First = LasStripExternalEffects(0.0005,1,102.5e-9,"/home/tg4/transitions/",3)
-First = LasStripExternalEffects(LFS,"/home/tg4/workspace/PyOrbit/ext/laserstripping/transitions/",3) 
+
+
+
+
+fS=LSFieldSource()
+
+LFS=HermiteGaussianLFmode(1.,0,0,1.,1.,0.,0.,1.) # (sqrt(P),n,m,wx,wy,fx,fy,lambda)
+
+LFS.setLaserFieldOrientation(0.,0.,0.,#{x0,y0,z0}
+                             0.,0.,1.,#{kx,ky,kz}     
+                             1.,0.,0.,#{mx,my,mz}    Please be shure that kx*mx+ky*my+kz*mz==0
+                             1.,2.,0.)#{Ex,Ey,Ez}    Please be shure that kx*Ex+ky*Ey+kz*Ez==0
+
+First = LasStripExternalEffects(LFS,addr+"/transitions/",3,100.) 
 
 
 #First = LasStripExternalEffects(0.0005,1,102.5e-9)
-First.name("first_effect")
-
-
-print "ExternalEffects name=",First.name()
+#First.name("first_effect")
+#print "ExternalEffects name=",First.name()
 
 
 
@@ -88,11 +100,10 @@ print "time_fl=",time_step*n_step
 print "AttrValue=", 1-b.partAttrValue("Amplitudes",0,1)
 
 
-mygra.PlotPopl()
+graph = mygra.PlotPopl()
 
-os.system('gthumb image.png')
-
-os.remove('data_ampl.txt')
+os.system('gthumb /home/tg4/workspace/PyOrbit/ext/laserstripping/working_dir/image.png')
+os.remove(addr+"/working_dir/data_ampl.txt")
 
 
 #orbit_mpi.finalize()
