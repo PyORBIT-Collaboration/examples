@@ -13,22 +13,34 @@ import math
 import orbit_mpi
 
 from spacecharge import Grid2D
-from spacecharge import Boundary2D
+from spacecharge import BaseBoundary2D
+from spacecharge import PoissonSolverFFT2D
 
 print "Start."
 
-nBinX = 200
-nBinY = 200
-xSize = 10.
-ySize = 10.
+sizeX = 200
+sizeY = 200
+
+xMin = -5.0
+xMax = +5.0
+yMin = -5.0
+yMax = +5.0
+
 nBoundaryPoints = 100
-BoundaryShape = "Circle"
 N_FreeSpaceModes = 20
+R_Boundary = 5.0
 
-boundary = Boundary2D(nBinX,nBinY,xSize,ySize,nBoundaryPoints,BoundaryShape,N_FreeSpaceModes)
+gridRho = Grid2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
+gridPhi = Grid2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
+solver = PoissonSolverFFT2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
 
-gridRho = Grid2D(boundary)
-gridPhi = Grid2D(boundary)
+boundary = BaseBoundary2D(nBoundaryPoints,N_FreeSpaceModes)
+
+for i in xrange(nBoundaryPoints):
+	x = R_Boundary*math.cos((2.0*math.pi/(nBoundaryPoints-1))*i)
+	y = R_Boundary*math.sin((2.0*math.pi/(nBoundaryPoints-1))*i)
+	boundary.setBoundaryPoint(i,x,y)
+boundary.initialize()	
 
 chrage_pos_x = 2.5
 chrage_pos_y = 0.0
@@ -36,13 +48,14 @@ chrage_pos_a = math.sqrt(chrage_pos_x*chrage_pos_x + chrage_pos_y*chrage_pos_y)
 charge = 1.0
 gridRho.binValue(charge,chrage_pos_x,chrage_pos_y)
 
-R = boundary.getBoundarySizeX()/2.0
+R = R_Boundary
 a_prime = R*R/chrage_pos_a
 a_prime_x = a_prime*chrage_pos_x/chrage_pos_a
 a_prime_y = a_prime*chrage_pos_y/chrage_pos_a
 
-gridRho.findPotential(gridPhi)
-gridPhi.addBoundaryPotential()
+solver.findPotential(gridRho,gridPhi)
+
+boundary.addBoundaryPotential(gridRho,gridPhi)
 
 #-----potential delta-------------------------------
 #our potential on the wall is zero, but the exact 
