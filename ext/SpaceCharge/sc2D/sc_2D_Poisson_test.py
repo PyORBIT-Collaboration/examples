@@ -3,6 +3,11 @@
 #for a charged string (2D case) 
 #Copmares with the exact result.
 #-----------------------------------------------------
+#The one very useful property of the FFT Poisson solver - scalability 
+#you can change the absolute value of steps X and Y and you will get 
+#the right results as soon you keep stepX/stepY constant.
+#
+
 import sys
 import math
 
@@ -13,15 +18,15 @@ from spacecharge import PoissonSolverFFT2D
 
 print "Start."
 
-sizeX = 512
-sizeY = 512
+sizeX = 200
+sizeY = 200
 xMin = -5.0
 xMax = +5.0
 yMin = -5.0
 yMax = +5.0
 
-
-solver = PoissonSolverFFT2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
+scale_coeff =3.0
+solver = PoissonSolverFFT2D(sizeX,sizeY,xMin/scale_coeff,xMax/scale_coeff,yMin/scale_coeff,yMax/scale_coeff)
 
 gridRho = Grid2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
 gridPhi = Grid2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
@@ -45,7 +50,7 @@ for i in xrange(n_angle_steps):
 	dist = (chrage_pos_x - x)*(chrage_pos_x - x) + (chrage_pos_y - y)*(chrage_pos_y - y)
 	dist = math.sqrt(dist)
 	phi_th = -math.log(dist)
-	print "",i," %7.4f  %7.4f  %12.5g  %12.5g  %12.5g  "%(x,y,phi,phi_th,phi/phi_th) 
+	print "",i," %7.4f  %7.4f  %12.5g  %12.5g  %12.5g  "%(x,y,phi,phi_th,(phi/phi_th)) 
 
 print "Stop."
 

@@ -7,6 +7,10 @@
 #           abs(a') = R^2/abs(a)  a' is parallel to a
 #           a - specifies the position of the charge
 #-----------------------------------------------------
+#The one very useful property of the FFT Poisson solver - scalability 
+#you can change the absolute value of steps X and Y and you will get 
+#the right results as soon you keep stepX/stepY constant.
+
 import sys
 import math
 
@@ -32,7 +36,11 @@ R_Boundary = 5.0
 
 gridRho = Grid2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
 gridPhi = Grid2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
-solver = PoissonSolverFFT2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
+
+#The one very useful property of the FFT Poisson solver - scalability 
+#you can change the absolute value of steps X and Y and you will get 
+#the right results as soon you keep stepX/stepY constant.
+solver = PoissonSolverFFT2D(sizeX,sizeY,xMin/2.0,xMax/2.0,yMin/2.0,yMax/2.0)
 
 boundary = BaseBoundary2D(nBoundaryPoints,N_FreeSpaceModes)
 
