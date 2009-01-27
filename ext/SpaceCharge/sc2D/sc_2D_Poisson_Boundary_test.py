@@ -17,7 +17,7 @@ import math
 import orbit_mpi
 
 from spacecharge import Grid2D
-from spacecharge import BaseBoundary2D
+from spacecharge import Boundary2D
 from spacecharge import PoissonSolverFFT2D
 
 print "Start."
@@ -42,13 +42,17 @@ gridPhi = Grid2D(sizeX,sizeY,xMin,xMax,yMin,yMax)
 #the right results as soon you keep stepX/stepY constant.
 solver = PoissonSolverFFT2D(sizeX,sizeY,xMin/2.0,xMax/2.0,yMin/2.0,yMax/2.0)
 
-boundary = BaseBoundary2D(nBoundaryPoints,N_FreeSpaceModes)
+boundary = Boundary2D(nBoundaryPoints,N_FreeSpaceModes)
 
 for i in xrange(nBoundaryPoints):
 	x = R_Boundary*math.cos((2.0*math.pi/(nBoundaryPoints-1))*i)
 	y = R_Boundary*math.sin((2.0*math.pi/(nBoundaryPoints-1))*i)
 	boundary.setBoundaryPoint(i,x,y)
 boundary.initialize()	
+
+#boundary = Boundary2D(nBoundaryPoints,N_FreeSpaceModes,"Circle",xMax-xMin)
+
+print "shape name=",boundary.getShapeName()
 
 chrage_pos_x = 2.5
 chrage_pos_y = 0.0
