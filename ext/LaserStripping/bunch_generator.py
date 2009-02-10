@@ -80,7 +80,7 @@ class ParticlesGen:
 		x = x + dx
 		px = (xp + dpx)*p0
 		py = yp*p0
-		return (x,xp,y,yp,0.,pz)
+		return (x,px,y,py,0.,pz)
 		
 #-----------------------------------------------------
 #Generates bunch with certain parameters
