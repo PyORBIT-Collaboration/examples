@@ -2,7 +2,9 @@
 #Track bunch with r and p through the external field 
 # The field is 1 T and has direction (0,1,0)
 #-----------------------------------------------------
-addr="/home/tg4/workspace/PyOrbit/ext/laserstripping/"
+import os
+orbit_path = os.environ["ORBIT_ROOT"]
+addr=orbit_path+"/ext/laserstripping/"
 import sys
 sys.path.append(addr+"/PyModules/")
 import math
@@ -12,7 +14,7 @@ from trackerrk4 import *
 from laserstripping import *
 from orbit_utils import *
 
-import mygra
+
 import os
 import orbit_mpi
 
@@ -169,9 +171,7 @@ for i in range(1):
 print "AttrValue=", population
 
 
-graph = mygra.PlotPopl(population)
-os.system('gthumb /home/tg4/workspace/PyOrbit/ext/laserstripping/working_dir/image.png')
-os.remove(addr+"/working_dir/data_ampl.txt")
+
 
 
 #orbit_mpi.finalize()
