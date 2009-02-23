@@ -1,6 +1,7 @@
 import sys
 from bunch import Bunch
 
+
 #-----------------------------------------------------
 #Test of particle attributes for bunch
 #-----------------------------------------------------
@@ -35,11 +36,3 @@ print "debug dict=",res_dict
 
 print "Stop."
 
-sys.exit(1)
-
-count = 0
-while(1 < 2):
-	count = count + 1
-	b_new = Bunch()
-	b_new.readBunch("bunch_dump_test.dat")
-	if(count % 100 == 0): print "i=",count
