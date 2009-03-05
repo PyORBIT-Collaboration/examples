@@ -29,6 +29,7 @@ class ExternalEffects(PyExternalEffects):
 	def __init__(self):
 		PyExternalEffects.__init__(self)
 		self.count = 0
+		self.trajectoryXYArr = []
 		
 	def setupEffects(self,bunch):
 		pass
@@ -37,7 +38,9 @@ class ExternalEffects(PyExternalEffects):
 		pass		
 		
 	def applyEffects(self,bunch, index, inVct, outVct, t, t_step, field_source, tracker):
-		print " %5d "%self.count," %8.6f  %8.6f  %8.6f "%(bunch.x(0),bunch.y(0),bunch.z(0))
+		(x,y,z) = (bunch.x(0),bunch.y(0),bunch.z(0))
+		self.trajectoryXYArr.append([x,z])
+		print " %5d "%self.count," %8.6f  %8.6f  %8.6f "%(x,y,z)
 		self.count = self.count + 1
 		pass
 		
@@ -86,4 +89,13 @@ print "Stop tracking."
 print "time step=",tracker.timeStep()
 print "Stop."
 
-sys.exit(1)
+"""
+#this is the example of using the Gnuplot package
+import Gnuplot
+g = Gnuplot.Gnuplot(debug=1)
+g.title('XZ trajectory')
+g('set data style linespoints')
+g.plot(extEff.trajectoryXYArr)
+raw_input('Please press return to stop:\n')
+"""
+
