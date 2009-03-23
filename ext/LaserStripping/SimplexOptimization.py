@@ -23,7 +23,7 @@ from ext.las_str.print_mod import printf
 
 
 
-file_name = "betaY_best.dat"
+file_name = "results.dat"
 
 #----------------------Beginning of the beam parameters----------------------#
 
@@ -47,7 +47,7 @@ b.betaY =0.75                                 # [m]
 b.emtY = 0.225e-6                             # [m*rad]
 b.cutOffY = math.sqrt(b.emtY*b.betaY)*3.0     # [m]
 
-b.relativeSpread = 1.0e-3
+b.relativeSpread = 0.5e-3
 
 b.dispD = 0.                                  # [m]
 b.dispDP = 2.6                                # [rad]
@@ -90,9 +90,9 @@ H13.wy = 1091.6e-6                              # [m]
 
 #-------------------definition of the optimization function----------------------------#
 
-#name_args, guess, increments = ['wx','wy'],[200.0e-6, 2000.0e-6],[10e-6, 100e-6]
+name_args, guess, increments = ['wx','wy'],[200.0e-6, 2000.0e-6],[10e-6, 100e-6]
 #name_args, guess, increments  = ['wx','wy','fx'], [100.0e-6, 1000.0e-6,-1.000], [10e-6, 100e-6,1.00]
-name_args, guess, increments  = ['wx','wy','fx','fy'], [323.6e-6, 884.6e-6,-6.907,-6.907], [10e-6, 100e-6,1.00,1.00]
+#name_args, guess, increments  = ['wx','wy','fx','fy'], [323.6e-6, 884.6e-6,-6.907,-6.907], [10e-6, 100e-6,1.00,1.00]
 time_start = orbit_mpi.MPI_Wtime()
 pf = printf(file_name,"cpu_time", "W[MW]", "wx[um]", "wy[um]", "fx[cm]", "fy[cm]", "Population", "+- Err")
 powers = [1.0e6,2.0e6,3.0e6,4.0e6,5.0e6,6.0e6,7.0e6,8.0e6,9.0e6,10.0e6]
