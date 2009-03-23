@@ -8,7 +8,7 @@ import sys,math,os
 from bunch import *
 from trackerrk4 import *
 from laserstripping import *
-from ext.las_str.mygra import *
+from ext.las_str.plot_mod import *
 
 
 
@@ -26,7 +26,7 @@ addr = orbit_path+"/ext/laserstripping/working_dir/"
 n_step = 1000
 par=10
 
-Ex=3.0e1
+Ex=4.0e3
 n_states = 3
 
 attr_name = "Amplitudes"
@@ -61,6 +61,7 @@ b.partAttrValue(attr_name,0,1,1.0)
 
 
 fS=LSFieldSource(Ex,0.,0.,0.,0.,0.)
+
 
 if(method == 2 or method == 3): Stark=HydrogenStarkParam(orbit_path+"/ext/laserstripping/transitions/",n_states)
 
@@ -106,8 +107,8 @@ if(method == 3):
 
 
 
-if (method == 1):                  graph = PlotPopl([3,1],1-pop1,0.15,addr+data_name,addr+pic_name)
-if (method == 2 or method == 3):   graph = PlotPopl([5,3],1-pop1,0.15,addr+data_name,addr+pic_name)
+if (method == 1):                  graph = PlotPopl([3,1],1-pop1,0.10,addr+data_name,addr+pic_name)
+if (method == 2 or method == 3):   graph = PlotPopl([5,3],1-pop1,0.10,addr+data_name,addr+pic_name)
 
 os.system('eog '+addr+pic_name)
 os.remove(addr+data_name)
