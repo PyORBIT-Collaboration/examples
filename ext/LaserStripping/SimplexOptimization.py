@@ -8,12 +8,16 @@ import sys, math, os, orbit_mpi
 from bunch import *
 from orbit_mpi import *
 from orbit_utils import *
+from ext.las_str.plot_mod import PlotPopl
 from ext.las_str.TwoLevelFuncMod import TwoLevelFunc
 from ext.las_str.SimplexMod import Simplex
 from ext.las_str.part_generator import BunchGen
 from ext.las_str.print_mod import printf
 
 
+time_start = orbit_mpi.MPI_Wtime()
+rank = orbit_mpi.MPI_Comm_rank(mpi_comm.MPI_COMM_WORLD)
+size = orbit_mpi.MPI_Comm_size(mpi_comm.MPI_COMM_WORLD)
 
 
 
@@ -21,9 +25,6 @@ from ext.las_str.print_mod import printf
 
 
 
-
-
-file_name = "results_1e5.dat"
 
 #----------------------Beginning of the beam parameters----------------------#
 
@@ -58,9 +59,6 @@ b.dispDP = 2.6                                # [rad]
 
 H13 = TwoLevelFunc()
 
-
-
-
 H13.bunch = b.getBunch(0)
 H13.TK = b.TK
 
@@ -79,33 +77,28 @@ H13.fy = -0.2                                   # [m]
 H13.wx = 87.8e-6                                # [m]
 H13.wy = 1091.6e-6                              # [m]
 
-
-
-
 #----------------------End of the Laser field and excitation parameters of H0 atom----------------------#
+
 #H13.bunch.dumpBunch("bunch_init.dat")
 
 
 
 
 #-------------------definition of the optimization function----------------------------#
+pf = printf("results_Igor.dat","N_part","cpu_time", "W[MW]", "wx[um]", "wy[um]", "fx[cm]", "fy[cm]", "Population", "+- Err")
 
-#name_args, guess, increments = ['wx','wy'],[200.0e-6, 2000.0e-6],[10e-6, 100e-6]
+name_args, guess, increments = ['wx','wy'],[100.0e-6, 1000.0e-6],[10e-6, 100e-6]
 #name_args, guess, increments  = ['wx','wy','fx'], [100.0e-6, 1000.0e-6,-1.000], [10e-6, 100e-6,1.00]
-name_args, guess, increments  = ['wx','wy','fx','fy'], [323.6e-6, 884.6e-6,-6.907,-6.907], [10e-6, 100e-6,1.00,1.00]
-time_start = orbit_mpi.MPI_Wtime()
-pf = printf(file_name,"N_part","cpu_time", "W[MW]", "wx[um]", "wy[um]", "fx[cm]", "fy[cm]", "Population", "+- Err")
+#name_args, guess, increments  = ['wx','wy','fx','fy'], [323.6e-6, 884.6e-6,-6.907,-6.907], [10e-6, 100e-6,1.00,1.00]
+
 powers = [1.0e6,2.0e6,3.0e6,4.0e6,5.0e6,6.0e6,7.0e6,8.0e6,9.0e6,10.0e6]
 
 
-H13.count  = 0
 def opt_func(args):
 
     for i in range(len(args)):
         H13.__dict__[name_args[i]] = args[i]
         
-#        H13.fy = H13.fx
-
     sum = 0
     for N_p in range(len(powers)):
         H13.power = powers[N_p]
@@ -115,7 +108,6 @@ def opt_func(args):
     H13.count += 1
     pf.fdata(H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver_1_10",1.0e+6*H13.wx,1.0e+6*H13.wy,H13.fx*100,H13.fy*100,sum/len(powers))
 
-    
     return -sum/len(powers)
 #-------------------definition of the optimization function----------------------------#
 
@@ -126,8 +118,34 @@ def opt_func(args):
 
 
 
+#-----------------------Beginning of optimization-----------------------------------------
+
 s = Simplex(opt_func, guess, increments)
 (values, err, iter) = s.minimize(1e-20, 1000,0)
+
+#-----------------------End of Optimization-----------------------------------------------
+
+
+
+
+
+#popul = population_average_powers()
+#H13.data_addr_name = res_dir+data_name
+#pop, sigma_pop = H13.population()
+"""
+#-----------------------Slide show-----------------------------------------
+
+res_dir = os.environ["ORBIT_ROOT"]+"/ext/laserstripping/working_dir/"
+data_name = "data_ampl_"
+pic_name = "pic"
+
+for i in range(b.N_part):
+     popi = math.pow(H13.bunch_target.partAttrValue("Amplitudes",i,3),2)+math.pow(H13.bunch_target.partAttrValue("Amplitudes",i,4),2)
+     graph = PlotPopl([3,1],["%1.6f"%popi,"px= %1.6f"%H13.bunch.px(i),"py= %1.6f"%H13.bunch.py(i),"y= %1.6f"%H13.bunch.y(i)],0.15,res_dir+data_name+"%i.dat"%(i*size+rank),res_dir+pic_name+"%i.png"%(i*size+rank))
+     os.remove(H13.data_addr_name+"%i.dat"%(i*size+rank))
+#-----------------------Slide show------------------------------------------
+"""
+
 
 
 
@@ -161,9 +179,6 @@ for beta_X, power  in [(beta_X,power)
     pf.fdata(H13.power/1.0e6,b.betaX,angleX,pop,sigma_pop)
 
 """
-
-#popul = population_average_powers()
-#popul, sigma = H13.population()
 
 
 
