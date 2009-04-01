@@ -33,7 +33,7 @@ orbit_path = os.environ["ORBIT_ROOT"]
 b = BunchGen()
 
 b.TK= 1.0                                     # [GeV]
-b.N_part = 10
+b.N_part = 200
 b.N_attr = 15
 
 
@@ -62,14 +62,14 @@ b.dispDP = 2.6                                # [rad]
 #----------------------Beginning of the Laser field and excitation parameters of H0 atom----------------------#
 
 #H13 = TwoLevelFunc()
-H13 = SchredingerFunc(orbit_path+"/ext/laserstripping/transitions/",3)
+H13 = SchredingerFunc(orbit_path+"/ext/laserstripping/transitions/",3,100)
 
 
 
 H13.dip_transition = math.sqrt(729./8192.)      # [a.u]
                              
 
-H13.By = 0.001                                   # [T]
+H13.By = 0.1                                   # [T]
 H13.fS = ConstEMfield(0.,0.,0.,0.,H13.By,0.)
 
 
@@ -82,10 +82,10 @@ H13.SetGroundStateBeam_ref(b.getBunch(0))
 H13.TK = b.TK
 
 H13.n_sigma = 3
-H13.n_step = 10000
+H13.n_step = 1000
 
 H13.la = 355.0e-9                               # [m]
-H13.power = 1.0e6                               # [W]
+H13.power = 10.0e6                               # [W]
 
 H13.fx = -0.2                                   # [m]
 H13.fy = -0.2                                   # [m]
