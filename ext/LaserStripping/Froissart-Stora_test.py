@@ -53,9 +53,9 @@ LFS.setLaserFieldPolarization(1.,1.,1.)
 
 if(method == 2 or method == 3):     Stark = HydrogenStarkParam(trans,n_states)
 
-if (method == 1):   am, pop, eff = 2*2+8,             2+1,  TwoLevelAtom(LFS,4./9.,math.sqrt(729./8192.))
-if (method == 2):   am, pop, eff = 2*levels+8,        14+1, SchrodingerEquation(LFS,Stark,1000.) 
-if (method == 3):   am, pop, eff = 2*levels*levels+8, 14+1, DensityMatrix(LFS,Stark,1000.)  
+if (method == 1):   am, pop, eff = 2*2+8,             2+1,      TwoLevelAtom(LFS,4./9.,math.sqrt(729./8192.))
+if (method == 2):   am, pop, eff = 2*levels+8,        levels+1, SchrodingerEquation(LFS,Stark,1000.) 
+if (method == 3):   am, pop, eff = 2*levels*levels+8, levels+1, DensityMatrix(LFS,Stark,1000.)  
 
 b = Bunch()
 b.charge(0)
@@ -66,7 +66,8 @@ b.addPartAttr("Populations",{"size":pop})
 b.addPartAttr("Amplitudes",{"size":am})
 b.partAttrValue("Amplitudes",0,1,1.0)
 
-fS=ConstEMfield(Ex,0.,0.,0.,0.,0.)
+
+fS = ConstEMfield(Ex,0.,0.,0.,0.,0.)
 
 pr = PrintExtEffects(max(2*n_step*par/10000,1),addr+data_name)
 

@@ -5,11 +5,13 @@
 
 import sys, math, os, orbit_mpi
 
+from laserstripping import *
 from bunch import *
 from orbit_mpi import *
 from orbit_utils import *
 from ext.las_str.plot_mod import PlotPopl
 from ext.las_str.TwoLevelFuncMod import TwoLevelFunc
+from ext.las_str.SchredingerFuncMod import SchredingerFunc
 from ext.las_str.SimplexMod import Simplex
 from ext.las_str.part_generator import BunchGen
 from ext.las_str.print_mod import printf
@@ -18,7 +20,7 @@ from ext.las_str.print_mod import printf
 time_start = orbit_mpi.MPI_Wtime()
 rank = orbit_mpi.MPI_Comm_rank(mpi_comm.MPI_COMM_WORLD)
 size = orbit_mpi.MPI_Comm_size(mpi_comm.MPI_COMM_WORLD)
-
+orbit_path = os.environ["ORBIT_ROOT"]
 
 
 
@@ -33,7 +35,7 @@ b = BunchGen()
 b.TK= 1.0                                     # [GeV]
 b.N_part = 10
 b.N_attr = 15
-b.attr_name = "Amplitudes"
+
 
 b.mass = 0.938256 + 0.000511                  # [GeV]
 b.charge = 0                                  # [e]
@@ -53,13 +55,30 @@ b.relativeSpread = 0.5e-3
 b.dispD = 0.                                  # [m]
 b.dispDP = 2.6                                # [rad]
 
+
+
 #----------------------End of the beam parameters----------------------#
 
 #----------------------Beginning of the Laser field and excitation parameters of H0 atom----------------------#
 
-H13 = TwoLevelFunc()
+#H13 = TwoLevelFunc()
+H13 = SchredingerFunc(orbit_path+"/ext/laserstripping/transitions/",3)
 
-H13.bunch = b.getBunch(0)
+
+
+H13.dip_transition = math.sqrt(729./8192.)      # [a.u]
+                             
+
+H13.By = 0.001                                   # [T]
+H13.fS = ConstEMfield(0.,0.,0.,0.,H13.By,0.)
+
+
+
+
+
+H13.delta_E = 4./9.                             # [a.u]
+H13.SetGroundStateBeam_ref(b.getBunch(0))
+
 H13.TK = b.TK
 
 H13.n_sigma = 3
@@ -67,9 +86,6 @@ H13.n_step = 10000
 
 H13.la = 355.0e-9                               # [m]
 H13.power = 1.0e6                               # [W]
-
-H13.dip_transition = math.sqrt(729./8192.)      # [a.u]
-H13.delta_E = 4./9.                             # [a.u]
 
 H13.fx = -0.2                                   # [m]
 H13.fy = -0.2                                   # [m]
@@ -87,7 +103,7 @@ H13.wy = 1091.6e-6                              # [m]
 #-------------------definition of the optimization function----------------------------#
 pf = printf("results_Igor.dat","N_part","cpu_time", "W[MW]", "wx[um]", "wy[um]", "fx[cm]", "fy[cm]", "Population", "+- Err")
 
-name_args, guess, increments = ['wx','wy'],[100.0e-6, 1000.0e-6],[10e-6, 100e-6]
+#name_args, guess, increments = ['wx','wy'],[100.0e-6, 1000.0e-6],[10e-6, 100e-6]
 #name_args, guess, increments  = ['wx','wy','fx'], [100.0e-6, 1000.0e-6,-1.000], [10e-6, 100e-6,1.00]
 #name_args, guess, increments  = ['wx','wy','fx','fy'], [323.6e-6, 884.6e-6,-6.907,-6.907], [10e-6, 100e-6,1.00,1.00]
 
@@ -116,12 +132,10 @@ def opt_func(args):
 
 
 
-
-
 #-----------------------Beginning of optimization-----------------------------------------
 
-s = Simplex(opt_func, guess, increments)
-(values, err, iter) = s.minimize(1e-20, 1000,0)
+#s = Simplex(opt_func, guess, increments)
+#(values, err, iter) = s.minimize(1e-20, 1000,0)
 
 #-----------------------End of Optimization-----------------------------------------------
 
@@ -129,9 +143,12 @@ s = Simplex(opt_func, guess, increments)
 
 
 
-#popul = population_average_powers()
+pop = opt_func([])
 #H13.data_addr_name = res_dir+data_name
 #pop, sigma_pop = H13.population()
+#print pop
+
+
 """
 #-----------------------Slide show-----------------------------------------
 
