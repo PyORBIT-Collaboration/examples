@@ -15,7 +15,7 @@ from ext.las_str.plot_mod import *
 
 
 
-method = 1
+method = 2
 
 #----------------------Beginning of the tracker and laser parameters----------------------#
 orbit_path = os.environ["ORBIT_ROOT"]
@@ -25,7 +25,7 @@ trans = orbit_path+"/ext/laserstripping/transitions/"
 n_step = 10000
 par=10
 
-Ex=4.0e3
+Ex=4.0e1
 n_states = 3
 
 
@@ -48,10 +48,11 @@ Elas=Rabi/dip_trans                                     # Amplitude of laser fie
 levels = n_states*(1+n_states)*(1+2*n_states)/6
 
 
-LFS=FroissartStoraLF(Omega,Gamma,Elas) 
+LFS = FroissartStoraLF(Omega,Gamma,Elas) 
 LFS.setLaserFieldPolarization(1.,1.,1.)
+fS = ConstEMfield(Ex,0.,0.,0.,0.,0.)
 
-if(method == 2 or method == 3):     Stark = HydrogenStarkParam(trans,n_states)
+if(method == 2 or method == 3):     Stark = HydrogenStarkParam(trans, n_states)
 
 if (method == 1):   am, pop, eff = 2*2+8,             2+1,      TwoLevelAtom(LFS,4./9.,math.sqrt(729./8192.))
 if (method == 2):   am, pop, eff = 2*levels+8,        levels+1, SchrodingerEquation(LFS,Stark,1000.) 
@@ -66,8 +67,6 @@ b.addPartAttr("Populations",{"size":pop})
 b.addPartAttr("Amplitudes",{"size":am})
 b.partAttrValue("Amplitudes",0,1,1.0)
 
-
-fS = ConstEMfield(Ex,0.,0.,0.,0.,0.)
 
 pr = PrintExtEffects(max(2*n_step*par/10000,1),addr+data_name)
 
