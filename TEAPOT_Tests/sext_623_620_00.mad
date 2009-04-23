@@ -37,11 +37,11 @@
 !------------------------------------------------------------
 ! Initial Quad Strengths
 !------------------------------------------------------------
-   KF:= 3.882808E+00
-   KD:=-4.123195E+00
-  KDE:=-2.00
-  KDC:=-4.00
-  KFC:= 4.00
+ KF:= 3.882808E+00
+ KD:=-4.123195E+00
+ KDE:=-2.00
+ KDC:=-4.00
+ KFC:= 4.00
  KDEE:=0.5*(KDE+KD)
 !------------------------------------------------------------
  KVX1:=KDEE
@@ -1007,8 +1007,6 @@ E2=(PHI4+PHI3+PHI2+PHI1)
    SPBB: Line = (SSSB,ARCC)
    SPCC: Line = (SSSC,ARCD)
    SPDD: Line = (SSSD,ARCA)
-    RNG: Line = (SPAA,SPBB,SPCC,SPDD)
-! RNG = SSSA,ARCB,SSSB,ARCC,SSSC,ARCD,SSSD,ARCA
+   RNG: Line = (SPAA,SPBB,SPCC,SPDD)
    RNGABCD: Line = (ARCA,SSSA,ARCB,SSSB,ARCC,SSSC,ARCD,SSSD)
 !------------------------------------------------------------
-!
