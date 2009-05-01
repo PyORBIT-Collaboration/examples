@@ -15,7 +15,7 @@ from ext.las_str.plot_mod import *
 
 
 
-method = 2
+method = 1
 
 #----------------------Beginning of the tracker and laser parameters----------------------#
 orbit_path = os.environ["ORBIT_ROOT"]
@@ -54,9 +54,9 @@ fS = ConstEMfield(Ex,0.,0.,0.,0.,0.)
 
 if(method == 2 or method == 3):     Stark = HydrogenStarkParam(trans, n_states)
 
-if (method == 1):   am, pop, eff = 2*2+8,             2+1,      TwoLevelAtom(LFS,4./9.,math.sqrt(729./8192.))
-if (method == 2):   am, pop, eff = 2*levels+8,        levels+1, SchrodingerEquation(LFS,Stark,1000.) 
-if (method == 3):   am, pop, eff = 2*levels*levels+8, levels+1, DensityMatrix(LFS,Stark,1000.)  
+if (method == 1):   am, pop, eff = 2*2+1,             2+1,      TwoLevelAtom(LFS,4./9.,math.sqrt(729./8192.))
+if (method == 2):   am, pop, eff = 2*levels+1,        levels+1, SchrodingerEquation(LFS,Stark,1000.) 
+if (method == 3):   am, pop, eff = 2*levels*levels+1, levels+1, DensityMatrix(LFS,Stark,1000.)  
 
 b = Bunch()
 b.charge(0)
@@ -94,4 +94,6 @@ graph = PlotPopl(ratio,["%1.4f"%pop2],0.15,addr+data_name+"0.dat",addr+pic_name)
 os.system('eog '+addr+pic_name)
 os.remove(addr+data_name+"0.dat")
 print "AttrValue=","sum=", pop2, sum
+
+
 
