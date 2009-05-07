@@ -34,6 +34,9 @@ class ExternalEffects(PyExternalEffects):
 	def setupEffects(self,bunch):
 		pass
 		
+	def memorizeInitParams(self,bunch):
+		pass
+		
 	def finalizeEffects(self,bunch):
 		pass		
 		
