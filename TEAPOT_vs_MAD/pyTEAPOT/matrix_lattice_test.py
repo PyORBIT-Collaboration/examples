@@ -96,6 +96,7 @@ for (pos,disp) in arrDispY:
 	if(abs(disp) > max_disp_y): max_disp_y = abs(disp)	
 print "max Disp. X [m] =",max_disp_x
 print "max Disp. Y [m] =",max_disp_y
+"""
 #-------------------------------------------------	
 #this is the example of using the Gnuplot package
 import Gnuplot
@@ -121,7 +122,7 @@ gDY.plot(arrDispY)
 
 raw_input('Please press return to stop:\n')
 #-------------------------------------------------	
-
+"""
 print "Stop."
 sys.exit(1)
 
