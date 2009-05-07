@@ -12,7 +12,7 @@
 # 
 #  The 1. method is the safest, because it does not track the bunch
 #  through possible Space Charge nodes, RF Nodes with nonzero voltage
-#  etc. If you know that you do not have them, they shoild give us the
+#  etc. If you know that you do not have them, they shoild give the
 #  same results.
 ##############################################################
 
@@ -33,7 +33,7 @@ def printM(m):
 	print "----matrix--- size=",m.size()
 	for i in xrange(m.size()[0]):
 		for j in xrange(m.size()[1]):
-			print ("(%1d,%1d)=% 6.5e "%(i,j,m.get(i,j))),
+			print ("(%1d,%1d)=% 8.7e "%(i,j,m.get(i,j))),
 		print ""	
 
 #---Transformation of the matrix to the MAD variables
@@ -104,6 +104,10 @@ class MatrixTracker:
 matrixTracker = MatrixTracker(1.0)
 momentum = matrixTracker.b.getSyncParticle().momentum()
 beta = matrixTracker.b.getSyncParticle().beta()
+gamma = matrixTracker.b.getSyncParticle().gamma()
+mass = matrixTracker.b.getSyncParticle().mass()
+print " etotal=", gamma*mass
+print " ekin=", (gamma-1)*mass
 
 matrixArr = matrixTracker.getTransportMatrixArray(teapot_latt)
 print "n marix =",len(matrixArr)
@@ -131,20 +135,15 @@ n_max = len(teapot_latt.getNodes())
 length = 0.
 for i in range(n_max):
 	node = teapot_latt.getNodes()[i]
-	#print "i=",i," name =",node.getName()," L=",length	
+	print "i=",i," name =",node.getName()," L=",length	
 	m = Matrix(6,6)
 	matrixGenerator.initBunch(matrixTracker.b)
 	node.trackBunch(matrixTracker.b)
 	matrixGenerator.calculateMatrix(matrixTracker.b,m)
-	#m_prt0 = res_matrix.copy()
+	#m_prt0 = m.copy()
 	#transormToMAD(m_prt0,momentum,beta)
 	#printM(m_prt0)	
-	res_matrix = m.mult(res_matrix)
-	#transormToMAD(m,momentum,beta)
-	#printM(m)		
-	#m_prt = res_matrix.copy()	
-	#transormToMAD(m_prt,momentum,beta)
-	#printM(m_prt)	
+	res_matrix = m.mult(res_matrix)	
 	length = length + node.getLength()
 	
 print "====res for TEAPOT n elements=",n_max," L=",length
