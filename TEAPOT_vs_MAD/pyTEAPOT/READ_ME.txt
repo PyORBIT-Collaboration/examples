@@ -20,5 +20,5 @@ matrix_lattice_test.py - MATRIX_Lattice class is presented. The example for for
                         calculation of ring parameters and twiss functions for 
                         the ring and accelerator lines are presented 
   
-teapot_one_turn_matrix.py
+
 
