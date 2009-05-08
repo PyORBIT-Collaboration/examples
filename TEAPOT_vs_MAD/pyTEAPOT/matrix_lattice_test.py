@@ -96,29 +96,33 @@ for (pos,disp) in arrDispY:
 	if(abs(disp) > max_disp_y): max_disp_y = abs(disp)	
 print "max Disp. X [m] =",max_disp_x
 print "max Disp. Y [m] =",max_disp_y
+
+(chromX,chromY) = matrix_lattice.getChromaticitiesXY()
+print "chromaticity X=",chromX
+print "chromaticity Y=",chromY
 """
 #-------------------------------------------------	
 #this is the example of using the Gnuplot package
 import Gnuplot
-gBX = Gnuplot.Gnuplot(debug=1)
+gBX = Gnuplot.Gnuplot()
 gBX.title('beta x [m]')
 gBX('set data style line')
 gBX.plot(arrPosBetaX)
 
-gBY = Gnuplot.Gnuplot(debug=1)
+gBY = Gnuplot.Gnuplot()
 gBY.title('beta y [m]')
 gBY('set data style line')
 gBY.plot(arrPosBetaY)
 
-gDX = Gnuplot.Gnuplot(debug=1)
+gDX = Gnuplot.Gnuplot()
 gDX.title('dispersion x [m]')
 gDX('set data style line')
 gDX.plot(arrDispX)
 
-gDY = Gnuplot.Gnuplot(debug=1)
-gDY.title('dispersion y [m]')
-gDY('set data style line')
-gDY.plot(arrDispY)
+#gDY = Gnuplot.Gnuplot()
+#gDY.title('dispersion y [m]')
+#gDY('set data style line')
+#gDY.plot(arrDispY)
 
 raw_input('Please press return to stop:\n')
 #-------------------------------------------------	
