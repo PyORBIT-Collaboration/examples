@@ -15,6 +15,7 @@ from ext.las_str.plot_mod import *
 
 
 
+
 method = 1
 
 #----------------------Beginning of the tracker and laser parameters----------------------#
@@ -35,17 +36,13 @@ pic_name = "imageFS.png"
 ta = 2.418884326505e-17                             # atomic unit of time
 Rabi = 1e+12*ta                                      # Rabi frequency
 Gamma = -math.pi*Rabi*Rabi/2/math.log(1-0.87)         # frequency sweep 
-Omega = 4./9.
-#Omega = 3./8.                                         # basis frequency
-dip_trans = math.sqrt(729./8192.)                     # dipole transition between two levels
-#dip_trans = math.sqrt(32768./59049.)                     # dipole transition between two levels
+en_trans = 1./2. - 1./(2.*n_states*n_states)              # energy transition for two level atom
+Omega = en_trans                                     # basis frequency
+dip_trans = math.sqrt(256*math.pow(n_states,7)*math.pow(n_states-1,2*n_states-5)/3/math.pow(n_states+1,2*n_states+5))   # dipole transition between two levels
 Elas=Rabi/dip_trans                                     # Amplitude of laser field
 
 #----------------------End of the tracker and laser parameters----------------------#
 
-
-
-levels = n_states*(1+n_states)*(1+2*n_states)/6
 
 
 LFS = FroissartStoraLF(Omega,Gamma,Elas) 
@@ -54,30 +51,27 @@ fS = ConstEMfield(Ex,0.,0.,0.,0.,0.)
 
 if(method == 2 or method == 3):     Stark = HydrogenStarkParam(trans, n_states)
 
-if (method == 1):   am, pop, eff = 2*2+1,             2+1,      TwoLevelAtom(LFS,4./9.,math.sqrt(729./8192.))
-if (method == 2):   am, pop, eff = 2*levels+1,        levels+1, SchrodingerEquation(LFS,Stark,1000.) 
-if (method == 3):   am, pop, eff = 2*levels*levels+1, levels+1, DensityMatrix(LFS,Stark,1000.)  
+if (method == 1):   eff = TwoLevelAtom(LFS,en_trans,dip_trans)
+if (method == 2):   eff = SchrodingerEquation(LFS,Stark,1000.) 
+if (method == 3):   eff = DensityMatrix(LFS,Stark,1000.)  
 
 b = Bunch()
 b.charge(0)
 b.mass(0.938256 + 0.000511)
 b.addParticle(0.,0.,0.,0.,0.,0.)
 
-b.addPartAttr("Populations",{"size":pop})
-b.addPartAttr("Amplitudes",{"size":am})
-b.partAttrValue("Amplitudes",0,1,1.0)
-
-
 pr = PrintExtEffects(max(2*n_step*par/10000,1),addr+data_name)
+evo = RecordEvolution("Populations",1,20000)
 
 cont_eff = ExtEffectsContainer()
 cont_eff.AddEffect(eff)
 cont_eff.AddEffect(pr)
+cont_eff.AddEffect(evo)
 
 
 tracker = RungeKuttaTracker(0.000000001)
-
 time_step=(2*math.pi*ta/Rabi)/n_step
+
 print "Start tracking."
 tracker.track(b,-par*time_step*n_step,2*par*time_step*n_step, time_step,fS,cont_eff)
 print "Stop tracking.","t= ",par*time_step*n_step
@@ -95,5 +89,8 @@ os.system('eog '+addr+pic_name)
 os.remove(addr+data_name+"0.dat")
 print "AttrValue=","sum=", pop2, sum
 
+b.dumpBunch("evol.dat")
+
+del cont_eff
 
 
