@@ -61,12 +61,12 @@ b.mass(0.938256 + 0.000511)
 b.addParticle(0.,0.,0.,0.,0.,0.)
 
 pr = PrintExtEffects(max(2*n_step*par/10000,1),addr+data_name)
-evo = RecordEvolution("Populations",1,20000)
+evo = RecordEvolution("Populations",1,200)
 
 cont_eff = ExtEffectsContainer()
-cont_eff.AddEffect(eff)
-cont_eff.AddEffect(pr)
 cont_eff.AddEffect(evo)
+cont_eff.AddEffect(pr)
+cont_eff.AddEffect(eff)
 
 
 tracker = RungeKuttaTracker(0.000000001)
@@ -91,6 +91,20 @@ print "AttrValue=","sum=", pop2, sum
 
 b.dumpBunch("evol.dat")
 
-del cont_eff
+
+#del b
+#b = Bunch()
+#b.readBunch("evol.dat")
+
+print int(b.getPartAttrDicts()['Evolution']['size'])
+
+
+print b.partAttrValue("Evolution",0,100)
+print b.partAttrValue("Evolution",0,110)
+print b.partAttrValue("Evolution",0,120)
+print b.partAttrValue("Evolution",0,190)
+print b.partAttrValue("Evolution",0,200)
+
+
 
 
