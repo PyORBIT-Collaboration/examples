@@ -16,17 +16,18 @@ from ext.las_str.plot_mod import *
 
 
 
-method = 1
+method = 2
 
 #----------------------Beginning of the tracker and laser parameters----------------------#
 orbit_path = os.environ["ORBIT_ROOT"]
 addr = orbit_path+"/ext/laserstripping/working_dir/"
 trans = orbit_path+"/ext/laserstripping/transitions/"
 
-n_step = 10000
+n_step = 1000
 par=10
 
-Ex=4.0e1
+Ex=4.0e-7
+
 n_states = 3
 
 
@@ -44,23 +45,23 @@ Elas=Rabi/dip_trans                                     # Amplitude of laser fie
 #----------------------End of the tracker and laser parameters----------------------#
 
 
-
 LFS = FroissartStoraLF(Omega,Gamma,Elas) 
 LFS.setLaserFieldPolarization(1.,1.,1.)
 fS = ConstEMfield(Ex,0.,0.,0.,0.,0.)
-
-if(method == 2 or method == 3):     Stark = HydrogenStarkParam(trans, n_states)
-
-if (method == 1):   eff = TwoLevelAtom(LFS,en_trans,dip_trans)
-if (method == 2):   eff = SchrodingerEquation(LFS,Stark,1000.) 
-if (method == 3):   eff = DensityMatrix(LFS,Stark,1000.)  
 
 b = Bunch()
 b.charge(0)
 b.mass(0.938256 + 0.000511)
 b.addParticle(0.,0.,0.,0.,0.,0.)
 
-pr = PrintExtEffects(max(2*n_step*par/10000,1),addr+data_name)
+
+if(method == 2 or method == 3):     Stark_ef = Stark(trans, n_states)
+
+if (method == 1):   eff = TwoLevelAtom(LFS,en_trans,dip_trans)
+if (method == 2):   eff = SchrodingerEquation(LFS,Stark_ef,1000.) 
+if (method == 3):   eff = DensityMatrix(LFS,Stark_ef,1000.)  
+
+pr = PrintExtEffects("Populations",10000,addr+data_name)
 evo = RecordEvolution("Populations",1,200)
 
 cont_eff = ExtEffectsContainer()
@@ -69,42 +70,29 @@ cont_eff.AddEffect(pr)
 cont_eff.AddEffect(eff)
 
 
-tracker = RungeKuttaTracker(0.000000001)
+tracker = RungeKuttaTracker(0)
 time_step=(2*math.pi*ta/Rabi)/n_step
 
-print "Start tracking."
 tracker.track(b,-par*time_step*n_step,2*par*time_step*n_step, time_step,fS,cont_eff)
-print "Stop tracking.","t= ",par*time_step*n_step
 
 pop1 = b.partAttrValue("Populations",0,1)
-sum = b.partAttrValue("Populations",0,0)
+sum = 1 - b.partAttrValue("Populations",0,0)
 
 pop2 = sum - pop1
+
 
 if (method == 1):                  ratio = [3,1]
 if (method == 2 or method == 3):   ratio = [5,3]
 
-graph = PlotPopl(ratio,["%1.4f"%pop2],0.15,addr+data_name+"0.dat",addr+pic_name)
+PlotPopl(ratio,["%1.4f"%pop2],0.15,addr+data_name+"0.dat",addr+pic_name)
 os.system('eog '+addr+pic_name)
 os.remove(addr+data_name+"0.dat")
 print "AttrValue=","sum=", pop2, sum
 
-b.dumpBunch("evol.dat")
+#b.dumpBunch("evol.dat")
 
-
-#del b
-#b = Bunch()
-#b.readBunch("evol.dat")
-
-print int(b.getPartAttrDicts()['Evolution']['size'])
-
-
-print b.partAttrValue("Evolution",0,100)
-print b.partAttrValue("Evolution",0,110)
-print b.partAttrValue("Evolution",0,120)
-print b.partAttrValue("Evolution",0,190)
-print b.partAttrValue("Evolution",0,200)
-
+#g = Bunch()
+#g.readBunch("evol.dat")
 
 
 
