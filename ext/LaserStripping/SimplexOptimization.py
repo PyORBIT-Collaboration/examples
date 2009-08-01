@@ -9,13 +9,12 @@ from laserstripping import *
 from bunch import *
 from orbit_mpi import *
 from orbit_utils import *
-#from ext.las_str.plot_mod import PlotPopl
 from ext.las_str.TwoLevelFuncMod import TwoLevelFunc
 from ext.las_str.SchredingerFuncMod import SchredingerFunc
 from ext.las_str.SimplexMod import Simplex
 from ext.las_str.part_generator import BunchGen
 from ext.las_str.print_mod import printf
-from ext.las_str.plot_mod import *
+
 
 
 time_start = orbit_mpi.MPI_Wtime()
@@ -32,7 +31,7 @@ orbit_path = os.environ["ORBIT_ROOT"]
 
 b = BunchGen()
 
-b.N_part = 500
+b.N_part = 1
 
 b.TK= 1.0                                     # [GeV]
 
@@ -47,7 +46,7 @@ b.cutOffX = math.sqrt(b.emtX*b.betaX)*3.0     # [m]
 
 b.alphaY = 1.979                              # [rad]
 b.betaY =0.75                                 # [m]
-b.emtY = 0.225e-6                          # [m*rad]
+b.emtY = 0.225e-6                             # [m*rad]
 b.cutOffY = math.sqrt(b.emtY*b.betaY)*3.0     # [m]
 
 
@@ -55,7 +54,10 @@ b.cutOffY = math.sqrt(b.emtY*b.betaY)*3.0     # [m]
 b.relativeSpread = 0.5e-3
 
 b.dispD = 0.                                  # [m]
-b.dispDP = 2.6                               # [rad]
+b.dispDP = 2.6                                # [rad]
+
+b.sigma_beam = 50e-12*299792458./(2*math.sqrt(2*math.log(2)))      #[m]
+b.cutOffZ = 3*b.sigma_beam
 
 
 
@@ -63,30 +65,31 @@ b.dispDP = 2.6                               # [rad]
 
 #----------------------Beginning of the Laser field and excitation parameters of H0 atom----------------------#
 
-H13 = TwoLevelFunc(3)
+#H13 = TwoLevelFunc(3)
 
 
 
-#H13 = SchredingerFunc(orbit_path+"/ext/laserstripping/transitions/",3,1000)
+H13 = SchredingerFunc(orbit_path+"/ext/laserstripping/transitions/",3,1000)
 #By = 0.00001                                       # [T]
 #H13.fS = ConstEMfield(0.,0.,0.,0.,By,0.)
 
-#grad_B = 1.0                                    # [T/m]
-#H13.fS = QuadEMfield()
-#H13.fS.cyBz(grad_B)
-#H13.fS.czBy(grad_B)
-  
+grad_B = 1.0                                    # [T/m]
+H13.fS = QuadEMfield()
+H13.fS.cxBz(grad_B)
+H13.fS.czBx(grad_B)
+
 
 H13.bunch = b.getBunch(0)
 
 
-f = open('bunch_parameters.txt','w')
-for i in range(H13.bunch.getSize()):
-    print >>f, i,"\t",(math.sqrt(H13.bunch.pz(i)*H13.bunch.pz(i) + H13.bunch.mass()*H13.bunch.mass()) - H13.bunch.mass() - 1),"\t",H13.bunch.x(i),"\t",H13.bunch.px(i)/H13.bunch.pz(i),"\t",H13.bunch.y(i),"\t",H13.bunch.py(i)/H13.bunch.pz(i)  
-f.close()
+#f = open('bunch_parameters.txt','w')
+#for i in range(H13.bunch.getSize()):
+#    print >>f, i,"\t",(math.sqrt(H13.bunch.pz(i)*H13.bunch.pz(i) + H13.bunch.mass()*H13.bunch.mass()) - H13.bunch.mass() - 1),"\t",H13.bunch.x(i),"\t",H13.bunch.px(i)/H13.bunch.pz(i),"\t",H13.bunch.y(i),"\t",H13.bunch.py(i)/H13.bunch.pz(i)  
+#f.close()
 
 
 H13.TK = b.TK
+H13.sigma_beam = b.sigma_beam
 
 H13.n_sigma = 3
 H13.n_step = 1000
@@ -94,33 +97,35 @@ H13.n_step = 1000
 H13.la = 355.0e-9                               # [m]
 H13.power = 0.5e6                               # [W]
 
-H13.fx = -2.8                                      # [m]
-H13.fy = -2.8                                      # [m]
+H13.fx = -4.5                                      # [m]
+H13.fy = -4.5                                      # [m]
 
-H13.wx = 333.0e-6                               # [m]
-H13.wy = 333.0e-6                               # [m]
+H13.wx = 370.0e-6                               # [m]
+H13.wy = 700.0e-6                               # [m]
+
+H13.env_sigma = 50e-12*299792458./(2*math.sqrt(2*math.log(2)))            #[m]
 
 
-#H13.rx = 68.45e-3                               # [m]
-#H13.ry = 0.377e-3                               # [m]
+H13.rx = 0.5e-3                               # [m]
+H13.ry = 1.0e-3                               # [m]
 
-#H13.ax = 0.2e-3                               # [rad]
-#H13.ay = 0.2e-3                               # [rad]
+H13.ax = 0.2e-3                               # [rad]
+H13.ay = 0.0e-3                               # [rad]
 
 #----------------------End of the Laser field and excitation parameters of H0 atom----------------------#
 
-#H13.bunch.dumpBunch("bunch_init.dat")
+#H13.bunch.dumpBunch("bunch_init1.dat")
 
 
 
 
 #-------------------definition of the optimization function----------------------------#
-pf = printf("optimiz.dat","N_part","cpu_time", "W[MW]", "wx[um]", "wy[um]", "fx[cm]", "fy[cm]", "Population", "+- Err")
-#pf = printf("optimiz.dat","N_part","cpu_time", "W[MW]", "rx[mm]", "ry[mm]", "ax[mrad]", "ay[mrad]", "Population", "+- Err")
+#pf = printf("optimiz.dat","N_part","cpu_time", "W[MW]", "wx[um]", "wy[um]", "fx[cm]", "fy[cm]", "Population", "+- Err")
+pf = printf("optimiz_sh.dat","N_part","cpu_time", "W[MW]", "rx[mm]", "ry[mm]", "ax[mrad]", "ay[mrad]", "Population", "+- Err")
 
 #name_args, guess, increments = ['wx','wy'],[300.0e-6, 300.0e-6],[10e-6, 100e-6]
-name_args, guess, increments  = ['wx','wy','fx'], [333.0e-6, 333.0e-6,-2.800], [10e-6, 100e-6,1.00]
-#name_args, guess, increments  = ['rx','ry','ax'], [1.0e-3,1.0e-3,0.], [1.0e-4,1.0e-4,1.0e-4]
+#name_args, guess, increments  = ['wx','wy','fx'], [333.0e-6, 333.0e-6,-2.800], [10e-6, 100e-6,1.00]
+name_args, guess, increments  = ['rx','ry','ax'], [0.5e-3,1.0e-3,0.2e-3], [1.0e-4,1.0e-4,1.0e-5]
 #name_args, guess, increments  = ['rx','ry','ax','ay'], [68.45e-3,0.377e-3,0.2e-3,0.2e-3], [1.0e-4,1.0e-4,1.0e-4,1.0e-4]
 #name_args, guess, increments  = ['wx','fx'], [370.0e-6, -4.500], [10e-6,1.00]
 #name_args, guess, increments  = ['wx','wy','fx','fy'], [300.6e-6, 300.6e-6,-2.0,-2.0], [10e-6, 10e-6,1.00,1.00]
@@ -129,14 +134,14 @@ name_args, guess, increments  = ['wx','wy','fx'], [333.0e-6, 333.0e-6,-2.800], [
 
 #powers = [0.1e6, 0.2e6, 0.3e6, 0.4e6, 0.5e6, 0.6e6, 0.7e6, 0.8e6, 0.9e6, 1.0e6]
 #powers = [0.5e6]
-powers = [0.1e6, 0.2e6, 0.3e6, 0.4e6, 0.5e6]
+#powers = [0.1e6, 0.2e6, 0.3e6, 0.4e6, 0.5e6, 0.6e6, 0.7e6, 0.8e6, 0.9e6, 1.0e6, 1.1e6, 1.2e6, 1.3e6, 1.4e6, 1.5e6, 1.6e6, 1.7e6, 1.8e6, 1.9e6, 2.0e6]
 
 def opt_func(args):
 
     for i in range(len(args)):
         H13.__dict__[name_args[i]] = args[i]
 
-#    H13.ay = (H13.ax)*(H13.ry)/(H13.rx)   
+    H13.ay = 0
         
     
     sum = 0
@@ -144,23 +149,37 @@ def opt_func(args):
         H13.power = powers[N_p]
         pop, sigma_pop = H13.population()
         sum += pop
-        pf.fdata("","",H13.power/1.0e+6,"","","","",pop,sigma_pop)
+#        pf.fdata("","",H13.power/1.0e+6,"","","","",pop,sigma_pop)
     H13.count += 1
-    pf.fdata(H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver_0.1-1.0",1.0e+6*H13.wx,1.0e+6*H13.wy,H13.fx*100,H13.fy*100,sum/len(powers))
-#    pf.fdata(H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver_0.1-1.0",1.0e+3*H13.rx,1.0e+3*H13.ry,1.0e+3*H13.ax,1.0e+3*H13.ay,sum/len(powers))
+#    pf.fdata(H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver_0.1-1.0",1.0e+6*H13.wx,1.0e+6*H13.wy,H13.fx*100,H13.fy*100,sum/len(powers))
+    pf.fdata(H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver_0.1-2.0",1.0e+3*H13.rx,1.0e+3*H13.ry,1.0e+3*H13.ax,1.0e+3*H13.ay,sum/len(powers))
 
     return -sum/len(powers)
+
+#-------------------definition of the optimization function----------------------------#
+
+def opt_func1(args):
+
+    for i in range(len(args)):
+        H13.__dict__[name_args[i]] = args[i]
+
+    H13.ay = 0
+        
+    
+    pop, sigma_pop = H13.population()
+    pf.fdata(H13.count,orbit_mpi.MPI_Wtime() - time_start,H13.power/1.0e+6,1.0e+3*H13.rx,1.0e+3*H13.ry,1.0e+3*H13.ax,1.0e+3*H13.ay,pop,sigma_pop)
+    H13.count += 1
+
+    return -pop
 
 #-------------------definition of the optimization function----------------------------#
 
 
 
 
-
-
 #-----------------------Beginning of optimization-----------------------------------------
 
-#s = Simplex(opt_func, guess, increments)
+#s = Simplex(opt_func1, guess, increments)
 #(values, err, iter) = s.minimize(1e-20, 1000,0)
 
 #-----------------------End of Optimization-----------------------------------------------
@@ -168,7 +187,7 @@ def opt_func(args):
 
 
 
-#-327.737 -0 0.000589744 0.000382 
+
 
 
 
