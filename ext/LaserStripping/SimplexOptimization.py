@@ -14,7 +14,7 @@ from ext.las_str.SchredingerFuncMod import SchredingerFunc
 from ext.las_str.SimplexMod import Simplex
 from ext.las_str.part_generator import BunchGen
 from ext.las_str.print_mod import printf
-
+from ext.las_str.plot_mod import *
 
 
 time_start = orbit_mpi.MPI_Wtime()
@@ -31,7 +31,7 @@ orbit_path = os.environ["ORBIT_ROOT"]
 
 b = BunchGen()
 
-b.N_part = 1
+b.N_part = 10
 
 b.TK= 1.0                                     # [GeV]
 
@@ -56,7 +56,7 @@ b.relativeSpread = 0.5e-3
 b.dispD = 0.                                  # [m]
 b.dispDP = 2.6                                # [rad]
 
-b.sigma_beam = 50e-12*299792458./(2*math.sqrt(2*math.log(2)))      #[m]
+b.sigma_beam = 50e-12*299792458./(2*math.sqrt(2*math.log(2)))                          #[m]
 b.cutOffZ = 3*b.sigma_beam
 
 
@@ -92,10 +92,10 @@ H13.TK = b.TK
 H13.sigma_beam = b.sigma_beam
 
 H13.n_sigma = 3
-H13.n_step = 1000
+H13.n_step = 100000
 
 H13.la = 355.0e-9                               # [m]
-H13.power = 0.5e6                               # [W]
+H13.power = 0.1e6                               # [W]
 
 H13.fx = -4.5                                      # [m]
 H13.fy = -4.5                                      # [m]
@@ -106,26 +106,26 @@ H13.wy = 700.0e-6                               # [m]
 H13.env_sigma = 50e-12*299792458./(2*math.sqrt(2*math.log(2)))            #[m]
 
 
-H13.rx = 0.5e-3                               # [m]
-H13.ry = 1.0e-3                               # [m]
+H13.rx = 0.7e-3                               # [m]
+H13.ry = 0.7e-3                               # [m]
 
-H13.ax = 0.2e-3                               # [rad]
-H13.ay = 0.0e-3                               # [rad]
+H13.ax = 0.3e-3                               # [rad]
+H13.ay = 0.3e-3                               # [rad]
 
 #----------------------End of the Laser field and excitation parameters of H0 atom----------------------#
 
-#H13.bunch.dumpBunch("bunch_init1.dat")
+#H13.bunch.dumpBunch("bunch_init.dat")
 
 
 
 
 #-------------------definition of the optimization function----------------------------#
 #pf = printf("optimiz.dat","N_part","cpu_time", "W[MW]", "wx[um]", "wy[um]", "fx[cm]", "fy[cm]", "Population", "+- Err")
-pf = printf("optimiz_sh.dat","N_part","cpu_time", "W[MW]", "rx[mm]", "ry[mm]", "ax[mrad]", "ay[mrad]", "Population", "+- Err")
+pf = printf("optimiz_sh1.0.dat","N_part","cpu_time", "W[MW]", "rx[mm]", "ry[mm]", "ax[mrad]", "ay[mrad]", "Population", "+- Err")
 
 #name_args, guess, increments = ['wx','wy'],[300.0e-6, 300.0e-6],[10e-6, 100e-6]
 #name_args, guess, increments  = ['wx','wy','fx'], [333.0e-6, 333.0e-6,-2.800], [10e-6, 100e-6,1.00]
-name_args, guess, increments  = ['rx','ry','ax'], [0.5e-3,1.0e-3,0.2e-3], [1.0e-4,1.0e-4,1.0e-5]
+name_args, guess, increments  = ['rx','ry','ax','ay'], [0.7e-3,0.7e-3,0.3e-3,0.3e-3], [1.0e-4,1.0e-4,1.0e-5,1.0e-5]
 #name_args, guess, increments  = ['rx','ry','ax','ay'], [68.45e-3,0.377e-3,0.2e-3,0.2e-3], [1.0e-4,1.0e-4,1.0e-4,1.0e-4]
 #name_args, guess, increments  = ['wx','fx'], [370.0e-6, -4.500], [10e-6,1.00]
 #name_args, guess, increments  = ['wx','wy','fx','fy'], [300.6e-6, 300.6e-6,-2.0,-2.0], [10e-6, 10e-6,1.00,1.00]
@@ -163,7 +163,7 @@ def opt_func1(args):
     for i in range(len(args)):
         H13.__dict__[name_args[i]] = args[i]
 
-    H13.ay = 0
+#    H13.ay = 0
         
     
     pop, sigma_pop = H13.population()
@@ -217,7 +217,7 @@ print  H13.population()
 
 
 #-----------------------Slide show-----------------------------------------
-"""
+
 res_dir = os.environ["ORBIT_ROOT"]+"/ext/laserstripping/working_dir/"
 data_name = "data"
 pic_name = "pic"
@@ -227,9 +227,10 @@ pic_name = "pic"
 for i in range(b.N_part):
      popi = 1 - H13.bunch_target.partAttrValue("Populations",i,0) - H13.bunch_target.partAttrValue("Populations",i,1)
      P = math.sqrt((H13.bunch.mass() + b.TK)*(H13.bunch.mass() + b.TK) - H13.bunch.mass()*H13.bunch.mass())
-     PlotPopl([3,1],["eff= %1.6f"%popi,"px= %1.6f"%H13.bunch.px(i),"py= %1.6f"%H13.bunch.py(i),"x= %1.6f"%H13.bunch.x(i),"y= %1.6f"%H13.bunch.y(i),"pz-p0= %1.6f"%(H13.bunch.pz(i) - P),"-px/(pz-p0)= %1.6f"%(-H13.bunch.px(i)/(H13.bunch.pz(i) - P)),"d= %1.6f"%(abs(H13.bunch.px(i)+2.6*(H13.bunch.pz(i) - P))/math.sqrt(1+2.6*2.6))],0.15,res_dir+data_name+"%i.dat"%(i*size+rank),res_dir+pic_name+"%i.png"%(i*size+rank))
+#     PlotPopl([3,1],["eff= %1.6f"%popi,"px= %1.6f"%H13.bunch.px(i),"py= %1.6f"%H13.bunch.py(i),"x= %1.6f"%H13.bunch.x(i),"y= %1.6f"%H13.bunch.y(i),"pz-p0= %1.6f"%(H13.bunch.pz(i) - P),"-px/(pz-p0)= %1.6f"%(-H13.bunch.px(i)/(H13.bunch.pz(i) - P)),"d= %1.6f"%(abs(H13.bunch.px(i)+2.6*(H13.bunch.pz(i) - P))/math.sqrt(1+2.6*2.6))],0.15,res_dir+data_name+"%i.dat"%(i*size+rank),res_dir+pic_name+"%i.png"%(i*size+rank))
+     PlotPopl([3,1],["eff= %1.6f"%popi],0.15,res_dir+data_name+"%i.dat"%(i*size+rank),res_dir+pic_name+"%i.png"%(i*size+rank))
      os.remove(res_dir+data_name+"%i.dat"%(i*size+rank))
-"""
+
 #-----------------------Slide show------------------------------------------
 
 
