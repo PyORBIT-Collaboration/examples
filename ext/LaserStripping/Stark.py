@@ -14,7 +14,7 @@ class Stark_calc:
     
     
 
-    def __init__(self,_n1, _n2, _m, _point1, _err_exp):
+    def __init__(self,_n1, _n2, _m, point_ground_state, _err_exp):
         
         mp.prec = 10000
         self.n1 = _n1
@@ -22,17 +22,17 @@ class Stark_calc:
         self.m = abs(_m)
         self.n = _n1 + _n2 + abs(_m) + 1
         self.Energy = fdiv(-1,2*self.n*self.n)
-        self.Gamma = mpf(0)
+        self.Gamma = mpf("0")
         self.Z1 = mpc(fdiv(2*(2*n1 + abs(m) + 1), self.n), 0)
         self.Z2 = fsub(4,self.Z1)
         self.F = mpf(0)
-        self.a = Functions(n1, n2, m, point1,_err_exp)
+        self.a = Functions(n1, n2, m, self.def_point(point_ground_state),_err_exp)
         self.err_exp = _err_exp
 
 
 
 
-    def def_point1(self, p1_for_ground):
+    def def_point(self, p1_for_ground):
 
         
         level0 = exp(p1_for_ground*p1_for_ground*mpf("-0.5"))*sqrt(p1_for_ground)
@@ -51,8 +51,42 @@ class Stark_calc:
         comp = mpc(line[0], line[1])
 #        print "args= ",nstr(re(self.Z1),20),nstr(im(self.Z1),20),"copm= ",nstr(fabs(comp),20)
         return fabs(comp)
-       
+    
+    
+    def defr_parameters_forF(self):
+        
+        mp.prec = self.a.calcPrecisionForM(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z1))+" "+ str(im(self.Z1))+")")
+        self.find_Z1()
+        self.Z2 = fsub(4,b.Z1)
+        self.a.calcPrecisionForN(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z2))+" "+ str(im(self.Z2))+")")
+        
+        return
 
+
+    
+    def def_start_EG(self):
+        
+        n1 = self.n1
+        n2 = self.n2
+        m = self.m
+        n = self.n
+        F = self.F
+        
+        self.Energy = (
+        -fdiv(1,2)/(n*n)
+        +F*fdiv(3,2)*n*(n1-n2)
+        -F*F*fdiv(1,16)*power(n,4)*(17*n*n-3*(n1-n2)*(n1-n2)-9*m*m+19)
+        +F*F*F*fdiv(3,32)*power(n,7)*(n1-n2)*(23*n*n-(n1-n2)*(n1-n2)+11*m*m+39)
+        -F*F*F*F*fdiv(1,1024)*power(n,10)*(5487*power(n,4)+35182*n*n+(5754-1134*m*m+1806*n*n)*(n1-n2)*(n1-n2)-549*m*m*m*m-3402*n*n*m*m+147*power(n1-n2,4)-8622*m*m+16211)
+        +F*F*F*F*F*fdiv(3,1024)*power(n,13)*(n1-n2)*(10563*n*n*n*n+90708*n*n+(n1-n2)*(n1-n2)*(220*m*m+98*n*n+780)+772*n*n*m*m-21*power(n1-n2,4)+725*m*m*m*m+830*m*m+59293)
+        )
+        
+        R = power(-2*self.Energy,fdiv(3,2))/F
+        
+        self.Gamma = power(4*R,2*n2+m+1)/(n*n*n*fac(n2)*fac(n2+m))*exp(-2*R/3-(n*n*n*F/4)*(34*n2*n2+34*n2*m+46*n2+7*m*m+23*m+fdiv(53,3)))
+       
+        return
+             
     
 
     def find_Z1(self):
@@ -71,23 +105,27 @@ class Stark_calc:
         self.Energy = args[0]
         self.Gamma = args[1]
         
-#        mp.prec = self.a.calcPrecisionForM(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z1))+" "+ str(im(self.Z1))+")")
-#        self.find_Z1()
-        self.Z1 = mpc(fdiv(2*(2*n1 + abs(m) + 1), self.n), 0)
+        
+        self.find_Z1()
         self.Z2 = fsub(4,self.Z1)
-        print "flag"
-        N_prec, N, derN = self.a.getN(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z2))+" "+ str(im(self.Z2))+")")
-#        print "mp.prec, N_prec = ",mp.prec, N_prec
-#        a_prec, a, der_a = self.a.get_a(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z2))+" "+ str(im(self.Z2))+")")
-#        print "mp.prec, a_prec = ",mp.prec, a_prec
-#        b_prec, b, der_b = self.a.get_b(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z2))+" "+ str(im(self.Z2))+")")
-#        print "mp.prec, b_prec = ",mp.prec, b_prec
+        par = self.a.getB(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z2))+" "+ str(im(self.Z2))+")")
+        line =  par.replace("(","").replace(")","").rsplit(" ")
+        B = mpc(line[0], line[1])
+        print  "E = ",nstr(self.Energy,30),"   G = ",nstr(self.Gamma,30),"  B = ",nstr(B,30),"  absB = ",nstr(fabs(B),30)
         
-        print N, derN
-#        print a, der_a
-#        print b, der_b
+        return fabs(B)
+    
+    
+    
+    
+    def find_EG(self):
         
+        s = Simplex(self.absB, [self.Energy, self.Gamma], [mpf("1e-2"),mpf("1e-2")])
+        (values, err, iter) = s.minimize(mpf("1e-50"), 10000000,0)
+
         return 
+
+    
         
             
 
@@ -96,9 +134,9 @@ class Stark_calc:
 
 
 n1 = 0
-n2 = 0
-m = 0
-point1 = 20
+n2 = 1
+m = 1
+point_gs = 10
 err_exp = 0
 
 
@@ -107,18 +145,20 @@ err_exp = 0
 
 
 
-mp.prec = 10000
+
+
+
+b = Stark_calc(n1, n2, m, point_gs,err_exp)
+
+
+b.F = mpf("5.5e-3")
+b.def_start_EG()
+b.defr_parameters_forF()
+b.find_EG()
 
 
 
 
-b = Stark_calc(n1, n2, m, point1,err_exp)
-b.F = mpf("1e-4")
-
-
-
-
-b.absB([b.Energy, b.Gamma])
 
 
 print "mp.dps =",mp.dps
