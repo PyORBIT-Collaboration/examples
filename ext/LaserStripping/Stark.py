@@ -17,6 +17,7 @@ class Stark_calc:
     def __init__(self,_n1, _n2, _m, point_ground_state, _err_exp):
         
         mp.prec = 10000
+        self.minG = mpf("1e-50")
         self.n1 = _n1
         self.n2 = _n2
         self.m = abs(_m)
@@ -30,11 +31,17 @@ class Stark_calc:
         self.err_exp = _err_exp
         self.array_E = []
         self.array_G = []
-        self.pass_calc = True
-        self.step_E = 0
-        self.step_G = 0
+        self.calc = 0
+        self.step_E = mpf("0.0")
+        self.step_G = mpf("0.0")
+        self.countE = 0
         self.tempE = mpf("1e100")
         self.tempG = mpf("1e100")
+        self.err_G = mpf("1e-20")
+        self.err_E = mpf("1e-20")
+        self.err_G_out = mpf("1e-20")
+        self.err_E_out = mpf("1e-20")
+        
 
 
 
@@ -64,6 +71,7 @@ class Stark_calc:
         
         self.tempE = mpf("1e100")
         self.tempG = mpf("1e100")
+        self.countE = 0
         
         mp.prec = self.a.calcPrecisionForM(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z1))+" "+ str(im(self.Z1))+")")
         self.find_Z1()
@@ -97,81 +105,113 @@ class Stark_calc:
             R = power(-2*self.Energy,fdiv(3,2))/F
             self.Gamma = power(4*R,2*n2+m+1)/(n*n*n*fac(n2)*fac(n2+m))*exp(-2*R/3-(n*n*n*F/4)*(34*n2*n2+34*n2*m+46*n2+7*m*m+23*m+fdiv(53,3)))
         
-        self.step_E = fabs((self.Energy + fdiv(1,2)/(n*n))/100)
-        self.step_G = fabs(self.Gamma/100)
+        
+        self.step_E = fabs(-fdiv(1,2)/(n*n) - self.Energy)*mpf("1e-10") 
+        self.err_E = (fdiv(1,2)/(n*n))*mpf("1e-20")
+        self.err_E_out = (fdiv(1,2)/(n*n))*mpf("1e-20")
+        
+        self.step_G = self.Gamma/10
+        self.err_G = self.Gamma*mpf("1e-15") 
+        self.err_G_out = self.Gamma*mpf("1e-15")
        
         return
     
     
+
     
-    
-    
-    def predict_EG(self):
+    def predict_E(self,k):
         
-        k = 100
         
         n = len(self.array_E)
         m = min(n,k)
         self.Energy = 0
         for i in range(0,m):
             self.Energy += power(-1,m+i+1)*fac(m)/(fac(m-i)*fac(i))*self.array_E[i+n-m]
+            
+        
+        n = len(self.array_E) - 1
+        m = min(n,k)
+        self.step_E = 0
+        for i in range(0,m):
+            self.step_E += power(-1,m+i+1)*fac(m)/(fac(m-i)*fac(i))*self.array_E[i+n-m]
+        self.step_E = fabs(self.step_E - self.array_E[n]) 
+        
+        self.err_E = self.step_E*mpf("1e-5")
+        self.err_E_out = (fdiv(1,2)/(self.n*self.n))*mpf("1e-20")
+        
 
+        print  "Epred = ",nstr(self.Energy,100),"   step_E = ",nstr(self.step_E,10),"   err_E = ",nstr(self.err_E,10)
 
+        return
+          
+ 
+ 
+ 
+          
+             
+    def predict_G(self,k):
+        
+        
         n = len(self.array_G)
         m = min(n,k)
         sumG = 0
         for i in range(0,m):
-            sumG += power(-1,m+i+1)*fac(m)/(fac(m-i)*fac(i))*log(self.array_G[i+n-m])
+            sumG += power(-1,m+i+1)*fac(m)/(fac(m-i)*fac(i))*log(self.array_G[i+n-m],10)
             
-        self.Gamma = exp(sumG)
+        self.Gamma = power(10,sumG)
+
+
+        n = len(self.array_G) - 1
+        m = min(n,k)
+        predn = 0
+        for i in range(0,m):
+            predn += power(-1,m+i+1)*fac(m)/(fac(m-i)*fac(i))*log(self.array_G[i+n-m],10)
+        predn = power(10,predn)
+        
+        self.step_G = self.Gamma*fabs(predn - self.array_G[n])/self.array_G[n]
+        
+        self.err_G = self.step_G*mpf("1e-5")
+        self.err_G_out = self.Gamma*mpf("1e-15")
+        
+        print  "Gpred = ",nstr(self.Gamma,100),"   step_G = ",nstr(self.step_G,10),"   err_G = ",nstr(self.err_G,10)
 
         return
              
              
              
+             
     
     def initialEG(self):
-    
-        
-        if(len(self.array_G)==1):
-            if(self.array_G[0]==mpf("0.0")):
-                self.array_G.pop(0)
-        
-        if(len(self.array_G)>1):
-            if(self.array_G[1]/self.array_G[0] > mpf("1e10")):
-                self.array_G.pop(0)
-                
-        
-        if(self.pass_calc or (len(self.array_E)<5) or (len(self.array_G)<5)):
+         
+        if (self.calc == 0 or self.calc == 1 or len(self.array_E)<5 or len(self.array_G)<5):
             self.def_start_EG()
-            print "Epred_an = ", self.Energy, "  Gpred_an = ", self.Gamma, "  dE_an = ",self.step_E,"  dG_an = ",self.step_G
+      
+   
+        
+        if ((self.calc == 1 or self.calc == 2) and len(self.array_E)>4):
+            
+            min = mpf("1e100000")
+            for k in range(3,100):
+                self.predict_E(k)
+                if (self.step_E < min):
+                    min = self.step_E
+                    k_min = k
+                    
+            self.predict_E(k_min)
+     
+        if (self.calc == 2 and len(self.array_G)>4):
 
-        else:
-
-            real_last_E = self.array_E[len(self.array_E)-1]
-            real_last_G = self.array_G[len(self.array_G)-1]
             
-            self.array_E.pop(len(self.array_E)-1)
-            self.array_G.pop(len(self.array_G)-1)
-            
-            self.predict_EG()
-            
-            predicted_last_E = self.Energy
-            predicted_last_G = self.Gamma
-            
-            self.array_E.append(real_last_E)
-            self.array_G.append(real_last_G)
-            
-            self.predict_EG()
-            
-            next_predicted_E = self.Energy
-            next_predicted_G = self.Gamma         
-                        
-            self.step_E = fabs(next_predicted_E*(real_last_E - predicted_last_E)/real_last_E)/10
-            self.step_G = fabs(next_predicted_G*(real_last_G - predicted_last_G)/real_last_G)/10    
-            
-            print "Epred = ", self.Energy, "  Gpred = ", self.Gamma, "  dE = ",self.step_E,"  dG = ",self.step_G
-    
+            min = mpf("1e100000")
+            for k in range(3,100):
+                self.predict_G(k)
+                if (self.step_G < min):
+                    min = self.step_G
+                    k_min = k
+                    
+            self.predict_G(k_min)
+          
+                 
         return
 
 
@@ -184,6 +224,7 @@ class Stark_calc:
         s = Simplex(self.absM, [re(self.Z1), im(self.Z1)], [mpf("1e-5"),mpf("1e-5")])
         (values, err, iter) = s.minimize(power(10,self.err_exp), 10000000,0)
         self.Z1 = mpc(values[0], values[1])
+        
         return 
 
     
@@ -191,7 +232,6 @@ class Stark_calc:
         
     def absB(self,args):
         
-        err_GE = mpf("1e-20")
         
         self.Energy = args[0]
         self.Gamma = args[1]
@@ -202,21 +242,64 @@ class Stark_calc:
         par = self.a.getB(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z2))+" "+ str(im(self.Z2))+")")
         line =  par.replace("(","").replace(")","").rsplit(" ")
         B = mpc(line[0], line[1])
-#        print  "E = ",nstr(self.Energy,30),"   G = ",nstr(self.Gamma,30),"  B = ",nstr(B,30),"  absB = ",nstr(fabs(B),30)
+        print  "E = ",nstr(self.Energy,70),"   G = ",nstr(self.Gamma,50),"  absB = ",nstr(fabs(B),30)
         
-        if((fabs((self.tempE - self.Energy)/self.Energy) < err_GE) and (fabs((self.tempG - self.Gamma)/self.Gamma) < err_GE)):
-            return mpf("1e-1000000")
+        
+
+        errEG = min(max(self.err_E,self.err_G),min(self.err_E_out,self.err_G_out))
+
+        if((fabs(self.tempE - self.Energy) < errEG) and (fabs(self.tempG - self.Gamma) < errEG)):
+            self.countE += 1
         else:
-#            print fabs((self.tempE - self.Energy)/self.Energy)
-#            print fabs((self.tempG - self.Gamma)/self.Gamma)
+            self.countE = 0
+            
+            
+            
+        if (self.countE > 4):
+            return mpf("1e-1000000000")
+        else:
             
             self.tempE = self.Energy
             self.tempG = self.Gamma
 
             
             return fabs(B)
+        
+        
+        
+  
+  
     
+    def absB0(self,args):
+        
+        
+        self.Energy = args[0]        
+        
+        self.find_Z1()
+        self.Z2 = fsub(4,self.Z1)
+        par = self.a.getB(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z2))+" "+ str(im(self.Z2))+")")
+        line =  par.replace("(","").replace(")","").rsplit(" ")
+        B = mpc(line[0], line[1])
+        print  "E = ",nstr(self.Energy,100),"   G = ",nstr(self.Gamma,10),"absB = ",nstr(fabs(B),10)
+        
+        if(fabs(self.tempE - self.Energy) < min(self.err_E,self.err_E_out)):
+            self.countE += 1
+        else:
+            self.countE = 0
+            
+            
+            
+        if (self.countE > 4):
+            return mpf("1e-1000000000")
+        else:
+            
+            self.tempE = self.Energy
+
+            
+            return fabs(B)
     
+  
+        
     
     
     def find_EG(self):
@@ -224,18 +307,49 @@ class Stark_calc:
         Ein = self.Energy
         Gin = self.Gamma
         
-        s = Simplex(self.absB, [self.Energy, self.Gamma], [self.step_E,self.step_G])
-        (values, err, iter) = s.minimize(mpf("1e-10000"), 10000000,0)
-
-        self.pass_calc = (err==mpf("0.0"))
-        
-        if (self.pass_calc):
-            self.Energy = Ein
-            self.Gamma = Gin
+        if (self.calc==0 or self.calc==1):
+            s = Simplex(self.absB0, [self.Energy], [self.step_E])
+        if (self.calc == 2):
+            step = max(self.step_E,self.step_G)
+            s = Simplex(self.absB, [self.Energy, self.Gamma], [step,step])
             
-        self.array_E.append(self.Energy)
-        self.array_G.append(self.Gamma)
+        (values, err, iter) = s.minimize(mpf("1e-1000000"), 10000000,0)
+
+
+
+ 
+        if(err == mpf("0.0")):
+            self.calc = 0
+            
+        if((err > mpf("0.0")) and (self.Gamma < min(self.step_E,self.minG))):
+            self.calc = 1  
+  
+  
+            
+        if(self.calc == 0):
+            self.Energy = Ein  
+               
+        if(self.calc == 1 or self.calc == 2):
+            self.array_E.append(self.Energy)
+            
+               
+
+            
+        if(self.calc == 2):
+            self.array_G.append(self.Gamma)
         
+        if(((err > mpf("0.0")) and (self.Gamma > min(self.step_E,self.minG))) or len(self.array_G) > 0):
+            self.calc = 2
+              
+              
+              
+              
+                 
+          
+            
+
+            
+
         return 
 
     
@@ -263,7 +377,7 @@ b = Stark_calc(n1, n2, m, point_gs,err_exp)
 
 
 
-for i in range(1,300):
+for i in range(1,30000):
     b.F = i*mpf("1.0e-5")
     b.defr_parameters_forF()
     b.initialEG()
@@ -276,7 +390,7 @@ for i in range(1,300):
 #    self.a.calcPrecisionForN(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z2))+" "+ str(im(self.Z2))+")")
         
     
-    print "F = ", b.F, "  Energy = ",b.Energy,"  G = ",b.Gamma,"  pass_calc = ", b.pass_calc
+    print "F = ", b.F, "  Energy = ",b.Energy,"  Gamma = ",b.Gamma,"  calc = ", b.calc
 
 
 """
