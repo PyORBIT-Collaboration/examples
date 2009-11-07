@@ -14,7 +14,8 @@ class Stark_calc:
     
     
 
-    def __init__(self,_n1, _n2, _m, point_ground_state, _err_exp):
+    def __init__(self,_n1, _n2, _m, point_ground_state):
+        
         
         mp.prec = 10000
         self.minG = mpf("1e-50")
@@ -27,8 +28,8 @@ class Stark_calc:
         self.Z1 = mpc(fdiv(2*(2*n1 + abs(m) + 1), self.n), 0)
         self.Z2 = fsub(4,self.Z1)
         self.F = mpf(0)
-        self.a = Functions(n1, n2, m, self.def_point(point_ground_state),_err_exp)
-        self.err_exp = _err_exp
+        self.err_exp = int(-point_ground_state*point_ground_state*0.22)
+        self.a = Functions(n1, n2, m, self.def_point(point_ground_state),self.err_exp)
         self.array_E = []
         self.array_G = []
         self.calc = 0
@@ -41,7 +42,6 @@ class Stark_calc:
         self.err_E = mpf("1e-20")
         self.err_G_out = mpf("1e-20")
         self.err_E_out = mpf("1e-20")
-        
 
 
 
@@ -49,9 +49,9 @@ class Stark_calc:
     def def_point(self, p1_for_ground):
 
         
-        level0 = exp(p1_for_ground*p1_for_ground*mpf("-0.5"))*sqrt(p1_for_ground)
+        level0 = exp(p1_for_ground*p1_for_ground*mpf("-0.5"))
         for i in range(100,0,-1):            
-            level = exp(i*i*mpf("-0.5")/self.n)*sqrt(i)*power(i,self.m)*hyp1f1(-self.n1, 1 + self.m, fdiv(i*i,self.n))
+            level = exp(i*i*mpf("-0.5")/self.n)*power(i,self.m)*hyp1f1(-self.n1, 1 + self.m, fdiv(i*i,self.n))
             if (abs(level)>level0):
                 break
         return i + 1
@@ -170,6 +170,13 @@ class Stark_calc:
         
         self.step_G = self.Gamma*fabs(predn - self.array_G[n])/self.array_G[n]
         
+#           predn += power(-1,m+i+1)*fac(m)/(fac(m-i)*fac(i))*self.array_G[i+n-m]
+        
+#        self.step_G = fabs(predn - self.array_G[n])
+   
+   
+   
+        
         self.err_G = self.step_G*mpf("1e-5")
         self.err_G_out = self.Gamma*mpf("1e-15")
         
@@ -191,7 +198,7 @@ class Stark_calc:
         if ((self.calc == 1 or self.calc == 2) and len(self.array_E)>4):
             
             min = mpf("1e100000")
-            for k in range(3,100):
+            for k in range(3,50):
                 self.predict_E(k)
                 if (self.step_E < min):
                     min = self.step_E
@@ -203,7 +210,7 @@ class Stark_calc:
 
             
             min = mpf("1e100000")
-            for k in range(3,100):
+            for k in range(3,20):
                 self.predict_G(k)
                 if (self.step_G < min):
                     min = self.step_G
@@ -355,16 +362,12 @@ class Stark_calc:
     
         
             
-#E =  -0.0609859323708186145609132465066    G =  0.00000201579857103347930193967475202   B =  (5.06916915324052272960434397358e-37 - 3.31449855012918010253005911196e-37j)   absB =  6.05659776962063704430148146337e-37
-    
+#E =  -0.05781083227125316738198518602142952673193689846288988423955944892760499    G =  2.3136750176682740221189273589186507538316971014424e-35   absB =  3.80067562773874093620237843864e-59
 
 
 
-n1 = 0
-n2 = 0
-m = 0
+(n1,n2,m) = (0,2,0)
 point_gs = 10
-err_exp = -50
 
 
 
@@ -373,12 +376,13 @@ err_exp = -50
 
 
 
-b = Stark_calc(n1, n2, m, point_gs,err_exp)
+
+b = Stark_calc(n1, n2, m, point_gs)
 
 
 
-for i in range(1,30000):
-    b.F = i*mpf("1.0e-5")
+for i in range(200,30000):
+    b.F = i*mpf("1.0e-6")
     b.defr_parameters_forF()
     b.initialEG()
     b.find_EG()
@@ -391,7 +395,7 @@ for i in range(1,30000):
         
     
     print "F = ", b.F, "  Energy = ",b.Energy,"  Gamma = ",b.Gamma,"  calc = ", b.calc
-
+    print "Z1 = ",b.Z1
 
 """
 d = mpf("0.001")
