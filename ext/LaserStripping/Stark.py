@@ -349,18 +349,37 @@ class Stark_calc:
             self.calc = 2
               
               
-              
-              
-                 
-          
-            
-
-            
-
         return 
 
     
+
+
+
+
+class WaveFunc:
+    
+    def __init__(self,_n1, _n2, _m, _muM, _nuN,str_Energy,str_Gamma,str_reZ1, str_imZ1, str_F):
         
+        mp.dps = max(200,len(str_Energy),len(str_Gamma),len(str_reZ1),len(str_imZ1),len(str_F))       
+        self.psi = WaveFunction(_n1,_n2,_m,_muM,_nuN,"("+str_Energy+" "+ str(mpf(str_Gamma)*mpf("-0.5"))+")", "("+str_reZ1+" "+str_imZ1+")",str_F)
+        self.mode = self.psi.getMode()
+        
+    
+    def M(self,mu):
+        par = self.psi.M(str(mu))
+        line =  par.replace("(","").replace(")","").rsplit(" ")
+     
+        return mpc(line[0], line[1])
+    
+    def N(self,nu):
+        
+        par = self.psi.N(str(nu))
+        line =  par.replace("(","").replace(")","").rsplit(" ")
+     
+        return mpc(line[0], line[1])
+
+    
+             
             
 #E =  -0.05781083227125316738198518602142952673193689846288988423955944892760499    G =  2.3136750176682740221189273589186507538316971014424e-35   absB =  3.80067562773874093620237843864e-59
 
@@ -375,7 +394,7 @@ point_gs = 10
 
 
 
-
+"""
 
 b = Stark_calc(n1, n2, m, point_gs)
 
@@ -386,54 +405,46 @@ for i in range(200,30000):
     b.defr_parameters_forF()
     b.initialEG()
     b.find_EG()
-
-#    b.F = 10*mpf("1.0e-5")
-#    mp.prec = b.a.calcPrecisionForM(str(b.F),"("+str(b.Energy)+" "+ str(b.Gamma*mpf("-0.5"))+")", "("+str(re(b.Z1))+" "+ str(im(b.Z1))+")")
-#    b.find_Z1()
-#    self.Z2 = fsub(4,b.Z1)
-#    self.a.calcPrecisionForN(str(self.F),"("+str(self.Energy)+" "+ str(self.Gamma*mpf("-0.5"))+")", "("+str(re(self.Z2))+" "+ str(im(self.Z2))+")")
-        
     
     print "F = ", b.F, "  Energy = ",b.Energy,"  Gamma = ",b.Gamma,"  calc = ", b.calc
     print "Z1 = ",b.Z1
 
-"""
-d = mpf("0.001")
 
-k = 100
-for i in range(0,k):
-    b.F = d*i
-    b.initialEG()
-    b.array_E.append(b.Energy)
-    b.array_G.append(b.Gamma)
-    
-
-
-b.F = d*k
-b.initialEG()
-
-#print "real = ",b.Energy
-print "real = ",b.Gamma
-
-b.pass_calc = False
-b.initialEG()
-    
-#print "pred = ",b.Energy
-print "pred = ",b.Gamma
-print "err  = ", b.step_G
-
-#for i in range(0,k-5):
-#    print b.array_G[i]
 """
 
 
 
-print "mp.dps =",mp.dps
-
-
-#print b.def_point1(10)
 
 
 
-#(2.000001999995500022249843345128907569821710508245174093240455103836507433670436765193680160603367165824627094388
+
+
+Energy =  "-0.078388135826455327502725226063798950806113275840260409954515146743327933756257367540920760951273929093889694278127628746102"   
+Gamma =  "0.0040161803800431632763025263340667207336114464420696927055098670080233581163098292671367803013726018619806251669267026763723"
+
+reZ1 =  "0.81585842928137492019582005646046483363587645751078955361133176141506139098267257422827215926748915548775364335273016790713"
+imZ1 =  "0.0095842521743217275590859123877076904119081589055758509138914523361076743965651584238851399334901989887306579877705173570832"
+
+F = "0.002"
+
+
+a = WaveFunc(0,2,0,18,46,Energy,Gamma,reZ1,imZ1,F)
+
+print "mode = ", a.mode
+
+print a.M(mpf("-1"))
+print a.M(mpf("0"))
+print a.M(mpf("10"))
+print a.M(mpf("18"))
+print a.M(mpf("18.5"))
+
+print a.N(mpf("-1"))
+print a.N(mpf("0"))
+print a.N(mpf("22"))
+print a.N(mpf("23"))
+print a.N(mpf("24"))
+
+print a.N(mpf("50"))
+print a.N(mpf("50.00001"))
+print a.N(mpf("51"))
 
