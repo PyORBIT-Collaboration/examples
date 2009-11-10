@@ -40,13 +40,18 @@ class ExternalEffects(PyExternalEffects):
 	def finalizeEffects(self,bunch):
 		pass		
 		
-	def applyEffects(self,bunch, index, inVct, outVct, t, t_step, field_source, tracker):
+	def applyEffects(self,bunch, t, t_step, field_source, tracker):
 		(x,y,z) = (bunch.x(0),bunch.y(0),bunch.z(0))
 		self.trajectoryXYArr.append([x,z])
 		print " %5d "%self.count," %8.6f  %8.6f  %8.6f "%(x,y,z)
 		self.count = self.count + 1
 		pass
 		
+	def applyEffectsForEach(self,bunch, index, inVct, outVct, t, t_step, field_source, tracker):
+		print "  macro-part. index = %5d "%index
+		self.count = self.count + 1
+		pass
+	
 print "Start."
 
 
