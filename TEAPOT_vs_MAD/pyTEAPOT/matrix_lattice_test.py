@@ -17,8 +17,8 @@ from orbit.teapot import teapot
 from orbit.teapot import TEAPOT_Lattice
 from orbit.teapot import BaseTEAPOT
 from orbit.teapot import RingRFTEAPOT
-from orbit.teapot import MATRIX_Lattice
-from orbit.teapot import BaseMATRIX
+from orbit.teapot import TEAPOT_MATRIX_Lattice
+from orbit.matrix_lattice import BaseMATRIX
 from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 from orbit_utils import Matrix
 from bunch import Bunch
@@ -43,7 +43,7 @@ Tkin = 1.0
 bunch = Bunch()
 bunch.getSyncParticle().kinEnergy(Tkin)
 
-matrix_lattice = MATRIX_Lattice(teapot_latt,bunch)
+matrix_lattice = TEAPOT_MATRIX_Lattice(teapot_latt,bunch)
 print "Lattice=",matrix_lattice.getName()," matrix lattice length [m] =",matrix_lattice.getLength()
 
 one_turn_matrix = matrix_lattice.getOneTurnMatrix()
