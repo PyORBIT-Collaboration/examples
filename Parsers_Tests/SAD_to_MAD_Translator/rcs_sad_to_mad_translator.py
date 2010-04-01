@@ -256,6 +256,7 @@ sad_file_name = sys.argv[1]
 mad_file_name = sys.argv[2]
 
 line_name = "RING"
+
 if(len(sys.argv) == 4):
 	line_name = sys.argv[3]
 
@@ -291,7 +292,13 @@ if(not parser.getSAD_LinesDict().has_key(line_name)):
 	sys.exit(1)
 lineRING = parser.getSAD_LinesDict()[line_name]
 
+print "debug -------------------------------------------------------main-------------"
 elemsRING = lineRING.getElements()
+
+#for elem in elemsRING:
+#	print "debug elem=",elem.getName()
+	
+#sys.exit(1)
 
 L = 0.
 for elem in elemsRING:
@@ -326,7 +333,12 @@ for key in k1_values.keys():
 	varName = quads[0].getName()[0:3]+"K1"
 	val = math.fabs(quads[0].getParameter("K1"))
 	mad_file.write(varName+" := "+str(val)+" \n")
+	#we want to go through the element only once
+	quad_tmp_dict = {}
 	for quad in quads:
+		quad_tmp_dict[quad] = quad
+	for quad_key in quad_tmp_dict.keys():
+		quad = quad_tmp_dict[quad_key]	
 		k1 = quad.getParameter("K1")
 		if(k1 >= 0.):
 			quad.getParameters()["K1"] = varName
