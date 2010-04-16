@@ -3,11 +3,11 @@ import sys,os
 #import python XML DOM parser
 import xml.dom.minidom
 
-# import the function that creates multidimensional arrays
+# import pyORBIT Python utilities classes for objects with names, types, and dictionary parameters
 from orbit.utils import orbitFinalize
 from orbit.utils   import NamedObject, TypedObject, ParamsDictObject
 
-class LinacNode(NamedObject, TypedObject, ParamsDictObject):
+class LinacStuctNode(NamedObject, TypedObject, ParamsDictObject):
 	"""
 	The node that keeps the information from xml file.
 	Parameters includes position length and others type dependent.
@@ -18,9 +18,9 @@ class LinacNode(NamedObject, TypedObject, ParamsDictObject):
 		ParamsDictObject.__init__(self)		
 
 		
-class LinacSeq(	NamedObject, TypedObject, ParamsDictObject):
+class LinacStructSeq(	NamedObject, TypedObject, ParamsDictObject):
 	"""	
-	The linac sequence. It includes the LinacNodes. It has the length parameter
+	The linac sequence. It includes the LinacStuctNodes. It has the length parameter
 	"""
 	def __init__(self, name = "None"):
 		NamedObject.__init__(self,name)
@@ -30,8 +30,8 @@ class LinacSeq(	NamedObject, TypedObject, ParamsDictObject):
 		self.setParam("length",0.)
 		
 	def addNode(self,node):
-		if(not isinstance(node,LinacNode)):
-			msg = "LinacSeq: cannot add node. It is not LinacNode instance!"
+		if(not isinstance(node,LinacStuctNode)):
+			msg = "LinacStructSeq: cannot add node. It is not LinacStuctNode instance!"
 			msg = msg + os.linesep
 			msg = msg + "========================================="
 			msg = msg + os.linesep
@@ -44,9 +44,9 @@ class LinacSeq(	NamedObject, TypedObject, ParamsDictObject):
 	def getLength(self):
 		return self.getParam("length")
 
-class LinacTree(NamedObject, TypedObject, ParamsDictObject):
+class LinacStructTree(NamedObject, TypedObject, ParamsDictObject):
 	"""	
-	The linac lattice. It includes set of LinacSeq.
+	The linac lattice. It includes set of LinacStructSeq.
 	"""
 	def __init__(self, name = "None"):
 		NamedObject.__init__(self,name)
@@ -56,8 +56,8 @@ class LinacTree(NamedObject, TypedObject, ParamsDictObject):
 		self.length = 0.
 		
 	def addSeq(self,node):
-		if(not isinstance(node,LinacSeq)):
-			msg = "LinacTree: cannot add node. It is not LinacSeq instance!"
+		if(not isinstance(node,LinacStructSeq)):
+			msg = "LinacStructTree: cannot add node. It is not LinacStructSeq instance!"
 			msg = msg + os.linesep
 			msg = msg + "========================================="
 			msg = msg + os.linesep
@@ -88,10 +88,10 @@ class SimplifiedLinacParser:
 			msg = msg + os.linesep
 			orbitFinalize(msg)		
 		self.domLinac = self.dom_doc.childNodes[0]
-		self.linacTree = LinacTree(name = self.domLinac.localName)		
+		self.linacTree = LinacStructTree(name = self.domLinac.localName)		
 		domSequences = self._stripDOMtoElements(self.domLinac)
 		for domSeq in domSequences:
-			linacSeq = LinacSeq(name = domSeq.localName)
+			linacSeq = LinacStructSeq(name = domSeq.localName)
 			seqParamDict = {}
 			for i in range(domSeq.attributes.length):
 				seqParamDict[domSeq.attributes.item(i).name] = domSeq.attributes.item(i).value
@@ -116,7 +116,7 @@ class SimplifiedLinacParser:
 						paramDict[domParameter.attributes.item(i).name] = domParameter.attributes.item(i).value
 				nodeName = paramDict["name"]
 				del paramDict["name"]			
-				linacNode = LinacNode(name = nodeName)
+				linacNode = LinacStuctNode(name = nodeName)
 				if(paramDict.has_key("type")):
 					linacNode.setType(type_in = paramDict["type"])
 					del paramDict["type"]
@@ -138,7 +138,10 @@ class SimplifiedLinacParser:
 				domChildren.append(child)
 		return domChildren	
 
-	def getLinacTree(self):
+	def getLinacStructTree(self):
+		"""
+		Returns the linac structure tree. It will be used to build the linac accelerator lattice.
+		"""
 		return self.linacTree
 
 
@@ -146,7 +149,7 @@ class SimplifiedLinacParser:
 
 
 parser = SimplifiedLinacParser("sns_linac.xml")
-linacTree = parser.getLinacTree()
+linacTree = parser.getLinacStructTree()
 print "Total length=",linacTree.getLength()
 sys.exit(1)
 
