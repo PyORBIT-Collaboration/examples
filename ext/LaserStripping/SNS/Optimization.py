@@ -14,7 +14,7 @@ from ext.las_str.SchredingerFuncMod import SchredingerFunc
 from ext.las_str.SimplexMod import Simplex
 from ext.las_str.part_generator import BunchGen
 from ext.las_str.print_mod import printf
-
+from ext.las_str.emittance import Freq_spread
 
 
 time_start = orbit_mpi.MPI_Wtime()
@@ -26,12 +26,11 @@ orbit_path = os.environ["ORBIT_ROOT"]
 
 
 
-
 #----------------------Beginning of the beam parameters----------------------#
 
 b = BunchGen()
 
-b.N_part = 25
+b.N_part = 250
 
 b.TK= 1.0                                    # [GeV]
 
@@ -66,18 +65,17 @@ b.cutOffZ = 3*b.sigma_beam
 #----------------------Beginning of the Laser field and excitation parameters of H0 atom----------------------#
 
 
-H13 = SchredingerFunc(orbit_path+"/ext/laserstripping/transitions/",3,300)
+H13 = SchredingerFunc(1)
 
-H13.method = 2
-
-
+H13.Bx = 2.1
 
 
 
 
 
-H13.Bx = 0.005e-3    
-H13.fS = ConstEMfield(0.,0.,0.,H13.Bx,0.,0.)                                   # [T]
+
+#H13.Bx = 0.005e-3    
+#H13.fS = ConstEMfield(0.,0.,0.,H13.Bx,0.,0.)                                   # [T]
     
 #grad_B = 1.0                                    # [T/m]
 #H13.fS = QuadEMfield()
@@ -86,20 +84,21 @@ H13.fS = ConstEMfield(0.,0.,0.,H13.Bx,0.,0.)                                   #
 
 
 
+
+
+
+
+
 H13.bunch = b.getBunch(0)
 
-
-#f = open('bunch_parameters.txt','w')
-#for i in range(H13.bunch.getSize()):
-#    print >>f, i,"\t",(math.sqrt(H13.bunch.pz(i)*H13.bunch.pz(i) + H13.bunch.mass()*H13.bunch.mass()) - H13.bunch.mass() - 1),"\t",H13.bunch.x(i),"\t",H13.bunch.px(i)/H13.bunch.pz(i),"\t",H13.bunch.y(i),"\t",H13.bunch.py(i)/H13.bunch.pz(i)  
-#f.close()
-
+#H13.Nevol = 1000
+#H13.print_file = True
 
 H13.TK = b.TK
 H13.sigma_beam = b.sigma_beam
 
 H13.n_sigma = 3
-H13.n_step = 1000000
+H13.n_step = 1000
 
 H13.la = 355.0e-9                               # [m]
 H13.power = 2.2e6                               # [W]
@@ -115,11 +114,11 @@ H13.env_sigma = 55e-12/(2*math.sqrt(2*math.log(2)))  #[m]
 
 
 
-H13.rx = 1.69e-3                               # [m]
-H13.ry = 0.77e-3                               # [m]
+H13.rx = 0.7e-3                               # [m]
+H13.ry = 0.7e-3                               # [m]
 
-H13.ax = 0.36e-3                               # [rad]
-H13.ay = 0.24e-3                               # [rad]
+H13.ax = 0.3e-3                               # [rad]
+H13.ay = 0.3e-3                               # [rad]
 
 #----------------------End of the Laser field and excitation parameters of H0 atom----------------------#
 
@@ -128,59 +127,103 @@ H13.ay = 0.24e-3                               # [rad]
 
 
 
-#-------------------definition of the optimization function----------------------------#
-#pf = printf("optimiz.dat","N_part","cpu_time", "W[MW]", "wx[um]", "wy[um]", "fx[cm]", "fy[cm]", "Population", "+- Err")
-pf = printf("optimiz_sh1.0_test.dat","N_step","cpu_time", "W[MW]","rx[mm]", "ry[mm]", "ax[mrad]", "ay[mrad]", "Population", "+- pop", "P_ioniz", "+- P_ioniz")
+#-------------------list of parameters to be optimized----------------------------#
 
-#name_args, guess, increments = ['wx','wy'],[300.0e-6, 300.0e-6],[10e-6, 100e-6]
-#name_args, guess, increments  = ['wx','wy','fx'], [333.0e-6, 333.0e-6,-2.800], [10e-6, 100e-6,1.00]
-name_args, guess, increments  = ['rx','ry','ax','ay'], [0.7e-3,0.7e-3,0.3e-3,0.3e-3], [1.0e-4,1.0e-4,1.0e-5,1.0e-5]
-#name_args, guess, increments  = ['rx','ry','ax','ay'], [68.45e-3,0.377e-3,0.2e-3,0.2e-3], [1.0e-4,1.0e-4,1.0e-4,1.0e-4]
-#name_args, guess, increments  = ['wx','fx'], [370.0e-6, -4.500], [10e-6,1.00]
-#name_args, guess, increments  = ['wx','wy','fx','fy'], [300.6e-6, 300.6e-6,-2.0,-2.0], [10e-6, 10e-6,1.00,1.00]
+name_args,guess,increments,name_args_pr,print_factor = [],[],[],[],[]
 
+#name_args.append('env_sigma'),  guess.append(15.0e-12), increments.append(24.0e-13),name_args_pr.append('env_sigma[ps]'),print_factor.append(1e12)
+name_args.append('rx'),         guess.append(1.69e-3),   increments.append(1.0e-4),  name_args_pr.append('rx[mm]'),print_factor.append(1e3)
+name_args.append('ry'),         guess.append(0.77e-3),   increments.append(1.0e-4),  name_args_pr.append('ry[mm]'),print_factor.append(1e3)
+name_args.append('ax'),         guess.append(0.36e-3),   increments.append(1.0e-4),  name_args_pr.append('ax[mrad]'),print_factor.append(1e3)
+name_args.append('ay'),         guess.append(0.24e-3),   increments.append(1.0e-4),  name_args_pr.append('ay[mrad]'),print_factor.append(1e3)
+#name_args.append('Bx'),         guess.append(2.00),      increments.append(0.1),     name_args_pr.append('Bx[T]'),print_factor.append(1)
+
+pf = printf("test.dat",["N_step","cpu_time","W[MW]"] + name_args_pr + ["Popul", "+- Pop", "P_ioniz", "+- P_ioniz"])
+#-------------------list of parameters to be optimized----------------------------#
 
 
 #powers = [0.1e6, 0.2e6, 0.3e6, 0.4e6, 0.5e6, 0.6e6, 0.7e6, 0.8e6, 0.9e6, 1.0e6]
 #powers = [0.5e6]
 #powers = [0.1e6, 0.2e6, 0.3e6, 0.4e6, 0.5e6, 0.6e6, 0.7e6, 0.8e6, 0.9e6, 1.0e6, 1.1e6, 1.2e6, 1.3e6, 1.4e6, 1.5e6, 1.6e6, 1.7e6, 1.8e6, 1.9e6, 2.0e6]
 
-def opt_func(args):
+ne = 23
+powers = []
+for i in range(1,ne):
+    powers.append(i*0.1e6)
 
+def opt_func(args):
+    
+    em = []
     for i in range(len(args)):
         H13.__dict__[name_args[i]] = args[i]
-
-    H13.ay = 0
-        
+        em.append("")
+       
     
-    sum = 0
-    for N_p in range(len(powers)):
-        H13.power = powers[N_p]
-        pop, sigma_pop = H13.population()
-        sum += pop
-#        pf.fdata("","",H13.power/1.0e+6,"","","","",pop,sigma_pop)
-    H13.count += 1
-#    pf.fdata(H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver_0.1-1.0",1.0e+6*H13.wx,1.0e+6*H13.wy,H13.fx*100,H13.fy*100,sum/len(powers))
-    pf.fdata(H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver_0.1-2.0",1.0e+3*H13.rx,1.0e+3*H13.ry,1.0e+3*H13.ax,1.0e+3*H13.ay,sum/len(powers))
+    sum_ioniz = 0
+    sum_pop2 = 0
+    for i in range(ne-1):
+        H13.power = powers[i]
+#        H13.power = 3e6 
+        pop, sigma_pop, p_ioniz, sigma_p_ioniz = H13.population()
+        sum_ioniz += p_ioniz
+        sum_pop2 += pop
+        
+        pf.fdata(["","",H13.power/1.0e+6] + em + [pop,sigma_pop,p_ioniz, sigma_p_ioniz])
 
-    return -sum/len(powers)
+    H13.count += 1
+
+
+    pr_args = []
+    for i in range(len(args)):
+        pr_args.append(print_factor[i]*H13.__dict__[name_args[i]])
+    pf.fdata([H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver"] + pr_args + [sum_pop2/(ne - 1),sigma_pop,sum_ioniz/(ne - 1), sigma_p_ioniz])
+    pf.fdata([""])
+    
+#    return -sum_ioniz/(ne-1)
+    return -sum_pop2/(ne-1)
 
 #-------------------definition of the optimization function----------------------------#
 
 
-def opt_func1(args):
 
-    for i in range(len(args)):  
-        H13.__dict__[name_args[i]] = args[i]
+"""
+ne = 20
+energies = []
+for i in range(1,ne):
+    energies.append(i*1.0e-5)
 
-        
+def opt_func3(args):
     
-    pop, sigma_pop, p_ioniz, sigma_p_ioniz  = H13.population()
-    pf.fdata(H13.count,orbit_mpi.MPI_Wtime() - time_start,H13.power/1.0e+6,1.0e+3*H13.rx,1.0e+3*H13.ry,1.0e+3*H13.ax,1.0e+3*H13.ay,pop,sigma_pop,p_ioniz, sigma_p_ioniz)
+    em = []
+    for i in range(len(args)):
+        H13.__dict__[name_args[i]] = args[i]
+        em.append("")
+       
+    
+    sum_ioniz = 0
+    sum_pop2 = 0
+    for i in range(ne-1):
+        H13.power = energies[i]/(math.sqrt(2*math.pi)*H13.env_sigma)
+#        H13.power = 3e6 
+        pop, sigma_pop, p_ioniz, sigma_p_ioniz = H13.population()
+        sum_ioniz += p_ioniz
+        sum_pop2 += pop
+        
+        pf.fdata(["","",H13.power/1.0e+6] + em + [pop,sigma_pop,p_ioniz, sigma_p_ioniz])
+
     H13.count += 1
 
-    return -pop
 
+    pr_args = []
+    for i in range(len(args)):
+        pr_args.append(print_factor[i]*H13.__dict__[name_args[i]])
+    pf.fdata([H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver"] + pr_args + [sum_pop2/(ne - 1),sigma_pop,sum_ioniz/(ne - 1), sigma_p_ioniz])
+    pf.fdata([""])
+    
+    return -sum_ioniz/(ne-1)
+#    return -sum_pop2/(ne-1)
+
+"""
 #-------------------definition of the optimization function----------------------------#
 
 
@@ -188,8 +231,8 @@ def opt_func1(args):
 
 #-----------------------Beginning of optimization-----------------------------------------
 
-#s = Simplex(opt_func1, guess, increments)
-#(values, err, iter) = s.minimize(1e-20, 1000,0)
+s = Simplex(opt_func, guess, increments)
+(values, err, iter) = s.minimize(1e-20, 1000,0)
 
 #-----------------------End of Optimization-----------------------------------------------
 
