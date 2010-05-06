@@ -16,6 +16,8 @@ from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 # import teapot base functions from wrapper around C++ functions
 from orbit.teapot_base import TPB
 
+# import the linac structure tree with all sequences and nodes, but without drifts
+from linac_parser import LinacStructTree
 
 class LinacAccLattice(AccLattice):
 	"""
@@ -37,7 +39,8 @@ class LinacAccLattice(AccLattice):
 	def getSubLattice(self, index_start = -1, index_stop = -1,):
 		"""
 		It returns the new LinacAccLattice with children with indexes 
-		between index_start and index_stop inclusive
+		between index_start and index_stop inclusive. 
+		What about seqences and RF cavities ?????
 		"""
 		return self._getSubLattice(LinacAccLattice(),index_start,index_stop)
 
@@ -126,7 +129,7 @@ class LinacAccLattice(AccLattice):
 #     Linac Lattice Factory
 #--------------------------------------------------------------------------
 class LinacLatticeFactory():
-	""" The base abstract class of the linac accelerator elements hierarchy. """
+	""" . """
 	def __init__(self, ltree):
 		if(isinstance(ltree, LinacStructTree) != True):
 			msg = "The LinacLatticeFactory constructor: you have to specify the LinacStructTree instance as input!"
@@ -135,13 +138,150 @@ class LinacLatticeFactory():
 			msg = msg + os.linesep
 			orbitFinalize(msg)	
 		self.ltree = ltree
+		#We need to compare positions, lengths etc. This is our delta
+		self.zeroDistance = 0.00005
+		
+	def getLinacAccLattice(self,names):
+		"""
+		Returns the linac accelerator lattice for specified sequence names.
+		"""
+		if(len(names) < 1):
+			msg = "The LinacLatticeFactory method getLinacAccLattice(names): you have to specify the names array!"
+			msg = msg + os.linesep
+			msg = msg + "Stop."
+			msg = msg + os.linesep
+			orbitFinalize(msg)				
+		seqencesLocal = self.ltree.getSeqs()
+		seqencesLocalNames = []
+		for seq in seqencesLocal:
+			seqencesLocalNames.append(seq.getName())
+		ind_start = seqencesLocalNames.index(names[0])
+		seqNames = seqencesLocalNames[ind_start:ind_start+len(names)]
+		for name in seqNames:
+			if(name not in names):
+				msg = "The LinacLatticeFactory method getLinacAccLattice(names): sequence names array is wrong!"
+				msg = msg + os.linesep
+				msg = msg + "existing names=" + str(seqencesLocalNames)
+				msg = msg + os.linesep
+				msg = msg + "sequence names="+str(names)
+				orbitFinalize(msg)
+		sequences = self.ltree.getSeqs()[ind_start:ind_start+len(names)]
 		#----make linac lattice
-		self.linacAccLattice = LinacAccLattice(self.ltree.getName())
-		#There are the folowing possible types of elements
+		linacAccLattice = LinacAccLattice(self.ltree.getName())
+		#There are the folowing possible types of elements in the linac tree:
 		#QUAD - quadrupole
 		#RFGAP - RF Gap
 		#DCH - horizontal dipole corrector
 		#DCV - vertical dipole corrector
+		#----------------------------------------------------------------------
+		# The DRIFTS will be generated additionally and put into right places
+		#----------------------------------------------------------------------
+		accNodes = []
+		accSeqs = []
+		accRF_Cavs = [] 
+		seqPosition = 0.
+		for seq in sequences:
+			accSeq = Sequence(seq.getName())
+			accSeq.setLength(float(seq.getLength()))
+			accSeq.setPosition(seqPosition)
+			seqPosition = seqPosition + accSeq.getLength()
+			accSeqs.append(accSeq)
+			nodes = seq.getNodes()
+			rf_cav_names = []
+			thinNodes = []
+			for node in nodes:
+				node.setParam("pos",float(node.getParam("pos")))
+				#------------QUAD-----------------
+				if(node.getType() == "QUAD"):
+					accNode = Quad(node.getName())
+					accNode.setLength(float(node.getLength()))
+					accNode.setParamsDict(node.getParamsDict())
+					accSeq.addNode(accNode)
+				#------------RF_Gap-----------------	
+				elif(node.getType() == "RFGAP"):
+					accNode = BaseRF_Gap(node.getName())
+					accNode.setParamsDict(node.getParamsDict())
+					accNode.setLength(float(node.getParam("gapLength")))
+					accNode.setParam("length",accNode.getLength())
+					accSeq.addNode(accNode)
+					accNode.setParam("amp",float(node.getParam("amp")))
+					accNode.setParam("E0TL",float(node.getParam("E0TL")))
+					rf_cav_name = node.getParam("parent")
+					if(rf_cav_name not in rf_cav_names):
+						rf_cav_names.append(rf_cav_name)
+						accRF_Cav = RF_Cavity(rf_cav_name)
+						accRF_Cavs.append(accRF_Cav)
+						accRF_Cav.setDesignPhase(accNode.getParam("firstPhase"))
+						accRF_Cav.setPhase(accNode.getParam("firstPhase"))
+						accRF_Cav.setDesignAmp(1.)
+						accRF_Cav.setAmp(1.)
+					accRF_Cav = accRF_Cavs[len(accRF_Cavs) - 1] 
+					accRF_Cav.addRF_GapNode(accNode)
+					accSeq.addNode(accNode)
+				else:
+					if(node.getParam("length") != 0.):
+						msg = "The LinacLatticeFactory method getLinacAccLattice(names): there is a strange element!"
+						msg = msg + os.linesep
+						msg = msg + "name=" + node.getName()
+						msg = msg + os.linesep
+						msg = msg + "type="+node.getType()
+						msg = msg + os.linesep
+						msg = msg + "length(should be 0.)="+str(node.getParam("length"))
+						orbitFinalize(msg)						
+					thinNodes.append(node)
+			#-----now check the integrety quads and rf_gaps should not overlap
+			#-----and create drifts
+			copyAccNodes = accSeq.getNodes()[:]
+			firstNode = copyAccNodes[0]
+			lastNode = copyAccNodes[len(copyAccNodes)-1]
+			#insert the drift before the first element if its half length less than its position
+			if(math.fabs(firstNode.getLength()/2.0 - firstNode.getParam("pos")) > self.zeroDistance):
+				if(firstNode.getLength()/2.0 > firstNode.getParam("pos")):
+					msg = "The LinacLatticeFactory method getLinacAccLattice(names): the first node is too long!"
+					msg = msg + os.linesep
+					msg = msg + "name=" + firstNode.getName()
+					msg = msg + os.linesep
+					msg = msg + "type=" + firstNode.getType()
+					msg = msg + os.linesep
+					msg = msg + "length=" + str(firstNode.getLength())
+					msg = msg + os.linesep
+					msg = msg + "pos=" + str(firstNode.getParam("pos"))						
+					orbitFinalize(msg)
+				else:
+					drift = Drift(accSeq.getName()+":drift")
+					drift.setLength(firstNode.getParam("pos") - firstNode.getLength()/2.0)
+					accSeq.addNode(drift, index = 0)	
+			#insert the drift after the last element if its half length less + position is less then the sequence length
+			if(math.fabs(lastNode.getLength()/2.0 + lastNode.getParam("pos") - accSeq.getLength()) > self.zeroDistance):
+				if(lastNode.getLength()/2.0 + lastNode.getParam("pos") > accSeq.getLength()):
+					msg = "The LinacLatticeFactory method getLinacAccLattice(names): the last node is too long!"
+					msg = msg + os.linesep
+					msg = msg + "name=" + firstNode.getName()
+					msg = msg + os.linesep
+					msg = msg + "type=" + firstNode.getType()
+					msg = msg + os.linesep
+					msg = msg + "length=" + str(firstNode.getLength())
+					msg = msg + os.linesep
+					msg = msg + "pos=" + str(firstNode.getParam("pos"))					
+					msg = msg + os.linesep
+					msg = msg + "sequence name=" + accSeq.getName()				
+					msg = msg + os.linesep
+					msg = msg + "sequence length=" + str(accSeq.getLength())			
+					orbitFinalize(msg)
+				else:
+					drift = Drift(accSeq.getName()+":drift")
+					drift.setLength(accSeq.getLength() - (lastNode.getParam("pos") + lastNode.getLength()/2.0))
+					accSeq.addNode(drift)
+			#now move on and generate drifts between (i,i+1) nodes from copyAccNodes
+											
+			
+			
+					
+						
+							
+						
+		return linacAccLattice
+		
 		
 		
 
@@ -152,7 +292,11 @@ class LinacLatticeFactory():
 #-----------------------------------------------------
 
 class BaseLinacNode(AccNode):
-	""" The base abstract class of the linac accelerator elements hierarchy. """
+	""" 
+	The base abstract class of the linac accelerator elements hierarchy. 
+	It cannot be tilted. The direct subclasses of this class will be markers, 
+	user defined nodes etc.
+	"""
 	def __init__(self, name = "none"):
 		"""
 		Constructor. Creates the base linac element. This is a superclass for all linac elements.
@@ -215,8 +359,8 @@ class LinacNode(BaseLinacNode):
 	"""
 	def __init__(self, name = "none"):
 		BaseLinacNode.__init__(self,name = "none")
-		self.__tiltNodeIN  = TiltTEAPOT()
-		self.__tiltNodeOUT = TiltTEAPOT()
+		self.__tiltNodeIN  = TiltElement()
+		self.__tiltNodeOUT = TiltElement()
 		self.__tiltNodeIN.setName(name+"_tilt_in")
 		self.__tiltNodeOUT.setName(name+"_tilt_out")
 		self.addChildNode(self.__tiltNodeIN,AccNode.ENTRANCE)
@@ -256,8 +400,8 @@ class LinacMagnetNode(LinacNode):
 	"""
 	def __init__(self, name = "none"):
 		LinacNode.__init__(self,name = "none")
-		self.__fringeFieldIN = FringeFieldTEAPOT(self)
-		self.__fringeFieldOUT = FringeFieldTEAPOT(self)
+		self.__fringeFieldIN = FringeField(self)
+		self.__fringeFieldOUT = FringeField(self)
 		self.__fringeFieldIN.setName(name+"_fringe_in")
 		self.__fringeFieldOUT	.setName(name+"_fringe_out")	
 		self.addChildNode(self.__fringeFieldIN,AccNode.ENTRANCE)
@@ -446,7 +590,7 @@ class Quad(LinacMagnetNode):
 		Constructor. Creates the Quad Combined Function element .
 		"""
 		LinacMagnetNode.__init__(self,name)	
-		self.addParam("dB_dr",0.)
+		self.addParam("dB/dr",0.)
 		self.addParam("poles",[])
 		self.addParam("kls",[])
 		self.addParam("skews",[])
@@ -460,7 +604,7 @@ class Quad(LinacMagnetNode):
 				return
 			bunch = paramsDict["bunch"]	
 			momentum = bunch.getSyncParticle().momentum()
-			kq = node.getParam("dB_dr")/(3.335640952*momentum)
+			kq = node.getParam("dB/dr")/(3.335640952*momentum)
 			poleArr = node.getParam("poles")
 			klArr = node.getParam("kls")
 			skewArr = node.getParam("skews")
@@ -480,7 +624,7 @@ class Quad(LinacMagnetNode):
 				return
 			bunch = paramsDict["bunch"]
 			momentum = bunch.getSyncParticle().momentum()
-			kq = node.getParam("dB_dr")/(3.335640952*momentum)	
+			kq = node.getParam("dB/dr")/(3.335640952*momentum)	
 			poleArr = node.getParam("poles")
 			klArr = node.getParam("kls")
 			skewArr = node.getParam("skews")
@@ -535,7 +679,7 @@ class Quad(LinacMagnetNode):
 		"""
 		bunch = paramsDict["bunch"]		
 		momentum = bunch.getSyncParticle().momentum()
-		kq = node.getParam("dB_dr")/(3.33564*momentum)		
+		kq = node.getParam("dB/dr")/(3.33564*momentum)		
 		nParts = self.getnParts()
 		index = self.getActivePartIndex()
 		length = self.getLength(index)
@@ -634,11 +778,11 @@ class BaseRF_Gap(BaseLinacNode):
 	"""
 	def __init__(self, name = "baserfgap"):
 		"""
-		Constructor for the simplest RF gap. ETL parameter is in GeV. Phases are in radians.
+		Constructor for the simplest RF gap. E0TL parameter is in GeV. Phases are in radians.
 		It has 3 parts with lengthes: 0.5 + 0. + 0.5 
 		"""
 		BaseLinacNode.__init__(self,name)
-		self.addParam("ETL",0.)
+		self.addParam("E0TL",0.)
 		self.addParam("rfCavity", None)
 		self.setType("baserfgap")	
 		self.__isFirstGap = False
@@ -709,7 +853,7 @@ class BaseRF_Gap(BaseLinacNode):
 		if(index == 0 or index == 2):
 			TPB.drift(bunch, length)
 			return
-		ETL = self.getParam("ETL")			
+		E0TL = self.getParam("E0TL")			
 		rfCavity = self.getParam("rfCavity")
 		frequency = rfCavity.frequency()	
 		rfPhase = rfCavity.getPhase()
@@ -726,9 +870,9 @@ class BaseRF_Gap(BaseLinacNode):
 			arrival_time = syncPart.time()
 			phase = math.fmod(frequency*(arrival_time - first_gap_arr_time)*2.0*math.pi+rfPhase,2.0*math.pi)	
 		#------------------------------------------------------
-		# ???? call rf gap with ETL phase phase of the gap and a longitudinal shift parameter	
+		# ???? call rf gap with E0TL phase phase of the gap and a longitudinal shift parameter	
 		eKin = syncPart.kinEnergy()
-		eKin = eKin + ETL*math.cos(phase)
+		eKin = eKin + E0TL*math.cos(phase)
 		syncPart.kinEnergy(eKin)
 		
 	def trackDesignBunch(self, paramsDict):
@@ -742,7 +886,7 @@ class BaseRF_Gap(BaseLinacNode):
 		if(index == 0 or index == 2):
 			TPB.drift(bunch, length)
 			return		
-		ETL = self.getParam("ETL")			
+		E0TL = self.getParam("E0TL")			
 		rfCavity = self.getParam("rfCavity")
 		frequency = rfCavity.frequency()	
 		rfPhase = rfCavity.getDesignPhase()
@@ -755,10 +899,92 @@ class BaseRF_Gap(BaseLinacNode):
 			arrival_time = bunch.getSyncParticle().time()
 			phase = math.fmod(frequency*(arrival_time - first_gap_arr_time)*2.0*math.pi+rfPhase,2.0*math.pi)				
 		#------------------------------------------------------
-		# ???? call rf gap with ETL phase phase of the gap and a longitudinal shift parameter	
+		# ???? call rf gap with E0TL phase phase of the gap and a longitudinal shift parameter	
 		eKin = syncPart.kinEnergy()
-		eKin = eKin + ETL*math.cos(phase)
+		eKin = eKin + E0TL*math.cos(phase)
 		syncPart.kinEnergy(eKin)	
+
+
+class TiltElement(BaseLinacNode):
+	"""
+	The class to do tilt at the entrance of an element.
+	"""
+	def __init__(self, name = "tilt no name", angle = 0.):
+		"""
+		Constructor. Creates the Tilt element.
+		"""
+		AccNode.__init__(self,name)
+		self.__angle = angle
+		self.setType("tilt teapot")
+
+	def setTiltAngle(self, angle = 0.):
+		"""
+		Sets the tilt angle for the tilt operation.
+		"""
+		self.__angle = angle
+
+	def getTiltAngle(self):
+		"""
+		Returns the tilt angle for the tilt operation.
+		"""
+		return self.__angle
+
+	def track(self, paramsDict):
+		"""
+		It is tracking the dictionary with parameters through
+		the titlt node.
+		"""
+		if(self.__angle != 0.):
+			bunch = paramsDict["bunch"]
+			TPB.rotatexy(bunch,self.__angle)
+
+class FringeField(BaseLinacNode):
+	"""
+	The class is a base class for the fringe field classes for others elements.
+	"""
+	def __init__(self,  parentNode,  trackFunction = None , name = "fringe field no name"):
+		"""
+		Constructor. Creates the Fringe Field element.
+		"""
+		AccNode.__init__(self,name)
+		self.setParamsDict(parentNode.getParamsDict())
+		self.__trackFunc = trackFunction
+		self.__usage = True
+		self.setType("fringeField teapot")
+
+	def track(self, paramsDict):
+		"""
+		It is tracking the dictionary with parameters through
+		the fringe field node.
+		"""
+		if(self.__trackFunc != None):
+			self.__trackFunc(self,paramsDict)
+
+	def setFringeFieldFunction(self, trackFunction = None):
+		"""
+		Sets the fringe field function that will track the bunch through the fringe.
+		"""
+		self.__trackFunc = trackFunction
+
+	def getFringeFieldFunction(self):
+		"""
+		Returns the fringe field function.
+		"""
+		return self.__trackFunc
+
+	def setUsage(self,usage = True):
+		"""
+		Sets the boolean flag describing if the fringe
+		field will be used in calculation.
+		"""
+		self.__usage = usage
+
+	def getUsage(self):
+		"""
+		Returns the boolean flag describing if the fringe
+		field will be used in calculation.
+		"""
+		return self.__usage
 
 #----------------------------------------------------------------
 # Classes that are specific for the linac model
@@ -779,8 +1005,8 @@ class RF_Cavity(NamedObject,ParamsDictObject):
 		self.addParam("designPhase",0.)
 		self.addParam("designAmp",0.)		
 		self.addParam("firstGapTime",0.)
-		self.addparam("designArrivalTime",0.)
-		self.addparam("isDesignSetUp",False)
+		self.addParam("designArrivalTime",0.)
+		self.addParam("isDesignSetUp",False)
 		
 	def setDesignSetUp(self,designOnOf):
 		""" Sets the design set up information (yes,no). """
@@ -870,18 +1096,34 @@ class Sequence(NamedObject,ParamsDictObject):
 		self.addParam("position",0.)	
 		self.addParam("length",0.)	
 		
-	def addNode(self,node):
+	def addNode(self,node, index = -1):
 		""" Adds the Linac Node to the sequence. """
-		self.__linacNodes.append(node)
+		node.setSequence(self)		
+		if(index < 0):
+			self.__linacNodes.append(node)
+		else:
+			self.__linacNodes.insert(index,node)
 		
 	def getNodes(self):
 		""" Returns the array with Linac Nodes. """
 		return self.__linacNodes
 		
+	def setPosition(self, pos):
+		""" Sets the position of the sequence. """
+		return self.setParam("position",pos)		
+		
 	def getPosition(self):
-		""" Returns the tuple (start_pos,end_pos). """
-		pos = self.getParam("position")
-		length = self.getParam("length")
-		return (pos,pos+length)
+		""" Returns the position of the sequence. """
+		return self.getParam("position")
 
-
+	def getLength(self):
+		"""
+		Returns the total length of the sequence [m].
+		"""		
+		return self.getParam("length")
+		
+	def setLength(self, length):
+		"""
+		Sets the total length of the sequence [m].
+		"""		
+		return self.setParam("length",length)	

@@ -15,7 +15,20 @@ class LinacStuctNode(NamedObject, TypedObject, ParamsDictObject):
 	def __init__(self,name = "node"):
 		NamedObject.__init__(self,name)
 		TypedObject.__init__(self,type_in = "none")
-		ParamsDictObject.__init__(self)		
+		ParamsDictObject.__init__(self)	
+		self.setParam("length",0.)
+		
+	def getLength(self):
+		"""
+		Returns the total length of the node[m].
+		"""		
+		return self.getParam("length")
+		
+	def setLength(self, length):
+		"""
+		Sets the total length of the node [m].
+		"""		
+		return self.setParam("length",length)			
 
 		
 class LinacStructSeq(	NamedObject, TypedObject, ParamsDictObject):
@@ -38,11 +51,24 @@ class LinacStructSeq(	NamedObject, TypedObject, ParamsDictObject):
 			orbitFinalize(msg)	
 		self.nodes.append(node)
 
-	def getSeqs(self):
+	def getNodes(self):
+		"""
+		Returns the array with linac nodes. It is a reference to the inner array, so
+		user can modify it on his/her own risk.
+		"""		
 		return self.nodes
 		
 	def getLength(self):
+		"""
+		Returns the total length of the sequence [m].
+		"""		
 		return self.getParam("length")
+		
+	def setLength(self, length):
+		"""
+		Sets the total length of the sequence [m].
+		"""		
+		return self.setParam("length",length)		
 
 class LinacStructTree(NamedObject, TypedObject, ParamsDictObject):
 	"""	
@@ -66,9 +92,16 @@ class LinacStructTree(NamedObject, TypedObject, ParamsDictObject):
 		self.length = self.length + node.getParam("length")
 
 	def getSeqs(self):
+		"""
+		Returns the array with sequences. It is a reference to the inner array, so
+		user can modify it on his/her own risk.
+		"""
 		return self.seqs
 
 	def getLength(self):
+		"""
+		Returns the total length of the linac [m].
+		"""
 		return self.length
 
 class SimplifiedLinacParser:
@@ -95,7 +128,7 @@ class SimplifiedLinacParser:
 			seqParamDict = {}
 			for i in range(domSeq.attributes.length):
 				seqParamDict[domSeq.attributes.item(i).name] = domSeq.attributes.item(i).value
-			linacSeq.setParam("length",float(seqParamDict["length"]))
+			linacSeq.setLength(float(seqParamDict["length"]))
 			domNodes = self._stripDOMtoElements(domSeq)
 			for domNode in domNodes:
 				nNodeParam = domNode.attributes.length
@@ -122,10 +155,12 @@ class SimplifiedLinacParser:
 					del paramDict["type"]
 				else:
 					linacNode.setType(type_in = "marker")
+				#each node has the length parameter
+				paramDict["length"] = float(paramDict["length"])
 				linacNode.setParamsDict(paramDict)
 				linacSeq.addNode(linacNode)
 			self.linacTree.addSeq(linacSeq)
-			print "name=",linacSeq.getName()," type=",linacSeq.getType()," length=",linacSeq.getLength()
+			#print "name=",linacSeq.getName()," type=",linacSeq.getType()," length=",linacSeq.getLength()
 
 	def _stripDOMtoElements(self,domNode):
 		"""
@@ -143,14 +178,5 @@ class SimplifiedLinacParser:
 		Returns the linac structure tree. It will be used to build the linac accelerator lattice.
 		"""
 		return self.linacTree
-
-
-
-
-
-parser = SimplifiedLinacParser("sns_linac.xml")
-linacTree = parser.getLinacStructTree()
-print "Total length=",linacTree.getLength()
-sys.exit(1)
 
 
