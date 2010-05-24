@@ -46,6 +46,15 @@ bunch.getSyncParticle().kinEnergy(Tkin)
 matrix_lattice = TEAPOT_MATRIX_Lattice(teapot_latt,bunch)
 print "Lattice=",matrix_lattice.getName()," matrix lattice length [m] =",matrix_lattice.getLength()
 
+nodes = matrix_lattice.getNodes()
+for node in nodes:
+	if(isinstance(node, BaseMATRIX)):
+		print "node =",node.getName()," dict=",node.getParamsDict()["matrix_parent_node"].getParamsDict()
+	else:
+		print "node =",node.getName()," dict=",node.getParamsDict()
+	
+sys.exit(1)
+
 one_turn_matrix = matrix_lattice.getOneTurnMatrix()
 print "=============one turn pyORBIT matrix for MATRIX lattice===="
 printM(one_turn_matrix)
@@ -100,7 +109,7 @@ print "max Disp. Y [m] =",max_disp_y
 (chromX,chromY) = matrix_lattice.getChromaticitiesXY()
 print "chromaticity X=",chromX
 print "chromaticity Y=",chromY
-"""
+
 #-------------------------------------------------	
 #this is the example of using the Gnuplot package
 import Gnuplot
@@ -126,7 +135,7 @@ gDX.plot(arrDispX)
 
 raw_input('Please press return to stop:\n')
 #-------------------------------------------------	
-"""
+
 print "Stop."
 sys.exit(1)
 
