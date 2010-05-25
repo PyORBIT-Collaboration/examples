@@ -103,7 +103,7 @@ class LinacAccLattice(AccLattice):
 		return self.__rfCavities
 
 	def addSequence(self,seq):
-		if(isinstance(cav, Sequence) == True):
+		if(isinstance(seq, Sequence) == True):
 			self.__sequences.append(seq)
 		else:
 			msg = "The LinacAccLattice, method addSequence(seq)!"
@@ -139,7 +139,7 @@ class LinacLatticeFactory():
 			orbitFinalize(msg)	
 		self.ltree = ltree
 		#We need to compare positions, lengths etc. This is our delta
-		self.zeroDistance = 0.00005
+		self.zeroDistance = 0.00001
 		
 	def getLinacAccLattice(self,names):
 		"""
@@ -150,21 +150,25 @@ class LinacLatticeFactory():
 			msg = msg + os.linesep
 			msg = msg + "Stop."
 			msg = msg + os.linesep
-			orbitFinalize(msg)				
+			orbitFinalize(msg)
+		#let's check that the names in good order  ==start==
 		seqencesLocal = self.ltree.getSeqs()
 		seqencesLocalNames = []
 		for seq in seqencesLocal:
 			seqencesLocalNames.append(seq.getName())
-		ind_start = seqencesLocalNames.index(names[0])
-		seqNames = seqencesLocalNames[ind_start:ind_start+len(names)]
-		for name in seqNames:
-			if(name not in names):
+		ind_old = -1
+		for name in names:
+			ind = seqencesLocalNames.index(name)
+			if(ind < 0 or ind != (ind_old + 1) ):
 				msg = "The LinacLatticeFactory method getLinacAccLattice(names): sequence names array is wrong!"
 				msg = msg + os.linesep
 				msg = msg + "existing names=" + str(seqencesLocalNames)
 				msg = msg + os.linesep
 				msg = msg + "sequence names="+str(names)
 				orbitFinalize(msg)
+			ind_old = ind
+		#	let's check that the names in good order  ==stop==			
+		ind_start = seqencesLocalNames.index(names[0])
 		sequences = self.ltree.getSeqs()[ind_start:ind_start+len(names)]
 		#----make linac lattice
 		linacAccLattice = LinacAccLattice(self.ltree.getName())
@@ -173,21 +177,29 @@ class LinacLatticeFactory():
 		#RFGAP - RF Gap
 		#DCH - horizontal dipole corrector
 		#DCV - vertical dipole corrector
+		#Marker - anything else with the length equals to 0
+		#Before putting enerything into the linacAccLattice we will create sequences 
+		# with all nodes.
 		#----------------------------------------------------------------------
 		# The DRIFTS will be generated additionally and put into right places
 		#----------------------------------------------------------------------
-		accNodes = []
 		accSeqs = []
 		accRF_Cavs = [] 
 		seqPosition = 0.
 		for seq in sequences:
+			#print "debug =========================================== seq=",seq.getName()
 			accSeq = Sequence(seq.getName())
 			accSeq.setLength(float(seq.getLength()))
 			accSeq.setPosition(seqPosition)
 			seqPosition = seqPosition + accSeq.getLength()
 			accSeqs.append(accSeq)
+			#these nodes are not AccNodes. They are from linac parser
 			nodes = seq.getNodes()
+			#rf_cav_names is an auxilary array with RF Cav. names
 			rf_cav_names = []
+			#array of nodes that are AccNodes with zero length
+			#They can be positioned inside the thick nodes, and this will be done at the end
+			#of this constructor
 			thinNodes = []
 			for node in nodes:
 				node.setParam("pos",float(node.getParam("pos")))
@@ -202,11 +214,11 @@ class LinacLatticeFactory():
 					accNode = BaseRF_Gap(node.getName())
 					accNode.setParamsDict(node.getParamsDict())
 					accNode.setLength(float(node.getParam("gapLength")))
-					accNode.setParam("length",accNode.getLength())
-					accSeq.addNode(accNode)
 					accNode.setParam("amp",float(node.getParam("amp")))
 					accNode.setParam("E0TL",float(node.getParam("E0TL")))
-					rf_cav_name = node.getParam("parent")
+					accNode.setParam("length",float(node.getParam("gapLength")))
+					accNode.setParam("gapLength",float(node.getParam("gapLength")))			
+					rf_cav_name = node.getParam("parentCvaity")
 					if(rf_cav_name not in rf_cav_names):
 						rf_cav_names.append(rf_cav_name)
 						accRF_Cav = RF_Cavity(rf_cav_name)
@@ -229,6 +241,7 @@ class LinacLatticeFactory():
 						msg = msg + "length(should be 0.)="+str(node.getParam("length"))
 						orbitFinalize(msg)						
 					thinNodes.append(node)
+			#insert the drifts ======================start ===========================
 			#-----now check the integrety quads and rf_gaps should not overlap
 			#-----and create drifts
 			copyAccNodes = accSeq.getNodes()[:]
@@ -250,7 +263,9 @@ class LinacLatticeFactory():
 				else:
 					drift = Drift(accSeq.getName()+":drift")
 					drift.setLength(firstNode.getParam("pos") - firstNode.getLength()/2.0)
+					drift.setParam("pos",drift.getLength()/2.0)
 					accSeq.addNode(drift, index = 0)	
+					#print "debug first node =",firstNode.getName()," pos=",firstNode.getParam("pos")," L=",firstNode.getLength()
 			#insert the drift after the last element if its half length less + position is less then the sequence length
 			if(math.fabs(lastNode.getLength()/2.0 + lastNode.getParam("pos") - accSeq.getLength()) > self.zeroDistance):
 				if(lastNode.getLength()/2.0 + lastNode.getParam("pos") > accSeq.getLength()):
@@ -271,21 +286,156 @@ class LinacLatticeFactory():
 				else:
 					drift = Drift(accSeq.getName()+":drift")
 					drift.setLength(accSeq.getLength() - (lastNode.getParam("pos") + lastNode.getLength()/2.0))
+					drift.setParam("pos",lastNode.getParam("pos")+(lastNode.getLength()+drift.getLength())/2.0)
 					accSeq.addNode(drift)
 			#now move on and generate drifts between (i,i+1) nodes from copyAccNodes
-											
-			
-			
-					
-						
-							
-						
+			for node_ind in range(len(copyAccNodes)-1):
+				accNode0 = copyAccNodes[node_ind]
+				accNode1 = copyAccNodes[node_ind+1]
+				dist = accNode1.getParam("pos") - accNode1.getLength()/2 - (accNode0.getParam("pos") + accNode0.getLength()/2)
+				if(dist < 0.):
+					msg = "The LinacLatticeFactory method getLinacAccLattice(names): two nodes are overlapping!"
+					msg = msg + os.linesep
+					msg = msg + "sequence name=" + accSeq.getName()		
+					msg = msg + os.linesep					
+					msg = msg + "node 0 name=" + accNode0.getName() + " pos="+ str(accNode0.getParam("pos")) + " L="+str(accNode0.getLength())
+					msg = msg + os.linesep
+					msg = msg + "node 1 name=" + accNode1.getName() + " pos="+ str(accNode1.getParam("pos")) + " L="+str(accNode1.getLength())			
+					msg = msg + os.linesep
+					orbitFinalize(msg)
+				elif(dist > self.zeroDistance):
+					drift = Drift(accSeq.getName()+":drift")
+					drift.setLength(dist)
+					drift.setParam("pos",accNode0.getParam("pos")+(accNode0.getLength()+drift.getLength())/2.0)
+					ind_of_node = accSeq.getNodes().index(accNode1)
+					accSeq.addNode(drift, index = ind_of_node)
+				else:
+					pass
+			#insert the drifts ======================stop ===========================		
+			#========================================================================
+			#Now we will go over all zero length nodes and attach them into the quads
+			#or drifts. We cannot put anything inside RF Cavity.
+			# zero length elements insertion ========== start ======================
+			# if a zero-length element is inside a quad it will be placed inside this 
+			# quad
+			accQuads = []
+			for accNode in accSeq.getNodes():
+				if(isinstance(accNode,Quad)): accQuads.append(accNode)
+			usedThinNodes = []
+			for node in thinNodes:
+				position = node.getParam("pos")
+				for quad in accQuads:
+					pos = quad.getParam("pos")
+					L = quad.getLength()
+					nParts = quad.getnParts()
+					if(abs(position - pos) < self.zeroDistance or (position > pos - L/2.0 and position < pos +L/2.0)):
+						accNode = None
+						if(node.getType() == "DCV" or node.getType() == "DCH"):
+							if(node.getType() == "DCV"): accNode = DCorrectorV(node.getName())
+							if(node.getType() == "DCH"): accNode = DCorrectorH(node.getName())
+							accNode.setParam("effLength",float(node.getParam("effLength")))
+						else:
+							accNode = MarkerLinacNode(node.getName())
+						accNode.setParamsDict(node.getParamsDict())
+						accNode.setParam("pos",quad.getParam("pos"))
+						quad.addChildNode(accNode, place = AccNode.BODY, part_index = (nParts/2) - 1 , place_in_part = AccNode.AFTER)
+						#print "debug ==== assigned node=",accNode.getName()," to quad=",quad.getName(),"    lattice node=",node.getName()," pos=",quad.getParam("pos")
+						usedThinNodes.append(node)
+			#remove all assigned zero-length nodes from list of thin nodes
+			for node in usedThinNodes:
+				thinNodes.remove(node)
+			#----------------
+			# chop the drifts if the thin element is inside or insert this element into
+			# the sequence at the end or the beginning of the drift
+			usedThinNodes = []
+			for node in thinNodes:
+				position = node.getParam("pos")
+				driftNode = self.__getDriftThinNode(position,accSeq)
+				if(driftNode != None):
+					usedThinNodes.append(node)
+					#print "debug drift assigned node=",node.getName()," pos=",position," drift=",driftNode.getName()," pos=",driftNode.getParam("pos")," L=",driftNode.getLength()
+					pos = driftNode.getParam("pos")
+					L = driftNode.getLength()
+					ind_insertion = accSeq.getNodes().index(driftNode)
+					accNode = None
+					if(node.getType() == "DCV" or node.getType() == "DCH"):
+						if(node.getType() == "DCV"): accNode = DCorrectorV(node.getName())
+						if(node.getType() == "DCH"): accNode = DCorrectorH(node.getName())
+						accNode.setParam("effLength",float(node.getParam("effLength")))
+					else:
+						accNode = MarkerLinacNode(node.getName())
+					accNode.setParamsDict(node.getParamsDict())
+					accNode.setParam("pos",position)					
+					if(abs(position - (pos - L/2.0)) < self.zeroDistance):
+						#insert before the drift
+						accSeq.addNode(accNode, index = ind_insertion)
+					elif(abs(position - (pos + L/2.0)) < self.zeroDistance):
+						#insert after the drift
+						accSeq.addNode(accNode, index = ind_insertion+1)	
+					else:
+						#we replace this drift with two new
+						drift0 = Drift(accSeq.getName()+":drift")
+						drift0.setLength(position - (pos - L/2.0))
+						drift0.setParam("pos",(pos - L/2.0) + drift0.getLength()/2.0)
+						drift1 = Drift(accSeq.getName()+":drift")
+						drift1.setLength((pos + L/2.0) - position)
+						drift1.setParam("pos",(pos + L/2.0) - drift1.getLength()/2.0)
+						accSeq.getNodes().remove(driftNode)
+						accSeq.addNode(drift0, index = ind_insertion)
+						accSeq.addNode(accNode, index = ind_insertion + 1)	
+						accSeq.addNode(drift1, index = ind_insertion + 2)
+						#print "debug insertion of node=",accNode.getName()," pos =",position," d0 pos=",drift0.getParam("pos")," L0=",drift0.getLength(),
+						#print " d1 pos=",drift1.getParam("pos")," L1=",drift1.getLength()
+			#remove all assigned zero-length nodes from list of thin nodes
+			for node in usedThinNodes:
+				thinNodes.remove(node)			
+			if(len(thinNodes) != 0):
+				print "==========WARNING!!!!==============="
+				print "The seqence =",accSeq.getName()," has nodes that are not assigned to the lattice:"
+				for node in thinNodes:
+					print "unused node =",node.getName()," pos=",node.getParam("pos")
+			# add all AccNodes to the linac lattice
+			L_total = 0.
+			for accNode in accSeq.getNodes():
+				pos = accNode.getParam("pos")
+				L = accNode.getLength()
+				L_total += L
+				#print "debug ==== node=",accNode.getName()," pos=",pos," pos-L/2=",(pos-L/2.0)," pos+L/2=",(pos+L/2.0)
+				linacAccLattice.addNode(accNode)
+			linacAccLattice.addSequence(accSeq)
+			#print "debug total length = ",L_total
+		# zero length elements insertion ========== stop ======================	
+		for accRF_Cav in accRF_Cavs:
+		 linacAccLattice.addRF_Cavity(accRF_Cav)
 		return linacAccLattice
 		
 		
-		
-
-
+	def __getDriftThinNode(self,position,accSeq):
+		"""
+		This method will return None or the drift AccNode in accSeq which cover this
+		position.
+		"""
+		resNode = None
+		ind_start = 0
+		ind_stop = len(accSeq.getNodes()) - 1
+		while(ind_stop - ind_start > 1):
+			ind = (ind_stop + ind_start)/2
+			accNode = accSeq.getNodes()[ind]
+			pos = accNode.getParam("pos") - accNode.getLength()/2.0
+			if(position > pos):
+				ind_start = ind
+			else:
+				ind_stop = ind
+		if(isinstance(accSeq.getNodes()[ind_start],Drift)):
+			resNode = accSeq.getNodes()[ind_start]
+		#check the last node
+		if(resNode == None):
+			accNode = accSeq.getNodes()[len(accSeq.getNodes())-1]
+			if(isinstance(accNode,Drift)):
+				pos = accNode.getParam("pos") - accNode.getLength()/2.0
+				if(pos <= position):
+					resNode = accNode
+		return resNode
 
 #-----------------------------------------------------
 #    LINAC ABSTRACT NODES ELEMENTS
@@ -352,13 +502,21 @@ class BaseLinacNode(AccNode):
 		"""
 		self.track(paramsDict)
 
+class MarkerLinacNode(BaseLinacNode):
+	"""
+	This is a marker. It does nothing. If the user wants to perform operations with bunch 
+	he/shi should specify tracking and design tracking functions.
+	"""
+	def __init__(self, name = "none"):
+		BaseLinacNode.__init__(self,name)
+		self.setType("markerLinacNode")
 
 class LinacNode(BaseLinacNode):
 	"""
 	The abstract class of the linac accelerator elements hierarchy that can be tilted.
 	"""
 	def __init__(self, name = "none"):
-		BaseLinacNode.__init__(self,name = "none")
+		BaseLinacNode.__init__(self,name)
 		self.__tiltNodeIN  = TiltElement()
 		self.__tiltNodeOUT = TiltElement()
 		self.__tiltNodeIN.setName(name+"_tilt_in")
@@ -394,12 +552,14 @@ class LinacNode(BaseLinacNode):
 		"""
 		return self.__tiltNodeOUT	
 
+
+
 class LinacMagnetNode(LinacNode):
 	"""
 	The abstract class of the linac magnet.
 	"""
 	def __init__(self, name = "none"):
-		LinacNode.__init__(self,name = "none")
+		LinacNode.__init__(self,name)
 		self.__fringeFieldIN = FringeField(self)
 		self.__fringeFieldOUT = FringeField(self)
 		self.__fringeFieldIN.setName(name+"_fringe_in")
@@ -595,7 +755,7 @@ class Quad(LinacMagnetNode):
 		self.addParam("kls",[])
 		self.addParam("skews",[])
 		self.setnParts(2)
-		self.setType("quad")
+		self.setType("linacQuad")
 		
 		# B*rho = 3.335640952*momentum [T*m] if momentum in GeV/c
 		def fringeIN(node,paramsDict):

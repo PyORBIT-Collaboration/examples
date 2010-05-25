@@ -148,13 +148,12 @@ class SimplifiedLinacParser:
 					for i in range(domParameter.attributes.length):
 						paramDict[domParameter.attributes.item(i).name] = domParameter.attributes.item(i).value
 				nodeName = paramDict["name"]
+				#the name is not in the dictionary of parameters
 				del paramDict["name"]			
 				linacNode = LinacStuctNode(name = nodeName)
-				if(paramDict.has_key("type")):
-					linacNode.setType(type_in = paramDict["type"])
-					del paramDict["type"]
-				else:
-					linacNode.setType(type_in = "marker")
+				linacNode.setType(type_in = paramDict["type"])
+				#the type is not in the dictionary of parameters
+				del paramDict["type"]
 				#each node has the length parameter
 				paramDict["length"] = float(paramDict["length"])
 				linacNode.setParamsDict(paramDict)

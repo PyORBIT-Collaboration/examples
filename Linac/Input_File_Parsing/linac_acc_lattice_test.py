@@ -20,7 +20,8 @@ for seq in sequences:
 	print "seq=",seq.getName()," L=",seq.getLength()
 	
 lattFactory = 	LinacLatticeFactory(linacTree)
-accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2"])
+accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4"])
+#accLattice = lattFactory.getLinacAccLattice(["MEBT"])
 	
 sys.exit(1)
 
