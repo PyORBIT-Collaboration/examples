@@ -217,7 +217,8 @@ class LinacLatticeFactory():
 					accNode.setParam("amp",float(node.getParam("amp")))
 					accNode.setParam("E0TL",float(node.getParam("E0TL")))
 					accNode.setParam("length",float(node.getParam("gapLength")))
-					accNode.setParam("gapLength",float(node.getParam("gapLength")))			
+					accNode.setParam("gapLength",float(node.getParam("gapLength")))		
+					accNode.setParam("modePhase",float(node.getParam("modePhase")))
 					rf_cav_name = node.getParam("parentCvaity")
 					if(rf_cav_name not in rf_cav_names):
 						rf_cav_names.append(rf_cav_name)
@@ -1013,10 +1014,11 @@ class BaseRF_Gap(BaseLinacNode):
 		if(index == 0 or index == 2):
 			TPB.drift(bunch, length)
 			return
-		E0TL = self.getParam("E0TL")			
+		E0TL = self.getParam("E0TL")		
+		modePhase = self.getParam("modePhase")*math.pi
 		rfCavity = self.getParam("rfCavity")
 		frequency = rfCavity.frequency()	
-		rfPhase = rfCavity.getPhase()
+		rfPhase = rfCavity.getPhase() + modePhase
 		phase = rfPhase
 		syncPart = bunch.getSyncParticle()
 		if(self.__isFirstGap):
@@ -1048,8 +1050,9 @@ class BaseRF_Gap(BaseLinacNode):
 			return		
 		E0TL = self.getParam("E0TL")			
 		rfCavity = self.getParam("rfCavity")
+		modePhase = self.getParam("modePhase")*math.pi		
 		frequency = rfCavity.frequency()	
-		rfPhase = rfCavity.getDesignPhase()
+		rfPhase = rfCavity.getDesignPhase() + modePhase
 		phase = rfPhase
 		if(self.__isFirstGap):
 			arrival_time = bunch.getSyncParticle().time()
