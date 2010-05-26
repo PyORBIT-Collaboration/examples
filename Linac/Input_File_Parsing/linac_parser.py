@@ -129,6 +129,8 @@ class SimplifiedLinacParser:
 			for i in range(domSeq.attributes.length):
 				seqParamDict[domSeq.attributes.item(i).name] = domSeq.attributes.item(i).value
 			linacSeq.setLength(float(seqParamDict["length"]))
+			linacSeq.setParam("rfFrequency",float(seqParamDict["rfFrequency"]))
+			linacSeq.setParam("bpmFrequency",float(seqParamDict["bpmFrequency"]))
 			domNodes = self._stripDOMtoElements(domSeq)
 			for domNode in domNodes:
 				nNodeParam = domNode.attributes.length

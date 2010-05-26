@@ -19,6 +19,9 @@ from orbit.teapot_base import TPB
 # import the linac structure tree with all sequences and nodes, but without drifts
 from linac_parser import LinacStructTree
 
+#import orbit Bunch
+from bunch import Bunch
+
 class LinacAccLattice(AccLattice):
 	"""
 	The subclass of the AccLattice class. In the beginning the lattcie is empty.
@@ -60,20 +63,21 @@ class LinacAccLattice(AccLattice):
 		self.trackActions(actionContainer,paramsDict)
 		actionContainer.removeAction(track, AccActionsContainer.BODY)
 
-	def trackDesignBunch(self, bunch_in):
+	def trackDesignBunch(self, bunch_in, paramsDict = None, actionContainer = None):
 		"""
 		This will track the design bunch through the linac and set up RF Cavities times of
 		arrivals.
 		"""
-		if(actionContainer == None): actionContainer = AccActionsContainer("Bunch Tracking")
+		if(actionContainer == None): actionContainer = AccActionsContainer("Design Bunch Tracking")
+		if(paramsDict == None): paramsDict = {}		
 		bunch = Bunch()
 		bunch_in.copyEmptyBunchTo(bunch)
 		bunch.getSyncParticle().time(0.)	
 		paramsDict["bunch"] = bunch
 		
-		def trackDesignBunch(paramsDict):
-			node = paramsDict["node"]
-			node.trackDesignBunch(paramsDict)
+		def trackDesignBunch(localParamsDict):
+			node = localParamsDict["node"]
+			node.trackDesignBunch(localParamsDict)
 			
 		actionContainer.addAction(trackDesignBunch, AccActionsContainer.BODY)
 		self.trackActions(actionContainer,paramsDict)
@@ -206,21 +210,25 @@ class LinacLatticeFactory():
 				#------------QUAD-----------------
 				if(node.getType() == "QUAD"):
 					accNode = Quad(node.getName())
+					accNode.updateParamsDict(node.getParamsDict())					
 					accNode.setLength(float(node.getLength()))
-					accNode.setParamsDict(node.getParamsDict())
+					accNode.setParam("dB/dr",float(node.getParam("field")))
+					accNode.setParam("field",float(node.getParam("field")))
 					accSeq.addNode(accNode)
 				#------------RF_Gap-----------------	
 				elif(node.getType() == "RFGAP"):
 					accNode = BaseRF_Gap(node.getName())
-					accNode.setParamsDict(node.getParamsDict())
+					accNode.updateParamsDict(node.getParamsDict())	
 					accNode.setLength(float(node.getParam("gapLength")))
 					accNode.setParam("amp",float(node.getParam("amp")))
-					accNode.setParam("E0TL",float(node.getParam("E0TL")))
+					#the parameter from XAL in MeV, we use GeV
+					accNode.setParam("E0TL",1.0e-3*float(node.getParam("E0TL")))
 					accNode.setParam("length",float(node.getParam("gapLength")))
 					accNode.setParam("gapLength",float(node.getParam("gapLength")))		
 					accNode.setParam("modePhase",float(node.getParam("modePhase")))
 					rf_cav_name = node.getParam("parentCvaity")
 					if(rf_cav_name not in rf_cav_names):
+						accNode.setParam("firstPhase", (math.pi/180.)*float(accNode.getParam("firstPhase")))
 						rf_cav_names.append(rf_cav_name)
 						accRF_Cav = RF_Cavity(rf_cav_name)
 						accRF_Cavs.append(accRF_Cav)
@@ -228,6 +236,7 @@ class LinacLatticeFactory():
 						accRF_Cav.setPhase(accNode.getParam("firstPhase"))
 						accRF_Cav.setDesignAmp(1.)
 						accRF_Cav.setAmp(1.)
+						accRF_Cav.setFrequency(seq.getParam("rfFrequency"))
 					accRF_Cav = accRF_Cavs[len(accRF_Cavs) - 1] 
 					accRF_Cav.addRF_GapNode(accNode)
 					accSeq.addNode(accNode)
@@ -337,7 +346,7 @@ class LinacLatticeFactory():
 							accNode.setParam("effLength",float(node.getParam("effLength")))
 						else:
 							accNode = MarkerLinacNode(node.getName())
-						accNode.setParamsDict(node.getParamsDict())
+							accNode.updateParamsDict(node.getParamsDict())
 						accNode.setParam("pos",quad.getParam("pos"))
 						quad.addChildNode(accNode, place = AccNode.BODY, part_index = (nParts/2) - 1 , place_in_part = AccNode.AFTER)
 						#print "debug ==== assigned node=",accNode.getName()," to quad=",quad.getName(),"    lattice node=",node.getName()," pos=",quad.getParam("pos")
@@ -365,7 +374,7 @@ class LinacLatticeFactory():
 						accNode.setParam("effLength",float(node.getParam("effLength")))
 					else:
 						accNode = MarkerLinacNode(node.getName())
-					accNode.setParamsDict(node.getParamsDict())
+						accNode.updateParamsDict(node.getParamsDict())
 					accNode.setParam("pos",position)					
 					if(abs(position - (pos - L/2.0)) < self.zeroDistance):
 						#insert before the drift
@@ -429,7 +438,7 @@ class LinacLatticeFactory():
 				ind_stop = ind
 		if(isinstance(accSeq.getNodes()[ind_start],Drift)):
 			resNode = accSeq.getNodes()[ind_start]
-		#check the last node
+		#check if the last node is the guy
 		if(resNode == None):
 			accNode = accSeq.getNodes()[len(accSeq.getNodes())-1]
 			if(isinstance(accNode,Drift)):
@@ -840,7 +849,7 @@ class Quad(LinacMagnetNode):
 		"""
 		bunch = paramsDict["bunch"]		
 		momentum = bunch.getSyncParticle().momentum()
-		kq = node.getParam("dB/dr")/(3.33564*momentum)		
+		kq = self.getParam("dB/dr")/(3.33564*momentum)		
 		nParts = self.getnParts()
 		index = self.getActivePartIndex()
 		length = self.getLength(index)
@@ -1010,7 +1019,7 @@ class BaseRF_Gap(BaseLinacNode):
 		"""
 		index = self.getActivePartIndex()
 		length = self.getLength(index)
-		bunch = paramsDict["bunch"]
+		bunch = paramsDict["bunch"]		
 		if(index == 0 or index == 2):
 			TPB.drift(bunch, length)
 			return
@@ -1020,7 +1029,6 @@ class BaseRF_Gap(BaseLinacNode):
 		frequency = rfCavity.frequency()	
 		rfPhase = rfCavity.getPhase() + modePhase
 		phase = rfPhase
-		syncPart = bunch.getSyncParticle()
 		if(self.__isFirstGap):
 			arrival_time = bunch.getSyncParticle().time()
 			rfCavity.setFirstGapTime(arrival_time)
@@ -1033,6 +1041,7 @@ class BaseRF_Gap(BaseLinacNode):
 			phase = math.fmod(frequency*(arrival_time - first_gap_arr_time)*2.0*math.pi+rfPhase,2.0*math.pi)	
 		#------------------------------------------------------
 		# ???? call rf gap with E0TL phase phase of the gap and a longitudinal shift parameter	
+		syncPart = bunch.getSyncParticle()
 		eKin = syncPart.kinEnergy()
 		eKin = eKin + E0TL*math.cos(phase)
 		syncPart.kinEnergy(eKin)
@@ -1051,21 +1060,24 @@ class BaseRF_Gap(BaseLinacNode):
 		E0TL = self.getParam("E0TL")			
 		rfCavity = self.getParam("rfCavity")
 		modePhase = self.getParam("modePhase")*math.pi		
-		frequency = rfCavity.frequency()	
+		frequency = rfCavity.getFrequency()	
 		rfPhase = rfCavity.getDesignPhase() + modePhase
 		phase = rfPhase
 		if(self.__isFirstGap):
 			arrival_time = bunch.getSyncParticle().time()
 			rfCavity.setDesignArrivalTime(arrival_time)
 		else:
-			first_gap_arr_time = rfCavity.getFirstGapTime()
+			first_gap_arr_time = rfCavity.getDesignArrivalTime()
 			arrival_time = bunch.getSyncParticle().time()
 			phase = math.fmod(frequency*(arrival_time - first_gap_arr_time)*2.0*math.pi+rfPhase,2.0*math.pi)				
 		#------------------------------------------------------
 		# ???? call rf gap with E0TL phase phase of the gap and a longitudinal shift parameter	
+		syncPart = bunch.getSyncParticle()
 		eKin = syncPart.kinEnergy()
 		eKin = eKin + E0TL*math.cos(phase)
 		syncPart.kinEnergy(eKin)	
+		eKin = syncPart.kinEnergy()
+		print "debug RF E0TL=",E0TL," phase=",phase*180./math.pi," eKin[MeV]=",eKin*1.0e+3
 
 
 class TiltElement(BaseLinacNode):
@@ -1183,7 +1195,7 @@ class RF_Cavity(NamedObject,ParamsDictObject):
 		""" Sets the arrival time for the first RF gap. """
 		self.setParam("firstGapTime",time)
 		
-	def getFirstGapTime(self,time):
+	def getFirstGapTime(self):
 		""" Returns the arrival time for the first RF gap. """
 		return self.getParam("firstGapTime")
 
@@ -1191,7 +1203,7 @@ class RF_Cavity(NamedObject,ParamsDictObject):
 		""" Sets the design arrival time for the first RF gap. """
 		self.setParam("designArrivalTime",time)
 		
-	def getDesignArrivalTime(self,time):
+	def getDesignArrivalTime(self):
 		""" Returns the design arrival time for the first RF gap. """
 		return self.getParam("designArrivalTime")
 		
@@ -1199,7 +1211,7 @@ class RF_Cavity(NamedObject,ParamsDictObject):
 		""" Sets the design phase for the first RF gap. """
 		self.setParam("designPhase",phase)
 		
-	def getDesignPhase(self,time):
+	def getDesignPhase(self):
 		""" Returns the design phase for the first RF gap. """
 		return self.getParam("designPhase")
 
@@ -1207,7 +1219,7 @@ class RF_Cavity(NamedObject,ParamsDictObject):
 		""" Sets the design Amp for the RF cavity. """
 		self.setParam("designAmp",Amp)
 		
-	def getDesignAmp(self,time):
+	def getDesignAmp(self):
 		""" Returns the design Amp for the RF cavity. """
 		return self.getParam("designAmp")
 
@@ -1215,7 +1227,7 @@ class RF_Cavity(NamedObject,ParamsDictObject):
 		""" Sets the phase for the first RF gap. """
 		self.setParam("phase",phase)
 		
-	def getPhase(self,time):
+	def getPhase(self):
 		""" Returns the phase for the first RF gap. """
 		return self.getParam("phase")
 
@@ -1223,7 +1235,7 @@ class RF_Cavity(NamedObject,ParamsDictObject):
 		""" Sets the Amp for RF cavity. """
 		self.setParam("Amp",Amp)
 		
-	def getAmp(self,time):
+	def getAmp(self):
 		""" Returns the Amp for RF cavity. """
 		return self.getParam("Amp")
 		
@@ -1231,7 +1243,7 @@ class RF_Cavity(NamedObject,ParamsDictObject):
 		""" Sets the frequency in Hz. """
 		self.setParam("frequency",freq)
 		
-	def getFrequency(self,time):
+	def getFrequency(self):
 		""" Returns the frequency in Hz. """
 		return self.getParam("frequency")
 		

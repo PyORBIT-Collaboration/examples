@@ -1,6 +1,6 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <sns>
-    <MEBT length="3.633" name="MEBT">
+    <MEBT bpmFrequency="8.05E8" length="3.633" name="MEBT" rfFrequency="4.025E8">
         <accElement length="0.061" name="MEBT_Mag:QH01" pos="0.128" type="QUAD">
             <parameters effLength="0.061" field="-34.636"/>
         </accElement>
@@ -110,7 +110,7 @@
             <parameters/>
         </accElement>
     </MEBT>
-    <DTL1 length="4.272517" name="DTL1">
+    <DTL1 bpmFrequency="8.05E8" length="4.272517" name="DTL1" rfFrequency="4.025E8">
         <accElement length="0.035001" name="DTL_Mag:PMQH100" pos="0.0175" type="QUAD">
             <parameters effLength="0.035" field="-37.182188"/>
         </accElement>
@@ -427,7 +427,7 @@
             <parameters effLength="0.035" field="-37.099654"/>
         </accElement>
     </DTL1>
-    <DTL2 length="6.1961" name="DTL2">
+    <DTL2 bpmFrequency="8.05E8" length="6.1961" name="DTL2" rfFrequency="4.025E8">
         <accElement length="0.0" name="DTL_RF:Cav02:Rg01" pos="0.0378323" type="RFGAP">
             <parameters E0TL="0.22852989159" amp="3.052" firstPhase="-33.403" gapLength="0.015" modePhase="0.0" parentCvaity="DTL2"/>
         </accElement>
@@ -687,7 +687,7 @@
             <parameters E0TL="0.4995559909448044" amp="3.610000212" gapLength="0.015" modePhase="0.0" parentCvaity="DTL2"/>
         </accElement>
     </DTL2>
-    <DTL3 length="6.560294" name="DTL3">
+    <DTL3 bpmFrequency="8.05E8" length="6.560294" name="DTL3" rfFrequency="4.025E8">
         <accElement length="0.035001" name="DTL_Mag:PMQV300" pos="0.0175" type="QUAD">
             <parameters effLength="0.035" field="37.071177"/>
         </accElement>
@@ -881,7 +881,7 @@
             <parameters effLength="0.035" field="-37.031303"/>
         </accElement>
     </DTL3>
-    <DTL4 length="6.629533" name="DTL4">
+    <DTL4 bpmFrequency="8.05E8" length="6.629533" name="DTL4" rfFrequency="4.025E8">
         <accElement length="0.0" name="DTL_RF:Cav04:Rg01" pos="0.0963756" type="RFGAP">
             <parameters E0TL="0.62228744997727" amp="3.6293" firstPhase="-31.694" gapLength="0.015" modePhase="0.0" parentCvaity="DTL4"/>
         </accElement>
@@ -1042,7 +1042,7 @@
             <parameters effLength="0.035" field="-36.998861"/>
         </accElement>
     </DTL4>
-    <DTL5 length="6.596593" name="DTL5">
+    <DTL5 bpmFrequency="8.05E8" length="6.596593" name="DTL5" rfFrequency="4.025E8">
         <accElement length="0.035001" name="DTL_Mag:PMQH500" pos="0.0175" type="QUAD">
             <parameters effLength="0.035" field="-36.993248"/>
         </accElement>
@@ -1185,7 +1185,7 @@
             <parameters effLength="0.035" field="-36.952373"/>
         </accElement>
     </DTL5>
-    <DTL6 length="6.443724" name="DTL6">
+    <DTL6 bpmFrequency="8.05E8" length="6.443724" name="DTL6" rfFrequency="4.025E8">
         <accElement length="0.0" name="DTL_RF:Cav06:Rg01" pos="0.129979" type="RFGAP">
             <parameters E0TL="0.7568307523826" amp="3.6085" firstPhase="-34.019" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
@@ -1193,7 +1193,7 @@
             <parameters effLength="0.035" field="36.95147"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg02" pos="0.410233" type="RFGAP">
-            <parameters E0TL="0.7585342278031" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.7585342278031" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.035001" name="DTL_Mag:PMQV602" pos="0.550859" type="QUAD">
             <parameters effLength="0.035" field="36.946808"/>
@@ -1205,7 +1205,7 @@
             <parameters/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg04" pos="0.972399" type="RFGAP">
-            <parameters E0TL="0.7657324888625998" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.7657324888625998" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.035001" name="DTL_Mag:PMQH604" pos="1.11309" type="QUAD">
             <parameters effLength="0.035" field="-36.944781"/>
@@ -1217,7 +1217,7 @@
             <parameters effLength="0.035" field="-36.942676"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg06" pos="1.535574" type="RFGAP">
-            <parameters E0TL="0.7704068199604002" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.7704068199604002" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg07" pos="1.818683" type="RFGAP">
             <parameters E0TL="0.7721995602888" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
@@ -1226,7 +1226,7 @@
             <parameters effLength="0.035" field="36.941617"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg08" pos="2.102896" type="RFGAP">
-            <parameters E0TL="0.773852770026" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.773852770026" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.035001" name="DTL_Mag:PMQV608" pos="2.245504" type="QUAD">
             <parameters effLength="0.035" field="36.939144"/>
@@ -1238,7 +1238,7 @@
             <parameters/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg10" pos="2.674597" type="RFGAP">
-            <parameters E0TL="0.7772703673854" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.7772703673854" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.035001" name="DTL_Mag:PMQH610" pos="2.818286" type="QUAD">
             <parameters effLength="0.035" field="-36.937673"/>
@@ -1250,7 +1250,7 @@
             <parameters effLength="0.035" field="-36.930323"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg12" pos="3.250606" type="RFGAP">
-            <parameters E0TL="0.7805558355479499" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.7805558355479499" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.0" name="DTL_Mag:DCH612" pos="3.39536" type="DCH">
             <parameters effLength="0.0365"/>
@@ -1262,7 +1262,7 @@
             <parameters effLength="0.035" field="36.925459"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg14" pos="3.830855" type="RFGAP">
-            <parameters E0TL="0.7837127754357999" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.7837127754357999" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.035001" name="DTL_Mag:PMQV614" pos="3.976656" type="QUAD">
             <parameters effLength="0.035" field="36.916736"/>
@@ -1274,7 +1274,7 @@
             <parameters effLength="0.0365"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg16" pos="4.415274" type="RFGAP">
-            <parameters E0TL="0.7867393874899999" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.7867393874899999" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.035001" name="DTL_Mag:PMQH616" pos="4.562106" type="QUAD">
             <parameters effLength="0.035" field="-36.915435"/>
@@ -1286,7 +1286,7 @@
             <parameters effLength="0.035" field="-36.905936"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg18" pos="5.003795" type="RFGAP">
-            <parameters E0TL="0.78963658105255" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.78963658105255" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.0" name="DTL_Mag:DCH618" pos="5.15164" type="DCH">
             <parameters effLength="0.0365"/>
@@ -1298,7 +1298,7 @@
             <parameters effLength="0.035" field="36.896246"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg20" pos="5.592934" type="RFGAP">
-            <parameters E0TL="0.7968941012599" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.7968941012599" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
         <accElement length="0.035001" name="DTL_Mag:PMQV620" pos="5.740609" type="QUAD">
             <parameters effLength="0.035" field="36.893266"/>
@@ -1310,10 +1310,10 @@
             <parameters effLength="0.0365"/>
         </accElement>
         <accElement length="0.0" name="DTL_RF:Cav06:Rg22" pos="6.183346" type="RFGAP">
-            <parameters E0TL="0.8010620407271999" amp="3.6085" gapLength="0.015" modePhase="1.0" parentCvaity="DTL6"/>
+            <parameters E0TL="0.8010620407271999" amp="3.6085" gapLength="0.015" modePhase="0.0" parentCvaity="DTL6"/>
         </accElement>
     </DTL6>
-    <CCL1 length="12.302676" name="CCL1">
+    <CCL1 bpmFrequency="4.025E8" length="12.302676" name="CCL1" rfFrequency="8.05E8">
         <accElement length="0.0" name="CCL_Mag:QH00" pos="0.04" type="QUAD">
             <parameters effLength="0.06075" field="-42.34"/>
         </accElement>
@@ -1369,7 +1369,7 @@
             <parameters E0TL="0.2118550803700057" amp="3.1487002200000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg16" pos="1.643112" type="RFGAP">
-            <parameters E0TL="0.2105430626444849" amp="3.1487002200000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2105430626444849" amp="3.1487002200000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QH102" pos="1.904284" type="QUAD">
             <parameters effLength="0.09769" field="-25.67"/>
@@ -1393,10 +1393,10 @@
             <parameters E0TL="0.21951299513056102" amp="3.2375014199999996" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg23" pos="2.557227" type="RFGAP">
-            <parameters E0TL="0.21951299513056102" amp="3.2375014199999996" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.21951299513056102" amp="3.2375014199999996" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg24" pos="2.633539" type="RFGAP">
-            <parameters E0TL="0.21817887000540062" amp="3.2375014199999996" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.21817887000540062" amp="3.2375014199999996" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QV103" pos="2.863761" type="QUAD">
             <parameters effLength="0.09769" field="24.05"/>
@@ -1423,13 +1423,13 @@
             <parameters E0TL="0.22729307742795377" amp="3.3261985800000002" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg30" pos="3.477505" type="RFGAP">
-            <parameters E0TL="0.22729307742795377" amp="3.3261985800000002" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg31" pos="3.55438" type="RFGAP">
             <parameters E0TL="0.22729307742795377" amp="3.3261985800000002" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg31" pos="3.55438" type="RFGAP">
+            <parameters E0TL="0.22729307742795377" amp="3.3261985800000002" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg32" pos="3.631255" type="RFGAP">
-            <parameters E0TL="0.225937859394015" amp="3.3261985800000002" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.225937859394015" amp="3.3261985800000002" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH104" pos="3.842436" type="QUAD">
             <parameters effLength="0.09769" field="-21.814311"/>
@@ -1450,16 +1450,16 @@
             <parameters E0TL="0.23519212218452992" amp="3.41499978" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg37" pos="4.404076" type="RFGAP">
-            <parameters E0TL="0.23519212218452992" amp="3.41499978" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg38" pos="4.481528" type="RFGAP">
             <parameters E0TL="0.23519212218452992" amp="3.41499978" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg39" pos="4.55898" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg38" pos="4.481528" type="RFGAP">
             <parameters E0TL="0.23519212218452992" amp="3.41499978" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg39" pos="4.55898" type="RFGAP">
+            <parameters E0TL="0.23519212218452992" amp="3.41499978" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg40" pos="4.636432" type="RFGAP">
-            <parameters E0TL="0.23384317951343106" amp="3.41499978" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.23384317951343106" amp="3.41499978" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:DCV105" pos="4.840458" type="DCV">
             <parameters effLength="0.09769"/>
@@ -1477,19 +1477,19 @@
             <parameters E0TL="0.24324533111232" amp="3.5037000000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg44" pos="5.337068" type="RFGAP">
-            <parameters E0TL="0.24324533111232" amp="3.5037000000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.24324533111232" amp="3.5037000000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg45" pos="5.415109" type="RFGAP">
-            <parameters E0TL="0.24324533111232" amp="3.5037000000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg46" pos="5.493151" type="RFGAP">
             <parameters E0TL="0.24324533111232" amp="3.5037000000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg47" pos="5.571192" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg46" pos="5.493151" type="RFGAP">
             <parameters E0TL="0.24324533111232" amp="3.5037000000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg47" pos="5.571192" type="RFGAP">
+            <parameters E0TL="0.24324533111232" amp="3.5037000000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg48" pos="5.649233" type="RFGAP">
-            <parameters E0TL="0.24190551307899003" amp="3.5037000000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.24190551307899003" amp="3.5037000000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH106" pos="5.85797" type="QUAD">
             <parameters effLength="0.09769" field="-21.385198"/>
@@ -1504,22 +1504,22 @@
             <parameters E0TL="0.2514190614585369" amp="3.5925012" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg51" pos="6.276605" type="RFGAP">
-            <parameters E0TL="0.2514190614585369" amp="3.5925012" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2514190614585369" amp="3.5925012" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg52" pos="6.355248" type="RFGAP">
-            <parameters E0TL="0.2514190614585369" amp="3.5925012" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2514190614585369" amp="3.5925012" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg53" pos="6.433891" type="RFGAP">
-            <parameters E0TL="0.2514190614585369" amp="3.5925012" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg54" pos="6.512534" type="RFGAP">
             <parameters E0TL="0.2514190614585369" amp="3.5925012" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg55" pos="6.591176" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg54" pos="6.512534" type="RFGAP">
             <parameters E0TL="0.2514190614585369" amp="3.5925012" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg55" pos="6.591176" type="RFGAP">
+            <parameters E0TL="0.2514190614585369" amp="3.5925012" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg56" pos="6.669819" type="RFGAP">
-            <parameters E0TL="0.25009119362074034" amp="3.5925012" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.25009119362074034" amp="3.5925012" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTV107" pos="6.878857" type="QUAD">
             <parameters effLength="0.09769" field="21.163272"/>
@@ -1528,49 +1528,49 @@
             <parameters E0TL="0.25841270082293333" amp="3.68120142" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg58" pos="7.222811" type="RFGAP">
-            <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg59" pos="7.302068" type="RFGAP">
-            <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg60" pos="7.381325" type="RFGAP">
-            <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg61" pos="7.460581" type="RFGAP">
-            <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg62" pos="7.539838" type="RFGAP">
             <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg63" pos="7.619095" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg62" pos="7.539838" type="RFGAP">
             <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg63" pos="7.619095" type="RFGAP">
+            <parameters E0TL="0.25972562523718556" amp="3.68120142" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg64" pos="7.698352" type="RFGAP">
-            <parameters E0TL="0.25841270082293333" amp="3.68120142" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.25841270082293333" amp="3.68120142" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH108" pos="7.907697" type="QUAD">
             <parameters effLength="0.09769" field="-20.93725"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg65" pos="8.175808" type="RFGAP">
-            <parameters E0TL="0.2668869948933816" amp="3.7699995600000005" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2668869948933816" amp="3.7699995600000005" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg66" pos="8.255691" type="RFGAP">
-            <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg67" pos="8.335574" type="RFGAP">
-            <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg68" pos="8.415456" type="RFGAP">
-            <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg69" pos="8.495339" type="RFGAP">
-            <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg70" pos="8.575222" type="RFGAP">
             <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg71" pos="8.655105" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg70" pos="8.575222" type="RFGAP">
             <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg71" pos="8.655105" type="RFGAP">
+            <parameters E0TL="0.2682120939427281" amp="3.7699995600000005" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg72" pos="8.734988" type="RFGAP">
             <parameters E0TL="0.2668869948933816" amp="3.7699995600000005" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
@@ -1582,22 +1582,22 @@
             <parameters effLength="0.09769" field="20.707135"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg73" pos="9.216242" type="RFGAP">
-            <parameters E0TL="0.2692560760238607" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2692560760238607" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg74" pos="9.296755" type="RFGAP">
-            <parameters E0TL="0.2705619649556254" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2705619649556254" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg75" pos="9.377269" type="RFGAP">
-            <parameters E0TL="0.2705619649556254" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2705619649556254" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg76" pos="9.457782" type="RFGAP">
-            <parameters E0TL="0.2705619649556254" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg77" pos="9.538295" type="RFGAP">
             <parameters E0TL="0.2705619649556254" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg78" pos="9.618809" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg77" pos="9.538295" type="RFGAP">
             <parameters E0TL="0.2705619649556254" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg78" pos="9.618809" type="RFGAP">
+            <parameters E0TL="0.2705619649556254" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg79" pos="9.699322" type="RFGAP">
             <parameters E0TL="0.2705619649556254" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
@@ -1612,19 +1612,19 @@
             <parameters effLength="0.09769" field="-20.477838"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg81" pos="10.264865" type="RFGAP">
-            <parameters E0TL="0.27147869430165367" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.27147869430165367" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg82" pos="10.346006" type="RFGAP">
-            <parameters E0TL="0.2727641627526874" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.2727641627526874" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg83" pos="10.427147" type="RFGAP">
-            <parameters E0TL="0.2727641627526874" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg84" pos="10.508288" type="RFGAP">
             <parameters E0TL="0.2727641627526874" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg85" pos="10.589429" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg84" pos="10.508288" type="RFGAP">
             <parameters E0TL="0.2727641627526874" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg85" pos="10.589429" type="RFGAP">
+            <parameters E0TL="0.2727641627526874" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg86" pos="10.67057" type="RFGAP">
             <parameters E0TL="0.2727641627526874" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
@@ -1642,16 +1642,16 @@
             <parameters effLength="0.09769" field="20.250179"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg89" pos="11.321637" type="RFGAP">
-            <parameters E0TL="0.27372066030315007" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
+            <parameters E0TL="0.27372066030315007" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg90" pos="11.403402" type="RFGAP">
-            <parameters E0TL="0.2749234891202568" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg91" pos="11.485168" type="RFGAP">
             <parameters E0TL="0.2749234891202568" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav01:Rg92" pos="11.566933" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg91" pos="11.485168" type="RFGAP">
             <parameters E0TL="0.2749234891202568" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav01:Rg92" pos="11.566933" type="RFGAP">
+            <parameters E0TL="0.2749234891202568" amp="3.7720008000000003" gapLength="0.015" modePhase="0.0" parentCvaity="CCL1"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav01:Rg93" pos="11.648698" type="RFGAP">
             <parameters E0TL="0.2749234891202568" amp="3.7720008000000003" gapLength="0.015" modePhase="1.0" parentCvaity="CCL1"/>
@@ -1675,7 +1675,7 @@
             <parameters/>
         </accElement>
     </CCL1>
-    <CCL2 length="13.392076" name="CCL2">
+    <CCL2 bpmFrequency="4.025E8" length="13.392076" name="CCL2" rfFrequency="8.05E8">
         <accElement length="0.0" name="CCL_RF:Cav02:Rg01" pos="0.083837" type="RFGAP">
             <parameters E0TL="0.2758960696792" amp="3.772" firstPhase="-30.834" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
@@ -1725,7 +1725,7 @@
             <parameters E0TL="0.27924930563399997" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg16" pos="1.737816" type="RFGAP">
-            <parameters E0TL="0.27809085465199995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.27809085465199995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH202" pos="1.949037" type="QUAD">
             <parameters effLength="0.09769" field="-19.572935"/>
@@ -1752,10 +1752,10 @@
             <parameters E0TL="0.281412941808" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg23" pos="2.739471" type="RFGAP">
-            <parameters E0TL="0.281412941808" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.281412941808" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg24" pos="2.82309" type="RFGAP">
-            <parameters E0TL="0.28027744910399993" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.28027744910399993" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:DCV203" pos="3.034619" type="DCV">
             <parameters effLength="0.09769"/>
@@ -1779,13 +1779,13 @@
             <parameters E0TL="0.28353273187679995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg30" pos="3.747863" type="RFGAP">
-            <parameters E0TL="0.28353273187679995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg31" pos="3.832094" type="RFGAP">
             <parameters E0TL="0.28353273187679995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg31" pos="3.832094" type="RFGAP">
+            <parameters E0TL="0.28353273187679995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg32" pos="3.916325" type="RFGAP">
-            <parameters E0TL="0.2824207142148" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.2824207142148" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH204" pos="4.128159" type="QUAD">
             <parameters effLength="0.09769" field="-19.126625"/>
@@ -1806,16 +1806,16 @@
             <parameters E0TL="0.2856433431608" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg37" pos="4.762958" type="RFGAP">
-            <parameters E0TL="0.2856433431608" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg38" pos="4.847797" type="RFGAP">
             <parameters E0TL="0.2856433431608" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg39" pos="4.932637" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg38" pos="4.847797" type="RFGAP">
             <parameters E0TL="0.2856433431608" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg39" pos="4.932637" type="RFGAP">
+            <parameters E0TL="0.2856433431608" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg40" pos="5.017476" type="RFGAP">
-            <parameters E0TL="0.28455529995359996" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.28455529995359996" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTV205" pos="5.229615" type="QUAD">
             <parameters effLength="0.09769" field="18.905517"/>
@@ -1833,19 +1833,19 @@
             <parameters E0TL="0.287748136512" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg44" pos="5.784726" type="RFGAP">
-            <parameters E0TL="0.287748136512" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.287748136512" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg45" pos="5.87017" type="RFGAP">
-            <parameters E0TL="0.287748136512" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg46" pos="5.955615" type="RFGAP">
             <parameters E0TL="0.287748136512" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg47" pos="6.041059" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg46" pos="5.955615" type="RFGAP">
             <parameters E0TL="0.287748136512" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg47" pos="6.041059" type="RFGAP">
+            <parameters E0TL="0.287748136512" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg48" pos="6.126504" type="RFGAP">
-            <parameters E0TL="0.28668455133" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.28668455133" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:DCH206" pos="6.338945" type="DCH">
             <parameters effLength="0.09769"/>
@@ -1860,22 +1860,22 @@
             <parameters E0TL="0.289837002216" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg51" pos="6.813132" type="RFGAP">
-            <parameters E0TL="0.289837002216" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.289837002216" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg52" pos="6.899179" type="RFGAP">
-            <parameters E0TL="0.289837002216" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.289837002216" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg53" pos="6.985225" type="RFGAP">
-            <parameters E0TL="0.289837002216" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg54" pos="7.071272" type="RFGAP">
             <parameters E0TL="0.289837002216" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg55" pos="7.157318" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg54" pos="7.071272" type="RFGAP">
             <parameters E0TL="0.289837002216" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg55" pos="7.157318" type="RFGAP">
+            <parameters E0TL="0.289837002216" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg56" pos="7.243364" type="RFGAP">
-            <parameters E0TL="0.2887659360264" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.2887659360264" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTV207" pos="7.456106" type="QUAD">
             <parameters effLength="0.09769" field="18.467397"/>
@@ -1884,49 +1884,49 @@
             <parameters E0TL="0.2908741966" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg58" pos="7.848146" type="RFGAP">
-            <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg59" pos="7.934791" type="RFGAP">
-            <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg60" pos="8.021436" type="RFGAP">
-            <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg61" pos="8.108081" type="RFGAP">
-            <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg62" pos="8.194726" type="RFGAP">
             <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg63" pos="8.281371" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg62" pos="8.194726" type="RFGAP">
             <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg63" pos="8.281371" type="RFGAP">
+            <parameters E0TL="0.291887353914" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg64" pos="8.368016" type="RFGAP">
-            <parameters E0TL="0.2908741966" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.2908741966" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH208" pos="8.581057" type="QUAD">
             <parameters effLength="0.09769" field="-18.249565"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg65" pos="8.889733" type="RFGAP">
-            <parameters E0TL="0.29297037998399994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.29297037998399994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg66" pos="8.976973" type="RFGAP">
-            <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg67" pos="9.064214" type="RFGAP">
-            <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg68" pos="9.151454" type="RFGAP">
-            <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg69" pos="9.238694" type="RFGAP">
-            <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg70" pos="9.325934" type="RFGAP">
             <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg71" pos="9.413174" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg70" pos="9.325934" type="RFGAP">
             <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg71" pos="9.413174" type="RFGAP">
+            <parameters E0TL="0.29395758782399994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg72" pos="9.500415" type="RFGAP">
             <parameters E0TL="0.29297037998399994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
@@ -1938,22 +1938,22 @@
             <parameters effLength="0.09769" field="18.033371"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg73" pos="10.025693" type="RFGAP">
-            <parameters E0TL="0.2950247017119999" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.2950247017119999" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg74" pos="10.113526" type="RFGAP">
-            <parameters E0TL="0.29598547839359995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.29598547839359995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg75" pos="10.201358" type="RFGAP">
-            <parameters E0TL="0.29598547839359995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.29598547839359995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg76" pos="10.28919" type="RFGAP">
-            <parameters E0TL="0.29598547839359995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg77" pos="10.377022" type="RFGAP">
             <parameters E0TL="0.29598547839359995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg78" pos="10.464854" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg77" pos="10.377022" type="RFGAP">
             <parameters E0TL="0.29598547839359995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg78" pos="10.464854" type="RFGAP">
+            <parameters E0TL="0.29598547839359995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg79" pos="10.552687" type="RFGAP">
             <parameters E0TL="0.29598547839359995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
@@ -1968,19 +1968,19 @@
             <parameters effLength="0.09769" field="-17.817996"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg81" pos="11.169339" type="RFGAP">
-            <parameters E0TL="0.2970698374884" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.2970698374884" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg82" pos="11.25776" type="RFGAP">
-            <parameters E0TL="0.29803705712319994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.29803705712319994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg83" pos="11.346181" type="RFGAP">
-            <parameters E0TL="0.29803705712319994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg84" pos="11.434602" type="RFGAP">
             <parameters E0TL="0.29803705712319994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg85" pos="11.523022" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg84" pos="11.434602" type="RFGAP">
             <parameters E0TL="0.29803705712319994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg85" pos="11.523022" type="RFGAP">
+            <parameters E0TL="0.29803705712319994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg86" pos="11.611443" type="RFGAP">
             <parameters E0TL="0.29803705712319994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
@@ -1998,16 +1998,16 @@
             <parameters effLength="0.09769"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg89" pos="12.320627" type="RFGAP">
-            <parameters E0TL="0.2991024200488" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
+            <parameters E0TL="0.2991024200488" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg90" pos="12.409633" type="RFGAP">
-            <parameters E0TL="0.3000424658184" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg91" pos="12.498639" type="RFGAP">
             <parameters E0TL="0.3000424658184" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav02:Rg92" pos="12.587646" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg91" pos="12.498639" type="RFGAP">
             <parameters E0TL="0.3000424658184" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav02:Rg92" pos="12.587646" type="RFGAP">
+            <parameters E0TL="0.3000424658184" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL2"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav02:Rg93" pos="12.676652" type="RFGAP">
             <parameters E0TL="0.3000424658184" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL2"/>
@@ -2031,7 +2031,7 @@
             <parameters/>
         </accElement>
     </CCL2>
-    <CCL3 length="14.481755" name="CCL3">
+    <CCL3 bpmFrequency="4.025E8" length="14.481755" name="CCL3" rfFrequency="8.05E8">
         <accElement length="0.0" name="CCL_RF:Cav03:Rg01" pos="0.167446" type="RFGAP">
             <parameters E0TL="0.3011258015696" amp="3.772" firstPhase="-30.674" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
@@ -2081,7 +2081,7 @@
             <parameters E0TL="0.3040242610636" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg16" pos="1.965058" type="RFGAP">
-            <parameters E0TL="0.30313997526119996" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.30313997526119996" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH302" pos="2.099853" type="QUAD">
             <parameters effLength="0.09769" field="-16.970417"/>
@@ -2108,10 +2108,10 @@
             <parameters E0TL="0.30599726865599997" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg23" pos="3.052301" type="RFGAP">
-            <parameters E0TL="0.30599726865599997" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.30599726865599997" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg24" pos="3.143043" type="RFGAP">
-            <parameters E0TL="0.3051073437136" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3051073437136" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:DCV303" pos="3.278125" type="DCV">
             <parameters effLength="0.09769"/>
@@ -2135,13 +2135,13 @@
             <parameters E0TL="0.30796059239280005" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg30" pos="4.145846" type="RFGAP">
-            <parameters E0TL="0.30796059239280005" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg31" pos="4.23716" type="RFGAP">
             <parameters E0TL="0.30796059239280005" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg31" pos="4.23716" type="RFGAP">
+            <parameters E0TL="0.30796059239280005" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg32" pos="4.328474" type="RFGAP">
-            <parameters E0TL="0.3070995013728" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3070995013728" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH304" pos="4.463842" type="QUAD">
             <parameters effLength="0.09769" field="-16.552769"/>
@@ -2162,16 +2162,16 @@
             <parameters E0TL="0.3098795706116" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg37" pos="5.24566" type="RFGAP">
-            <parameters E0TL="0.3098795706116" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg38" pos="5.337543" type="RFGAP">
             <parameters E0TL="0.3098795706116" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg39" pos="5.429426" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg38" pos="5.337543" type="RFGAP">
             <parameters E0TL="0.3098795706116" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg39" pos="5.429426" type="RFGAP">
+            <parameters E0TL="0.3098795706116" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg40" pos="5.521309" type="RFGAP">
-            <parameters E0TL="0.3090477721892" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3090477721892" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:DCV305" pos="5.656962" type="DCV">
             <parameters effLength="0.09769"/>
@@ -2189,19 +2189,19 @@
             <parameters E0TL="0.3118233029576" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg44" pos="6.35171" type="RFGAP">
-            <parameters E0TL="0.3118233029576" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3118233029576" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg45" pos="6.444158" type="RFGAP">
-            <parameters E0TL="0.3118233029576" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg46" pos="6.536607" type="RFGAP">
             <parameters E0TL="0.3118233029576" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg47" pos="6.629056" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg46" pos="6.536607" type="RFGAP">
             <parameters E0TL="0.3118233029576" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg47" pos="6.629056" type="RFGAP">
+            <parameters E0TL="0.3118233029576" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg48" pos="6.721504" type="RFGAP">
-            <parameters E0TL="0.3109863806504" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3109863806504" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH306" pos="6.857439" type="QUAD">
             <parameters effLength="0.09769" field="-16.08353"/>
@@ -2216,22 +2216,22 @@
             <parameters E0TL="0.3137573423952" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg51" pos="7.464127" type="RFGAP">
-            <parameters E0TL="0.3137573423952" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3137573423952" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg52" pos="7.557138" type="RFGAP">
-            <parameters E0TL="0.3137573423952" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3137573423952" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg53" pos="7.65015" type="RFGAP">
-            <parameters E0TL="0.3137573423952" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg54" pos="7.743162" type="RFGAP">
             <parameters E0TL="0.3137573423952" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg55" pos="7.836174" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg54" pos="7.743162" type="RFGAP">
             <parameters E0TL="0.3137573423952" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg55" pos="7.836174" type="RFGAP">
+            <parameters E0TL="0.3137573423952" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg56" pos="7.929186" type="RFGAP">
-            <parameters E0TL="0.3129153233616" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3129153233616" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTV307" pos="8.065402" type="QUAD">
             <parameters effLength="0.09769" field="15.852595"/>
@@ -2240,49 +2240,49 @@
             <parameters E0TL="0.314837961552" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg58" pos="8.58265" type="RFGAP">
-            <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg59" pos="8.676223" type="RFGAP">
-            <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg60" pos="8.769795" type="RFGAP">
-            <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg61" pos="8.863368" type="RFGAP">
-            <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg62" pos="8.956941" type="RFGAP">
             <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg63" pos="9.050514" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg62" pos="8.956941" type="RFGAP">
             <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg63" pos="9.050514" type="RFGAP">
+            <parameters E0TL="0.3156497634708" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg64" pos="9.144087" type="RFGAP">
-            <parameters E0TL="0.314837961552" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.314837961552" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH308" pos="9.280584" type="QUAD">
             <parameters effLength="0.09769" field="-15.62166"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg65" pos="9.707336" type="RFGAP">
-            <parameters E0TL="0.3167509279572" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3167509279572" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg66" pos="9.801468" type="RFGAP">
-            <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg67" pos="9.895599" type="RFGAP">
-            <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg68" pos="9.98973" type="RFGAP">
-            <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg69" pos="10.083861" type="RFGAP">
-            <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg70" pos="10.177992" type="RFGAP">
             <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg71" pos="10.272124" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg70" pos="10.177992" type="RFGAP">
             <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg71" pos="10.272124" type="RFGAP">
+            <parameters E0TL="0.31753206464760003" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg72" pos="10.366255" type="RFGAP">
             <parameters E0TL="0.3167509279572" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
@@ -2294,22 +2294,22 @@
             <parameters effLength="0.09769" field="15.392364"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg73" pos="10.932848" type="RFGAP">
-            <parameters E0TL="0.31865758456079996" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.31865758456079996" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg74" pos="11.027535" type="RFGAP">
-            <parameters E0TL="0.31944333516159995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.31944333516159995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg75" pos="11.122223" type="RFGAP">
-            <parameters E0TL="0.31944333516159995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.31944333516159995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg76" pos="11.21691" type="RFGAP">
-            <parameters E0TL="0.31944333516159995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg77" pos="11.311597" type="RFGAP">
             <parameters E0TL="0.31944333516159995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg78" pos="11.406284" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg77" pos="11.311597" type="RFGAP">
             <parameters E0TL="0.31944333516159995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg78" pos="11.406284" type="RFGAP">
+            <parameters E0TL="0.31944333516159995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg79" pos="11.500971" type="RFGAP">
             <parameters E0TL="0.31944333516159995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
@@ -2324,19 +2324,19 @@
             <parameters effLength="0.09769" field="-15.163886"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg81" pos="12.16558" type="RFGAP">
-            <parameters E0TL="0.3205579290996" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3205579290996" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg82" pos="12.260821" type="RFGAP">
-            <parameters E0TL="0.3213123521088" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3213123521088" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg83" pos="12.356062" type="RFGAP">
-            <parameters E0TL="0.3213123521088" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg84" pos="12.451303" type="RFGAP">
             <parameters E0TL="0.3213123521088" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg85" pos="12.546544" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg84" pos="12.451303" type="RFGAP">
             <parameters E0TL="0.3213123521088" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg85" pos="12.546544" type="RFGAP">
+            <parameters E0TL="0.3213123521088" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg86" pos="12.641784" type="RFGAP">
             <parameters E0TL="0.3213123521088" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
@@ -2354,16 +2354,16 @@
             <parameters effLength="0.09769"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg89" pos="13.405501" type="RFGAP">
-            <parameters E0TL="0.3224485931776" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
+            <parameters E0TL="0.3224485931776" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg90" pos="13.501293" type="RFGAP">
-            <parameters E0TL="0.3231712480256" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg91" pos="13.597085" type="RFGAP">
             <parameters E0TL="0.3231712480256" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav03:Rg92" pos="13.692877" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg91" pos="13.597085" type="RFGAP">
             <parameters E0TL="0.3231712480256" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav03:Rg92" pos="13.692877" type="RFGAP">
+            <parameters E0TL="0.3231712480256" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL3"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav03:Rg93" pos="13.788668" type="RFGAP">
             <parameters E0TL="0.3231712480256" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL3"/>
@@ -2387,7 +2387,7 @@
             <parameters/>
         </accElement>
     </CCL3>
-    <CCL4 length="15.097716" name="CCL4">
+    <CCL4 bpmFrequency="4.025E8" length="15.097716" name="CCL4" rfFrequency="8.05E8">
         <accElement length="0.0" name="CCL_RF:Cav04:Rg01" pos="0.130816" type="RFGAP">
             <parameters E0TL="0.32432957339999996" amp="3.772" firstPhase="-29.301" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
@@ -2437,7 +2437,7 @@
             <parameters E0TL="0.3268620504448" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg16" pos="2.063215" type="RFGAP">
-            <parameters E0TL="0.32616768786" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.32616768786" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTH402" pos="2.241376" type="QUAD">
             <parameters effLength="0.09769" field="-14.26062"/>
@@ -2467,10 +2467,10 @@
             <parameters E0TL="0.3286939569472" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg23" pos="3.230874" type="RFGAP">
-            <parameters E0TL="0.3286939569472" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3286939569472" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg24" pos="3.328303" type="RFGAP">
-            <parameters E0TL="0.32799570279" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.32799570279" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:DCV403" pos="3.506735" type="DCV">
             <parameters effLength="0.09769"/>
@@ -2494,13 +2494,13 @@
             <parameters E0TL="0.330519116096" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg30" pos="4.404487" type="RFGAP">
-            <parameters E0TL="0.330519116096" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg31" pos="4.502457" type="RFGAP">
             <parameters E0TL="0.330519116096" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg31" pos="4.502457" type="RFGAP">
+            <parameters E0TL="0.330519116096" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg32" pos="4.600426" type="RFGAP">
-            <parameters E0TL="0.32985393898399995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.32985393898399995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:DCH404" pos="4.779129" type="DCH">
             <parameters effLength="0.09769"/>
@@ -2521,16 +2521,16 @@
             <parameters E0TL="0.3323341542144" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg37" pos="5.584028" type="RFGAP">
-            <parameters E0TL="0.3323341542144" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg38" pos="5.682536" type="RFGAP">
             <parameters E0TL="0.3323341542144" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg39" pos="5.781044" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg38" pos="5.682536" type="RFGAP">
             <parameters E0TL="0.3323341542144" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg39" pos="5.781044" type="RFGAP">
+            <parameters E0TL="0.3323341542144" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg40" pos="5.879552" type="RFGAP">
-            <parameters E0TL="0.3316653242976" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3316653242976" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QTV405" pos="6.058523" type="QUAD">
             <parameters effLength="0.09769" field="13.594022"/>
@@ -2548,19 +2548,19 @@
             <parameters E0TL="0.3341017122828" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg44" pos="6.769473" type="RFGAP">
-            <parameters E0TL="0.3341017122828" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3341017122828" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg45" pos="6.868517" type="RFGAP">
-            <parameters E0TL="0.3341017122828" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg46" pos="6.96756" type="RFGAP">
             <parameters E0TL="0.3341017122828" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg47" pos="7.066603" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg46" pos="6.96756" type="RFGAP">
             <parameters E0TL="0.3341017122828" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg47" pos="7.066603" type="RFGAP">
+            <parameters E0TL="0.3341017122828" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg48" pos="7.165647" type="RFGAP">
-            <parameters E0TL="0.33346660894959995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.33346660894959995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:DCH406" pos="7.344886" type="DCH">
             <parameters effLength="0.09769"/>
@@ -2575,22 +2575,22 @@
             <parameters E0TL="0.3358996809696" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg51" pos="7.960794" type="RFGAP">
-            <parameters E0TL="0.3358996809696" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3358996809696" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg52" pos="8.06037" type="RFGAP">
-            <parameters E0TL="0.3358996809696" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3358996809696" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg53" pos="8.159946" type="RFGAP">
-            <parameters E0TL="0.3358996809696" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg54" pos="8.259522" type="RFGAP">
             <parameters E0TL="0.3358996809696" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg55" pos="8.359098" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg54" pos="8.259522" type="RFGAP">
             <parameters E0TL="0.3358996809696" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg55" pos="8.359098" type="RFGAP">
+            <parameters E0TL="0.3358996809696" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg56" pos="8.458674" type="RFGAP">
-            <parameters E0TL="0.33526115982719995" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.33526115982719995" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:DCV407" pos="8.63818" type="DCV">
             <parameters effLength="0.09769"/>
@@ -2602,25 +2602,25 @@
             <parameters E0TL="0.33704561004319994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg58" pos="9.157965" type="RFGAP">
-            <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg59" pos="9.258071" type="RFGAP">
-            <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg60" pos="9.358177" type="RFGAP">
-            <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg61" pos="9.458283" type="RFGAP">
-            <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg62" pos="9.55839" type="RFGAP">
             <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg63" pos="9.658496" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg62" pos="9.55839" type="RFGAP">
             <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg63" pos="9.658496" type="RFGAP">
+            <parameters E0TL="0.33768752975759997" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+        </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg64" pos="9.758602" type="RFGAP">
-            <parameters E0TL="0.33704561004319994" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.33704561004319994" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_Mag:QH408" pos="9.938373" type="QUAD">
             <parameters effLength="0.09769" field="-12.93725"/>
@@ -2629,25 +2629,25 @@
             <parameters effLength="0.09769"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg65" pos="10.360959" type="RFGAP">
-            <parameters E0TL="0.33882332648479996" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.33882332648479996" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg66" pos="10.461593" type="RFGAP">
-            <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg67" pos="10.562226" type="RFGAP">
-            <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg68" pos="10.66286" type="RFGAP">
-            <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg69" pos="10.763494" type="RFGAP">
-            <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg70" pos="10.864127" type="RFGAP">
             <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg71" pos="10.964761" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg70" pos="10.864127" type="RFGAP">
             <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg71" pos="10.964761" type="RFGAP">
+            <parameters E0TL="0.3394306728016" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg72" pos="11.065394" type="RFGAP">
             <parameters E0TL="0.33882332648479996" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
@@ -2662,22 +2662,22 @@
             <parameters/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg73" pos="11.670908" type="RFGAP">
-            <parameters E0TL="0.3405875753776" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3405875753776" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg74" pos="11.772067" type="RFGAP">
-            <parameters E0TL="0.3411980841392" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3411980841392" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg75" pos="11.873225" type="RFGAP">
-            <parameters E0TL="0.3411980841392" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3411980841392" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg76" pos="11.974384" type="RFGAP">
-            <parameters E0TL="0.3411980841392" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg77" pos="12.075542" type="RFGAP">
             <parameters E0TL="0.3411980841392" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg78" pos="12.1767" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg77" pos="12.075542" type="RFGAP">
             <parameters E0TL="0.3411980841392" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg78" pos="12.1767" type="RFGAP">
+            <parameters E0TL="0.3411980841392" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg79" pos="12.277859" type="RFGAP">
             <parameters E0TL="0.3411980841392" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
@@ -2689,19 +2689,19 @@
             <parameters effLength="0.09769" field="-11.97"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg81" pos="12.987672" type="RFGAP">
-            <parameters E0TL="0.3423484573831999" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.3423484573831999" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg82" pos="13.089352" type="RFGAP">
-            <parameters E0TL="0.34292376848119993" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.34292376848119993" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg83" pos="13.191033" type="RFGAP">
-            <parameters E0TL="0.34292376848119993" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg84" pos="13.292714" type="RFGAP">
             <parameters E0TL="0.34292376848119993" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg85" pos="13.394394" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg84" pos="13.292714" type="RFGAP">
             <parameters E0TL="0.34292376848119993" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg85" pos="13.394394" type="RFGAP">
+            <parameters E0TL="0.34292376848119993" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg86" pos="13.496075" type="RFGAP">
             <parameters E0TL="0.34292376848119993" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
@@ -2719,16 +2719,16 @@
             <parameters/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg89" pos="14.311215" type="RFGAP">
-            <parameters E0TL="0.34409587183999996" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
+            <parameters E0TL="0.34409587183999996" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg90" pos="14.413415" type="RFGAP">
-            <parameters E0TL="0.34467411944" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
-        </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg91" pos="14.515615" type="RFGAP">
             <parameters E0TL="0.34467411944" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
-        <accElement length="0.0" name="CCL_RF:Cav04:Rg92" pos="14.617815" type="RFGAP">
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg91" pos="14.515615" type="RFGAP">
             <parameters E0TL="0.34467411944" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
+        </accElement>
+        <accElement length="0.0" name="CCL_RF:Cav04:Rg92" pos="14.617815" type="RFGAP">
+            <parameters E0TL="0.34467411944" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
         <accElement length="0.0" name="CCL_RF:Cav04:Rg93" pos="14.720015" type="RFGAP">
             <parameters E0TL="0.34467411944" amp="3.772" gapLength="0.015" modePhase="1.0" parentCvaity="CCL4"/>
@@ -2743,7 +2743,7 @@
             <parameters E0TL="0.34409587183999996" amp="3.772" gapLength="0.015" modePhase="0.0" parentCvaity="CCL4"/>
         </accElement>
     </CCL4>
-    <SCLMed length="66.962" name="SCLMed">
+    <SCLMed bpmFrequency="4.025E8" length="66.962" name="SCLMed" rfFrequency="8.05E8">
         <accElement length="0.0" name="SCL_Diag:BPM00a" pos="0.221842" type="MARKER">
             <parameters/>
         </accElement>
@@ -3519,7 +3519,7 @@
             <parameters effLength="0.38"/>
         </accElement>
     </SCLMed>
-    <SCLHigh length="171.294012" name="SCLHigh">
+    <SCLHigh bpmFrequency="4.025E8" length="171.294012" name="SCLHigh" rfFrequency="8.05E8">
         <accElement length="0.0" name="SCL_RF:Cav12a:Rg01" pos="0.158391" type="RFGAP">
             <parameters E0TL="2.0312721354253123" amp="25.492009375" firstPhase="-89.714" gapLength="0.015" modePhase="0.0" parentCvaity="SCL_RF:Cav12a"/>
         </accElement>
