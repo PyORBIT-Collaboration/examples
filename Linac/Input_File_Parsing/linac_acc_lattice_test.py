@@ -24,12 +24,9 @@ for seq in sequences:
 	totalLength +=  seq.getLength()	
 	print "seq=",seq.getName()," L=",seq.getLength(),"  total length=",totalLength
 
-	
 lattFactory = 	LinacLatticeFactory(linacTree)
-#accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"])
-accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1"])
+accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"])
 
-	
 b = Bunch()
 syncPart = b.getSyncParticle()
 #set H- mass
@@ -43,22 +40,19 @@ actionContainer = AccActionsContainer("Test Design Bunch Tracking")
 
 def test_action(paramsDict):
 	node = paramsDict["node"]
-	pos = paramsDict["test_pos"]
-	bunch = paramsDict["bunch"]
-	eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
 	length = node.getLength()
-	print "test debug i=",paramsDict["count"]," node=",node.getName()," pos=",(pos+length/2.0)," end pos=",(pos+length)," Ekin[MeV]=",eKin 
-	pos = pos + length
-	paramsDict["test_pos"] = pos
-	paramsDict["count"]	+= 1
+	pos = paramsDict["test_pos"] + length
+	paramsDict["test_pos"] = pos	
+	bunch = paramsDict["bunch"]
+	eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3	
+	if(node.getName().find(":Rg") >= 0):
+		paramsDict["count"]	+= 1
+		print "test debug i=",paramsDict["count"]," node=",node.getName()," pos=",(pos - length/2)," Ekin[MeV]=",eKin 
 
-	
+actionContainer.addAction(test_action, AccActionsContainer.EXIT)
 
-actionContainer.addAction(test_action, AccActionsContainer.ENTRANCE)
 
 accLattice.trackDesignBunch(b, paramsDict = paramsDict, actionContainer = actionContainer)
-
-
 
 sys.exit(1)
 

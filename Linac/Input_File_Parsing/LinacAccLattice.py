@@ -161,9 +161,10 @@ class LinacLatticeFactory():
 		for seq in seqencesLocal:
 			seqencesLocalNames.append(seq.getName())
 		ind_old = -1
+		count = 0
 		for name in names:
 			ind = seqencesLocalNames.index(name)
-			if(ind < 0 or ind != (ind_old + 1) ):
+			if(ind < 0 or (count > 0 and ind != (ind_old + 1))):
 				msg = "The LinacLatticeFactory method getLinacAccLattice(names): sequence names array is wrong!"
 				msg = msg + os.linesep
 				msg = msg + "existing names=" + str(seqencesLocalNames)
@@ -171,6 +172,7 @@ class LinacLatticeFactory():
 				msg = msg + "sequence names="+str(names)
 				orbitFinalize(msg)
 			ind_old = ind
+			count += 1
 		#	let's check that the names in good order  ==stop==			
 		ind_start = seqencesLocalNames.index(names[0])
 		sequences = self.ltree.getSeqs()[ind_start:ind_start+len(names)]
@@ -219,6 +221,7 @@ class LinacLatticeFactory():
 				elif(node.getType() == "RFGAP"):
 					accNode = BaseRF_Gap(node.getName())
 					accNode.updateParamsDict(node.getParamsDict())	
+					accNode.setParam("gapOffset",float(node.getParam("gapOffset")))					
 					accNode.setLength(float(node.getParam("gapLength")))
 					accNode.setParam("amp",float(node.getParam("amp")))
 					#the parameter from XAL in MeV, we use GeV
@@ -1019,9 +1022,12 @@ class BaseRF_Gap(BaseLinacNode):
 		"""
 		index = self.getActivePartIndex()
 		length = self.getLength(index)
-		bunch = paramsDict["bunch"]		
+		bunch = paramsDict["bunch"]			
 		if(index == 0 or index == 2):
-			TPB.drift(bunch, length)
+			gapOffset = 0.
+			if(self.hasParam("gapOffset")): gapOffset = self.getParam("gapOffset")
+			if(index == 2): gapOffset = -gapOffset
+			TPB.drift(bunch, length + gapOffset)
 			return
 		E0TL = self.getParam("E0TL")		
 		modePhase = self.getParam("modePhase")*math.pi
@@ -1055,21 +1061,25 @@ class BaseRF_Gap(BaseLinacNode):
 		length = self.getLength(index)
 		bunch = paramsDict["bunch"]
 		if(index == 0 or index == 2):
-			TPB.drift(bunch, length)
+			gapOffset = 0.
+			if(self.hasParam("gapOffset")): gapOffset = self.getParam("gapOffset")
+			if(index == 2): gapOffset = -gapOffset
+			TPB.drift(bunch, length + gapOffset)
 			return		
 		E0TL = self.getParam("E0TL")			
 		rfCavity = self.getParam("rfCavity")
-		modePhase = self.getParam("modePhase")*math.pi		
+		modePhase = self.getParam("modePhase")*math.pi	
+		arrival_time = bunch.getSyncParticle().time()
 		frequency = rfCavity.getFrequency()	
 		rfPhase = rfCavity.getDesignPhase() + modePhase
 		phase = rfPhase
 		if(self.__isFirstGap):
-			arrival_time = bunch.getSyncParticle().time()
 			rfCavity.setDesignArrivalTime(arrival_time)
 		else:
 			first_gap_arr_time = rfCavity.getDesignArrivalTime()
-			arrival_time = bunch.getSyncParticle().time()
-			phase = math.fmod(frequency*(arrival_time - first_gap_arr_time)*2.0*math.pi+rfPhase,2.0*math.pi)				
+			#print "debug name=",self.getName()," delta_phase=",frequency*(arrival_time - first_gap_arr_time)*360.0," rfPhase=",rfPhase*180/math.pi
+			phase = math.fmod(frequency*(arrival_time - first_gap_arr_time)*2.0*math.pi+rfPhase,2.0*math.pi)		
+		#print "debug name=",self.getName()," arr_time=",arrival_time," phase=",phase*180./math.pi," E0TL=",E0TL*1.0e+3," freq=",frequency
 		#------------------------------------------------------
 		# ???? call rf gap with E0TL phase phase of the gap and a longitudinal shift parameter	
 		syncPart = bunch.getSyncParticle()
@@ -1077,7 +1087,7 @@ class BaseRF_Gap(BaseLinacNode):
 		eKin = eKin + E0TL*math.cos(phase)
 		syncPart.kinEnergy(eKin)	
 		eKin = syncPart.kinEnergy()
-		print "debug RF E0TL=",E0TL," phase=",phase*180./math.pi," eKin[MeV]=",eKin*1.0e+3
+		#print "debug RF E0TL=",E0TL," phase=",phase*180./math.pi," eKin[MeV]=",eKin*1.0e+3
 
 
 class TiltElement(BaseLinacNode):
