@@ -1022,7 +1022,8 @@ class BaseRF_Gap(BaseLinacNode):
 		"""
 		index = self.getActivePartIndex()
 		length = self.getLength(index)
-		bunch = paramsDict["bunch"]			
+		bunch = paramsDict["bunch"]		
+		syncPart = bunch.getSyncParticle()
 		if(index == 0 or index == 2):
 			gapOffset = 0.
 			if(self.hasParam("gapOffset")): gapOffset = self.getParam("gapOffset")
@@ -1036,7 +1037,7 @@ class BaseRF_Gap(BaseLinacNode):
 		rfPhase = rfCavity.getPhase() + modePhase
 		phase = rfPhase
 		if(self.__isFirstGap):
-			arrival_time = bunch.getSyncParticle().time()
+			arrival_time = syncPart.time()
 			rfCavity.setFirstGapTime(arrival_time)
 			if(rfCavity.isDesignSetUp()):
 				designArrivalTime = rfCavity.getDesignArrivalTime()
@@ -1047,7 +1048,6 @@ class BaseRF_Gap(BaseLinacNode):
 			phase = math.fmod(frequency*(arrival_time - first_gap_arr_time)*2.0*math.pi+rfPhase,2.0*math.pi)	
 		#------------------------------------------------------
 		# ???? call rf gap with E0TL phase phase of the gap and a longitudinal shift parameter	
-		syncPart = bunch.getSyncParticle()
 		eKin = syncPart.kinEnergy()
 		eKin = eKin + E0TL*math.cos(phase)
 		syncPart.kinEnergy(eKin)
@@ -1197,7 +1197,7 @@ class RF_Cavity(NamedObject,ParamsDictObject):
 		""" Sets the design set up information (yes,no). """
 		self.setParam("isDesignSetUp",designOnOf)	
 
-	def istDesignSetUp(self):
+	def isDesignSetUp(self):
 		""" Returns the design set up information (yes,no). """
 		return self.getParam("isDesignSetUp")	
 		
