@@ -75,13 +75,13 @@ class LinacAccLattice(AccLattice):
 		bunch.getSyncParticle().time(0.)	
 		paramsDict["bunch"] = bunch
 		
-		def trackDesignBunch(localParamsDict):
+		def trackDesign(localParamsDict):
 			node = localParamsDict["node"]
-			node.trackDesignBunch(localParamsDict)
+			node.trackDesign(localParamsDict)
 			
-		actionContainer.addAction(trackDesignBunch, AccActionsContainer.BODY)
+		actionContainer.addAction(trackDesign, AccActionsContainer.BODY)
 		self.trackActions(actionContainer,paramsDict)
-		actionContainer.removeAction(trackDesignBunch, AccActionsContainer.BODY)
+		actionContainer.removeAction(trackDesign, AccActionsContainer.BODY)
 
 	def addRF_Cavity(self,cav):
 		if(isinstance(cav, RF_Cavity) == True):
@@ -421,8 +421,7 @@ class LinacLatticeFactory():
 		for accRF_Cav in accRF_Cavs:
 		 linacAccLattice.addRF_Cavity(accRF_Cav)
 		return linacAccLattice
-		
-		
+	
 	def __getDriftThinNode(self,position,accSeq):
 		"""
 		This method will return None or the drift AccNode in accSeq which cover this
@@ -508,7 +507,7 @@ class BaseLinacNode(AccNode):
 		"""
 		pass	
 
-	def trackDesignBunch(self, paramsDict):
+	def trackDesign(self, paramsDict):
 		"""
 		The RF First Gap nodes will reload this method to setup the design time of passage 
 		of the bunch through this node
@@ -1052,7 +1051,7 @@ class BaseRF_Gap(BaseLinacNode):
 		eKin = eKin + E0TL*math.cos(phase)
 		syncPart.kinEnergy(eKin)
 		
-	def trackDesignBunch(self, paramsDict):
+	def trackDesign(self, paramsDict):
 		"""
 		The RF First Gap node setups the design time of passage 
 		of the bunch through this node.
