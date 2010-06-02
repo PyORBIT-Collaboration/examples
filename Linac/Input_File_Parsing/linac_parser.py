@@ -31,16 +31,14 @@ class LinacStuctNode(NamedObject, TypedObject, ParamsDictObject):
 		return self.setParam("length",length)			
 
 		
-class LinacStructSeq(	NamedObject, TypedObject, ParamsDictObject):
+class LinacStructSeq(	LinacStuctNode):
 	"""	
 	The linac sequence. It includes the LinacStuctNodes. It has the length parameter
 	"""
 	def __init__(self, name = "None"):
-		NamedObject.__init__(self,name)
-		TypedObject.__init__(self,type_in = "sequence")
-		ParamsDictObject.__init__(self)
+		LinacStuctNode.__init__(self,name)
+		self.setType("sequence")
 		self.nodes = []
-		self.setParam("length",0.)
 		
 	def addNode(self,node):
 		if(not isinstance(node,LinacStuctNode)):
@@ -57,18 +55,6 @@ class LinacStructSeq(	NamedObject, TypedObject, ParamsDictObject):
 		user can modify it on his/her own risk.
 		"""		
 		return self.nodes
-		
-	def getLength(self):
-		"""
-		Returns the total length of the sequence [m].
-		"""		
-		return self.getParam("length")
-		
-	def setLength(self, length):
-		"""
-		Sets the total length of the sequence [m].
-		"""		
-		return self.setParam("length",length)		
 
 class LinacStructTree(NamedObject, TypedObject, ParamsDictObject):
 	"""	
