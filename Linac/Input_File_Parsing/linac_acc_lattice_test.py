@@ -7,14 +7,15 @@ linac acc lattice.
 
 import sys
 
-from linac_parser import SimplifiedLinacParser
-from LinacAccLattice import LinacLatticeFactory, LinacAccLattice
+from orbit.sns_linac import SimplifiedLinacParser
+from orbit.sns_linac import LinacLatticeFactory, LinacAccLattice
+
 from bunch import Bunch
 
 from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 
 parser = SimplifiedLinacParser("sns_linac.xml")
-linacTree = parser.getLinacStructTree()
+linacTree = parser.getLinacStructureTree()
 print "======================================="
 print "Total length=",linacTree.getLength()
 print "======================================="
