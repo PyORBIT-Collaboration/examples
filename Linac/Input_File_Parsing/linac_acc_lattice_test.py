@@ -2,7 +2,8 @@
 
 """
 This is a test script to check the functionality of the 
-linac acc lattice.
+linac acc lattice. It will print out the table with the
+positions of RF gaps and energies after each gap.
 """
 
 import sys
@@ -39,6 +40,10 @@ syncPart.kinEnergy(0.0025)
 paramsDict = {"test_pos":0.,"count":0}
 actionContainer = AccActionsContainer("Test Design Bunch Tracking")
 
+outF = open("sns_linac_energy.dat","w")
+
+
+print "   N           node           position           kinEnergy[MeV]      "
 def test_action(paramsDict):
 	node = paramsDict["node"]
 	length = node.getLength()
@@ -48,12 +53,17 @@ def test_action(paramsDict):
 	eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3	
 	if(node.getName().find(":Rg") >= 0):
 		paramsDict["count"]	+= 1
-		print "test debug i=",paramsDict["count"]," node=",node.getName()," pos=",(pos - length/2)," Ekin[MeV]=",eKin 
+		s = " %5d     %25s     %4.5f     %5.3f  "%(paramsDict["count"],node.getName(),(pos - length/2),eKin)
+		outF.write(s+"\n")
+		print s
 
 actionContainer.addAction(test_action, AccActionsContainer.EXIT)
 
-
 accLattice.trackDesignBunch(b, paramsDict = paramsDict, actionContainer = actionContainer)
+
+outF.close()
+
+#accLattice.trackBunch(b, paramsDict = paramsDict, actionContainer = actionContainer)
 
 sys.exit(1)
 
