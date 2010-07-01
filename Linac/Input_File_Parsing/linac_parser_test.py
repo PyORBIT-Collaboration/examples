@@ -9,7 +9,7 @@ import sys
 
 from orbit.sns_linac  import SimplifiedLinacParser
 
-parser = SimplifiedLinacParser("sns_linac.xml")
+parser = SimplifiedLinacParser("../SNS_Linac_XML/sns_linac.xml")
 linacTree = parser.getLinacStructureTree()
 print "======================================="
 print "Total length=",linacTree.getLength()

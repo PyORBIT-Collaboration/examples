@@ -4,9 +4,12 @@
 This is a test script to check the functionality of the 
 linac acc lattice. It will print out the table with the
 positions of RF gaps and energies after each gap.
+Keep in mind that phases in pyORBIT linac RF cavities are shifted by 180
+because we track the negative ions for SNS.
 """
 
 import sys
+import math
 
 from orbit.sns_linac import SimplifiedLinacParser
 from orbit.sns_linac import LinacLatticeFactory, LinacAccLattice
@@ -15,7 +18,7 @@ from bunch import Bunch
 
 from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 
-parser = SimplifiedLinacParser("sns_linac.xml")
+parser = SimplifiedLinacParser("../SNS_Linac_XML/sns_linac.xml")
 linacTree = parser.getLinacStructureTree()
 print "======================================="
 print "Total length=",linacTree.getLength()
@@ -54,7 +57,7 @@ def test_action(paramsDict):
 	if(node.getName().find(":Rg") >= 0):
 		paramsDict["count"]	+= 1
 		s = " %5d     %25s     %4.5f     %5.3f  "%(paramsDict["count"],node.getName(),(pos - length/2),eKin)
-		outF.write(s+"\n")
+		#outF.write(s+"\n")
 		print s
 
 actionContainer.addAction(test_action, AccActionsContainer.EXIT)
@@ -63,7 +66,7 @@ accLattice.trackDesignBunch(b, paramsDict = paramsDict, actionContainer = action
 
 outF.close()
 
-#accLattice.trackBunch(b, paramsDict = paramsDict, actionContainer = actionContainer)
+accLattice.trackBunch(b, paramsDict = paramsDict, actionContainer = actionContainer)
 
 sys.exit(1)
 
