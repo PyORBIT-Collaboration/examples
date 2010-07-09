@@ -43,7 +43,7 @@ bunch = Bunch()
 bunch.mass(0.939294)
 bunch.charge(-1.0)
 bunch.getSyncParticle().kinEnergy(0.0025)
-bunch.addParticle(0.001,0.0,0.001,0.0,0.0,0.0)
+bunch.addParticle(0.000,0.0,0.000,0.0,0.001,0.0)
 
 #set up design
 accLattice.trackDesignBunch(bunch)
@@ -54,9 +54,9 @@ print "Design tracking completed."
 paramsDict = {"test_pos":0.,"count":0}
 actionContainer = AccActionsContainer("Test Design Bunch Tracking")
 
-print "N  name position  x  xp    y  yp   z   dE  eKin "
+print " N  name position[m]  x[mm]  xp[mrad]    y[mm]  yp[mrad]   z[mm]   dE[keV]  eKin[MeV]  "
 file_out = open("pyorbit_trajectory_ekin.dat","w")
-file_out.write(" N  name position  x  xp    y  yp   z   dE  eKin  \n")
+file_out.write(" N  name position[m]  x[mm]  xp[mrad]    y[mm]  yp[mrad]   z[mm]   dE[keV]  eKin[MeV]  \n")
 
 def action_entrance(paramsDict):
 	bunch = paramsDict["bunch"]
@@ -65,9 +65,9 @@ def action_entrance(paramsDict):
 	#print "debug ============= entr xp=",bunch.xp(0), "   name=",node.getName()," L=",length
 	if(isinstance(paramsDict["parentNode"],AccLattice)):
 		pos = paramsDict["test_pos"]
-		(x,xp,y,yp,z,dE) = (bunch.x(0)*1000.,bunch.xp(0)*1000.,bunch.y(0)*1000.,bunch.yp(0)*1000.,bunch.z(0)*1000.,bunch.dE(0)*1000.)
+		(x,xp,y,yp,z,dE) = (bunch.x(0)*1000.,bunch.xp(0)*1000.,bunch.y(0)*1000.,bunch.yp(0)*1000.,bunch.z(0)*1000.,bunch.dE(0)*1000.*1000.)
 		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
-		s = " %5d  %35s  %4.5f  %9.6f  %9.6f  %9.6f  %9.3f  %9.6f  %9.3f   %12.6f  "%(paramsDict["count"],node.getName(),pos,x,xp,y,yp,z,dE,eKin)
+		s = " %5d  %35s  %4.5f  %9.6f  %9.6f  %9.6f  %9.3f  %9.6f  %9.5f   %12.6f  "%(paramsDict["count"],node.getName(),pos,x,xp,y,yp,z,dE,eKin)
 		file_out.write(s +"\n")
 		print s		
 	
@@ -81,9 +81,9 @@ def action_exit(paramsDict):
 	#print "debug ============= exit xp=",bunch.xp(0), "   name=",node.getName()," L=",length
 	if(isinstance(paramsDict["parentNode"],AccLattice)):	
 		paramsDict["count"]	+= 1
-		(x,xp,y,yp,z,dE) = (bunch.x(0)*1000.,bunch.xp(0)*1000.,bunch.y(0)*1000.,bunch.yp(0)*1000.,bunch.z(0)*1000.,bunch.dE(0)*1000.)
+		(x,xp,y,yp,z,dE) = (bunch.x(0)*1000.,bunch.xp(0)*1000.,bunch.y(0)*1000.,bunch.yp(0)*1000.,bunch.z(0)*1000.,bunch.dE(0)*1000.*1000.)
 		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
-		s = " %5d  %35s  %4.5f  %9.6f  %9.6f  %9.6f  %9.3f  %9.6f  %9.3f   %12.6f  "%(paramsDict["count"],node.getName(),pos,x,xp,y,yp,z,dE,eKin)
+		s = " %5d  %35s  %4.5f  %9.6f  %9.6f  %9.6f  %9.3f  %9.6f  %9.5f   %12.6f  "%(paramsDict["count"],node.getName(),pos,x,xp,y,yp,z,dE,eKin)
 		file_out.write(s +"\n")
 		print s	
 	

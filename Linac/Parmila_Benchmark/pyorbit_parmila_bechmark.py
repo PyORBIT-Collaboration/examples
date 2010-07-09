@@ -22,7 +22,7 @@ from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 
 from sns_linac_bunch_generator import SNS_Linac_BunchGenerator
 
-random.seed(1)
+random.seed(100)
 
 parser = SimplifiedLinacParser("../SNS_Linac_XML/sns_linac.xml")
 linacTree = parser.getLinacStructureTree()
@@ -44,10 +44,15 @@ print "Acc Lattice is ready. "
 #-----TWISS Parameters at the entrance of the MEBT ---------------
 # transverse emittances are normalized and in pi*mm*mrad
 # longitudinal emittance is in pi*eV*sec
-beta = 0.0728
-gamma = 1.0027
+e_kin_ini = 0.0025 # in [GeV]
+mass = 0.939294    # in [GeV]
+gamma = (mass + e_kin_ini)/mass
+beta = math.sqrt(gamma*gamma - 1.0)/gamma
+print "relat. gamma=",gamma
+print "relat.  beta=",beta
 frequency = 402.5e+6
-v_light = 2.99792458e+8
+v_light = 2.99792458e+8  # in [m/sec]
+
 
 emittX = 0.21
 emittY = 0.21
@@ -69,14 +74,21 @@ betaZ = (772.8/360.)*(v_light*beta/frequency)*1.0e+3
 
 print " aplha beta emitt X=",alphaX,betaX,emittX
 print " aplha beta emitt Y=",alphaY,betaY,emittY
+print " aplha beta emitt Z=",alphaZ,betaZ,emittZ
 
 twissX = TwissContainer(alphaX,betaX,emittX)
 twissY = TwissContainer(alphaY,betaY,emittY)
 twissZ = TwissContainer(alphaZ,betaZ,emittZ)
+
+xal_emittZ = emittZ/(gamma**3*beta**2*mass)
+xal_betaZ = betaZ*(gamma**3*beta**2*mass)
+print "XAL Twiss Longitudinal parameters alpha=",alphaZ," beta=", xal_betaZ," emittZ =",xal_emittZ
+print "==============================================="
+
 print "Start Bunch Generation."
 bunch_gen = SNS_Linac_BunchGenerator(twissX,twissY,twissZ)
 
-bunch_in = bunch_gen.getBunch(nParticles = 50000, distributorClass = WaterBagDist3D)
+bunch_in = bunch_gen.getBunch(nParticles = 5000, distributorClass = WaterBagDist3D)
 
 bunch_gen.dumpParmilaFile(bunch_in, phase_init = -45.0, fileName = 	"parmila_bunch.txt")
 print "Bunch Generation completed."
@@ -93,9 +105,9 @@ twiss_analysis = TwissAnalysis(3)
 
 
 
-print "   N           node           position         sizeX       sizeY   sizeXP   sizeYP   eKin "
+print "   N           node           position         sizeX       sizeY    sizeZ    sizeXP   sizeYP   size_dE   eKin "
 file_out = open("pyorbit_sizes_ekin.dat","w")
-file_out.write(" N           node           position         sizeX       sizeY   sizeXP   sizeYP  eKin \n")
+file_out.write(" N           node   position  sizeX  sizeY  sizeZ  sizeXP  sizeYP sizedE  eKin Nparts \n")
 
 def action_entrance(paramsDict):
 	if(isinstance(paramsDict["parentNode"],AccLattice)):
@@ -105,21 +117,18 @@ def action_entrance(paramsDict):
 		twiss_analysis.init()
 		for i in range(bunch.getSize()):
 			(x,xp,y,yp,z,dE) = (bunch.x(i),bunch.xp(i),bunch.y(i),bunch.yp(i),bunch.z(i),bunch.dE(i))
-			r = math.sqrt(x*x + y*y)
-			if(r < 1.03):
-				twiss_analysis.account((x,xp,y,yp,z,dE))
-			else:
-				bunch.deleteParticleFast(i)
-		bunch.compress()
+			twiss_analysis.account((x,xp,y,yp,z,dE))
 		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
+		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
 		xp_rms = math.sqrt(twiss_analysis.getTwiss(0)[2]*twiss_analysis.getTwiss(0)[3])*1000.
-		yp_rms = math.sqrt(twiss_analysis.getTwiss(1)[2]*twiss_analysis.getTwiss(1)[3])*1000.	
-		emittX = twiss_analysis.getTwiss(0)[3]*1000.0*1000.0	*bunch.getSyncParticle().gamma()*bunch.getSyncParticle().beta()
+		yp_rms = math.sqrt(twiss_analysis.getTwiss(1)[2]*twiss_analysis.getTwiss(1)[3])*1000.
+		dE_rms = math.sqrt(twiss_analysis.getTwiss(2)[2]*twiss_analysis.getTwiss(2)[3])*1000. 
+		#emittX = twiss_analysis.getTwiss(0)[3]*1000.0*1000.0	*bunch.getSyncParticle().gamma()*bunch.getSyncParticle().beta()
 		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
-		s = " %5d  %35s  %4.5f  %5.3f  %5.3f   %5.3f   %5.3f   %10.6f   %8d "%(paramsDict["count"],node.getName(),pos,x_rms,y_rms,xp_rms,yp_rms,eKin,bunch.getSize())
+		s = " %5d  %35s  %4.5f  %5.3f  %5.3f   %5.3f  %5.3f  %5.3f  %7.5f  %10.6f   %8d "%(paramsDict["count"],node.getName(),pos,x_rms,y_rms,z_rms,xp_rms,yp_rms,dE_rms,eKin,bunch.getSize())
 		file_out.write(s +"\n")
-		print s," emittX=",	emittX	
+		print s	
 	
 
 def action_exit(paramsDict):
@@ -136,13 +145,15 @@ def action_exit(paramsDict):
 			twiss_analysis.account((x,xp,y,yp,z,dE))
 		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
+		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
 		xp_rms = math.sqrt(twiss_analysis.getTwiss(0)[2]*twiss_analysis.getTwiss(0)[3])*1000.
-		yp_rms = math.sqrt(twiss_analysis.getTwiss(1)[2]*twiss_analysis.getTwiss(1)[3])*1000.		
-		emittX = twiss_analysis.getTwiss(0)[3]*1000.0*1000.0	*bunch.getSyncParticle().gamma()*bunch.getSyncParticle().beta()
+		yp_rms = math.sqrt(twiss_analysis.getTwiss(1)[2]*twiss_analysis.getTwiss(1)[3])*1000.
+		dE_rms = math.sqrt(twiss_analysis.getTwiss(2)[2]*twiss_analysis.getTwiss(2)[3])*1000. 
+		#emittX = twiss_analysis.getTwiss(0)[3]*1000.0*1000.0	*bunch.getSyncParticle().gamma()*bunch.getSyncParticle().beta()
 		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
-		s = " %5d  %35s  %4.5f  %5.3f  %5.3f   %5.3f   %5.3f   %10.6f   %8d "%(paramsDict["count"],node.getName(),pos,x_rms,y_rms,xp_rms,yp_rms,eKin,bunch.getSize())
-		file_out.write(s +"\n")		
-		print s," emittX=",	emittX	
+		s = " %5d  %35s  %4.5f  %5.3f  %5.3f   %5.3f  %5.3f  %5.3f  %7.5f  %10.6f   %8d "%(paramsDict["count"],node.getName(),pos,x_rms,y_rms,z_rms,xp_rms,yp_rms,dE_rms,eKin,bunch.getSize())
+		file_out.write(s +"\n")
+		print s	
 	
 actionContainer.addAction(action_entrance, AccActionsContainer.ENTRANCE)
 actionContainer.addAction(action_exit, AccActionsContainer.EXIT)
