@@ -45,7 +45,7 @@ parmila_bunch_in.close()
 
 print "n particles =",n_parts
 mass = 939.3014      # MeV - mass of H-
-e_kin = twiss_analysis.getAvgA_AP(2)[1]
+e_kin = twiss_analysis.getAvgU_UP(2)[1]
 gamma = 1.0 + e_kin/mass
 beta = math.sqrt(1.0 - 1.0/gamma**2)
 bg = gamma*beta
@@ -66,24 +66,24 @@ print "Y alpha= %12.5g    beta [cm/rad]  =%12.5g    gamma = %12.5g  norm. emitt[
 print "Z alpha= %12.5g    beta [deg/MeV] =%12.5g    gamma = %12.5g  emitt[deg*MeV] = %12.5g "%(alpha_z,beta_z,gamma_z,emitt_z)
 
 print "-------------------centroid params--------------------------------------"
-print "X x_avg [cm]    =%12.5g    xp_avg [rad]  =%12.5g "%twiss_analysis.getAvgA_AP(0)
-print "Y y_avg [cm]    =%12.5g    xp_avg [rad]  =%12.5g "%twiss_analysis.getAvgA_AP(1)
-print "Z phi_avg [deg] =%12.5g    Ek [Mev]      =%12.5g "%twiss_analysis.getAvgA_AP(2)
+print "X x_avg [cm]    =%12.5g    xp_avg [rad]  =%12.5g "%twiss_analysis.getAvgU_UP(0)
+print "Y y_avg [cm]    =%12.5g    xp_avg [rad]  =%12.5g "%twiss_analysis.getAvgU_UP(1)
+print "Z phi_avg [deg] =%12.5g    Ek [Mev]      =%12.5g "%twiss_analysis.getAvgU_UP(2)
 
-(x_rms,xp_rms) =  twiss_analysis.getRmsA_AP(0)
-(y_rms,yp_rms) =  twiss_analysis.getRmsA_AP(1)
-(z_rms,zp_rms) =  twiss_analysis.getRmsA_AP(2)
+(x_rms,xp_rms) =  twiss_analysis.getRmsU_UP(0)
+(y_rms,yp_rms) =  twiss_analysis.getRmsU_UP(1)
+(z_rms,zp_rms) =  twiss_analysis.getRmsU_UP(2)
 print "-------------------Rms--------------------------------------"
 print "X x_rms [cm]    =%12.5g  xp_rms [deg] =%12.5g "%(x_rms,xp_rms*180./math.pi)
 print "Y y_rms [cm]    =%12.5g  yp_rms [deg] =%12.5g "%(y_rms,yp_rms*180./math.pi)
 print "Z phi_rms [deg] =%12.5g  Ek_rms [MeV] =%12.5g "%(z_rms,zp_rms)
 
-(x_max,xp_max) =  twiss_analysis.getMaxA_AP(0)
-(x_min,xp_min) =  twiss_analysis.getMinA_AP(0)
-(y_max,yp_max) =  twiss_analysis.getMaxA_AP(1)
-(y_min,yp_min) =  twiss_analysis.getMinA_AP(1)
-(z_max,zp_max) =  twiss_analysis.getMaxA_AP(2)
-(z_min,zp_min) =  twiss_analysis.getMinA_AP(2)
+(x_max,xp_max) =  twiss_analysis.getMaxU_UP(0)
+(x_min,xp_min) =  twiss_analysis.getMinU_UP(0)
+(y_max,yp_max) =  twiss_analysis.getMaxU_UP(1)
+(y_min,yp_min) =  twiss_analysis.getMinU_UP(1)
+(z_max,zp_max) =  twiss_analysis.getMaxU_UP(2)
+(z_min,zp_min) =  twiss_analysis.getMinU_UP(2)
 print "-------------------Min Max--------------------------------------"
 print "X x_min_max [cm]    =%12.5g %12.5g  xp_min_max [rad] =%12.5g %12.5g "%(x_min,x_max,xp_min,xp_max)
 print "Y y_min_max [cm]    =%12.5g %12.5g  yp_min_max [rad] =%12.5g %12.5g "%(y_min,y_max,yp_min,yp_max)

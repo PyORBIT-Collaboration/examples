@@ -36,9 +36,9 @@ for seq in sequences:
 	print "seq=",seq.getName()," L=",seq.getLength(),"  total length=",totalLength
 
 lattFactory = 	LinacLatticeFactory(linacTree)
-lattFactory.setMaxDriftLength(0.1)
-#accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"])
-accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6"])
+lattFactory.setMaxDriftLength(0.5)
+accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"])
+#accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1"])
 
 print "Acc Lattice is ready. "
 #-----TWISS Parameters at the entrance of the MEBT ---------------
