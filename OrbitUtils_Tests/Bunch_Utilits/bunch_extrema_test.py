@@ -1,3 +1,7 @@
+#-----------------------------------------------------
+# Calculates the min and max coordinates for the bunch
+#-----------------------------------------------------
+
 import sys
 import math
 
