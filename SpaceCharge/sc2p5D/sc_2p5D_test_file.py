@@ -18,30 +18,17 @@ calc2p5d = SpaceChargeCalc2p5D(sizeX,sizeY,sizeZ,1)
 charge = 1.0
 
 b = Bunch()
+b.readBunch("input_0.dat")
 b.addPartAttr("macrosize")
 
 macroSize = 1.0e-13
-
+nParts = b.getSize()
+b.partAttrValue("macrosize",0,0,macroSize)
+for i in range(nParts-1):
+	b.partAttrValue("macrosize",i+1,0,0.)
 energy = 1.0
 b.getSyncParticle().kinEnergy(energy)
 
-b.addParticle( 0.,0.,0.,0.,0.,0.)
-b.addParticle( 0.001,0.,0.,0.,0.,0.)
-b.addParticle(-0.001,0.,0.,0.,0.,0.)
-b.addParticle( 0.,0., 0.001,0.,0.,0.)
-b.addParticle( 0.,0.,-0.001,0.,0.,0.)
-b.addParticle( 0.,0.,0.,0., 0.001,0.)
-b.addParticle( 0.,0.,0.,0.,-0.001,0.)
-
-b.partAttrValue("macrosize",0,0,macroSize)
-b.partAttrValue("macrosize",1,0,0.)
-b.partAttrValue("macrosize",2,0,0.)
-b.partAttrValue("macrosize",3,0,0.)
-b.partAttrValue("macrosize",4,0,0.)
-b.partAttrValue("macrosize",5,0,0.)
-b.partAttrValue("macrosize",6,0,0.)
-
-nParts = b.getSize()
 macroSize = macroSize/nParts
 b.macroSize(macroSize)
 
@@ -52,9 +39,9 @@ print "mass=",b.mass()
 slice_length = 0.1
 
 print "without boundary."
-b.dumpBunch("pyorbit_bunch_test.in")
+b.dumpBunch("pyorbit_bunch_file_test.in")
 calc2p5d.trackBunch(b,slice_length)
-b.dumpBunch("pyorbit_bunch_test.out")
+b.dumpBunch("pyorbit_bunch_file_test.out")
 
 print "with boundary."
 nBoundaryPoints = 128
@@ -68,6 +55,6 @@ for i in xrange(nBoundaryPoints):
 boundary.initialize()
 
 calc2p5d.trackBunch(b,slice_length,boundary)
-b.dumpBunch("pyorbit_bunch_boundary_test.out")
+b.dumpBunch("pyorbit_bunch_file_boundary_test.out")
 
 print "Stop."
