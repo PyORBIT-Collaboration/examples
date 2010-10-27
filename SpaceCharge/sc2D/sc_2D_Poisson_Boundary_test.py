@@ -97,7 +97,7 @@ for i in xrange(n_angle_steps):
 	phi_th = -math.log(dist/dist_prime)	- phi_delta
 	ratio = 0.
 	if(phi_th != 0.): ratio = phi/phi_th
-	print "",i," %7.4f  %7.4f  %12.5g  %12.5g  %12.5g  "%(x,y,phi,phi_th,ratio) 
+	print "",i," %7.4f  %7.4f  %12.5g  %12.5g  %12.7g  "%(x,y,phi,phi_th,ratio) 
 
 print "Stop."
 
