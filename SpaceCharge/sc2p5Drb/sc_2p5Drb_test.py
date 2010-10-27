@@ -17,9 +17,10 @@ print "Start."
 
 sizeX = 64
 sizeY = 64
-sizeZ = 10
+sizeZ = 5
+long_avg_n = 3
 calc2p5d = SpaceChargeCalc2p5Drb(sizeX,sizeY,sizeZ)
-
+calc2p5d.setLongAveragingPointsN(long_avg_n)
 
 macroSize = 1.0e+13
 energy = 1.0
@@ -68,11 +69,7 @@ print "Stop Poisson Solver."
 rhoGrid = calc2p5d.getRhoGrid()
 phiGrid = calc2p5d.getPhiGrid()
 longGrid = calc2p5d.getLongGrid()
-
-s_long = 0.
-for il in range(longGrid.getSizeZ()):
-	s_long +=  longGrid.getValueOnGrid(il)
-print "debug s_long =",s_long
+longDerivGrid = calc2p5d.getLongDerivativeGrid()
 
 x = bunch_radius/2.0
 y = 0.
@@ -147,7 +144,7 @@ for ix in range(nStep+1):
 long_grad_arr = []
 for ix in range(nStep+1):
 	z = ix*bunch_length/nStep - bunch_length/2.0
-	long_grad_rho = longGrid.calcGradient(z)/longGrid.getStepZ()
+	long_grad_rho = longDerivGrid.getValue(z)/longGrid.getStepZ()
 	long_grad_arr.append((z,long_grad_rho))
 		
 
