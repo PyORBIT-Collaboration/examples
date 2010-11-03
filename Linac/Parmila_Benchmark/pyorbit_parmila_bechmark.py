@@ -36,9 +36,33 @@ for seq in sequences:
 	print "seq=",seq.getName()," L=",seq.getLength(),"  total length=",totalLength
 
 lattFactory = 	LinacLatticeFactory(linacTree)
-lattFactory.setMaxDriftLength(0.5)
-accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"])
-#accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1"])
+lattFactory.setMaxDriftLength(0.1)
+#accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"])
+accLattice = lattFactory.getLinacAccLattice(["MEBT",])
+
+#-----------------------------------------------------
+# Set up Space Charge Acc Nodes
+#-----------------------------------------------------
+from orbit.space_charge.sc2p5d import setSC2p5DrbAccNodes
+from spacecharge import SpaceChargeCalc2p5Drb
+
+sizeX = 32
+sizeY = 32
+sizeZ = 20
+long_avg_n = 3
+calc2p5d = SpaceChargeCalc2p5Drb(sizeX,sizeY,sizeZ)
+calc2p5d.setLongAveragingPointsN(long_avg_n)
+
+pipe_radius = 0.015
+sc_path_length_min = 0.10
+space_charge_nodes = setSC2p5DrbAccNodes(accLattice,sc_path_length_min,calc2p5d,pipe_radius)
+max_sc_length = 0.
+min_sc_length = accLattice.getLength()
+for sc_node in space_charge_nodes:
+	scL = sc_node.getLengthOfSC()
+	if(scL > max_sc_length): max_sc_length = scL
+	if(scL < min_sc_length): min_sc_length = scL
+print "maximal SC length =",max_sc_length,"  min=",min_sc_length
 
 print "Acc Lattice is ready. "
 #-----TWISS Parameters at the entrance of the MEBT ---------------
@@ -88,7 +112,10 @@ print "==============================================="
 print "Start Bunch Generation."
 bunch_gen = SNS_Linac_BunchGenerator(twissX,twissY,twissZ)
 
-bunch_in = bunch_gen.getBunch(nParticles = 5000, distributorClass = WaterBagDist3D)
+#set the beam peak current in mA
+bunch_gen.setBeamCurrent(38.0)
+
+bunch_in = bunch_gen.getBunch(nParticles = 20000, distributorClass = WaterBagDist3D)
 
 bunch_gen.dumpParmilaFile(bunch_in, phase_init = -45.0, fileName = 	"parmila_bunch.txt")
 print "Bunch Generation completed."
@@ -105,9 +132,9 @@ twiss_analysis = TwissAnalysis(3)
 
 
 
-print "   N           node           position         sizeX       sizeY    sizeZ    sizeXP   sizeYP   size_dE   eKin "
+print "   N           node           position         sizeX       sizeY    sizeZ  sizeZdeg  sizeXP   sizeYP   size_dE   eKin Nparts"
 file_out = open("pyorbit_sizes_ekin.dat","w")
-file_out.write(" N           node   position  sizeX  sizeY  sizeZ  sizeXP  sizeYP sizedE  eKin Nparts \n")
+file_out.write(" N           node   position  sizeX  sizeY  sizeZ  sizeZdeg  sizeXP  sizeYP sizedE  eKin Nparts \n")
 
 def action_entrance(paramsDict):
 	if(isinstance(paramsDict["parentNode"],AccLattice)):
@@ -118,15 +145,16 @@ def action_entrance(paramsDict):
 		for i in range(bunch.getSize()):
 			(x,xp,y,yp,z,dE) = (bunch.x(i),bunch.xp(i),bunch.y(i),bunch.yp(i),bunch.z(i),bunch.dE(i))
 			twiss_analysis.account((x,xp,y,yp,z,dE))
-		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
+		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*100.
+		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*100.
 		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
+		z_rms_deg = bunch_gen.getZtoPhaseCoeff(bunch)*z_rms/1000.0
 		xp_rms = math.sqrt(twiss_analysis.getTwiss(0)[2]*twiss_analysis.getTwiss(0)[3])*1000.
 		yp_rms = math.sqrt(twiss_analysis.getTwiss(1)[2]*twiss_analysis.getTwiss(1)[3])*1000.
 		dE_rms = math.sqrt(twiss_analysis.getTwiss(2)[2]*twiss_analysis.getTwiss(2)[3])*1000. 
 		#emittX = twiss_analysis.getTwiss(0)[3]*1000.0*1000.0	*bunch.getSyncParticle().gamma()*bunch.getSyncParticle().beta()
 		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
-		s = " %5d  %35s  %4.5f  %5.3f  %5.3f   %5.3f  %5.3f  %5.3f  %7.5f  %10.6f   %8d "%(paramsDict["count"],node.getName(),pos,x_rms,y_rms,z_rms,xp_rms,yp_rms,dE_rms,eKin,bunch.getSize())
+		s = " %5d  %35s  %4.5f  %5.3f  %5.3f   %5.3f  %5.3f  %5.3f  %5.3f  %7.5f  %10.6f   %8d "%(paramsDict["count"],node.getName(),pos*100,x_rms,y_rms,z_rms,z_rms_deg,xp_rms,yp_rms,dE_rms,eKin,bunch.getSize())
 		file_out.write(s +"\n")
 		print s	
 	
@@ -143,15 +171,16 @@ def action_exit(paramsDict):
 		for i in range(bunch.getSize()):
 			(x,xp,y,yp,z,dE) = (bunch.x(i),bunch.xp(i),bunch.y(i),bunch.yp(i),bunch.z(i),bunch.dE(i))
 			twiss_analysis.account((x,xp,y,yp,z,dE))
-		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
+		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*100.
+		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*100.
 		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
+		z_rms_deg = bunch_gen.getZtoPhaseCoeff(bunch)*z_rms/1000.0		
 		xp_rms = math.sqrt(twiss_analysis.getTwiss(0)[2]*twiss_analysis.getTwiss(0)[3])*1000.
 		yp_rms = math.sqrt(twiss_analysis.getTwiss(1)[2]*twiss_analysis.getTwiss(1)[3])*1000.
 		dE_rms = math.sqrt(twiss_analysis.getTwiss(2)[2]*twiss_analysis.getTwiss(2)[3])*1000. 
 		#emittX = twiss_analysis.getTwiss(0)[3]*1000.0*1000.0	*bunch.getSyncParticle().gamma()*bunch.getSyncParticle().beta()
 		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
-		s = " %5d  %35s  %4.5f  %5.3f  %5.3f   %5.3f  %5.3f  %5.3f  %7.5f  %10.6f   %8d "%(paramsDict["count"],node.getName(),pos,x_rms,y_rms,z_rms,xp_rms,yp_rms,dE_rms,eKin,bunch.getSize())
+		s = " %5d  %35s  %4.5f  %5.3f  %5.3f   %5.3f  %5.3f  %5.3f  %5.3f  %7.5f  %10.6f   %8d "%(paramsDict["count"],node.getName(),pos*100,x_rms,y_rms,z_rms,z_rms_deg,xp_rms,yp_rms,dE_rms,eKin,bunch.getSize())
 		file_out.write(s +"\n")
 		print s	
 	
