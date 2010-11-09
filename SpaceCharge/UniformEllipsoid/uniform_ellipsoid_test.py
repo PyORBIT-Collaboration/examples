@@ -4,6 +4,7 @@
 
 import sys
 import math
+import time
 
 from spacecharge import UniformEllipsoidFieldCalculator
 
@@ -14,19 +15,17 @@ print "Start."
 a = 1.0
 b = 1.0
 c = 1.0
-x_max = 3.
-y_max = 3.
-z_max = 3.
+r_max = 10.
 uniformEllips = UniformEllipsoidFieldCalculator()
 print "Start."
-uniformEllips.setEllipsoid(a,b,c,x_max,y_max,z_max)
+uniformEllips.setEllipsoid(a,b,c,r_max)
 
 (dirX,dirY,dirZ) = (1.5,2.5,0.3)
 mod_dir = math.sqrt(dirX**2 + dirY**2 + dirZ**2)
 (dirX,dirY,dirZ) =(dirX/mod_dir,dirY/mod_dir,dirZ/mod_dir)
 
 nPoints = 100
-r_step = 2.5/(nPoints-1)
+r_step = 11./(nPoints-1)
 
 max_diff = 0.
 max_diff_point = (0.,0.,0.)
@@ -65,12 +64,19 @@ else:
 	print "(ex_th,ey_th,ez_th)=",(ex_th,ey_th,ez_th)
 	print "abs(ex_th,ey_th,ez_th)=",math.sqrt(ex_th**2+ey_th**2+ez_th**2)
 
+"""
 #--------------Speed test -----------
 count = 0
+count_step = 1000
+time_start = time.clock()
 while(1 < 2):
-	uniformEllips.setEllipsoid(a,b,c,x_max,y_max,z_max)
+	uniformEllips.setEllipsoid(a,b,c,r_max)
 	count += 1
-	if(count % 1000 == 0): print "i=",count
+	if(count % count_step == 0):
+		time_stop = (time.clock() - time_start)/count_step
+		print "i=",count," freq=",time_stop
+		time_start = time.clock()
+"""
 
 print "Stop."
 
