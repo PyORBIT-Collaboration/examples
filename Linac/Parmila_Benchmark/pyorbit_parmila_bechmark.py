@@ -8,15 +8,17 @@ will generate the intermediate file for PARMILA
 import sys
 import math
 import random
+import time
 
 from orbit.sns_linac import SimplifiedLinacParser
 from orbit.sns_linac import LinacLatticeFactory, LinacAccLattice
 
-from orbit.bunch_generators import TwissContainer, TwissAnalysis
+from orbit.bunch_generators import TwissContainer
 from orbit.bunch_generators import WaterBagDist3D, GaussDist3D, KVDist3D
 
 
 from bunch import Bunch
+from bunch import BunchTwissAnalysis
 
 from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 
@@ -36,26 +38,32 @@ for seq in sequences:
 	print "seq=",seq.getName()," L=",seq.getLength(),"  total length=",totalLength
 
 lattFactory = 	LinacLatticeFactory(linacTree)
-lattFactory.setMaxDriftLength(0.1)
+lattFactory.setMaxDriftLength(0.02)
 #accLattice = lattFactory.getLinacAccLattice(["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"])
 accLattice = lattFactory.getLinacAccLattice(["MEBT",])
 
 #-----------------------------------------------------
 # Set up Space Charge Acc Nodes
 #-----------------------------------------------------
-from orbit.space_charge.sc2p5d import setSC2p5DrbAccNodes
-from spacecharge import SpaceChargeCalc2p5Drb
+from orbit.space_charge.sc2p5d import setSC2p5DrbAccNodes, setUniformEllipsesSCAccNodes
+from spacecharge import SpaceChargeCalc2p5Drb, SpaceChargeCalcUnifEllipse
+sc_path_length_min = 0.015
 
-sizeX = 32
-sizeY = 32
-sizeZ = 20
-long_avg_n = 3
+"""
+sizeX = 64
+sizeY = 64
+sizeZ = 30
+long_avg_n = 5
 calc2p5d = SpaceChargeCalc2p5Drb(sizeX,sizeY,sizeZ)
 calc2p5d.setLongAveragingPointsN(long_avg_n)
 
 pipe_radius = 0.015
-sc_path_length_min = 0.10
 space_charge_nodes = setSC2p5DrbAccNodes(accLattice,sc_path_length_min,calc2p5d,pipe_radius)
+"""
+nEllipses = 1
+calcUnifEllips = SpaceChargeCalcUnifEllipse(nEllipses)
+space_charge_nodes = setUniformEllipsesSCAccNodes(accLattice,sc_path_length_min,calcUnifEllips)
+
 max_sc_length = 0.
 min_sc_length = accLattice.getLength()
 for sc_node in space_charge_nodes:
@@ -128,9 +136,7 @@ print "Design tracking completed."
 paramsDict = {"test_pos":0.,"count":0}
 actionContainer = AccActionsContainer("Test Design Bunch Tracking")
 
-twiss_analysis = TwissAnalysis(3)
-
-
+twiss_analysis = BunchTwissAnalysis()
 
 print "   N           node           position         sizeX       sizeY    sizeZ  sizeZdeg  sizeXP   sizeYP   size_dE   eKin Nparts"
 file_out = open("pyorbit_sizes_ekin.dat","w")
@@ -141,10 +147,7 @@ def action_entrance(paramsDict):
 		node = paramsDict["node"]
 		pos = paramsDict["test_pos"]
 		bunch = paramsDict["bunch"]
-		twiss_analysis.init()
-		for i in range(bunch.getSize()):
-			(x,xp,y,yp,z,dE) = (bunch.x(i),bunch.xp(i),bunch.y(i),bunch.yp(i),bunch.z(i),bunch.dE(i))
-			twiss_analysis.account((x,xp,y,yp,z,dE))
+		twiss_analysis.analyzeBunch(bunch)
 		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*100.
 		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*100.
 		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
@@ -157,6 +160,7 @@ def action_entrance(paramsDict):
 		s = " %5d  %35s  %4.5f  %5.3f  %5.3f   %5.3f  %5.3f  %5.3f  %5.3f  %7.5f  %10.6f   %8d "%(paramsDict["count"],node.getName(),pos*100,x_rms,y_rms,z_rms,z_rms_deg,xp_rms,yp_rms,dE_rms,eKin,bunch.getSize())
 		file_out.write(s +"\n")
 		print s	
+		
 	
 
 def action_exit(paramsDict):
@@ -167,10 +171,7 @@ def action_exit(paramsDict):
 	if(isinstance(paramsDict["parentNode"],AccLattice)):	
 		bunch = paramsDict["bunch"]
 		paramsDict["count"]	+= 1
-		twiss_analysis.init()
-		for i in range(bunch.getSize()):
-			(x,xp,y,yp,z,dE) = (bunch.x(i),bunch.xp(i),bunch.y(i),bunch.yp(i),bunch.z(i),bunch.dE(i))
-			twiss_analysis.account((x,xp,y,yp,z,dE))
+		twiss_analysis.analyzeBunch(bunch)
 		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*100.
 		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*100.
 		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
@@ -184,9 +185,16 @@ def action_exit(paramsDict):
 		file_out.write(s +"\n")
 		print s	
 	
-actionContainer.addAction(action_entrance, AccActionsContainer.ENTRANCE)
+	
+#actionContainer.addAction(action_entrance, AccActionsContainer.ENTRANCE)
 actionContainer.addAction(action_exit, AccActionsContainer.EXIT)
+
+time_start = time.clock()
+
 accLattice.trackBunch(bunch_in, paramsDict = paramsDict, actionContainer = actionContainer)
+
+time_exec = time.clock() - time_start
+print "time[sec]=",time_exec
 
 file_out.close()
 
