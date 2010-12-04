@@ -45,11 +45,13 @@ accLattice = lattFactory.getLinacAccLattice(["MEBT",])
 #-----------------------------------------------------
 # Set up Space Charge Acc Nodes
 #-----------------------------------------------------
-from orbit.space_charge.sc2p5d import setSC2p5DrbAccNodes, setUniformEllipsesSCAccNodes
-from spacecharge import SpaceChargeCalc2p5Drb, SpaceChargeCalcUnifEllipse
+from orbit.space_charge.sc2p5d import setSC2p5DrbAccNodes
+from orbit.space_charge.sc3d import setSC3DAccNodes, setUniformEllipsesSCAccNodes
+from spacecharge import SpaceChargeCalc2p5Drb, SpaceChargeCalcUnifEllipse, SpaceChargeCalc3D
 sc_path_length_min = 0.015
 
 """
+#the 2p5rb Space Charge nodes
 sizeX = 64
 sizeY = 64
 sizeZ = 30
@@ -60,9 +62,20 @@ calc2p5d.setLongAveragingPointsN(long_avg_n)
 pipe_radius = 0.015
 space_charge_nodes = setSC2p5DrbAccNodes(accLattice,sc_path_length_min,calc2p5d,pipe_radius)
 """
+
+"""
+# set of uniformly charged ellipses Space Charge
 nEllipses = 1
 calcUnifEllips = SpaceChargeCalcUnifEllipse(nEllipses)
 space_charge_nodes = setUniformEllipsesSCAccNodes(accLattice,sc_path_length_min,calcUnifEllips)
+"""
+
+# set FFT 3D Space Charge
+sizeX = 32
+sizeY = 32
+sizeZ = 32
+calc3d = SpaceChargeCalc3D(sizeX,sizeY,sizeZ)
+space_charge_nodes =  setSC3DAccNodes(accLattice,sc_path_length_min,calc3d)
 
 max_sc_length = 0.
 min_sc_length = accLattice.getLength()
