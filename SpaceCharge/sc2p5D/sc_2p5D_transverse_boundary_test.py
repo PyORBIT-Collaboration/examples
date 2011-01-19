@@ -46,7 +46,7 @@ b.getSyncParticle().kinEnergy(energy)
 # Make a boundary
 nBoundaryPoints = 100
 N_FreeSpaceModes = 20
-R_Boundary = 0.0049
+R_Boundary = 0.005
 boundary = Boundary2D(nBoundaryPoints,N_FreeSpaceModes)
 
 for i in xrange(nBoundaryPoints):
@@ -62,7 +62,7 @@ print "MaxX=",b_maxx," MinX=",b_minx," MaxY=",b_maxy," MinY=",b_miny
 
 # Shape boundary test
 #Choose from Circle/Ellipse/Rectangle
-shapeboundary = Boundary2D(nBoundaryPoints,N_FreeSpaceModes,"Circle",0.007,0.007)
+shapeboundary = Boundary2D(nBoundaryPoints,N_FreeSpaceModes,"Circle",0.01,0.01)
 print "shape name=",boundary.getShapeName()
 
 # Set SC node parameters
@@ -73,8 +73,7 @@ slice_length = 0.1
 #analysis
 rhoGrid = calc2p5d.getRhoGrid()
 phiGrid = calc2p5d.getPhiGrid()
-#x = bunch_radius/2.0
-x = R_Boundary/2.0
+x = bunch_radius/2.0
 y = 0.
 r = math.sqrt(x*x+y*y)
 
@@ -90,15 +89,15 @@ rho = rhoGrid.getValue(x,y)
 phi = 2*(phiGrid.getValue(x,y) - phiGrid.getValue(0.,0.))
 (ex,ey) = phiGrid.calcGradient(x,y)
 grad = 2*math.sqrt(ex*ex+ey*ey)
-
+	
 print "r=",r," rho  = %12.5g "%rho,"  rho_theory = %12.5g "%rho_theory
 print "r=",r," phi  = %12.5g "%phi,"  phi_theory = %12.5g "%phi_theory
 print "r=",r," grad = %12.5g "%grad," grad_theory = %12.5g "%grad_theory
 
 #with boundary
 print "with boundary."
-calc2p5d.trackBunch(b,slice_length,pipe_radius,boundary)
-#calc2p5d.trackBunch(b,slice_length,pipe_radius,shapeboundary)
+#calc2p5d.trackBunch(b,slice_length,pipe_radius,boundary)
+calc2p5d.trackBunch(b,slice_length,pipe_radius,shapeboundary)
 
 rho = rhoGrid.getValue(x,y)
 phi = 2*(phiGrid.getValue(x,y) - phiGrid.getValue(0.,0.))
@@ -109,14 +108,59 @@ print "r=",r," rho  = %12.5g "%rho,"  rho_theory = %12.5g "%rho_theory
 print "r=",r," phi  = %12.5g "%phi,"  phi_theory = %12.5g "%phi_theory
 print "r=",r," grad = %12.5g "%grad," grad_theory = %12.5g "%grad_theory
 
+#-------------------------------------
+# momentum change
+# coeff is: 2*r0*L*lambda/e*(gamma^3*beta^2) = 2*r0*macrosize/(gamma^3*beta^2)
+# r/a^2 and grad/macrosize
+#-------------------------------------
+xyp_coeff = 2*b.classicalRadius()*b.charge()**2*b.macroSize()/(b.getSyncParticle().gamma()**3*b.getSyncParticle().beta()**2)
+ip=2
+x = b.x(ip)
+y = b.y(ip)
+xp = b.xp(ip)
+yp = b.yp(ip)
+xp_calc = x*xyp_coeff/bunch_radius**2
+yp_calc = y*xyp_coeff/bunch_radius**2
+print "r=",r," xp = %12.5g "%xp," xp_theory = %12.5g "%xp_calc
+print "r=",r," yp = %12.5g "%yp," yp_theory = %12.5g "%yp_calc
+
+xy_arr = []
 xyp_arr = []
+xp_arr = []
+yp_arr = []
+
+xp_calc_arr = []
+yp_calc_arr = []
+xyp_calc_arr =[]
+
 for ip in range(b.getSize()):
-	xp = b.xp(ip)
-	yp = b.yp(ip)
-	xyp_arr.append((xp,yp))
+	x = b.x(ip)
+	y = b.y(ip)	
+	xy_arr.append((x,y))
 	
+	xp = b.xp(ip)
+	yp = b.yp(ip)	
+	xyp_arr.append((xp,yp))
+	xp_arr.append((x,xp))
+	yp_arr.append((y,yp))
+	
+	xp_calc = x*xyp_coeff/bunch_radius**2
+	yp_calc = y*xyp_coeff/bunch_radius**2
+	xp_calc_arr.append((x,xp_calc))
+	yp_calc_arr.append((y,yp_calc))
+	xyp_calc_arr.append((xp_calc,yp_calc))
+
+print "size=", b.getSize()
 # Plot
 import Gnuplot
+"""
+gXY = Gnuplot.Gnuplot()
+gXY.title('sample')
+gXY.xlabel('x')
+gXY.ylabel('y')
+gXY('set data style line')
+gXY.plot(xy_arr)
+
 gXYp = Gnuplot.Gnuplot()
 gXYp.title('momentum')
 gXYp.xlabel('xp')
@@ -124,4 +168,12 @@ gXYp.ylabel('yp')
 gXYp('set data style line')
 gXYp.plot(xyp_arr)
 
+gXYp_c = Gnuplot.Gnuplot()
+gXYp_c.title('momentum calc')
+gXYp_c.xlabel('xp_c')
+gXYp_c.ylabel('yp_c')
+gXYp_c('set data style line')
+gXYp_c.plot(xyp_calc_arr)
+
 raw_input('Please press return to continue...\n')
+"""
