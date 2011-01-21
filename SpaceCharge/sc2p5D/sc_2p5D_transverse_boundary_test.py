@@ -66,7 +66,7 @@ shapeboundary = Boundary2D(nBoundaryPoints,N_FreeSpaceModes,"Circle",0.01,0.01)
 print "shape name=",boundary.getShapeName()
 
 # Set SC node parameters
-pipe_radius = 0.010
+pipe_radius = 0.02
 slice_length = 0.1
 
 # Track and analysis
@@ -83,7 +83,7 @@ grad_theory = macroSize*2*r/(bunch_radius**2)
 
 #without boundary
 print "without boundary."
-calc2p5d.trackBunch(b,slice_length,pipe_radius)
+calc2p5d.trackBunch(b,slice_length)
 
 rho = rhoGrid.getValue(x,y)
 phi = 2*(phiGrid.getValue(x,y) - phiGrid.getValue(0.,0.))
@@ -96,8 +96,8 @@ print "r=",r," grad = %12.5g "%grad," grad_theory = %12.5g "%grad_theory
 
 #with boundary
 print "with boundary."
-#calc2p5d.trackBunch(b,slice_length,pipe_radius,boundary)
-calc2p5d.trackBunch(b,slice_length,pipe_radius,shapeboundary)
+#calc2p5d.trackBunch(b,slice_length,boundary)
+#calc2p5d.trackBunch(b,slice_length,shapeboundary)
 
 rho = rhoGrid.getValue(x,y)
 phi = 2*(phiGrid.getValue(x,y) - phiGrid.getValue(0.,0.))
@@ -110,17 +110,20 @@ print "r=",r," grad = %12.5g "%grad," grad_theory = %12.5g "%grad_theory
 
 #-------------------------------------
 # momentum change
-# coeff is: 2*r0*L*lambda/e*(gamma^3*beta^2) = 2*r0*macrosize/(gamma^3*beta^2)
+# coeff is: 2*r0*L*lambda/e*(gamma^3*beta^2)
 # r/a^2 and grad/macrosize
 #-------------------------------------
-xyp_coeff = 2*b.classicalRadius()*b.charge()**2*b.macroSize()/(b.getSyncParticle().gamma()**3*b.getSyncParticle().beta()**2)
-ip=2
+xyp_coeff = 2*b.classicalRadius()*b.charge()**2*slice_length/(b.getSyncParticle().gamma()**3*b.getSyncParticle().beta()**2)
+ip=1000
 x = b.x(ip)
 y = b.y(ip)
+r=math.sqrt(x*x+y*y)
+theta=math.atan(y/x)
 xp = b.xp(ip)
 yp = b.yp(ip)
-xp_calc = x*xyp_coeff/bunch_radius**2
-yp_calc = y*xyp_coeff/bunch_radius**2
+xp_calc = math.cos(theta)*r*xyp_coeff*macroSize/(bunch_length*bunch_radius**2)
+yp_calc = math.sin(theta)*r*xyp_coeff*macroSize/(bunch_length*bunch_radius**2)
+print "debug xyp_coeff=",xyp_coeff
 print "r=",r," xp = %12.5g "%xp," xp_theory = %12.5g "%xp_calc
 print "r=",r," yp = %12.5g "%yp," yp_theory = %12.5g "%yp_calc
 
