@@ -5,7 +5,7 @@
 import sys
 import math
 import random
-
+random.seed(10)
 import orbit_mpi
 
 from bunch import Bunch
@@ -18,9 +18,7 @@ print "Start."
 sizeX = 64
 sizeY = 64
 sizeZ = 20
-long_avg_n = 3
 calc2p5d = SpaceChargeCalc2p5D(sizeX,sizeY,sizeZ)
-calc2p5d.setLongAveragingPointsN(long_avg_n)
 
 # Make bunch
 b = Bunch()
@@ -42,6 +40,8 @@ energy = 0.08
 nParticlesGlobal = b.getSizeGlobal()
 b.macroSize(macroSize/nParticlesGlobal)
 b.getSyncParticle().kinEnergy(energy)	
+
+#bunchExtremaCalc->getExtremaXYZ
 
 # Make a boundary
 nBoundaryPoints = 100
@@ -82,22 +82,13 @@ phi_theory = macroSize*r**2/(bunch_radius**2)
 grad_theory = macroSize*2*r/(bunch_radius**2)
 
 #without boundary
-print "without boundary."
-calc2p5d.trackBunch(b,slice_length)
-
-rho = rhoGrid.getValue(x,y)
-phi = 2*(phiGrid.getValue(x,y) - phiGrid.getValue(0.,0.))
-(ex,ey) = phiGrid.calcGradient(x,y)
-grad = 2*math.sqrt(ex*ex+ey*ey)
-	
-print "r=",r," rho  = %12.5g "%rho,"  rho_theory = %12.5g "%rho_theory
-print "r=",r," phi  = %12.5g "%phi,"  phi_theory = %12.5g "%phi_theory
-print "r=",r," grad = %12.5g "%grad," grad_theory = %12.5g "%grad_theory
+#print "without boundary."
+#calc2p5d.trackBunch(b,slice_length)
 
 #with boundary
 print "with boundary."
 #calc2p5d.trackBunch(b,slice_length,boundary)
-#calc2p5d.trackBunch(b,slice_length,shapeboundary)
+calc2p5d.trackBunch(b,slice_length,shapeboundary)
 
 rho = rhoGrid.getValue(x,y)
 phi = 2*(phiGrid.getValue(x,y) - phiGrid.getValue(0.,0.))
@@ -114,69 +105,18 @@ print "r=",r," grad = %12.5g "%grad," grad_theory = %12.5g "%grad_theory
 # r/a^2 and grad/macrosize
 #-------------------------------------
 xyp_coeff = 2*b.classicalRadius()*b.charge()**2*slice_length/(b.getSyncParticle().gamma()**3*b.getSyncParticle().beta()**2)
-ip=1000
-x = b.x(ip)
-y = b.y(ip)
-r=math.sqrt(x*x+y*y)
-theta=math.atan(y/x)
-xp = b.xp(ip)
-yp = b.yp(ip)
-xp_calc = math.cos(theta)*r*xyp_coeff*macroSize/(bunch_length*bunch_radius**2)
-yp_calc = math.sin(theta)*r*xyp_coeff*macroSize/(bunch_length*bunch_radius**2)
-print "debug xyp_coeff=",xyp_coeff
-print "r=",r," xp = %12.5g "%xp," xp_theory = %12.5g "%xp_calc
-print "r=",r," yp = %12.5g "%yp," yp_theory = %12.5g "%yp_calc
-
-xy_arr = []
-xyp_arr = []
-xp_arr = []
-yp_arr = []
-
-xp_calc_arr = []
-yp_calc_arr = []
-xyp_calc_arr =[]
-
-for ip in range(b.getSize()):
+for ip in range(10):
 	x = b.x(ip)
-	y = b.y(ip)	
-	xy_arr.append((x,y))
-	
+	y = b.y(ip)
+	r=math.sqrt(x*x+y*y)
+	theta=math.atan2(y,x)
 	xp = b.xp(ip)
-	yp = b.yp(ip)	
-	xyp_arr.append((xp,yp))
-	xp_arr.append((x,xp))
-	yp_arr.append((y,yp))
-	
-	xp_calc = x*xyp_coeff/bunch_radius**2
-	yp_calc = y*xyp_coeff/bunch_radius**2
-	xp_calc_arr.append((x,xp_calc))
-	yp_calc_arr.append((y,yp_calc))
-	xyp_calc_arr.append((xp_calc,yp_calc))
+	yp = b.yp(ip)
+	xp_calc = math.cos(theta)*r*xyp_coeff*macroSize/(bunch_length*bunch_radius**2)
+	yp_calc = math.sin(theta)*r*xyp_coeff*macroSize/(bunch_length*bunch_radius**2)
+	xp_error = (xp - xp_calc)*100/xp_calc
+	yp_error = (yp - yp_calc)*100/yp_calc
+	print "debug xyp_coeff=",xyp_coeff
+	print "r=%10.5g"%r, "x=%10.5g"%x, "y=%10.5g"%y, "xp = %10.5g "%xp," xp_theory = %10.5g "%xp_calc," xp_error = %10.5g "%xp_error,"%"
+	print "r=%10.5g"%r, "x=%10.5g"%x, "y=%10.5g"%y, "yp = %10.5g "%yp," yp_theory = %10.5g "%yp_calc," xp_error = %10.5g "%yp_error,"%"
 
-print "size=", b.getSize()
-# Plot
-import Gnuplot
-"""
-gXY = Gnuplot.Gnuplot()
-gXY.title('sample')
-gXY.xlabel('x')
-gXY.ylabel('y')
-gXY('set data style line')
-gXY.plot(xy_arr)
-
-gXYp = Gnuplot.Gnuplot()
-gXYp.title('momentum')
-gXYp.xlabel('xp')
-gXYp.ylabel('yp')
-gXYp('set data style line')
-gXYp.plot(xyp_arr)
-
-gXYp_c = Gnuplot.Gnuplot()
-gXYp_c.title('momentum calc')
-gXYp_c.xlabel('xp_c')
-gXYp_c.ylabel('yp_c')
-gXYp_c('set data style line')
-gXYp_c.plot(xyp_calc_arr)
-
-raw_input('Please press return to continue...\n')
-"""
