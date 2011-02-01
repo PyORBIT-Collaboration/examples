@@ -37,20 +37,11 @@ b.macroSize(macroSize/nParticlesGlobal)
 syncPart = b.getSyncParticle()
 syncPart.kinEnergy(energy)
 
-#make a simple lattice
-lattice = AccLattice("test_lattice")
+#make a Teapot lattice
 elem1 = teapot.DriftTEAPOT("drift1")
 elem2 = teapot.QuadTEAPOT("quad1")
 elem3 = teapot.QuadTEAPOT("quad2")
-lattice.addNode(elem1)
-lattice.addNode(elem2)
-lattice.addNode(elem3)
-"""lattice_arr = []
-lattice_arr.append(elem1)
-lattice_arr.append(elem2)
-lattice_arr.append(elem3)
-"""
-#make a Teapot lattice
+
 teapot_lattice = teapot.TEAPOT_Lattice("teapot_lattice")
 teapot_lattice.addNode(elem1)
 #teapot_lattice.addNode(elem2)
@@ -66,31 +57,14 @@ elem3.setLength(2.0)
 elem3.setnParts(5)
 elem3.addParam("kq",+0.7)
 
-lattice.initialize()
 teapot_lattice.initialize()
-"""
-nodes = lattice.getNodes()
-for node in nodes:
-	print "node=", node.getName()," s start,stop = %4.3f %4.3f "%lattice.getNodePositionsDict()[node]
-	print "There are ", node.getNumberOfBodyChildren()," children nodes."
-"""	
+
 #make 2.5D space charge calculator
 sizeX = 64
 sizeY = 64
 sizeZ = 20
 calc2p5d = SpaceChargeCalc2p5D(sizeX,sizeY,sizeZ)
 
-#make scNode
-scNode = scAccNodes.SC2p5D_AccNode(calc2p5d,"sc1")
-if (scNode.getCalculationOn()) :
-	print "The switcher is on."
-else:
-	print "The switcher is off. Now we turn it on."
-	scNode.setCalculationOn()
-scNode.setLengthOfSC(0.1)
-print "Length of the",scNode.getType(),"Node",scNode.getName(),"is",scNode.getLengthOfSC()
-
-"""
 #set boundary
 nBoundaryPoints = 100
 N_FreeSpaceModes = 20
@@ -103,22 +77,14 @@ for i in xrange(nBoundaryPoints):
 	boundary.setBoundaryPoint(i,x,y)
 boundary.initialize()
 
-scNode.setBoundary(boundary)
-"""
-boundary = scNode.getBoundary()
 sc_path_length_min = 0.05
 
-#setSC_General_AccNodes(lattice, sc_path_length_min, space_charge_calculator, scNode)
-#scNode = scLatticeModifications.setSC2p5DAccNodes(lattice, sc_path_length_min, calc2p5d, boundary = None)
-scNode = scLatticeModifications.setSC2p5DAccNodes(teapot_lattice, sc_path_length_min, calc2p5d, boundary = None)
-"""
-#track node
-for i in range(len(scNode)):
-	scNode[i].trackBunch(b)
-"""
+scNode_arr = scLatticeModifications.setSC2p5DAccNodes(teapot_lattice, sc_path_length_min, calc2p5d)
+#scNode_arr = scLatticeModifications.setSC2p5DAccNodes(teapot_lattice, sc_path_length_min, calc2p5d, boundary)
+
 #track lattice
 teapot_lattice.trackBunch(b)
-slice_length=0.1
+slice_length=0.2
 #calc2p5d.trackBunch(b,slice_length)
 
 #-------------------------------------
@@ -143,9 +109,9 @@ for ip in range(10):
 	print "r=%10.5g"%r, "x=%10.5g"%x, "y=%10.5g"%y, "yp = %10.5g "%yp," yp_theory = %10.5g "%yp_calc," xp_error = %10.5g "%yp_error,"%"
 
 #printout lattice
-nodes = lattice.getNodes()
+nodes = teapot_lattice.getNodes()
 for node in nodes:
-	print "node=", node.getName()," s start,stop = %4.3f %4.3f "%lattice.getNodePositionsDict()[node]
+	print "node=", node.getName()," s start,stop = %4.3f %4.3f "%teapot_lattice.getNodePositionsDict()[node]
 	print "There are ", node.getNumberOfBodyChildren()," children nodes."
 	childnodes = node.getChildNodes(AccNode.BODY)
 	for childnode in childnodes:

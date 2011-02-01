@@ -53,6 +53,6 @@ for i in range(ACC_TURNS):
 	print "Turn ",i
 
 # dump ORBIT_MPI bunch to compare results
-bunch_pyorbit_to_orbit(lattice.getLength(), b, "orbit_mpi_bunch_from_pyorbut_output.dat")
+bunch_pyorbit_to_orbit(lattice.getLength(), b, "orbit_mpi_bunch_from_pyorbit_output.dat")
 
 print("STOP.")

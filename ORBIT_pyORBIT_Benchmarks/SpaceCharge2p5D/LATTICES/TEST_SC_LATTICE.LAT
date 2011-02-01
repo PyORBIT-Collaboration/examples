@@ -1,0 +1,13 @@
+! Element definitions:
+
+QFH: QUADRUPOLE, L=0.25, K1=0.838581217201
+QDH: QUADRUPOLE, L=0.25, K1=-0.838582112944
+D: DRIFT, L=0.25
+
+! Beam lines from SAVELINE command:
+
+L000001: LINE = (D, D)
+
+FODO: LINE = (L000001)
+
+RETURN

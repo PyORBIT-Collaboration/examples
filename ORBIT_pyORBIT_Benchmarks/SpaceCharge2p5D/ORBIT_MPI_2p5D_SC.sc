@@ -48,6 +48,7 @@ OFstream fio("ORBIT_MPI_2p5D_SC.out", ios::out);
   const Integer nstepTPK = 4;
 
   buildTPlatticeNew("LATTICES/TEST_SC_LATTICE.TP",
+  //buildTPlatticeNew("LATTICES/Q_0p125.TP",
                     "Linac",
                     nstepTPD,
                     nstepTPM, fringeM,
@@ -77,6 +78,8 @@ OFstream fio("ORBIT_MPI_2p5D_SC.out", ios::out);
 
   Real eps = 1.0e-06;
   String BPShape = "Circle";
+  //String BPShape = "None";
+  
   Real BP1 = 110., BP2 = 0., BP3 = 0., BP4 = 0.;
   Integer BPPoints = 128, BPModes = 32;
   Real Gridfact = 2.0;
@@ -103,8 +106,9 @@ OFstream fio("ORBIT_MPI_2p5D_SC.out", ios::out);
   cerr << "Start Tracking\n";
 
 	//this will track bunch only through longitudinal distribution calculator and 
-	//SC node with the length 0.5 m
-	turnToNode(mainHerd,2);
+	//SC node
+	//turnToNode(mainHerd,2);
+	doTurn(1);
 	
   OFstream fio98("orbit_mpi_bunch_output.dat", ios::out);
   dumpPartsGlobal(mainHerd, fio98);
