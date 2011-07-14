@@ -14,16 +14,16 @@
             <parameters/>
         </accElement>
         <accElement length="0.061" name="MEBT_Mag:QV02" pos="0.273" type="QUAD">
-            <parameters effLength="0.061" field="-37.85"/>
+            <parameters effLength="0.061" field="-36.813"/>
         </accElement>
         <accElement length="0.061" name="MEBT_Mag:QH03" pos="0.418" type="QUAD">
             <parameters effLength="0.061" field="28.3266"/>
         </accElement>
         <accElement length="0.0" name="MEBT_RF:Bnch01:Rg01" pos="0.528" type="RFGAP">
-            <parameters E0TL="0.07520500000000001" amp="1.3" firstPhase="90.0" gapLength="0.015" gapOffset="0.0" modePhase="0.0" parentCvaity="MEBT_RF:Bnch01"/>
+            <parameters E0TL="0.075" amp="1.3" firstPhase="90.0" gapLength="0.015" gapOffset="0.0" modePhase="0.0" parentCvaity="MEBT_RF:Bnch01"/>
         </accElement>
         <accElement length="0.061" name="MEBT_Mag:QV04" pos="0.638" type="QUAD">
-            <parameters effLength="0.061" field="-17.69"/>
+            <parameters effLength="0.061" field="-16.12"/>
         </accElement>
         <accElement length="0.0" name="MEBT_Mag:DCH04" pos="0.638" type="DCH">
             <parameters effLength="0.061"/>
@@ -35,7 +35,7 @@
             <parameters/>
         </accElement>
         <accElement length="0.0" name="MEBT_RF:Bnch02:Rg01" pos="1.288" type="RFGAP">
-            <parameters E0TL="0.0449046" amp="1.01" firstPhase="90.0" gapLength="0.015" gapOffset="0.0" modePhase="0.0" parentCvaity="MEBT_RF:Bnch02"/>
+            <parameters E0TL="0.045" amp="1.0" firstPhase="90.0" gapLength="0.015" gapOffset="0.0" modePhase="0.0" parentCvaity="MEBT_RF:Bnch02"/>
         </accElement>
         <accElement length="0.066" name="MEBT_Mag:QH05" pos="1.398" type="QUAD">
             <parameters effLength="0.066" field="17.0"/>
@@ -74,10 +74,10 @@
             <parameters/>
         </accElement>
         <accElement length="0.0" name="MEBT_RF:Bnch03:Rg01" pos="2.248" type="RFGAP">
-            <parameters E0TL="0.04579380000000001" amp="1.03" firstPhase="90.0" gapLength="0.015" gapOffset="0.0" modePhase="0.0" parentCvaity="MEBT_RF:Bnch03"/>
+            <parameters E0TL="0.045773" amp="1.0" firstPhase="90.0" gapLength="0.015" gapOffset="0.0" modePhase="0.0" parentCvaity="MEBT_RF:Bnch03"/>
         </accElement>
         <accElement length="0.061" name="MEBT_Mag:QV11" pos="2.903" type="QUAD">
-            <parameters effLength="0.061" field="-16.63"/>
+            <parameters effLength="0.061" field="-16.72"/>
         </accElement>
         <accElement length="0.0" name="MEBT_Mag:DCH11" pos="2.903" type="DCH">
             <parameters effLength="0.061"/>
@@ -89,16 +89,16 @@
             <parameters/>
         </accElement>
         <accElement length="0.061" name="MEBT_Mag:QH12" pos="3.053" type="QUAD">
-            <parameters effLength="0.061" field="29.02"/>
+            <parameters effLength="0.061" field="25.961"/>
         </accElement>
         <accElement length="0.0" name="MEBT_RF:Bnch04:Rg01" pos="3.158" type="RFGAP">
-            <parameters E0TL="0.0942955" amp="1.63" firstPhase="90.0" gapLength="0.015" gapOffset="0.0" modePhase="0.0" parentCvaity="MEBT_RF:Bnch04"/>
+            <parameters E0TL="0.094141" amp="1.0" firstPhase="90.0" gapLength="0.015" gapOffset="0.0" modePhase="0.0" parentCvaity="MEBT_RF:Bnch04"/>
         </accElement>
         <accElement length="0.061" name="MEBT_Mag:QV13" pos="3.263" type="QUAD">
-            <parameters effLength="0.061" field="-26.1"/>
+            <parameters effLength="0.061" field="-27.582"/>
         </accElement>
         <accElement length="0.061" name="MEBT_Mag:QH14" pos="3.408" type="QUAD">
-            <parameters effLength="0.061" field="10.44"/>
+            <parameters effLength="0.061" field="14.505"/>
         </accElement>
         <accElement length="0.0" name="MEBT_Mag:DCH14" pos="3.408" type="DCH">
             <parameters effLength="0.061"/>
