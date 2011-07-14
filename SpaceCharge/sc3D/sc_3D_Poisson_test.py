@@ -17,16 +17,16 @@ from spacecharge import PoissonSolverFFT3D
 
 print "Start."
 
-sizeX = 100
-sizeY = 100
-sizeZ = 100
+sizeX = 64
+sizeY = 64
+sizeZ = 64
 xMin = -5.0
 xMax = +5.0
 yMin = -5.5
 yMax = +5.5
 zMin = -6.0
 zMax = +6.0
-
+print " x,y,z sizes: ",sizeX," ",sizeY," ",sizeZ
 solver = PoissonSolverFFT3D(sizeX,sizeY,sizeZ,xMin,xMax,yMin,yMax,zMin,zMax)
 
 scale_coeff = 1.2
@@ -54,7 +54,7 @@ solver.findPotential(gridRho,gridPhi)
 r_test = 4.0
 n_angle_steps = 10
 angle_step = 360./(n_angle_steps - 1)
-print "  i    x       y      z      r        phi         phi_theory    ratio phi/theory  "
+print "  i    x       y        z         r          phi         phi_theory    ratio phi/theory  "
 for i in xrange(n_angle_steps):
 	angle = math.pi*i*angle_step/180.
 	x = r_test*math.cos(angle)
@@ -66,4 +66,10 @@ for i in xrange(n_angle_steps):
 	print "",i," %7.4f  %7.4f  %7.4f  %7.4f  %12.5g  %12.5g  %12.7g  "%(x,y,z,dist,phi,phi_th,(phi/phi_th)) 
 
 print "Stop."
+
+count = 0
+while(1 < 2):
+	solver.findPotential(gridRho,gridPhi)
+	count += 1
+	if(count % 10 == 0): print "solved n=",count
 

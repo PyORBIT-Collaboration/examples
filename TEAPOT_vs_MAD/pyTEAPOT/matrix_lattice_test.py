@@ -53,7 +53,6 @@ for node in nodes:
 	else:
 		print "node =",node.getName()," dict=",node.getParamsDict()
 	
-sys.exit(1)
 
 one_turn_matrix = matrix_lattice.getOneTurnMatrix()
 print "=============one turn pyORBIT matrix for MATRIX lattice===="
