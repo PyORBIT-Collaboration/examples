@@ -12,4 +12,4 @@ if [ ! -n "$2" ]
     exit $E_BADARGS
 fi
 
-mpirun -np $2 ${ORBIT_ROOT}/bin/pyORBIT $1
+mpirun -np $2 ${ORBIT_ROOT}/bin/pyORBIT  $1

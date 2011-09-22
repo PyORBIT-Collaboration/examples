@@ -6,7 +6,7 @@ orbit_path = os.environ["ORBIT_ROOT"]
 
 
 
-(n1,n2,m) = (0,0,1)
+(n1,n2,m) = (0,3,0)
 
 
 
@@ -17,17 +17,17 @@ b = Stark_calcSS(n1, n2, m, 10)
 
 
 
-b.F = mpf("6.0e-3")
+b.F = mpf("0.000507564")
 
 b.main()
 
 E = b.Energy
 #    G = b.readG(orbit_path+"/ext/laserstripping/transitions/")
-G = mpf("1.3e-4")
+G = mpf("0.00257245")
     
 
-for i in range(-10,11):
-    Ei = E + i*G/1
+for i in range(-100,101):
+    Ei = E + i*G/100
     f = open('TDM_%i%i%i_F=%f.txt'%(b.n1,b.n2,b.m,b.F),'a')
     print >>f,nstr(Ei,30),"\t",nstr(b.TDM(Ei),30)
     f.close()

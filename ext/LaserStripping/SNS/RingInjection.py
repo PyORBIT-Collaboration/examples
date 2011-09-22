@@ -17,7 +17,6 @@ from ext.las_str.emittance import *
 from orbit_mpi import mpi_comm,mpi_datatype,mpi_op
 
 
-
 if not("n_states" in dir ()):
 
 
@@ -27,17 +26,40 @@ if not("n_states" in dir ()):
     orbit_path = os.environ["ORBIT_ROOT"]
     addr = orbit_path+"/ext/laserstripping/working_dir/"
     trans = orbit_path+"/ext/laserstripping/transitions/"
-    
+
     St = Stark(trans, n_states)
+
 #    design case    
 #    magnetic_field2 = RegularGridFS(addr+"D2_2126A_Data.table","m",0.01,0.0001*(46.2/53.1))
 #    magnetic_field3 = RegularGridFS(addr+"D3_1449A_Data.table","m",0.01,0.0001*(42.0/28.3))
 #    magnetic_field4 = RegularGridFS(addr+"D4_1737A_Data.table","m",0.01,0.0001*(46.2/39.4))
  
-#    real case    
-    magnetic_field2 = RegularGridFS(addr+"D2_2126A_Data.table","m",0.01,0.0001)
-    magnetic_field3 = RegularGridFS(addr+"D3_1449A_Data.table","m",0.01,0.0001)
+#    real case W = 0.925 GeV (present case)   
+#    magnetic_field2 = RegularGridFS(addr+"D2_2126A_Data.table","m",0.01,0.0001)
+#    magnetic_field3 = RegularGridFS(addr+"D3_1449A_Data.table","m",0.01,0.0001)
+#    magnetic_field4 = RegularGridFS(addr+"D4_1737A_Data.table","m",0.01,0.0001)
+    
+#    real case W = 1.3 GeV (present case)   
+#    magnetic_field2 = RegularGridFS(addr+"D2_2126A_Data.table","m",0.01,0.0001*(0.2/0.249*0.8))
+#    magnetic_field3 = RegularGridFS(addr+"D3_1449A_Data.table","m",0.01,0.0001*(0.2/0.188*0.8))
+#    magnetic_field4 = RegularGridFS(addr+"D4_1737A_Data.table","m",0.01,0.0001)
+    
+    magnetic_field2 = RegularGridFS(addr+"D2_2126A_Data.table","m",0.01,0.0001*(0.186/0.249))
+    magnetic_field3 = RegularGridFS(addr+"D3_1449A_Data.table","m",0.01,0.0001*(0.17/0.188))
+#    real case W = 1.0 GeV (present case)   
+#    magnetic_field2 = RegularGridFS(addr+"D2_2126A_Data.table","m",0.01,0.0001*(0.186/0.249)/1.198)
+#    magnetic_field3 = RegularGridFS(addr+"D3_1449A_Data.table","m",0.01,0.0001*(0.17/0.188)/1.198)
     magnetic_field4 = RegularGridFS(addr+"D4_1737A_Data.table","m",0.01,0.0001)
+
+#    real case W = 1.21 GeV (present case)   
+#    magnetic_field2 = RegularGridFS(addr+"D2_2126A_Data.table","m",0.01,0.0001*(0.186/0.249)/1.0515)
+#    magnetic_field3 = RegularGridFS(addr+"D3_1449A_Data.table","m",0.01,0.0001*(0.17/0.188)/1.0515)
+#    magnetic_field4 = RegularGridFS(addr+"D4_1737A_Data.table","m",0.01,0.0001)    
+
+#    real case W = 0.925 GeV (present case)   
+#    magnetic_field2 = RegularGridFS(addr+"D2_2126A_Data.table","m",0.01,0.0001*(0.186/0.249)/1.262)
+#    magnetic_field3 = RegularGridFS(addr+"D3_1449A_Data.table","m",0.01,0.0001*(0.17/0.188)/1.262)
+#    magnetic_field4 = RegularGridFS(addr+"D4_1737A_Data.table","m",0.01,0.0001) 
 
 #magnetic_field2 = ConstEMfield(0.,0.,0.,0.,0.25,0.)
     
@@ -76,9 +98,11 @@ n_step = 1000000
 Nevol = 100000
 coeff_bunch = 100000
     
-    #print field_cont.getFields(0.04321,0,z_foil1,0)
+print field_cont.getFields(x_inj,y_inj,z_foil1,0)
+print field_cont.getFields(x_inj,y_inj,1.814,0)
+
     
-    
+#sys.exit(0)    
 
    
     ######-------------------Bunch generation----------------------------------
@@ -87,7 +111,7 @@ a = BunchGen()
     
 a.N_part = 1
     
-a.TK = 1.0                                    # [GeV]
+a.TK = 1.3                                    # [GeV]
     
 a.mass = 0.938256 + 0.000511                  # [GeV]
 a.charge = 0                                  # [e]
@@ -168,9 +192,9 @@ tracker = RungeKuttaTracker(100)
 tracker.track(b, 0, time_step*n_step, time_step, field_cont, cont_eff)
 
     
-f = open('evol_out.txt','w')
+f = open('evol_out1.3.txt','w')
 for i in range(Nevol+1):
-    print >>f, b.partAttrValue("Evolution",0,i)
+    print >>f, z_foil1 + (z_foil2 - z_foil1)*i/Nevol ,"\t", b.partAttrValue("Evolution",0,i)
 f.close()
     
 sys.exit(0)
@@ -185,7 +209,7 @@ walls = Walls()
 bunch, bunch_unstr = a.getAutoionizationBunch(coeff_bunch,b,0)
 ###    bunch = b
 ###    bunch.charge(+1)
-  
+
 print "begin tracking"
 time_step = (z_flange + 0.01 - z_foil1)/vz/n_step
 tracker.track(bunch, 0, time_step*n_step, time_step, field_cont, walls)

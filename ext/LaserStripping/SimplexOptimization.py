@@ -14,7 +14,7 @@ from ext.las_str.SchredingerFuncMod import SchredingerFunc
 from ext.las_str.SimplexMod import Simplex
 from ext.las_str.part_generator import BunchGen
 from ext.las_str.print_mod import printf
-from ext.las_str.plot_mod import *
+
 
 
 time_start = orbit_mpi.MPI_Wtime()
@@ -31,7 +31,7 @@ orbit_path = os.environ["ORBIT_ROOT"]
 
 b = BunchGen()
 
-b.N_part = 10
+b.N_part = 25
 
 b.TK= 1.0                                     # [GeV]
 
@@ -39,14 +39,14 @@ b.mass = 0.938256 + 0.000511                  # [GeV]
 b.charge = 0                                  # [e]
 
 b.alphaX = 0.                                 # [rad]
-b.betaX = 26.7                                # [m]
-b.emtX = 0.225e-6                             # [m*rad]
+b.betaX = 25.0                                # [m]
+b.emtX = 0.2e-6                             # [m*rad]
 b.cutOffX = math.sqrt(b.emtX*b.betaX)*3.0     # [m]
 
 
-b.alphaY = 1.979                              # [rad]
+b.alphaY = 2.0                              # [rad]
 b.betaY =0.75                                 # [m]
-b.emtY = 0.225e-6                             # [m*rad]
+b.emtY = 0.2e-6                             # [m*rad]
 b.cutOffY = math.sqrt(b.emtY*b.betaY)*3.0     # [m]
 
 
@@ -56,7 +56,7 @@ b.relativeSpread = 0.5e-3
 b.dispD = 0.                                  # [m]
 b.dispDP = 2.6                                # [rad]
 
-b.sigma_beam = 50e-12*299792458./(2*math.sqrt(2*math.log(2)))                          #[m]
+b.sigma_beam = 30e-12/(2*math.sqrt(2*math.log(2)))                          #[m]
 b.cutOffZ = 3*b.sigma_beam
 
 
@@ -65,18 +65,34 @@ b.cutOffZ = 3*b.sigma_beam
 
 #----------------------Beginning of the Laser field and excitation parameters of H0 atom----------------------#
 
-#H13 = TwoLevelFunc(3)
+
+H13 = SchredingerFunc(orbit_path+"/ext/laserstripping/transitions/",2,1000)
+
+H13.method = 3
 
 
 
-H13 = SchredingerFunc(orbit_path+"/ext/laserstripping/transitions/",3,1000)
-#By = 0.00001                                       # [T]
-#H13.fS = ConstEMfield(0.,0.,0.,0.,By,0.)
 
-grad_B = 1.0                                    # [T/m]
-H13.fS = QuadEMfield()
-H13.fS.cxBz(grad_B)
-H13.fS.czBx(grad_B)
+
+
+
+if (H13.method == 2):
+    
+    By = 0.00001                                       # [T]
+    H13.fS = ConstEMfield(0.,0.,0.,0.,By,0.)
+    
+    #grad_B = 0.0001                                    # [T/m]
+    #H13.fS = QuadEMfield()
+    #H13.fS.cxBz(grad_B)
+    #H13.fS.czBx(grad_B)
+
+if (H13.method == 3):
+    
+    H13.B_x = 0.0
+    H13.B_y = 1.0e-10    
+    H13.fS = ConstEMfield(0.,0.,0.,0.,H13.B_y,0.)                                   # [T]
+    H13.B_z = 0.0
+
 
 
 H13.bunch = b.getBunch(0)
@@ -92,10 +108,10 @@ H13.TK = b.TK
 H13.sigma_beam = b.sigma_beam
 
 H13.n_sigma = 3
-H13.n_step = 100000
+H13.n_step = 1000000
 
 H13.la = 355.0e-9                               # [m]
-H13.power = 0.1e6                               # [W]
+H13.power = 2.2e6                               # [W]
 
 H13.fx = -4.5                                      # [m]
 H13.fy = -4.5                                      # [m]
@@ -103,25 +119,27 @@ H13.fy = -4.5                                      # [m]
 H13.wx = 370.0e-6                               # [m]
 H13.wy = 700.0e-6                               # [m]
 
-H13.env_sigma = 50e-12*299792458./(2*math.sqrt(2*math.log(2)))            #[m]
+    
+H13.env_sigma = 55e-12/(2*math.sqrt(2*math.log(2)))  #[m]
 
 
-H13.rx = 0.7e-3                               # [m]
-H13.ry = 0.7e-3                               # [m]
 
-H13.ax = 0.3e-3                               # [rad]
-H13.ay = 0.3e-3                               # [rad]
+H13.rx = 1.69e-3                               # [m]
+H13.ry = 0.77e-3                               # [m]
+
+H13.ax = 0.36e-3                               # [rad]
+H13.ay = 0.24e-3                               # [rad]
 
 #----------------------End of the Laser field and excitation parameters of H0 atom----------------------#
 
-#H13.bunch.dumpBunch("bunch_init.dat")
+#H13.bunch.dumpBunch("bunch_init1.dat")
 
 
 
 
 #-------------------definition of the optimization function----------------------------#
 #pf = printf("optimiz.dat","N_part","cpu_time", "W[MW]", "wx[um]", "wy[um]", "fx[cm]", "fy[cm]", "Population", "+- Err")
-pf = printf("optimiz_sh1.0.dat","N_part","cpu_time", "W[MW]", "rx[mm]", "ry[mm]", "ax[mrad]", "ay[mrad]", "Population", "+- Err")
+pf = printf("optimiz_sh1.0_test.dat","N_step","cpu_time", "W[MW]","rx[mm]", "ry[mm]", "ax[mrad]", "ay[mrad]", "Population", "+- Err")
 
 #name_args, guess, increments = ['wx','wy'],[300.0e-6, 300.0e-6],[10e-6, 100e-6]
 #name_args, guess, increments  = ['wx','wy','fx'], [333.0e-6, 333.0e-6,-2.800], [10e-6, 100e-6,1.00]
@@ -160,10 +178,9 @@ def opt_func(args):
 
 def opt_func1(args):
 
-    for i in range(len(args)):
+    for i in range(len(args)):  
         H13.__dict__[name_args[i]] = args[i]
 
-#    H13.ay = 0
         
     
     pop, sigma_pop = H13.population()
@@ -179,8 +196,8 @@ def opt_func1(args):
 
 #-----------------------Beginning of optimization-----------------------------------------
 
-#s = Simplex(opt_func1, guess, increments)
-#(values, err, iter) = s.minimize(1e-20, 1000,0)
+s = Simplex(opt_func1, guess, increments)
+(values, err, iter) = s.minimize(1e-20, 1000,0)
 
 #-----------------------End of Optimization-----------------------------------------------
 
@@ -193,9 +210,17 @@ def opt_func1(args):
 
 
 #-----------------------Single point calculation-----------------------------------------------------
+#print "start"
+#print  H13.population() 
 
-print  H13.population() 
-
+"""
+for i in range(0,50):
+    H13.B_x = i*0.001+1.0e-10       
+    Bx = i*0.001+1.0e-10
+    H13.fS = ConstEMfield(0.,0.,0.,Bx,0.,0.)
+    pop, sigma_pop = H13.population()
+    if(rank==0):    print i*0.001,"  ",pop,"  ",sigma_pop
+"""
 #-----------------------End of single point calculation-----------------------------------------------
 
 
@@ -217,7 +242,7 @@ print  H13.population()
 
 
 #-----------------------Slide show-----------------------------------------
-
+"""
 res_dir = os.environ["ORBIT_ROOT"]+"/ext/laserstripping/working_dir/"
 data_name = "data"
 pic_name = "pic"
@@ -227,10 +252,9 @@ pic_name = "pic"
 for i in range(b.N_part):
      popi = 1 - H13.bunch_target.partAttrValue("Populations",i,0) - H13.bunch_target.partAttrValue("Populations",i,1)
      P = math.sqrt((H13.bunch.mass() + b.TK)*(H13.bunch.mass() + b.TK) - H13.bunch.mass()*H13.bunch.mass())
-#     PlotPopl([3,1],["eff= %1.6f"%popi,"px= %1.6f"%H13.bunch.px(i),"py= %1.6f"%H13.bunch.py(i),"x= %1.6f"%H13.bunch.x(i),"y= %1.6f"%H13.bunch.y(i),"pz-p0= %1.6f"%(H13.bunch.pz(i) - P),"-px/(pz-p0)= %1.6f"%(-H13.bunch.px(i)/(H13.bunch.pz(i) - P)),"d= %1.6f"%(abs(H13.bunch.px(i)+2.6*(H13.bunch.pz(i) - P))/math.sqrt(1+2.6*2.6))],0.15,res_dir+data_name+"%i.dat"%(i*size+rank),res_dir+pic_name+"%i.png"%(i*size+rank))
-     PlotPopl([3,1],["eff= %1.6f"%popi],0.15,res_dir+data_name+"%i.dat"%(i*size+rank),res_dir+pic_name+"%i.png"%(i*size+rank))
+     PlotPopl([3,1],["eff= %1.6f"%popi,"px= %1.6f"%H13.bunch.px(i),"py= %1.6f"%H13.bunch.py(i),"x= %1.6f"%H13.bunch.x(i),"y= %1.6f"%H13.bunch.y(i),"pz-p0= %1.6f"%(H13.bunch.pz(i) - P),"-px/(pz-p0)= %1.6f"%(-H13.bunch.px(i)/(H13.bunch.pz(i) - P)),"d= %1.6f"%(abs(H13.bunch.px(i)+2.6*(H13.bunch.pz(i) - P))/math.sqrt(1+2.6*2.6))],0.15,res_dir+data_name+"%i.dat"%(i*size+rank),res_dir+pic_name+"%i.png"%(i*size+rank))
      os.remove(res_dir+data_name+"%i.dat"%(i*size+rank))
-
+"""
 #-----------------------Slide show------------------------------------------
 
 
@@ -252,7 +276,8 @@ for spread, disp  in [(spread,disp)
                         for disp in [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.2,3.3,3.4,3.5,3.6,3.7,3.8,3.9,4.0,4.1,4.2,4.3,4.4,4.5,4.6,4.7,4.8,4.9,5.0]]:
 """
 
-""""
+"""
+
 for B, power  in [(B,power)
                         for B in [0.001,0.002,0.003,0.004,0.005,0.006,0.007,0.008,0.008,0.01]
                         for power in [1.0e6,2.0e6,3.0e6,4.0e6,5.0e6,6.0e6,7.0e6,8.0e6,9.0e6,10.0e6]]:

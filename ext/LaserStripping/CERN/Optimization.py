@@ -14,7 +14,7 @@ from ext.las_str.SchredingerFuncMod import SchredingerFunc
 from ext.las_str.SimplexMod import Simplex
 from ext.las_str.part_generator import BunchGen
 from ext.las_str.print_mod import printf
-from ext.las_str.plot_mod import *
+#from ext.las_str.plot_mod import *
 from ext.las_str.emittance import Freq_spread
 
 
@@ -32,7 +32,7 @@ orbit_path = os.environ["ORBIT_ROOT"]
 
 b = BunchGen()
 
-b.N_part = 5
+b.N_part = 1
 
 b.TK= 4.0                                     # [GeV]
 
@@ -42,13 +42,13 @@ b.charge = 0                                  # [e]
 b.alphaX = 0.0                                 # [rad]
 b.betaX = 30.0                                # [m]
 b.emtX = 0.25e-6                             # [m*rad]
-b.cutOffX = math.sqrt(b.emtX*b.betaX)*3.0     # [m]
+b.cutOffX = math.sqrt(b.emtX*b.betaX)*30.0     # [m]
 
 
 b.alphaY = 0.0                              # [rad]
 b.betaY = 7.0                                 # [m]
 b.emtY = 0.25e-6                             # [m*rad]
-b.cutOffY = math.sqrt(b.emtY*b.betaY)*3.0     # [m]
+b.cutOffY = math.sqrt(b.emtY*b.betaY)*30.0     # [m]
 
 
 
@@ -67,14 +67,10 @@ b.cutOffZ = 3*b.sigma_beam
 #----------------------Beginning of the Laser field and excitation parameters of H0 atom----------------------#
 
 
-H13 = SchredingerFunc(3)
+H13 = SchredingerFunc(4)
 
+H13.Bx = 2.1
 
-
-
-
-H13.Bx = 2.01
-H13.fS = ConstEMfield(0.,0.,0.,H13.Bx,0.,0.)                                   # [T]
     
 #grad_B = -3.0                                    # [T/m]
 #H13.fS = QuadEMfield()
@@ -89,6 +85,37 @@ H13.fS = ConstEMfield(0.,0.,0.,H13.Bx,0.,0.)                                   #
 #sys.exit(0)
 
 H13.bunch = b.getBunch(0)
+"""
+averT = 0
+for i in range(H13.bunch.getSize()):
+    px = H13.bunch.px(i)
+    py = H13.bunch.py(i)
+    pz = H13.bunch.pz(i)
+    P = math.sqrt(px*px+py*py+pz*pz)
+    E = math.sqrt(pz*pz+H13.bunch.mass()*H13.bunch.mass())
+    T = E - H13.bunch.mass()
+    averT += T
+    
+averT /= H13.bunch.getSize()
+
+
+averT2 = 0
+for i in range(H13.bunch.getSize()):
+    px = H13.bunch.px(i)
+    py = H13.bunch.py(i)
+    pz = H13.bunch.pz(i)
+    P = math.sqrt(px*px+py*py+pz*pz)
+    E = math.sqrt(pz*pz+H13.bunch.mass()*H13.bunch.mass())
+    T = E - H13.bunch.mass()
+    averT2 += (T - averT)**2
+
+averT2 /= H13.bunch.getSize()
+averT2 = math.sqrt(averT2)
+print averT
+print averT2
+print averT2/averT
+"""    
+   
 
 """
 f = open('energies.txt','w')
@@ -126,7 +153,7 @@ H13.n_sigma = 3
 H13.n_step = 1000
 
 H13.la = 1064.0e-9                                   # [m]
-H13.power = 4.91e6                               # [W]
+H13.power = 5.00e6                               # [W]
 
 H13.fx = -4.5                                      # [m]
 H13.fy = -4.5                                      # [m]
@@ -135,12 +162,12 @@ H13.wx = 370.0e-6                               # [m]
 H13.wy = 700.0e-6                               # [m]
 
     
-H13.env_sigma = 15.44e-12                     #[m]
+H13.env_sigma = 15.0e-12                     #[m]
 
 
 
-H13.rx = 4.12e-3                               # [m]
-H13.ry = 1.39e-3                               # [m]
+H13.rx = 4.0e-3                               # [m]
+H13.ry = 1.3e-3                               # [m]
 
 H13.ax = 0.0e-3                               # [rad]
 H13.ay = 0.0e-3                               # [rad]
@@ -156,12 +183,12 @@ H13.ay = 0.0e-3                               # [rad]
 
 name_args,guess,increments,name_args_pr,print_factor = [],[],[],[],[]
 
-name_args.append('env_sigma'),  guess.append(15.44e-12), increments.append(24.0e-13),name_args_pr.append('env_sigma[ps]'),print_factor.append(1e12)
-name_args.append('rx'),         guess.append(4.12e-3),   increments.append(1.0e-4),  name_args_pr.append('rx[mm]'),print_factor.append(1e3)
-name_args.append('ry'),         guess.append(1.39e-3),   increments.append(1.0e-4),  name_args_pr.append('ry[mm]'),print_factor.append(1e3)
+name_args.append('env_sigma'),  guess.append(15.0e-12), increments.append(24.0e-13),name_args_pr.append('env_sigma[ps]'),print_factor.append(1e12)
+name_args.append('rx'),         guess.append(3.9e-3),   increments.append(1.0e-4),  name_args_pr.append('rx[mm]'),print_factor.append(1e3)
+name_args.append('ry'),         guess.append(1.34e-3),   increments.append(1.0e-4),  name_args_pr.append('ry[mm]'),print_factor.append(1e3)
 #name_args.append('ax'),         guess.append(2.7e-3),   increments.append(1.0e-4),  name_args_pr.append('ax[mrad]'),print_factor.append(1e3)
 #name_args.append('ay'),         guess.append(0.0e-3),   increments.append(1.0e-4),  name_args_pr.append('ay[mrad]'),print_factor.append(1e3)
-name_args.append('Bx'),         guess.append(2.01),      increments.append(0.1),     name_args_pr.append('Bx[T]'),print_factor.append(1)
+name_args.append('Bx'),         guess.append(2.00),      increments.append(0.1),     name_args_pr.append('Bx[T]'),print_factor.append(1)
 
 pf = printf("test.dat",["N_step","cpu_time","W[MW]"] + name_args_pr + ["Popul", "+- Pop", "P_ioniz", "+- P_ioniz"])
 
@@ -247,8 +274,8 @@ def opt_func3(args):
 
 #-----------------------Beginning of optimization-----------------------------------------
 
-s = Simplex(opt_func3, guess, increments)
-(values, err, iter) = s.minimize(1e-20, 1000,0)
+#s = Simplex(opt_func3, guess, increments)
+#(values, err, iter) = s.minimize(1e-20, 1000,0)
 
 #-----------------------End of Optimization-----------------------------------------------
 
@@ -261,16 +288,15 @@ s = Simplex(opt_func3, guess, increments)
 
 
 #-----------------------Single point calculation-----------------------------------------------------
-#print "start"
-#print  H13.population() 
+print "start"
+print  H13.population() 
+
 
 """
 for i in range(0,50):
-    H13.B_x = i*0.001+1.0e-10       
-    Bx = i*0.001+1.0e-10
-    H13.fS = ConstEMfield(0.,0.,0.,Bx,0.,0.)
-    pop, sigma_pop = H13.population()
-    if(rank==0):    print i*0.001,"  ",pop,"  ",sigma_pop
+    H13.Bx = i*0.1      
+    pop, sigma_pop, p_ioniz, sigma_p_ioniz = H13.population()
+    if(rank==0):    print H13.Bx,"  ",p_ioniz,"  ",sigma_p_ioniz
 """
 #-----------------------End of single point calculation-----------------------------------------------
 
@@ -280,8 +306,8 @@ for i in range(0,50):
 
 #-----------------------Single point calculation with optimization function-----------------------------------------------------
 
-pop, sigma_pop, p_ioniz, sigma_p_ioniz = H13.population()
-print pop, sigma_pop, p_ioniz, sigma_p_ioniz
+#pop, sigma_pop, p_ioniz, sigma_p_ioniz = H13.population()
+#print p_ioniz, sigma_p_ioniz
 
 #-----------------------End of Single point calculation with optimization function-----------------------------------------------
 
