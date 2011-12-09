@@ -26,7 +26,7 @@ for i in range(n):
 
 print "================================================="
 print "KV 1D - done!"
-print "                  alpha       beta [cm/rad]    gamma     emitt[cm*rad] "
+print "                  alpha       beta [m/rad]    gamma     emitt[m*rad] "
 print "Twiss     X  %12.5g  %12.5g   %12.5g    %12.5g "%twiss.getAlphaBetaGammaEmitt()
 print "Generated X  %12.5g  %12.5g   %12.5g    %12.5g "%twiss_analysis.getTwiss(0)
 print "================================================="
@@ -42,7 +42,7 @@ for i in range(n):
 
 print "================================================="
 print "Water bag 1D - done!"
-print "                  alpha       beta [cm/rad]    gamma     emitt[cm*rad] "
+print "                  alpha       beta [m/rad]    gamma     emitt[m*rad] "
 print "Twiss     X  %12.5g  %12.5g   %12.5g    %12.5g "%twiss.getAlphaBetaGammaEmitt()
 print "Generated X  %12.5g  %12.5g   %12.5g    %12.5g "%twiss_analysis.getTwiss(0)
 print "================================================="
@@ -58,7 +58,7 @@ for i in range(n):
 
 print "================================================="
 print "Gauss 1D - done!"
-print "                  alpha       beta [cm/rad]    gamma     emitt[cm*rad] "
+print "                  alpha       beta [m/rad]    gamma     emitt[m*rad] "
 print "Twiss     X  %12.5g  %12.5g   %12.5g    %12.5g "%twiss.getAlphaBetaGammaEmitt()
 print "Generated X  %12.5g  %12.5g   %12.5g    %12.5g "%twiss_analysis.getTwiss(0)
 print "================================================="
