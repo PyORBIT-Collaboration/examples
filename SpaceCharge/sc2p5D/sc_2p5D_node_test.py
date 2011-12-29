@@ -83,9 +83,9 @@ scNode_arr = scLatticeModifications.setSC2p5DAccNodes(teapot_lattice, sc_path_le
 #scNode_arr = scLatticeModifications.setSC2p5DAccNodes(teapot_lattice, sc_path_length_min, calc2p5d, boundary)
 
 #track lattice
-teapot_lattice.trackBunch(b)
-slice_length=0.2
-#calc2p5d.trackBunch(b,slice_length)
+#teapot_lattice.trackBunch(b)
+slice_length=0.1
+calc2p5d.trackBunch(b,slice_length)
 
 #-------------------------------------
 # momentum change
