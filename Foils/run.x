@@ -1,0 +1,1 @@
+${ORBIT_ROOT}/bin/pyORBIT lattice_with_foil_nodes.py
