@@ -42,9 +42,17 @@ for node in teapot_latt.getNodes():
 		print "node=",node.getName()," type=",node.getType(),"  pos=",node_pos_start," L=",node.getLength()
 
 
-collimator_pos = (pos_start + pos_stop)/2.0
-collimator = TeapotCollimatorNode("Collimator 1")
-collimator.setLength(0.5)
+length = 0.5
+ma = 9
+density_fac = 1.0
+shape = 1
+a = 0
+b = 0
+c = 0
+d = 0
+angle = 0
+
+collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle, "Collimator 1")
 
 addTeapotColimatorNode(teapot_latt, 18.5,collimator) 
 print "===========Lattice modified ======================================="
