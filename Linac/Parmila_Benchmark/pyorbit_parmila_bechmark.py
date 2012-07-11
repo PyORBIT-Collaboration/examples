@@ -136,7 +136,7 @@ bunch_gen = SNS_Linac_BunchGenerator(twissX,twissY,twissZ)
 #set the beam peak current in mA
 bunch_gen.setBeamCurrent(38.0)
 
-bunch_in = bunch_gen.getBunch(nParticles = 20000, distributorClass = WaterBagDist3D)
+bunch_in = bunch_gen.getBunch(nParticles = 200000, distributorClass = WaterBagDist3D)
 
 bunch_gen.dumpParmilaFile(bunch_in, phase_init = -45.0, fileName = 	"parmila_bunch.txt")
 print "Bunch Generation completed."
