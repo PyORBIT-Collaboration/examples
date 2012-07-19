@@ -10,11 +10,11 @@ import sys
 import os
 import random
 
-from distribution_generators import TwissContainer
-from distribution_generators import KVDist2D, KVDist3D
-from distribution_generators import GaussDist2D, GaussDist3D
-from distribution_generators import WaterBagDist2D, WaterBagDist3D
-from distribution_generators import TwissAnalysis
+from orbit.bunch_generators import TwissContainer
+from orbit.bunch_generators import KVDist2D, KVDist3D
+from orbit.bunch_generators import GaussDist2D, GaussDist3D
+from orbit.bunch_generators import WaterBagDist2D, WaterBagDist3D
+from orbit.bunch_generators import TwissAnalysis
 
 random.seed(1)
 
