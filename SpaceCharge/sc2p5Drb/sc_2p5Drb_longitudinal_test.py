@@ -141,12 +141,12 @@ import Gnuplot
 
 gLong = Gnuplot.Gnuplot()
 gLong.title('Long Density as a function of z')
-gLong('set data style line')
+gLong('set style data lines')
 gLong.plot(long_arr)
 
 gLongGrad = Gnuplot.Gnuplot()
 gLongGrad.title('Derivative of Long. Density ')
-gLongGrad('set data style line')
+gLongGrad('set style data lines')
 gLongGrad.plot(long_grad_arr)
 
 raw_input('Please press return to stop:\n')

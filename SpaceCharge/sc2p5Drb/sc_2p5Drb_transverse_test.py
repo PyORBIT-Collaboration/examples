@@ -180,12 +180,12 @@ for ix in range(2*nStep+1):
 import Gnuplot
 gRho = Gnuplot.Gnuplot()
 gRho.title('Transverse Density vs. radius')
-gRho('set data style line')
+gRho('set style data lines')
 gRho.plot(rho_arr)
 
 gPhi = Gnuplot.Gnuplot()
 gPhi.title('Potential vs. distance from center')
-gPhi('set data style line')
+gPhi('set style data lines')
 gPhi.plot(phi_arr)
 
 

@@ -77,21 +77,26 @@ for i in range(nGraphPoints):
 	(ex,ey,ez) = spaceChargeCalc.calculateField(0.,0.,r)
 	filed_z_arr.append((r,ez))		
 	
+
 import Gnuplot
 
 gX = Gnuplot.Gnuplot()
 gX.title('Ex as function of x')
-gX('set data style line')
+gX('set style data lines')
 gX.plot(filed_x_arr)
+
+time.sleep(1.0)
 
 gY = Gnuplot.Gnuplot()
 gY.title('Ey as function of y')
-gY('set data style line')
+gY('set style data lines')
 gY.plot(filed_y_arr)
+
+time.sleep(1.0)
 
 gZ = Gnuplot.Gnuplot()
 gZ.title('Ez as function of z')
-gZ('set data style line')
+gZ('set style data lines')
 gZ.plot(filed_z_arr)
 
 
