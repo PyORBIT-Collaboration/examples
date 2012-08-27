@@ -29,7 +29,7 @@ if (method == 4):   Ez = 5.14220642e11*0.0045
 if (method == 5):   Ez = 5.14220642e11*0.0045
 
 
-n_states = 2
+n_states = 3
 
 #AttrValue= sum= 0.439180474444 0.439547597955
 data_name = "data_pop_"
@@ -60,11 +60,11 @@ b.addParticle(0.,0.,0.,0.,0.,0.)
 
 
 if (method == 2 or method == 3):     
-    Stark_ef = Stark(orbit_path+"/ext/laserstripping/Hydrogen_data/", n_states)
+    Stark_ef = Stark(orbit_path+"/ext/laserstripping/Hydrogen_data/StarkEG/", n_states)
 
 
 if (method == 4):     
-    Stark_ef = StarkStrongField(orbit_path+"/ext/laserstripping/Hydrogen_data/",0,0,1)
+    Stark_ef = StarkStrongField(orbit_path+"/ext/laserstripping/Hydrogen_data/StarkEG/",0,0,1)
     Omega = Stark_ef.deltaE(b.mass(),0.,0.,Ez,0.,0.,0.,0.,0.,0.)
 #    Omega = 0.5 - 0.1275
 #    Omega += 2.0e-4
@@ -152,7 +152,7 @@ if (method == 5):
     
 print "AttrValue=","sum=", pop2, sum
 
-#n = n_states
+n = n_states
 
 #for n1 in range(n):
 #    n2 = n-n1-1
@@ -160,6 +160,7 @@ print "AttrValue=","sum=", pop2, sum
     
 #for n1 in range(n-1):
 #    n2 = n-n1-2
+#    print n
 #    print 1+n+n1+(n*n*n-n)/3,"  ", b.partAttrValue("Populations",0,1+n+n1+(n*n*n-n)/3)/0.87,"  ",3.*(n1+1)*(n2+1)/(n*(n*n-1))
 #    print 2-n+n1+(n*n*n-n)/3,"  ", b.partAttrValue("Populations",0,2-n+n1+(n*n*n-n)/3)/0.87,"  ",3.*(n1+1)*(n2+1)/(n*(n*n-1))
 

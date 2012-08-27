@@ -30,9 +30,9 @@ orbit_path = os.environ["ORBIT_ROOT"]
 
 b = BunchGen()
 
-b.N_part = 250
+b.N_part = 100
 
-b.TK= 3.0                                    # [GeV]
+b.TK= 1.0                                    # [GeV]
 
 b.mass = 0.938256 + 0.000511                  # [GeV]
 b.charge = 0                                  # [e]
@@ -65,7 +65,7 @@ b.cutOffZ = 3*b.sigma_beam
 #----------------------Beginning of the Laser field and excitation parameters of H0 atom----------------------#
 
 
-H13 = SchredingerFunc(0)
+H13 = SchredingerFunc(1)
 
 H13.Bx = 0.001
 
@@ -90,7 +90,7 @@ H13.Bx = 0.001
 
 
 H13.bunch = b.getBunch(0)
-sys.exit(0)
+
 #H13.Nevol = 1000
 #H13.print_file = True
 
@@ -233,8 +233,8 @@ def opt_func3(args):
 
 #-----------------------Beginning of optimization-----------------------------------------
 
-#s = Simplex(opt_func, guess, increments)
-#(values, err, iter) = s.minimize(1e-20, 1000,0)
+s = Simplex(opt_func, guess, increments)
+(values, err, iter) = s.minimize(1e-20, 1000,0)
 
 #-----------------------End of Optimization-----------------------------------------------
 
