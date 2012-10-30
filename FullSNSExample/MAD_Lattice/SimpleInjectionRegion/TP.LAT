@@ -1,0 +1,398 @@
+drift l  0.85  sub  10  end
+drift l  0.85  sub  10  end
+drift l  0.85  sub  10  end
+drift l  0.85  sub  10  end
+drift l  0.85  sub  10  end
+drift l  0.85  sub  10  end
+drift l  0.85  sub  10  end
+drift l  0.85  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+drift l  0.4  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  0.01  sub  10  end
+sextupole k2  -1.323186  l  0.3  sub  10  end
+drift l  0.69  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  0.01  sub  10  end
+sextupole k2  0.3520601  l  0.3  sub  10  end
+drift l  0.69  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  -1.615776  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  1.816845  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  -1.323186  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+drift l  0.4958  sub  10  end
+drift l  0.4958  sub  10  end
+drift l  0.4958  sub  10  end
+drift l  0.4958  sub  10  end
+drift l  0.4958  sub  10  end
+drift l  0.6  sub  10  end
+drift l  0.215  sub  10  end
+drift l  0.0045  sub  10  end
+drift l  0.01455  sub  10  end
+drift l  0.0254  sub  10  end
+drift l  0.0045  sub  10  end
+drift l  0.01455  sub  10  end
+drift l  0.13462  sub  10  end
+drift l  0.0045  sub  10  end
+drift l  0.01455  sub  10  end
+drift l  0.0254  sub  10  end
+drift l  0.0045  sub  10  end
+drift l  0.01455  sub  10  end
+drift l  0.215  sub  10  end
+drift l  0.254  sub  10  end
+drift l  1.2  sub  10  end
+drift l  0.6  sub  10  end
+drift l  0.3  sub  10  end
+drift l  0.36269  sub  10  end
+drift l  0.36269  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+drift l  0.4  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+drift l  0.925  sub  10  end
+drift l  1.0335  sub  10  end
+drift l  1.12  sub  10  end
+drift l  1.0335  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  0.4276  sub  10  end
+drift l  1.0335  sub  10  end
+drift l  1.12  sub  10  end
+drift l  1.0335  sub  10  end
+drift l  0.925  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+drift l  0.4  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+drift l  0.685  sub  10  end
+drift l  0.685  sub  10  end
+drift l  0.685  sub  10  end
+drift l  0.685  sub  10  end
+drift l  0.685  sub  10  end
+drift l  0.685  sub  10  end
+drift l  0.685  sub  10  end
+drift l  0.685  sub  10  end
+drift l  0.685  sub  10  end
+drift l  0.685  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  0.01  sub  10  end
+sextupole k2  -1.323186  l  0.3  sub  10  end
+drift l  0.69  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  0.01  sub  10  end
+sextupole k2  0.3520601  l  0.3  sub  10  end
+drift l  0.69  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  -1.615776  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  1.816845  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  -1.323186  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+drift l  0.4  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+drift l  1.25  sub  10  end
+drift l  1.25  sub  10  end
+drift l  1.25  sub  10  end
+drift l  1.25  sub  10  end
+drift l  1.25  sub  10  end
+drift l  1.25  sub  10  end
+drift l  1.25  sub  10  end
+drift l  1.25  sub  10  end
+drift l  1.25  sub  10  end
+drift l  1.25  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+drift l  0.4  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  0.01  sub  10  end
+sextupole k2  -1.323186  l  0.3  sub  10  end
+drift l  0.69  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  0.01  sub  10  end
+sextupole k2  0.3520601  l  0.3  sub  10  end
+drift l  0.69  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  -1.615776  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  1.816845  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  -1.323186  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+drift l  0.4  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+drift l  0.57  sub  10  end
+drift l  0.57  sub  10  end
+rfcavity volt  0.0  l  1.7  sub  10  end
+drift l  0.57  sub  10  end
+drift l  0.57  sub  10  end
+rfcavity volt  0.0  l  1.7  sub  10  end
+drift l  0.57  sub  10  end
+drift l  0.57  sub  10  end
+rfcavity volt  0.0  l  1.7  sub  10  end
+drift l  0.57  sub  10  end
+drift l  0.57  sub  10  end
+rfcavity volt  0.0  l  1.7  sub  10  end
+drift l  0.57  sub  10  end
+drift l  0.57  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+drift l  0.4  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  0.01  sub  10  end
+sextupole k2  -1.323186  l  0.3  sub  10  end
+drift l  0.69  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  0.01  sub  10  end
+sextupole k2  0.3520601  l  0.3  sub  10  end
+drift l  0.69  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  -1.615776  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  1.816845  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  0.69  sub  10  end
+sextupole k2  -1.323186  l  0.3  sub  10  end
+drift l  0.01  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+quadrupole k1  -0.771448800402  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+quadrupole k1  0.695757845933  l  0.25  sub  10  end
+drift l  1.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+sbend e1  0.0  angle  0.098174770425  l  0.75  e2  0.0  sub  10  end
+drift l  1.0  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+quadrupole k1  -0.52769770283  l  0.25  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+drift l  1.7125  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+quadrupole k1  0.623676340266  l  0.35  sub  10  end
+drift l  0.4  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+quadrupole k1  -0.674705850692  l  0.275  sub  10  end
+drift l  0.7125  sub  10  end
+drift l  0.7125  sub  10  end
+drift l  0.7125  sub  10  end
+drift l  0.7125  sub  10  end
+drift l  0.7125  sub  10  end
+drift l  0.7125  sub  10  end
+drift l  0.7125  sub  10  end
+drift l  0.7125  sub  10  end
+final
