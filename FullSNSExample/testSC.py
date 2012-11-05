@@ -333,10 +333,10 @@ addLongitudinalSpaceChargeNode(teapot_latt, position, sc1Dnode)
 
 nodes = teapot_latt.getNodes()
 i = 0
-	#for node in nodes:
-	#print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%teapot_latt.getNodePositionsDict()[node]
-	#print "There are ", node.getNumberOfBodyChildren()," child nodes."
-#i=i+1
+	for node in nodes:
+	print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%teapot_latt.getNodePositionsDict()[node]
+	print "There are ", node.getNumberOfBodyChildren()," child nodes."
+i=i+1
 
 #================Do some turns===========================================
 
