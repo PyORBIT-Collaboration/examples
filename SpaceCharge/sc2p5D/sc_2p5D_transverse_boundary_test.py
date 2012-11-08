@@ -60,6 +60,18 @@ b_maxy = boundary.getMaxY()
 b_miny = boundary.getMinY()
 print "MaxX=",b_maxx," MinX=",b_minx," MaxY=",b_maxy," MinY=",b_miny
 
+
+#-------------------------------------------------------------------------
+"""
+For the Boundary2D class it is possible to have the predefined shapes
+Circle - the last parameter will be the diameter of the circle
+Ellipse - there will be two parameters at the end - 2*a and 2*b where a,b are semi-axises
+Rectangle - there will be two parameters at the end - horizontal and vertical sizes
+"""
+#-------------------------------------------------------------------------
+#boundary = Boundary2D(nBoundaryPoints,N_FreeSpaceModes,"Circle",2*R_Boundary)
+
+
 # Shape boundary test
 #Choose from Circle/Ellipse/Rectangle
 shapeboundary = Boundary2D(nBoundaryPoints,N_FreeSpaceModes,"Circle",0.01,0.01)

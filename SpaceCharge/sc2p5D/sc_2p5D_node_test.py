@@ -77,6 +77,16 @@ for i in xrange(nBoundaryPoints):
 	boundary.setBoundaryPoint(i,x,y)
 boundary.initialize()
 
+#-------------------------------------------------------------------------
+"""
+For the Boundary2D class it is possible to have the predefined shapes
+Circle - the last parameter will be the diameter of the circle
+Ellipse - there will be two parameters at the end - 2*a and 2*b where a,b are semi-axises
+Rectangle - there will be two parameters at the end - horizontal and vertical sizes
+"""
+#-------------------------------------------------------------------------
+#boundary = Boundary2D(nBoundaryPoints,N_FreeSpaceModes,"Circle",2*R_Boundary)
+
 sc_path_length_min = 0.05
 
 scNode_arr = scLatticeModifications.setSC2p5DAccNodes(teapot_lattice, sc_path_length_min, calc2p5d)
