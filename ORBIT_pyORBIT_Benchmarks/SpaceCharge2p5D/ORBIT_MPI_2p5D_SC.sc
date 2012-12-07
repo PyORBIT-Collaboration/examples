@@ -18,13 +18,15 @@ OFstream fio("ORBIT_MPI_2p5D_SC.out", ios::out);
 
   addSyncPart(mSync,charge,TSync);
 
-  Real INTENSITY = 1.0e+13;
-  nMaxMacroParticles = 10000;
+  Real INTENSITY = 1.0e+14;
+  nMaxMacroParticles = 100000;
   nReals_Macro = INTENSITY / nMaxMacroParticles;
   
   mainHerd = addMacroHerd(nMaxMacroParticles);
-  readParts(mainHerd, "orbit_mpi_bunch_input.dat", nMaxMacroParticles);
-
+	//readParts(mainHerd, "./DISTRIBUTIONS/Bm_KV_offset_40mm_Uniform", nMaxMacroParticles);
+  readParts(mainHerd, "./DISTRIBUTIONS/Bm_KV_Uniform", nMaxMacroParticles);
+  //readParts(mainHerd, "./DISTRIBUTIONS/Bm_50mm_Uniform", nMaxMacroParticles);
+	//readParts(mainHerd, "./DISTRIBUTIONS/Bm_50mm_offset_40mm_Uniform", nMaxMacroParticles);
   Integer TURNS = 1;
 
   Real GAMMA = 1.0 + TSync / (0.93827231 * mSync);
@@ -47,9 +49,8 @@ OFstream fio("ORBIT_MPI_2p5D_SC.out", ios::out);
   const Integer nstepTPS = 4;
   const Integer nstepTPK = 4;
 
-  buildTPlatticeNew("LATTICES/TEST_SC_LATTICE.TP",
-  //buildTPlatticeNew("LATTICES/Q_0p125.TP",
-                    "Linac",
+  //buildTPlatticeNew("LATTICES/TEST_SC_LATTICE.TP","FODO",
+  buildTPlatticeNew("LATTICES/Q_0p125.TP","FODO",                   
                     nstepTPD,
                     nstepTPM, fringeM,
                     nstepTPQ, fringeQ,
@@ -60,7 +61,7 @@ OFstream fio("ORBIT_MPI_2p5D_SC.out", ios::out);
 //////////////////////////////
 // Add a Longitudinal Impedance Node
 //////////////////////////////
-
+/**
   ComplexVector ZImped(128);
   ZImped = Complex(0.,0.);
 
@@ -71,12 +72,12 @@ OFstream fio("ORBIT_MPI_2p5D_SC.out", ios::out);
   Integer useSpaceCharge = 0;
 
   addFFTLSpaceCharge("LSC1", 1, ZImped, b_a, useAvg, nMacroLSCMin, useSpaceCharge);
-	
+*/
 ///////////////////////////////////////////
 // Add a Transverse Space Charge Node Set
 ///////////////////////////////////////////
 
-  Real eps = 1.0e-06;
+  Real eps = 1.0e-6;
   String BPShape = "Circle";
   //String BPShape = "None";
   
@@ -85,7 +86,8 @@ OFstream fio("ORBIT_MPI_2p5D_SC.out", ios::out);
   Real Gridfact = 2.0;
   Integer nMacroSCMin = 1;
 
-  Integer nxBins = 32, nyBins = 32;
+  Integer nxBins = 512, nyBins = 512;
+	//addFFTTransSCSet(nxBins, nyBins, eps, nMacroSCMin);
   addPotentialTransSCSet(nxBins, nyBins, eps,
                          BPShape, BP1, BP2, BP3, BP4,
                          BPPoints, BPModes, Gridfact, nMacroSCMin);
@@ -108,9 +110,9 @@ OFstream fio("ORBIT_MPI_2p5D_SC.out", ios::out);
 	//this will track bunch only through longitudinal distribution calculator and 
 	//SC node
 	//turnToNode(mainHerd,2);
-	doTurn(1);
+	doTurn(100);
 	
-  OFstream fio98("orbit_mpi_bunch_output.dat", ios::out);
+  OFstream fio98("orbit_mpi_binch_final.dat", ios::out);
   dumpPartsGlobal(mainHerd, fio98);
   fio98.close();
 	
