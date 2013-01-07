@@ -1,7 +1,11 @@
 from orbit.teapot import teapot
 from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 from bunch import Bunch
+
+#///////////////////////////////////////////////////////////
 from orbit.rf_cavities import RFNode, RFLatticeModifications
+#///////////////////////////////////////////////////////////
+
 import math
 
 print "Start."
@@ -35,6 +39,7 @@ elem0.setLength(4.0)
 
 lattice.initialize()
 
+#///////////////////////////////////////////////////////////
 ZtoPhi = 2.0 * math.pi / lattice.getLength()
 dESync = 0.0
 RFHNum = 1.0
@@ -52,7 +57,7 @@ print "dESync = ", dESync
 print "RFHNum = ", RFHNum
 print "RFVoltage = ", RFVoltage
 print "RFPhase = ", RFPhase
-
+#///////////////////////////////////////////////////////////
 
 print "==============BEFORE============================"
 b.dumpBunch()
