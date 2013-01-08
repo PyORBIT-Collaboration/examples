@@ -47,7 +47,7 @@ accelDict["RFHNum"] = 1
 accelDict["n_tuple"] = 8
 accelDict["time"] = (0, 5.e-09, 10.e-09, 15.e-09, 20.e-09,\
 		     25.e-09, 30.e-09, 35.e-09, 40.e-09)
-accelDict["Brho"] = (5.6573729517, 5.7573729517, 5.8573729517,\
+accelDict["BRho"] = (5.6573729517, 5.7573729517, 5.8573729517,\
 		     5.9573729517, 6.0573729517, 5.9573729517,\
 		     5.8573729517, 5.7573729517, 5.6573729517)
 accelDict["RFVoltage"] = (0.1, 0.11, 0.12, 0.13, 0.14,\
@@ -56,7 +56,7 @@ accelDict["RFPhase"] = (0., 30., 60., 90., 90.,\
 			90., 60., 30., 0.)
 length = 0.0
 name = "harmonic_rfnode"
-rf_node = RFNode.TimeDep_Harmonic_RFNode(ZtoPhi, accelDict, b, length, name)
+rf_node = RFNode.BRhoDep_Harmonic_RFNode(ZtoPhi, accelDict, b, length, name)
 position = 1.0
 RFLatticeModifications.addRFNode(lattice, position, rf_node)
 
