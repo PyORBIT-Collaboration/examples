@@ -27,7 +27,7 @@ b.addParticle(0.0,0.0,0.0,0.0, 1.8,0.0)
 b.compress()
 
 syncPart = b.getSyncParticle()
-energy = 1.0                          #energy in GeV
+energy = 100.0                          #energy in GeV
 #p = syncPart.energyToMomentum(energy)
 #syncPart.pz(p)
 syncPart.kinEnergy(energy)
@@ -48,27 +48,28 @@ lattice.initialize()
 
 #///////////////////////////////////////////////////////////
 ZtoPhi = 2.0 * math.pi / lattice.getLength()
-RFVoltage = 0.1
-RFPhasep =  150.0
-RFPhasem = -150.0
-dRFPhasep =  30.0
-dRFPhasem =  30.0
+accelDict = {}
+accelDict["n_tuple"] = 8
+accelDict["time"] = (0, 5.e-09, 10.e-09, 15.e-09, 20.e-09,\
+		     25.e-09, 30.e-09, 35.e-09, 40.e-09)
+accelDict["RFVoltage"] = (0.1, 0.11, 0.12, 0.13, 0.14,\
+			  0.13, 0.12, 0.11, 0.1)
+accelDict["RFPhasep"]  = ( 150.,  140.,  130.,  120.,  110.,\
+                           120.,  130.,  140.,  150.)
+accelDict["RFPhasem"]  = (-150., -140., -130., -120., -110.,\
+                          -120., -130., -140., -150.)
+accelDict["dRFPhasep"] = (  30.,   40.,   50.,   60.,   70.,\
+                            60.,   50.,   40.,   30.)
+accelDict["dRFPhasem"] = (  30.,   40.,   50.,   60.,   70.,\
+                            60.,   50.,   40.,   30.)
+
 length = 0.0
 name = "barrier_rfnode"
-rf_node = RFNode.Barrier_RFNode(ZtoPhi, RFVoltage,\
-				 RFPhasep, RFPhasem,\
-				 dRFPhasep, dRFPhasem,\
-				 length, name)
+rf_node = RFNode.TimeDep_Barrier_RFNode(ZtoPhi, accelDict, b, length, name)
 position = 1.0
 RFLatticeModifications.addRFNode(lattice, position, rf_node)
 
 print "Lattice length = ", lattice.getLength()
-print "ZtoPhi = ", ZtoPhi
-print "RFVoltage = ", RFVoltage
-print "RFPhasep  = ", RFPhasep
-print "RFPhasem  = ", RFPhasem
-print "dRFPhasep = ", dRFPhasep
-print "dRFPhasem = ", dRFPhasem
 
 #///////////////////////////////////////////////////////////
 
@@ -89,6 +90,10 @@ paramsDict = {}
 paramsDict["bunch"] = b
 
 lattice.trackActions(accContainer,paramsDict)
+lattice.trackActions(accContainer,paramsDict)
+lattice.trackActions(accContainer,paramsDict)
+lattice.trackActions(accContainer,paramsDict)
+
 print "=============AFTER============================="
 b.dumpBunch()
 print "=========================================="
@@ -97,6 +102,7 @@ print "lattice length=",lattice.getLength()
 print "beta=",b.getSyncParticle().beta()
 print "TEAPOT time[sec]=",b.getSyncParticle().time()
 print "SIMPLE time[sec]=",lattice.getLength()/(b.getSyncParticle().beta()*2.99792458e+8)
+
 print "Stop."
 
 #==============BEFORE============================
