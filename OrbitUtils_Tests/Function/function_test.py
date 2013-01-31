@@ -1,3 +1,11 @@
+#------------------------------------------------------
+# This is an example of Function and SplineCH
+# They are containers for (x,y) (or (x,y,err) ) points
+# Function provides a linear interpolation, and SplineCH
+# uses 3-rd order polynomials. SplineCH can be used for 
+# derivatives calculations.
+#-------------------------------------------------------
+
 import sys
 import math
 
