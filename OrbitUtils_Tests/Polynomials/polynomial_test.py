@@ -1,6 +1,6 @@
 #-------------------------------------------------------------
 # This is an example of Polynomial class
-# The methods "derivative", "copyTo" and "value" are included.
+# The methods "derivativeTo","derivative", "copyTo" and "value" are included.
 #-------------------------------------------------------------
 
 import sys
@@ -24,7 +24,7 @@ y = poly.value(x)
 print "x=",x," y=",y
 
 poly1 = Polynomial()
-poly.derivative(poly1)
+poly.derivativeTo(poly1)
 
 print "========Derivative polynomial======="
 order = poly1.order()
@@ -33,7 +33,8 @@ for i in range(order+1):
 
 x = 10.
 y = poly1.value(x)
-print "x=",x," y_prime=",y
+yp = poly.derivative(x)
+print "x=",x," y_prime=",y,"  yp =",yp
 
 print "========Copy of initial polynomial======="
 poly2 = Polynomial()
@@ -44,7 +45,8 @@ for i in range(order+1):
 
 x = 10.
 y = poly2.value(x)
-print "x=",x," y_prime=",y
+yp = poly2.derivative(x)
+print "x=",x," y=",y," y_prime=",yp
 
 """
 # Memory leak test
@@ -52,7 +54,7 @@ count = 1
 while(1 < 2):
  poly1 = Polynomial()
  poly2 = Polynomial()
- poly.derivative(poly1)
+ poly.derivativeTo(poly1)
  poly.copyTo(poly2)
  count += 1
  if(count % 100000 == 0):

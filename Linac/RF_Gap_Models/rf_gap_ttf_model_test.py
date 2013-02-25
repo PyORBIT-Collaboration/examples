@@ -17,7 +17,8 @@ from orbit_utils import Polynomial
 from linac import BaseRfGap, MatrixRfGap, RfGapTTF
 
 rf_gap_ttf = RfGapTTF()
-
+T_ttf = rf_gap_ttf.getT_TTF()
+S_ttf = rf_gap_ttf.getS_TTF()
 #---------------------------------------
 # We have to set only T and S. The T'=dT/d(cappa) and S'=dS/d(cappa)
 # will be calculated internaly.
@@ -26,11 +27,12 @@ rf_gap_ttf = RfGapTTF()
 
 polyT = Polynomial(4)
 polyT.coefficient(2,2.0)
-#rf_gap_ttf.setT_TTF(polyT)
+rf_gap_ttf.setT_TTF(polyT)
 
 polyS = Polynomial(5)
 polyS.coefficient(3,3.0)
-#rf_gap_ttf.setS_TTF(polyS)
+rf_gap_ttf.setS_TTF(polyS)
+
 
 beta_min = 0.5
 beta_max = 0.9
@@ -38,10 +40,13 @@ rf_frequency = 805.0e+6
 gap_length = 0.22
 relative_amplitude = 0.89
 
+print "===========second set======================="
 rf_gap_ttf.setParameters(polyT,polyS,beta_min,beta_max,rf_frequency,gap_length,relative_amplitude)
 
+print "===========second get======================="
 T_ttf = rf_gap_ttf.getT_TTF()
 S_ttf = rf_gap_ttf.getS_TTF()
+
 
 print "========================================"
 order = T_ttf.order()
@@ -59,12 +64,23 @@ print "rf_frequency= ",rf_gap_ttf.getFrequency()
 print "gap_length= ",rf_gap_ttf.getLength()
 print "relative_amplitude= ",rf_gap_ttf.getRelativeAmplitude()
 
-"""
+print "===========memory leak check======================"
 count = 0
 while(1 < 2):
 	count += 1
+	rf_gap_ttf = RfGapTTF()
+	
+	polyT = Polynomial(4)
+	polyT.coefficient(2,2.0)
+	T_ttf = rf_gap_ttf.setT_TTF(polyT)
+	
+	polyS = Polynomial(5)
+	polyS.coefficient(3,3.0)
+	S_ttf = rf_gap_ttf.setS_TTF(polyS)
+	
 	T_ttf = rf_gap_ttf.getT_TTF()
 	S_ttf = rf_gap_ttf.getS_TTF()
-	if(count % 1000000 == 0): print "count=",count
-"""
-	
+	if(count % 100000 == 0): print "count=",count
+
+
+
