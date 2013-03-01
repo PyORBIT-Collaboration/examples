@@ -33,6 +33,13 @@ polyS = Polynomial(5)
 polyS.coefficient(3,3.0)
 rf_gap_ttf.setS_TTF(polyS)
 
+polyTp = Polynomial(4)
+polyTp.coefficient(3,2.0)
+rf_gap_ttf.setT_TTF(polyTp)
+
+polySp = Polynomial(5)
+polySp.coefficient(1,3.0)
+rf_gap_ttf.setS_TTF(polySp)
 
 beta_min = 0.5
 beta_max = 0.9
@@ -41,12 +48,13 @@ gap_length = 0.22
 relative_amplitude = 0.89
 
 print "===========second set======================="
-rf_gap_ttf.setParameters(polyT,polyS,beta_min,beta_max,rf_frequency,gap_length,relative_amplitude)
+rf_gap_ttf.setParameters(polyT,polyTp,polyS,polySp,beta_min,beta_max,rf_frequency,gap_length,relative_amplitude)
 
 print "===========second get======================="
 T_ttf = rf_gap_ttf.getT_TTF()
 S_ttf = rf_gap_ttf.getS_TTF()
-
+Tp_ttf = rf_gap_ttf.getTp_TTF()
+Sp_ttf = rf_gap_ttf.getSp_TTF()
 
 print "========================================"
 order = T_ttf.order()
@@ -57,6 +65,16 @@ print "========================================"
 order = S_ttf.order()
 for i in range(order+1):
 	print "S_ttf i=",i," coef=",S_ttf.coefficient(i)
+
+print "========================================"
+order = Tp_ttf.order()
+for i in range(order+1):
+	print "Tp_ttf i=",i," coef=",Tp_ttf.coefficient(i)
+
+print "========================================"
+order = Sp_ttf.order()
+for i in range(order+1):
+	print "Sp_ttf i=",i," coef=",Sp_ttf.coefficient(i)
 print "========================================"
 
 print "beta min/max= ",rf_gap_ttf.getBetaMinMax()
@@ -66,8 +84,12 @@ print "relative_amplitude= ",rf_gap_ttf.getRelativeAmplitude()
 
 print "===========memory leak check======================"
 count = 0
+
+rf_gap_ttf = RfGapTTF()
+
 while(1 < 2):
 	count += 1
+
 	rf_gap_ttf = RfGapTTF()
 	
 	polyT = Polynomial(4)
@@ -78,9 +100,20 @@ while(1 < 2):
 	polyS.coefficient(3,3.0)
 	S_ttf = rf_gap_ttf.setS_TTF(polyS)
 	
+	polyT = Polynomial(4)
+	polyT.coefficient(2,2.0)
+	T_ttf = rf_gap_ttf.setTp_TTF(polyT)
+	
+	polyS = Polynomial(5)
+	polyS.coefficient(3,3.0)
+	S_ttf = rf_gap_ttf.setSp_TTF(polyS)	
+	
+	
 	T_ttf = rf_gap_ttf.getT_TTF()
 	S_ttf = rf_gap_ttf.getS_TTF()
-	if(count % 100000 == 0): print "count=",count
+	Tp_ttf = rf_gap_ttf.getTp_TTF()
+	Sp_ttf = rf_gap_ttf.getSp_TTF()
 
+	if(count % 100000 == 0): print "count=",count
 
 
