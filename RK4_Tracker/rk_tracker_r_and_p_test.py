@@ -1,6 +1,9 @@
 #-----------------------------------------------------
-#Track bunch with r and p through the external field 
-# The field is 1 T and has direction (0,1,0)
+# Track bunch with r and p through the external field 
+# The field is 1 T and has direction (0,1,0).
+# This example uses the Bunch as a container of 
+# 6D absolute coordinates without SyncPart synchronous 
+# particle instance. The coordinates are (x,Px,y,Py,z,Pz)
 #-----------------------------------------------------
 import sys
 import math
