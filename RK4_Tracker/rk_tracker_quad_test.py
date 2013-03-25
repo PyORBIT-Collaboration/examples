@@ -1,5 +1,5 @@
 #-----------------------------------------------------
-# Track bunch with r and p through the external field 
+# Track ORBIT bunch through the external field 
 # of the quadrupole Bx = K*y , By = K*x, K in [T/m].
 # This example uses the ORBIT Bunch which has the coordinates  
 # relative to the SyncPart synchronous 
@@ -23,7 +23,7 @@ from orbit.bunch_generators import GaussDist2D, GaussDist3D
 from orbit.bunch_generators import WaterBagDist2D, WaterBagDist3D
 from orbit.bunch_generators import TwissAnalysis
 
-from orbit.sns_linac import Quad
+from orbit.sns_linac import Quad, Drift
 
 random.seed(100)
 
@@ -80,7 +80,7 @@ twissZ = TwissContainer(alphaZ,betaZ,emittZ)
 distGen = GaussDist3D(twissX,twissY,twissZ)
 distGen = WaterBagDist3D(twissX,twissY,twissZ)
 distGen = KVDist3D(twissX,twissY,twissZ)
-n_parts = 1000
+n_parts = 10000
 for i in range(n_parts):
 	(x,xp,y,yp,z,dE) = distGen.getCoordinates()
 	b.addParticle(x,xp,y,yp,z,dE)
@@ -93,6 +93,8 @@ syncPart.kinEnergy(TK)
 b1 = Bunch()
 b.copyBunchTo(b1)
 
+
+
 twiss_analysis = BunchTwissAnalysis()
 
 twiss_analysis.analyzeBunch(b)
@@ -100,9 +102,10 @@ print "============before=================="
 print "X Twiss =",twiss_analysis.getTwiss(0)
 print "Y Twiss =",twiss_analysis.getTwiss(1)
 print "Z Twiss =",twiss_analysis.getTwiss(2)
+#b.dumpBunch()
 
-G = 30.0       # [T/m]
-length = 0.4   # [m]
+G = 30.0      # [T/m]
+length = 0.1   # [m]
 fieldSource = FieldSource(G)
 tracker = RungeKuttaTracker(length)
 print "Tracker Entrance plane (a,b,c,d)=",tracker.entrancePlane()
@@ -115,6 +118,7 @@ tracker.trackBunch(b,fieldSource)
 
 twiss_analysis.analyzeBunch(b)
 print "============after RK4 quad tracker==========="
+print "Runge-Kutta N steps=",tracker.stepsNumber()
 print "X Twiss =",twiss_analysis.getTwiss(0)
 print "Y Twiss =",twiss_analysis.getTwiss(1)
 print "Z Twiss =",twiss_analysis.getTwiss(2)
