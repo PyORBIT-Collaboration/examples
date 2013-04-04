@@ -20,9 +20,6 @@ fReader.readFile("data/scl_medium_beta_rf_cav_field.dat")
 #fReader.readFile("data/scl_high_beta_rf_cav_field.dat")
 (grid2D_Ez,grid2D_Er,grid2D_H) = fReader.makeGrid2DFileds_EzErH()
 
-fieldSource = SuperFishFieldSource()
-fieldSource.setGrid2D_Fields(grid2D_Ez,grid2D_Er,grid2D_H)
-
 #----------------------------------------------
 # RF field parameters 
 #----------------------------------------------

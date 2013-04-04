@@ -54,6 +54,9 @@ print "symmetry = ",fieldSource.getSymmetry()
 print "min max Z =",(grid2D_Ez.getMinX(),grid2D_Ez.getMaxX())
 print "min max R =",(grid2D_Ez.getMinY(),grid2D_Ez.getMaxY())
 print "length =",(grid2D_Ez.getMaxX()-grid2D_Ez.getMinX())
+print "length of the filed =",fieldSource.getLength()
+print "average filed [MV/m] =",fieldSource.getAvgField()/1.0e+6
+print "AvgField*Length [kV] =",fieldSource.getAvgField()*fieldSource.getLength()/1000.
 print "initial time [sec] =",fieldSource.getTimeInit()
 
 #-------Bunch definition ------------------
