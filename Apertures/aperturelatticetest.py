@@ -14,10 +14,7 @@ from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 from bunch import Bunch
 from orbit.utils.orbit_mpi_utils import bunch_orbit_to_pyorbit, bunch_pyorbit_to_orbit
 
-from orbit.diagnostics import StatLats
-from orbit.diagnostics import addTeapotDiagnosticsNode
-from orbit.diagnostics import TeapotStatLatsNode
-from orbit.diagnostics import addTeapotDiagnosticsNodeSet
+
 from orbit.utils import orbitFinalize, NamedObject, ParamsDictObject
 from orbit.aperture import addTeapotApertureNode
 from orbit.aperture import TeapotApertureNode, CircleApertureNode, EllipseApertureNode, RectangleApertureNode
