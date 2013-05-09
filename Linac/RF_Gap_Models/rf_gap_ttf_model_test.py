@@ -1,8 +1,10 @@
 #! /usr/bin/env python
 
 """
-This script is a test for RfGapTTF gap model. This model uses T,T',S,S' transit time factors (TTF)
+This script is a test for RfGapTTF gap model. 
+This model uses T,T',S,S' transit time factors (TTF)
 to calculate the 6D coordinates transformation in the RF gap. 
+The test includes the memory leak test also.
 """
 
 import sys
@@ -20,9 +22,11 @@ rf_gap_ttf = RfGapTTF()
 T_ttf = rf_gap_ttf.getT_TTF()
 S_ttf = rf_gap_ttf.getS_TTF()
 #---------------------------------------
-# We have to set only T and S. The T'=dT/d(cappa) and S'=dS/d(cappa)
-# will be calculated internaly.
-# cappa = 2*PI*frequency/(c*beta)
+# We set T, T', S, and S'. The T'=dT/d(cappa) and S'=dS/d(cappa).
+# where cappa = 2*PI*frequency/(c*beta)
+# The T' and S' are set up as separate polynomials, because
+# the accuracy of calculating a derivative from the polynomial
+# fitting is very low.
 #---------------------------------------
 
 polyT = Polynomial(4)
