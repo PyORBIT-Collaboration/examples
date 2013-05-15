@@ -1,6 +1,7 @@
 #-------------------------------------------------------------------------
 # This script reads the SuperFish files and generates tables of 
 # the TTF functions and their polynomial interpolations. 
+# TTFs (T,S,Tp,Sp) are funcftions of the cappa variable = 2*pi*f/(c*beta).
 # The Super Fish files are the data files with electric and magnetic fields 
 # along the RF cavities.
 #--------------------------------------------------------------------------
