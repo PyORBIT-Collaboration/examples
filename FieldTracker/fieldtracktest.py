@@ -3,7 +3,7 @@ import math
 import sys
 from bunch import Bunch
 from fieldtracker import FieldTracker
-
+from orbit.parsers.field_parser import Field_Parser3D
 
 
 print "Start."
@@ -25,8 +25,8 @@ b.getSyncParticle().kinEnergy(energy)
 
 #=====track bunch through Foil============
 
-#myparser = FieldParser3D()
-#myparser.parseFile("filename", 10, 10, 10)
+myparser = Field_Parser3D()
+myparser.parse("testfile", 1, 1, 1)
 
 mytracker = FieldTracker(0)
 mytracker.trackBunch(b)
