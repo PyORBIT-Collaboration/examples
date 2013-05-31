@@ -1,0 +1,2353 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<sns>
+    <SCLMed bpmFrequency="4.025E8" length="66.962" name="SCLMed" rfFrequency="8.05E8">
+        <accElement length="0.0" name="Begin_Of_SCLMed" pos="0.0" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BCM00" pos="0.0" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM00a" pos="0.221842" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:WS00" pos="0.304" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.04" name="SCL_Mag:QH00" pos="0.85" type="QUAD">
+            <parameters effLength="0.104" field="16.04970634" />
+        </accElement>
+        <accElement length="0.04" name="SCL_Mag:QV00" pos="1.35" type="QUAD">
+            <parameters effLength="0.104" field="-16.56302345" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV00" pos="1.35" type="DCV">
+            <parameters effLength="0.104" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM00b" pos="1.533897" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01a:Rg01" pos="2.8918120000000003" type="RFGAP">
+            <parameters E0TL="1.5503042574798513" amp="26.678571595827687" firstPhase="97.66683249853304" gapLength="0.05" gapOffset="-0.011264" modePhase="0" parentCavity="SCL_RF:Cav01a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01a:Rg02" pos="3.005412" type="RFGAP">
+            <parameters E0TL="1.623057181562387" amp="19.600036458037046" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav01a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01a:Rg03" pos="3.119012" type="RFGAP">
+            <parameters E0TL="1.625502457379384" amp="19.600036458037046" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav01a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01a:Rg04" pos="3.232612" type="RFGAP">
+            <parameters E0TL="1.6285336727639774" amp="19.600036458037046" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav01a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01a:Rg05" pos="3.346212" type="RFGAP">
+            <parameters E0TL="1.6318210200205585" amp="19.600036458037046" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav01a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01a:Rg06" pos="3.459812" type="RFGAP">
+            <parameters E0TL="1.5741776319564564" amp="26.678571595827687" gapLength="0.05" gapOffset="0.011344" modePhase="1" parentCavity="SCL_RF:Cav01a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01b:Rg01" pos="4.115238000000001" type="RFGAP">
+            <parameters E0TL="1.2860233600521218" amp="21.737621371138616" firstPhase="104.10184245583514" gapLength="0.05" gapOffset="-0.011359" modePhase="0" parentCavity="SCL_RF:Cav01b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01b:Rg02" pos="4.2288380000000005" type="RFGAP">
+            <parameters E0TL="1.3344959338541222" amp="15.970048188869878" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav01b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01b:Rg03" pos="4.3424380000000005" type="RFGAP">
+            <parameters E0TL="1.3361296916121672" amp="15.970048188869878" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav01b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01b:Rg04" pos="4.456038" type="RFGAP">
+            <parameters E0TL="1.3380616228516402" amp="15.970048188869878" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav01b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01b:Rg05" pos="4.569638" type="RFGAP">
+            <parameters E0TL="1.3401387014552966" amp="15.970048188869878" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav01b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01b:Rg06" pos="4.683238" type="RFGAP">
+            <parameters E0TL="1.3018946320648883" amp="21.737621371138616" gapLength="0.05" gapOffset="0.011442" modePhase="1" parentCavity="SCL_RF:Cav01b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01c:Rg01" pos="5.273666" type="RFGAP">
+            <parameters E0TL="1.3313934417249178" amp="22.1791717844253" firstPhase="109.56994939869764" gapLength="0.05" gapOffset="-0.011457" modePhase="0" parentCavity="SCL_RF:Cav01c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01c:Rg02" pos="5.387266" type="RFGAP">
+            <parameters E0TL="1.3717540887997457" amp="16.294447175417293" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav01c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01c:Rg03" pos="5.500866" type="RFGAP">
+            <parameters E0TL="1.3734552591079014" amp="16.294447175417293" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav01c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01c:Rg04" pos="5.614466" type="RFGAP">
+            <parameters E0TL="1.3753929563108231" amp="16.294447175417293" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav01c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01c:Rg05" pos="5.728066" type="RFGAP">
+            <parameters E0TL="1.3774540626070106" amp="16.294447175417293" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav01c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav01c:Rg06" pos="5.841666" type="RFGAP">
+            <parameters E0TL="1.3478250942923762" amp="22.1791717844253" gapLength="0.05" gapOffset="0.011536" modePhase="1" parentCavity="SCL_RF:Cav01c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH01" pos="6.91138" type="QUAD">
+            <parameters effLength="0.38" field="3.9" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH01" pos="6.91138" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:LW01" pos="7.369" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM01" pos="7.544653" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV01" pos="7.82662" type="QUAD">
+            <parameters effLength="0.38" field="-3.9" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV01" pos="7.82662" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02a:Rg01" pos="8.730811999999998" type="RFGAP">
+            <parameters E0TL="1.025180472532874" amp="16.82899844650589" firstPhase="115.60321573295005" gapLength="0.05" gapOffset="-0.011552" modePhase="0" parentCavity="SCL_RF:Cav02a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02a:Rg02" pos="8.844411999999998" type="RFGAP">
+            <parameters E0TL="1.0485324228924673" amp="12.363817227581627" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav02a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02a:Rg03" pos="8.958011999999998" type="RFGAP">
+            <parameters E0TL="1.0495136232785642" amp="12.363817227581627" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav02a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02a:Rg04" pos="9.071612" type="RFGAP">
+            <parameters E0TL="1.0505952302693684" amp="12.363817227581627" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav02a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02a:Rg05" pos="9.185212" type="RFGAP">
+            <parameters E0TL="1.0517334194087373" amp="12.363817227581627" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav02a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02a:Rg06" pos="9.298812" type="RFGAP">
+            <parameters E0TL="1.0346299105128898" amp="16.82899844650589" gapLength="0.05" gapOffset="0.011632" modePhase="1" parentCavity="SCL_RF:Cav02a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02b:Rg01" pos="9.954238" type="RFGAP">
+            <parameters E0TL="1.0530999413729007" amp="17.09757459081068" firstPhase="119.58372462172701" gapLength="0.05" gapOffset="-0.011648" modePhase="0" parentCavity="SCL_RF:Cav02b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02b:Rg02" pos="10.067838" type="RFGAP">
+            <parameters E0TL="1.0712703566517785" amp="12.561188403472253" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav02b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02b:Rg03" pos="10.181438" type="RFGAP">
+            <parameters E0TL="1.072271801647086" amp="12.561188403472253" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav02b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02b:Rg04" pos="10.295038000000002" type="RFGAP">
+            <parameters E0TL="1.0733522624676792" amp="12.561188403472253" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav02b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02b:Rg05" pos="10.408638000000002" type="RFGAP">
+            <parameters E0TL="1.0744801055383373" amp="12.561188403472253" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav02b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02b:Rg06" pos="10.522238000000002" type="RFGAP">
+            <parameters E0TL="1.062728794150921" amp="17.09757459081068" gapLength="0.05" gapOffset="0.011728" modePhase="1" parentCavity="SCL_RF:Cav02b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02c:Rg01" pos="11.112665999999999" type="RFGAP">
+            <parameters E0TL="1.0733075615732124" amp="17.23498773429903" firstPhase="123.48039501837411" gapLength="0.05" gapOffset="-0.011742" modePhase="0" parentCavity="SCL_RF:Cav02c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02c:Rg02" pos="11.226265999999999" type="RFGAP">
+            <parameters E0TL="1.0859361978763977" amp="12.662086751260416" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav02c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02c:Rg03" pos="11.339865999999999" type="RFGAP">
+            <parameters E0TL="1.0869382111113246" amp="12.662086751260416" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav02c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02c:Rg04" pos="11.453466" type="RFGAP">
+            <parameters E0TL="1.087998687994912" amp="12.662086751260416" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav02c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02c:Rg05" pos="11.567066" type="RFGAP">
+            <parameters E0TL="1.089096475314625" amp="12.662086751260416" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav02c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav02c:Rg06" pos="11.680666" type="RFGAP">
+            <parameters E0TL="1.082931658124759" amp="17.23498773429903" gapLength="0.05" gapOffset="0.011818" modePhase="1" parentCavity="SCL_RF:Cav02c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH02" pos="12.75038" type="QUAD">
+            <parameters effLength="0.38" field="3.9" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH02" pos="12.75038" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:LW02" pos="13.208" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM02" pos="13.380743" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV02" pos="13.66562" type="QUAD">
+            <parameters effLength="0.38" field="-3.9" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV02" pos="13.66562" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03a:Rg01" pos="14.569811999999999" type="RFGAP">
+            <parameters E0TL="1.545585764238686" amp="24.55131366894775" firstPhase="129.6931776830861" gapLength="0.05" gapOffset="-0.011834" modePhase="0" parentCavity="SCL_RF:Cav03a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03a:Rg02" pos="14.683411999999999" type="RFGAP">
+            <parameters E0TL="1.5559486985456572" amp="18.03728576138976" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav03a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03a:Rg03" pos="14.797011999999999" type="RFGAP">
+            <parameters E0TL="1.5579760878441378" amp="18.03728576138976" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav03a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03a:Rg04" pos="14.910612" type="RFGAP">
+            <parameters E0TL="1.5600661528846995" amp="18.03728576138976" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav03a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03a:Rg05" pos="15.024212" type="RFGAP">
+            <parameters E0TL="1.5621931280770334" amp="18.03728576138976" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav03a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03a:Rg06" pos="15.137812" type="RFGAP">
+            <parameters E0TL="1.5649395536939794" amp="24.55131366894775" gapLength="0.05" gapOffset="0.011908" modePhase="1" parentCavity="SCL_RF:Cav03a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03b:Rg01" pos="15.793238" type="RFGAP">
+            <parameters E0TL="1.4429905103398546" amp="22.578634519999248" firstPhase="135.17969286513107" gapLength="0.05" gapOffset="-0.011925" modePhase="0" parentCavity="SCL_RF:Cav03b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03b:Rg02" pos="15.906838" type="RFGAP">
+            <parameters E0TL="1.4418429187955655" amp="16.588003739054525" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav03b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03b:Rg03" pos="16.020438000000002" type="RFGAP">
+            <parameters E0TL="1.4435034137292744" amp="16.588003739054525" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav03b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03b:Rg04" pos="16.134038" type="RFGAP">
+            <parameters E0TL="1.4451840646675278" amp="16.588003739054525" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav03b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03b:Rg05" pos="16.247638000000002" type="RFGAP">
+            <parameters E0TL="1.4468758036359872" amp="16.588003739054525" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav03b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03b:Rg06" pos="16.361238" type="RFGAP">
+            <parameters E0TL="1.4588751583873063" amp="22.578634519999248" gapLength="0.05" gapOffset="0.011996" modePhase="1" parentCavity="SCL_RF:Cav03b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03c:Rg01" pos="16.951666" type="RFGAP">
+            <parameters E0TL="1.6240803296962973" amp="25.076514774208864" firstPhase="141.1397301299985" gapLength="0.05" gapOffset="-0.012012" modePhase="0" parentCavity="SCL_RF:Cav03c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03c:Rg02" pos="17.065265999999998" type="RFGAP">
+            <parameters E0TL="1.6124021866577465" amp="18.423138939982564" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav03c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03c:Rg03" pos="17.178866" type="RFGAP">
+            <parameters E0TL="1.6143902637823953" amp="18.423138939982564" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav03c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03c:Rg04" pos="17.292465999999997" type="RFGAP">
+            <parameters E0TL="1.616369335911195" amp="18.423138939982564" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav03c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03c:Rg05" pos="17.406066" type="RFGAP">
+            <parameters E0TL="1.618334666665242" amp="18.423138939982564" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav03c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav03c:Rg06" pos="17.519665999999997" type="RFGAP">
+            <parameters E0TL="1.6431122703617473" amp="25.076514774208864" gapLength="0.05" gapOffset="0.012083" modePhase="1" parentCavity="SCL_RF:Cav03c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH03" pos="18.58938" type="QUAD">
+            <parameters effLength="0.38" field="3.95" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH03" pos="18.58938" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:LW03" pos="19.047" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM03" pos="19.219623" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV03" pos="19.50462" type="QUAD">
+            <parameters effLength="0.38" field="-3.95" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV03" pos="19.50462" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04a:Rg01" pos="20.408812" type="RFGAP">
+            <parameters E0TL="1.4076419289612903" amp="21.429580458962075" firstPhase="146.64339341034065" gapLength="0.05" gapOffset="-0.012098" modePhase="0" parentCavity="SCL_RF:Cav04a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04a:Rg02" pos="20.522412" type="RFGAP">
+            <parameters E0TL="1.3876212010823423" amp="15.743820135126779" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav04a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04a:Rg03" pos="20.636012" type="RFGAP">
+            <parameters E0TL="1.3890163654385328" amp="15.743820135126779" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav04a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04a:Rg04" pos="20.749612" type="RFGAP">
+            <parameters E0TL="1.390390818024321" amp="15.743820135126779" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav04a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04a:Rg05" pos="20.863212" type="RFGAP">
+            <parameters E0TL="1.3917416566282814" amp="15.743820135126779" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav04a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04a:Rg06" pos="20.976812" type="RFGAP">
+            <parameters E0TL="1.4210550018384052" amp="21.429580458962075" gapLength="0.05" gapOffset="0.012165" modePhase="1" parentCavity="SCL_RF:Cav04a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04b:Rg01" pos="21.632238" type="RFGAP">
+            <parameters E0TL="1.6717268900695406" amp="25.158954897035013" firstPhase="151.39674128636398" gapLength="0.05" gapOffset="-0.01218" modePhase="0" parentCavity="SCL_RF:Cav04b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04b:Rg02" pos="21.745838" type="RFGAP">
+            <parameters E0TL="1.6388841506415288" amp="18.48370580307063" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav04b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04b:Rg03" pos="21.859438" type="RFGAP">
+            <parameters E0TL="1.640730654000281" amp="18.48370580307063" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav04b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04b:Rg04" pos="21.973038" type="RFGAP">
+            <parameters E0TL="1.642531982990488" amp="18.48370580307063" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav04b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04b:Rg05" pos="22.086638" type="RFGAP">
+            <parameters E0TL="1.6442791174027818" amp="18.48370580307063" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav04b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04b:Rg06" pos="22.200238" type="RFGAP">
+            <parameters E0TL="1.6894870895870089" amp="25.158954897035013" gapLength="0.05" gapOffset="0.012246" modePhase="1" parentCavity="SCL_RF:Cav04b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04c:Rg01" pos="22.790666" type="RFGAP">
+            <parameters E0TL="1.4678761960326965" amp="21.810581352637083" firstPhase="156.58856826438569" gapLength="0.05" gapOffset="-0.012261" modePhase="0" parentCavity="SCL_RF:Cav04c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04c:Rg02" pos="22.904266" type="RFGAP">
+            <parameters E0TL="1.4297784623725143" amp="16.02373273317455" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav04c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04c:Rg03" pos="23.017866" type="RFGAP">
+            <parameters E0TL="1.431102899006937" amp="16.02373273317455" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav04c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04c:Rg04" pos="23.131466" type="RFGAP">
+            <parameters E0TL="1.4323891360503227" amp="16.02373273317455" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav04c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04c:Rg05" pos="23.245066" type="RFGAP">
+            <parameters E0TL="1.4336242189256285" amp="16.02373273317455" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav04c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav04c:Rg06" pos="23.358666" type="RFGAP">
+            <parameters E0TL="1.4806778976951576" amp="21.810581352637083" gapLength="0.05" gapOffset="0.012323" modePhase="1" parentCavity="SCL_RF:Cav04c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH04" pos="24.42838" type="QUAD">
+            <parameters effLength="0.38" field="4.05" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH04" pos="24.42838" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:LW04" pos="24.886" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM04" pos="25.05902" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV04" pos="25.34362" type="QUAD">
+            <parameters effLength="0.38" field="-4.05" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV04" pos="25.34362" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05a:Rg01" pos="26.247812" type="RFGAP">
+            <parameters E0TL="0.7483325523888698" amp="11.003327251172678" firstPhase="160.0751208992806" gapLength="0.05" gapOffset="-0.012337" modePhase="0" parentCavity="SCL_RF:Cav05a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05a:Rg02" pos="26.361411999999998" type="RFGAP">
+            <parameters E0TL="0.7248211105194913" amp="8.083891584445515" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav05a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05a:Rg03" pos="26.475012" type="RFGAP">
+            <parameters E0TL="0.7251451437207528" amp="8.083891584445515" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav05a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05a:Rg04" pos="26.588611999999998" type="RFGAP">
+            <parameters E0TL="0.7254601095907534" amp="8.083891584445515" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav05a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05a:Rg05" pos="26.702212" type="RFGAP">
+            <parameters E0TL="0.7257612890745929" amp="8.083891584445515" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav05a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05a:Rg06" pos="26.815811999999998" type="RFGAP">
+            <parameters E0TL="0.7514847436887014" amp="11.003327251172678" gapLength="0.05" gapOffset="0.012398" modePhase="1" parentCavity="SCL_RF:Cav05a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05b:Rg01" pos="27.471238" type="RFGAP">
+            <parameters E0TL="1.6655329819608762" amp="24.365836184657006" firstPhase="164.69078566055396" gapLength="0.05" gapOffset="-0.012411" modePhase="0" parentCavity="SCL_RF:Cav05b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05b:Rg02" pos="27.584837999999998" type="RFGAP">
+            <parameters E0TL="1.6100233399204604" amp="17.901019717479972" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav05b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05b:Rg03" pos="27.698438" type="RFGAP">
+            <parameters E0TL="1.611569275106355" amp="17.901019717479972" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav05b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05b:Rg04" pos="27.812037999999998" type="RFGAP">
+            <parameters E0TL="1.613068677586446" amp="17.901019717479972" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav05b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05b:Rg05" pos="27.925638" type="RFGAP">
+            <parameters E0TL="1.614489981767052" amp="17.901019717479972" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav05b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05b:Rg06" pos="28.039237999999997" type="RFGAP">
+            <parameters E0TL="1.6806141383329043" amp="24.365836184657006" gapLength="0.05" gapOffset="0.01247" modePhase="1" parentCavity="SCL_RF:Cav05b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05c:Rg01" pos="28.629666" type="RFGAP">
+            <parameters E0TL="1.6337641491127681" amp="23.64420654131608" firstPhase="167.83516486884037" gapLength="0.05" gapOffset="-0.012482" modePhase="0" parentCavity="SCL_RF:Cav05c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05c:Rg02" pos="28.743266" type="RFGAP">
+            <parameters E0TL="1.5707821841561753" amp="17.37085500750387" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav05c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05c:Rg03" pos="28.856866" type="RFGAP">
+            <parameters E0TL="1.572159845394992" amp="17.37085500750387" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav05c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05c:Rg04" pos="28.970466" type="RFGAP">
+            <parameters E0TL="1.5734912898513285" amp="17.37085500750387" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav05c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05c:Rg05" pos="29.084066" type="RFGAP">
+            <parameters E0TL="1.5747353095329337" amp="17.37085500750387" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav05c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav05c:Rg06" pos="29.197665999999998" type="RFGAP">
+            <parameters E0TL="1.6471861697690742" amp="23.64420654131608" gapLength="0.05" gapOffset="0.012538" modePhase="1" parentCavity="SCL_RF:Cav05c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH05" pos="30.26738" type="QUAD">
+            <parameters effLength="0.38" field="4.05" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH05" pos="30.26738" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM05" pos="30.897177" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV05" pos="31.18262" type="QUAD">
+            <parameters effLength="0.38" field="-4.05" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV05" pos="31.18262" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06a:Rg01" pos="32.086812" type="RFGAP">
+            <parameters E0TL="1.5715834111726639" amp="22.52342700996508" firstPhase="172.19502124235441" gapLength="0.05" gapOffset="-0.01255" modePhase="0" parentCavity="SCL_RF:Cav06a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06a:Rg02" pos="32.200412" type="RFGAP">
+            <parameters E0TL="1.5035868764572238" amp="16.547444050555228" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav06a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06a:Rg03" pos="32.314012" type="RFGAP">
+            <parameters E0TL="1.5047733846793119" amp="16.547444050555228" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav06a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06a:Rg04" pos="32.427612" type="RFGAP">
+            <parameters E0TL="1.5059230949697642" amp="16.547444050555228" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav06a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06a:Rg05" pos="32.541212" type="RFGAP">
+            <parameters E0TL="1.5069881128525826" amp="16.547444050555228" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav06a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06a:Rg06" pos="32.654812" type="RFGAP">
+            <parameters E0TL="1.5832033432304795" amp="22.52342700996508" gapLength="0.05" gapOffset="0.012604" modePhase="1" parentCavity="SCL_RF:Cav06a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06b:Rg01" pos="33.310238" type="RFGAP">
+            <parameters E0TL="1.7764432160966825" amp="25.237730211497627" firstPhase="176.5406430785588" gapLength="0.05" gapOffset="-0.012615" modePhase="0" parentCavity="SCL_RF:Cav06b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06b:Rg02" pos="33.423837999999996" type="RFGAP">
+            <parameters E0TL="1.6923100787432825" amp="18.541580215701455" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav06b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06b:Rg03" pos="33.537437999999995" type="RFGAP">
+            <parameters E0TL="1.6937218556773188" amp="18.541580215701455" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav06b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06b:Rg04" pos="33.651038" type="RFGAP">
+            <parameters E0TL="1.6950946988177105" amp="18.541580215701455" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav06b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06b:Rg05" pos="33.764638" type="RFGAP">
+            <parameters E0TL="1.6963550310651965" amp="18.541580215701455" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav06b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06b:Rg06" pos="33.878237999999996" type="RFGAP">
+            <parameters E0TL="1.790337731764577" amp="25.237730211497627" gapLength="0.05" gapOffset="0.012667" modePhase="1" parentCavity="SCL_RF:Cav06b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06c:Rg01" pos="34.468666" type="RFGAP">
+            <parameters E0TL="1.698478549568887" amp="23.90922567448187" firstPhase="181.15050445121597" gapLength="0.05" gapOffset="-0.012677" modePhase="0" parentCavity="SCL_RF:Cav06c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06c:Rg02" pos="34.582266" type="RFGAP">
+            <parameters E0TL="1.6104896864193072" amp="17.565558472320628" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav06c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06c:Rg03" pos="34.695865999999995" type="RFGAP">
+            <parameters E0TL="1.6116839008716828" amp="17.565558472320628" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav06c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06c:Rg04" pos="34.809466" type="RFGAP">
+            <parameters E0TL="1.6128544675667882" amp="17.565558472320628" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav06c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06c:Rg05" pos="34.923066" type="RFGAP">
+            <parameters E0TL="1.6139230392571884" amp="17.565558472320628" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav06c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav06c:Rg06" pos="35.036666" type="RFGAP">
+            <parameters E0TL="1.7103317248366803" amp="23.90922567448187" gapLength="0.05" gapOffset="0.012727" modePhase="1" parentCavity="SCL_RF:Cav06c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH06" pos="36.10638" type="QUAD">
+            <parameters effLength="0.38" field="4.0" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH06" pos="36.10638" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM06" pos="36.73707" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV06" pos="37.02162" type="QUAD">
+            <parameters effLength="0.38" field="-4.0" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV06" pos="37.02162" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07a:Rg01" pos="37.925812" type="RFGAP">
+            <parameters E0TL="1.776380573452958" amp="24.802431997387693" firstPhase="184.52328288593708" gapLength="0.05" gapOffset="-0.012736" modePhase="0" parentCavity="SCL_RF:Cav07a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07a:Rg02" pos="38.039412" type="RFGAP">
+            <parameters E0TL="1.6774625574754045" amp="18.2217766245293" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav07a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07a:Rg03" pos="38.153012" type="RFGAP">
+            <parameters E0TL="1.6786763044093664" amp="18.2217766245293" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav07a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07a:Rg04" pos="38.266612" type="RFGAP">
+            <parameters E0TL="1.6798708161674922" amp="18.2217766245293" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav07a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07a:Rg05" pos="38.380212" type="RFGAP">
+            <parameters E0TL="1.6809497669593534" amp="18.2217766245293" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav07a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07a:Rg06" pos="38.493812" type="RFGAP">
+            <parameters E0TL="1.7884574901456085" amp="24.802431997387693" gapLength="0.05" gapOffset="0.012784" modePhase="1" parentCavity="SCL_RF:Cav07a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07b:Rg01" pos="39.149238000000004" type="RFGAP">
+            <parameters E0TL="1.7026195640602517" amp="23.58540348391839" firstPhase="188.31382989604026" gapLength="0.05" gapOffset="-0.012793" modePhase="0" parentCavity="SCL_RF:Cav07b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07b:Rg02" pos="39.262838" type="RFGAP">
+            <parameters E0TL="1.6013106600344116" amp="17.32765375301185" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav07b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07b:Rg03" pos="39.376438" type="RFGAP">
+            <parameters E0TL="1.6023452327278755" amp="17.32765375301185" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav07b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07b:Rg04" pos="39.490038000000006" type="RFGAP">
+            <parameters E0TL="1.603372266038788" amp="17.32765375301185" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav07b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07b:Rg05" pos="39.603638000000004" type="RFGAP">
+            <parameters E0TL="1.6042944131740158" amp="17.32765375301185" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav07b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07b:Rg06" pos="39.717238" type="RFGAP">
+            <parameters E0TL="1.7129847372890756" amp="23.58540348391839" gapLength="0.05" gapOffset="0.012838" modePhase="1" parentCavity="SCL_RF:Cav07b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07c:Rg01" pos="40.307666" type="RFGAP">
+            <parameters E0TL="1.3842571443234768" amp="19.040779272866924" firstPhase="192.06330737230746" gapLength="0.05" gapOffset="-0.012847" modePhase="0" parentCavity="SCL_RF:Cav07c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07c:Rg02" pos="40.421265999999996" type="RFGAP">
+            <parameters E0TL="1.2970631888641908" amp="13.988822818007995" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav07c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07c:Rg03" pos="40.534865999999994" type="RFGAP">
+            <parameters E0TL="1.2977009227857008" amp="13.988822818007995" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav07c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07c:Rg04" pos="40.648466" type="RFGAP">
+            <parameters E0TL="1.2983421095752756" amp="13.988822818007995" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav07c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07c:Rg05" pos="40.762066" type="RFGAP">
+            <parameters E0TL="1.2989176986255502" amp="13.988822818007995" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav07c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav07c:Rg06" pos="40.875665999999995" type="RFGAP">
+            <parameters E0TL="1.3907165196389903" amp="19.040779272866924" gapLength="0.05" gapOffset="0.01289" modePhase="1" parentCavity="SCL_RF:Cav07c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH07" pos="41.94538" type="QUAD">
+            <parameters effLength="0.38" field="3.9" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH07" pos="41.94538" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM07" pos="42.580163" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV07" pos="42.86062" type="QUAD">
+            <parameters effLength="0.38" field="-3.9" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV07" pos="42.86062" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08a:Rg01" pos="43.764812" type="RFGAP">
+            <parameters E0TL="1.557928016639087" amp="21.314603476342008" firstPhase="195.15373630802787" gapLength="0.05" gapOffset="-0.012898" modePhase="0" parentCavity="SCL_RF:Cav08a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08a:Rg02" pos="43.878412" type="RFGAP">
+            <parameters E0TL="1.4558649481357901" amp="15.65927185135511" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav08a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08a:Rg03" pos="43.992011999999995" type="RFGAP">
+            <parameters E0TL="1.4566252220240221" amp="15.65927185135511" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav08a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08a:Rg04" pos="44.105612" type="RFGAP">
+            <parameters E0TL="1.457396649373648" amp="15.65927185135511" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav08a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08a:Rg05" pos="44.219212" type="RFGAP">
+            <parameters E0TL="1.4580868893068042" amp="15.65927185135511" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav08a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08a:Rg06" pos="44.332812" type="RFGAP">
+            <parameters E0TL="1.5656829331264628" amp="21.314603476342008" gapLength="0.05" gapOffset="0.01294" modePhase="1" parentCavity="SCL_RF:Cav08a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08b:Rg01" pos="44.988238" type="RFGAP">
+            <parameters E0TL="1.5442634897314782" amp="21.007245912870875" firstPhase="196.16229865672358" gapLength="0.05" gapOffset="-0.012947" modePhase="0" parentCavity="SCL_RF:Cav08b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08b:Rg02" pos="45.101838" type="RFGAP">
+            <parameters E0TL="1.4388657882989495" amp="15.433464430292515" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav08b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08b:Rg03" pos="45.215438" type="RFGAP">
+            <parameters E0TL="1.4395723566952638" amp="15.433464430292515" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav08b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08b:Rg04" pos="45.329038000000004" type="RFGAP">
+            <parameters E0TL="1.440287359044456" amp="15.433464430292515" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav08b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08b:Rg05" pos="45.442638" type="RFGAP">
+            <parameters E0TL="1.4409161657845528" amp="15.433464430292515" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav08b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08b:Rg06" pos="45.556238" type="RFGAP">
+            <parameters E0TL="1.5514183180752636" amp="21.007245912870875" gapLength="0.05" gapOffset="0.012987" modePhase="1" parentCavity="SCL_RF:Cav08b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08c:Rg01" pos="46.146666" type="RFGAP">
+            <parameters E0TL="1.8412892133035537" amp="24.916140398042447" firstPhase="200.12527751350717" gapLength="0.05" gapOffset="-0.012994" modePhase="0" parentCavity="SCL_RF:Cav08c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08c:Rg02" pos="46.260266" type="RFGAP">
+            <parameters E0TL="1.7111175528111524" amp="18.305225166986702" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav08c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08c:Rg03" pos="46.373866" type="RFGAP">
+            <parameters E0TL="1.712054811537644" amp="18.305225166986702" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav08c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08c:Rg04" pos="46.487466000000005" type="RFGAP">
+            <parameters E0TL="1.7130182662521383" amp="18.305225166986702" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav08c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08c:Rg05" pos="46.601066" type="RFGAP">
+            <parameters E0TL="1.7138673133313063" amp="18.305225166986702" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav08c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav08c:Rg06" pos="46.714666" type="RFGAP">
+            <parameters E0TL="1.8509074849301717" amp="24.916140398042447" gapLength="0.05" gapOffset="0.013032" modePhase="1" parentCavity="SCL_RF:Cav08c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH08" pos="47.78438" type="QUAD">
+            <parameters effLength="0.38" field="3.85" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH08" pos="47.78438" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM08" pos="48.41303" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV08" pos="48.69962" type="QUAD">
+            <parameters effLength="0.38" field="-3.85" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV08" pos="48.69962" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09a:Rg01" pos="49.603812" type="RFGAP">
+            <parameters E0TL="1.9035626477030592" amp="25.60681013869555" firstPhase="201.11636331012414" gapLength="0.05" gapOffset="-0.013038" modePhase="0" parentCavity="SCL_RF:Cav09a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09a:Rg02" pos="49.717411999999996" type="RFGAP">
+            <parameters E0TL="1.7636096094707832" amp="18.81264184215011" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav09a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09a:Rg03" pos="49.831011999999994" type="RFGAP">
+            <parameters E0TL="1.764551391058352" amp="18.81264184215011" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav09a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09a:Rg04" pos="49.944612" type="RFGAP">
+            <parameters E0TL="1.7655158333820835" amp="18.81264184215011" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav09a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09a:Rg05" pos="50.058212" type="RFGAP">
+            <parameters E0TL="1.7663478876804537" amp="18.81264184215011" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav09a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09a:Rg06" pos="50.171811999999996" type="RFGAP">
+            <parameters E0TL="1.913135722450723" amp="25.60681013869555" gapLength="0.05" gapOffset="0.013076" modePhase="1" parentCavity="SCL_RF:Cav09a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09b:Rg01" pos="50.827238" type="RFGAP">
+            <parameters E0TL="1.5663347038266668" amp="20.952123292033296" firstPhase="204.48902107973117" gapLength="0.05" gapOffset="-0.013082" modePhase="0" parentCavity="SCL_RF:Cav09b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09b:Rg02" pos="50.940838" type="RFGAP">
+            <parameters E0TL="1.4467846151123562" amp="15.39296730794103" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav09b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09b:Rg03" pos="51.054438" type="RFGAP">
+            <parameters E0TL="1.4473785322514334" amp="15.39296730794103" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav09b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09b:Rg04" pos="51.168038" type="RFGAP">
+            <parameters E0TL="1.4479970266471105" amp="15.39296730794103" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav09b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09b:Rg05" pos="51.281638" type="RFGAP">
+            <parameters E0TL="1.448532099045953" amp="15.39296730794103" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav09b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09b:Rg06" pos="51.395238" type="RFGAP">
+            <parameters E0TL="1.5724510364068627" amp="20.952123292033296" gapLength="0.05" gapOffset="0.013116" modePhase="1" parentCavity="SCL_RF:Cav09b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09c:Rg01" pos="51.985666" type="RFGAP">
+            <parameters E0TL="1.7145958704738922" amp="22.835569487098248" firstPhase="206.9210953873262" gapLength="0.05" gapOffset="-0.013122" modePhase="0" parentCavity="SCL_RF:Cav09c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09c:Rg02" pos="52.099266" type="RFGAP">
+            <parameters E0TL="1.580184753076983" amp="16.77668509648251" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav09c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09c:Rg03" pos="52.212866" type="RFGAP">
+            <parameters E0TL="1.5808552243191711" amp="16.77668509648251" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav09c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09c:Rg04" pos="52.326466" type="RFGAP">
+            <parameters E0TL="1.5815602965853444" amp="16.77668509648251" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav09c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09c:Rg05" pos="52.440066" type="RFGAP">
+            <parameters E0TL="1.5821679810880134" amp="16.77668509648251" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav09c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav09c:Rg06" pos="52.553666" type="RFGAP">
+            <parameters E0TL="1.7215424584725811" amp="22.835569487098248" gapLength="0.05" gapOffset="0.013156" modePhase="1" parentCavity="SCL_RF:Cav09c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH09" pos="53.62338" type="QUAD">
+            <parameters effLength="0.38" field="3.78" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH09" pos="53.62338" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM09" pos="54.256773" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV09" pos="54.53862" type="QUAD">
+            <parameters effLength="0.38" field="-3.78" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV09" pos="54.53862" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10a:Rg01" pos="55.442812" type="RFGAP">
+            <parameters E0TL="1.7624560875104711" amp="23.36765378216592" firstPhase="209.6141406646493" gapLength="0.05" gapOffset="-0.013161" modePhase="0" parentCavity="SCL_RF:Cav10a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10a:Rg02" pos="55.556412" type="RFGAP">
+            <parameters E0TL="1.6204758817674945" amp="17.167593265782934" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav10a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10a:Rg03" pos="55.670012" type="RFGAP">
+            <parameters E0TL="1.6211401102529537" amp="17.167593265782934" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav10a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10a:Rg04" pos="55.783612000000005" type="RFGAP">
+            <parameters E0TL="1.6218476769927976" amp="17.167593265782934" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav10a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10a:Rg05" pos="55.897212" type="RFGAP">
+            <parameters E0TL="1.6224568052990882" amp="17.167593265782934" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav10a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10a:Rg06" pos="56.010812" type="RFGAP">
+            <parameters E0TL="1.769399566417579" amp="23.36765378216592" gapLength="0.05" gapOffset="0.013193" modePhase="1" parentCavity="SCL_RF:Cav10a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10b:Rg01" pos="56.666238" type="RFGAP">
+            <parameters E0TL="1.6427810807040364" amp="21.68634317937032" firstPhase="211.2462231087702" gapLength="0.05" gapOffset="-0.013198" modePhase="0" parentCavity="SCL_RF:Cav10b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10b:Rg02" pos="56.779838" type="RFGAP">
+            <parameters E0TL="1.5069391428510717" amp="15.932379116715385" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav10b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10b:Rg03" pos="56.893437999999996" type="RFGAP">
+            <parameters E0TL="1.5074843927088377" amp="15.932379116715385" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav10b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10b:Rg04" pos="57.007038" type="RFGAP">
+            <parameters E0TL="1.508068637216044" amp="15.932379116715385" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav10b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10b:Rg05" pos="57.120638" type="RFGAP">
+            <parameters E0TL="1.5085674310746116" amp="15.932379116715385" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav10b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10b:Rg06" pos="57.234238" type="RFGAP">
+            <parameters E0TL="1.648487797952978" amp="21.68634317937032" gapLength="0.05" gapOffset="0.013229" modePhase="1" parentCavity="SCL_RF:Cav10b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10c:Rg01" pos="57.824666" type="RFGAP">
+            <parameters E0TL="1.3897649140935455" amp="18.27651668182948" firstPhase="212.32992824130633" gapLength="0.05" gapOffset="-0.013233" modePhase="0" parentCavity="SCL_RF:Cav10c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10c:Rg02" pos="57.938266" type="RFGAP">
+            <parameters E0TL="1.2722109829163246" amp="13.427270347030229" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav10c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10c:Rg03" pos="58.051866" type="RFGAP">
+            <parameters E0TL="1.2725830035619954" amp="13.427270347030229" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav10c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10c:Rg04" pos="58.165466" type="RFGAP">
+            <parameters E0TL="1.2729828694662826" amp="13.427270347030229" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav10c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10c:Rg05" pos="58.279066" type="RFGAP">
+            <parameters E0TL="1.273321009994277" amp="13.427270347030229" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav10c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav10c:Rg06" pos="58.392666" type="RFGAP">
+            <parameters E0TL="1.3936536549565846" amp="18.27651668182948" gapLength="0.05" gapOffset="0.013263" modePhase="1" parentCavity="SCL_RF:Cav10c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH10" pos="59.46238" type="QUAD">
+            <parameters effLength="0.38" field="3.710916044" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH10" pos="59.46238" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM10" pos="60.094163" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV10" pos="60.37762" type="QUAD">
+            <parameters effLength="0.38" field="-3.640526903" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV10" pos="60.37762" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11a:Rg01" pos="61.281812" type="RFGAP">
+            <parameters E0TL="1.8676151033008495" amp="24.485914005030445" firstPhase="215.4166620971664" gapLength="0.05" gapOffset="-0.013267" modePhase="0" parentCavity="SCL_RF:Cav11a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11a:Rg02" pos="61.395412" type="RFGAP">
+            <parameters E0TL="1.7070307649637682" amp="17.989149287213447" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav11a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11a:Rg03" pos="61.509012" type="RFGAP">
+            <parameters E0TL="1.707662920202661" amp="17.989149287213447" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav11a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11a:Rg04" pos="61.622612000000004" type="RFGAP">
+            <parameters E0TL="1.7083550606447377" amp="17.989149287213447" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav11a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11a:Rg05" pos="61.736212" type="RFGAP">
+            <parameters E0TL="1.7089442400915835" amp="17.989149287213447" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav11a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11a:Rg06" pos="61.849812" type="RFGAP">
+            <parameters E0TL="1.8743270635695768" amp="24.485914005030445" gapLength="0.05" gapOffset="0.013296" modePhase="1" parentCavity="SCL_RF:Cav11a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11b:Rg01" pos="62.505238" type="RFGAP">
+            <parameters E0TL="0.0" amp="0.0" firstPhase="180.0" gapLength="0.05" gapOffset="-0.013299" modePhase="0" parentCavity="SCL_RF:Cav11b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11b:Rg02" pos="62.618838" type="RFGAP">
+            <parameters E0TL="0.0" amp="0.0" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav11b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11b:Rg03" pos="62.732437999999995" type="RFGAP">
+            <parameters E0TL="0.0" amp="0.0" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav11b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11b:Rg04" pos="62.846038" type="RFGAP">
+            <parameters E0TL="0.0" amp="0.0" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav11b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11b:Rg05" pos="62.959638" type="RFGAP">
+            <parameters E0TL="0.0" amp="0.0" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav11b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11b:Rg06" pos="63.073237999999996" type="RFGAP">
+            <parameters E0TL="0.0" amp="0.0" gapLength="0.05" gapOffset="0.013327" modePhase="1" parentCavity="SCL_RF:Cav11b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11c:Rg01" pos="63.663666" type="RFGAP">
+            <parameters E0TL="1.8396532793320097" amp="24.025319402860088" firstPhase="216.72393643305986" gapLength="0.05" gapOffset="-0.01333" modePhase="0" parentCavity="SCL_RF:Cav11c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11c:Rg02" pos="63.777266" type="RFGAP">
+            <parameters E0TL="1.677961934865676" amp="17.65076269247065" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav11c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11c:Rg03" pos="63.890865999999995" type="RFGAP">
+            <parameters E0TL="1.6785422647922001" amp="17.65076269247065" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav11c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11c:Rg04" pos="64.004466" type="RFGAP">
+            <parameters E0TL="1.6791804115962017" amp="17.65076269247065" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav11c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11c:Rg05" pos="64.118066" type="RFGAP">
+            <parameters E0TL="1.6797180017039524" amp="17.65076269247065" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav11c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav11c:Rg06" pos="64.231666" type="RFGAP">
+            <parameters E0TL="1.8458122420441914" amp="24.025319402860088" gapLength="0.05" gapOffset="0.013357" modePhase="1" parentCavity="SCL_RF:Cav11c" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH11" pos="65.30138" type="QUAD">
+            <parameters effLength="0.38" field="4.128638526" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH11" pos="65.30138" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM11" pos="65.930557" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV11" pos="66.21662" type="QUAD">
+            <parameters effLength="0.38" field="-4.173147937" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV11" pos="66.21662" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+    </SCLMed>
+    <SCLHigh bpmFrequency="4.025E8" length="171.294012" name="SCLHigh" rfFrequency="8.05E8">
+        <accElement length="0.0" name="Begin_Of_SCLHigh" pos="0.0" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12a:Rg01" pos="0.158391" type="RFGAP">
+            <parameters E0TL="2.031225696506533" amp="24.6432609507132" firstPhase="96.13133944958099" gapLength="0.05" gapOffset="-0.011884" modePhase="0" parentCavity="SCL_RF:Cav12a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12a:Rg02" pos="0.30939099999999997" type="RFGAP">
+            <parameters E0TL="2.1116896034161066" amp="19.398292510285916" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav12a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12a:Rg03" pos="0.460391" type="RFGAP">
+            <parameters E0TL="2.113026857827706" amp="19.398292510285916" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav12a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12a:Rg04" pos="0.611391" type="RFGAP">
+            <parameters E0TL="2.114778852538271" amp="19.398292510285916" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav12a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12a:Rg05" pos="0.762391" type="RFGAP">
+            <parameters E0TL="2.1167232636556026" amp="19.398292510285916" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav12a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12a:Rg06" pos="0.9133910000000001" type="RFGAP">
+            <parameters E0TL="2.043220658525603" amp="24.6432609507132" gapLength="0.05" gapOffset="0.011943" modePhase="1" parentCavity="SCL_RF:Cav12a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12b:Rg01" pos="1.605817" type="RFGAP">
+            <parameters E0TL="2.064375549330293" amp="24.87248046428778" firstPhase="99.79631944507128" gapLength="0.05" gapOffset="-0.011948" modePhase="0" parentCavity="SCL_RF:Cav12b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12b:Rg02" pos="1.756817" type="RFGAP">
+            <parameters E0TL="2.139931591363612" amp="19.57870001666455" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav12b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12b:Rg03" pos="1.907817" type="RFGAP">
+            <parameters E0TL="2.141310030313385" amp="19.57870001666455" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav12b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12b:Rg04" pos="2.058817" type="RFGAP">
+            <parameters E0TL="2.1430550809279034" amp="19.57870001666455" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav12b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12b:Rg05" pos="2.209817" type="RFGAP">
+            <parameters E0TL="2.144969819097227" amp="19.57870001666455" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav12b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12b:Rg06" pos="2.360817" type="RFGAP">
+            <parameters E0TL="2.0765705432808703" amp="24.87248046428778" gapLength="0.05" gapOffset="0.012003" modePhase="1" parentCavity="SCL_RF:Cav12b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12c:Rg01" pos="2.92124" type="RFGAP">
+            <parameters E0TL="2.2122424781862424" amp="26.46955407990782" firstPhase="102.82432226816309" gapLength="0.05" gapOffset="-0.012011" modePhase="0" parentCavity="SCL_RF:Cav12c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12c:Rg02" pos="3.07224" type="RFGAP">
+            <parameters E0TL="2.2865466415780675" amp="20.83585751125583" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav12c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12c:Rg03" pos="3.22324" type="RFGAP">
+            <parameters E0TL="2.2881017082143167" amp="20.83585751125583" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav12c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12c:Rg04" pos="3.37424" type="RFGAP">
+            <parameters E0TL="2.290019213296244" amp="20.83585751125583" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav12c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12c:Rg05" pos="3.52524" type="RFGAP">
+            <parameters E0TL="2.2921078865343647" amp="20.83585751125583" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav12c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12c:Rg06" pos="3.67624" type="RFGAP">
+            <parameters E0TL="2.2259016448630624" amp="26.46955407990782" gapLength="0.05" gapOffset="0.012066" modePhase="1" parentCavity="SCL_RF:Cav12c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12d:Rg01" pos="4.368665999999999" type="RFGAP">
+            <parameters E0TL="2.043617515049217" amp="24.274319058489873" firstPhase="104.98846071878506" gapLength="0.05" gapOffset="-0.012075" modePhase="0" parentCavity="SCL_RF:Cav12d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12d:Rg02" pos="4.519666" type="RFGAP">
+            <parameters E0TL="2.1057161816197887" amp="19.10786136486143" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav12d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12d:Rg03" pos="4.670666" type="RFGAP">
+            <parameters E0TL="2.1069950872567538" amp="19.10786136486143" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav12d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12d:Rg04" pos="4.821666" type="RFGAP">
+            <parameters E0TL="2.1085457933803418" amp="19.10786136486143" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav12d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12d:Rg05" pos="4.972665999999999" type="RFGAP">
+            <parameters E0TL="2.1102335068194815" amp="19.10786136486143" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav12d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav12d:Rg06" pos="5.123666" type="RFGAP">
+            <parameters E0TL="2.0548673037887486" amp="24.274319058489873" gapLength="0.05" gapOffset="0.01213" modePhase="1" parentCavity="SCL_RF:Cav12d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH12" pos="6.23038" type="QUAD">
+            <parameters effLength="0.38" field="4.58" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH12" pos="6.23038" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:LW12" pos="6.688" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM12" pos="6.860967" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV12" pos="7.14562" type="QUAD">
+            <parameters effLength="0.38" field="-4.58" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV12" pos="7.14562" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13a:Rg01" pos="8.049391" type="RFGAP">
+            <parameters E0TL="1.9337586918280232" amp="22.819415909106834" firstPhase="107.91200199980813" gapLength="0.05" gapOffset="-0.012138" modePhase="0" parentCavity="SCL_RF:Cav13a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13a:Rg02" pos="8.200391" type="RFGAP">
+            <parameters E0TL="1.9869930501096615" amp="17.962603258705528" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav13a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13a:Rg03" pos="8.351391" type="RFGAP">
+            <parameters E0TL="1.988115355045341" amp="17.962603258705528" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav13a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13a:Rg04" pos="8.502391" type="RFGAP">
+            <parameters E0TL="1.9894468979706728" amp="17.962603258705528" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav13a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13a:Rg05" pos="8.653391" type="RFGAP">
+            <parameters E0TL="1.9908866172860724" amp="17.962603258705528" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav13a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13a:Rg06" pos="8.804390999999999" type="RFGAP">
+            <parameters E0TL="1.9435830001280052" amp="22.819415909106834" gapLength="0.05" gapOffset="0.012191" modePhase="1" parentCavity="SCL_RF:Cav13a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13b:Rg01" pos="9.496817" type="RFGAP">
+            <parameters E0TL="1.8617429142502917" amp="21.83677041989114" firstPhase="109.84370307828067" gapLength="0.05" gapOffset="-0.012201" modePhase="0" parentCavity="SCL_RF:Cav13b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13b:Rg02" pos="9.647817" type="RFGAP">
+            <parameters E0TL="1.90806366684915" amp="17.189100942211354" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav13b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13b:Rg03" pos="9.798817" type="RFGAP">
+            <parameters E0TL="1.9090710129269721" amp="17.189100942211354" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav13b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13b:Rg04" pos="9.949817" type="RFGAP">
+            <parameters E0TL="1.9102495432725297" amp="17.189100942211354" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav13b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13b:Rg05" pos="10.100817" type="RFGAP">
+            <parameters E0TL="1.9115209059970772" amp="17.189100942211354" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav13b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13b:Rg06" pos="10.251816999999999" type="RFGAP">
+            <parameters E0TL="1.8705623110780214" amp="21.83677041989114" gapLength="0.05" gapOffset="0.012252" modePhase="1" parentCavity="SCL_RF:Cav13b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13c:Rg01" pos="10.812240000000001" type="RFGAP">
+            <parameters E0TL="1.857435538293016" amp="21.662782646632063" firstPhase="112.55301688412146" gapLength="0.05" gapOffset="-0.012262" modePhase="0" parentCavity="SCL_RF:Cav13c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13c:Rg02" pos="10.96324" type="RFGAP">
+            <parameters E0TL="1.8990768293830462" amp="17.05214417892842" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav13c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13c:Rg03" pos="11.11424" type="RFGAP">
+            <parameters E0TL="1.9000602505557336" amp="17.05214417892842" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav13c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13c:Rg04" pos="11.26524" type="RFGAP">
+            <parameters E0TL="1.90118998074455" amp="17.05214417892842" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav13c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13c:Rg05" pos="11.41624" type="RFGAP">
+            <parameters E0TL="1.9024004321290302" amp="17.05214417892842" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav13c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13c:Rg06" pos="11.56724" type="RFGAP">
+            <parameters E0TL="1.8660077452259523" amp="21.662782646632063" gapLength="0.05" gapOffset="0.012313" modePhase="1" parentCavity="SCL_RF:Cav13c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13d:Rg01" pos="12.259666000000001" type="RFGAP">
+            <parameters E0TL="1.4276348756596509" amp="16.558068186387406" firstPhase="114.42972118090256" gapLength="0.05" gapOffset="-0.012323" modePhase="0" parentCavity="SCL_RF:Cav13d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13d:Rg02" pos="12.410666" type="RFGAP">
+            <parameters E0TL="1.4561184595766614" amp="13.033901075617505" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav13d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13d:Rg03" pos="12.561666" type="RFGAP">
+            <parameters E0TL="1.4566824582685929" amp="13.033901075617505" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav13d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13d:Rg04" pos="12.712666" type="RFGAP">
+            <parameters E0TL="1.4573233086291275" amp="13.033901075617505" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav13d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13d:Rg05" pos="12.863666" type="RFGAP">
+            <parameters E0TL="1.45800875038854" amp="13.033901075617505" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav13d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav13d:Rg06" pos="13.014666" type="RFGAP">
+            <parameters E0TL="1.4325574667107608" amp="16.558068186387406" gapLength="0.05" gapOffset="0.012373" modePhase="1" parentCavity="SCL_RF:Cav13d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH13" pos="14.12138" type="QUAD">
+            <parameters effLength="0.38" field="4.6" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH13" pos="14.12138" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:LW13" pos="14.579" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM13" pos="14.75162" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV13" pos="15.03662" type="QUAD">
+            <parameters effLength="0.38" field="-4.6" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV13" pos="15.03662" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14a:Rg01" pos="15.940391" type="RFGAP">
+            <parameters E0TL="2.0974104830694578" amp="24.225335614075252" firstPhase="116.45545711551677" gapLength="0.05" gapOffset="-0.012382" modePhase="0" parentCavity="SCL_RF:Cav14a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14a:Rg02" pos="16.091390999999998" type="RFGAP">
+            <parameters E0TL="2.1356884793658053" amp="19.069291439267836" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav14a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14a:Rg03" pos="16.242390999999998" type="RFGAP">
+            <parameters E0TL="2.1368831809815427" amp="19.069291439267836" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav14a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14a:Rg04" pos="16.393391" type="RFGAP">
+            <parameters E0TL="2.138220729704327" amp="19.069291439267836" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav14a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14a:Rg05" pos="16.544391" type="RFGAP">
+            <parameters E0TL="2.139640792361545" amp="19.069291439267836" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav14a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14a:Rg06" pos="16.695391" type="RFGAP">
+            <parameters E0TL="2.1077826408164135" amp="24.225335614075252" gapLength="0.05" gapOffset="0.012431" modePhase="1" parentCavity="SCL_RF:Cav14a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14b:Rg01" pos="17.387817" type="RFGAP">
+            <parameters E0TL="1.879262033067462" amp="21.576607269370676" firstPhase="120.06171411157993" gapLength="0.05" gapOffset="-0.012441" modePhase="0" parentCavity="SCL_RF:Cav14b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14b:Rg02" pos="17.538816999999998" type="RFGAP">
+            <parameters E0TL="1.9086692025111045" amp="16.984310097697715" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav14b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14b:Rg03" pos="17.689816999999998" type="RFGAP">
+            <parameters E0TL="1.909611691623684" amp="16.984310097697715" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav14b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14b:Rg04" pos="17.840817" type="RFGAP">
+            <parameters E0TL="1.9106474830970497" amp="16.984310097697715" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav14b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14b:Rg05" pos="17.991817" type="RFGAP">
+            <parameters E0TL="1.9117375678504793" amp="16.984310097697715" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav14b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14b:Rg06" pos="18.142817" type="RFGAP">
+            <parameters E0TL="1.887409517887829" amp="21.576607269370676" gapLength="0.05" gapOffset="0.012489" modePhase="1" parentCavity="SCL_RF:Cav14b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14c:Rg01" pos="18.703239999999997" type="RFGAP">
+            <parameters E0TL="2.1955825123715127" amp="25.077061722369734" firstPhase="121.56778035746538" gapLength="0.05" gapOffset="-0.012498" modePhase="0" parentCavity="SCL_RF:Cav14c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14c:Rg02" pos="18.854239999999997" type="RFGAP">
+            <parameters E0TL="2.225078346785031" amp="19.73973884376382" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav14c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14c:Rg03" pos="19.005239999999997" type="RFGAP">
+            <parameters E0TL="2.2263166249390802" amp="19.73973884376382" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav14c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14c:Rg04" pos="19.15624" type="RFGAP">
+            <parameters E0TL="2.2276638723517213" amp="19.73973884376382" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav14c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14c:Rg05" pos="19.30724" type="RFGAP">
+            <parameters E0TL="2.229076972942303" amp="19.73973884376382" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav14c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14c:Rg06" pos="19.45824" type="RFGAP">
+            <parameters E0TL="2.2062875584200943" amp="25.077061722369734" gapLength="0.05" gapOffset="0.012545" modePhase="1" parentCavity="SCL_RF:Cav14c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14d:Rg01" pos="20.150665999999998" type="RFGAP">
+            <parameters E0TL="2.1601730571860727" amp="24.527638305085723" firstPhase="124.367310073314" gapLength="0.05" gapOffset="-0.012554" modePhase="0" parentCavity="SCL_RF:Cav14d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14d:Rg02" pos="20.301665999999997" type="RFGAP">
+            <parameters E0TL="2.183690272343664" amp="19.307252977121795" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav14d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14d:Rg03" pos="20.452665999999997" type="RFGAP">
+            <parameters E0TL="2.1848516931499056" amp="19.307252977121795" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav14d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14d:Rg04" pos="20.603666" type="RFGAP">
+            <parameters E0TL="2.186098294720023" amp="19.307252977121795" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav14d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14d:Rg05" pos="20.754666" type="RFGAP">
+            <parameters E0TL="2.187397730298277" amp="19.307252977121795" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav14d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav14d:Rg06" pos="20.905666" type="RFGAP">
+            <parameters E0TL="2.1702010970399193" amp="24.527638305085723" gapLength="0.05" gapOffset="0.0126" modePhase="1" parentCavity="SCL_RF:Cav14d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH14" pos="22.01238" type="QUAD">
+            <parameters effLength="0.38" field="4.75" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH14" pos="22.01238" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:LW14" pos="22.47" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM14" pos="22.6429" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV14" pos="22.92762" type="QUAD">
+            <parameters effLength="0.38" field="-4.75" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV14" pos="22.92762" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15a:Rg01" pos="23.831391" type="RFGAP">
+            <parameters E0TL="1.980354156838066" amp="22.359966546773844" firstPhase="126.62521048916096" gapLength="0.05" gapOffset="-0.012609" modePhase="0" parentCavity="SCL_RF:Cav15a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15a:Rg02" pos="23.982391" type="RFGAP">
+            <parameters E0TL="1.9970537547767473" amp="17.60094165238198" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav15a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15a:Rg03" pos="24.133391" type="RFGAP">
+            <parameters E0TL="1.9979954655338448" amp="17.60094165238198" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav15a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15a:Rg04" pos="24.284391000000003" type="RFGAP">
+            <parameters E0TL="1.9989960389977466" amp="17.60094165238198" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav15a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15a:Rg05" pos="24.435391000000003" type="RFGAP">
+            <parameters E0TL="2.000034687244977" amp="17.60094165238198" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav15a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15a:Rg06" pos="24.586391000000003" type="RFGAP">
+            <parameters E0TL="1.9884904576442857" amp="22.359966546773844" gapLength="0.05" gapOffset="0.012653" modePhase="1" parentCavity="SCL_RF:Cav15a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15b:Rg01" pos="25.278817" type="RFGAP">
+            <parameters E0TL="1.7856148467255903" amp="20.06105863526115" firstPhase="129.7350953555724" gapLength="0.05" gapOffset="-0.012662" modePhase="0" parentCavity="SCL_RF:Cav15b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15b:Rg02" pos="25.429817" type="RFGAP">
+            <parameters E0TL="1.7967906550056574" amp="15.791326064179216" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav15b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15b:Rg03" pos="25.580817" type="RFGAP">
+            <parameters E0TL="1.7975387602871447" amp="15.791326064179216" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav15b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15b:Rg04" pos="25.731817000000003" type="RFGAP">
+            <parameters E0TL="1.798324669177554" amp="15.791326064179216" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav15b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15b:Rg05" pos="25.882817000000003" type="RFGAP">
+            <parameters E0TL="1.7991353761853834" amp="15.791326064179216" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav15b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15b:Rg06" pos="26.033817000000003" type="RFGAP">
+            <parameters E0TL="1.7920730882369404" amp="20.06105863526115" gapLength="0.05" gapOffset="0.012705" modePhase="1" parentCavity="SCL_RF:Cav15b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15c:Rg01" pos="26.59424" type="RFGAP">
+            <parameters E0TL="1.792825673984334" amp="20.054077706019072" firstPhase="130.75206040701596" gapLength="0.05" gapOffset="-0.012714" modePhase="0" parentCavity="SCL_RF:Cav15c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15c:Rg02" pos="26.74524" type="RFGAP">
+            <parameters E0TL="1.8006531795752965" amp="15.78583093394223" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav15c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15c:Rg03" pos="26.89624" type="RFGAP">
+            <parameters E0TL="1.8013791686234266" amp="15.78583093394223" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav15c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15c:Rg04" pos="27.047240000000002" type="RFGAP">
+            <parameters E0TL="1.8021376071757367" amp="15.78583093394223" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav15c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15c:Rg05" pos="27.198240000000002" type="RFGAP">
+            <parameters E0TL="1.8029183349201472" amp="15.78583093394223" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav15c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15c:Rg06" pos="27.34924" type="RFGAP">
+            <parameters E0TL="1.7991017367128297" amp="20.054077706019072" gapLength="0.05" gapOffset="0.012755" modePhase="1" parentCavity="SCL_RF:Cav15c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15d:Rg01" pos="28.041666" type="RFGAP">
+            <parameters E0TL="2.1304965773226314" amp="23.730152742058632" firstPhase="133.11777003691532" gapLength="0.05" gapOffset="-0.012764" modePhase="0" parentCavity="SCL_RF:Cav15d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15d:Rg02" pos="28.192666" type="RFGAP">
+            <parameters E0TL="2.136021481284964" amp="18.67950173097863" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav15d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15d:Rg03" pos="28.343666" type="RFGAP">
+            <parameters E0TL="2.137018857145473" amp="18.67950173097863" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav15d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15d:Rg04" pos="28.494666000000002" type="RFGAP">
+            <parameters E0TL="2.1380509357541952" amp="18.67950173097863" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav15d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15d:Rg05" pos="28.645666000000002" type="RFGAP">
+            <parameters E0TL="2.1391067566360857" amp="18.67950173097863" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav15d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav15d:Rg06" pos="28.796666000000002" type="RFGAP">
+            <parameters E0TL="2.1391070519051176" amp="23.730152742058632" gapLength="0.05" gapOffset="0.012804" modePhase="1" parentCavity="SCL_RF:Cav15d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH15" pos="29.90338" type="QUAD">
+            <parameters effLength="0.38" field="4.8" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH15" pos="29.90338" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:LW15" pos="30.361" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM15" pos="30.533363" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV15" pos="30.81862" type="QUAD">
+            <parameters effLength="0.38" field="-4.8" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV15" pos="30.81862" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16a:Rg01" pos="31.722391" type="RFGAP">
+            <parameters E0TL="2.1638689678407843" amp="23.984083175781375" firstPhase="134.945489968115" gapLength="0.05" gapOffset="-0.012813" modePhase="0" parentCavity="SCL_RF:Cav16a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16a:Rg02" pos="31.873390999999998" type="RFGAP">
+            <parameters E0TL="2.164916196101682" amp="18.879386410518226" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav16a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16a:Rg03" pos="32.024391" type="RFGAP">
+            <parameters E0TL="2.165905172981401" amp="18.879386410518226" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav16a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16a:Rg04" pos="32.175391" type="RFGAP">
+            <parameters E0TL="2.166921161046821" amp="18.879386410518226" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav16a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16a:Rg05" pos="32.326391" type="RFGAP">
+            <parameters E0TL="2.1679561913952976" amp="18.879386410518226" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav16a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16a:Rg06" pos="32.477391" type="RFGAP">
+            <parameters E0TL="2.172413767939639" amp="23.984083175781375" gapLength="0.05" gapOffset="0.012852" modePhase="1" parentCavity="SCL_RF:Cav16a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16b:Rg01" pos="33.169817" type="RFGAP">
+            <parameters E0TL="1.801476174325249" amp="19.871933549971256" firstPhase="136.12449277643464" gapLength="0.05" gapOffset="-0.01286" modePhase="0" parentCavity="SCL_RF:Cav16b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16b:Rg02" pos="33.320817" type="RFGAP">
+            <parameters E0TL="1.7985112407297106" amp="15.642453766708384" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav16b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16b:Rg03" pos="33.471817" type="RFGAP">
+            <parameters E0TL="1.7991677553574472" amp="15.642453766708384" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav16b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16b:Rg04" pos="33.622817" type="RFGAP">
+            <parameters E0TL="1.799839151413741" amp="15.642453766708384" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav16b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16b:Rg05" pos="33.773817" type="RFGAP">
+            <parameters E0TL="1.8005217318063425" amp="15.642453766708384" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav16b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16b:Rg06" pos="33.924817" type="RFGAP">
+            <parameters E0TL="1.807161560039428" amp="19.871933549971256" gapLength="0.05" gapOffset="0.012898" modePhase="1" parentCavity="SCL_RF:Cav16b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16c:Rg01" pos="34.485240000000005" type="RFGAP">
+            <parameters E0TL="2.250350172571619" amp="24.728341318279103" firstPhase="139.15071466536028" gapLength="0.05" gapOffset="-0.012906" modePhase="0" parentCavity="SCL_RF:Cav16c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16c:Rg02" pos="34.63624" type="RFGAP">
+            <parameters E0TL="2.243100320480043" amp="19.46523899276651" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav16c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16c:Rg03" pos="34.787240000000004" type="RFGAP">
+            <parameters E0TL="2.244101108470365" amp="19.46523899276651" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav16c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16c:Rg04" pos="34.93824" type="RFGAP">
+            <parameters E0TL="2.245115688593136" amp="19.46523899276651" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav16c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16c:Rg05" pos="35.089240000000004" type="RFGAP">
+            <parameters E0TL="2.246140020747045" amp="19.46523899276651" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav16c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16c:Rg06" pos="35.24024" type="RFGAP">
+            <parameters E0TL="2.259008522080816" amp="24.728341318279103" gapLength="0.05" gapOffset="0.012942" modePhase="1" parentCavity="SCL_RF:Cav16c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16d:Rg01" pos="35.932666000000005" type="RFGAP">
+            <parameters E0TL="1.9997413294359747" amp="21.87222126467156" firstPhase="140.963857898867" gapLength="0.05" gapOffset="-0.01295" modePhase="0" parentCavity="SCL_RF:Cav16d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16d:Rg02" pos="36.083666" type="RFGAP">
+            <parameters E0TL="1.9891907223448144" amp="17.217006540782023" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav16d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16d:Rg03" pos="36.234666000000004" type="RFGAP">
+            <parameters E0TL="1.9899496937232846" amp="17.217006540782023" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav16d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16d:Rg04" pos="36.385666" type="RFGAP">
+            <parameters E0TL="1.990715369162003" amp="17.217006540782023" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav16d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16d:Rg05" pos="36.536666000000004" type="RFGAP">
+            <parameters E0TL="1.991485868402093" amp="17.217006540782023" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav16d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav16d:Rg06" pos="36.687666" type="RFGAP">
+            <parameters E0TL="2.0063209150074313" amp="21.87222126467156" gapLength="0.05" gapOffset="0.012985" modePhase="1" parentCavity="SCL_RF:Cav16d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH16" pos="37.79438" type="QUAD">
+            <parameters effLength="0.38" field="4.84" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH16" pos="37.79438" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM16" pos="38.426763" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV16" pos="38.70962" type="QUAD">
+            <parameters effLength="0.38" field="-4.84" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV16" pos="38.70962" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17a:Rg01" pos="39.613391" type="RFGAP">
+            <parameters E0TL="1.9213043896671544" amp="20.930596977573284" firstPhase="142.6770645522629" gapLength="0.05" gapOffset="-0.012992" modePhase="0" parentCavity="SCL_RF:Cav17a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17a:Rg02" pos="39.764390999999996" type="RFGAP">
+            <parameters E0TL="1.9078336583842075" amp="16.47579460287446" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav17a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17a:Rg03" pos="39.915391" type="RFGAP">
+            <parameters E0TL="1.908509888309016" amp="16.47579460287446" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav17a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17a:Rg04" pos="40.066390999999996" type="RFGAP">
+            <parameters E0TL="1.9091890080779315" amp="16.47579460287446" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav17a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17a:Rg05" pos="40.217391" type="RFGAP">
+            <parameters E0TL="1.9098699976271822" amp="16.47579460287446" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav17a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17a:Rg06" pos="40.368390999999995" type="RFGAP">
+            <parameters E0TL="1.9271747172694502" amp="20.930596977573284" gapLength="0.05" gapOffset="0.013027" modePhase="1" parentCavity="SCL_RF:Cav17a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17b:Rg01" pos="41.060817" type="RFGAP">
+            <parameters E0TL="1.83373698785437" amp="19.90272748738728" firstPhase="144.40425581365707" gapLength="0.05" gapOffset="-0.013034" modePhase="0" parentCavity="SCL_RF:Cav17b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17b:Rg02" pos="41.211816999999996" type="RFGAP">
+            <parameters E0TL="1.8179217438916362" amp="15.66669361941893" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav17b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17b:Rg03" pos="41.362817" type="RFGAP">
+            <parameters E0TL="1.8185176497030224" amp="15.66669361941893" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav17b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17b:Rg04" pos="41.513816999999996" type="RFGAP">
+            <parameters E0TL="1.8191137453068158" amp="15.66669361941893" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav17b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17b:Rg05" pos="41.664817" type="RFGAP">
+            <parameters E0TL="1.8197095020169056" amp="15.66669361941893" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav17b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17b:Rg06" pos="41.815816999999996" type="RFGAP">
+            <parameters E0TL="1.8389177824951102" amp="19.90272748738728" gapLength="0.05" gapOffset="0.013066" modePhase="1" parentCavity="SCL_RF:Cav17b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17c:Rg01" pos="42.37624" type="RFGAP">
+            <parameters E0TL="2.0530661087518878" amp="22.207016428174764" firstPhase="145.2781614776759" gapLength="0.05" gapOffset="-0.013073" modePhase="0" parentCavity="SCL_RF:Cav17c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17c:Rg02" pos="42.52724" type="RFGAP">
+            <parameters E0TL="2.032384561539215" amp="17.480544955564213" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav17c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17c:Rg03" pos="42.67824" type="RFGAP">
+            <parameters E0TL="2.0331042950484113" amp="17.480544955564213" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav17c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17c:Rg04" pos="42.82924" type="RFGAP">
+            <parameters E0TL="2.033821181452334" amp="17.480544955564213" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav17c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17c:Rg05" pos="42.98024" type="RFGAP">
+            <parameters E0TL="2.034534744043864" amp="17.480544955564213" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav17c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17c:Rg06" pos="43.13124" type="RFGAP">
+            <parameters E0TL="2.059322351368507" amp="22.207016428174764" gapLength="0.05" gapOffset="0.013105" modePhase="1" parentCavity="SCL_RF:Cav17c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17d:Rg01" pos="43.823666" type="RFGAP">
+            <parameters E0TL="1.9198603795158025" amp="20.689588336603247" firstPhase="147.09005715453532" gapLength="0.05" gapOffset="-0.013112" modePhase="0" parentCavity="SCL_RF:Cav17d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17d:Rg02" pos="43.974666" type="RFGAP">
+            <parameters E0TL="1.8974179200025185" amp="16.28608148239372" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav17d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17d:Rg03" pos="44.125666" type="RFGAP">
+            <parameters E0TL="1.898025905244171" amp="16.28608148239372" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav17d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17d:Rg04" pos="44.276666" type="RFGAP">
+            <parameters E0TL="1.8986294658483063" amp="16.28608148239372" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav17d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17d:Rg05" pos="44.427666" type="RFGAP">
+            <parameters E0TL="1.8992282626806627" amp="16.28608148239372" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav17d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav17d:Rg06" pos="44.578666" type="RFGAP">
+            <parameters E0TL="1.9251550847425967" amp="20.689588336603247" gapLength="0.05" gapOffset="0.013142" modePhase="1" parentCavity="SCL_RF:Cav17d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH17" pos="45.68538" type="QUAD">
+            <parameters effLength="0.38" field="4.87" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH17" pos="45.68538" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM17" pos="46.31782" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV17" pos="46.60062" type="QUAD">
+            <parameters effLength="0.38" field="-4.87" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV17" pos="46.60062" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18a:Rg01" pos="47.504391000000005" type="RFGAP">
+            <parameters E0TL="2.15723217277913" amp="23.170058983605244" firstPhase="150.2453160895966" gapLength="0.05" gapOffset="-0.013149" modePhase="0" parentCavity="SCL_RF:Cav18a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18a:Rg02" pos="47.655391" type="RFGAP">
+            <parameters E0TL="2.128982807559456" amp="18.238616564993272" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav18a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18a:Rg03" pos="47.806391000000005" type="RFGAP">
+            <parameters E0TL="2.1297302847959223" amp="18.238616564993272" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav18a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18a:Rg04" pos="47.957391" type="RFGAP">
+            <parameters E0TL="2.130469739395811" amp="18.238616564993272" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav18a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18a:Rg05" pos="48.108391000000005" type="RFGAP">
+            <parameters E0TL="2.131200606577725" amp="18.238616564993272" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav18a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18a:Rg06" pos="48.259391" type="RFGAP">
+            <parameters E0TL="2.163759956139285" amp="23.170058983605244" gapLength="0.05" gapOffset="0.013178" modePhase="1" parentCavity="SCL_RF:Cav18a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18b:Rg01" pos="48.951817000000005" type="RFGAP">
+            <parameters E0TL="1.5686836668104067" amp="16.78713346666207" firstPhase="151.65539376583183" gapLength="0.05" gapOffset="-0.013184" modePhase="0" parentCavity="SCL_RF:Cav18b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18b:Rg02" pos="49.102817" type="RFGAP">
+            <parameters E0TL="1.545523702289811" amp="13.214212822697585" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav18b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18b:Rg03" pos="49.253817000000005" type="RFGAP">
+            <parameters E0TL="1.5459045535278648" amp="13.214212822697585" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav18b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18b:Rg04" pos="49.404817" type="RFGAP">
+            <parameters E0TL="1.5462809224427945" amp="13.214212822697585" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav18b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18b:Rg05" pos="49.555817000000005" type="RFGAP">
+            <parameters E0TL="1.5466523999742101" amp="13.214212822697585" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav18b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18b:Rg06" pos="49.706817" type="RFGAP">
+            <parameters E0TL="1.5720204725419678" amp="16.78713346666207" gapLength="0.05" gapOffset="0.013212" modePhase="1" parentCavity="SCL_RF:Cav18b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18c:Rg01" pos="50.26724" type="RFGAP">
+            <parameters E0TL="2.211537254205851" amp="23.60573248005979" firstPhase="151.52438723415253" gapLength="0.05" gapOffset="-0.013218" modePhase="0" parentCavity="SCL_RF:Cav18c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18c:Rg02" pos="50.41824" type="RFGAP">
+            <parameters E0TL="2.176614935284273" amp="18.581562685889505" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav18c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18c:Rg03" pos="50.56924" type="RFGAP">
+            <parameters E0TL="2.177344987463822" amp="18.581562685889505" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav18c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18c:Rg04" pos="50.72024" type="RFGAP">
+            <parameters E0TL="2.1780629709569377" amp="18.581562685889505" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav18c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18c:Rg05" pos="50.87124" type="RFGAP">
+            <parameters E0TL="2.1787676042256763" amp="18.581562685889505" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav18c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18c:Rg06" pos="51.02224" type="RFGAP">
+            <parameters E0TL="2.217914759655815" amp="23.60573248005979" gapLength="0.05" gapOffset="0.013246" modePhase="1" parentCavity="SCL_RF:Cav18c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18d:Rg01" pos="51.714666" type="RFGAP">
+            <parameters E0TL="1.399747370994821" amp="14.888764127613438" firstPhase="154.09329088244704" gapLength="0.05" gapOffset="-0.013252" modePhase="0" parentCavity="SCL_RF:Cav18d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18d:Rg02" pos="51.865666" type="RFGAP">
+            <parameters E0TL="1.3753776013053929" amp="11.719886438023861" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav18d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18d:Rg03" pos="52.016666" type="RFGAP">
+            <parameters E0TL="1.3756611556452472" amp="11.719886438023861" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav18d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18d:Rg04" pos="52.167666" type="RFGAP">
+            <parameters E0TL="1.3759402606009072" amp="11.719886438023861" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav18d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18d:Rg05" pos="52.318666" type="RFGAP">
+            <parameters E0TL="1.3762142368931491" amp="11.719886438023861" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav18d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav18d:Rg06" pos="52.469666" type="RFGAP">
+            <parameters E0TL="1.4022392592699702" amp="14.888764127613438" gapLength="0.05" gapOffset="0.013278" modePhase="1" parentCavity="SCL_RF:Cav18d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH18" pos="53.57638" type="QUAD">
+            <parameters effLength="0.38" field="4.83" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH18" pos="53.57638" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM18" pos="54.19638" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV18" pos="54.49162" type="QUAD">
+            <parameters effLength="0.38" field="-4.83" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV18" pos="54.49162" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19a:Rg01" pos="55.395391000000004" type="RFGAP">
+            <parameters E0TL="1.6358257506864091" amp="17.362451139389265" firstPhase="155.97602598989033" gapLength="0.05" gapOffset="-0.013283" modePhase="0" parentCavity="SCL_RF:Cav19a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19a:Rg02" pos="55.546391" type="RFGAP">
+            <parameters E0TL="1.6058754152629433" amp="13.667081692965036" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav19a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19a:Rg03" pos="55.697391" type="RFGAP">
+            <parameters E0TL="1.606254190831525" amp="13.667081692965036" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav19a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19a:Rg04" pos="55.848391" type="RFGAP">
+            <parameters E0TL="1.6066265618310729" amp="13.667081692965036" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav19a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19a:Rg05" pos="55.999391" type="RFGAP">
+            <parameters E0TL="1.6069913456206963" amp="13.667081692965036" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav19a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19a:Rg06" pos="56.150391" type="RFGAP">
+            <parameters E0TL="1.6391620597971936" amp="17.362451139389265" gapLength="0.05" gapOffset="0.013309" modePhase="1" parentCavity="SCL_RF:Cav19a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19b:Rg01" pos="56.842817000000004" type="RFGAP">
+            <parameters E0TL="1.7224558594138788" amp="18.236962601112367" firstPhase="156.4252055872057" gapLength="0.05" gapOffset="-0.013314" modePhase="0" parentCavity="SCL_RF:Cav19b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19b:Rg02" pos="56.993817" type="RFGAP">
+            <parameters E0TL="1.6890981853651041" amp="14.355464887990363" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav19b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19b:Rg03" pos="57.144817" type="RFGAP">
+            <parameters E0TL="1.6895051314344807" amp="14.355464887990363" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav19b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19b:Rg04" pos="57.295817" type="RFGAP">
+            <parameters E0TL="1.6899042549608159" amp="14.355464887990363" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav19b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19b:Rg05" pos="57.446817" type="RFGAP">
+            <parameters E0TL="1.6902939153858674" amp="14.355464887990363" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav19b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19b:Rg06" pos="57.597817" type="RFGAP">
+            <parameters E0TL="1.7260394075589314" amp="18.236962601112367" gapLength="0.05" gapOffset="0.013339" modePhase="1" parentCavity="SCL_RF:Cav19b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19c:Rg01" pos="58.15824" type="RFGAP">
+            <parameters E0TL="1.84138662679872" amp="19.44727764460752" firstPhase="156.331751447462" gapLength="0.05" gapOffset="-0.013344" modePhase="0" parentCavity="SCL_RF:Cav19c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19c:Rg02" pos="58.309239999999996" type="RFGAP">
+            <parameters E0TL="1.8037435910506316" amp="15.308180287496718" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav19c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19c:Rg03" pos="58.46024" type="RFGAP">
+            <parameters E0TL="1.8041927877824278" amp="15.308180287496718" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav19c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19c:Rg04" pos="58.611239999999995" type="RFGAP">
+            <parameters E0TL="1.8046319023832342" amp="15.308180287496718" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav19c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19c:Rg05" pos="58.76224" type="RFGAP">
+            <parameters E0TL="1.805058648149475" amp="15.308180287496718" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav19c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19c:Rg06" pos="58.913239999999995" type="RFGAP">
+            <parameters E0TL="1.8453351207542938" amp="19.44727764460752" gapLength="0.05" gapOffset="0.013367" modePhase="1" parentCavity="SCL_RF:Cav19c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19d:Rg01" pos="59.605666" type="RFGAP">
+            <parameters E0TL="1.407481384353312" amp="14.826307432550372" firstPhase="159.01083461139933" gapLength="0.05" gapOffset="-0.013372" modePhase="0" parentCavity="SCL_RF:Cav19d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19d:Rg02" pos="59.756665999999996" type="RFGAP">
+            <parameters E0TL="1.3770541249398267" amp="11.670722829334819" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav19d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19d:Rg03" pos="59.907666" type="RFGAP">
+            <parameters E0TL="1.3773101677159512" amp="11.670722829334819" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav19d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19d:Rg04" pos="60.058665999999995" type="RFGAP">
+            <parameters E0TL="1.3775609792172832" amp="11.670722829334819" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav19d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19d:Rg05" pos="60.209666" type="RFGAP">
+            <parameters E0TL="1.377804978707846" amp="11.670722829334819" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav19d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav19d:Rg06" pos="60.360665999999995" type="RFGAP">
+            <parameters E0TL="1.4097463786384363" amp="14.826307432550372" gapLength="0.05" gapOffset="0.013394" modePhase="1" parentCavity="SCL_RF:Cav19d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH19" pos="61.46738" type="QUAD">
+            <parameters effLength="0.38" field="4.79" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH19" pos="61.46738" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM19" pos="62.09711" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV19" pos="62.38262" type="QUAD">
+            <parameters effLength="0.38" field="-4.79" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV19" pos="62.38262" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20a:Rg01" pos="63.286391" type="RFGAP">
+            <parameters E0TL="2.6625744021614497" amp="27.992989165218333" firstPhase="158.4450043287652" gapLength="0.05" gapOffset="-0.013399" modePhase="0" parentCavity="SCL_RF:Cav20a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20a:Rg02" pos="63.437391" type="RFGAP">
+            <parameters E0TL="2.603173118148216" amp="22.035049468526925" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav20a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20a:Rg03" pos="63.588391" type="RFGAP">
+            <parameters E0TL="2.604058923532207" amp="22.035049468526925" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav20a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20a:Rg04" pos="63.739391" type="RFGAP">
+            <parameters E0TL="2.604920636205881" amp="22.035049468526925" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav20a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20a:Rg05" pos="63.890391" type="RFGAP">
+            <parameters E0TL="2.6057516242313077" amp="22.035049468526925" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav20a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20a:Rg06" pos="64.041391" type="RFGAP">
+            <parameters E0TL="2.6703623361706974" amp="27.992989165218333" gapLength="0.05" gapOffset="0.013421" modePhase="1" parentCavity="SCL_RF:Cav20a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20b:Rg01" pos="64.733817" type="RFGAP">
+            <parameters E0TL="2.5551142419082375" amp="26.768888746898483" firstPhase="158.0266885497258" gapLength="0.05" gapOffset="-0.013426" modePhase="0" parentCavity="SCL_RF:Cav20b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20b:Rg02" pos="64.884817" type="RFGAP">
+            <parameters E0TL="2.494149352728529" amp="21.071482729979515" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav20b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20b:Rg03" pos="65.035817" type="RFGAP">
+            <parameters E0TL="2.4949245450344244" amp="21.071482729979515" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav20b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20b:Rg04" pos="65.186817" type="RFGAP">
+            <parameters E0TL="2.4956749825909315" amp="21.071482729979515" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav20b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20b:Rg05" pos="65.337817" type="RFGAP">
+            <parameters E0TL="2.4963933739705944" amp="21.071482729979515" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav20b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20b:Rg06" pos="65.488817" type="RFGAP">
+            <parameters E0TL="2.5619061537917998" amp="26.768888746898483" gapLength="0.05" gapOffset="0.013447" modePhase="1" parentCavity="SCL_RF:Cav20b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20c:Rg01" pos="66.04924" type="RFGAP">
+            <parameters E0TL="2.258550068690581" amp="23.586463277751808" firstPhase="165.23580019472865" gapLength="0.05" gapOffset="-0.013451" modePhase="0" parentCavity="SCL_RF:Cav20c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20c:Rg02" pos="66.20024" type="RFGAP">
+            <parameters E0TL="2.2014575169769546" amp="18.566394679944537" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav20c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20c:Rg03" pos="66.35123999999999" type="RFGAP">
+            <parameters E0TL="2.2020477455325076" amp="18.566394679944537" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav20c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20c:Rg04" pos="66.50224" type="RFGAP">
+            <parameters E0TL="2.202625127385793" amp="18.566394679944537" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav20c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20c:Rg05" pos="66.65324" type="RFGAP">
+            <parameters E0TL="2.20318285797031" amp="18.566394679944537" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav20c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20c:Rg06" pos="66.80424" type="RFGAP">
+            <parameters E0TL="2.2638233210968908" amp="23.586463277751808" gapLength="0.05" gapOffset="0.013471" modePhase="1" parentCavity="SCL_RF:Cav20c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20d:Rg01" pos="67.496666" type="RFGAP">
+            <parameters E0TL="2.3380425066962496" amp="24.348286766554907" firstPhase="164.10940467001637" gapLength="0.05" gapOffset="-0.013476" modePhase="0" parentCavity="SCL_RF:Cav20d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20d:Rg02" pos="67.647666" type="RFGAP">
+            <parameters E0TL="2.276092174027101" amp="19.16607405548332" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav20d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20d:Rg03" pos="67.798666" type="RFGAP">
+            <parameters E0TL="2.276697916815174" amp="19.16607405548332" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav20d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20d:Rg04" pos="67.94966600000001" type="RFGAP">
+            <parameters E0TL="2.277287157958187" amp="19.16607405548332" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav20d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20d:Rg05" pos="68.100666" type="RFGAP">
+            <parameters E0TL="2.2778517425651126" amp="19.16607405548332" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav20d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav20d:Rg06" pos="68.251666" type="RFGAP">
+            <parameters E0TL="2.3434252469779366" amp="24.348286766554907" gapLength="0.05" gapOffset="0.013495" modePhase="1" parentCavity="SCL_RF:Cav20d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH20" pos="69.35838" type="QUAD">
+            <parameters effLength="0.38" field="4.93" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH20" pos="69.35838" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM20" pos="69.986533" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV20" pos="70.27362" type="QUAD">
+            <parameters effLength="0.38" field="-4.93" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV20" pos="70.27362" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21a:Rg01" pos="71.177391" type="RFGAP">
+            <parameters E0TL="2.043649452807135" amp="21.223833215869558" firstPhase="167.88679157826118" gapLength="0.05" gapOffset="-0.013499" modePhase="0" parentCavity="SCL_RF:Cav21a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21a:Rg02" pos="71.328391" type="RFGAP">
+            <parameters E0TL="1.9869729072610487" amp="16.70661936327024" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav21a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21a:Rg03" pos="71.47939099999999" type="RFGAP">
+            <parameters E0TL="1.9874204211690607" amp="16.70661936327024" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav21a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21a:Rg04" pos="71.630391" type="RFGAP">
+            <parameters E0TL="1.987858324818326" amp="16.70661936327024" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav21a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21a:Rg05" pos="71.781391" type="RFGAP">
+            <parameters E0TL="1.9882796215240475" amp="16.70661936327024" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav21a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21a:Rg06" pos="71.932391" type="RFGAP">
+            <parameters E0TL="2.047669623642704" amp="21.223833215869558" gapLength="0.05" gapOffset="0.013519" modePhase="1" parentCavity="SCL_RF:Cav21a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21b:Rg01" pos="72.62481700000001" type="RFGAP">
+            <parameters E0TL="1.7813327178651568" amp="18.45603756724035" firstPhase="164.06469410043792" gapLength="0.05" gapOffset="-0.013522" modePhase="0" parentCavity="SCL_RF:Cav21b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21b:Rg02" pos="72.775817" type="RFGAP">
+            <parameters E0TL="1.7300369900897434" amp="14.527912627938907" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav21b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21b:Rg03" pos="72.926817" type="RFGAP">
+            <parameters E0TL="1.7303631368738535" amp="14.527912627938907" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav21b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21b:Rg04" pos="73.07781700000001" type="RFGAP">
+            <parameters E0TL="1.7306787767371552" amp="14.527912627938907" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav21b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21b:Rg05" pos="73.228817" type="RFGAP">
+            <parameters E0TL="1.7309782760502872" amp="14.527912627938907" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav21b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21b:Rg06" pos="73.379817" type="RFGAP">
+            <parameters E0TL="1.7842220150289285" amp="18.45603756724035" gapLength="0.05" gapOffset="0.013541" modePhase="1" parentCavity="SCL_RF:Cav21b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21c:Rg01" pos="73.94024" type="RFGAP">
+            <parameters E0TL="1.8539763957525544" amp="19.17143608827574" firstPhase="167.004900064494" gapLength="0.05" gapOffset="-0.013544" modePhase="0" parentCavity="SCL_RF:Cav21c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21c:Rg02" pos="74.09124" type="RFGAP">
+            <parameters E0TL="1.7990308304490774" amp="15.091047979711652" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav21c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21c:Rg03" pos="74.24224" type="RFGAP">
+            <parameters E0TL="1.7993756497210367" amp="15.091047979711652" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav21c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21c:Rg04" pos="74.39324" type="RFGAP">
+            <parameters E0TL="1.799710847191039" amp="15.091047979711652" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav21c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21c:Rg05" pos="74.54424" type="RFGAP">
+            <parameters E0TL="1.8000298342903804" amp="15.091047979711652" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav21c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21c:Rg06" pos="74.69524" type="RFGAP">
+            <parameters E0TL="1.8570563228659414" amp="19.17143608827574" gapLength="0.05" gapOffset="0.013562" modePhase="1" parentCavity="SCL_RF:Cav21c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21d:Rg01" pos="75.387666" type="RFGAP">
+            <parameters E0TL="2.2986166284940546" amp="23.72215239193478" firstPhase="163.61356464168057" gapLength="0.05" gapOffset="-0.013565" modePhase="0" parentCavity="SCL_RF:Cav21d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21d:Rg02" pos="75.53866599999999" type="RFGAP">
+            <parameters E0TL="2.2285833161291015" amp="18.673204150191378" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav21d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21d:Rg03" pos="75.68966599999999" type="RFGAP">
+            <parameters E0TL="2.2290922325383646" amp="18.673204150191378" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav21d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21d:Rg04" pos="75.840666" type="RFGAP">
+            <parameters E0TL="2.2295805769881207" amp="18.673204150191378" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav21d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21d:Rg05" pos="75.991666" type="RFGAP">
+            <parameters E0TL="2.230037806867175" amp="18.673204150191378" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav21d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav21d:Rg06" pos="76.14266599999999" type="RFGAP">
+            <parameters E0TL="2.3030921360303234" amp="23.72215239193478" gapLength="0.05" gapOffset="0.013583" modePhase="1" parentCavity="SCL_RF:Cav21d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH21" pos="77.24938" type="QUAD">
+            <parameters effLength="0.38" field="4.93" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH21" pos="77.24938" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM21" pos="77.881575" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV21" pos="78.16462" type="QUAD">
+            <parameters effLength="0.38" field="-4.93" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV21" pos="78.16462" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22a:Rg01" pos="79.068391" type="RFGAP">
+            <parameters E0TL="2.623343127340826" amp="27.010643801762352" firstPhase="168.82432957284618" gapLength="0.05" gapOffset="-0.013586" modePhase="0" parentCavity="SCL_RF:Cav22a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22a:Rg02" pos="79.219391" type="RFGAP">
+            <parameters E0TL="2.5408345820766245" amp="21.261783399970515" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav22a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22a:Rg03" pos="79.370391" type="RFGAP">
+            <parameters E0TL="2.5414794995805456" amp="21.261783399970515" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav22a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22a:Rg04" pos="79.52139100000001" type="RFGAP">
+            <parameters E0TL="2.5421045371702973" amp="21.261783399970515" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav22a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22a:Rg05" pos="79.672391" type="RFGAP">
+            <parameters E0TL="2.542694630355355" amp="21.261783399970515" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav22a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22a:Rg06" pos="79.823391" type="RFGAP">
+            <parameters E0TL="2.629107009534598" amp="27.010643801762352" gapLength="0.05" gapOffset="0.013603" modePhase="1" parentCavity="SCL_RF:Cav22a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22b:Rg01" pos="80.515817" type="RFGAP">
+            <parameters E0TL="2.3798118184961368" amp="24.43912029219201" firstPhase="169.44807300515822" gapLength="0.05" gapOffset="-0.013606" modePhase="0" parentCavity="SCL_RF:Cav22b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22b:Rg02" pos="80.666817" type="RFGAP">
+            <parameters E0TL="2.3021651976375694" amp="19.237574859452522" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav22b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22b:Rg03" pos="80.81781699999999" type="RFGAP">
+            <parameters E0TL="2.3026747857933203" amp="19.237574859452522" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav22b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22b:Rg04" pos="80.968817" type="RFGAP">
+            <parameters E0TL="2.303168106858595" amp="19.237574859452522" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav22b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22b:Rg05" pos="81.119817" type="RFGAP">
+            <parameters E0TL="2.3036319409682977" amp="19.237574859452522" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav22b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22b:Rg06" pos="81.270817" type="RFGAP">
+            <parameters E0TL="2.384367606063792" amp="24.43912029219201" gapLength="0.05" gapOffset="0.013622" modePhase="1" parentCavity="SCL_RF:Cav22b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22c:Rg01" pos="81.83124000000001" type="RFGAP">
+            <parameters E0TL="1.2708875933671644" amp="13.021495301163906" firstPhase="168.86716208292637" gapLength="0.05" gapOffset="-0.013625" modePhase="0" parentCavity="SCL_RF:Cav22c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22c:Rg02" pos="81.98224" type="RFGAP">
+            <parameters E0TL="1.2280201057774565" amp="10.250041230746843" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav22c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22c:Rg03" pos="82.13324" type="RFGAP">
+            <parameters E0TL="1.228160501029002" amp="10.250041230746843" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav22c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22c:Rg04" pos="82.28424000000001" type="RFGAP">
+            <parameters E0TL="1.2282961394120249" amp="10.250041230746843" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav22c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22c:Rg05" pos="82.43524000000001" type="RFGAP">
+            <parameters E0TL="1.2284230867335866" amp="10.250041230746843" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav22c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22c:Rg06" pos="82.58624" type="RFGAP">
+            <parameters E0TL="1.2721400105799874" amp="13.021495301163906" gapLength="0.05" gapOffset="0.01364" modePhase="1" parentCavity="SCL_RF:Cav22c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22d:Rg01" pos="83.278666" type="RFGAP">
+            <parameters E0TL="2.115089833068564" amp="21.645790204380738" firstPhase="170.53868617743137" gapLength="0.05" gapOffset="-0.013643" modePhase="0" parentCavity="SCL_RF:Cav22d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22d:Rg02" pos="83.429666" type="RFGAP">
+            <parameters E0TL="2.042814173049815" amp="17.03876835459651" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav22d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22d:Rg03" pos="83.580666" type="RFGAP">
+            <parameters E0TL="2.043195161923686" amp="17.03876835459651" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav22d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22d:Rg04" pos="83.731666" type="RFGAP">
+            <parameters E0TL="2.04356366031734" amp="17.03876835459651" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav22d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22d:Rg05" pos="83.882666" type="RFGAP">
+            <parameters E0TL="2.0439083803980145" amp="17.03876835459651" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav22d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav22d:Rg06" pos="84.033666" type="RFGAP">
+            <parameters E0TL="2.118499958604211" amp="21.645790204380738" gapLength="0.05" gapOffset="0.013658" modePhase="1" parentCavity="SCL_RF:Cav22d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH22" pos="85.14038" type="QUAD">
+            <parameters effLength="0.38" field="4.92" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH22" pos="85.14038" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM22" pos="85.7734" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV22" pos="86.05562" type="QUAD">
+            <parameters effLength="0.38" field="-4.92" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV22" pos="86.05562" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23a:Rg01" pos="86.959391" type="RFGAP">
+            <parameters E0TL="2.0348717286152214" amp="20.785005840461984" firstPhase="173.78877323894994" gapLength="0.05" gapOffset="-0.013661" modePhase="0" parentCavity="SCL_RF:Cav23a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23a:Rg02" pos="87.11039099999999" type="RFGAP">
+            <parameters E0TL="1.9636062796876421" amp="16.361190625089456" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav23a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23a:Rg03" pos="87.26139099999999" type="RFGAP">
+            <parameters E0TL="1.9639486528691292" amp="16.361190625089456" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav23a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23a:Rg04" pos="87.412391" type="RFGAP">
+            <parameters E0TL="1.9642824165317805" amp="16.361190625089456" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav23a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23a:Rg05" pos="87.563391" type="RFGAP">
+            <parameters E0TL="1.964596563416537" amp="16.361190625089456" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav23a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23a:Rg06" pos="87.71439099999999" type="RFGAP">
+            <parameters E0TL="2.037971709147863" amp="20.785005840461984" gapLength="0.05" gapOffset="0.013676" modePhase="1" parentCavity="SCL_RF:Cav23a" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23b:Rg01" pos="88.406817" type="RFGAP">
+            <parameters E0TL="1.8032603080824845" amp="18.385920073396424" firstPhase="167.10646133468254" gapLength="0.05" gapOffset="-0.013679" modePhase="0" parentCavity="SCL_RF:Cav23b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23b:Rg02" pos="88.557817" type="RFGAP">
+            <parameters E0TL="1.7386240691237014" amp="14.472718720766615" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav23b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23b:Rg03" pos="88.708817" type="RFGAP">
+            <parameters E0TL="1.7388823409305012" amp="14.472718720766615" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav23b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23b:Rg04" pos="88.859817" type="RFGAP">
+            <parameters E0TL="1.739128014235416" amp="14.472718720766615" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav23b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23b:Rg05" pos="89.010817" type="RFGAP">
+            <parameters E0TL="1.7393524951410761" amp="14.472718720766615" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav23b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23b:Rg06" pos="89.161817" type="RFGAP">
+            <parameters E0TL="1.8055281866175497" amp="18.385920073396424" gapLength="0.05" gapOffset="0.013693" modePhase="1" parentCavity="SCL_RF:Cav23b" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23c:Rg01" pos="89.72224" type="RFGAP">
+            <parameters E0TL="2.164373925803553" amp="22.03508135264589" firstPhase="171.22696163749788" gapLength="0.05" gapOffset="-0.013695" modePhase="0" parentCavity="SCL_RF:Cav23c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23c:Rg02" pos="89.87324" type="RFGAP">
+            <parameters E0TL="2.0854411372825816" amp="17.34520400028813" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav23c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23c:Rg03" pos="90.02423999999999" type="RFGAP">
+            <parameters E0TL="2.0858059558504087" amp="17.34520400028813" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav23c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23c:Rg04" pos="90.17524" type="RFGAP">
+            <parameters E0TL="2.086156723689828" amp="17.34520400028813" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav23c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23c:Rg05" pos="90.32624" type="RFGAP">
+            <parameters E0TL="2.086480435745705" amp="17.34520400028813" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav23c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23c:Rg06" pos="90.47724" type="RFGAP">
+            <parameters E0TL="2.1676268638574316" amp="22.03508135264589" gapLength="0.05" gapOffset="0.013709" modePhase="1" parentCavity="SCL_RF:Cav23c" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23d:Rg01" pos="91.169666" type="RFGAP">
+            <parameters E0TL="2.200303353070853" amp="22.36113369891649" firstPhase="174.1490620606346" gapLength="0.05" gapOffset="-0.013711" modePhase="0" parentCavity="SCL_RF:Cav23d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23d:Rg02" pos="91.320666" type="RFGAP">
+            <parameters E0TL="2.118338082992221" amp="17.601860391536583" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav23d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23d:Rg03" pos="91.471666" type="RFGAP">
+            <parameters E0TL="2.1187043560404417" amp="17.601860391536583" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav23d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23d:Rg04" pos="91.62266600000001" type="RFGAP">
+            <parameters E0TL="2.1190591256711118" amp="17.601860391536583" gapLength="0.05" gapOffset="0.0" modePhase="1" parentCavity="SCL_RF:Cav23d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23d:Rg05" pos="91.773666" type="RFGAP">
+            <parameters E0TL="2.1193883707293164" amp="17.601860391536583" gapLength="0.05" gapOffset="0.0" modePhase="0" parentCavity="SCL_RF:Cav23d" />
+        </accElement>
+        <accElement length="0.0" name="SCL_RF:Cav23d:Rg06" pos="91.924666" type="RFGAP">
+            <parameters E0TL="2.2036040901696348" amp="22.36113369891649" gapLength="0.05" gapOffset="0.013725" modePhase="1" parentCavity="SCL_RF:Cav23d" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH23" pos="93.03138" type="QUAD">
+            <parameters effLength="0.38" field="4.728252797" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH23" pos="93.03138" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM23" pos="93.662237" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV23" pos="93.94662" type="QUAD">
+            <parameters effLength="0.38" field="-4.728252797" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV23" pos="93.94662" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH24" pos="100.92238" type="QUAD">
+            <parameters effLength="0.38" field="4.216458984" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH24" pos="100.92238" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM24" pos="101.549695" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV24" pos="101.83762" type="QUAD">
+            <parameters effLength="0.38" field="-4.216458984" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV24" pos="101.83762" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH25" pos="108.81338" type="QUAD">
+            <parameters effLength="0.38" field="4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH25" pos="108.81338" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM25" pos="109.441107" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV25" pos="109.72862" type="QUAD">
+            <parameters effLength="0.38" field="-4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV25" pos="109.72862" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH26" pos="116.70438" type="QUAD">
+            <parameters effLength="0.38" field="4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH26" pos="116.70438" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM26" pos="117.33641" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV26" pos="117.61962" type="QUAD">
+            <parameters effLength="0.38" field="-4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV26" pos="117.61962" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH27" pos="124.59538" type="QUAD">
+            <parameters effLength="0.38" field="4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH27" pos="124.59538" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM27" pos="125.224233" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV27" pos="125.51062" type="QUAD">
+            <parameters effLength="0.38" field="-4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV27" pos="125.51062" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH28" pos="132.48638" type="QUAD">
+            <parameters effLength="0.38" field="4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH28" pos="132.48638" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM28" pos="133.117277" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV28" pos="133.40162" type="QUAD">
+            <parameters effLength="0.38" field="-4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV28" pos="133.40162" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH29" pos="140.37738" type="QUAD">
+            <parameters effLength="0.38" field="4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH29" pos="140.37738" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM29" pos="141.0084" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV29" pos="141.29262" type="QUAD">
+            <parameters effLength="0.38" field="-4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV29" pos="141.29262" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH30" pos="148.26838" type="QUAD">
+            <parameters effLength="0.38" field="4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH30" pos="148.26838" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM30" pos="148.899023" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV30" pos="149.18362" type="QUAD">
+            <parameters effLength="0.38" field="-4.25" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV30" pos="149.18362" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH31" pos="156.15938" type="QUAD">
+            <parameters effLength="0.38" field="5.37" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH31" pos="156.15938" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM31" pos="156.787733" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV31" pos="157.07462" type="QUAD">
+            <parameters effLength="0.38" field="-5.13" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV31" pos="157.07462" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH32" pos="164.05038" type="QUAD">
+            <parameters effLength="0.38" field="4.28" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH32" pos="164.05038" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:LW32" pos="164.508" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="SCL_Diag:BPM32" pos="164.680459" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QV32" pos="164.96562" type="QUAD">
+            <parameters effLength="0.38" field="-5.257" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCV32" pos="164.96562" type="DCV">
+            <parameters effLength="0.38" />
+        </accElement>
+        <accElement length="0.2" name="SCL_Mag:QH33" pos="168.358" type="QUAD">
+            <parameters effLength="0.38" field="4.28" />
+        </accElement>
+        <accElement length="0.0" name="SCL_Mag:DCH33" pos="168.358" type="DCH">
+            <parameters effLength="0.38" />
+        </accElement>
+    </SCLHigh>
+    <HEBT1 bpmFrequency="4.025E8" length="41.973095" name="HEBT1" rfFrequency="8.05E8">
+        <accElement length="0.0" name="Begin_Of_HEBT1" pos="0.0" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV01" pos="1.0" type="QUAD">
+            <parameters effLength="0.505" field="-3.960379551537694" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM01" pos="1.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS01" pos="2.362458" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BSM01" pos="3.567" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BCM01" pos="3.75" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH02" pos="5.0" type="QUAD">
+            <parameters effLength="0.505" field="3.960379551537694" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM02" pos="5.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS02" pos="6.27305" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV03" pos="9.0" type="QUAD">
+            <parameters effLength="0.505" field="-3.960379551537694" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM03" pos="9.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS03" pos="10.27305" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH04" pos="13.0" type="QUAD">
+            <parameters effLength="0.505" field="3.960379551537694" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM04" pos="13.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS04" pos="14.27305" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV05" pos="17.0" type="QUAD">
+            <parameters effLength="0.505" field="-3.960379551537694" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM05" pos="17.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCV05" pos="17.520192" type="DCV">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH06" pos="21.0" type="QUAD">
+            <parameters effLength="0.505" field="3.960379551537694" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM06" pos="21.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCH06" pos="21.520192" type="DCH">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV07" pos="25.0" type="QUAD">
+            <parameters effLength="0.505" field="-3.960379551537694" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM07" pos="25.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCV07" pos="25.520192" type="DCV">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH08" pos="29.0" type="QUAD">
+            <parameters effLength="0.505" field="3.3921416149654946" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM08" pos="29.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCH08" pos="29.520192" type="DCH">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV09" pos="33.0" type="QUAD">
+            <parameters effLength="0.505" field="-3.0219991850436396" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM09" pos="33.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS09" pos="34.362458" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BCM09" pos="35.75" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH10" pos="37.0" type="QUAD">
+            <parameters effLength="0.505" field="2.815801162740753" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM10" pos="37.383197" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:EMS_X" pos="39.443" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:EMS_Y" pos="39.443" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM11" pos="41.116803" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV11" pos="41.5" type="QUAD">
+            <parameters effLength="0.505" field="-2.3569998012158755" />
+        </accElement>
+    </HEBT1>
+    <HEBT2 bpmFrequency="4.025E8" length="132.053806" name="HEBT2" rfFrequency="8.05E8">
+        <accElement length="0.0" name="Begin_Of_HEBT2" pos="0.0" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DH11" pos="2.943512" type="BEND">
+            <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-0.001403," poles="1.0," skews="0.0," theta="-0.19634954084936207" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH12" pos="6.860119" type="QUAD">
+            <parameters effLength="0.5" field="2.219343130330302" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DH12" pos="10.276726" type="BEND">
+            <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-6.38E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV13" pos="14.193333" type="QUAD">
+            <parameters effLength="0.5" field="-2.0701018709497716" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DH13" pos="17.60994" type="BEND">
+            <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-8.47E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCH14" pos="20.973335" type="DCH">
+            <parameters effLength="0.538" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH14" pos="21.526546" type="QUAD">
+            <parameters effLength="0.5" field="2.219343130330302" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DH14" pos="24.943157" type="BEND">
+            <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="1.3E-5," poles="1.0," skews="0.0," theta="-0.19634954084936207" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCV15" pos="28.306549" type="DCV">
+            <parameters effLength="0.538" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV15" pos="28.859768" type="QUAD">
+            <parameters effLength="0.5" field="-2.0701018709497716" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DH15" pos="32.276379" type="BEND">
+            <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-6.36E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS16" pos="35.321501" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCH16" pos="35.639763" type="DCH">
+            <parameters effLength="0.538" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM16" pos="35.83707" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH16" pos="36.192989" type="QUAD">
+            <parameters effLength="0.5" field="2.219343130330302" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DH16" pos="39.6096" type="BEND">
+            <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="4.14E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCV17" pos="42.972977" type="DCV">
+            <parameters effLength="0.538" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM17" pos="43.170284" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV17" pos="43.526211" type="QUAD">
+            <parameters effLength="0.5" field="-2.0701018709497716" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DH17" pos="46.942821" type="BEND">
+            <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="1.14E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM18" pos="50.503498" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH18" pos="50.859432" type="QUAD">
+            <parameters effLength="0.5" field="2.219343130330302" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DH18" pos="54.276043" type="BEND">
+            <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-4.12E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM19" pos="57.836712" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV19" pos="58.192654" type="QUAD">
+            <parameters effLength="0.5" field="-2.0701018709497716" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BSM19" pos="59.298" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH20" pos="63.692654" type="QUAD">
+            <parameters effLength="0.505" field="2.4488786935847133" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM20" pos="64.075814" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS20" pos="64.805075" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BCM20" pos="66.192617" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV21" pos="68.692654" type="QUAD">
+            <parameters effLength="0.505" field="-2.5798161118205285" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM21" pos="69.075814" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCV21" pos="69.212809" type="DCV">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS21" pos="69.715667" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH22" pos="73.192654" type="QUAD">
+            <parameters effLength="0.505" field="2.9729277865278836" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM22" pos="73.575814" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCH22" pos="73.712809" type="DCH">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS22" pos="74.215667" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV23" pos="77.692654" type="QUAD">
+            <parameters effLength="0.505" field="-2.8037353976964186" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM23" pos="78.075814" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCV23" pos="78.212809" type="DCV">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS23" pos="78.715667" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH24" pos="82.192654" type="QUAD">
+            <parameters effLength="0.505" field="3.446954607217562" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM24" pos="82.575814" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCH24" pos="82.712809" type="DCH">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Inj:LStrp_IP" pos="84.3" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV25" pos="86.192654" type="QUAD">
+            <parameters effLength="0.505" field="-3.240630311943467" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM25" pos="86.575814" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DH25" pos="89.514667" type="BEND">
+            <parameters ea1="0.07640056627557539" ea2="0.07640056627557539" effLength="4.13" kls="-1.79E-4," poles="1.0," skews="0.0," theta="0.15280113255115077" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH26" pos="92.336689" type="QUAD">
+            <parameters effLength="0.505" field="3.25169354612548" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM26" pos="92.719834" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV27" pos="96.336689" type="QUAD">
+            <parameters effLength="0.505" field="-3.240630311943467" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM27" pos="96.719834" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH28" pos="100.336689" type="QUAD">
+            <parameters effLength="0.505" field="3.25169354612548" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM28" pos="100.719834" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCH28" pos="100.856829" type="DCH">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV29" pos="104.336689" type="QUAD">
+            <parameters effLength="0.505" field="-3.240630311943467" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM29" pos="104.719834" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCV29" pos="104.856829" type="DCV">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH30" pos="107.836689" type="QUAD">
+            <parameters effLength="0.505" field="4.073370902047217" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM30" pos="108.219834" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCH30" pos="108.356829" type="DCH">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV31" pos="111.836689" type="QUAD">
+            <parameters effLength="0.505" field="-3.240630311943467" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM31" pos="112.219834" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:DCV31" pos="112.356829" type="DCV">
+            <parameters effLength="0.33" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH32" pos="115.836689" type="QUAD">
+            <parameters effLength="0.505" field="3.25169354612548" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM32" pos="116.219834" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:WS32" pos="116.949095" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BCM32" pos="118.336637" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Diag:BPM33" pos="122.068439" type="MARKER">
+            <parameters />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QV33" pos="122.451694" type="QUAD">
+            <parameters effLength="0.505" field="-5.294947104878765" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:QH34" pos="123.311695" type="QUAD">
+            <parameters effLength="0.505" field="4.7887321558919504" />
+        </accElement>
+        <accElement length="0.0" name="HEBT_Mag:InjSptm" pos="126.343479" type="BEND">
+            <parameters ea1="0.0" ea2="0.0" effLength="3.064" kls="0.0," poles="1.0," skews="0.0," theta="-0.11084586079415987" />
+        </accElement>
+        <accElement length="0.0" name="Ring_Mag:DH_A11" pos="130.690932" type="BEND">
+            <parameters ea1="-0.042000004545719505" ea2="-0.011099997336711095" effLength="0.94" kls="0.0," poles="1.0," skews="0.0," theta="-0.05310000188243061" />
+        </accElement>
+        <accElement length="0.0" name="Ring_Inj:Foil" pos="131.053695" type="MARKER">
+            <parameters />
+        </accElement>
+    </HEBT2>
+    <UserSequence bpmFrequency="4.025E8" length="0.0" name="UserSequence" rfFrequency="8.05E8">
+        <accElement length="0.0" name="Begin_Of_SCLMed" pos="0.0" type="MARKER">
+            <parameters />
+        </accElement>
+    </UserSequence>
+</sns>
