@@ -16,8 +16,6 @@ import random
 
 from bunch import Bunch
 
-from orbit_utils import Function
-from orbit_utils import SplineCH
 from orbit_utils import GaussLegendreIntegrator
 
 # from linac import the RF gap classes
