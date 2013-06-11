@@ -71,8 +71,8 @@ def split_polynom_coeffs(ln):
 	return poly
 
 #---------------------------------------
-# We set T, T', S, and S'. The T'=dT/d(cappa) and S'=dS/d(cappa).
-# where cappa = 2*PI*frequency/(c*beta)
+# We set T, T', S, and S'. The T'=dT/d(kappa) and S'=dS/d(kappa).
+# where kappa = 2*PI*frequency/(c*beta)
 # The T' and S' are set up as separate polynomials, because
 # the accuracy of calculating a derivative from the polynomial
 # fitting is very low.
@@ -169,8 +169,8 @@ for i_gap in range(n_gaps):
 	amp = rf_gap_ttf.getRelativeAmplitude()
 	length = rf_gap_ttf.getLength()
 	polyT = rf_gap_ttf.getT_TTF()
-	cappa = 2*math.pi*rf_gap_ttf.getFrequency()/(c_light*beta)
-	ttf_t = polyT.value(cappa)
+	kappa = 2*math.pi*rf_gap_ttf.getFrequency()/(c_light*beta)
+	ttf_t = polyT.value(kappa)
 	energy_gain += E0*ttf_t*amp*length
 
 print "Approximate maximal energy gain [MeV] = ",energy_gain/1.0e+6
