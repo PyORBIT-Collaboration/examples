@@ -54,7 +54,7 @@ print "FILE NEEDS TO NOT CONTAIN A HEADER OR BLANK LINES"
 # 
 # BxField3D = 0.0
 # ByField3D = 0.0
-# BzField3D = 0.0
+# BzField3D = 0.0.
 # 
 # zsymmetry = 1
 
@@ -63,12 +63,12 @@ print "FILE NEEDS TO NOT CONTAIN A HEADER OR BLANK LINES"
 mytracker = FieldTracker(0)
 mytracker.trackBunch(b)
 
-FieldArr = mytracker.BGrid3D(xField3D,yField3D,zField3D,
-XGrid,YGrid,ZGrid,
-nXGrid, nYGrid, nZGrid,
-BxField3D, ByField3D, BzField3D,
-BXGrid,  BYGrid, BZGrid,
-zsymmetry)
+# FieldArr = mytracker.BGrid3D(xField3D,yField3D,zField3D,
+# XGrid,YGrid,ZGrid,
+# nXGrid, nYGrid, nZGrid,
+# BxField3D, ByField3D, BzField3D,
+# BXGrid,  BYGrid, BZGrid,
+# zsymmetry)
 
 
 
