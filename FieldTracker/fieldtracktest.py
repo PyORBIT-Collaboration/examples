@@ -22,11 +22,13 @@ b.macroSize(1.0e+1)
 energy = 1.0 #Gev
 b.readBunch("parts.dat")
 b.getSyncParticle().kinEnergy(energy)
+# b.readBunch("Bunches/controlbunch_600.dat", 1)
+
 
 #=====track bunch through Foil============
+# 
+# myparser = Field_Parser3D()
 
-myparser = Field_Parser3D()
-print "FILE NEEDS TO NOT CONTAIN A HEADER OR BLANK LINES"
 # data = myparser.parse("BIGDATA~", -20.0,20.0,-12.0, 12.0 ,0.0, 250.0 , 0.5 , 0.5 , 0.5)
 # 
 # # for i in range(10):
@@ -55,13 +57,14 @@ print "FILE NEEDS TO NOT CONTAIN A HEADER OR BLANK LINES"
 # BxField3D = 0.0
 # ByField3D = 0.0
 # BzField3D = 0.0.
-# 
-# zsymmetry = 1
-
-
+ 
+zsymmetry = 1
 
 mytracker = FieldTracker(0)
 mytracker.trackBunch(b)
+
+
+
 
 # FieldArr = mytracker.BGrid3D(xField3D,yField3D,zField3D,
 # XGrid,YGrid,ZGrid,
