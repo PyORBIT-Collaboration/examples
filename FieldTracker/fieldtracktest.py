@@ -90,7 +90,7 @@ mytracker = FieldTracker( 10.190, 10.758, 0.047, 0.056, -0.001, -0.012,
           ZSTART, ZINT, 0.0001, 2, 1.e-06,
           XREFI, YREFI, EULERA, EULERB, EULERG,b, "testfile.data")
 
-mytracker.setPathVariable(1);
+mytracker.setPathVariable(1)
 
 mytracker.trackBunch(b)
 
