@@ -22,7 +22,7 @@ from kickernodes import rootTWaveform, flatTopWaveform
 from kickernodes import TeapotXKickerNode, TeapotYKickerNode,addTeapotKickerNode
 from orbit.foils import TeapotFoilNode, addTeapotFoilNode
 from foil import Foil
-from orbit.collimation import TeapotCollimatorNode, addTeapotColimatorNode
+from orbit.collimation import TeapotCollimatorNode, addTeapotCollimatorNode
 from orbit.space_charge.sc2p5d import scAccNodes, scLatticeModifications
 from spacecharge import SpaceChargeCalc2p5D, Boundary2D
 
@@ -45,7 +45,7 @@ lostbunch.addPartAttr("LostParticleAttributes")
 
 teapot_latt = teapot.TEAPOT_Lattice()
 print "Read MAD."
-teapot_latt.readMAD("MAD_Lattice/RealInjection/SNSring_pyOrbitBenchmark.LAT","RING")
+teapot_latt.readMAD("../MAD_Lattice/RealInjection/SNSring_pyOrbitBenchmark.LAT","RING")
 print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
 
 #====Add the injection kickers======
@@ -186,7 +186,7 @@ shape = 1
 radius = 0.110
 
 collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., "Collimator 1")
-addTeapotColimatorNode(teapot_latt, 0.5, collimator)
+addTeapotCollimatorNode(teapot_latt, 0.5, collimator)
 
 #----------------------------------------------
 #make 2.5D space charge calculator

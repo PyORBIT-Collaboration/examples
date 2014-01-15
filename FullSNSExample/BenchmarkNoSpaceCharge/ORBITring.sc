@@ -67,7 +67,7 @@
   const Integer fringeK = 1;
 
 
-buildTPlatticeNew("MAD_Lattice/RealInjection/SNSring_pyOrbitBenchmark.TP","Ring",
+buildTPlatticeNew("SNSring_pyOrbitBenchmark.TP","Ring",
                  nstepTPD,
                  nstepTPM, fringeM,
                  nstepTPQ, fringeQ,

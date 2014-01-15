@@ -153,6 +153,7 @@ tstop = 1.0; // Total paint time in ms.
   useFoilScattering = 2;
   addFoil("Foil", 1, xfoilmin, xfoilmax, yfoilmin, yfoilmax, 400.0);
 
+
 ///////////////////////////////////////////
 // Add a Transverse Space Charge Node Set
 ///////////////////////////////////////////
@@ -162,11 +163,14 @@ tstop = 1.0; // Total paint time in ms.
   Real BP1 = 110., BP2 = 0., BP3 = 0., BP4 = 0.;
   Integer BPPoints = 128, BPModes = 32;
   Real Gridfact = 2.0;
-  Integer nMacroSCMin = 1;
-
+  Integer nMacroSCMin = 1000;
+Real sc_path_length_min = 0.00000001;
   Integer nxBins = 64, nyBins = 64;
-//  addFFTTransSCSet(nxBins, nyBins, eps, nMacroSCMin);
-
+//addFFTTransSCSet(nxBins, nyBins, eps, nMacroSCMin);
+ addPotentialTransSCSet(nxBins, nyBins,eps,
+                       BPShape, BP1,BP2,BP3,BP4,
+                       BPPoints, BPModes,Gridfact,
+			nMacroSCMin);
 
 //////////////////////////////////////
 // Add aperutre
@@ -182,6 +186,28 @@ globalAperture = 200.0;
   nMaxMacroParticles = TURNS * nMacrosPerTurn;
   nReals_Macro = INTENSITY / nMaxMacroParticles;
 
+
+//////////////////////////////
+// Add RF Cavities
+//////////////////////////////
+
+  RealVector harmNum(2);
+  harmNum(1) = 1.; harmNum(2) = 2.;
+
+  Integer nRFHarms1 = 1;
+  RealVector volts1(nRFHarms1), harmNum1(nRFHarms1), RFPhase1(nRFHarms1);
+  volts1(1) = 16.0;
+  harmNum1(1) = harmNum(1);
+  RFPhase1(1) = 0;
+
+  Integer nRFHarms2 = 2;
+  RealVector volts2(nRFHarms2), harmNum2(nRFHarms2), RFPhase2(nRFHarms2);
+  volts2(1) = 0.; volts2(2) = -3.0;
+  harmNum2(1) = harmNum(1); harmNum2(2) = harmNum(2);
+  RFPhase2(1) = 0.; RFPhase2(2) = 0.;
+
+  addRFCavity("RF 1", 4767, nRFHarms1, volts1, harmNum1, RFPhase1);
+  addRFCavity("RF 2", 4787, nRFHarms2, volts2, harmNum2, RFPhase2);
 
 //////////////////////////////
 // Add a Longitudinal Impedance Node

@@ -22,7 +22,7 @@ from kickernodes import rootTWaveform, flatTopWaveform
 from kickernodes import TeapotXKickerNode, TeapotYKickerNode,addTeapotKickerNode
 from orbit.foils import TeapotFoilNode, addTeapotFoilNode
 from foil import Foil
-from orbit.collimation import TeapotCollimatorNode, addTeapotColimatorNode
+from orbit.collimation import TeapotCollimatorNode, addTeapotCollimatorNode
 from orbit.space_charge.sc2p5d import scAccNodes, scLatticeModifications
 from spacecharge import SpaceChargeCalc2p5D, Boundary2D
 from spacecharge import LSpaceChargeCalc
@@ -193,7 +193,7 @@ shape = 1
 radius = 0.110
 
 collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., "Collimator 1")
-addTeapotColimatorNode(teapot_latt, 0.5, collimator)
+addTeapotCollimatorNode(teapot_latt, 0.5, collimator)
 
 #-----------------------------
 # Add RF Node
