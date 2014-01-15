@@ -22,12 +22,14 @@ from kickernodes import rootTWaveform, flatTopWaveform
 from kickernodes import TeapotXKickerNode, TeapotYKickerNode,addTeapotKickerNode
 from orbit.foils import TeapotFoilNode, addTeapotFoilNode
 from foil import Foil
-from orbit.collimation import TeapotCollimatorNode, addTeapotColimatorNode
+from orbit.collimation import TeapotCollimatorNode, addTeapotCollimatorNode
 from orbit.space_charge.sc2p5d import scAccNodes, scLatticeModifications
 from spacecharge import SpaceChargeCalc2p5D, Boundary2D
 from spacecharge import LSpaceChargeCalc
 from orbit.space_charge.sc1d import addLongitudinalSpaceChargeNode, SC1D_AccNode
 from orbit.rf_cavities import RFNode, RFLatticeModifications
+from spacecharge import Boundary2D
+
 print "Start."
 
 #=====Main bunch parameters============
@@ -191,7 +193,7 @@ shape = 1
 radius = 0.110
 
 collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., "Collimator 1")
-addTeapotColimatorNode(teapot_latt, 0.5, collimator)
+addTeapotCollimatorNode(teapot_latt, 0.5, collimator)
 
 #-----------------------------
 # Add RF Node
@@ -218,13 +220,18 @@ RFLatticeModifications.addRFNode(teapot_latt, position2, rf2_node)
 #----------------------------------------------
 #make 2.5D space charge calculator
 #----------------------------------------------
+#set boundary
+nboundarypoints = 128
+n_freespacemodes = 32
+r_boundary = 0.220
+boundary = Boundary2D(nboundarypoints,n_freespacemodes,"Circle",r_boundary,r_boundary)
 
 sizeX = 64   #number of grid points in horizontal direction
 sizeY = 64  #number of grid points in vertical direction
 sizeZ = 1     #number of longitudinal slices in the 2.5D space charge solver
 calc2p5d = SpaceChargeCalc2p5D(sizeX,sizeY,sizeZ)
 sc_path_length_min = 0.00000001
-scLatticeModifications.setSC2p5DAccNodes(teapot_latt, sc_path_length_min,calc2p5d)
+scLatticeModifications.setSC2p5DAccNodes(teapot_latt, sc_path_length_min,calc2p5d, boundary)
 
 #-----------------------------------------------
 # Add longitudinal space charge node with Imped
@@ -338,6 +345,7 @@ bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_1.dat")
 
 for i in xrange(99):
 	teapot_latt.trackBunch(b, paramsDict)
+	
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_100.dat")
 b.dumpBunch("pybunch_100.dat")
 

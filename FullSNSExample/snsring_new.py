@@ -22,20 +22,23 @@ from kickernodes import rootTWaveform, flatTopWaveform
 from kickernodes import TeapotXKickerNode, TeapotYKickerNode,addTeapotKickerNode
 from orbit.foils import TeapotFoilNode, addTeapotFoilNode
 from foil import Foil
-from orbit.collimation import TeapotCollimatorNode, addTeapotColimatorNode
+from orbit.collimation import TeapotCollimatorNode, addTeapotCollimatorNode
 from orbit.space_charge.sc2p5d import scAccNodes, scLatticeModifications
 from spacecharge import SpaceChargeCalc2p5D, Boundary2D
 from spacecharge import LSpaceChargeCalc
 from orbit.space_charge.sc1d import addLongitudinalSpaceChargeNode, SC1D_AccNode
+from orbit.rf_cavities import RFNode, RFLatticeModifications
+from spacecharge import Boundary2D
 
 print "Start."
 
 #=====Main bunch parameters============
 intensity = 7.8e13
 turns = 1000.0
-macrosperturn = 260
+macrosperturn = 5000
 macrosize = intensity/turns/macrosperturn
-
+nmaxmacroparticles = 250000
+injectturninterval = 1
 b = Bunch()
 b.mass(0.93827231)
 b.macroSize(macrosize)
@@ -57,7 +60,7 @@ print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength(),"
 
 #====Add the injection kickers======
 
-duration = 0.001
+duration = 0.0005
 startamp = 1.0
 endamp = 0.58
 deltapos = 0.001
@@ -171,7 +174,7 @@ ymax = ycenterpos + 0.100
 
 nparts = macrosperturn
 injectparams = (xmin, xmax, ymin, ymax)
-injectnode = TeapotInjectionNode(nparts, b, lostbunch, injectparams, xFunc, yFunc, lFunc)
+injectnode = TeapotInjectionNode(nparts, b, lostbunch, injectparams, xFunc, yFunc, lFunc, nmaxmacroparticles, injectturninterval)
 addTeapotInjectionNode(teapot_latt, 0., injectnode) 
 
 thick = 400.0
@@ -191,18 +194,45 @@ shape = 1
 radius = 0.110
 
 collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., "Collimator 1")
-addTeapotColimatorNode(teapot_latt, 0.5, collimator)
+addTeapotCollimatorNode(teapot_latt, 0.5, collimator)
+
+#-----------------------------
+# Add RF Node
+#-----------------------------
+
+teapot_latt.initialize()
+ZtoPhi = 2.0 * math.pi / lattlength;
+dESync = 0.0
+RF1HNum = 1.0
+RF1Voltage = 0.000016
+RF1Phase = 0.0
+RF2HNum = 2.0
+RF2Voltage = -0.000003
+RF2Phase = 0.0
+length = 0.0
+
+rf1_node = RFNode.Harmonic_RFNode(ZtoPhi, dESync, RF1HNum, RF1Voltage, RF1Phase, length, "RF1")
+rf2_node = RFNode.Harmonic_RFNode(ZtoPhi, dESync, RF2HNum, RF2Voltage, RF2Phase, length, "RF2")
+position1 = 196.0
+position2 = 196.5
+RFLatticeModifications.addRFNode(teapot_latt, position1, rf1_node)
+RFLatticeModifications.addRFNode(teapot_latt, position2, rf2_node)
 
 #----------------------------------------------
 #make 2.5D space charge calculator
 #----------------------------------------------
+#set boundary
+nboundarypoints = 128
+n_freespacemodes = 32
+r_boundary = 0.110
+boundary = Boundary2D(nboundarypoints,n_freespacemodes,"Circle",r_boundary,r_boundary)
 
 sizeX = 64   #number of grid points in horizontal direction
 sizeY = 64  #number of grid points in vertical direction
 sizeZ = 1     #number of longitudinal slices in the 2.5D space charge solver
 calc2p5d = SpaceChargeCalc2p5D(sizeX,sizeY,sizeZ)
 sc_path_length_min = 0.00000001
-#scLatticeModifications.setSC2p5DAccNodes(teapot_latt, sc_path_length_min,calc2p5d)
+scLatticeModifications.setSC2p5DAccNodes(teapot_latt, sc_path_length_min,calc2p5d, boundary)
 
 #-----------------------------------------------
 # Add longitudinal space charge node with Imped
@@ -307,22 +337,40 @@ i = 0
 for node in nodes:
 	print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%teapot_latt.getNodePositionsDict()[node]
 	print "There are ", node.getNumberOfBodyChildren()," child nodes."
-	i=i+1
+i=i+1
 
 #================Do some turns===========================================
 
 teapot_latt.trackBunch(b, paramsDict)
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_1.dat")
 
-for i in xrange(99):
+for i in xrange(9):
+	teapot_latt.trackBunch(b, paramsDict)
+
+bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_10.dat")
+
+
+for i in xrange(40):
+	teapot_latt.trackBunch(b, paramsDict)
+bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_50.dat")
+
+for i in xrange(50):
 	teapot_latt.trackBunch(b, paramsDict)
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_100.dat")
 
-for i in xrange(100):
+for i in xrange(50):
+	teapot_latt.trackBunch(b, paramsDict)
+bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_150.dat")
+
+for i in xrange(50):
 	teapot_latt.trackBunch(b, paramsDict)
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_200.dat")
 
-for i in xrange(100):
+for i in xrange(50):
+	teapot_latt.trackBunch(b, paramsDict)
+bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_250.dat")
+
+for i in xrange(50):
 	teapot_latt.trackBunch(b, paramsDict)
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_300.dat")
 
@@ -337,22 +385,6 @@ bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_500.dat")
 for i in xrange(100):
 	teapot_latt.trackBunch(b, paramsDict)
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_600.dat")
-
-for i in xrange(100):
-	teapot_latt.trackBunch(b, paramsDict)
-bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_700.dat")
-
-for i in xrange(100):
-	teapot_latt.trackBunch(b, paramsDict)
-bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_800.dat")
-
-for i in xrange(100):
-	teapot_latt.trackBunch(b, paramsDict)
-bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_900.dat")
-
-for i in xrange(100):
-	teapot_latt.trackBunch(b, paramsDict)
-bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_1000.dat")
 
 #===========Dump bunch infomration=======================================
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch.dat")

@@ -15,7 +15,7 @@ from bunch import Bunch
 from orbit.utils.orbit_mpi_utils import bunch_orbit_to_pyorbit, bunch_pyorbit_to_orbit
 
 from orbit.collimation import TeapotCollimatorNode
-from orbit.collimation import addTeapotColimatorNode
+from orbit.collimation import addTeapotCollimatorNode
 from orbit.utils import orbitFinalize, NamedObject, ParamsDictObject
 
 print "Start."
@@ -56,7 +56,7 @@ angle = 0
 
 collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle, "Collimator 1")
 
-addTeapotColimatorNode(teapot_latt, 18.5, collimator) 
+addTeapotCollimatorNode(teapot_latt, 18.5, collimator)
 print "===========Lattice modified ======================================="
 print "New Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
 

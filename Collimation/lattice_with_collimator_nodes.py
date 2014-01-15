@@ -14,7 +14,7 @@ from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 from bunch import Bunch
 
 from orbit.collimation import TeapotCollimatorNode
-from orbit.collimation import addTeapotColimatorNode
+from orbit.collimation import addTeapotCollimatorNode
 
 print "Start."
 
@@ -54,7 +54,7 @@ angle = 0
 
 collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle, "Collimator 1")
 
-addTeapotColimatorNode(teapot_latt, 18.5,collimator) 
+addTeapotCollimatorNode(teapot_latt, 18.5,collimator)
 print "===========Lattice modified ======================================="
 print "New Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
 
