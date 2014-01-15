@@ -13,7 +13,7 @@ from orbit.teapot import DriftTEAPOT
 from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 from bunch import Bunch
 from orbit.utils.orbit_mpi_utils import bunch_orbit_to_pyorbit, bunch_pyorbit_to_orbit
-from orbit.collimation import TeapotCollimatorNode, addTeapotColimatorNode
+from orbit.collimation import TeapotCollimatorNode, addTeapotCollimatorNode
 from orbit.space_charge.directforce2p5d import directforceAccNodes, directforceLatticeModifications
 from spacecharge import SpaceChargeForceCalc2p5D
 from spacecharge import LSpaceChargeCalc
@@ -62,7 +62,7 @@ shape = 1
 radius = 0.110
 
 collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., "Collimator 1")
-#addTeapotColimatorNode(teapot_latt, 0.5, collimator)
+#addTeapotCollimatorNode(teapot_latt, 0.5, collimator)
 
 #-----------------------------
 # Add RF Node
