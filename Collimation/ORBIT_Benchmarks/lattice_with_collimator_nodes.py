@@ -108,8 +108,8 @@ collimator.track(paramsDict)
 # dump ORBIT_MPI bunch to compare results
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch.dat")
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), lostbunch, "lostbunch.dat")
-lostbunch.dumpBunch()
-b.dumpBunch()
+lostbunch.dumpBunch("pylostbunch.dat")
+b.dumpBunch("pybunch.dat")
 print "Stop."
 
 
