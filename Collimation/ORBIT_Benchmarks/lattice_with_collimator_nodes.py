@@ -53,10 +53,12 @@ b = 0
 c = 0
 d = 0
 angle = 0
+pos = 18.5
 
-collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle, "Collimator 1")
+collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle, pos, "Collimator 1")
+#collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle)
+addTeapotCollimatorNode(teapot_latt, pos, collimator)
 
-addTeapotCollimatorNode(teapot_latt, 18.5, collimator)
 print "===========Lattice modified ======================================="
 print "New Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
 
