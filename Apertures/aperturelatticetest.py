@@ -26,7 +26,7 @@ print "Read MAD."
 teapot_latt.readMAD("MAD_Lattice/LATTICE","RING")
 print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
 
-Aperturenode = CircleApertureNode(.01, 240)
+Aperturenode = CircleApertureNode(.01)
 #Aperturenode = CircleApertureNode(.01, .002, .0025)
 #Aperturenode = RectangleApertureNode(.02, .015, -.002, -.0025)
 addTeapotApertureNode(teapot_latt, 240, Aperturenode)
