@@ -55,7 +55,7 @@ d = 0
 angle = 0
 pos = 18.5
 
-collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle, pos, "Collimator 1")
+collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle)
 #collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle)
 addTeapotCollimatorNode(teapot_latt, pos, collimator)
 
