@@ -44,8 +44,12 @@ bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "Bunches/controlbunch_600_ORB
 #bunch_orbit_to_pyorbit(teapot_latt.getLength(), energy, "Bunches/Bm_KV_Uniform_1000",b)
 
 tunes = TeapotTuneAnalysisNode("tune_analysis")
-tunes.assignTwiss(3.25011, 0.811013, 1.45074, -0.636723, 10.6922, -2.13656)
-addTeapotDiagnosticsNode(teapot_latt, 38.788, tunes)
+#tunes.assignTwiss(3.25011, 0.811013, 1.45074, -0.636723, 10.6922, -2.13656)
+#addTeapotDiagnosticsNode(teapot_latt, 38.788, tunes)
+
+tunes.assignTwiss(9.335, -1.826, -0.065, -0.03, 8.089, 0.497)
+addTeapotDiagnosticsNode(teapot_latt, 51.035, tunes)
+
 
 addTeapotMomentsNodeSet(teapot_latt, "moments", 3) 
 addTeapotStatLatsNodeSet(teapot_latt, "statlats")
