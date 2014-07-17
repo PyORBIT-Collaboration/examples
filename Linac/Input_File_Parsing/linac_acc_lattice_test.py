@@ -56,7 +56,7 @@ def test_action(paramsDict):
 	eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3	
 	if(node.getName().find(":Rg") >= 0):
 		paramsDict["count"]	+= 1
-		s = " %5d     %25s     %4.5f     %5.3f  "%(paramsDict["count"],node.getName(),(pos - length/2),eKin)
+		s = " %5d     %35s     %4.5f     %5.3f  "%(paramsDict["count"],node.getName(),(pos - length/2),eKin)
 		#outF.write(s+"\n")
 		print s
 
@@ -68,5 +68,4 @@ outF.close()
 
 accLattice.trackBunch(b, paramsDict = paramsDict, actionContainer = actionContainer)
 
-sys.exit(1)
 

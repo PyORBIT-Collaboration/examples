@@ -24,6 +24,3 @@ for node in nodes:
 	print "node=",node.getName()," type=",node.getType()," position=",node.getParam("pos")," L=",node.getLength()
 
 
-
-sys.exit(1)
-
