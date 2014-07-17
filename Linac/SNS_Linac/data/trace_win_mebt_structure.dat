@@ -1,0 +1,89 @@
+;--------MEBT of SNS linac------------
+FREQ 402.5 
+;SET_SIZE_MAX  0.00005 45 7 7  0
+Drift 97.5 15 0
+;MATCH_FAM_GRAD 1 0
+QUAD 61 34.636 15
+Drift 84 15 0
+;MATCH_FAM_GRAD 1 0
+QUAD 61 -37.85 15
+Drift 84 15 0
+;MATCH_FAM_GRAD 1 0
+QUAD 61 28.326 15
+Drift 29.5 15 0
+;----buncher----
+SET_SYNC_PHASE
+;field_map  400 100.0 -90 15 2.31 2.31 0 0 buncher1.5
+field_map  400 100.0 -90 15 1.7 1.7 0 0 buncher1
+;Drift 35 15 0
+;GAP 75000 -90 15 0
+;Drift 35 15 0
+;----------------
+Drift 29.5 15 0
+;MATCH_FAM_GRAD 1 0
+QUAD 61 -17.69 15
+Drift 114.5 15 0
+Drift 175 15 0
+Drift 175 15 0
+Drift 105 15 0
+;----buncher----
+SET_SYNC_PHASE
+;field_map  400 100.0 -90 18 1.36 1.36 0 0 buncher1.8
+field_map  400 100.0 -90 18 1.05 1.05 0 0 buncher1
+;Drift 35 15 0
+;GAP 45000 -90 15 0
+;Drift 35 15 0
+;----------------
+Drift 27 15 0
+QUAD 66 17 15
+Drift 34 15 0
+QUAD 66 -26.2 15
+Drift 34 15 0
+QUAD 66 11.7 15
+Drift 137 15 0
+Drift 137 15 0
+QUAD 66 11.7 15
+Drift 34 15 0
+QUAD 66 -26.2 15
+Drift 34 15 0
+QUAD 66 17 15
+Drift 27 15 0
+;----buncher----
+MATCH_FAM_field 1 0
+SET_SYNC_PHASE
+;field_map  400 100.0 -90 18 1.50 1.50 0 0 buncher1.8
+field_map 400 100.0 -90 18 1.05 1.05 0 0 buncher1
+;Drift 35 15 0
+;GAP 45772.980 -90 15 0
+;Drift 35 15 0
+;----------------
+Drift 105 15 0
+Drift 175 15 0
+Drift 175 15 0
+Drift 119.5 15 0
+MATCH_FAM_GRAD 1 0
+QUAD 61 -16.63 15
+Drift 89 15 0
+MATCH_FAM_GRAD 1 0
+QUAD 61 29.02 15
+Drift 24.5 15 0
+;----buncher----
+MATCH_FAM_field 1 0
+SET_SYNC_PHASE
+;field_map  400 100.0 -90 15 2.9 2.9 0 0 buncher1.5
+field_map  400 100.0 -90 15 2.15 2.15 0 0 buncher1
+;Drift 35 15 0
+;GAP 94100 -90 15 0
+;Drift 35 15 0
+;----------------
+Drift 24.5 15 0
+MATCH_FAM_GRAD 1 0
+QUAD 61 -26.1 15
+Drift 84 15 0
+MATCH_FAM_GRAD 1 0
+QUAD 61 10.44 15
+Drift 194.5 15 0
+set_twiss 1  -0.3304457946 0.9266784422   -0.2006850058 0.2478551996  0.3129091787    0.6344029693  0 0 0 0 0 0 
+Drift 0.0000001 15 0
+QUAD 17.5 37.182188 12.5
+
