@@ -108,38 +108,6 @@ for node in teapot_latt.getNodes():
             print "aperture limitation", node.getParam("aperture")
         if node.getName() == "qf":
             print "poles", node.getParam("poles"), "skews", node.getParam("skews"), "kls", node.getParam("kls"), "kq", node.getParam("kq")
-#------------------------------
-#Initial Distribution Functions
-#------------------------------
-zlim = circum/2
-zmin = -zlim
-zmax = zlim
-deltaEfrac = 1e-3*beta0*beta0*energy/A
-eoffset = 0.0
 
-lFunc = UniformLongDist(zmin, zmax, sp, eoffset, deltaEfrac)
-twissX = TwissContainer(alpha = -1.11, beta = 16.8, emittance = emittance_x/2)
-distX = KVDist1DFull(twissX)
-twissY = TwissContainer(alpha = 1.17, beta = 15.22, emittance = emittance_y/2)
-distY = KVDist1DFull(twissY)
-
-
-
-#---------------------
-#injection point
-#--------------------
-injectparams = (-10, 10, -10, 10)
-injectnode = TeapotInjectionNode(NPIC, bunch, lostbunch, injectparams, distX, distY, lFunc,NPIC*1000)
-injectnode.trackBunch(bunch)
-    
-
-#=====track bunch ============
-TURNS = 2
-    
-for n in range(TURNS):
-    bunch = paramsDict["bunch"]
-    lostbunch = paramsDict["lostbunch"]
-    teapot_latt.trackBunch(bunch,paramsDict)
-print "lost in %", bunch.getSize()/float(NPIC)
 
             
