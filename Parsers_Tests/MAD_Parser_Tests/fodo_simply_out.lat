@@ -1,0 +1,11 @@
+none = 0;
+twiss_tol = 1e-06;
+qf: quadrupole,l:= 4,k1:= 0.0331,ksl:={ 0.001, 0, 3e-05};
+rb: sbend,l:= 2.61799294,angle:= 0.261799294;
+qd: quadrupole,l:= 4,k1:= -0.0331,knl:={ 0, 0, 2e-05},ksl:={ 0.00, 0, 3e-05};
+cella: sequence, l = 17.99998588;
+qf, at = 3.191;
+rb, at = 7.69099647;
+qd, at = 12.19099294;
+rb, at = 16.69098941;
+endsequence;
