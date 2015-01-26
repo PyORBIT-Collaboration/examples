@@ -7,8 +7,6 @@ import pickle
 import math
 import numpy as np
 
-sys.path.append("/u/sappel/codes/py-orbit/py")
-
 from bunch import Bunch
 
 
@@ -29,20 +27,6 @@ from orbit.injection import UniformLongDist
 from orbit.bunch_generators import TwissContainer, TwissAnalysis
 from orbit.bunch_generators import KVDist1D, KVDist2D
 
-from ext.gsi.bunch_generators import KVDist1DFull
-
-
-# add kicker node, calulation of kicker angle depending of lattice and time
-from orbit.time_dep import time_dep
-from orbit.kickernodes import TeapotXKickerNode
-from ext.gsi.bumper import rootWaveform, linearWaveform, flatTopWaveform, expWaveform
-from orbit.kickernodes import addTeapotKickerNode
-from ext.gsi.bumper import OrbitBumpH, OrbitBumpH_SISMODI, OrbitBump_ELSA
-
-# add collimation
-from collimator import Collimator
-from orbit.collimation import TeapotCollimatorNode
-from orbit.collimation import addTeapotCollimatorNode
 
 # add apertures
 from orbit.aperture import addTeapotApertureNode
