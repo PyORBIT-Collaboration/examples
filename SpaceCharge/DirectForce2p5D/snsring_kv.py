@@ -30,7 +30,7 @@ b = Bunch()
 b.mass(0.93827231)
 
 energy = 1.0 #Gev
-b.readBunch("kv.dat", 10)
+b.readBunch("KV.dat", 10)
 b.getSyncParticle().kinEnergy(energy)
 macrosize = intensity/b.getSize()
 b.macroSize(macrosize)
@@ -60,9 +60,6 @@ ma = 9
 density_fac = 1.0
 shape = 1
 radius = 0.110
-
-collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., "Collimator 1")
-#addTeapotCollimatorNode(teapot_latt, 0.5, collimator)
 
 #-----------------------------
 # Add RF Node
