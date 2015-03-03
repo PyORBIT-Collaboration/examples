@@ -160,12 +160,12 @@
   }
   Integer maxModes = 32;
 
-  nLongBins = 128;
+  nLongBins = 64;
   Real b_a = 10.0/3.0;
   Integer useAvg = 0;
   Integer nMacroLSCMin = 1;
 
-  Integer useSpaceCharge = 1;
+  Integer useSpaceCharge = 0;
   addFFTLSpaceCharge("LSC1", 1, ZImped, b_a, useAvg,
                     nMacroLSCMin, useSpaceCharge);
 

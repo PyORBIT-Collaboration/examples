@@ -1,0 +1,1 @@
+mpirun -np 1 /home/jzh/CODES/ORBIT_MPI/LINUX/ORBIT_MPI TImpedance.sc
