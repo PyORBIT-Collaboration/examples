@@ -75,7 +75,7 @@ b_a = 10.0/3.0
 length = 248.0
 nMacrosMin = 1
 useSpaceCharge = 1
-nBins= 64          #number of longitudinal slices
+nBins= 128          #number of longitudinal slices
 position = 0.0
 
 #-------------------------------------------------------------------------
@@ -259,20 +259,20 @@ sc1Dnode.assignImpedance(ZM)
 addLongitudinalSpaceChargeNode(lattice, position, sc1Dnode)
 """
 
-"""
+
 f_sc1Dnode = FreqDep_SC1D_AccNode(b_a, length, nMacrosMin, useSpaceCharge, nBins, b, f_impeDict)
 addLongitudinalSpaceChargeNode(lattice, position, f_sc1Dnode)
-"""
+
 
 """
 compbf_sc1Dnode = BetFreqDep_SC1D_AccNode(b_a, length, nMacrosMin, useSpaceCharge, nBins, b, compbf_impeDict)
 addLongitudinalSpaceChargeNode(lattice, position, compbf_sc1Dnode)
 """
 
-
+"""
 bf_sc1Dnode = BetFreqDep_SC1D_AccNode(b_a, length, nMacrosMin, useSpaceCharge, nBins, b, bf_impeDict)
 addLongitudinalSpaceChargeNode(lattice, position, bf_sc1Dnode)
-
+"""
 
 print "===========Lattice modified ======================================="
 print "New Lattice = ", lattice.getName()," length [m] = ",lattice.getLength()," nodes = ",len(lattice.getNodes())
@@ -280,9 +280,9 @@ print "New Lattice = ", lattice.getName()," length [m] = ",lattice.getLength(),"
 print "Ready to track"
 
 #sc1Dnode.trackBunch(b)
-#f_sc1Dnode.trackBunch(b)
+f_sc1Dnode.trackBunch(b)
 #compbf_sc1Dnode.trackBunch(b)
-bf_sc1Dnode.trackBunch(b)
+#bf_sc1Dnode.trackBunch(b)
 
 print "tracking done"
 
