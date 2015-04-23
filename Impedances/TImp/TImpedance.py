@@ -31,7 +31,7 @@ def getLattice(lattice_length, n_parts):
 lattice_length = 248.0    # the length of the lattice
 # number of parts into which the drift will be chopped:
 n_parts = 1
-#also the number of SC nodes
+# also the number of SC nodes
 lattice = getLattice(lattice_length, n_parts)
 
 #------------------------------
@@ -45,7 +45,7 @@ runName = "Benchmark_Collimator"
 total_macroSize=1.0e+16
 b.mass(consts.mass_proton)
 
-ERef = 1.0 #Gev
+ERef = 1.0 # Gev
 print "Reference energy is 1.0 (GeV). \nPlease input desired energy:"
 energy = float(raw_input())
 print "energy is:", energy
@@ -73,7 +73,7 @@ print "Freq =", Freq
 
 length = 248.0
 nMacrosMin = 1
-nBins= 64          #number of longitudinal slices
+nBins = 64          # number of longitudinal slices
 position = 0.0
 
 #-------------------------------------------------------------------------
@@ -214,103 +214,81 @@ ZM = [complex(-36904.387,  -92036.662),
       complex( 27146.509,  -55839.951),
       complex( 27342.041,  -55639.799)]
 
-ZF = [complex(     0.000, 157197.430),
-      complex(  7187.314, 148828.430),
-      complex( 15790.266, 135241.380),
-      complex( 23513.549, 122525.270),
-      complex( 29868.459, 111163.960),
-      complex( 34366.289, 101641.310),
-      complex( 36604.713,  94357.279),
-      complex( 36819.781,  89091.792),
-      complex( 35533.669,  85346.877),
-      complex( 33269.902,  82623.249),
-      complex( 30552.005,  80421.622),
-      complex( 27865.194,  78291.571),
-      complex( 25411.569,  76143.769),
-      complex( 23266.333,  74050.737),
-      complex( 21504.092,  72085.759),
-      complex( 20199.451,  70322.119),
-      complex( 19407.853,  68823.957),
-      complex( 19043.126,  67587.851),
-      complex( 18955.621,  66580.093),
-      complex( 18995.393,  65766.834),
-      complex( 19012.495,  65114.223),
-      complex( 18877.728,  64588.408),
-      complex( 18615.224,  64155.514),
-      complex( 18317.839,  63781.657),
-      complex( 18078.752,  63432.953),
-      complex( 17991.144,  63075.517),
-      complex( 18133.522,  62680.523),
-      complex( 18475.945,  62256.524),
-      complex( 18939.871,  61828.830),
-      complex( 19446.526,  61422.827),
-      complex( 19917.136,  61063.902),
-      complex( 20282.202,  60773.597),
-      complex( 20540.771,  60545.044),
-      complex( 20722.612,  60358.639),
-      complex( 20857.641,  60194.716),
-      complex( 20975.770,  60033.613),
-      complex( 21104.968,  59857.792),
-      complex( 21258.828,  59665.442),
-      complex( 21444.495,  59461.79),
-      complex( 21669.088,  59252.132),
-      complex( 21939.722,  59041.711),
-      complex( 22262.022,  58835.235),
-      complex( 22630.575,  58633.189),
-      complex( 23035.023,  58434.167),
-      complex( 23464.985,  58236.757),
-      complex( 23910.079,  58039.543),
-      complex( 24359.649,  57841.267),
-      complex( 24801.017,  57641.803),
-      complex( 25220.597,  57441.533),
-      complex( 25604.796,  57240.842),
-      complex( 25940.026,  57040.116),
-      complex( 26215.284,  56839.695),
-      complex( 26438.699,  56639.600),
-      complex( 26626.975,  56439.702),
-      complex( 26796.853,  56239.876),
-      complex( 26965.080,  56039.994),
-      complex( 27146.509,  55839.951),
-      complex( 27342.041,  55639.799),
-      complex( 27542.041,  55439.799),
-      complex( 27742.041,  55239.799),
-      complex( 27942.041,  55039.799),
-      complex( 28142.041,  54839.799),
-      complex( 28342.041,  54639.799),
-      complex( 28542.041,  54439.799)]
-
-Z0 = [complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0),
-      complex(0.0, 0.0), complex(0.0, 0.0), complex(0.0, 0.0)]
+ZF = [complex(     0.000, -157197.430),
+      complex(  7187.314, -148828.430),
+      complex( 15790.266, -135241.380),
+      complex( 23513.549, -122525.270),
+      complex( 29868.459, -111163.960),
+      complex( 34366.289, -101641.310),
+      complex( 36604.713,  -94357.279),
+      complex( 36819.781,  -89091.792),
+      complex( 35533.669,  -85346.877),
+      complex( 33269.902,  -82623.249),
+      complex( 30552.005,  -80421.622),
+      complex( 27865.194,  -78291.571),
+      complex( 25411.569,  -76143.769),
+      complex( 23266.333,  -74050.737),
+      complex( 21504.092,  -72085.759),
+      complex( 20199.451,  -70322.119),
+      complex( 19407.853,  -68823.957),
+      complex( 19043.126,  -67587.851),
+      complex( 18955.621,  -66580.093),
+      complex( 18995.393,  -65766.834),
+      complex( 19012.495,  -65114.223),
+      complex( 18877.728,  -64588.408),
+      complex( 18615.224,  -64155.514),
+      complex( 18317.839,  -63781.657),
+      complex( 18078.752,  -63432.953),
+      complex( 17991.144,  -63075.517),
+      complex( 18133.522,  -62680.523),
+      complex( 18475.945,  -62256.524),
+      complex( 18939.871,  -61828.830),
+      complex( 19446.526,  -61422.827),
+      complex( 19917.136,  -61063.902),
+      complex( 20282.202,  -60773.597),
+      complex( 20540.771,  -60545.044),
+      complex( 20722.612,  -60358.639),
+      complex( 20857.641,  -60194.716),
+      complex( 20975.770,  -60033.613),
+      complex( 21104.968,  -59857.792),
+      complex( 21258.828,  -59665.442),
+      complex( 21444.495,  -59461.79),
+      complex( 21669.088,  -59252.132),
+      complex( 21939.722,  -59041.711),
+      complex( 22262.022,  -58835.235),
+      complex( 22630.575,  -58633.189),
+      complex( 23035.023,  -58434.167),
+      complex( 23464.985,  -58236.757),
+      complex( 23910.079,  -58039.543),
+      complex( 24359.649,  -57841.267),
+      complex( 24801.017,  -57641.803),
+      complex( 25220.597,  -57441.533),
+      complex( 25604.796,  -57240.842),
+      complex( 25940.026,  -57040.116),
+      complex( 26215.284,  -56839.695),
+      complex( 26438.699,  -56639.600),
+      complex( 26626.975,  -56439.702),
+      complex( 26796.853,  -56239.876),
+      complex( 26965.080,  -56039.994),
+      complex( 27146.509,  -55839.951),
+      complex( 27342.041,  -55639.799),
+      complex( 27542.041,  -55439.799),
+      complex( 27742.041,  -55239.799),
+      complex( 27942.041,  -55039.799),
+      complex( 28142.041,  -54839.799),
+      complex( 28342.041,  -54639.799),
+      complex( 28542.041,  -54439.799)]
 
 for i in range(len(ZP)):
-	#Multiply by 100 to make the effect bigger for benchmark purpose.
+	# Multiply by 100 to make the effect bigger for benchmark purpose.
 	ZP[i] = 100.0 * ZP[i]
 
 for i in range(len(ZM)):
-	#Multiply by 100 to make the effect bigger for benchmark purpose.
+	# Multiply by 100 to make the effect bigger for benchmark purpose.
 	ZM[i] = 100.0 * ZM[i]
 
 for i in range(len(ZF)):
-	#Multiply by 100 to make the effect bigger for benchmark purpose.
+	# Multiply by 100 to make the effect bigger for benchmark purpose.
 	ZF[i] = 100.0 * ZF[i]
 
 #-------------------------------------------------------------------------
@@ -318,7 +296,7 @@ for i in range(len(ZF)):
 # f_impeDict is for frequency-dependent impedance, FreqDep_TImpedance_Node.
 # compbf_impeDict is for comparison between BetFreqDep_TImpedance_Node
 # and FreqDep_TImpedance_Node. Hence, impedance is independent of beta.
-# In bf_impeDict, impedance does change with frequency for test of
+# In bf_impeDict, impedance does change with beta for test of
 # BetFreqDep_TImpedance_Node.
 #-------------------------------------------------------------------------
 
@@ -331,14 +309,14 @@ for i in range(len(ZP)):
 # Additional data for beta dependent tests.
 #-------------------------------------------------------------------------
 
-#BetaRef = 0.875025655404
+# BetaRef = 0.875025655404
 beta_list = []
 
 nBetas = 10
 BetaMin = 0.1
 BetaMax = 1.0
-for i in range(nBetas + 1):
-    vb = BetaMin + i * ((BetaMax - BetaMin) / nBetas)
+for i in range(nBetas):
+    vb = BetaMin + i * ((BetaMax - BetaMin) / (nBetas - 1))
     beta_list.append(vb)
 
 #-------------------------------------------------------------------------
@@ -349,7 +327,6 @@ for i in range(nBetas + 1):
 
 compbfz = []
 bfz = []
-bf0 = []
 
 #-------------------------------------------------------------------------
 def lMult(n, list):
@@ -362,51 +339,32 @@ def lMult(n, list):
         newList.append(nv)
     return newList
 
-# I take the existing Z(freq) list and mulitply it by
+# Take the existing Z(freq) list and mulitply it by
 # some factor for each beta value.
 #-------------------------------------------------------------------------
 
 for i in range(len(beta_list)):
-    comp = lMult(1, ZF)    #Use this one to compare fd and bfd nodes
-    v = lMult((i/10.0), ZF)
+    comp = lMult(1, ZF)    # Use this one to compare fd and bfd nodes
+    v = lMult(((i + 1) / 10.0), ZF)
     compbfz.append(comp)
     bfz.append(v)
-    bf0.append(Z0)
 
 f_impeDict = {}
 f_impeDict["freqs"] = f_list
-useX_f = 1
-useY_f = 0
 f_impeDict["zx_imp"] = ZF
-f_impeDict["zy_imp"] = Z0
-# useX_f = 0
-# useY_f = 1
-# f_impeDict["zx_imp"] = Z0
-# f_impeDict["zy_imp"] = ZF
+f_impeDict["zy_imp"] = ZF
 
 compbf_impeDict = {}
 compbf_impeDict["freqs"] = f_list
 compbf_impeDict["betas"] = beta_list
-useX_compbf = 1
-useY_compbf = 0
 compbf_impeDict["zx_imp"] = compbfz
-compbf_impeDict["zy_imp"] = bf0
-# useX_compbf = 0
-# useY_compbf = 1
-# compbf_impeDict["zx_imp"] = bf0
-# compbf_impeDict["zy_imp"] = compbfz
+compbf_impeDict["zy_imp"] = compbfz
 
 bf_impeDict = {}
 bf_impeDict["freqs"] = f_list
 bf_impeDict["betas"] = beta_list
-useX_bf = 1
-useY_bf = 0
 bf_impeDict["zx_imp"] = bfz
-bf_impeDict["zy_imp"] = bf0
-# useX_bf = 0
-# useY_bf = 1
-# bf_impeDict["zx_imp"] = bf0
-# bf_impeDict["zy_imp"] = bfz
+bf_impeDict["zy_imp"] = bfz
 
 #------------------------------------------------------------------------
 # Testing:
@@ -425,35 +383,42 @@ qY     =  6.2
 alphaY =  0.0
 betaY  = 10.0
 
-
+"""
 useX = 1
-useY = 0
-# useX = 0
-# useY = 1
+useY = 1
 impedancenode = TImpedance_Node(length, nMacrosMin, nBins, useX, useY)
 impedancenode.assignLatFuncs(qX, alphaX, betaX, qY, alphaY, betaY)
-XorY = "X"
-impedancenode.assignImpedance(XorY, ZP, ZM)
-# impedancenode.assignImpedance(XorY, Z0, Z0)
-XorY = "Y"
-impedancenode.assignImpedance(XorY, Z0, Z0)
-# impedancenode.assignImpedance(XorY, ZP, ZM)
+if useX != 0:
+	XorY = "X"
+	print "Here X"
+	impedancenode.assignImpedance(XorY, ZP, ZM)
+	print "Here X"
+if useY != 0:
+	XorY = "Y"
+	print "Here Y"
+	impedancenode.assignImpedance(XorY, ZP, ZM)
+	print "Here Y"
 addImpedanceNode(lattice, position, impedancenode)
-
-
 """
 
-f_impedancenode = FreqDep_LImpedance_Node(length, nMacrosMin, nBins, b, f_impeDict)
+"""
+useX = 1
+useY = 1
+f_impedancenode = FreqDep_TImpedance_Node(length, nMacrosMin, nBins, useX, useY, b, f_impeDict, qX, alphaX, betaX, qY, alphaY, betaY)
 addImpedanceNode(lattice, position, f_impedancenode)
 """
 
 """
-compbf_impedancenode = BetFreqDep_LImpedance_Node(length, nMacrosMin, nBins, b, compbf_impeDict)
+useX = 1
+useY = 1
+compbf_impedancenode = BetFreqDep_TImpedance_Node(length, nMacrosMin, nBins, useX, useY, b, compbf_impeDict, qX, alphaX, betaX, qY, alphaY, betaY)
 addImpedanceNode(lattice, position, compbf_impedancenode)
 """
 
 """
-bf_impedancenode = BetFreqDep_LImpedance_Node(length, nMacrosMin, nBins, b, bf_impeDict)
+useX = 1
+useY = 1
+bf_impedancenode = BetFreqDep_TImpedance_Node(length, nMacrosMin, nBins, useX, useY, b, bf_impeDict, qX, alphaX, betaX, qY, alphaY, betaY)
 addImpedanceNode(lattice, position, bf_impedancenode)
 """
 
@@ -462,10 +427,10 @@ print "New Lattice = ", lattice.getName()," length [m] = ",lattice.getLength(),"
 
 print "Ready to track"
 
-impedancenode.trackBunch(b)
-#f_impedancenode.trackBunch(b)
-#compbf_impedancenode.trackBunch(b)
-#bf_impedancenode.trackBunch(b)
+# impedancenode.trackBunch(b)
+# f_impedancenode.trackBunch(b)
+# compbf_impedancenode.trackBunch(b)
+# bf_impedancenode.trackBunch(b)
 
 print "tracking done"
 
