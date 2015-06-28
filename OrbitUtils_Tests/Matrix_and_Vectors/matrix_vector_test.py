@@ -90,6 +90,7 @@ count = 0
 while(2 > 1):
 	v = PhaseVector(5)
 	v1 = PhaseVector(5)
+	v_tmp = v.copy()
 	setV(v)
 	setV(v1)
 	v3 = v.add(1)
@@ -118,6 +119,7 @@ while(2 > 1):
 	v = PhaseVector(5)
 	m = Matrix(4,5)
 	v1 = m.mult(v)
+	v_tmp = v.copy()
 	count += 1
 	if(count%1000 == 0):
 		print "i=",count
