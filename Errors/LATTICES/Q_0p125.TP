@@ -1,0 +1,17 @@
+quadrupole k1  0.838581217201  l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+quadrupole k1  -0.838582112944  l  0.25  sub  10  end
+quadrupole k1  -0.838582112944  l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+drift l  0.25  sub  10  end
+quadrupole k1  0.838581217201  l  0.25  sub  10  end
+final
