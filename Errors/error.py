@@ -253,14 +253,12 @@ ESet  = AddErrorSet(lattice, positioni, positionf, setDict, paramsDict)
 
 """
 
-positioni = 0.0
-positionf = 6.0
+positioni = 2.8
+positionf = 3.2
 paramsDict["errtype"]     = "RotationError"
 paramsDict["elementtype"] = "straight"
 paramsDict["subtype"]     = "YS"
-paramsDict["sample"]      = "Gaussian"
-paramsDict["mean"]        = 0.0
-paramsDict["sigma"]       = 1.0
+paramsDict["sample"]      = "Fixed"
 paramsDict["angle"]       = 0.1
 
 setDict["elementtype"] = "quad"
