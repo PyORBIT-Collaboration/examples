@@ -1,4 +1,4 @@
-This a set of test scripts for the new edition of the Probity linac package
+This a set of test scripts for the new edition of the PyORBIT linac package
 which is located in the directory:
 py/orbit/py_linac  
 
