@@ -5,8 +5,11 @@
 import sys
 import math
 
-from orbit_utils.numrecipes import bessi0,bessi1,bessi
-from orbit_utils.numrecipes import bessj0,bessj1,bessj
+import orbit_utils
+
+from orbit_utils import num_recipes
+from num_recipes import bessi0,bessi1,bessi
+from num_recipes import bessj0,bessj1,bessj
 
 x = 1.0
 
