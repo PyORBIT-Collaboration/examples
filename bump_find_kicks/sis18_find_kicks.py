@@ -132,9 +132,9 @@ case = "inj"
 #case = "mid"
 
 if case == "inj":
-	lattice.readMAD("./lattices/sis18_inj.lat","SIS18") # lattice start at injection point
+	lattice.readMAD(".sis18_inj.lat","SIS18") # lattice start at injection point
 if case == "mid":
-	lattice.readMAD("./lattices/sis18_inj.lat","SIS18_MID") # lattice start at injection point plus half circumference 
+	lattice.readMAD(".sis18_inj.lat","SIS18_MID") # lattice start at injection point plus half circumference 
 
 
 # get the lattice function for the kick and bpms, jet only horizontal 
