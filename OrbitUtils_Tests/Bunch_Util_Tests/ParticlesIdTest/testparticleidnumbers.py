@@ -1,5 +1,5 @@
 ##############################################################
-# This script test the particle id numbers.
+# This script tests the particle id numbers.
 ##############################################################
 
 import math

@@ -1,5 +1,5 @@
 ##############################################################
-# This script test the bunch particles sorting according to 
+# This script tests the bunch particles sorting according to 
 # the particle id numbers.
 ##############################################################
 
