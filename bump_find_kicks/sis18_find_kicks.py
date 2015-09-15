@@ -71,7 +71,7 @@ def plot_info(lattice):
 	ax2.plot(array(s),array(yAvg)*1e3, '-bx')
 
 	ax1.set_ylim(-100,100)
-	ax2.set_ylim(-100,100)
+	ax2.set_ylim(-20,20)
 
 	ax1.set_ylabel('x [mm]')
 	ax2.set_ylabel('xp [mm]')
@@ -134,14 +134,14 @@ case = "inj"
 if case == "inj":
 	lattice.readMAD("sis18_inj.lat","SIS18") # lattice start at injection point
 if case == "mid":
-	lattice.readMAD("sis18_inj.lat","SIS18_MID") # lattice start at injection point plus half circumference
+	lattice.readMAD("sis18_inj.lat","SIS18_MID") # lattice start at injection point plus half circumference 
 
 
 # get the lattice function for the kick and bpms, jet only horizontal 
-find = close_orbit_bumps()
+find = closed_orbit_bumps()
 
 xc0 = 70e-3
-xcs0 = 0.0e-3 # or 7.0e-3
+xcs0 = 7.0e-3 # or 7.0e-3
 
 # set variable, list [[node.name], [variable, start value], ...]
 kicker1 = [["S11MB1"], ["kx",-0.00111]]
@@ -174,7 +174,7 @@ print "python nelder", kick_nelder
 print "python leastsq", kick_leastsq
 
 
-kick = kick_ana
+kick = kick_nelder
 nodes = lattice.getNodes()
 for node in nodes:
 	if node.getName() == "S11MB1":
@@ -190,10 +190,52 @@ if case == "inj":
 	pos = [xc0,xcs0,0.0,0.0]  # for SIS18 lattice
 if case =="mid":
 	pos = [0.0,0.0,0.0,0.0]  # for SIS18_MID lattice
+from orbit.orbit_correction import orbit, correction   
 
-set_bunch(pos,lattice,bunch)
-lattice.trackBunch(bunch)
-plot_info(lattice)
+OrbitX, OrbitY = orbit(lattice,bunch).get_orbit()
+x = []
+y = []
+s = []
+for i in xrange(len(OrbitX)):
+	s.append(OrbitX[i][0])
+	x.append(OrbitX[i][1]*1e3)
+	y.append(OrbitX[i][2]*1e3)
+	
+
+from matplotlib.font_manager import FontProperties
+
+rc('font', **{'family': 'serif', 'serif': ['Times']})
+rc('text', usetex=True)
+rc('axes', linewidth=3)
+rc('figure', figsize=(12,10))
+rc('xtick', labelsize='medium', direction='in')
+rc('xtick.major', size=15, pad = 18)
+rc('ytick.major', size=15, pad = 18)
+rc('figure.subplot', bottom=0.15)
+rc('figure.subplot', left=0.20)
+rc('figure.subplot', top=0.95)
+rc('figure.subplot', right=0.95)
+
+rc('lines', linewidth=3.0, markersize=10, markeredgewidth=2)
+rc('font',  size=40)
+
+
+
+fig, (ax1, ax2) = plt.subplots(2, sharex='col')
+
+ax1.plot(s,x,'r-', label="x")
+ax2.plot(s,y,'b-', label="y")
+#ax1.set_ylim(-100,100)
+#ax2.set_ylim(-7,7)
+
+ax1.set_ylabel('x [mm]')
+ax2.set_ylabel('xp [mrad]')
+ax2.set_xlabel('s [m]')
+
+fontP = FontProperties()
+fontP.set_size(35)
+savefig("plot.pdf")
+
 show()
 exit()
 
