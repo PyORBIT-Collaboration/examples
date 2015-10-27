@@ -13,6 +13,9 @@
   <accElement length="0.0" name="MEBT_Diag:BPM01" pos="0.128" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="MEBT_Diag:WS01" pos="0.201" type="MARKER">
+   <parameters/>	 
+  </accElement>
   <accElement length="0.061" name="MEBT_Mag:QV02" pos="0.273" type="QUAD">
    <parameters effLength="0.061" field="37.85"/>
   </accElement>
@@ -38,6 +41,12 @@
    <parameters effLength="0.061"/>
   </accElement>
   <accElement length="0.0" name="MEBT_Diag:BPM04" pos="0.638" type="MARKER">
+   <parameters/>
+  </accElement>	 
+  <accElement length="0.0" name="MEBT_Diag:WS04a" pos="0.723" type="MARKER">
+   <parameters/>	 
+  </accElement>
+  <accElement length="0.0" name="MEBT_Diag:WS04b" pos="1.193" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.0" name="MEBT_RF:Bnch02:Rg01" pos="1.288" type="RFGAP">
@@ -67,6 +76,9 @@
   <accElement length="0.066" name="MEBT_Mag:QH07" pos="1.598" type="QUAD">
    <parameters effLength="0.066" field="-11.7"/>
   </accElement>
+  <accElement length="0.0" name="MEBT_Diag:WS07" pos="1.673" type="MARKER">
+   <parameters/>	 
+  </accElement>		
   <accElement length="0.066" name="MEBT_Mag:QH08" pos="1.938" type="QUAD">
    <parameters effLength="0.066" field="-11.7"/>
   </accElement>
@@ -94,6 +106,12 @@
     <polySP order="0" pcoefs="0 "/>
    </TTFs>
   </accElement>
+  <accElement length="0.0" name="MEBT_Diag:EMS" pos="2.442" type="MARKER">
+   <parameters/>
+  </accElement>	
+  <accElement length="0.0" name="MEBT_Diag:LBSM" pos="2.578" type="MARKER">
+   <parameters/>
+  </accElement>		
   <accElement length="0.061" name="MEBT_Mag:QV11" pos="2.903" type="QUAD">
    <parameters effLength="0.061" field="16.63"/>
   </accElement>
@@ -133,6 +151,9 @@
   <accElement length="0.0" name="MEBT_Diag:BPM14" pos="3.408" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="MEBT_Diag:WS14" pos="3.498" type="MARKER">
+   <parameters/>	 
+  </accElement>		
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="MEBT1" pos="0.528"/>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="MEBT2" pos="1.288"/>
