@@ -79,7 +79,10 @@
   <accElement length="0.0" name="MEBT_Diag:WS07" pos="1.673" type="MARKER">
    <parameters/>	 
   </accElement>		
-  <accElement length="0.066" name="MEBT_Mag:QH08" pos="1.938" type="QUAD">
+  <accElement length="0.0" name="MEBT_Diag:H_SCRP" pos="1.743" type="MARKER">
+   <parameters/>
+  </accElement>	
+ <accElement length="0.066" name="MEBT_Mag:QH08" pos="1.938" type="QUAD">
    <parameters effLength="0.066" field="-11.7"/>
   </accElement>
   <accElement length="0.066" name="MEBT_Mag:QV09" pos="2.038" type="QUAD">
@@ -106,12 +109,15 @@
     <polySP order="0" pcoefs="0 "/>
    </TTFs>
   </accElement>
-  <accElement length="0.0" name="MEBT_Diag:EMS" pos="2.442" type="MARKER">
+  <accElement length="0.0" name="MEBT_Diag:EMT" pos="2.442" type="MARKER">
+   <parameters/>
+  </accElement>	
+  <accElement length="0.0" name="MEBT_Diag:V_SCRP" pos="2.499" type="MARKER">
    <parameters/>
   </accElement>	
   <accElement length="0.0" name="MEBT_Diag:LBSM" pos="2.578" type="MARKER">
    <parameters/>
-  </accElement>		
+  </accElement>	
   <accElement length="0.061" name="MEBT_Mag:QV11" pos="2.903" type="QUAD">
    <parameters effLength="0.061" field="16.63"/>
   </accElement>
