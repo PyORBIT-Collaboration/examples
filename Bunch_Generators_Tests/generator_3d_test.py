@@ -69,7 +69,7 @@ for i in range(n):
 	twiss_analysis.account((x,xp,y,yp,z,zp))
 	
 print "================================================="
-print "Gauss 2D - done!"
+print "Gauss 3D - done!"
 print "                  alpha       beta [m/rad]    gamma     emitt[m*rad] "
 print "Twiss     X  %12.5g  %12.5g   %12.5g    %12.5g "%twissX.getAlphaBetaGammaEmitt()
 print "Generated X  %12.5g  %12.5g   %12.5g    %12.5g "%twiss_analysis.getTwiss(0)
