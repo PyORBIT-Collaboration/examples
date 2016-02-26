@@ -135,6 +135,14 @@ print "Bunch Generation completed."
 #set up design
 accLattice.trackDesignBunch(bunch_in)
 
+"""
+#----- the charge of H- is negative, so the phases are shifted by -180.
+cavs = accLattice.getRF_Cavities()
+for cav in cavs:
+	avg_phase = phaseNearTargetPhaseDeg(cav.getAvgGapPhaseDeg()-180.,0.)
+	print "debug cav=",cav.getName()," gaps phaseAvg=",avg_phase
+"""
+
 print "Design tracking completed."
 
 #track through the lattice 
