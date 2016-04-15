@@ -2,7 +2,7 @@
 <sns>
  <MEBT bpmFrequency="8.05E8" length="3.633" name="MEBT">
   <accElement length="0.061" name="MEBT_Mag:QH01" pos="0.128" type="QUAD">
-   <parameters effLength="0.061" field="-34.636"/>
+   <parameters aperture="0.032" aprt_type="1" effLength="0.061" field="-34.636"/>
   </accElement>
   <accElement length="0.0" name="MEBT_Mag:DCH01" pos="0.128" type="DCH">
    <parameters effLength="0.061"/>
@@ -14,13 +14,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="MEBT_Diag:WS01" pos="0.201" type="MARKER">
-   <parameters/>	 
+   <parameters/>
   </accElement>
   <accElement length="0.061" name="MEBT_Mag:QV02" pos="0.273" type="QUAD">
-   <parameters effLength="0.061" field="37.85"/>
+   <parameters aperture="0.032" aprt_type="1" effLength="0.061" field="37.85"/>
   </accElement>
   <accElement length="0.061" name="MEBT_Mag:QH03" pos="0.418" type="QUAD">
-   <parameters effLength="0.061" field="-28.3266"/>
+   <parameters aperture="0.032" aprt_type="1" effLength="0.061" field="-28.3266"/>
   </accElement>
   <accElement length="0.0" name="MEBT_RF:Bnch01:Rg01" pos="0.528" type="RFGAP">
    <parameters E0L="0.000169424" E0TL="7.5e-05" EzFile="./axis_fields/MEBT1_Rg1.dat" cavity="MEBT1" mode="0" phase="90.00"/>
@@ -32,7 +32,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.061" name="MEBT_Mag:QV04" pos="0.638" type="QUAD">
-   <parameters effLength="0.061" field="17.69"/>
+   <parameters aperture="0.032" aprt_type="1" effLength="0.061" field="17.69"/>
   </accElement>
   <accElement length="0.0" name="MEBT_Mag:DCH04" pos="0.638" type="DCH">
    <parameters effLength="0.061"/>
@@ -42,16 +42,19 @@
   </accElement>
   <accElement length="0.0" name="MEBT_Diag:BPM04" pos="0.638" type="MARKER">
    <parameters/>
-  </accElement>	 
-  <accElement length="0.0" name="MEBT_Diag:WS04a" pos="0.723" type="MARKER">
-   <parameters/>	 
   </accElement>
-  <accElement length="0.0" name="MEBT:ChpPlt:Entr" pos="0.779" type="MARKER">
+  <accElement length="0.0" name="MEBT_Diag:WS04a" pos="0.723" type="MARKER">
+   <parameters/>
+  </accElement>
+   <accElement length="0.0" name="MEBT:ChpPlt:Entr" pos="0.779" type="MARKER">
    <parameters/>	 
   </accElement>  
   <accElement length="0.0" name="MEBT:ChpPlt:Exit" pos="1.137" type="MARKER">
    <parameters/>	 
   </accElement>    
+  <accElement length="0.0" name="MEBT_Diag:WS04b" pos="1.193" type="MARKER">
+   <parameters/>
+  </accElement>  
   <accElement length="0.0" name="MEBT_Diag:WS04b" pos="1.193" type="MARKER">
    <parameters/>
   </accElement>
@@ -65,7 +68,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.066" name="MEBT_Mag:QH05" pos="1.398" type="QUAD">
-   <parameters effLength="0.066" field="-17.0"/>
+   <parameters aperture="0.042" aprt_type="1" effLength="0.066" field="-17.0"/>
   </accElement>
   <accElement length="0.0" name="MEBT_Mag:DCH05" pos="1.398" type="DCH">
    <parameters effLength="0.066"/>
@@ -77,25 +80,25 @@
    <parameters/>
   </accElement>
   <accElement length="0.066" name="MEBT_Mag:QV06" pos="1.498" type="QUAD">
-   <parameters effLength="0.066" field="26.2"/>
+   <parameters aperture="0.042" aprt_type="1" effLength="0.066" field="26.2"/>
   </accElement>
   <accElement length="0.066" name="MEBT_Mag:QH07" pos="1.598" type="QUAD">
-   <parameters effLength="0.066" field="-11.7"/>
+   <parameters aperture="0.042" aprt_type="1" effLength="0.066" field="-11.7"/>
   </accElement>
   <accElement length="0.0" name="MEBT_Diag:WS07" pos="1.673" type="MARKER">
-   <parameters/>	 
-  </accElement>		
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="MEBT_Diag:H_SCRP" pos="1.743" type="MARKER">
    <parameters/>
-  </accElement>	
- <accElement length="0.066" name="MEBT_Mag:QH08" pos="1.938" type="QUAD">
-   <parameters effLength="0.066" field="-11.7"/>
+  </accElement>
+  <accElement length="0.066" name="MEBT_Mag:QH08" pos="1.938" type="QUAD">
+   <parameters aperture="0.042" aprt_type="1" effLength="0.066" field="-11.7"/>
   </accElement>
   <accElement length="0.066" name="MEBT_Mag:QV09" pos="2.038" type="QUAD">
-   <parameters effLength="0.066" field="26.2"/>
+   <parameters aperture="0.042" aprt_type="1" effLength="0.066" field="26.2"/>
   </accElement>
   <accElement length="0.066" name="MEBT_Mag:QH10" pos="2.138" type="QUAD">
-   <parameters effLength="0.066" field="-17.0"/>
+   <parameters aperture="0.042" aprt_type="1" effLength="0.066" field="-17.0"/>
   </accElement>
   <accElement length="0.0" name="MEBT_Mag:DCH10" pos="2.138" type="DCH">
    <parameters effLength="0.066"/>
@@ -117,18 +120,18 @@
   </accElement>
   <accElement length="0.0" name="MEBT_Diag:EMT" pos="2.442" type="MARKER">
    <parameters/>
-  </accElement>	
+  </accElement>
   <accElement length="0.0" name="MEBT_Diag:V_SCRP" pos="2.499" type="MARKER">
    <parameters/>
-  </accElement>	
+  </accElement>
   <accElement length="0.0" name="MEBT_Diag:LBSM" pos="2.578" type="MARKER">
    <parameters/>
-  </accElement>	
+  </accElement>
   <accElement length="0.0" name="MEBT_Diag:Harp" pos="2.795" type="MARKER">
    <parameters/>
-  </accElement>	  
+  </accElement>
   <accElement length="0.061" name="MEBT_Mag:QV11" pos="2.903" type="QUAD">
-   <parameters effLength="0.061" field="16.63"/>
+   <parameters aperture="0.032" aprt_type="1" effLength="0.061" field="16.63"/>
   </accElement>
   <accElement length="0.0" name="MEBT_Mag:DCH11" pos="2.903" type="DCH">
    <parameters effLength="0.061"/>
@@ -140,7 +143,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.061" name="MEBT_Mag:QH12" pos="3.053" type="QUAD">
-   <parameters effLength="0.061" field="-29.02"/>
+   <parameters aperture="0.032" aprt_type="1" effLength="0.061" field="-29.02"/>
   </accElement>
   <accElement length="0.0" name="MEBT_RF:Bnch04:Rg01" pos="3.158" type="RFGAP">
    <parameters E0L="0.000212345" E0TL="9.4e-05" EzFile="./axis_fields/MEBT4_Rg1.dat" cavity="MEBT4" mode="0" phase="90.00"/>
@@ -152,10 +155,10 @@
    </TTFs>
   </accElement>
   <accElement length="0.061" name="MEBT_Mag:QV13" pos="3.263" type="QUAD">
-   <parameters effLength="0.061" field="26.1"/>
+   <parameters aperture="0.032" aprt_type="1" effLength="0.061" field="26.1"/>
   </accElement>
   <accElement length="0.061" name="MEBT_Mag:QH14" pos="3.408" type="QUAD">
-   <parameters effLength="0.061" field="-10.44"/>
+   <parameters aperture="0.032" aprt_type="1" effLength="0.061" field="-10.44"/>
   </accElement>
   <accElement length="0.0" name="MEBT_Mag:DCH14" pos="3.408" type="DCH">
    <parameters effLength="0.061"/>
@@ -167,8 +170,8 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="MEBT_Diag:WS14" pos="3.498" type="MARKER">
-   <parameters/>	 
-  </accElement>		
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="MEBT1" pos="0.528"/>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="MEBT2" pos="1.288"/>
@@ -178,7 +181,7 @@
  </MEBT>
  <DTL1 bpmFrequency="8.05E8" length="4.272517" name="DTL1">
   <accElement length="0.035001" name="DTL_Mag:PMQH100" pos="0.0175" type="QUAD">
-   <parameters effLength="0.035" field="-37.182188"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.182188"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg01" pos="0.044601" type="RFGAP">
    <parameters E0L="6.13582e-05" E0TL="3.58179e-05" EzFile="./axis_fields/DTL1_Rg1.dat" cavity="DTL1" mode="0" phase="135.00"/>
@@ -199,7 +202,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV102" pos="0.126427" type="QUAD">
-   <parameters effLength="0.035" field="37.178036"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.178036"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg03" pos="0.153809" type="RFGAP">
    <parameters E0L="6.4776e-05" E0TL="3.81038e-05" EzFile="./axis_fields/DTL1_Rg3.dat" cavity="DTL1" mode="0" phase="134.44"/>
@@ -211,7 +214,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV103" pos="0.181321" type="QUAD">
-   <parameters effLength="0.035" field="37.16915"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.16915"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg04" pos="0.208859" type="RFGAP">
    <parameters E0L="6.65577e-05" E0TL="3.93038e-05" EzFile="./axis_fields/DTL1_Rg4.dat" cavity="DTL1" mode="0" phase="134.30"/>
@@ -232,7 +235,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH105" pos="0.292042" type="QUAD">
-   <parameters effLength="0.035" field="-37.16788"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.16788"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg06" pos="0.319881" type="RFGAP">
    <parameters E0L="7.0162e-05" E0TL="4.17638e-05" EzFile="./axis_fields/DTL1_Rg6.dat" cavity="DTL1" mode="0" phase="134.29"/>
@@ -244,7 +247,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH106" pos="0.347863" type="QUAD">
-   <parameters effLength="0.035" field="-37.166054"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.166054"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg07" pos="0.37586" type="RFGAP">
    <parameters E0L="7.20224e-05" E0TL="4.30461e-05" EzFile="./axis_fields/DTL1_Rg7.dat" cavity="DTL1" mode="0" phase="134.36"/>
@@ -265,7 +268,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV108" pos="0.460471" type="QUAD">
-   <parameters effLength="0.035" field="37.163963"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.163963"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg09" pos="0.488796" type="RFGAP">
    <parameters E0L="7.58457e-05" E0TL="4.57121e-05" EzFile="./axis_fields/DTL1_Rg9.dat" cavity="DTL1" mode="0" phase="134.64"/>
@@ -277,7 +280,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV109" pos="0.517277" type="QUAD">
-   <parameters effLength="0.035" field="37.159041"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.159041"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg10" pos="0.545774" type="RFGAP">
    <parameters E0L="7.78183e-05" E0TL="4.71028e-05" EzFile="./axis_fields/DTL1_Rg10.dat" cavity="DTL1" mode="0" phase="134.88"/>
@@ -298,7 +301,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH111" pos="0.631942" type="QUAD">
-   <parameters effLength="0.035" field="-37.1551"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.1551"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg12" pos="0.660798" type="RFGAP">
    <parameters E0L="8.189e-05" E0TL="5.00071e-05" EzFile="./axis_fields/DTL1_Rg12.dat" cavity="DTL1" mode="0" phase="135.55"/>
@@ -310,7 +313,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH112" pos="0.689822" type="QUAD">
-   <parameters effLength="0.035" field="-37.152437"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.152437"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg13" pos="0.718865" type="RFGAP">
    <parameters E0L="8.39925e-05" E0TL="5.15249e-05" EzFile="./axis_fields/DTL1_Rg13.dat" cavity="DTL1" mode="0" phase="135.97"/>
@@ -331,7 +334,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV114" pos="0.806729" type="QUAD">
-   <parameters effLength="0.035" field="37.149749"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.149749"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg15" pos="0.836162" type="RFGAP">
    <parameters E0L="8.83367e-05" E0TL="5.47004e-05" EzFile="./axis_fields/DTL1_Rg15.dat" cavity="DTL1" mode="0" phase="136.97"/>
@@ -343,7 +346,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV115" pos="0.865777" type="QUAD">
-   <parameters effLength="0.035" field="37.149058"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.149058"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg16" pos="0.895414" type="RFGAP">
    <parameters E0L="9.05862e-05" E0TL="5.63654e-05" EzFile="./axis_fields/DTL1_Rg16.dat" cavity="DTL1" mode="0" phase="137.53"/>
@@ -364,7 +367,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH117" pos="0.985121" type="QUAD">
-   <parameters effLength="0.035" field="-37.145492"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.145492"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg18" pos="1.015182" type="RFGAP">
    <parameters E0L="9.52412e-05" E0TL="5.98563e-05" EzFile="./axis_fields/DTL1_Rg18.dat" cavity="DTL1" mode="0" phase="138.70"/>
@@ -376,7 +379,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH118" pos="1.04544" type="QUAD">
-   <parameters effLength="0.035" field="-37.145352"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.145352"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg19" pos="1.075722" type="RFGAP">
    <parameters E0L="9.76474e-05" E0TL="6.16849e-05" EzFile="./axis_fields/DTL1_Rg19.dat" cavity="DTL1" mode="0" phase="139.30"/>
@@ -397,7 +400,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV120" pos="1.167431" type="QUAD">
-   <parameters effLength="0.035" field="37.144579"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.144579"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg21" pos="1.198173" type="RFGAP">
    <parameters E0L="0.000102639" E0TL="6.55274e-05" EzFile="./axis_fields/DTL1_Rg21.dat" cavity="DTL1" mode="0" phase="140.44"/>
@@ -409,7 +412,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV121" pos="1.229128" type="QUAD">
-   <parameters effLength="0.035" field="37.142519"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.142519"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg22" pos="1.260109" type="RFGAP">
    <parameters E0L="0.00010523" E0TL="6.7546e-05" EzFile="./axis_fields/DTL1_Rg22.dat" cavity="DTL1" mode="0" phase="140.96"/>
@@ -430,7 +433,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH123" pos="1.353989" type="QUAD">
-   <parameters effLength="0.035" field="-37.141221"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.141221"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg24" pos="1.38547" type="RFGAP">
    <parameters E0L="0.000110609" E0TL="7.17867e-05" EzFile="./axis_fields/DTL1_Rg24.dat" cavity="DTL1" mode="0" phase="141.87"/>
@@ -442,7 +445,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH124" pos="1.417181" type="QUAD">
-   <parameters effLength="0.035" field="-37.140049"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.140049"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg25" pos="1.44892" type="RFGAP">
    <parameters E0L="0.000113425" E0TL="7.40135e-05" EzFile="./axis_fields/DTL1_Rg25.dat" cavity="DTL1" mode="0" phase="142.24"/>
@@ -463,7 +466,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV126" pos="1.545152" type="QUAD">
-   <parameters effLength="0.035" field="37.138169"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.138169"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg27" pos="1.577432" type="RFGAP">
    <parameters E0L="0.000119231" E0TL="7.86941e-05" EzFile="./axis_fields/DTL1_Rg27.dat" cavity="DTL1" mode="0" phase="142.82"/>
@@ -475,7 +478,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV127" pos="1.60996" type="QUAD">
-   <parameters effLength="0.035" field="37.135965"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.135965"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg28" pos="1.642521" type="RFGAP">
    <parameters E0L="0.000122244" E0TL="8.11484e-05" EzFile="./axis_fields/DTL1_Rg28.dat" cavity="DTL1" mode="0" phase="143.02"/>
@@ -496,7 +499,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH129" pos="1.741295" type="QUAD">
-   <parameters effLength="0.035" field="-37.131231"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.131231"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg30" pos="1.774439" type="RFGAP">
    <parameters E0L="0.000128519" E0TL="8.6307e-05" EzFile="./axis_fields/DTL1_Rg30.dat" cavity="DTL1" mode="0" phase="143.27"/>
@@ -508,7 +511,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH130" pos="1.807852" type="QUAD">
-   <parameters effLength="0.035" field="-37.130444"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.130444"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg31" pos="1.841299" type="RFGAP">
    <parameters E0L="0.00013179" E0TL="8.90177e-05" EzFile="./axis_fields/DTL1_Rg31.dat" cavity="DTL1" mode="0" phase="143.34"/>
@@ -529,7 +532,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV132" pos="1.94282" type="QUAD">
-   <parameters effLength="0.035" field="37.129957"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.129957"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg33" pos="1.976898" type="RFGAP">
    <parameters E0L="0.00013859" E0TL="9.47056e-05" EzFile="./axis_fields/DTL1_Rg33.dat" cavity="DTL1" mode="0" phase="143.43"/>
@@ -541,7 +544,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV133" pos="2.011265" type="QUAD">
-   <parameters effLength="0.035" field="37.129753"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.129753"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg34" pos="2.04567" type="RFGAP">
    <parameters E0L="0.000142137" E0TL="9.76945e-05" EzFile="./axis_fields/DTL1_Rg34.dat" cavity="DTL1" mode="0" phase="143.47"/>
@@ -562,7 +565,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH135" pos="2.150156" type="QUAD">
-   <parameters effLength="0.035" field="-37.127321"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.127321"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg36" pos="2.18524" type="RFGAP">
    <parameters E0L="0.000149528" E0TL="0.000103971" EzFile="./axis_fields/DTL1_Rg36.dat" cavity="DTL1" mode="0" phase="143.62"/>
@@ -574,7 +577,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH136" pos="2.220636" type="QUAD">
-   <parameters effLength="0.035" field="-37.126323"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.126323"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg37" pos="2.256074" type="RFGAP">
    <parameters E0L="0.000153382" E0TL="0.000107266" EzFile="./axis_fields/DTL1_Rg37.dat" cavity="DTL1" mode="0" phase="143.75"/>
@@ -595,7 +598,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV138" pos="2.363755" type="QUAD">
-   <parameters effLength="0.035" field="37.125312"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.125312"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg39" pos="2.399925" type="RFGAP">
    <parameters E0L="0.000161391" E0TL="0.00011419" EzFile="./axis_fields/DTL1_Rg39.dat" cavity="DTL1" mode="0" phase="144.16"/>
@@ -607,7 +610,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV139" pos="2.436429" type="QUAD">
-   <parameters effLength="0.035" field="37.124167"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.124167"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg40" pos="2.472979" type="RFGAP">
    <parameters E0L="0.000165589" E0TL="0.000117833" EzFile="./axis_fields/DTL1_Rg40.dat" cavity="DTL1" mode="0" phase="144.45"/>
@@ -628,7 +631,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH141" pos="2.584101" type="QUAD">
-   <parameters effLength="0.035" field="-37.123408"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.123408"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg42" pos="2.621439" type="RFGAP">
    <parameters E0L="0.000174336" E0TL="0.00012548" EzFile="./axis_fields/DTL1_Rg42.dat" cavity="DTL1" mode="0" phase="145.23"/>
@@ -640,7 +643,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH142" pos="2.659136" type="QUAD">
-   <parameters effLength="0.035" field="-37.123036"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.123036"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg43" pos="2.696883" type="RFGAP">
    <parameters E0L="0.00017891" E0TL="0.000129507" EzFile="./axis_fields/DTL1_Rg43.dat" cavity="DTL1" mode="0" phase="145.72"/>
@@ -661,7 +664,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV144" pos="2.811706" type="QUAD">
-   <parameters effLength="0.035" field="37.121122"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.121122"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg45" pos="2.8503" type="RFGAP">
    <parameters E0L="0.000188472" E0TL="0.000137977" EzFile="./axis_fields/DTL1_Rg45.dat" cavity="DTL1" mode="0" phase="146.82"/>
@@ -673,7 +676,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV145" pos="2.889281" type="QUAD">
-   <parameters effLength="0.035" field="37.116327"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.116327"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg46" pos="2.928315" type="RFGAP">
    <parameters E0L="0.000193463" E0TL="0.000142427" EzFile="./axis_fields/DTL1_Rg46.dat" cavity="DTL1" mode="0" phase="147.43"/>
@@ -694,7 +697,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH147" pos="3.047117" type="QUAD">
-   <parameters effLength="0.035" field="-37.111381"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.111381"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg48" pos="3.087063" type="RFGAP">
    <parameters E0L="0.000203914" E0TL="0.0001518" EzFile="./axis_fields/DTL1_Rg48.dat" cavity="DTL1" mode="0" phase="148.70"/>
@@ -706,7 +709,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH148" pos="3.127422" type="QUAD">
-   <parameters effLength="0.035" field="-37.108946"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.108946"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg49" pos="3.167839" type="RFGAP">
    <parameters E0L="0.000209377" E0TL="0.00015672" EzFile="./axis_fields/DTL1_Rg49.dat" cavity="DTL1" mode="0" phase="149.32"/>
@@ -730,7 +733,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV150" pos="3.290915" type="QUAD">
-   <parameters effLength="0.035" field="37.107512"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.107512"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg51" pos="3.33231" type="RFGAP">
    <parameters E0L="0.000220811" E0TL="0.000167064" EzFile="./axis_fields/DTL1_Rg51.dat" cavity="DTL1" mode="0" phase="150.52"/>
@@ -742,7 +745,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV151" pos="3.374148" type="QUAD">
-   <parameters effLength="0.035" field="37.105765"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.105765"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg52" pos="3.416049" type="RFGAP">
    <parameters E0L="0.000226794" E0TL="0.000172491" EzFile="./axis_fields/DTL1_Rg52.dat" cavity="DTL1" mode="0" phase="151.06"/>
@@ -766,7 +769,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH153" pos="3.543704" type="QUAD">
-   <parameters effLength="0.035" field="-37.105182"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.105182"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg54" pos="3.586651" type="RFGAP">
    <parameters E0L="0.000239314" E0TL="0.000183868" EzFile="./axis_fields/DTL1_Rg54.dat" cavity="DTL1" mode="0" phase="152.01"/>
@@ -778,7 +781,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH154" pos="3.630073" type="QUAD">
-   <parameters effLength="0.035" field="-37.103091"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.103091"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg55" pos="3.673562" type="RFGAP">
    <parameters E0L="0.000245873" E0TL="0.000189828" EzFile="./axis_fields/DTL1_Rg55.dat" cavity="DTL1" mode="0" phase="152.41"/>
@@ -802,7 +805,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV156" pos="3.806114" type="QUAD">
-   <parameters effLength="0.035" field="37.101047"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.101047"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg57" pos="3.850722" type="RFGAP">
    <parameters E0L="0.000259543" E0TL="0.000202292" EzFile="./axis_fields/DTL1_Rg57.dat" cavity="DTL1" mode="0" phase="153.04"/>
@@ -814,7 +817,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV157" pos="3.895835" type="QUAD">
-   <parameters effLength="0.035" field="37.100278"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.100278"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg58" pos="3.940679" type="RFGAP">
    <parameters E0L="0.000264644" E0TL="0.000207174" EzFile="./axis_fields/DTL1_Rg58.dat" cavity="DTL1" mode="0" phase="151.93"/>
@@ -838,7 +841,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH159" pos="4.077358" type="QUAD">
-   <parameters effLength="0.035" field="-37.100009"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.100009"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg60" pos="4.123344" type="RFGAP">
    <parameters E0L="0.000279168" E0TL="0.000220258" EzFile="./axis_fields/DTL1_Rg60.dat" cavity="DTL1" mode="0" phase="146.84"/>
@@ -850,7 +853,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH160" pos="4.169825" type="QUAD">
-   <parameters effLength="0.035" field="-37.099654"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.099654"/>
   </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL1" pos="2.136258"/>
@@ -867,7 +870,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV201" pos="0.085689" type="QUAD">
-   <parameters effLength="0.035" field="37.099051"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.099051"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg02" pos="0.1336183" type="RFGAP">
    <parameters E0L="0.000295" E0TL="0.000233759" EzFile="./axis_fields/DTL2_Rg2.dat" cavity="DTL2" mode="0" phase="150.04"/>
@@ -879,7 +882,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV202" pos="0.182082" type="QUAD">
-   <parameters effLength="0.035" field="37.096306"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.096306"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg03" pos="0.2304963" type="RFGAP">
    <parameters E0L="0.000298884" E0TL="0.000237654" EzFile="./axis_fields/DTL2_Rg3.dat" cavity="DTL2" mode="0" phase="152.95"/>
@@ -903,7 +906,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH204" pos="0.377606" type="QUAD">
-   <parameters effLength="0.035" field="-37.093377"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.093377"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg05" pos="0.4269533" type="RFGAP">
    <parameters E0L="0.000306475" E0TL="0.000245305" EzFile="./axis_fields/DTL2_Rg5.dat" cavity="DTL2" mode="0" phase="154.61"/>
@@ -915,7 +918,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH205" pos="0.476865" type="QUAD">
-   <parameters effLength="0.035" field="-37.093207"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.093207"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg06" pos="0.5268563" type="RFGAP">
    <parameters E0L="0.00031143" E0TL="0.000250069" EzFile="./axis_fields/DTL2_Rg6.dat" cavity="DTL2" mode="0" phase="154.51"/>
@@ -936,7 +939,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV207" pos="0.679229" type="QUAD">
-   <parameters effLength="0.035" field="37.093013"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.093013"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg08" pos="0.7304803" type="RFGAP">
    <parameters E0L="0.000321271" E0TL="0.000259556" EzFile="./axis_fields/DTL2_Rg8.dat" cavity="DTL2" mode="0" phase="154.07"/>
@@ -948,7 +951,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV208" pos="0.782307" type="QUAD">
-   <parameters effLength="0.035" field="37.092945"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.092945"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg09" pos="0.8342163" type="RFGAP">
    <parameters E0L="0.000326439" E0TL="0.000264507" EzFile="./axis_fields/DTL2_Rg9.dat" cavity="DTL2" mode="0" phase="153.75"/>
@@ -972,7 +975,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH210" pos="0.992432" type="QUAD">
-   <parameters effLength="0.035" field="-37.092781"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.092781"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg11" pos="1.045669" type="RFGAP">
    <parameters E0L="0.000336905" E0TL="0.000274589" EzFile="./axis_fields/DTL2_Rg11.dat" cavity="DTL2" mode="0" phase="153.31"/>
@@ -984,7 +987,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH211" pos="1.099493" type="QUAD">
-   <parameters effLength="0.035" field="-37.092618"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.092618"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg12" pos="1.153399" type="RFGAP">
    <parameters E0L="0.000342224" E0TL="0.000279721" EzFile="./axis_fields/DTL2_Rg12.dat" cavity="DTL2" mode="0" phase="153.20"/>
@@ -1005,7 +1008,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV213" pos="1.317645" type="QUAD">
-   <parameters effLength="0.035" field="37.092372"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.092372"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg14" pos="1.372899" type="RFGAP">
    <parameters E0L="0.000353103" E0TL="0.000290174" EzFile="./axis_fields/DTL2_Rg14.dat" cavity="DTL2" mode="0" phase="153.20"/>
@@ -1017,7 +1020,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV214" pos="1.42875" type="QUAD">
-   <parameters effLength="0.035" field="37.091453"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.091453"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg15" pos="1.484684" type="RFGAP">
    <parameters E0L="0.000358629" E0TL="0.000295495" EzFile="./axis_fields/DTL2_Rg15.dat" cavity="DTL2" mode="0" phase="153.31"/>
@@ -1038,7 +1041,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH216" pos="1.655051" type="QUAD">
-   <parameters effLength="0.035" field="-37.090496"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.090496"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg17" pos="1.712353" type="RFGAP">
    <parameters E0L="0.000369856" E0TL="0.000306311" EzFile="./axis_fields/DTL2_Rg17.dat" cavity="DTL2" mode="0" phase="153.72"/>
@@ -1050,7 +1053,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH217" pos="1.77026" type="QUAD">
-   <parameters effLength="0.035" field="-37.089729"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.089729"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg18" pos="1.828251" type="RFGAP">
    <parameters E0L="0.000375613" E0TL="0.000311818" EzFile="./axis_fields/DTL2_Rg18.dat" cavity="DTL2" mode="0" phase="154.00"/>
@@ -1071,7 +1074,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV219" pos="2.004826" type="QUAD">
-   <parameters effLength="0.035" field="37.089583"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.089583"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg20" pos="2.064205" type="RFGAP">
    <parameters E0L="0.00038724" E0TL="0.000323005" EzFile="./axis_fields/DTL2_Rg20.dat" cavity="DTL2" mode="0" phase="154.66"/>
@@ -1083,7 +1086,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV220" pos="2.124196" type="QUAD">
-   <parameters effLength="0.035" field="37.089164"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.089164"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg21" pos="2.184273" type="RFGAP">
    <parameters E0L="0.000393172" E0TL="0.000328697" EzFile="./axis_fields/DTL2_Rg21.dat" cavity="DTL2" mode="0" phase="155.01"/>
@@ -1104,7 +1107,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH222" pos="2.367142" type="QUAD">
-   <parameters effLength="0.035" field="-37.08865"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.08865"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg23" pos="2.428625" type="RFGAP">
    <parameters E0L="0.000405223" E0TL="0.000340253" EzFile="./axis_fields/DTL2_Rg23.dat" cavity="DTL2" mode="0" phase="155.69"/>
@@ -1116,7 +1119,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH223" pos="2.49073" type="QUAD">
-   <parameters effLength="0.035" field="-37.087658"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.087658"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg24" pos="2.552922" type="RFGAP">
    <parameters E0L="0.00041136" E0TL="0.000346125" EzFile="./axis_fields/DTL2_Rg24.dat" cavity="DTL2" mode="0" phase="156.01"/>
@@ -1137,7 +1140,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV225" pos="2.742171" type="QUAD">
-   <parameters effLength="0.035" field="37.087577"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.087577"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg26" pos="2.805789" type="RFGAP">
    <parameters E0L="0.000423853" E0TL="0.000358046" EzFile="./axis_fields/DTL2_Rg26.dat" cavity="DTL2" mode="0" phase="156.53"/>
@@ -1149,7 +1152,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV226" pos="2.870037" type="QUAD">
-   <parameters effLength="0.035" field="37.086705"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.086705"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg27" pos="2.934372" type="RFGAP">
    <parameters E0L="0.000430183" E0TL="0.000364081" EzFile="./axis_fields/DTL2_Rg27.dat" cavity="DTL2" mode="0" phase="156.72"/>
@@ -1170,7 +1173,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH228" pos="3.130087" type="QUAD">
-   <parameters effLength="0.035" field="-37.081953"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.081953"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg29" pos="3.195867" type="RFGAP">
    <parameters E0L="0.000443131" E0TL="0.000376342" EzFile="./axis_fields/DTL2_Rg29.dat" cavity="DTL2" mode="0" phase="156.94"/>
@@ -1182,7 +1185,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH229" pos="3.262285" type="QUAD">
-   <parameters effLength="0.035" field="-37.080853"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.080853"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg30" pos="3.328791" type="RFGAP">
    <parameters E0L="0.000449711" E0TL="0.000382552" EzFile="./axis_fields/DTL2_Rg30.dat" cavity="DTL2" mode="0" phase="156.97"/>
@@ -1203,7 +1206,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV231" pos="3.531056" type="QUAD">
-   <parameters effLength="0.035" field="37.080608"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.080608"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg32" pos="3.599025" type="RFGAP">
    <parameters E0L="0.000463078" E0TL="0.000395132" EzFile="./axis_fields/DTL2_Rg32.dat" cavity="DTL2" mode="0" phase="156.87"/>
@@ -1215,7 +1218,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV232" pos="3.66764" type="QUAD">
-   <parameters effLength="0.035" field="37.080485"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.080485"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg33" pos="3.736345" type="RFGAP">
    <parameters E0L="0.000469908" E0TL="0.000401509" EzFile="./axis_fields/DTL2_Rg33.dat" cavity="DTL2" mode="0" phase="156.74"/>
@@ -1236,7 +1239,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH234" pos="3.945238" type="QUAD">
-   <parameters effLength="0.035" field="-37.079024"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.079024"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg35" pos="4.015422" type="RFGAP">
    <parameters E0L="0.000483775" E0TL="0.000414388" EzFile="./axis_fields/DTL2_Rg35.dat" cavity="DTL2" mode="0" phase="156.35"/>
@@ -1248,7 +1251,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH235" pos="4.086262" type="QUAD">
-   <parameters effLength="0.035" field="-37.078817"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.078817"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg36" pos="4.157191" type="RFGAP">
    <parameters E0L="0.0004908" E0TL="0.000420911" EzFile="./axis_fields/DTL2_Rg36.dat" cavity="DTL2" mode="0" phase="156.10"/>
@@ -1272,7 +1275,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV237" pos="4.372789" type="QUAD">
-   <parameters effLength="0.035" field="37.078445"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.078445"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg38" pos="4.445216" type="RFGAP">
    <parameters E0L="0.00050514" E0TL="0.000434089" EzFile="./axis_fields/DTL2_Rg38.dat" cavity="DTL2" mode="0" phase="155.55"/>
@@ -1284,7 +1287,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV238" pos="4.518304" type="QUAD">
-   <parameters effLength="0.035" field="37.076606"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.076606"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg39" pos="4.591483" type="RFGAP">
    <parameters E0L="0.000512384" E0TL="0.000440735" EzFile="./axis_fields/DTL2_Rg39.dat" cavity="DTL2" mode="0" phase="155.26"/>
@@ -1308,7 +1311,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH240" pos="4.813862" type="QUAD">
-   <parameters effLength="0.035" field="-37.074358"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.074358"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg41" pos="4.888555" type="RFGAP">
    <parameters E0L="0.000527236" E0TL="0.000454194" EzFile="./axis_fields/DTL2_Rg41.dat" cavity="DTL2" mode="0" phase="154.70"/>
@@ -1320,7 +1323,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH241" pos="4.963917" type="QUAD">
-   <parameters effLength="0.035" field="-37.074239"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.074239"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg42" pos="5.03937" type="RFGAP">
    <parameters E0L="0.000534766" E0TL="0.000460986" EzFile="./axis_fields/DTL2_Rg42.dat" cavity="DTL2" mode="0" phase="154.43"/>
@@ -1344,7 +1347,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV243" pos="5.268603" type="QUAD">
-   <parameters effLength="0.035" field="37.074205"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.074205"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg44" pos="5.345587" type="RFGAP">
    <parameters E0L="0.000550097" E0TL="0.000474706" EzFile="./axis_fields/DTL2_Rg44.dat" cavity="DTL2" mode="0" phase="154.00"/>
@@ -1356,7 +1359,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV244" pos="5.423246" type="QUAD">
-   <parameters effLength="0.035" field="37.073166"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.073166"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg45" pos="5.500998" type="RFGAP">
    <parameters E0L="0.000557919" E0TL="0.000481617" EzFile="./axis_fields/DTL2_Rg45.dat" cavity="DTL2" mode="0" phase="153.83"/>
@@ -1380,7 +1383,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH246" pos="5.736105" type="QUAD">
-   <parameters effLength="0.035" field="-37.072624"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.072624"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg47" pos="5.814866" type="RFGAP">
    <parameters E0L="0.00056978" E0TL="0.000492124" EzFile="./axis_fields/DTL2_Rg47.dat" cavity="DTL2" mode="0" phase="150.07"/>
@@ -1392,7 +1395,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH247" pos="5.894281" type="QUAD">
-   <parameters effLength="0.035" field="-37.071838"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.071838"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg48" pos="5.973785" type="RFGAP">
    <parameters E0L="0.000575992" E0TL="0.000497602" EzFile="./axis_fields/DTL2_Rg48.dat" cavity="DTL2" mode="0" phase="147.66"/>
@@ -1409,7 +1412,7 @@
  </DTL2>
  <DTL3 bpmFrequency="8.05E8" length="6.560294" name="DTL3">
   <accElement length="0.035001" name="DTL_Mag:PMQV300" pos="0.0175" type="QUAD">
-   <parameters effLength="0.035" field="37.071177"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.071177"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg01" pos="0.099087" type="RFGAP">
    <parameters E0L="0.000592543" E0TL="0.000487031" EzFile="./axis_fields/DTL3_Rg1.dat" cavity="DTL3" mode="0" phase="147.57"/>
@@ -1421,7 +1424,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV301" pos="0.181265" type="QUAD">
-   <parameters effLength="0.035" field="37.068425"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.068425"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg02" pos="0.263542" type="RFGAP">
    <parameters E0L="0.00059762" E0TL="0.000491364" EzFile="./axis_fields/DTL3_Rg2.dat" cavity="DTL3" mode="0" phase="151.18"/>
@@ -1445,7 +1448,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH303" pos="0.51263" type="QUAD">
-   <parameters effLength="0.035" field="-37.066351"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.066351"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg04" pos="0.595721" type="RFGAP">
    <parameters E0L="0.000603544" E0TL="0.000496565" EzFile="./axis_fields/DTL3_Rg4.dat" cavity="DTL3" mode="0" phase="155.93"/>
@@ -1457,7 +1460,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH304" pos="0.67945" type="QUAD">
-   <parameters effLength="0.035" field="-37.063513"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.063513"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg05" pos="0.763065" type="RFGAP">
    <parameters E0L="0.000607343" E0TL="0.000499802" EzFile="./axis_fields/DTL3_Rg5.dat" cavity="DTL3" mode="0" phase="156.16"/>
@@ -1478,7 +1481,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV306" pos="1.016661" type="QUAD">
-   <parameters effLength="0.035" field="37.061368"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.061368"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg07" pos="1.101752" type="RFGAP">
    <parameters E0L="0.000618055" E0TL="0.000508764" EzFile="./axis_fields/DTL3_Rg7.dat" cavity="DTL3" mode="0" phase="155.63"/>
@@ -1490,7 +1493,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV307" pos="1.187478" type="QUAD">
-   <parameters effLength="0.035" field="37.060704"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.060704"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg08" pos="1.273304" type="RFGAP">
    <parameters E0L="0.000623376" E0TL="0.000513212" EzFile="./axis_fields/DTL3_Rg8.dat" cavity="DTL3" mode="0" phase="155.34"/>
@@ -1514,7 +1517,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH309" pos="1.533519" type="QUAD">
-   <parameters effLength="0.035" field="-37.059474"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.059474"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg10" pos="1.620814" type="RFGAP">
    <parameters E0L="0.000633971" E0TL="0.000522037" EzFile="./axis_fields/DTL3_Rg10.dat" cavity="DTL3" mode="0" phase="154.74"/>
@@ -1526,7 +1529,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH310" pos="1.70874" type="QUAD">
-   <parameters effLength="0.035" field="-37.058834"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.058834"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg11" pos="1.796766" type="RFGAP">
    <parameters E0L="0.000639269" E0TL="0.000526413" EzFile="./axis_fields/DTL3_Rg11.dat" cavity="DTL3" mode="0" phase="154.45"/>
@@ -1547,7 +1550,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV312" pos="2.063568" type="QUAD">
-   <parameters effLength="0.035" field="37.05835"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.05835"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg13" pos="2.153055" type="RFGAP">
    <parameters E0L="0.000649792" E0TL="0.000535094" EzFile="./axis_fields/DTL3_Rg13.dat" cavity="DTL3" mode="0" phase="153.91"/>
@@ -1559,7 +1562,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV313" pos="2.24317" type="QUAD">
-   <parameters effLength="0.035" field="37.053234"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.053234"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg14" pos="2.333386" type="RFGAP">
    <parameters E0L="0.000655079" E0TL="0.000539396" EzFile="./axis_fields/DTL3_Rg14.dat" cavity="DTL3" mode="0" phase="153.68"/>
@@ -1580,7 +1583,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH315" pos="2.606739" type="QUAD">
-   <parameters effLength="0.035" field="-37.046054"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.046054"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg16" pos="2.698408" type="RFGAP">
    <parameters E0L="0.000665593" E0TL="0.000547925" EzFile="./axis_fields/DTL3_Rg16.dat" cavity="DTL3" mode="0" phase="153.32"/>
@@ -1592,7 +1595,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH316" pos="2.7907" type="QUAD">
-   <parameters effLength="0.035" field="-37.045257"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.045257"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg17" pos="2.883093" type="RFGAP">
    <parameters E0L="0.000670843" E0TL="0.000552149" EzFile="./axis_fields/DTL3_Rg17.dat" cavity="DTL3" mode="0" phase="153.20"/>
@@ -1613,7 +1616,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV318" pos="3.162959" type="QUAD">
-   <parameters effLength="0.035" field="37.04507"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.04507"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg19" pos="3.256797" type="RFGAP">
    <parameters E0L="0.000681263" E0TL="0.000560516" EzFile="./axis_fields/DTL3_Rg19.dat" cavity="DTL3" mode="0" phase="153.07"/>
@@ -1625,7 +1628,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV319" pos="3.351253" type="QUAD">
-   <parameters effLength="0.035" field="37.043721"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.043721"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg20" pos="3.44581" type="RFGAP">
    <parameters E0L="0.000686475" E0TL="0.000564661" EzFile="./axis_fields/DTL3_Rg20.dat" cavity="DTL3" mode="0" phase="153.07"/>
@@ -1646,7 +1649,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH321" pos="3.732152" type="QUAD">
-   <parameters effLength="0.035" field="-37.042543"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.042543"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg22" pos="3.828144" type="RFGAP">
    <parameters E0L="0.000696809" E0TL="0.000572859" EzFile="./axis_fields/DTL3_Rg22.dat" cavity="DTL3" mode="0" phase="153.19"/>
@@ -1658,7 +1661,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH322" pos="3.924751" type="QUAD">
-   <parameters effLength="0.035" field="-37.04052"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.04052"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg23" pos="4.021459" type="RFGAP">
    <parameters E0L="0.000702011" E0TL="0.000576918" EzFile="./axis_fields/DTL3_Rg23.dat" cavity="DTL3" mode="0" phase="153.31"/>
@@ -1682,7 +1685,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV324" pos="4.314234" type="QUAD">
-   <parameters effLength="0.035" field="37.040445"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.040445"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg25" pos="4.412368" type="RFGAP">
    <parameters E0L="0.000712323" E0TL="0.000584937" EzFile="./axis_fields/DTL3_Rg25.dat" cavity="DTL3" mode="0" phase="153.63"/>
@@ -1694,7 +1697,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV325" pos="4.511111" type="QUAD">
-   <parameters effLength="0.035" field="37.038466"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.038466"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg26" pos="4.609956" type="RFGAP">
    <parameters E0L="0.000717464" E0TL="0.000588903" EzFile="./axis_fields/DTL3_Rg26.dat" cavity="DTL3" mode="0" phase="153.83"/>
@@ -1718,7 +1721,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH327" pos="4.909122" type="QUAD">
-   <parameters effLength="0.035" field="-37.036184"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.036184"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg28" pos="5.009383" type="RFGAP">
    <parameters E0L="0.000727692" E0TL="0.000596741" EzFile="./axis_fields/DTL3_Rg28.dat" cavity="DTL3" mode="0" phase="154.29"/>
@@ -1730,7 +1733,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH328" pos="5.110248" type="QUAD">
-   <parameters effLength="0.035" field="-37.033973"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.033973"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg29" pos="5.211215" type="RFGAP">
    <parameters E0L="0.000732793" E0TL="0.000600608" EzFile="./axis_fields/DTL3_Rg29.dat" cavity="DTL3" mode="0" phase="154.53"/>
@@ -1754,7 +1757,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV330" pos="5.516727" type="QUAD">
-   <parameters effLength="0.035" field="37.031947"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.031947"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg31" pos="5.619101" type="RFGAP">
    <parameters E0L="0.000742966" E0TL="0.000608251" EzFile="./axis_fields/DTL3_Rg31.dat" cavity="DTL3" mode="0" phase="155.02"/>
@@ -1766,7 +1769,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV331" pos="5.722073" type="QUAD">
-   <parameters effLength="0.035" field="37.031657"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.031657"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg32" pos="5.824358" type="RFGAP">
    <parameters E0L="0.000742287" E0TL="0.00060732" EzFile="./axis_fields/DTL3_Rg32.dat" cavity="DTL3" mode="0" phase="153.88"/>
@@ -1790,7 +1793,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH333" pos="6.133736" type="QUAD">
-   <parameters effLength="0.035" field="-37.031545"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.031545"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg34" pos="6.237366" type="RFGAP">
    <parameters E0L="0.000751881" E0TL="0.000614391" EzFile="./axis_fields/DTL3_Rg34.dat" cavity="DTL3" mode="0" phase="148.81"/>
@@ -1802,7 +1805,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH334" pos="6.34155" type="QUAD">
-   <parameters effLength="0.035" field="-37.031303"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.031303"/>
   </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL3" pos="3.280147"/>
@@ -1819,7 +1822,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV401" pos="0.202978" type="QUAD">
-   <parameters effLength="0.035" field="37.030193"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.030193"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg02" pos="0.3096816" type="RFGAP">
    <parameters E0L="0.000777094" E0TL="0.000628638" EzFile="./axis_fields/DTL4_Rg2.dat" cavity="DTL4" mode="0" phase="151.78"/>
@@ -1831,7 +1834,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV402" pos="0.416955" type="QUAD">
-   <parameters effLength="0.035" field="37.026906"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.026906"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg03" pos="0.5240866" type="RFGAP">
    <parameters E0L="0.000780257" E0TL="0.000630977" EzFile="./axis_fields/DTL4_Rg3.dat" cavity="DTL4" mode="0" phase="154.79"/>
@@ -1855,7 +1858,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH404" pos="0.847037" type="QUAD">
-   <parameters effLength="0.035" field="-37.025925"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.025925"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg05" pos="0.9548036" type="RFGAP">
    <parameters E0L="0.000784886" E0TL="0.000634203" EzFile="./axis_fields/DTL4_Rg5.dat" cavity="DTL4" mode="0" phase="156.95"/>
@@ -1867,7 +1870,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH405" pos="1.063157" type="QUAD">
-   <parameters effLength="0.035" field="-37.024512"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.024512"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg06" pos="1.171614" type="RFGAP">
    <parameters E0L="0.000789901" E0TL="0.00063796" EzFile="./axis_fields/DTL4_Rg6.dat" cavity="DTL4" mode="0" phase="156.93"/>
@@ -1888,7 +1891,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV407" pos="1.499529" type="QUAD">
-   <parameters effLength="0.035" field="37.023589"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.023589"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg08" pos="1.609361" type="RFGAP">
    <parameters E0L="0.000799857" E0TL="0.000645369" EzFile="./axis_fields/DTL4_Rg8.dat" cavity="DTL4" mode="0" phase="156.80"/>
@@ -1900,7 +1903,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV408" pos="1.719774" type="QUAD">
-   <parameters effLength="0.035" field="37.021235"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.021235"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg09" pos="1.83029" type="RFGAP">
    <parameters E0L="0.000804832" E0TL="0.000649022" EzFile="./axis_fields/DTL4_Rg9.dat" cavity="DTL4" mode="0" phase="156.68"/>
@@ -1924,7 +1927,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH410" pos="2.164361" type="QUAD">
-   <parameters effLength="0.035" field="-37.017393"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.017393"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg11" pos="2.276241" type="RFGAP">
    <parameters E0L="0.000814733" E0TL="0.000656225" EzFile="./axis_fields/DTL4_Rg11.dat" cavity="DTL4" mode="0" phase="156.37"/>
@@ -1936,7 +1939,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH411" pos="2.388696" type="QUAD">
-   <parameters effLength="0.035" field="-37.016647"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.016647"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg12" pos="2.501255" type="RFGAP">
    <parameters E0L="0.000819671" E0TL="0.000659776" EzFile="./axis_fields/DTL4_Rg12.dat" cavity="DTL4" mode="0" phase="156.17"/>
@@ -1957,7 +1960,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV413" pos="2.84143" type="QUAD">
-   <parameters effLength="0.035" field="37.015673"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.015673"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg14" pos="2.955341" type="RFGAP">
    <parameters E0L="0.000829438" E0TL="0.000666775" EzFile="./axis_fields/DTL4_Rg14.dat" cavity="DTL4" mode="0" phase="155.73"/>
@@ -1969,7 +1972,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV414" pos="3.069822" type="QUAD">
-   <parameters effLength="0.035" field="37.014631"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.014631"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg15" pos="3.184406" type="RFGAP">
    <parameters E0L="0.000834344" E0TL="0.00067022" EzFile="./axis_fields/DTL4_Rg15.dat" cavity="DTL4" mode="0" phase="155.50"/>
@@ -1990,7 +1993,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH416" pos="3.530635" type="QUAD">
-   <parameters effLength="0.035" field="-37.012877"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.012877"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg17" pos="3.64656" type="RFGAP">
    <parameters E0L="0.000844083" E0TL="0.00067701" EzFile="./axis_fields/DTL4_Rg17.dat" cavity="DTL4" mode="0" phase="155.01"/>
@@ -2002,7 +2005,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH417" pos="3.763049" type="QUAD">
-   <parameters effLength="0.035" field="-37.010973"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.010973"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg18" pos="3.879641" type="RFGAP">
    <parameters E0L="0.000848885" E0TL="0.000680348" EzFile="./axis_fields/DTL4_Rg18.dat" cavity="DTL4" mode="0" phase="154.77"/>
@@ -2026,7 +2029,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV419" pos="4.23187" type="QUAD">
-   <parameters effLength="0.035" field="37.009845"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.009845"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg20" pos="4.349791" type="RFGAP">
    <parameters E0L="0.000858549" E0TL="0.000686921" EzFile="./axis_fields/DTL4_Rg20.dat" cavity="DTL4" mode="0" phase="154.30"/>
@@ -2038,7 +2041,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV420" pos="4.468269" type="QUAD">
-   <parameters effLength="0.035" field="37.009518"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.009518"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg21" pos="4.58685" type="RFGAP">
    <parameters E0L="0.000863351" E0TL="0.000690151" EzFile="./axis_fields/DTL4_Rg21.dat" cavity="DTL4" mode="0" phase="154.09"/>
@@ -2062,7 +2065,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH422" pos="4.945022" type="QUAD">
-   <parameters effLength="0.035" field="-37.009055"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.009055"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg23" pos="5.064919" type="RFGAP">
    <parameters E0L="0.000872849" E0TL="0.000696497" EzFile="./axis_fields/DTL4_Rg23.dat" cavity="DTL4" mode="0" phase="153.71"/>
@@ -2074,7 +2077,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH423" pos="5.185367" type="QUAD">
-   <parameters effLength="0.035" field="-37.008286"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-37.008286"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg24" pos="5.305919" type="RFGAP">
    <parameters E0L="0.000877619" E0TL="0.000699618" EzFile="./axis_fields/DTL4_Rg24.dat" cavity="DTL4" mode="0" phase="153.56"/>
@@ -2098,7 +2101,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV425" pos="5.669975" type="QUAD">
-   <parameters effLength="0.035" field="37.005557"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.005557"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg26" pos="5.7909" type="RFGAP">
    <parameters E0L="0.0008803" E0TL="0.000700349" EzFile="./axis_fields/DTL4_Rg26.dat" cavity="DTL4" mode="0" phase="151.95"/>
@@ -2110,7 +2113,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV426" pos="5.912363" type="QUAD">
-   <parameters effLength="0.035" field="37.004144"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="37.004144"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg27" pos="6.033922" type="RFGAP">
    <parameters E0L="0.000884854" E0TL="0.000703242" EzFile="./axis_fields/DTL4_Rg27.dat" cavity="DTL4" mode="0" phase="149.13"/>
@@ -2134,7 +2137,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH428" pos="6.400856" type="QUAD">
-   <parameters effLength="0.035" field="-36.998861"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.998861"/>
   </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL4" pos="3.314767"/>
@@ -2142,7 +2145,7 @@
  </DTL4>
  <DTL5 bpmFrequency="8.05E8" length="6.596593" name="DTL5">
   <accElement length="0.035001" name="DTL_Mag:PMQH500" pos="0.0175" type="QUAD">
-   <parameters effLength="0.035" field="-36.993248"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.993248"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg01" pos="0.142354" type="RFGAP">
    <parameters E0L="0.00091643" E0TL="0.000717048" EzFile="./axis_fields/DTL5_Rg1.dat" cavity="DTL5" mode="0" phase="148.34"/>
@@ -2166,7 +2169,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV502" pos="0.519146" type="QUAD">
-   <parameters effLength="0.035" field="36.991514"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.991514"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg03" pos="0.64494" type="RFGAP">
    <parameters E0L="0.000923378" E0TL="0.000721295" EzFile="./axis_fields/DTL5_Rg3.dat" cavity="DTL5" mode="0" phase="154.43"/>
@@ -2178,7 +2181,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV503" pos="0.771266" type="QUAD">
-   <parameters effLength="0.035" field="36.991164"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.991164"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg04" pos="0.897118" type="RFGAP">
    <parameters E0L="0.000923822" E0TL="0.000721007" EzFile="./axis_fields/DTL5_Rg4.dat" cavity="DTL5" mode="0" phase="155.98"/>
@@ -2199,7 +2202,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH505" pos="1.276446" type="QUAD">
-   <parameters effLength="0.035" field="-36.98957"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.98957"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg06" pos="1.403286" type="RFGAP">
    <parameters E0L="0.0009311" E0TL="0.000725365" EzFile="./axis_fields/DTL5_Rg6.dat" cavity="DTL5" mode="0" phase="156.12"/>
@@ -2211,7 +2214,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH506" pos="1.53066" type="QUAD">
-   <parameters effLength="0.035" field="-36.98819"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.98819"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg07" pos="1.658137" type="RFGAP">
    <parameters E0L="0.000935777" E0TL="0.000728352" EzFile="./axis_fields/DTL5_Rg7.dat" cavity="DTL5" mode="0" phase="155.96"/>
@@ -2235,7 +2238,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV508" pos="2.042895" type="QUAD">
-   <parameters effLength="0.035" field="36.987945"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.987945"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg09" pos="2.171637" type="RFGAP">
    <parameters E0L="0.000944947" E0TL="0.000734285" EzFile="./axis_fields/DTL5_Rg9.dat" cavity="DTL5" mode="0" phase="155.60"/>
@@ -2247,7 +2250,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV509" pos="2.300907" type="QUAD">
-   <parameters effLength="0.035" field="36.98037"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.98037"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg10" pos="2.430279" type="RFGAP">
    <parameters E0L="0.00094958" E0TL="0.00073723" EzFile="./axis_fields/DTL5_Rg10.dat" cavity="DTL5" mode="0" phase="155.40"/>
@@ -2268,7 +2271,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH511" pos="2.820698" type="QUAD">
-   <parameters effLength="0.035" field="-36.979318"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.979318"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg12" pos="2.951322" type="RFGAP">
    <parameters E0L="0.000958755" E0TL="0.000743078" EzFile="./axis_fields/DTL5_Rg12.dat" cavity="DTL5" mode="0" phase="155.00"/>
@@ -2280,7 +2283,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH512" pos="3.082468" type="QUAD">
-   <parameters effLength="0.035" field="-36.973"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.973"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg13" pos="3.213715" type="RFGAP">
    <parameters E0L="0.000963301" E0TL="0.000745982" EzFile="./axis_fields/DTL5_Rg13.dat" cavity="DTL5" mode="0" phase="154.80"/>
@@ -2304,7 +2307,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV514" pos="3.609735" type="QUAD">
-   <parameters effLength="0.035" field="36.971739"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.971739"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg15" pos="3.742222" type="RFGAP">
    <parameters E0L="0.000972368" E0TL="0.000751745" EzFile="./axis_fields/DTL5_Rg15.dat" cavity="DTL5" mode="0" phase="154.41"/>
@@ -2316,7 +2319,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV515" pos="3.875223" type="QUAD">
-   <parameters effLength="0.035" field="36.966896"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.966896"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg16" pos="4.008326" type="RFGAP">
    <parameters E0L="0.00097692" E0TL="0.000754607" EzFile="./axis_fields/DTL5_Rg16.dat" cavity="DTL5" mode="0" phase="154.22"/>
@@ -2340,7 +2343,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH517" pos="4.409887" type="QUAD">
-   <parameters effLength="0.035" field="-36.963929"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.963929"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg18" pos="4.544216" type="RFGAP">
    <parameters E0L="0.000985835" E0TL="0.000760286" EzFile="./axis_fields/DTL5_Rg18.dat" cavity="DTL5" mode="0" phase="153.88"/>
@@ -2352,7 +2355,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH518" pos="4.679053" type="QUAD">
-   <parameters effLength="0.035" field="-36.963654"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.963654"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg19" pos="4.813992" type="RFGAP">
    <parameters E0L="0.000990262" E0TL="0.000763108" EzFile="./axis_fields/DTL5_Rg19.dat" cavity="DTL5" mode="0" phase="153.74"/>
@@ -2376,7 +2379,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV520" pos="5.221033" type="QUAD">
-   <parameters effLength="0.035" field="36.959985"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.959985"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg21" pos="5.357184" type="RFGAP">
    <parameters E0L="0.000999214" E0TL="0.000768705" EzFile="./axis_fields/DTL5_Rg21.dat" cavity="DTL5" mode="0" phase="153.50"/>
@@ -2388,7 +2391,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV521" pos="5.493838" type="QUAD">
-   <parameters effLength="0.035" field="36.958895"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.958895"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg22" pos="5.629312" type="RFGAP">
    <parameters E0L="0.000994181" E0TL="0.000764257" EzFile="./axis_fields/DTL5_Rg22.dat" cavity="DTL5" mode="0" phase="151.72"/>
@@ -2412,7 +2415,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH523" pos="6.037875" type="QUAD">
-   <parameters effLength="0.035" field="-36.952932"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.952932"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg24" pos="6.174499" type="RFGAP">
    <parameters E0L="0.00100251" E0TL="0.000769448" EzFile="./axis_fields/DTL5_Rg24.dat" cavity="DTL5" mode="0" phase="144.88"/>
@@ -2424,7 +2427,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH524" pos="6.31158" type="QUAD">
-   <parameters effLength="0.035" field="-36.952373"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.952373"/>
   </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL5" pos="3.298297"/>
@@ -2441,7 +2444,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV601" pos="0.270058" type="QUAD">
-   <parameters effLength="0.035" field="36.95147"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.95147"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg02" pos="0.410233" type="RFGAP">
    <parameters E0L="0.00101434" E0TL="0.000763703" EzFile="./axis_fields/DTL6_Rg2.dat" cavity="DTL6" mode="0" phase="149.00"/>
@@ -2453,7 +2456,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV602" pos="0.550859" type="QUAD">
-   <parameters effLength="0.035" field="36.946808"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.946808"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg03" pos="0.691286" type="RFGAP">
    <parameters E0L="0.00101619" E0TL="0.000764563" EzFile="./axis_fields/DTL6_Rg3.dat" cavity="DTL6" mode="0" phase="151.62"/>
@@ -2477,7 +2480,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH604" pos="1.11309" type="QUAD">
-   <parameters effLength="0.035" field="-36.944781"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.944781"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg05" pos="1.253576" type="RFGAP">
    <parameters E0L="0.00101663" E0TL="0.000763844" EzFile="./axis_fields/DTL6_Rg5.dat" cavity="DTL6" mode="0" phase="152.68"/>
@@ -2489,7 +2492,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH605" pos="1.394528" type="QUAD">
-   <parameters effLength="0.035" field="-36.942676"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.942676"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg06" pos="1.535574" type="RFGAP">
    <parameters E0L="0.00102066" E0TL="0.000766377" EzFile="./axis_fields/DTL6_Rg6.dat" cavity="DTL6" mode="0" phase="152.13"/>
@@ -2510,7 +2513,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV607" pos="1.960743" type="QUAD">
-   <parameters effLength="0.035" field="36.941617"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.941617"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg08" pos="2.102896" type="RFGAP">
    <parameters E0L="0.00102869" E0TL="0.000771433" EzFile="./axis_fields/DTL6_Rg8.dat" cavity="DTL6" mode="0" phase="150.97"/>
@@ -2522,7 +2525,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV608" pos="2.245504" type="QUAD">
-   <parameters effLength="0.035" field="36.939144"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.939144"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg09" pos="2.388203" type="RFGAP">
    <parameters E0L="0.00103264" E0TL="0.000773956" EzFile="./axis_fields/DTL6_Rg9.dat" cavity="DTL6" mode="0" phase="150.38"/>
@@ -2546,7 +2549,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH610" pos="2.818286" type="QUAD">
-   <parameters effLength="0.035" field="-36.937673"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.937673"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg11" pos="2.962067" type="RFGAP">
    <parameters E0L="0.00104035" E0TL="0.000778993" EzFile="./axis_fields/DTL6_Rg11.dat" cavity="DTL6" mode="0" phase="149.17"/>
@@ -2558,7 +2561,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH611" pos="3.106291" type="QUAD">
-   <parameters effLength="0.035" field="-36.930323"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.930323"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg12" pos="3.250606" type="RFGAP">
    <parameters E0L="0.00104423" E0TL="0.000781504" EzFile="./axis_fields/DTL6_Rg12.dat" cavity="DTL6" mode="0" phase="148.56"/>
@@ -2582,7 +2585,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV613" pos="3.685485" type="QUAD">
-   <parameters effLength="0.035" field="36.925459"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.925459"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg14" pos="3.830855" type="RFGAP">
    <parameters E0L="0.00105185" E0TL="0.000786515" EzFile="./axis_fields/DTL6_Rg14.dat" cavity="DTL6" mode="0" phase="147.34"/>
@@ -2594,7 +2597,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV614" pos="3.976656" type="QUAD">
-   <parameters effLength="0.035" field="36.916736"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.916736"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg15" pos="4.122547" type="RFGAP">
    <parameters E0L="0.00105561" E0TL="0.000789012" EzFile="./axis_fields/DTL6_Rg15.dat" cavity="DTL6" mode="0" phase="146.73"/>
@@ -2618,7 +2621,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH616" pos="4.562106" type="QUAD">
-   <parameters effLength="0.035" field="-36.915435"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.915435"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg17" pos="4.709026" type="RFGAP">
    <parameters E0L="0.00106295" E0TL="0.000793994" EzFile="./axis_fields/DTL6_Rg17.dat" cavity="DTL6" mode="0" phase="145.54"/>
@@ -2630,7 +2633,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQH617" pos="4.856367" type="QUAD">
-   <parameters effLength="0.035" field="-36.905936"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="-36.905936"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg18" pos="5.003795" type="RFGAP">
    <parameters E0L="0.00106665" E0TL="0.000796475" EzFile="./axis_fields/DTL6_Rg18.dat" cavity="DTL6" mode="0" phase="144.96"/>
@@ -2654,7 +2657,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV619" pos="5.445648" type="QUAD">
-   <parameters effLength="0.035" field="36.896246"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.896246"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg20" pos="5.592934" type="RFGAP">
    <parameters E0L="0.00106552" E0TL="0.000795193" EzFile="./axis_fields/DTL6_Rg20.dat" cavity="DTL6" mode="0" phase="139.72"/>
@@ -2666,7 +2669,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.035001" name="DTL_Mag:PMQV620" pos="5.740609" type="QUAD">
-   <parameters effLength="0.035" field="36.893266"/>
+   <parameters aperture="0.025" aprt_type="1" effLength="0.035" field="36.893266"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg21" pos="5.887921" type="RFGAP">
    <parameters E0L="0.00106563" E0TL="0.000795081" EzFile="./axis_fields/DTL6_Rg21.dat" cavity="DTL6" mode="0" phase="135.92"/>
@@ -2695,7 +2698,7 @@
  </DTL6>
  <CCL1 bpmFrequency="4.025E8" length="12.302676" name="CCL1">
   <accElement length="0.0" name="CCL_Mag:QH00" pos="0.04" type="QUAD">
-   <parameters effLength="0.06075" field="-42.34"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.06075" field="-42.34"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav01:Rg01" pos="0.133243" type="RFGAP">
    <parameters E0L="0.000228825" E0TL="0.000202968" EzFile="./axis_fields/CCL1_Rg1.dat" cavity="CCL1" mode="0" phase="149.08"/>
@@ -2773,7 +2776,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QV101" pos="0.963857" type="QUAD">
-   <parameters effLength="0.09769" field="24.79"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="24.79"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav01:Rg09" pos="1.112786" type="RFGAP">
    <parameters E0L="0.000237141" E0TL="0.00021047" EzFile="./axis_fields/CCL1_Rg9.dat" cavity="CCL1" mode="1" phase="149.46"/>
@@ -2848,7 +2851,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QH102" pos="1.904284" type="QUAD">
-   <parameters effLength="0.09769" field="-25.67"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-25.67"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav01:Rg17" pos="2.099357" type="RFGAP">
    <parameters E0L="0.000245603" E0TL="0.000218107" EzFile="./axis_fields/CCL1_Rg17.dat" cavity="CCL1" mode="0" phase="149.91"/>
@@ -2923,7 +2926,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QV103" pos="2.863761" type="QUAD">
-   <parameters effLength="0.09769" field="24.05"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="24.05"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV103" pos="2.863761" type="DCV">
    <parameters effLength="0.09769"/>
@@ -3004,7 +3007,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH104" pos="3.842436" type="QUAD">
-   <parameters effLength="0.09769" field="-21.814311"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-21.814311"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH104" pos="3.842436" type="DCH">
    <parameters effLength="0.09769"/>
@@ -3082,7 +3085,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV105" pos="4.840458" type="QUAD">
-   <parameters effLength="0.09769" field="21.602211"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="21.602211"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV105" pos="4.840458" type="DCV">
    <parameters effLength="0.09769"/>
@@ -3160,7 +3163,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH106" pos="5.85797" type="QUAD">
-   <parameters effLength="0.09769" field="-21.385198"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-21.385198"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH106" pos="5.85797" type="DCH">
    <parameters effLength="0.09769"/>
@@ -3238,7 +3241,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV107" pos="6.878857" type="QUAD">
-   <parameters effLength="0.09769" field="21.163272"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="21.163272"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav01:Rg57" pos="7.143554" type="RFGAP">
    <parameters E0L="0.00029004" E0TL="0.000258306" EzFile="./axis_fields/CCL1_Rg57.dat" cavity="CCL1" mode="1" phase="150.79"/>
@@ -3313,7 +3316,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH108" pos="7.907697" type="QUAD">
-   <parameters effLength="0.09769" field="-20.93725"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-20.93725"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav01:Rg65" pos="8.175808" type="RFGAP">
    <parameters E0L="0.000299383" E0TL="0.000266771" EzFile="./axis_fields/CCL1_Rg65.dat" cavity="CCL1" mode="0" phase="150.48"/>
@@ -3388,7 +3391,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV109" pos="8.944645" type="QUAD">
-   <parameters effLength="0.09769" field="20.707135"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="20.707135"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV109" pos="8.944645" type="DCV">
    <parameters effLength="0.09769"/>
@@ -3466,7 +3469,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH110" pos="9.989809" type="QUAD">
-   <parameters effLength="0.09769" field="-20.477838"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-20.477838"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH110" pos="9.989809" type="DCH">
    <parameters effLength="0.09769"/>
@@ -3544,7 +3547,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV111" pos="11.043139" type="QUAD">
-   <parameters effLength="0.09769" field="20.250179"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="20.250179"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV111" pos="11.043139" type="DCV">
    <parameters effLength="0.09769"/>
@@ -3622,7 +3625,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH112" pos="12.104594" type="QUAD">
-   <parameters effLength="0.09769" field="-20.023339"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-20.023339"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH112" pos="12.104594" type="DCH">
    <parameters effLength="0.09769"/>
@@ -3708,7 +3711,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV201" pos="0.871455" type="QUAD">
-   <parameters effLength="0.09769" field="19.797318"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="19.797318"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav02:Rg09" pos="1.156782" type="RFGAP">
    <parameters E0L="0.00031196" E0TL="0.000278043" EzFile="./axis_fields/CCL2_Rg9.dat" cavity="CCL2" mode="1" phase="149.02"/>
@@ -3783,7 +3786,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH202" pos="1.949037" type="QUAD">
-   <parameters effLength="0.09769" field="-19.572935"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-19.572935"/>
   </accElement>
   <accElement length="0.0" name="CCL_Diag:BPM202" pos="2.032197" type="MARKER">
    <parameters/>
@@ -3861,7 +3864,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV203" pos="3.034619" type="QUAD">
-   <parameters effLength="0.09769" field="19.34937"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="19.34937"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV203" pos="3.034619" type="DCV">
    <parameters effLength="0.09769"/>
@@ -3939,7 +3942,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH204" pos="4.128159" type="QUAD">
-   <parameters effLength="0.09769" field="-19.126625"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-19.126625"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH204" pos="4.128159" type="DCH">
    <parameters effLength="0.09769"/>
@@ -4017,7 +4020,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV205" pos="5.229615" type="QUAD">
-   <parameters effLength="0.09769" field="18.905517"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="18.905517"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV205" pos="5.229615" type="DCV">
    <parameters effLength="0.09769"/>
@@ -4095,7 +4098,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH206" pos="6.338945" type="QUAD">
-   <parameters effLength="0.09769" field="-18.686048"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-18.686048"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH206" pos="6.338945" type="DCH">
    <parameters effLength="0.09769"/>
@@ -4173,7 +4176,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV207" pos="7.456106" type="QUAD">
-   <parameters effLength="0.09769" field="18.467397"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="18.467397"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav02:Rg57" pos="7.761501" type="RFGAP">
    <parameters E0L="0.00032566" E0TL="0.000290837" EzFile="./axis_fields/CCL2_Rg57.dat" cavity="CCL2" mode="1" phase="150.13"/>
@@ -4248,7 +4251,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH208" pos="8.581057" type="QUAD">
-   <parameters effLength="0.09769" field="-18.249565"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-18.249565"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav02:Rg65" pos="8.889733" type="RFGAP">
    <parameters E0L="0.000327901" E0TL="0.000292917" EzFile="./axis_fields/CCL2_Rg65.dat" cavity="CCL2" mode="0" phase="150.34"/>
@@ -4326,7 +4329,7 @@
    <parameters effLength="0.09769"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV209" pos="9.713754" type="QUAD">
-   <parameters effLength="0.09769" field="18.033371"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="18.033371"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav02:Rg73" pos="10.02569" type="RFGAP">
    <parameters E0L="0.000330118" E0TL="0.000294982" EzFile="./axis_fields/CCL2_Rg73.dat" cavity="CCL2" mode="1" phase="150.45"/>
@@ -4401,7 +4404,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH210" pos="10.854154" type="QUAD">
-   <parameters effLength="0.09769" field="-17.817996"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-17.817996"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH210" pos="10.854154" type="DCH">
    <parameters effLength="0.09769"/>
@@ -4479,7 +4482,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV211" pos="12.002214" type="QUAD">
-   <parameters effLength="0.09769" field="17.604258"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="17.604258"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV211" pos="12.002214" type="DCV">
    <parameters effLength="0.09769"/>
@@ -4557,7 +4560,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH212" pos="13.157892" type="QUAD">
-   <parameters effLength="0.09769" field="-17.392159"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-17.392159"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH212" pos="13.157892" type="DCH">
    <parameters effLength="0.09769"/>
@@ -4643,7 +4646,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV301" pos="0.929068" type="QUAD">
-   <parameters effLength="0.09769" field="17.180059"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="17.180059"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav03:Rg09" pos="1.333889" type="RFGAP">
    <parameters E0L="0.000339305" E0TL="0.000303109" EzFile="./axis_fields/CCL3_Rg9.dat" cavity="CCL3" mode="1" phase="149.17"/>
@@ -4718,7 +4721,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH302" pos="2.099853" type="QUAD">
-   <parameters effLength="0.09769" field="-16.970417"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-16.970417"/>
   </accElement>
   <accElement length="0.0" name="CCL_Diag:BPM302" pos="2.183013" type="MARKER">
    <parameters/>
@@ -4796,7 +4799,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV303" pos="3.278125" type="QUAD">
-   <parameters effLength="0.09769" field="16.760774"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="16.760774"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV303" pos="3.278125" type="DCV">
    <parameters effLength="0.09769"/>
@@ -4874,7 +4877,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH304" pos="4.463842" type="QUAD">
-   <parameters effLength="0.09769" field="-16.552769"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-16.552769"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH304" pos="4.463842" type="DCH">
    <parameters effLength="0.09769"/>
@@ -4952,7 +4955,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV305" pos="5.656962" type="QUAD">
-   <parameters effLength="0.09769" field="16.316102"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="16.316102"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV305" pos="5.656962" type="DCV">
    <parameters effLength="0.09769"/>
@@ -5030,7 +5033,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH306" pos="6.857439" type="QUAD">
-   <parameters effLength="0.09769" field="-16.08353"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-16.08353"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH306" pos="6.857439" type="DCH">
    <parameters effLength="0.09769"/>
@@ -5108,7 +5111,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV307" pos="8.065402" type="QUAD">
-   <parameters effLength="0.09769" field="15.852595"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="15.852595"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav03:Rg57" pos="8.489077" type="RFGAP">
    <parameters E0L="0.000352126" E0TL="0.000314823" EzFile="./axis_fields/CCL3_Rg57.dat" cavity="CCL3" mode="1" phase="150.29"/>
@@ -5183,7 +5186,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH308" pos="9.280584" type="QUAD">
-   <parameters effLength="0.09769" field="-15.62166"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-15.62166"/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav03:Rg65" pos="9.707336" type="RFGAP">
    <parameters E0L="0.000354228" E0TL="0.000316736" EzFile="./axis_fields/CCL3_Rg65.dat" cavity="CCL3" mode="0" phase="150.66"/>
@@ -5258,7 +5261,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV309" pos="10.503031" type="QUAD">
-   <parameters effLength="0.09769" field="15.392364"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="15.392364"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV309" pos="10.503031" type="DCV">
    <parameters effLength="0.09769"/>
@@ -5336,7 +5339,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH310" pos="11.732713" type="QUAD">
-   <parameters effLength="0.09769" field="-15.163886"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-15.163886"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH310" pos="11.732713" type="DCH">
    <parameters effLength="0.09769"/>
@@ -5414,7 +5417,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV311" pos="12.969597" type="QUAD">
-   <parameters effLength="0.09769" field="14.936227"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="14.936227"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV311" pos="12.969597" type="DCV">
    <parameters effLength="0.09769"/>
@@ -5492,7 +5495,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH312" pos="14.213651" type="QUAD">
-   <parameters effLength="0.09769" field="-14.710206"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-14.710206"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH312" pos="14.213651" type="DCH">
    <parameters effLength="0.09769"/>
@@ -5578,7 +5581,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV401" pos="0.983085" type="QUAD">
-   <parameters effLength="0.09769" field="14.484185"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="14.484185"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV401" pos="0.983085" type="DCV">
    <parameters effLength="0.09769"/>
@@ -5656,7 +5659,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH402" pos="2.241376" type="QUAD">
-   <parameters effLength="0.09769" field="-14.26062"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-14.26062"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH402" pos="2.241376" type="DCH">
    <parameters effLength="0.09769"/>
@@ -5737,7 +5740,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV403" pos="3.506735" type="QUAD">
-   <parameters effLength="0.09769" field="14.037056"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="14.037056"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV403" pos="3.506735" type="DCV">
    <parameters effLength="0.09769"/>
@@ -5815,7 +5818,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH404" pos="4.779129" type="QUAD">
-   <parameters effLength="0.09769" field="-13.815129"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-13.815129"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH404" pos="4.779129" type="DCH">
    <parameters effLength="0.09769"/>
@@ -5893,7 +5896,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV405" pos="6.058523" type="QUAD">
-   <parameters effLength="0.09769" field="13.594022"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="13.594022"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV405" pos="6.058523" type="DCV">
    <parameters effLength="0.09769"/>
@@ -5971,7 +5974,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTH406" pos="7.344886" type="QUAD">
-   <parameters effLength="0.09769" field="-13.373733"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-13.373733"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH406" pos="7.344886" type="DCH">
    <parameters effLength="0.09769"/>
@@ -6049,7 +6052,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QTV407" pos="8.63818" type="QUAD">
-   <parameters effLength="0.09769" field="13.155082"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="13.155082"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV407" pos="8.63818" type="DCV">
    <parameters effLength="0.09769"/>
@@ -6127,7 +6130,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QH408" pos="9.938373" type="QUAD">
-   <parameters effLength="0.09769" field="-12.93725"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-12.93725"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH408" pos="9.938373" type="DCH">
    <parameters effLength="0.09769"/>
@@ -6205,7 +6208,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QV409" pos="11.245429" type="QUAD">
-   <parameters effLength="0.09769" field="12.33"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="12.33"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV409" pos="11.245429" type="DCV">
    <parameters effLength="0.09769"/>
@@ -6286,7 +6289,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QH410" pos="12.559314" type="QUAD">
-   <parameters effLength="0.09769" field="-11.97"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="-11.97"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH410" pos="12.559314" type="DCH">
    <parameters effLength="0.09769"/>
@@ -6364,7 +6367,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:QV411" pos="13.879994" type="QUAD">
-   <parameters effLength="0.09769" field="8.69"/>
+   <parameters aperture="0.030" aprt_type="1" effLength="0.09769" field="8.69"/>
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCV411" pos="13.879994" type="DCV">
    <parameters effLength="0.09769"/>
@@ -6453,13 +6456,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.04" name="SCL_Mag:QH00" pos="0.85" type="QUAD">
-   <parameters effLength="0.104" field="-17.89"/>
+   <parameters aperture="0.048" aprt_type="1" effLength="0.104" field="-17.89"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH00" pos="0.85" type="DCH">
    <parameters effLength="0.104"/>
   </accElement>
   <accElement length="0.04" name="SCL_Mag:QV00" pos="1.35" type="QUAD">
-   <parameters effLength="0.104" field="16.88"/>
+   <parameters aperture="0.048" aprt_type="1" effLength="0.104" field="16.88"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV00" pos="1.35" type="DCV">
    <parameters effLength="0.104"/>
@@ -6630,7 +6633,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH01" pos="6.91138" type="QUAD">
-   <parameters effLength="0.38" field="-4.41"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-4.41"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH01" pos="6.91138" type="DCH">
    <parameters effLength="0.38"/>
@@ -6639,7 +6642,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV01" pos="7.82662" type="QUAD">
-   <parameters effLength="0.38" field="4.41"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="4.41"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV01" pos="7.82662" type="DCV">
    <parameters effLength="0.38"/>
@@ -6807,7 +6810,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH02" pos="12.75038" type="QUAD">
-   <parameters effLength="0.38" field="-4.34"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-4.34"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH02" pos="12.75038" type="DCH">
    <parameters effLength="0.38"/>
@@ -6816,7 +6819,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV02" pos="13.66562" type="QUAD">
-   <parameters effLength="0.38" field="4.34"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="4.34"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV02" pos="13.66562" type="DCV">
    <parameters effLength="0.38"/>
@@ -6984,7 +6987,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH03" pos="18.58938" type="QUAD">
-   <parameters effLength="0.38" field="-4.96"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-4.96"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH03" pos="18.58938" type="DCH">
    <parameters effLength="0.38"/>
@@ -6993,7 +6996,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV03" pos="19.50462" type="QUAD">
-   <parameters effLength="0.38" field="4.96"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="4.96"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV03" pos="19.50462" type="DCV">
    <parameters effLength="0.38"/>
@@ -7161,7 +7164,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH04" pos="24.42838" type="QUAD">
-   <parameters effLength="0.38" field="-5.045263"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.045263"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH04" pos="24.42838" type="DCH">
    <parameters effLength="0.38"/>
@@ -7170,7 +7173,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV04" pos="25.34362" type="QUAD">
-   <parameters effLength="0.38" field="5.045263"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.045263"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV04" pos="25.34362" type="DCV">
    <parameters effLength="0.38"/>
@@ -7338,7 +7341,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH05" pos="30.26738" type="QUAD">
-   <parameters effLength="0.38" field="-5.089474"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.089474"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH05" pos="30.26738" type="DCH">
    <parameters effLength="0.38"/>
@@ -7347,7 +7350,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV05" pos="31.18262" type="QUAD">
-   <parameters effLength="0.38" field="5.089474"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.089474"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV05" pos="31.18262" type="DCV">
    <parameters effLength="0.38"/>
@@ -7515,7 +7518,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH06" pos="36.10638" type="QUAD">
-   <parameters effLength="0.38" field="-5.107368"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.107368"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH06" pos="36.10638" type="DCH">
    <parameters effLength="0.38"/>
@@ -7524,7 +7527,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV06" pos="37.02162" type="QUAD">
-   <parameters effLength="0.38" field="5.107368"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.107368"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV06" pos="37.02162" type="DCV">
    <parameters effLength="0.38"/>
@@ -7692,7 +7695,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH07" pos="41.94538" type="QUAD">
-   <parameters effLength="0.38" field="-5.107368"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.107368"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH07" pos="41.94538" type="DCH">
    <parameters effLength="0.38"/>
@@ -7701,7 +7704,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV07" pos="42.86062" type="QUAD">
-   <parameters effLength="0.38" field="5.107368"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.107368"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV07" pos="42.86062" type="DCV">
    <parameters effLength="0.38"/>
@@ -7869,7 +7872,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH08" pos="47.78438" type="QUAD">
-   <parameters effLength="0.38" field="-5.097895"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.097895"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH08" pos="47.78438" type="DCH">
    <parameters effLength="0.38"/>
@@ -7878,7 +7881,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV08" pos="48.69962" type="QUAD">
-   <parameters effLength="0.38" field="5.097895"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.097895"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV08" pos="48.69962" type="DCV">
    <parameters effLength="0.38"/>
@@ -8046,7 +8049,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH09" pos="53.62338" type="QUAD">
-   <parameters effLength="0.38" field="-5.0"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.0"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH09" pos="53.62338" type="DCH">
    <parameters effLength="0.38"/>
@@ -8055,7 +8058,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV09" pos="54.53862" type="QUAD">
-   <parameters effLength="0.38" field="5.0"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.0"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV09" pos="54.53862" type="DCV">
    <parameters effLength="0.38"/>
@@ -8223,7 +8226,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH10" pos="59.46238" type="QUAD">
-   <parameters effLength="0.38" field="-4.86"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-4.86"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH10" pos="59.46238" type="DCH">
    <parameters effLength="0.38"/>
@@ -8232,7 +8235,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV10" pos="60.37762" type="QUAD">
-   <parameters effLength="0.38" field="5.0"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.0"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV10" pos="60.37762" type="DCV">
    <parameters effLength="0.38"/>
@@ -8400,7 +8403,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH11" pos="65.30138" type="QUAD">
-   <parameters effLength="0.38" field="-5.61"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.61"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH11" pos="65.30138" type="DCH">
    <parameters effLength="0.38"/>
@@ -8409,7 +8412,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV11" pos="66.21662" type="QUAD">
-   <parameters effLength="0.38" field="5.55"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.55"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV11" pos="66.21662" type="DCV">
    <parameters effLength="0.38"/>
@@ -8668,7 +8671,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH12" pos="6.23038" type="QUAD">
-   <parameters effLength="0.38" field="-5.76"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.76"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH12" pos="6.23038" type="DCH">
    <parameters effLength="0.38"/>
@@ -8677,7 +8680,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV12" pos="7.14562" type="QUAD">
-   <parameters effLength="0.38" field="5.76"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.76"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV12" pos="7.14562" type="DCV">
    <parameters effLength="0.38"/>
@@ -8899,7 +8902,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH13" pos="14.12138" type="QUAD">
-   <parameters effLength="0.38" field="-6.15"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.15"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH13" pos="14.12138" type="DCH">
    <parameters effLength="0.38"/>
@@ -8908,7 +8911,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV13" pos="15.03662" type="QUAD">
-   <parameters effLength="0.38" field="6.15"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.15"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV13" pos="15.03662" type="DCV">
    <parameters effLength="0.38"/>
@@ -9130,7 +9133,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH14" pos="22.01238" type="QUAD">
-   <parameters effLength="0.38" field="-6.255789"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.255789"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH14" pos="22.01238" type="DCH">
    <parameters effLength="0.38"/>
@@ -9139,7 +9142,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV14" pos="22.92762" type="QUAD">
-   <parameters effLength="0.38" field="6.255789"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.255789"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV14" pos="22.92762" type="DCV">
    <parameters effLength="0.38"/>
@@ -9361,7 +9364,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH15" pos="29.90338" type="QUAD">
-   <parameters effLength="0.38" field="-6.369474"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.369474"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH15" pos="29.90338" type="DCH">
    <parameters effLength="0.38"/>
@@ -9370,7 +9373,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV15" pos="30.81862" type="QUAD">
-   <parameters effLength="0.38" field="6.369474"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.369474"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV15" pos="30.81862" type="DCV">
    <parameters effLength="0.38"/>
@@ -9592,7 +9595,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH16" pos="37.79438" type="QUAD">
-   <parameters effLength="0.38" field="-6.435789"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.435789"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH16" pos="37.79438" type="DCH">
    <parameters effLength="0.38"/>
@@ -9601,7 +9604,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV16" pos="38.70962" type="QUAD">
-   <parameters effLength="0.38" field="6.435789"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.435789"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV16" pos="38.70962" type="DCV">
    <parameters effLength="0.38"/>
@@ -9823,7 +9826,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH17" pos="45.68538" type="QUAD">
-   <parameters effLength="0.38" field="-6.467368"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.467368"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH17" pos="45.68538" type="DCH">
    <parameters effLength="0.38"/>
@@ -9832,7 +9835,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV17" pos="46.60062" type="QUAD">
-   <parameters effLength="0.38" field="6.467368"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.467368"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV17" pos="46.60062" type="DCV">
    <parameters effLength="0.38"/>
@@ -10054,7 +10057,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH18" pos="53.57638" type="QUAD">
-   <parameters effLength="0.38" field="-6.470526"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.470526"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH18" pos="53.57638" type="DCH">
    <parameters effLength="0.38"/>
@@ -10063,7 +10066,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV18" pos="54.49162" type="QUAD">
-   <parameters effLength="0.38" field="6.470526"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.470526"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV18" pos="54.49162" type="DCV">
    <parameters effLength="0.38"/>
@@ -10285,7 +10288,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH19" pos="61.46738" type="QUAD">
-   <parameters effLength="0.38" field="-6.454737"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.454737"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH19" pos="61.46738" type="DCH">
    <parameters effLength="0.38"/>
@@ -10294,7 +10297,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV19" pos="62.38262" type="QUAD">
-   <parameters effLength="0.38" field="6.454737"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.454737"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV19" pos="62.38262" type="DCV">
    <parameters effLength="0.38"/>
@@ -10516,7 +10519,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH20" pos="69.35838" type="QUAD">
-   <parameters effLength="0.38" field="-6.425263"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.425263"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH20" pos="69.35838" type="DCH">
    <parameters effLength="0.38"/>
@@ -10525,7 +10528,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV20" pos="70.27362" type="QUAD">
-   <parameters effLength="0.38" field="6.425263"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.425263"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV20" pos="70.27362" type="DCV">
    <parameters effLength="0.38"/>
@@ -10747,7 +10750,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH21" pos="77.24938" type="QUAD">
-   <parameters effLength="0.38" field="-6.388421"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.388421"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH21" pos="77.24938" type="DCH">
    <parameters effLength="0.38"/>
@@ -10756,7 +10759,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV21" pos="78.16462" type="QUAD">
-   <parameters effLength="0.38" field="6.388421"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.388421"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV21" pos="78.16462" type="DCV">
    <parameters effLength="0.38"/>
@@ -10978,7 +10981,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH22" pos="85.14038" type="QUAD">
-   <parameters effLength="0.38" field="-6.346316"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.346316"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH22" pos="85.14038" type="DCH">
    <parameters effLength="0.38"/>
@@ -10987,7 +10990,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV22" pos="86.05562" type="QUAD">
-   <parameters effLength="0.38" field="6.346316"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.346316"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV22" pos="86.05562" type="DCV">
    <parameters effLength="0.38"/>
@@ -11209,7 +11212,7 @@
    </TTFs>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH23" pos="93.03138" type="QUAD">
-   <parameters effLength="0.38" field="-6.346316"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.346316"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH23" pos="93.03138" type="DCH">
    <parameters effLength="0.38"/>
@@ -11218,13 +11221,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV23" pos="93.94662" type="QUAD">
-   <parameters effLength="0.38" field="6.346316"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.346316"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV23" pos="93.94662" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH24" pos="100.92238" type="QUAD">
-   <parameters effLength="0.38" field="-6.346316"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.346316"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH24" pos="100.92238" type="DCH">
    <parameters effLength="0.38"/>
@@ -11233,13 +11236,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV24" pos="101.83762" type="QUAD">
-   <parameters effLength="0.38" field="6.346316"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.346316"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV24" pos="101.83762" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH25" pos="108.81338" type="QUAD">
-   <parameters effLength="0.38" field="-6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH25" pos="108.81338" type="DCH">
    <parameters effLength="0.38"/>
@@ -11248,13 +11251,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV25" pos="109.72862" type="QUAD">
-   <parameters effLength="0.38" field="6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV25" pos="109.72862" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH26" pos="116.70438" type="QUAD">
-   <parameters effLength="0.38" field="-6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH26" pos="116.70438" type="DCH">
    <parameters effLength="0.38"/>
@@ -11263,13 +11266,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV26" pos="117.61962" type="QUAD">
-   <parameters effLength="0.38" field="6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV26" pos="117.61962" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH27" pos="124.59538" type="QUAD">
-   <parameters effLength="0.38" field="-6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH27" pos="124.59538" type="DCH">
    <parameters effLength="0.38"/>
@@ -11278,13 +11281,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV27" pos="125.51062" type="QUAD">
-   <parameters effLength="0.38" field="6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV27" pos="125.51062" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH28" pos="132.48638" type="QUAD">
-   <parameters effLength="0.38" field="-6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH28" pos="132.48638" type="DCH">
    <parameters effLength="0.38"/>
@@ -11293,13 +11296,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV28" pos="133.40162" type="QUAD">
-   <parameters effLength="0.38" field="6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV28" pos="133.40162" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH29" pos="140.37738" type="QUAD">
-   <parameters effLength="0.38" field="-6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH29" pos="140.37738" type="DCH">
    <parameters effLength="0.38"/>
@@ -11308,13 +11311,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV29" pos="141.29262" type="QUAD">
-   <parameters effLength="0.38" field="6.3"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="6.3"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV29" pos="141.29262" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH30" pos="148.26838" type="QUAD">
-   <parameters effLength="0.38" field="-5.4"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.4"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH30" pos="148.26838" type="DCH">
    <parameters effLength="0.38"/>
@@ -11323,13 +11326,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV30" pos="149.18362" type="QUAD">
-   <parameters effLength="0.38" field="5.13"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.13"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV30" pos="149.18362" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH31" pos="156.15938" type="QUAD">
-   <parameters effLength="0.38" field="-5.71"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-5.71"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH31" pos="156.15938" type="DCH">
    <parameters effLength="0.38"/>
@@ -11338,13 +11341,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV31" pos="157.07462" type="QUAD">
-   <parameters effLength="0.38" field="5.83"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.83"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV31" pos="157.07462" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH32" pos="164.05038" type="QUAD">
-   <parameters effLength="0.38" field="-4.48"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-4.48"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH32" pos="164.05038" type="DCH">
    <parameters effLength="0.38"/>
@@ -11353,13 +11356,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QV32" pos="164.96562" type="QUAD">
-   <parameters effLength="0.38" field="5.66"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="5.66"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCV32" pos="164.96562" type="DCV">
    <parameters effLength="0.38"/>
   </accElement>
   <accElement length="0.2" name="SCL_Mag:QH33" pos="168.358" type="QUAD">
-   <parameters effLength="0.38" field="-4.48"/>
+   <parameters aperture="0.080" aprt_type="1" effLength="0.38" field="-4.48"/>
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH33" pos="168.358" type="DCH">
    <parameters effLength="0.38"/>
@@ -11417,31 +11420,31 @@
  </SCLHigh>
  <HEBT1 bpmFrequency="4.025E8" length="41.973095" name="HEBT1">
   <accElement length="0.0" name="HEBT_Mag:QV01" pos="1.0" type="QUAD">
-   <parameters effLength="0.505" field="4.14"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM01" pos="1.383197" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH02" pos="5.0" type="QUAD">
-   <parameters effLength="0.505" field="-4.14"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="-4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM02" pos="5.383197" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV03" pos="9.0" type="QUAD">
-   <parameters effLength="0.505" field="4.14"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM03" pos="9.383197" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH04" pos="13.0" type="QUAD">
-   <parameters effLength="0.505" field="-4.14"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="-4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM04" pos="13.383197" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV05" pos="17.0" type="QUAD">
-   <parameters effLength="0.505" field="4.14"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM05" pos="17.383197" type="MARKER">
    <parameters/>
@@ -11450,7 +11453,7 @@
    <parameters effLength="0.33"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH06" pos="21.0" type="QUAD">
-   <parameters effLength="0.505" field="-4.14"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="-4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM06" pos="21.383197" type="MARKER">
    <parameters/>
@@ -11459,7 +11462,7 @@
    <parameters effLength="0.33"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV07" pos="25.0" type="QUAD">
-   <parameters effLength="0.505" field="4.14"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM07" pos="25.383197" type="MARKER">
    <parameters/>
@@ -11468,7 +11471,7 @@
    <parameters effLength="0.33"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH08" pos="29.0" type="QUAD">
-   <parameters effLength="0.505" field="-3.54599"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="-3.54599"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM08" pos="29.383197" type="MARKER">
    <parameters/>
@@ -11477,13 +11480,13 @@
    <parameters effLength="0.33"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV09" pos="33.0" type="QUAD">
-   <parameters effLength="0.505" field="3.15906"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="3.15906"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM09" pos="33.383197" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH10" pos="37.0" type="QUAD">
-   <parameters effLength="0.505" field="-2.94351"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="-2.94351"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM10" pos="37.383197" type="MARKER">
    <parameters/>
@@ -11492,7 +11495,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV11" pos="41.5" type="QUAD">
-   <parameters effLength="0.505" field="2.4639"/>
+   <parameters aperture="0.240" aprt_type="1" effLength="0.505" field="2.4639"/>
   </accElement>
  </HEBT1>
  <HEBT2 bpmFrequency="4.025E8" length="132.053806" name="HEBT2">
@@ -11503,13 +11506,13 @@
    <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-0.001403," poles="1.0," skews="0.0," theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH12" pos="6.860119" type="QUAD">
-   <parameters effLength="0.5" field="2.219343130330302"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.5" field="2.219343130330302"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DH12" pos="10.276726" type="BEND">
    <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-6.38E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV13" pos="14.193333" type="QUAD">
-   <parameters effLength="0.5" field="-2.0701018709497716"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.5" field="-2.0701018709497716"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DH13" pos="17.60994" type="BEND">
    <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-8.47E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207"/>
@@ -11518,7 +11521,7 @@
    <parameters effLength="0.538"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH14" pos="21.526546" type="QUAD">
-   <parameters effLength="0.5" field="2.219343130330302"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.5" field="2.219343130330302"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DH14" pos="24.943157" type="BEND">
    <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="1.3E-5," poles="1.0," skews="0.0," theta="-0.19634954084936207"/>
@@ -11527,7 +11530,7 @@
    <parameters effLength="0.538"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV15" pos="28.859768" type="QUAD">
-   <parameters effLength="0.5" field="-2.0701018709497716"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.5" field="-2.0701018709497716"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DH15" pos="32.276379" type="BEND">
    <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-6.36E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207"/>
@@ -11542,7 +11545,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH16" pos="36.192989" type="QUAD">
-   <parameters effLength="0.5" field="2.219343130330302"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.5" field="2.219343130330302"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DH16" pos="39.6096" type="BEND">
    <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="4.14E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207"/>
@@ -11554,7 +11557,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV17" pos="43.526211" type="QUAD">
-   <parameters effLength="0.5" field="-2.0701018709497716"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.5" field="-2.0701018709497716"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DH17" pos="46.942821" type="BEND">
    <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="1.14E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207"/>
@@ -11563,7 +11566,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH18" pos="50.859432" type="QUAD">
-   <parameters effLength="0.5" field="2.219343130330302"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.5" field="2.219343130330302"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DH18" pos="54.276043" type="BEND">
    <parameters ea1="-0.09817477042468103" ea2="-0.09817477042468103" effLength="5.432" kls="-4.12E-4," poles="1.0," skews="0.0," theta="-0.19634954084936207"/>
@@ -11572,13 +11575,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV19" pos="58.192654" type="QUAD">
-   <parameters effLength="0.5" field="-2.0701018709497716"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.5" field="-2.0701018709497716"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BSM19" pos="59.298" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH20" pos="63.692654" type="QUAD">
-   <parameters effLength="0.505" field="2.4488786935847133"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="2.4488786935847133"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM20" pos="64.075814" type="MARKER">
    <parameters/>
@@ -11590,7 +11593,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV21" pos="68.692654" type="QUAD">
-   <parameters effLength="0.505" field="-2.5798161118205285"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="-2.5798161118205285"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM21" pos="69.075814" type="MARKER">
    <parameters/>
@@ -11602,7 +11605,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH22" pos="73.192654" type="QUAD">
-   <parameters effLength="0.505" field="2.9729277865278836"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="2.9729277865278836"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM22" pos="73.575814" type="MARKER">
    <parameters/>
@@ -11614,7 +11617,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV23" pos="77.692654" type="QUAD">
-   <parameters effLength="0.505" field="-2.8037353976964186"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="-2.8037353976964186"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM23" pos="78.075814" type="MARKER">
    <parameters/>
@@ -11626,7 +11629,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH24" pos="82.192654" type="QUAD">
-   <parameters effLength="0.505" field="3.446954607217562"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="3.446954607217562"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM24" pos="82.575814" type="MARKER">
    <parameters/>
@@ -11638,7 +11641,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV25" pos="86.192654" type="QUAD">
-   <parameters effLength="0.505" field="-3.240630311943467"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="-3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM25" pos="86.575814" type="MARKER">
    <parameters/>
@@ -11647,19 +11650,19 @@
    <parameters ea1="0.07640056627557539" ea2="0.07640056627557539" effLength="4.13" kls="-1.79E-4," poles="1.0," skews="0.0," theta="0.15280113255115077"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH26" pos="92.336689" type="QUAD">
-   <parameters effLength="0.505" field="3.25169354612548"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="3.25169354612548"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM26" pos="92.719834" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV27" pos="96.336689" type="QUAD">
-   <parameters effLength="0.505" field="-3.240630311943467"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="-3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM27" pos="96.719834" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH28" pos="100.336689" type="QUAD">
-   <parameters effLength="0.505" field="3.25169354612548"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="3.25169354612548"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM28" pos="100.719834" type="MARKER">
    <parameters/>
@@ -11668,7 +11671,7 @@
    <parameters effLength="0.33"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV29" pos="104.336689" type="QUAD">
-   <parameters effLength="0.505" field="-3.240630311943467"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="-3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM29" pos="104.719834" type="MARKER">
    <parameters/>
@@ -11677,7 +11680,7 @@
    <parameters effLength="0.33"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH30" pos="107.836689" type="QUAD">
-   <parameters effLength="0.505" field="4.073370902047217"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="4.073370902047217"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM30" pos="108.219834" type="MARKER">
    <parameters/>
@@ -11686,7 +11689,7 @@
    <parameters effLength="0.33"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV31" pos="111.836689" type="QUAD">
-   <parameters effLength="0.505" field="-3.240630311943467"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="-3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM31" pos="112.219834" type="MARKER">
    <parameters/>
@@ -11695,7 +11698,7 @@
    <parameters effLength="0.33"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH32" pos="115.836689" type="QUAD">
-   <parameters effLength="0.505" field="3.25169354612548"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="3.25169354612548"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM32" pos="116.219834" type="MARKER">
    <parameters/>
@@ -11710,10 +11713,10 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QV33" pos="122.451694" type="QUAD">
-   <parameters effLength="0.505" field="-5.294947104878765"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="-5.294947104878765"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:QH34" pos="123.311695" type="QUAD">
-   <parameters effLength="0.505" field="4.7887321558919504"/>
+   <parameters aperture="0.420" aprt_type="1" effLength="0.505" field="4.7887321558919504"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:InjSptm" pos="126.343479" type="BEND">
    <parameters ea1="0.0" ea2="0.0" effLength="3.064" kls="0.0," poles="1.0," skews="0.0," theta="-0.11084586079415987"/>
@@ -11724,5 +11727,5 @@
   <accElement length="0.0" name="Ring_Inj:Foil" pos="131.053695" type="MARKER">
    <parameters/>
   </accElement>
- </HEBT2> 
+ </HEBT2>
 </sns>
