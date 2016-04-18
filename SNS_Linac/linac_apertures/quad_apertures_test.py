@@ -26,12 +26,41 @@ from orbit.py_linac.lattice_modifications import AddMEBTChopperPlatesAperturesTo
 
 from orbit.lattice import AccLattice, AccActionsContainer
 
+from orbit.py_linac.lattice import BaseLinacNode
+
 from orbit.bunch_generators import TwissContainer
 from orbit.bunch_generators import WaterBagDist3D
 from orbit.bunch_generators import TwissAnalysis
 
 from bunch import Bunch
 from bunch import BunchTwissAnalysis
+
+
+class LostBunchDumpNode(BaseLinacNode):
+	"""
+	The class LostBunchDumpNode writes the information from the lostbunch
+	to the file.
+	"""
+	def __init__(self, name = "LostBunchDump"):
+		BaseLinacNode.__init__(self,name)
+		self.file_name = "lost_bunch.dat"
+	
+	def setFileName(self,file_name):
+		self.file_name = file_name
+		
+	def getFileName(self):
+		return self.file_name
+	
+	def track(self, paramsDict):
+		if(paramsDict.has_key("lostbunch")):
+			lostbunch = paramsDict["lostbunch"]
+			lostbunch.dumpBunch(self.file_name)
+
+	def trackDesign(self, paramsDict):
+		"""
+		This method does nothing for this class.
+		"""
+		pass
 
 #-------------------------------------------
 # START of Script
@@ -76,8 +105,11 @@ for node in nodes:
 	print "%35s      start stop L = %10.4f %10.4f    %10.4f "%(node.getName(),posBefore,posAfter,(posAfter-posBefore))
 
 #----------------------------------------------------------
-#      add Aperture nodes to the quads in the linac lattice
-#      add Aperture nodes to the quads in the linac lattice
+#      1. add Aperture nodes to the quads in the linac lattice
+#      2. add Aperture nodes to the MEBT chopper entrance/exit plates 
+#         in the linac lattice
+#      3. add Aperture nodes to the MEBT scrapers (H and V)
+#      4. add a LostBunchDumpNode to one of the chopper plate
 #----------------------------------------------------------
 
 print "===== Aperture Nodes ======="
@@ -86,12 +118,25 @@ aprtNodes = AddMEBTChopperPlatesAperturesToSNS_Lattice(accLattice,aprtNodes)
 x_size = 0.042
 y_size = 0.042
 aprtNodes = AddScrapersAperturesToLattice(accLattice,"MEBT_Diag:H_SCRP",x_size,y_size,aprtNodes)
+
 x_size = 0.042
 y_size = 0.042
 aprtNodes = AddScrapersAperturesToLattice(accLattice,"MEBT_Diag:V_SCRP",x_size,y_size,aprtNodes)
 
 for node in aprtNodes:
 	print "aprt=",node.getName()," pos =",node.getPosition()
+
+#---- set the Lost Bunch Dump Node to see the one of the apertures effect 
+aprt_node_1 = None
+for node in aprtNodes:	
+	if(node.getName().find("MEBT:ChpPlt:Entr") >= 0):
+		aprt_node_1 = node
+		break
+if(aprt_node_1 != None):
+	dumpNode = LostBunchDumpNode()
+	dumpNode.setFileName("lost_bunch_chpplt.dat")
+	dumpNode.setSequence(aprt_node_1.getSequence())
+	aprt_node_1.addChildNode(dumpNode,node.EXIT)
 
 #-----------------------------------------------------------
 #    Bunch Generation
@@ -118,7 +163,7 @@ macrosize /= N_particles
 
 #---- we increase the emittances to see apertures effects
 emittX *= 5.
-emittY *= 5.
+emittY *= 10.
 
 twissX = TwissContainer(alphaX,betaX,emittX)
 twissY = TwissContainer(alphaY,betaY,emittY)
