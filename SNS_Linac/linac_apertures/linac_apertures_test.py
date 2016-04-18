@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #--------------------------------------------------------
-# Test of the Linac Aperture for quads
+# Test of the Linac Aperture for quads and scrapers.
 # The example includes quads with overlapping fields and the lost bunch.
 # The user can comment out the parts with these quads or the lost bunch 
 # in the paramsDict dictionary.
