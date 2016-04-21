@@ -3,6 +3,8 @@
 # two bunches that are the states of the bunch at two
 # different places in the lattice. The matrix is a 7x7 matrix
 # that transforms the particles coordinates.
+#
+# This example also includes the Twiss filtering function.
 ##############################################################
 
 import math
@@ -32,12 +34,16 @@ print "Start."
 #------------------------------
 # Initial Bunch
 #------------------------------
-nParticles = 10
+nParticles = 10000
 b_in = Bunch()
+b_in.addPartAttr("macrosize")
+b_in_has_ms = b_in.hasPartAttr("macrosize")
 for i in range(nParticles):
 	(x,xp,y,yp,z,dE) = (random.random(),random.random(),random.random(),random.random(),random.random(),random.random())
 	b_in.addParticle(x,xp,y,yp,z,dE)
-	
+	if(b_in_has_ms):
+		b_in.partAttrValue("macrosize", i, 0, random.random())
+b_in.addParticle(0.,0.,0.,0.,0.,0.)	
 #----set up ids
 ParticleIdNumber.addParticleIdNumbers(b_in)
 
@@ -68,15 +74,50 @@ for i in range(nParticles):
 	b_out.addParticle(x,xp,y,yp,z,dE)
 	part_id = b_in.partAttrValue("ParticleIdNumber", i, 0)
 	b_out.partAttrValue("ParticleIdNumber", i, 0, part_id)
+	if(b_in_has_ms):
+		m_size = b_in.partAttrValue("macrosize", i, 0)
+		b_out.partAttrValue("macrosize", i, 0, m_size)
 
-b_out.deleteParticleFast(int(nParticles*0.5))
-b_out.deleteParticleFast(int(nParticles*0.3))
+#---- let's remove 20% of the particles from the out-bunch (they are lost!)
+n_deleted = int(nParticles*0.2)
+for ind in range(n_deleted):
+	ind = int(nParticles*random.random())
+	if(ind > nParticles-1): ind = nParticles-1
+	b_out.deleteParticleFast(ind)
 
-#-----get the matrix
-mtrxA = Matrix(7,7)
-n_part_analysis = bunch_utils_functions.trasportMtrx(b_in,b_out,mtrxA)
-print "Total N=",n_part_analysis
-printM(mtrxA, "Transp. M ")
+b_out.compress()
+b_in.compress()
+
+print "debug before filtering n_part in ==in == bunch=",b_in.getSizeGlobal()
+print "debug before filtering n_part in ==out== bunch=",b_out.getSizeGlobal()
+
+#----- Twiss filtering. 
+#----- bunch_utils_functions.bunchTwissFiltering(b_in,b_bad,coeff_x,coeff_y,coeff_z)
+#----- b_bad - collection of removed macro-particles
+#----- coeff_x the cutt-off coefficients for the value 
+#------(gamma*x^2+2*alpha*x*xp+beta*xp^2)/(2*emittance)
+#------ for the x-direction
+bunch_bad = Bunch()
+bunch_utils_functions.bunchTwissFiltering(b_in,bunch_bad,1.0,-1.0,-1.0)
+bunch_utils_functions.bunchTwissFiltering(b_out,bunch_bad,5.0,-1.0,-1.0)
+
+print "debug after  filtering n_part in ==in == bunch=",b_in.getSizeGlobal()
+print "debug after  filtering n_part in ==out== bunch=",b_out.getSizeGlobal()
+
+
+count = 0
+while(1 < 2):
+
+	#-----get the matrix
+	mtrxA = Matrix(7,7)
+	n_part_analysis = bunch_utils_functions.trasportMtrx(b_in,b_out,mtrxA,1,1,1)
+
+	#==== we can use transport matrix generator function without Twiss weights for macroparticles 
+	#n_part_analysis = bunch_utils_functions.trasportMtrx(b_in,b_out,mtrxA)
+
+	printM(mtrxA, "Transp. M ")
+	print "Total N=",n_part_analysis," count=",count
+	count += 1
 
 print "Stop."
 
