@@ -33,6 +33,15 @@ print " child2 int arr =",child2.intArrayValue("arr_double1")
 print " child2 double arr =",child2.doubleArrayValue("arr_double1")
 print " child2 double val =",child2.doubleArrayValue("val")
 print " child2 double val =",child2.doubleValue("val")
+print "======================================================================="
+#-----Deep Copy of XmlDataAdaptor
+xml_data_adaptor_copy = xml_data_adaptor_new.getDeepCopy()
+child1 = xml_data_adaptor_copy.childAdaptors("child1")[0]
+child2 = child1.childAdaptors("child2")[0]
+print " child2 int arr =",child2.intArrayValue("arr_double1")
+print " child2 double arr =",child2.doubleArrayValue("arr_double1")
+print " child2 double val =",child2.doubleArrayValue("val")
+print " child2 double val =",child2.doubleValue("val")
 
 print "Stop."
 
