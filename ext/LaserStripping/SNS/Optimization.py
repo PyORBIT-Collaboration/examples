@@ -25,38 +25,84 @@ orbit_path = os.environ["ORBIT_ROOT"]
 
 
 
+def getKinEnergy(bunch):
 
-#----------------------Beginning of the beam parameters----------------------#
+    op = mpi_op.MPI_SUM
+    data_type = mpi_datatype.MPI_DOUBLE
+    mpi_size = orbit_mpi.MPI_Comm_size(mpi_comm.MPI_COMM_WORLD)
+    size = bunch.getSize()
+
+    pz = 0
+    for i in range(size):
+        pz += bunch.pz(i)
+    pz /= size
+    
+    pz = orbit_mpi.MPI_Allreduce(pz,data_type,op,mpi_comm.MPI_COMM_WORLD)
+    pz /= mpi_size
+    
+    Tk = math.sqrt(bunch.mass()**2 + pz**2) - bunch.mass()
+    
+    return Tk
+   
+
+
+
+
+
+#----------------------H- beam parameters----------------------#
 
 b = BunchGen()
 
-b.N_part = 100
+b.N_part = 250
 
-b.TK= 1.0                                    # [GeV]
+b.TK = 0.982                                  # [GeV]
+
 
 b.mass = 0.938256 + 0.000511                  # [GeV]
 b.charge = 0                                  # [e]
 
-b.alphaX = 0.                                 # [rad]
-b.betaX = 25.0                                # [m]
-b.emtX = 0.2e-6                             # [m*rad]
-b.cutOffX = math.sqrt(b.emtX*b.betaX)*3.0     # [m]
+b.alphaX = 0.0                                 # [rad]
+b.betaX = 1.0                                # [m]
+b.emtX = 0.09e-6                             # [m*rad] non - normilized
+
+b.dispD = -0.0                                  # [m]
+b.dispDP = -2.7                                # [rad]
+
+b.alphaY = -0.0                              # [rad]
+b.betaY = 1.0                                 # [m]
+b.emtY = 0.09e-6                             # [m*rad] non - normilized
+
+b.betaY = 0.0002**2/b.emtY
+#b.betaX = 0.0010**2/b.emtX
+print b.betaX 
 
 
-b.alphaY = 2.0                              # [rad]
-b.betaY =0.75                                 # [m]
-b.emtY = 0.2e-6                             # [m*rad]
-b.cutOffY = math.sqrt(b.emtY*b.betaY)*3.0     # [m]
+
+
+E = b.mass + b.TK
+P = math.sqrt(E*E - b.mass*b.mass)
+beta = P/E
+g = E/b.mass
+vz = 299792458*beta
+
+#print b.emtY*beta*g
+#sys.exit
+
+sigmaZ_beam = 25e-12*vz/(2*math.sqrt(2*math.log(2))) *1      #[m] 
+
+T0 = 0.185
+E0 = b.mass + T0
+pz0 = math.sqrt(E0**2 - b.mass**2)
+beta0 = pz0/E0
+g0 = E0/b.mass
+
+e0Z = 1.0e-6
+b.emtZ = e0Z*(beta0*g0**3)/(beta*g**3)
+b.alphaZ = 0.0
+b.betaZ = sigmaZ_beam**2/b.emtZ
 
 
 
-b.relativeSpread = 0.5e-3
-
-b.dispD = 0.                                  # [m]
-b.dispDP = -2.6                                # [rad]
-
-b.sigma_beam = 30e-12/(2*math.sqrt(2*math.log(2)))                          #[m]
-b.cutOffZ = 3*b.sigma_beam
 
 
 
@@ -85,23 +131,21 @@ H13.Bx = 0.001
 
 
 
-
-
-
-
 H13.bunch = b.getBunch(0)
+#H13.bunch = Bunch()
+#H13.bunch.readBunch("/home/tg4/temp/bls")
 
 #H13.Nevol = 1000
 #H13.print_file = True
 
 H13.TK = b.TK
-H13.sigma_beam = b.sigma_beam
+#H13.TK = getKinEnergy(H13.bunch)
+H13.sigmaZ_beam = sigmaZ_beam
 
-H13.n_sigma = 3
-H13.n_step = 100000
+H13.n_step = 10000
 
-H13.la = 355.0e-9                               # [m]
-H13.power = 2.2e6                               # [W]
+H13.la = 355.0e-9                    # [m]
+H13.power = 1.0e6                               # [W]
 
 H13.fx = -4.5                                      # [m]
 H13.fy = -4.5                                      # [m]
@@ -109,16 +153,16 @@ H13.fy = -4.5                                      # [m]
 H13.wx = 370.0e-6                               # [m]
 H13.wy = 700.0e-6                               # [m]
 
-    
-H13.env_sigma = 55e-12/(2*math.sqrt(2*math.log(2)))  #[m]
+
+H13.env_sigma = 35.0e-12/(2*math.sqrt(2*math.log(2))) #[m]
 
 
 
-H13.rx = 0.8580e-3                               # [m]
-H13.ry = 0.8580e-3                               # [m]
+H13.rx = 0.857e-3                               # [m]
+H13.ry = 0.857e-3                               # [m]
 
-H13.ax = 0.3442e-3                               # [rad]
-H13.ay = 0.3442e-3                               # [rad]
+H13.ax = 0.341e-3                               # [rad]
+H13.ay = 0.341e-3                               # [rad]
 
 #----------------------End of the Laser field and excitation parameters of H0 atom----------------------#
 
@@ -132,10 +176,10 @@ H13.ay = 0.3442e-3                               # [rad]
 name_args,guess,increments,name_args_pr,print_factor = [],[],[],[],[]
 
 #name_args.append('env_sigma'),  guess.append(15.0e-12), increments.append(24.0e-13),name_args_pr.append('env_sigma[ps]'),print_factor.append(1e12)
-name_args.append('rx'),         guess.append(1.69e-3),   increments.append(1.0e-4),  name_args_pr.append('rx[mm]'),print_factor.append(1e3)
-#name_args.append('ry'),         guess.append(0.77e-3),   increments.append(1.0e-4),  name_args_pr.append('ry[mm]'),print_factor.append(1e3)
-name_args.append('ax'),         guess.append(0.36e-3),   increments.append(1.0e-4),  name_args_pr.append('ax[mrad]'),print_factor.append(1e3)
-#name_args.append('ay'),         guess.append(0.24e-3),   increments.append(1.0e-4),  name_args_pr.append('ay[mrad]'),print_factor.append(1e3)
+name_args.append('rx'),         guess.append(0.2e-3),   increments.append(0.05e-3),  name_args_pr.append('rx[mm]'),print_factor.append(1e3)
+#name_args.append('ry'),         guess.append(1.3e-3),   increments.append(1.0e-4),  name_args_pr.append('ry[mm]'),print_factor.append(1e3)
+name_args.append('ax'),         guess.append(0.5e-3),   increments.append(0.1e-3),  name_args_pr.append('ax[mrad]'),print_factor.append(1e3)
+#name_args.append('ay'),         guess.append(0.45e-3),   increments.append(1.0e-4),  name_args_pr.append('ay[mrad]'),print_factor.append(1e3)
 #name_args.append('Bx'),         guess.append(2.00),      increments.append(0.1),     name_args_pr.append('Bx[T]'),print_factor.append(1)
 
 pf = printf("test.dat",["N_step","cpu_time","W[MW]"] + name_args_pr + ["Popul", "+- Pop", "P_ioniz", "+- P_ioniz"])
@@ -144,12 +188,11 @@ pf = printf("test.dat",["N_step","cpu_time","W[MW]"] + name_args_pr + ["Popul", 
 
 #powers = [0.1e6, 0.2e6, 0.3e6, 0.4e6, 0.5e6, 0.6e6, 0.7e6, 0.8e6, 0.9e6, 1.0e6]
 #powers = [0.5e6]
-#powers = [0.1e6, 0.2e6, 0.3e6, 0.4e6, 0.5e6, 0.6e6, 0.7e6, 0.8e6, 0.9e6, 1.0e6, 1.1e6, 1.2e6, 1.3e6, 1.4e6, 1.5e6, 1.6e6, 1.7e6, 1.8e6, 1.9e6, 2.0e6]
+powers = [0.1e6, 0.2e6, 0.3e6, 0.4e6, 0.5e6, 0.6e6, 0.7e6, 0.8e6, 0.9e6, 1.0e6, 1.1e6, 1.2e6, 1.3e6, 1.4e6, 1.5e6, 1.6e6, 1.7e6, 1.8e6, 1.9e6, 2.0e6]
 
-ne = 23
-powers = []
-for i in range(1,ne):
-    powers.append(i*0.1e6)
+
+
+#powers = [0.5e6, 1.0e6, 1.5e6, 2.0e6]
 
 def opt_func(args):
     
@@ -163,8 +206,8 @@ def opt_func(args):
     
     sum_ioniz = 0
     sum_pop2 = 0
-    for i in range(ne-1):
-        H13.power = powers[i]
+    for power in powers:
+        H13.power = power
 #        H13.power = 3e6 
         pop, sigma_pop, p_ioniz, sigma_p_ioniz = H13.population()
         sum_ioniz += p_ioniz
@@ -178,11 +221,11 @@ def opt_func(args):
     pr_args = []
     for i in range(len(args)):
         pr_args.append(print_factor[i]*H13.__dict__[name_args[i]])
-    pf.fdata([H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver"] + pr_args + [sum_pop2/(ne - 1),sigma_pop,sum_ioniz/(ne - 1), sigma_p_ioniz])
+    pf.fdata([H13.count,orbit_mpi.MPI_Wtime() - time_start,"aver"] + pr_args + [sum_pop2/len(powers),sigma_pop,sum_ioniz/len(powers), sigma_p_ioniz])
     pf.fdata([""])
     
-#    return -sum_ioniz/(ne-1)
-    return -sum_pop2/(ne-1)
+    #print -sum_ioniz/(ne-1)
+    return -sum_pop2/len(powers)
 
 #-------------------definition of the optimization function----------------------------#
 
@@ -249,14 +292,27 @@ s = Simplex(opt_func, guess, increments)
 #-----------------------Single point calculation-----------------------------------------------------
 #print "start"
 #print  H13.population() 
+#sys.exit()
 
 
-for i in range(0,50):
-    H13.Bx = i*0.001+1.0e-10       
+if(rank==0):    
+    f = open("ar.txt",'a',0)
+    
+for i in range(1, 100):
+    for j in range(0, 50):
+        
+        H13.rx = 0.00001*i
+        H13.ax = 0.0001*j
 
-    pop, sigma_pop, p_ioniz, sigma_p_ioniz = H13.population()
-    if(rank==0):    print i*0.001,"  ",pop,"  ",sigma_pop
+        H13.ry = H13.rx
+        H13.ay = H13.ax
 
+        pop, sigma_pop, p_ioniz, sigma_p_ioniz = H13.population()
+        if(rank==0):    
+            f.write(str(H13.rx)+"     "+str(H13.ax)+"     "+str(pop)+"\n")
+                #print str(H13.rx)+"   "+str(H13.ax)+"     "+str(pop)
+if(rank==0):    
+    f.close()
 #-----------------------End of single point calculation-----------------------------------------------
 
 
