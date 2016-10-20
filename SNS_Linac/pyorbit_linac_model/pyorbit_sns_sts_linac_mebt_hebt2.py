@@ -34,12 +34,16 @@ import time
 
 from orbit.py_linac.linac_parsers import SNS_LinacLatticeFactory
 
-from linac import BaseRfGap, MatrixRfGap
+# from linac import the C++ RF gap classes
+from linac import BaseRfGap, MatrixRfGap, RfGapTTF
 
 from orbit.bunch_generators import TwissContainer
 from orbit.bunch_generators import WaterBagDist3D, GaussDist3D, KVDist3D
 
 from orbit.py_linac.lattice_modifications import Add_quad_apertures_to_lattice
+from orbit.py_linac.lattice_modifications import Add_rfgap_apertures_to_lattice
+from orbit.py_linac.lattice_modifications import AddMEBTChopperPlatesAperturesToSNS_Lattice
+from orbit.py_linac.lattice_modifications import AddScrapersAperturesToLattice
 
 from bunch import Bunch
 from bunch import BunchTwissAnalysis
@@ -91,22 +95,30 @@ def setSynchPhase(bunch_in,accLattice,cav_name,synchPhaseDeg):
 random.seed(100)
 
 names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
-names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4"]
-names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"]
-names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
 
 #---- create the factory instance
 sns_linac_factory = SNS_LinacLatticeFactory()
 sns_linac_factory.setMaxDriftLength(0.02)
 
 #---- the XML file name with the structure
-xml_file_name = "../sns_linac_xml/sns_linac.xml"
-xml_file_name = "../sns_linac_xml/sns_sts_linac_with_aprt.xml"
+xml_file_name = "../sns_linac_xml/sns_sts_linac.xml"
 
 #---- make lattice from XML file 
 accLattice = sns_linac_factory.getLinacAccLattice(names,xml_file_name)
 
 print "Linac lattice is ready. L=",accLattice.getLength()
+
+#----set up RF Gap Model -------------
+#---- There are three available models at this moment
+#---- BaseRfGap  uses only E0TL*cos(phi)*J0(kr) with E0TL = const
+#---- MatrixRfGap uses a matrix approach like envelope codes
+#---- RfGapTTF uses Transit Time Factors (TTF) like PARMILA
+#cppGapModel = BaseRfGap
+#cppGapModel = MatrixRfGap
+cppGapModel = RfGapTTF
+rf_gaps = accLattice.getRF_Gaps()
+for rf_gap in rf_gaps:
+	rf_gap.setCppGapModel(cppGapModel())
 
 #-----------------------------------------------------
 # Set up Space Charge Acc Nodes
@@ -139,23 +151,34 @@ for sc_node in space_charge_nodes:
 	if(scL < min_sc_length): min_sc_length = scL
 print "maximal SC length =",max_sc_length,"  min=",min_sc_length
 
-
-print "===== Aperture Nodes ======="
+print "===== Aperture Nodes START  ======="
 aprtNodes = Add_quad_apertures_to_lattice(accLattice)
+aprtNodes = Add_rfgap_apertures_to_lattice(accLattice,aprtNodes)
+aprtNodes = AddMEBTChopperPlatesAperturesToSNS_Lattice(accLattice,aprtNodes)
 
-#for node in aprtNodes:
-#	print "aprt=",node.getName()," pos =",node.getPosition()
-	
+x_size = 0.042
+y_size = 0.042
+aprtNodes = AddScrapersAperturesToLattice(accLattice,"MEBT_Diag:H_SCRP",x_size,y_size,aprtNodes)
+
+x_size = 0.042
+y_size = 0.042
+aprtNodes = AddScrapersAperturesToLattice(accLattice,"MEBT_Diag:V_SCRP",x_size,y_size,aprtNodes)
+
+"""
+for node in aprtNodes:
+	print "aprt=",node.getName()," pos =",node.getPosition()
+"""
+
 #------ definitions of the activated cavities with Amp = 1 
 sclHigh_accSeq = accLattice.getSequence("SCLHigh")
 cav_names = []
 cav_names = ["SCL:Cav32a","SCL:Cav32b","SCL:Cav32c","SCL:Cav32d",] + cav_names
-#cav_names = ["SCL:Cav31a","SCL:Cav31b","SCL:Cav31c","SCL:Cav31d",] + cav_names
-#cav_names = ["SCL:Cav30a","SCL:Cav30b","SCL:Cav30c","SCL:Cav30d",] + cav_names
-#cav_names = ["SCL:Cav29a","SCL:Cav29b","SCL:Cav29c","SCL:Cav29d",] + cav_names
-#cav_names = ["SCL:Cav28a","SCL:Cav28b","SCL:Cav28c","SCL:Cav28d",] + cav_names
-#cav_names = ["SCL:Cav27a","SCL:Cav27b","SCL:Cav27c","SCL:Cav27d",] + cav_names
-#cav_names = ["SCL:Cav25a","SCL:Cav25b","SCL:Cav25c","SCL:Cav25d",] + cav_names
+cav_names = ["SCL:Cav31a","SCL:Cav31b","SCL:Cav31c","SCL:Cav31d",] + cav_names
+cav_names = ["SCL:Cav30a","SCL:Cav30b","SCL:Cav30c","SCL:Cav30d",] + cav_names
+cav_names = ["SCL:Cav29a","SCL:Cav29b","SCL:Cav29c","SCL:Cav29d",] + cav_names
+cav_names = ["SCL:Cav28a","SCL:Cav28b","SCL:Cav28c","SCL:Cav28d",] + cav_names
+cav_names = ["SCL:Cav27a","SCL:Cav27b","SCL:Cav27c","SCL:Cav27d",] + cav_names
+cav_names = ["SCL:Cav25a","SCL:Cav25b","SCL:Cav25c","SCL:Cav25d",] + cav_names
 
 rf_cavs = []
 for cav_name in cav_names:
@@ -167,6 +190,7 @@ for cav_name in cav_names:
 #------ definitions synchronous phases for the activated cavities with Amp = 1 	
 cav_synch_phases = {}
 
+"""
 cav_synch_phases["SCL:Cav25a"] = -20.0
 cav_synch_phases["SCL:Cav25b"] = -20.0
 cav_synch_phases["SCL:Cav25c"] = -20.0
@@ -199,7 +223,7 @@ cav_synch_phases["SCL:Cav32c"] = -30.0
 cav_synch_phases["SCL:Cav32d"] =  +0.0
 #------scl32 added -----stop----
 
-"""
+
 #------scl31 added -----start----
 cav_synch_phases["SCL:Cav31a"] = -30.0
 cav_synch_phases["SCL:Cav31b"] = +30.0
@@ -311,7 +335,7 @@ cav_synch_phases["SCL:Cav32b"] = -30.0
 cav_synch_phases["SCL:Cav32c"] = -30.0
 cav_synch_phases["SCL:Cav32d"] = -30.0
 #------scl27 added -----stop----
-
+"""
 
 #------scl25 added -----start----
 cav_synch_phases["SCL:Cav25a"] = -30.0
@@ -349,7 +373,7 @@ cav_synch_phases["SCL:Cav32b"] = -30.0
 cav_synch_phases["SCL:Cav32c"] = -30.0
 cav_synch_phases["SCL:Cav32d"] = -30.0
 #------scl25 added -----stop----
-"""
+
 
 #-----TWISS Parameters at the entrance of MEBT ---------------
 # transverse emittances are unnormalized and in pi*mm*mrad
@@ -404,12 +428,11 @@ bunch_gen.setKinEnergy(e_kin_ini)
 #set the beam peak current in mA
 bunch_gen.setBeamCurrent(50.0)
 
-#bunch_in = bunch_gen.getBunch(nParticles = 20000, distributorClass = WaterBagDist3D)
-bunch_in = bunch_gen.getBunch(nParticles = 20000, distributorClass = GaussDist3D)
-#bunch_in = bunch_gen.getBunch(nParticles = 20000, distributorClass = KVDist3D)
+bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = WaterBagDist3D)
+#bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = GaussDist3D)
+#bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = KVDist3D)
 
 print "Bunch Generation completed."
-
 
 for cav_name in cav_names:
 	cav_synch_phase = cav_synch_phases[cav_name]
@@ -418,6 +441,7 @@ for cav_name in cav_names:
 #set up design
 accLattice.trackDesignBunch(bunch_in)
 
+#----- Print out the average phases for the RF gaps in SCL RF Cavities
 #----- the charge of H- is negative, so the phases are shifted by -180.
 cavs = accLattice.getRF_Cavities()
 for cav in cavs:
@@ -427,83 +451,90 @@ for cav in cavs:
 print "Design tracking completed."
 
 #track through the lattice 
-paramsDict = {"test_pos":0.,"count":0}
+paramsDict = {"old_pos":-1.,"count":0,"pos_step":0.1}
 actionContainer = AccActionsContainer("Test Design Bunch Tracking")
+
+
+pos_start = 0.
 
 twiss_analysis = BunchTwissAnalysis()
 
-print "   N           node           position         sizeX       sizeY    sizeZ  sizeZdeg  sizeXP   sizeYP   size_dE   eKin Nparts"
-file_out = open("pyorbit_scl_sizes_ekin.dat","w")
-file_out.write(" N           node   position  sizeX  sizeY  sizeZ  sizeZdeg  sizeXP  sizeYP sizedE  eKin Nparts \n")
+file_out = open("pyorbit_sts_twiss_sizes_ekin.dat","w")
+
+s = " Node   position "
+s += "   alphaX betaX emittX  normEmittX"
+s += "   alphaY betaY emittY  normEmittY"
+s += "   alphaZ betaZ emittZ  emittZphiMeV"
+s += "   sizeX sizeY sizeZ_deg"
+s += "   eKin Nparts "
+file_out.write(s+"\n")
+print " N node   position    sizeX  sizeY  sizeZdeg  eKin Nparts "
 
 def action_entrance(paramsDict):
-	if(isinstance(paramsDict["parentNode"],AccLattice)):
-		node = paramsDict["node"]
-		pos = paramsDict["test_pos"]
-		bunch = paramsDict["bunch"]
-		twiss_analysis.analyzeBunch(bunch)
-		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
-		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-		z_rms_deg = bunch_gen.getZtoPhaseCoeff(bunch)*z_rms/1000.0
-		xp_rms = math.sqrt(twiss_analysis.getTwiss(0)[2]*twiss_analysis.getTwiss(0)[3])*1000.
-		yp_rms = math.sqrt(twiss_analysis.getTwiss(1)[2]*twiss_analysis.getTwiss(1)[3])*1000.
-		dE_rms = math.sqrt(twiss_analysis.getTwiss(2)[2]*twiss_analysis.getTwiss(2)[3])*1000. 
-		#emittX = twiss_analysis.getTwiss(0)[3]*1000.0*1000.0	*bunch.getSyncParticle().gamma()*bunch.getSyncParticle().beta()
-		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
-		s = " %5d  %35s  %4.5f    %5.3f  %5.3f   %5.3f    %5.3f    %5.3f  %5.3f  %7.5f  %10.6f   %8d "%(paramsDict["count"],node.getName(),pos,x_rms,y_rms,z_rms,z_rms_deg,xp_rms,yp_rms,dE_rms,eKin,bunch.getSize())
-		file_out.write(s +"\n")
-		print s	
-		
-def action_exit(paramsDict):
 	node = paramsDict["node"]
-	length = node.getLength()
-	pos = paramsDict["test_pos"] + length
-	paramsDict["test_pos"] = pos	
-	if(isinstance(paramsDict["parentNode"],AccLattice)):	
-		bunch = paramsDict["bunch"]
-		paramsDict["count"]	+= 1
-		twiss_analysis.analyzeBunch(bunch)
-		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
-		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-		z_rms_deg = bunch_gen.getZtoPhaseCoeff(bunch)*z_rms/1000.0		
-		xp_rms = math.sqrt(twiss_analysis.getTwiss(0)[2]*twiss_analysis.getTwiss(0)[3])*1000.
-		yp_rms = math.sqrt(twiss_analysis.getTwiss(1)[2]*twiss_analysis.getTwiss(1)[3])*1000.
-		dE_rms = math.sqrt(twiss_analysis.getTwiss(2)[2]*twiss_analysis.getTwiss(2)[3])*1000. 
-		alpha_z = twiss_analysis.getTwiss(2)[0]
-		#emittX = twiss_analysis.getTwiss(0)[3]*1000.0*1000.0	*bunch.getSyncParticle().gamma()*bunch.getSyncParticle().beta()
-		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
-		s = " %5d  %35s  %4.5f    %5.3f  %5.3f   %5.3f    %5.3f    %5.3f  %5.3f  %7.5f  %10.6f   %8d "%(paramsDict["count"],node.getName(),pos,x_rms,y_rms,z_rms,z_rms_deg,xp_rms,yp_rms,dE_rms,eKin,bunch.getSize())
-		file_out.write(s +"\n")
-		print s," a= %5.3f "%alpha_z
+	bunch = paramsDict["bunch"]
+	pos = paramsDict["path_length"]
+	if(paramsDict["old_pos"] == pos): return
+	if(paramsDict["old_pos"] + paramsDict["pos_step"] > pos): return
+	paramsDict["old_pos"] = pos
+	paramsDict["count"] += 1
+	gamma = bunch.getSyncParticle().gamma()
+	beta = bunch.getSyncParticle().beta()
+	twiss_analysis.analyzeBunch(bunch)
+	x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
+	y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
+	z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
+	z_to_phase_coeff = bunch_gen.getZtoPhaseCoeff(bunch)
+	z_rms_deg = z_to_phase_coeff*z_rms/1000.0
+	nParts = bunch.getSizeGlobal()
+	(alphaX,betaX,emittX) = (twiss_analysis.getTwiss(0)[0],twiss_analysis.getTwiss(0)[1],twiss_analysis.getTwiss(0)[3]*1.0e+6)
+	(alphaY,betaY,emittY) = (twiss_analysis.getTwiss(1)[0],twiss_analysis.getTwiss(1)[1],twiss_analysis.getTwiss(1)[3]*1.0e+6)
+	(alphaZ,betaZ,emittZ) = (twiss_analysis.getTwiss(2)[0],twiss_analysis.getTwiss(2)[1],twiss_analysis.getTwiss(2)[3]*1.0e+6)		 
+	norm_emittX = emittX*gamma*beta
+	norm_emittY = emittY*gamma*beta
+	#---- phi_de_emittZ will be in [pi*deg*MeV]
+	phi_de_emittZ = z_to_phase_coeff*emittZ	
+	eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
+	s = " %35s  %4.5f "%(node.getName(),pos+pos_start)
+	s += "   %6.4f  %6.4f  %6.4f  %6.4f   "%(alphaX,betaX,emittX,norm_emittX)
+	s += "   %6.4f  %6.4f  %6.4f  %6.4f   "%(alphaY,betaY,emittY,norm_emittY)
+	s += "   %6.4f  %6.4f  %6.4f  %6.4f   "%(alphaZ,betaZ,emittZ,phi_de_emittZ)
+	s += "   %5.3f  %5.3f  %5.3f "%(x_rms,y_rms,z_rms_deg)
+	s += "  %10.6f   %8d "%(eKin,nParts)
+	file_out.write(s +"\n")
+	file_out.flush()
+	s_prt = " %5d  %35s  %4.5f "%(paramsDict["count"],node.getName(),pos+pos_start)
+	s_prt += "  %5.3f  %5.3f   %5.3f "%(x_rms,y_rms,z_rms_deg)
+	s_prt += "  %10.6f   %8d "%(eKin,nParts)
+	print s_prt	
+	
+def action_exit(paramsDict):
+	action_entrance(paramsDict)
 	
 	
-#actionContainer.addAction(action_entrance, AccActionsContainer.ENTRANCE)
+actionContainer.addAction(action_entrance, AccActionsContainer.ENTRANCE)
 actionContainer.addAction(action_exit, AccActionsContainer.EXIT)
 
 time_start = time.clock()
 
+#---- If we need to repeat the tracking we can do it starting after RF SCL23d cavity
+#---- Here we do not need this, but the necessary actions are there
 
+#---- Let's find the last RF gap of SCL23d index in the lattice
 rf_cav = accLattice.getRF_Cavity("SCL:Cav23d")
 rf_gaps = rf_cav.getRF_GapNodes()
 ind_stop = accLattice.getNodeIndex(rf_gaps[len(rf_gaps)-1])
 
+#------------Track bunch to the last RF gap in SCL:Cav23d 
+accLattice.trackBunch(bunch_in, paramsDict = paramsDict, actionContainer = actionContainer,index_start = -1, index_stop = ind_stop)
 
-#------------track bunch to the last RF gap in SCL:Cav23d 
-#accLattice.trackBunch(bunch_in, paramsDict = paramsDict, actionContainer = actionContainer,index_start = -1, index_stop = ind_stop)
+#---- Dump and read the bunch into the disk if necessary
 #bunch_in.dumpBunch("bunch_sts_after_scl_23d_rg06.dat")
-#sys.exit(1)
-#--------------------------------------------------------
 
-bunch_in.deleteAllParticles()
-bunch_in.readBunch("bunch_sts_after_scl_23d_rg06.dat")
+#bunch_in.deleteAllParticles()
+#bunch_in.readBunch("bunch_sts_after_scl_23d_rg06.dat")
 
-#set up design
-accLattice.trackDesignBunch(bunch_in,None,None,ind_stop+1)
-
-paramsDict["test_pos"] = accLattice.getNodePositionsDict()[rf_gaps[len(rf_gaps)-1]][0]
-
+#------------Now track the bunch to the end
 accLattice.trackBunch(bunch_in, paramsDict = paramsDict, actionContainer = actionContainer,index_start = (ind_stop+1))
 
 time_exec = time.clock() - time_start
@@ -511,18 +542,10 @@ print "time[sec]=",time_exec
 
 file_out.close()
 
-eKin = bunch_in.getSyncParticle().kinEnergy()*1.0e+3
-twiss_analysis.analyzeBunch(bunch_in)
-(alphaX,betaX,emittX) = (twiss_analysis.getTwiss(0)[0],twiss_analysis.getTwiss(0)[1],twiss_analysis.getTwiss(0)[3])
-(alphaY,betaY,emittY) = (twiss_analysis.getTwiss(1)[0],twiss_analysis.getTwiss(1)[1],twiss_analysis.getTwiss(1)[3])
-(alphaZ,betaZ,emittZ) = (twiss_analysis.getTwiss(2)[0],twiss_analysis.getTwiss(2)[1],twiss_analysis.getTwiss(2)[3])
-
-print " ========= CCL4 exit PyORBIT Twiss =========== eKin=",eKin
-print " aplha beta emitt[mm*mrad] X= ( %6.4f , %6.4f , %6.4f ) "%(alphaX,betaX,emittX*1.0e+6)
-print " aplha beta emitt[mm*mrad] Y= ( %6.4f , %6.4f , %6.4f ) "%(alphaY,betaY,emittY*1.0e+6)
-print " aplha beta emitt[mm*MeV]  Z= ( %6.4f , %6.4f , %6.4f ) "%(alphaZ,betaZ,emittZ*1.0e+6)
-
-bunch_in.dumpBunch("bunch_sts_end_hebt2.dat")
+"""
+#-------------------------------------------------
+# Plot the phi-dE phase space at the end
+#-------------------------------------------------
 
 z_deg_arr = []
 dE_arr = []
@@ -541,7 +564,8 @@ gp('set xlabel "phi,deg"')
 gp('set ylabel "dE, MeV"')
 #gp('set pointsize 1.5')
 gp.plot(data)
-#raw_input('Please press return to stop:\n')
+raw_input('Please press return to stop:\n')
 
 sys.exit(1)
+"""
 
