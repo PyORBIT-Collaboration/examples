@@ -91,7 +91,11 @@ class SNS_Linac_BunchGenerator:
 		self.bunch.copyEmptyBunchTo(bunch)		
 		macrosize = (self.beam_current*1.0e-3/self.bunch_frequency)
 		macrosize /= (math.fabs(bunch.charge())*self.si_e_charge)
-		distributor = distributorClass(self.twiss[0],self.twiss[1],self.twiss[2], cut_off)
+		distributor = None
+		if(distributorClass == WaterBagDist3D):
+			distributor = distributorClass(self.twiss[0],self.twiss[1],self.twiss[2])
+		else:
+			distributor = distributorClass(self.twiss[0],self.twiss[1],self.twiss[2], cut_off)
 		bunch.getSyncParticle().time(0.)	
 		for i in range(nParticles):
 			(x,xp,y,yp,z,dE) = distributor.getCoordinates()
