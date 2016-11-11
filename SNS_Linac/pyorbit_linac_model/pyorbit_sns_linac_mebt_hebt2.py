@@ -2,6 +2,13 @@
 
 """
 This script will track the bunch through the SNS Linac.
+
+At the beginning the lattice can be modified by replacing
+the BaseRF_Gap nodes with AxisFieldRF_Gap nodes for 
+the selected sequences. These nodes will use the 
+RF fields at the axis of the RF gap to track the bunch.
+The usual BaseRF_Gap nodes have a zero length. 
+
 The apertures are added to the lattice.
 """
 
@@ -27,6 +34,9 @@ from orbit.py_linac.lattice_modifications import Add_quad_apertures_to_lattice
 from orbit.py_linac.lattice_modifications import Add_rfgap_apertures_to_lattice
 from orbit.py_linac.lattice_modifications import AddMEBTChopperPlatesAperturesToSNS_Lattice
 from orbit.py_linac.lattice_modifications import AddScrapersAperturesToLattice
+
+#---- BaseRF_Gap to  AxisFieldRF_Gap replacement  ---- It is a possibility ----------
+from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_to_AxisField_Nodes
 
 from sns_linac_bunch_generator import SNS_Linac_BunchGenerator
 
@@ -57,6 +67,21 @@ cppGapModel = RfGapTTF
 rf_gaps = accLattice.getRF_Gaps()
 for rf_gap in rf_gaps:
 	rf_gap.setCppGapModel(cppGapModel())
+
+
+#------------------------------------------------------------------
+#---- BaseRF_Gap to  AxisFieldRF_Gap direct replacement
+#---- in the MEBT, CCL, SCLMed,SCLHigh  it could be done directly
+#---- because rf fields cover drifts only.
+#---- The DTL needs a special treatment.
+#------------------------------------------------------------------
+"""
+#---- axis fields files location 
+dir_location = "../sns_rf_fields/"
+Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,dir_location,["MEBT","CCL1","CCL2","CCL3","CCL4","SCLMed"])
+
+print "Linac lattice has been modified. New L[m] = ",accLattice.getLength()
+"""
 
 #-----------------------------------------------------
 # Set up Space Charge Acc Nodes
@@ -162,7 +187,7 @@ bunch_gen.setKinEnergy(e_kin_ini)
 #set the beam peak current in mA
 bunch_gen.setBeamCurrent(38.0)
 
-bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = WaterBagDist3D)
+bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = WaterBagDist3D)
 #bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = GaussDist3D)
 #bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = KVDist3D)
 
