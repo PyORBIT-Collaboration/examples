@@ -10,7 +10,7 @@ import os
 
 from orbit.py_linac.overlapping_fields import EngeFunction, SNS_MEBT_OverlappingQuadsSubst
 from orbit.py_linac.overlapping_fields import OverlappingQuadsController
-from orbit.py_linac.overlapping_fields import getGlobalField
+from orbit.py_linac.overlapping_fields import getGlobalQuadGradient
 
 from orbit.py_linac.linac_parsers import SNS_LinacLatticeFactory
 
@@ -40,7 +40,7 @@ n_points = int(length/step) + 1
 res_z_G0_G_arr = []
 for ind in range(n_points):
 	z = step*ind
-	G0 = getGlobalField(accLattice,z)
+	G0 = getGlobalQuadGradient(accLattice,z)
 	res_z_G0_G_arr.append([z,G0,0.])
 
 #--------------------------------------------------------
@@ -59,7 +59,7 @@ for node in nodes:
 
 for ind in range(n_points):
 	z = step*ind
-	G = getGlobalField(accLattice,z)
+	G = getGlobalQuadGradient(accLattice,z)
 	res_z_G0_G_arr[ind][2] = G
 
 fl_out = open("overlapping_field_test.dat","w")
