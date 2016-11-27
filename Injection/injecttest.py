@@ -3,8 +3,8 @@ import sys
 from bunch import Bunch
 from foil import Foil
 from collimator import Collimator
-from injection import InjectParts
-from injection import JohoTransverse, SNSESpreadDist
+from orbit.injection import InjectParts
+from orbit.injection import JohoTransverse, SNSESpreadDist
 from orbit.utils.orbit_mpi_utils import bunch_orbit_to_pyorbit, bunch_pyorbit_to_orbit
 print "Start."
 
