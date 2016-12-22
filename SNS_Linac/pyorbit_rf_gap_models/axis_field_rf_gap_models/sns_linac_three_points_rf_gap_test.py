@@ -29,7 +29,7 @@ from bunch import Bunch
 
 
 #names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
-names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6"]
+names = ["MEBT","DTL1"]
 
 #---- create the factory instance
 sns_linac_factory = SNS_LinacLatticeFactory()
@@ -49,7 +49,6 @@ bunch_init = Bunch()
 bunch_init.mass(0.939294)
 bunch_init.charge(-1.0)
 bunch_init.getSyncParticle().kinEnergy(0.0025)
-
 
 #----------------------------------------
 # Test MEBT Rb4 

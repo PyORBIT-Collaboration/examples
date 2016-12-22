@@ -18,7 +18,7 @@ print "==============START======================="
 names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
 
 #---- the XML file name with the structure
-xml_file_name = "../sns_linac_xml/sns_linac_with_aprt.xml"
+xml_file_name = "../sns_linac_xml/sns_linac.xml"
 acc_da = XmlDataAdaptor.adaptorForFile(xml_file_name)
 
 accSeq_da = acc_da.childAdaptors("SCLHigh")[0]
@@ -111,7 +111,7 @@ for cav_da in cavs_da.childAdaptors():
 	pos_old = pos
 	
 
-acc_da.writeToFile("../sns_linac_xml/sns_sts_linac_with_aprt.xml")
+acc_da.writeToFile("../sns_linac_xml/sns_sts_linac.xml")
 		
 
 

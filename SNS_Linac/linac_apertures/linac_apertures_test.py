@@ -83,7 +83,6 @@ sns_linac_factory.setMaxDriftLength(0.01)
 
 #---- the XML file name with the structure
 xml_file_name = py_orbit_sns_home+"sns_linac_xml/sns_linac.xml"
-xml_file_name = py_orbit_sns_home+"sns_linac_xml/sns_linac_with_aprt.xml"
 
 #---- make lattice from XML file 
 accLattice = sns_linac_factory.getLinacAccLattice(names,xml_file_name)
