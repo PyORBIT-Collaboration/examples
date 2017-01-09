@@ -33,20 +33,17 @@ from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_to_AxisField
 from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes
 from orbit.py_linac.lattice_modifications import Replace_Quads_to_OverlappingQuads_Nodes
 
-from orbit.py_linac.overlapping_fields import GetGlobalQuadGradient
-from orbit.py_linac.overlapping_fields import GetGlobalRF_AxisField
 from orbit.py_linac.overlapping_fields import SNS_EngeFunctionFactory
 
-
+# we take a SNS Linac Bunch generator from a neighboring directory
 sys.path.append("../pyorbit_linac_model")
 from sns_linac_bunch_generator import SNS_Linac_BunchGenerator
 
 random.seed(100)
 
-names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
+#names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
 names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1"]
-#names = ["SCLMed",]
-#names = ["MEBT","DTL1"]
+
 
 #---- create the factory instance
 sns_linac_factory = SNS_LinacLatticeFactory()
@@ -83,15 +80,12 @@ z_step = 0.005
 #---- axis fields files location 
 dir_location = "../sns_rf_fields/"
 
-#Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,z_step,dir_location,["MEBT",])
+#Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,z_step,dir_location,["MEBT",],[],SNS_EngeFunctionFactory)
 #Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1"],[],SNS_EngeFunctionFactory)
-#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT",],[],SNS_EngeFunctionFactory)
-#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["DTL1",],[],SNS_EngeFunctionFactory)
-#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","SCLMed","SCLHigh"],[],SNS_EngeFunctionFactory)
 Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["SCLMed","SCLHigh"],[],SNS_EngeFunctionFactory)
 
-#Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT","DTL1"],[],SNS_EngeFunctionFactory)
 #Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT",],[],SNS_EngeFunctionFactory)
+#Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT","DTL1"],[],SNS_EngeFunctionFactory)
 #Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["DTL1",],[],SNS_EngeFunctionFactory)
 
 #-----------------------------------------------------
@@ -119,7 +113,6 @@ calc3d = SpaceChargeCalc3D(sizeX,sizeY,sizeZ)
 space_charge_nodes =  setSC3DAccNodes(accLattice,sc_path_length_min,calc3d)
 """
 
-
 max_sc_length = 0.
 min_sc_length = accLattice.getLength()
 for sc_node in space_charge_nodes:
@@ -129,7 +122,6 @@ for sc_node in space_charge_nodes:
 	if(scL > max_sc_length): max_sc_length = scL
 	if(scL < min_sc_length): min_sc_length = scL
 print "maximal SC length =",max_sc_length,"  min=",min_sc_length
-
 
 
 print "===== Aperture Nodes START  ======="
@@ -217,13 +209,13 @@ print "Design tracking completed."
 
 #track through the lattice 
 paramsDict = {"old_pos":-1.,"count":0,"pos_step":0.01}
-actionContainer = AccActionsContainer("Test Design Bunch Tracking")
+actionContainer = AccActionsContainer("Bunch Tracking")
 
 pos_start = 0.
 
 twiss_analysis = BunchTwissAnalysis()
 
-file_out = open("pyorbit_twiss_sizes_ekin_tmp.dat","w")
+file_out = open("pyorbit_twiss_sizes_ekin_new_lattice.dat","w")
 
 s = " Node   position "
 s += "   alphaX betaX emittX  normEmittX"
@@ -238,7 +230,6 @@ def action_entrance(paramsDict):
 	node = paramsDict["node"]
 	bunch = paramsDict["bunch"]
 	pos = paramsDict["path_length"]
-	#print "debug node=",node.getName()," pos=",pos
 	if(paramsDict["old_pos"] == pos): return
 	if(paramsDict["old_pos"] + paramsDict["pos_step"] > pos): return
 	paramsDict["old_pos"] = pos

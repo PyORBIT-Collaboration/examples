@@ -31,8 +31,8 @@ from orbit.py_linac.lattice import GetGlobalRF_AxisField
 
 from orbit.py_linac.overlapping_fields import SNS_EngeFunctionFactory
 
-names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
-names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4"]
+#names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
+names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"]
 
 #---- the XML file name with the structure
 xml_file_name = "../sns_linac_xml/sns_linac.xml"
@@ -60,7 +60,7 @@ for name in names:
 	magn_field_arr = []
 	step = 0.001
 	n_points = int(accLattice.getLength()/step)
-	step = accLattice.getLength()/(n_points-1)
+	step = accLattice.getLength()/(n_points - 1)
 	for ip in range(n_points):
 		z = step*ip
 		g0 = GetGlobalQuadGradient(accLattice,z)
@@ -88,9 +88,12 @@ for name in names:
 		magn_field_arr[ip] = [z,g0,g1,Ez]
 	
 	fl_out = open(name+output_file_sfx,"w")
+	fl_out.write("z[m]        G0[T/m]       G1[T/m]       Ez[V/m] \n")
+	
 	for ip in range(n_points):
 		[z,g0,g1,Ez] = magn_field_arr[ip]
-		fl_out.write(" %12.6f %12.6f  %12.6f    %12.5g "%(z,g0,g1,Ez)+"\n")
+		fl_out.write(" %14.8f  %12.6f  %12.6f    %12.5g "%(z,g0,g1,Ez)+"\n")
+		
 	fl_out.close()
 	
 
