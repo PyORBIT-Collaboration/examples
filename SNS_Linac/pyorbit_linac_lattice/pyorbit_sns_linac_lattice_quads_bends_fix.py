@@ -1,6 +1,10 @@
 #! /usr/bin/env python
 
 """
+This script is an "one-time deal". It was used one time to modify 
+the SNS linac XML file. It can be used as example if somebody wants
+to do something similar with the XML lattice file.
+
 This is a script will modify the linac lattice file.
 It will remove "effLength" parameter from the QUAD type elements, 
 because we do not use it in the linac lattice factory.
@@ -11,10 +15,6 @@ For DCH and DCV types the "B" parameter was added to "parameters" with
 0. value. These are correctors, and B is the default field in [T].
 Also the apertures were added to the RF gaps and BENDs.
 The aperture parameters are for SNS Linac.
-
-This script is an "one-time deal". It was used one time to modify 
-the SNS linac XML file. It can be used as example if somebody wants
-to do something similar.
 """
 
 import sys
