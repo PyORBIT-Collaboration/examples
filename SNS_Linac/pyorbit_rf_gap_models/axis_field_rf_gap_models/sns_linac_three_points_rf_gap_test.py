@@ -233,7 +233,7 @@ for [pos,phase] in three_point_gap2.gap_phase_vs_z_arr:
 phase_avg /= len(three_point_gap2.gap_phase_vs_z_arr)
 print "debug avg_phase = %6.2f "%(phase_avg*180./math.pi)
 
-sys.exit(1)
+sys.exit(0)
 
 #------------------------------------
 #       SPEED and MEMORY LEAK TEST
