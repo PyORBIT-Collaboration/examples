@@ -21,6 +21,7 @@ from orbit.bunch_generators import WaterBagDist3D, GaussDist3D, KVDist3D
 
 from bunch import Bunch
 from bunch import BunchTwissAnalysis
+from bunch import SynchPartRedefinitionZdE
 
 from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 
@@ -61,8 +62,8 @@ print "Linac lattice is ready. L=",accLattice.getLength()
 #---- BaseRfGap  uses only E0TL*cos(phi)*J0(kr) with E0TL = const
 #---- MatrixRfGap uses a matrix approach like envelope codes
 #---- RfGapTTF uses Transit Time Factors (TTF) like PARMILA
-#cppGapModel = BaseRfGap
-cppGapModel = MatrixRfGap
+cppGapModel = BaseRfGap
+#cppGapModel = MatrixRfGap
 #cppGapModel = RfGapTTF
 rf_gaps = accLattice.getRF_Gaps()
 for rf_gap in rf_gaps:
@@ -81,7 +82,7 @@ dir_location = "../sns_rf_fields/"
 
 #Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,z_step,dir_location,["MEBT",])
 
-#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1"],[],SNS_EngeFunctionFactory)
+Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT",],[],SNS_EngeFunctionFactory)
 #Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["SCLMed","SCLHigh"],[],SNS_EngeFunctionFactory)
 
 #Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT",],[],SNS_EngeFunctionFactory)
@@ -96,12 +97,12 @@ from spacecharge import SpaceChargeCalcUnifEllipse, SpaceChargeCalc3D
 sc_path_length_min = 0.02
 
 print "Set up Space Charge nodes. "
-"""
+
 # set of uniformly charged ellipses Space Charge
 nEllipses = 1
 calcUnifEllips = SpaceChargeCalcUnifEllipse(nEllipses)
 space_charge_nodes = setUniformEllipsesSCAccNodes(accLattice,sc_path_length_min,calcUnifEllips)
-"""
+
 
 
 """
@@ -207,15 +208,26 @@ accLattice.trackDesignBunch(bunch_in)
 
 print "Design tracking completed."
 
+bunch_tmp = Bunch()
+bunch_in.copyBunchTo(bunch_tmp)
+accLattice.trackBunch(bunch_tmp)
+redefCalc = SynchPartRedefinitionZdE()
+redefCalc.analyzeBunch(bunch_tmp)
+eKin_out_init = bunch_tmp.getSyncParticle().kinEnergy() + redefCalc.getAvg_dE()
+avg_dZ_init = redefCalc.getAvg_Z()*1000.
+tm_out_init = bunch_tmp.getSyncParticle().time()
+
 #----------------------------------------------
 #  Bunch phase shifting
 #----------------------------------------------
 
 bunch_lambda = bunch_in.getSyncParticle().beta()*2.99792458e+8/402.5e+6
 phase_coeff = 360./bunch_lambda
-delta_phase = 90.0 # deg
+delta_phase = 20.0 # deg
 delta_z = delta_phase/phase_coeff
 delta_t = (delta_phase/360.)*1.0/402.5e+6
+
+print "debug delta_z[mm]=",delta_z*1000.
 
 tm = bunch_in.getSyncParticle().time()
 bunch_in.getSyncParticle().time(tm + delta_t)
@@ -223,7 +235,7 @@ nParts = bunch_in.getSize()
 for ip in range(nParts):
 	bunch_in.z(ip,bunch_in.z(ip)+delta_z)
 
-
+#-------------------------------------------------------------------
 #track through the lattice 
 paramsDict = {"old_pos":-1.,"count":0,"pos_step":0.01}
 actionContainer = AccActionsContainer("Bunch Tracking")
@@ -296,4 +308,22 @@ time_exec = time.clock() - time_start
 print "time[sec]=",time_exec
 
 file_out.close()
+
+
+redefCalc = SynchPartRedefinitionZdE()
+redefCalc.analyzeBunch(bunch_in)
+dE_avg = redefCalc.getAvg_dE()
+
+
+tm_out = bunch_in.getSyncParticle().time()
+phase_diff = 360.0*402.5e+6*(tm_out - tm_out_init)
+z_diff = phase_diff/phase_coeff
+print "debug phase_diff[deg] = ",phase_diff
+print "debug z_diff[mm] = ",z_diff*1000.
+
+print "eKin_out_init[MeV] = ",eKin_out_init*1000.
+print "avg dZ_init[mm]=",avg_dZ_init
+print "=========================================="
+print "eKin_out_avg[MeV] = ", (bunch_in.getSyncParticle().kinEnergy() + dE_avg)*1000.
+print "avg dZ[mm]=",redefCalc.getAvg_Z()*1000.
 
