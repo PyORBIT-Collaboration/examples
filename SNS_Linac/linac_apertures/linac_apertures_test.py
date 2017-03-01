@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #--------------------------------------------------------
-# Test of the Linac Aperture for quads and scrapers.
+# Test of the Linac Aperture for quads, RF gaps, and scrapers.
 # The example includes quads with overlapping fields and the lost bunch.
 # The user can comment out the parts with these quads or the lost bunch 
 # in the paramsDict dictionary.
@@ -17,9 +17,15 @@ from orbit_mpi import mpi_datatype
 from orbit_mpi import mpi_op
 
 from orbit.py_linac.linac_parsers import SNS_LinacLatticeFactory
-from orbit.py_linac.overlapping_fields import SNS_MEBT_OverlappingQuadsSubst
+
+from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_to_AxisField_Nodes
+from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes
+from orbit.py_linac.lattice_modifications import Replace_Quads_to_OverlappingQuads_Nodes
+
+from orbit.py_linac.overlapping_fields import SNS_EngeFunctionFactory
 
 from orbit.py_linac.lattice_modifications import Add_quad_apertures_to_lattice
+from orbit.py_linac.lattice_modifications import Add_rfgap_apertures_to_lattice
 from orbit.py_linac.lattice_modifications import GetLostDistributionArr
 from orbit.py_linac.lattice_modifications import AddScrapersAperturesToLattice
 from orbit.py_linac.lattice_modifications import AddMEBTChopperPlatesAperturesToSNS_Lattice
@@ -35,15 +41,19 @@ from orbit.bunch_generators import TwissAnalysis
 from bunch import Bunch
 from bunch import BunchTwissAnalysis
 
-
-class LostBunchDumpNode(BaseLinacNode):
+#--------------------------------------------------------
+# This is an example of the custom AccNode subclass
+# that can be added to the lattice or attached as a child
+# to any BaseLinacNode instance in the lattice.
+#--------------------------------------------------------
+class BunchDumpNode(BaseLinacNode):
 	"""
-	The class LostBunchDumpNode writes the information from the lostbunch
+	The class BunchDumpNode writes the information from the bunch
 	to the file.
 	"""
-	def __init__(self, name = "LostBunchDump"):
+	def __init__(self, name = "BunchDump", file_name = "bunch.dat"):
 		BaseLinacNode.__init__(self,name)
-		self.file_name = "lost_bunch.dat"
+		self.file_name = file_name
 	
 	def setFileName(self,file_name):
 		self.file_name = file_name
@@ -52,9 +62,9 @@ class LostBunchDumpNode(BaseLinacNode):
 		return self.file_name
 	
 	def track(self, paramsDict):
-		if(paramsDict.has_key("lostbunch")):
-			lostbunch = paramsDict["lostbunch"]
-			lostbunch.dumpBunch(self.file_name)
+		if(paramsDict.has_key("bunch")):
+			bunch = paramsDict["bunch"]
+			bunch.dumpBunch(self.file_name)
 
 	def trackDesign(self, paramsDict):
 		"""
@@ -83,7 +93,6 @@ sns_linac_factory.setMaxDriftLength(0.01)
 
 #---- the XML file name with the structure
 xml_file_name = py_orbit_sns_home+"sns_linac_xml/sns_linac.xml"
-xml_file_name = py_orbit_sns_home+"sns_linac_xml/sns_linac_with_aprt.xml"
 
 #---- make lattice from XML file 
 accLattice = sns_linac_factory.getLinacAccLattice(names,xml_file_name)
@@ -91,10 +100,20 @@ accLattice = sns_linac_factory.getLinacAccLattice(names,xml_file_name)
 print "1. Linac lattice is ready. L=",accLattice.getLength()
 
 #--------------------------------------------------------
-# Replace overlapping quads with the special nodes
+# Replace overlapping quads and/or RF gaps with the special nodes
 #--------------------------------------------------------
+#---- z_step defines the tracking (integration) longitudinal step over the 
+#---- quads' and RF gaps' fields
+z_step = 0.001
 
-(ovrlp_quads1,ovrlp_quads2) = SNS_MEBT_OverlappingQuadsSubst(accLattice)
+#---- RF gaps' axis field files location 
+dir_location = "../sns_rf_fields/"
+
+#Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,z_step,dir_location,["MEBT",])
+
+#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT",],[],SNS_EngeFunctionFactory)
+
+Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT",],[],SNS_EngeFunctionFactory)
 
 print "2. Linac lattice is ready. L=",accLattice.getLength()
 
@@ -102,19 +121,25 @@ node_pos_dict = accLattice.getNodePositionsDict()
 nodes = accLattice.getNodes()
 for node in nodes:
 	(posBefore, posAfter) = node_pos_dict[node]
-	print "%35s      start stop L = %10.4f %10.4f    %10.4f "%(node.getName(),posBefore,posAfter,(posAfter-posBefore))
+	print "%45s      (start stop) L = (%10.4f %10.4f)    %10.4f "%(node.getName(),posBefore,posAfter,(posAfter-posBefore))
 
 #----------------------------------------------------------
 #      1. add Aperture nodes to the quads in the linac lattice
-#      2. add Aperture nodes to the MEBT chopper entrance/exit plates 
+#      2. add Aperture nodes to the RF gaps in the linac lattice
+#      3. add Aperture nodes to the MEBT chopper entrance/exit plates 
 #         in the linac lattice
-#      3. add Aperture nodes to the MEBT scrapers (H and V)
-#      4. add a LostBunchDumpNode to one of the chopper plate
+#      4. add Aperture nodes to the MEBT scrapers (H and V)
+#      5. add a BunchDumpNode to one of the chopper plate
 #----------------------------------------------------------
 
 print "===== Aperture Nodes ======="
+
 aprtNodes = Add_quad_apertures_to_lattice(accLattice)
+
+aprtNodes = Add_rfgap_apertures_to_lattice(accLattice,aprtNodes)
+
 aprtNodes = AddMEBTChopperPlatesAperturesToSNS_Lattice(accLattice,aprtNodes)
+
 x_size = 0.042
 y_size = 0.042
 aprtNodes = AddScrapersAperturesToLattice(accLattice,"MEBT_Diag:H_SCRP",x_size,y_size,aprtNodes)
@@ -123,20 +148,22 @@ x_size = 0.042
 y_size = 0.042
 aprtNodes = AddScrapersAperturesToLattice(accLattice,"MEBT_Diag:V_SCRP",x_size,y_size,aprtNodes)
 
+#---- print all aperture nodes and their positions
 for node in aprtNodes:
 	print "aprt=",node.getName()," pos =",node.getPosition()
 
-#---- set the Lost Bunch Dump Node to see the one of the apertures effect 
+#---- set the Bunch Dump Node to see the one of the apertures effect 
+chopper_plate_entr_node = accLattice.getNodeForName("MEBT:ChpPlt:Entr")
 aprt_node_1 = None
 for node in aprtNodes:	
 	if(node.getName().find("MEBT:ChpPlt:Entr") >= 0):
 		aprt_node_1 = node
 		break
-if(aprt_node_1 != None):
-	dumpNode = LostBunchDumpNode()
-	dumpNode.setFileName("lost_bunch_chpplt.dat")
-	dumpNode.setSequence(aprt_node_1.getSequence())
-	aprt_node_1.addChildNode(dumpNode,node.EXIT)
+if(chopper_plate_entr_node != None):
+	dumpNode = BunchDumpNode()
+	dumpNode.setFileName("bunch_at_chpplt.dat")
+	dumpNode.setSequence(chopper_plate_entr_node.getSequence())
+	chopper_plate_entr_node.addChildNode(dumpNode,node.EXIT)
 
 #-----------------------------------------------------------
 #    Bunch Generation
@@ -161,7 +188,7 @@ macrosize /= N_particles
 (alphaY,betaY,emittY) = ( 2.92, 0.281, 3.74*1.0e-6)
 (alphaZ,betaZ,emittZ) = ( 0.0 , 117.0, 0.0166*1.0e-6)
 
-#---- we increase the emittances to see apertures effects
+#---- we artificially increase the emittances to see apertures effects
 emittX *= 5.
 emittY *= 10.
 
@@ -189,7 +216,7 @@ paramsDict = {}
 lost_parts_bunch = Bunch()
 paramsDict["lostbunch"] = lost_parts_bunch
 
-actionContainer = AccActionsContainer("Test Design Bunch Tracking")
+actionContainer = AccActionsContainer("Test Apertures")
 
 twiss_analysis = BunchTwissAnalysis()
 
@@ -210,6 +237,11 @@ actionContainer.addAction(action_entrance, AccActionsContainer.ENTRANCE)
 accLattice.trackBunch(bunch, paramsDict = paramsDict, actionContainer = actionContainer)
 
 lost_parts_bunch.dumpBunch("lostbunch.dat")
+
+#----------------------------------------------------------------------------
+# This is an example how to analyze the lost bunch with the special function
+# GetLostDistributionArr(...)
+#----------------------------------------------------------------------------
 
 aprtNodes_loss_arr = GetLostDistributionArr(aprtNodes,lost_parts_bunch)
 total_loss = 0.

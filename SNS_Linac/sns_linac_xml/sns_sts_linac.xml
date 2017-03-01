@@ -130,6 +130,12 @@
   <accElement length="0.0" name="MEBT_Diag:Harp" pos="2.795" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="MEBT_Diag:Slit2:Y" pos="2.814" type="MARKER">
+   <parameters/>
+  </accElement> 
+  <accElement length="0.0" name="MEBT_Diag:Slit2:X" pos="2.821" type="MARKER">
+   <parameters/>
+  </accElement>  
   <accElement length="0.061" name="MEBT_Mag:QV11" pos="2.903" type="QUAD">
    <parameters aperture="0.032" aprt_type="1" field="16.63"/>
   </accElement>

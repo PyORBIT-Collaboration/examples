@@ -5,6 +5,26 @@ This script will check the three-point TTF gap model in the SNS linac lattice.
 Here we will use only MEBT cavities and DTL1 rf gap 1 (1 and 2),
 because we have to specify the exact input energy. 
 It also includes a speed test and a memory leak test.
+
+Tests include the usual RF Gap class instance extracted from the standard lattice:
+rf_gap =  accLattice.getNodeForName("name of the RF gap")
+
+and the new instance of the AxisFieldRF_Gap instance 
+that uses the RfGapThreePointTTF class instance from C++ linac package:
+three_point_gap = AxisFieldRF_Gap(rf_gap)
+
+All C++ tracker classes are from "linac" package:
+>from linac import BaseRfGap, MatrixRfGap, RfGapTTF, RfGapThreePointTTF
+
+
+The script tracks the Bunch with only a synchronous particle at the right energy.
+We are going to compare energy gains for different models for MEBT re-bunchers 
+and the first gap of DTL1.
+We also going to print the synch. particle phases at different parts of the 
+distributed RF field in the AxisFieldRF_Gap and the average phase which should
+be almost equal to the synch. particle phase in the zero length BaseRfGap
+instance.
+
 """
 
 import sys
@@ -29,7 +49,7 @@ from bunch import Bunch
 
 
 #names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
-names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6"]
+names = ["MEBT","DTL1"]
 
 #---- create the factory instance
 sns_linac_factory = SNS_LinacLatticeFactory()
@@ -49,7 +69,6 @@ bunch_init = Bunch()
 bunch_init.mass(0.939294)
 bunch_init.charge(-1.0)
 bunch_init.getSyncParticle().kinEnergy(0.0025)
-
 
 #----------------------------------------
 # Test MEBT Rb4 
@@ -78,8 +97,8 @@ three_point_gap.trackDesignBunch(bunch)
 
 print "debug ====================Design==========================================="
 print "debug gap=",three_point_gap.getName()
-print "debug         delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
-print "debug TTF Gap delta_eKin[MeV]=",math.fabs(rf_gap.getParam("E0TL")*math.cos(rf_gap.getParam("gap_phase")))*1000.
+print "debug AxisFieldRF_Gap delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
+print "debug TTF Gap         delta_eKin[MeV]=",math.fabs(rf_gap.getParam("E0TL")*math.cos(rf_gap.getParam("gap_phase")))*1000.
 print "debug gap_phase=",three_point_gap.getGapPhase()*180./math.pi
 
 phase_avg = 0.
@@ -108,8 +127,8 @@ three_point_gap.trackBunch(bunch)
 print "debug ===================Not Design========================================"
 print "debug cav phase shift = ",cav_phase_shift_deg
 print "debug gap=",three_point_gap.getName()
-print "debug         delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
-print "debug TTF Gap delta_eKin[MeV]=",math.fabs(rf_gap.getParam("E0TL")*math.cos(rf_gap.getParam("gap_phase")))*1000.
+print "debug  AxisFieldRF_Gap delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
+print "debug TTF Gap          delta_eKin[MeV]=",math.fabs(rf_gap.getParam("E0TL")*math.cos(rf_gap.getParam("gap_phase")))*1000.
 print "debug gap_phase=",three_point_gap.getGapPhase()*180./math.pi
 
 phase_avg = 0.
@@ -150,8 +169,8 @@ print "debug ========================Design Tracking========================"
 three_point_gap1.trackDesignBunch(bunch)
 print "debug ==============================================================="
 print "debug gap=",three_point_gap1.getName()
-print "debug         delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
-print "debug TTF Gap delta_eKin[MeV]=",math.fabs(rf_gap1.getParam("E0TL")*math.cos(rf_gap1.getParam("gap_phase")))*1000.
+print "debug AxisFieldRF_Gap delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
+print "debug TTF Gap         delta_eKin[MeV]=",math.fabs(rf_gap1.getParam("E0TL")*math.cos(rf_gap1.getParam("gap_phase")))*1000.
 print "debug gap_phase=",three_point_gap1.getGapPhase()*180./math.pi
 
 phase_avg = 0.
@@ -166,8 +185,8 @@ eKin_init = bunch.getSyncParticle().kinEnergy()
 three_point_gap2.trackDesignBunch(bunch)
 print "debug ==============================================================="
 print "debug gap=",three_point_gap2.getName()
-print "debug         delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
-print "debug TTF Gap delta_eKin[MeV]=",math.fabs(rf_gap2.getParam("E0TL")*math.cos(rf_gap2.getParam("gap_phase")))*1000.
+print "debug AxisFieldRF_Gap delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
+print "debug TTF Gap         delta_eKin[MeV]=",math.fabs(rf_gap2.getParam("E0TL")*math.cos(rf_gap2.getParam("gap_phase")))*1000.
 print "debug gap_phase=",three_point_gap2.getGapPhase()*180./math.pi
 
 phase_avg = 0.
@@ -187,8 +206,8 @@ eKin_init = bunch.getSyncParticle().kinEnergy()
 three_point_gap1.trackBunch(bunch)
 print "debug ==============================================================="
 print "debug gap=",three_point_gap1.getName()
-print "debug         delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
-print "debug TTF Gap delta_eKin[MeV]=",math.fabs(rf_gap1.getParam("E0TL")*math.cos(rf_gap1.getParam("gap_phase")))*1000.
+print "debug AxisFieldRF_Gap delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
+print "debug TTF Gap         delta_eKin[MeV]=",math.fabs(rf_gap1.getParam("E0TL")*math.cos(rf_gap1.getParam("gap_phase")))*1000.
 print "debug gap_phase=",three_point_gap1.getGapPhase()*180./math.pi
 
 phase_avg = 0.
@@ -203,8 +222,8 @@ eKin_init = bunch.getSyncParticle().kinEnergy()
 three_point_gap2.trackBunch(bunch)
 print "debug ==============================================================="
 print "debug gap=",three_point_gap2.getName()
-print "debug         delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
-print "debug TTF Gap delta_eKin[MeV]=",math.fabs(rf_gap2.getParam("E0TL")*math.cos(rf_gap2.getParam("gap_phase")))*1000.
+print "debug  AxisFieldRF_Gap delta_eKin[MeV]=",(bunch.getSyncParticle().kinEnergy() - eKin_init)*1000.
+print "debug TTF Gap          delta_eKin[MeV]=",math.fabs(rf_gap2.getParam("E0TL")*math.cos(rf_gap2.getParam("gap_phase")))*1000.
 print "debug gap_phase=",three_point_gap2.getGapPhase()*180./math.pi
 
 phase_avg = 0.
@@ -214,7 +233,7 @@ for [pos,phase] in three_point_gap2.gap_phase_vs_z_arr:
 phase_avg /= len(three_point_gap2.gap_phase_vs_z_arr)
 print "debug avg_phase = %6.2f "%(phase_avg*180./math.pi)
 
-sys.exit(1)
+sys.exit(0)
 
 #------------------------------------
 #       SPEED and MEMORY LEAK TEST

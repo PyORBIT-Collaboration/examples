@@ -1,6 +1,10 @@
 #! /usr/bin/env python
 
 """
+This script is an "one-time deal". It was used one time to modify 
+the SNS linac XML file. It can be used as example if somebody wants
+to do something similar with the XML lattice file.
+
 This is a script to add aperture parameters to the SNS linac xml file.
 """
 
