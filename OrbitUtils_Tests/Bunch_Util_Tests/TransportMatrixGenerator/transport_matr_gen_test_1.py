@@ -3,6 +3,8 @@
 # two bunches that are the states of the bunch at two
 # different places in the lattice. The matrix is a 7x7 matrix
 # that transforms the particles coordinates.
+# Both bunches have Id number particles Attributes to define
+# the relations between particles from two bunches.
 #
 # This example also includes the Twiss filtering function.
 ##############################################################
@@ -94,7 +96,7 @@ print "debug before filtering n_part in ==out== bunch=",b_out.getSizeGlobal()
 #----- Twiss filtering. 
 #----- bunch_utils_functions.bunchTwissFiltering(b_in,b_bad,coeff_x,coeff_y,coeff_z)
 #----- b_bad - collection of removed macro-particles
-#----- coeff_x the cutt-off coefficients for the value 
+#----- coeff_x the cutt-off coefficients for the value (if coeff_x < 0 no filtering)
 #------(gamma*x^2+2*alpha*x*xp+beta*xp^2)/(2*emittance)
 #------ for the x-direction
 bunch_bad = Bunch()
@@ -110,15 +112,15 @@ while(1 < 2):
 
 	#-----get the matrix
 	mtrxA = Matrix(7,7)
-	n_part_analysis = bunch_utils_functions.trasportMtrx(b_in,b_out,mtrxA,1,1,1)
+	n_part_analysis = bunch_utils_functions.transportMtrx(b_in,b_out,mtrxA,1,1,1)
 
 	#==== we can use transport matrix generator function without Twiss weights for macroparticles 
-	#n_part_analysis = bunch_utils_functions.trasportMtrx(b_in,b_out,mtrxA)
+	#n_part_analysis = bunch_utils_functions.transportMtrx(b_in,b_out,mtrxA)
 
 	printM(mtrxA, "Transp. M ")
 	print "Total N=",n_part_analysis," count=",count
 	count += 1
-
+	
 print "Stop."
 
 
