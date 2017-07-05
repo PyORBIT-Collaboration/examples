@@ -59,10 +59,20 @@ for ix in range(6):
 mtrxA_init.set(6,6,1.0)
 for ix in range(6):
 	mtrxA_init.set(ix,ix,1.*(ix+1))
+
+mtrxA_init.set(0,1,1.5*.001)
+mtrxA_init.set(2,3,1.6*.001)
+mtrxA_init.set(4,5,1.7*.001)
+
+mtrxA_init.set(1,0,1.4*.001)
+mtrxA_init.set(3,2,1.3*.001)
+mtrxA_init.set(5,4,1.2*.001)
+
 printM(mtrxA_init, "Init M ")
+
 #-----------------------------------------------------------------------------
 #------ track coordinates of the particle with the transport matrix 
-noise_level = 0.000001
+noise_level = 1.0e-6
 nParticles = b_in.getSize()
 for i in range(nParticles):
 	coord_arr = (b_in.x(i),b_in.xp(i),b_in.y(i),b_in.yp(i),b_in.z(i),b_in.dE(i))
@@ -98,7 +108,7 @@ print "debug before filtering n_part in ==in == bunch=",b_in.getSizeGlobal()
 #------(gamma*x^2+2*alpha*x*xp+beta*xp^2)/(2*emittance)
 #------ for the x-direction
 bunch_bad = Bunch()
-bunch_utils_functions.bunchTwissFiltering(b_in,bunch_bad,5.0,-1.0,-1.0)
+bunch_utils_functions.bunchTwissFiltering(b_in,bunch_bad,10.0,-1.0,-1.0)
 
 print "debug after  filtering n_part in ==in == bunch=",b_in.getSizeGlobal()
 
@@ -115,6 +125,7 @@ while(1 < 2):
 	printM(mtrxA, "Transp. M ")
 	print "Total N=",n_part_analysis," count=",count
 	count += 1
+	sys.exit()
 
 print "Stop."
 
