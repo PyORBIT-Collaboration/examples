@@ -60,7 +60,17 @@ for ix in range(6):
 mtrxA_init.set(6,6,1.0)
 for ix in range(6):
 	mtrxA_init.set(ix,ix,1.*(ix+1))
+
+mtrxA_init.set(0,1,1.5*.001)
+mtrxA_init.set(2,3,1.6*.001)
+mtrxA_init.set(4,5,1.7*.001)
+
+mtrxA_init.set(1,0,1.4*.001)
+mtrxA_init.set(3,2,1.3*.001)
+mtrxA_init.set(5,4,1.2*.001)
+
 printM(mtrxA_init, "Init M ")
+
 #-----------------------------------------------------------------------------
 #------ put particles from b_in bunch to b_out 
 noise_level = 0.000001
@@ -120,7 +130,7 @@ while(1 < 2):
 	printM(mtrxA, "Transp. M ")
 	print "Total N=",n_part_analysis," count=",count
 	count += 1
-	
+	sys.exit()
 print "Stop."
 
 
