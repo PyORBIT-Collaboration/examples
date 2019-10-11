@@ -27,6 +27,7 @@ from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_and_Quads_to
 from orbit.py_linac.lattice_modifications import Replace_Quads_to_OverlappingQuads_Nodes
 
 from orbit.py_linac.lattice import GetGlobalQuadGradient
+from orbit.py_linac.lattice import GetGlobalQuadGradientDerivative
 from orbit.py_linac.lattice import GetGlobalRF_AxisField
 
 from orbit.py_linac.overlapping_fields import SNS_EngeFunctionFactory
@@ -49,14 +50,15 @@ sns_linac_factory.setMaxDriftLength(0.01)
 output_file_sfx = "_fields_rf_and_quads.dat"
 
 for name in names:
-	print "debug ==================  start of the accSeq=",name
+	print "==========================  start of the accSeq=",name
 	#---- make lattice from XML file 
 	accLattice = sns_linac_factory.getLinacAccLattice([name,],xml_file_name)
 	
 	print "Linac initial lattice is ready.  L=",accLattice.getLength()
 	
 	
-	#---- magn_field_arr[[z,g0,g1],...]
+	#---- magn_field_arr[[z,g0,gp0,g1,gp1,Ez],...]
+	#---- g is [T/m] and gp = dq/dz - derivative along z-axis
 	magn_field_arr = []
 	step = 0.001
 	n_points = int(accLattice.getLength()/step)
@@ -64,9 +66,11 @@ for name in names:
 	for ip in range(n_points):
 		z = step*ip
 		g0 = GetGlobalQuadGradient(accLattice,z)
+		gp0 = GetGlobalQuadGradientDerivative(accLattice,z)
 		g1 = 0.
+		gp1 = 0.
 		Ez = 0.
-		magn_field_arr.append([z,g0,g1,Ez])
+		magn_field_arr.append([z,g0,gp0,g1,gp1,Ez])
 	
 	#---- longitudinal step along the distributed fields lattice
 	z_step = 0.005 
@@ -82,17 +86,18 @@ for name in names:
 	print "Linac modified lattice is ready. L=",accLattice.getLength()
 	
 	for ip in range(n_points):
-		[z,g0,g1,Ez] = magn_field_arr[ip]
+		[z,g0,gp0,g1,gp1,Ez] = magn_field_arr[ip]
 		g1 = GetGlobalQuadGradient(accLattice,z)
+		gp1 = GetGlobalQuadGradientDerivative(accLattice,z)
 		Ez = GetGlobalRF_AxisField(accLattice,z)
-		magn_field_arr[ip] = [z,g0,g1,Ez]
+		magn_field_arr[ip] = [z,g0,gp0,g1,gp1,Ez]
 	
 	fl_out = open(name+output_file_sfx,"w")
-	fl_out.write("z[m]        G0[T/m]       G1[T/m]       Ez[V/m] \n")
+	fl_out.write("z[m]        G0[T/m]  dG0/dz[T/m^2]     G1[T/m]   dG1/dz[T/m^2]    Ez[V/m] \n")
 	
 	for ip in range(n_points):
-		[z,g0,g1,Ez] = magn_field_arr[ip]
-		fl_out.write(" %14.8f  %12.6f  %12.6f    %12.5g "%(z,g0,g1,Ez)+"\n")
+		[z,g0,gp0,g1,gp1,Ez] = magn_field_arr[ip]
+		fl_out.write(" %14.8f   %12.6f  %12.6f     %12.6f  %12.6f    %12.5g "%(z,g0,gp0,g1,gp1,Ez)+"\n")
 		
 	fl_out.close()
 	

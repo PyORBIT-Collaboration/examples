@@ -29,6 +29,9 @@ from orbit.py_linac.lattice_modifications import Add_rfgap_apertures_to_lattice
 from orbit.py_linac.lattice_modifications import AddMEBTChopperPlatesAperturesToSNS_Lattice
 from orbit.py_linac.lattice_modifications import AddScrapersAperturesToLattice
 
+from orbit.py_linac.lattice import AxisField_and_Quad_RF_Gap
+from orbit.py_linac.lattice import OverlappingQuadsNode
+
 from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_to_AxisField_Nodes
 from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes
 from orbit.py_linac.lattice_modifications import Replace_Quads_to_OverlappingQuads_Nodes
@@ -43,6 +46,7 @@ random.seed(100)
 
 #names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
 names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1"]
+names = ["MEBT","DTL1","DTL2","DTL3",]
 
 #---- create the factory instance
 sns_linac_factory = SNS_LinacLatticeFactory()
@@ -82,7 +86,7 @@ dir_location = "../sns_rf_fields/"
 #Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,z_step,dir_location,["MEBT",])
 
 #Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6"],[],SNS_EngeFunctionFactory)
-Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1"],[],SNS_EngeFunctionFactory)
+Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1","DTL2","DTL3",],[],SNS_EngeFunctionFactory)
 #Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["SCLMed","SCLHigh"],[],SNS_EngeFunctionFactory)
 
 #Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT",],[],SNS_EngeFunctionFactory)
@@ -92,9 +96,19 @@ Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location
 #------------Set the linac specific trackers for drifts, quads and RF gaps ------
 #------------It is for situation when the bunch has very big energy spread
 #------------which is unusual
-#nodes = accLattice.getNodes()
-#for node in nodes:
-#	node.setLinacTracker()
+accLattice.setLinacTracker(True)
+
+
+#------------ Add tracking through the longitudinal field component of the quad
+#------------ The longitudinal component is not zero only for the distributed 
+#------------ magnetic field of the quad. It means you have to modify lattice with
+#------------ Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes
+#------------ or 
+#------------ Replace_Quads_to_OverlappingQuads_Nodes
+nodes = accLattice.getNodes()
+for node in nodes:
+		if(isinstance(node,OverlappingQuadsNode) or isinstance(node,AxisField_and_Quad_RF_Gap)):
+			node.setUseLongitudinalFieldOfQuad(True)
 
 #-----------------------------------------------------
 # Set up Space Charge Acc Nodes
@@ -223,7 +237,7 @@ pos_start = 0.
 
 twiss_analysis = BunchTwissAnalysis()
 
-file_out = open("pyorbit_twiss_sizes_ekin_new_lattice.dat","w")
+file_out = open("pyorbit_twiss_sizes_ekin_ovlp_fields_lattice.dat","w")
 
 s = " Node   position "
 s += "   alphaX betaX emittX  normEmittX"
