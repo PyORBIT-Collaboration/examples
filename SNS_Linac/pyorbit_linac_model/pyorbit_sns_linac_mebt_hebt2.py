@@ -37,13 +37,16 @@ from orbit.py_linac.lattice_modifications import AddScrapersAperturesToLattice
 
 #---- BaseRF_Gap to  AxisFieldRF_Gap replacement  ---- It is a possibility ----------
 from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_to_AxisField_Nodes
+from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes
+from orbit.py_linac.lattice_modifications import Replace_Quads_to_OverlappingQuads_Nodes
+
+from orbit.py_linac.overlapping_fields import SNS_EngeFunctionFactory
 
 from sns_linac_bunch_generator import SNS_Linac_BunchGenerator
 
 random.seed(100)
 
 names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
-
 #---- create the factory instance
 sns_linac_factory = SNS_LinacLatticeFactory()
 sns_linac_factory.setMaxDriftLength(0.01)
@@ -75,20 +78,28 @@ for rf_gap in rf_gaps:
 #---- because rf fields cover drifts only.
 #---- The DTL needs a special treatment.
 #------------------------------------------------------------------
-"""
+
 #---- axis fields files location 
 dir_location = "../sns_rf_fields/"
-Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,dir_location,["MEBT","CCL1","CCL2","CCL3","CCL4","SCLMed"])
 
+"""
+#Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,dir_location,["MEBT","CCL1","CCL2","CCL3","CCL4","SCLMed"])
+
+#---- longitudinal step along the distributed fields lattice
+z_step = 0.002
+accSeq_names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed"]
+#accSeq_names = ["MEBT","DTL1"]
+Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,accSeq_names,[],SNS_EngeFunctionFactory)	
 print "Linac lattice has been modified. New L[m] = ",accLattice.getLength()
 """
+#accLattice.setLinacTracker(True)
 
 #-----------------------------------------------------
 # Set up Space Charge Acc Nodes
 #-----------------------------------------------------
 from orbit.space_charge.sc3d import setSC3DAccNodes, setUniformEllipsesSCAccNodes
 from spacecharge import SpaceChargeCalcUnifEllipse, SpaceChargeCalc3D
-sc_path_length_min = 0.02
+sc_path_length_min = 0.01
 
 print "Set up Space Charge nodes. "
 
@@ -187,7 +198,7 @@ bunch_gen.setKinEnergy(e_kin_ini)
 #set the beam peak current in mA
 bunch_gen.setBeamCurrent(38.0)
 
-bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = WaterBagDist3D)
+bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = WaterBagDist3D)
 #bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = GaussDist3D)
 #bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = KVDist3D)
 
