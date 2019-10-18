@@ -46,7 +46,8 @@ random.seed(100)
 
 #names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
 names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1"]
-names = ["MEBT","DTL1","DTL2","DTL3",]
+#names = ["MEBT","DTL1","DTL2","DTL3",]
+#names = ["MEBT",]
 
 #---- create the factory instance
 sns_linac_factory = SNS_LinacLatticeFactory()
@@ -72,6 +73,10 @@ rf_gaps = accLattice.getRF_Gaps()
 for rf_gap in rf_gaps:
 	rf_gap.setCppGapModel(cppGapModel())
 
+#---- If you want to switch off all cavities - remove comments marks
+#cavs = accLattice.getRF_Cavities()
+#for cav in cavs:
+#	cav.setAmp(0.)
 
 #------------------------------------------------------------------
 #---- BaseRF_Gap and Quads will be replaced for specified sequences 
@@ -86,8 +91,9 @@ dir_location = "../sns_rf_fields/"
 #Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,z_step,dir_location,["MEBT",])
 
 #Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6"],[],SNS_EngeFunctionFactory)
-Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1","DTL2","DTL3",],[],SNS_EngeFunctionFactory)
+#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1","DTL2","DTL3",],[],SNS_EngeFunctionFactory)
 #Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["SCLMed","SCLHigh"],[],SNS_EngeFunctionFactory)
+#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT",],[],SNS_EngeFunctionFactory)
 
 #Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT",],[],SNS_EngeFunctionFactory)
 #Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT","DTL1"],[],SNS_EngeFunctionFactory)
@@ -96,7 +102,7 @@ Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location
 #------------Set the linac specific trackers for drifts, quads and RF gaps ------
 #------------It is for situation when the bunch has very big energy spread
 #------------which is unusual
-accLattice.setLinacTracker(True)
+#accLattice.setLinacTracker(True)
 
 
 #------------ Add tracking through the longitudinal field component of the quad
@@ -108,7 +114,9 @@ accLattice.setLinacTracker(True)
 nodes = accLattice.getNodes()
 for node in nodes:
 		if(isinstance(node,OverlappingQuadsNode) or isinstance(node,AxisField_and_Quad_RF_Gap)):
-			node.setUseLongitudinalFieldOfQuad(True)
+			#node.setUseLongitudinalFieldOfQuad(True)
+			pass
+
 
 #-----------------------------------------------------
 # Set up Space Charge Acc Nodes
@@ -124,10 +132,8 @@ nEllipses = 1
 calcUnifEllips = SpaceChargeCalcUnifEllipse(nEllipses)
 space_charge_nodes = setUniformEllipsesSCAccNodes(accLattice,sc_path_length_min,calcUnifEllips)
 
-
-
 """
-# set FFT 3D Space Charge
+# set FFT 3D Space Charge instead of UniformEllipses
 sizeX = 64
 sizeY = 64
 sizeZ = 64
@@ -160,10 +166,11 @@ y_size = 0.042
 #aprtNodes = AddScrapersAperturesToLattice(accLattice,"MEBT_Diag:V_SCRP",x_size,y_size,aprtNodes)
 
 
-for node in aprtNodes:
-	print "aprt=",node.getName()," pos =",node.getPosition()
+#for node in aprtNodes:
+#	print "aprt=",node.getName()," pos =",node.getPosition()
 
 print "===== Aperture Nodes Added ======= N total=",len(aprtNodes)
+
 
 #-----TWISS Parameters at the entrance of MEBT ---------------
 # transverse emittances are unnormalized and in pi*mm*mrad
@@ -237,7 +244,7 @@ pos_start = 0.
 
 twiss_analysis = BunchTwissAnalysis()
 
-file_out = open("pyorbit_twiss_sizes_ekin_ovlp_fields_lattice.dat","w")
+file_out = open("pyorbit_twiss_sizes_and_ekin.dat","w")
 
 s = " Node   position "
 s += "   alphaX betaX emittX  normEmittX"
