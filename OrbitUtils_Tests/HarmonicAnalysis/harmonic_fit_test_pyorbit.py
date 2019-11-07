@@ -102,6 +102,9 @@ print "best score=",bestScore," iteration=",solver.getScoreboard().getIteration(
 trialPoint = solver.getScoreboard().getBestTrialPoint()
 print trialPoint.textDesciption()	
 
+#----- this will set the trial point for best score to the harmonic_data
+best_score = scorer.getScore(trialPoint)
+
 print "======= fitting quality ================"
 for ind in range(harmonic_data.dataSize()):
 	x = harmonic_data.valueX(ind)
