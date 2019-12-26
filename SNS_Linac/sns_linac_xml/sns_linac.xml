@@ -11665,6 +11665,12 @@
   <accElement length="0.0" name="HEBT_Diag:BPM10" pos="37.383197" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Diag:EMS_X" pos="39.443" type="MARKER">
+   <parameters/>  
+  </accElement>  
+  <accElement length="0.0" name="HEBT_Diag:EMS_Y" pos="39.443" type="MARKER">
+   <parameters/>  
+  </accElement>  
   <accElement length="0.0" name="HEBT_Diag:BPM11" pos="41.116803" type="MARKER">
    <parameters/>
   </accElement>
