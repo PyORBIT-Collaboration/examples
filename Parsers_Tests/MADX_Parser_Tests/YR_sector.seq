@@ -1,0 +1,31 @@
+///Main dipoles
+MH: sbend,l= 0.62831853071,angle= -0.52359877559, e1= -0.52359877559/2,e2= -0.52359877559/2,hgap= 0.04,fint= 0.56;
+
+//Main quadrupoles
+kqfl := 0.5086546699;
+kqdl := -0.6511149282;
+LQD := 0.289;
+MQF: quadrupole,l= LQD,k1=kqfl/LQD;
+MQD: quadrupole,l= LQD,k1=kqdl/LQD;
+
+//BPMs
+HBPM: drift,l= 0.1;
+VBPM: drift,l= 0.1;
+
+YR01MH	:	MH	;			
+YR02QS1	:	MQF	;			
+YR02DX1	:	HBPM	;			
+YR02DX2	:	VBPM	;			
+YR02QS2	:	MQD	;			
+YR02QS3	:	MQF	;			
+YR02MH	:	MH	;			
+
+yring:	sequence, refer = centre,	l=	54.17782237/6.0	;
+YR01MH	,	at	=	2.276659265	;
+YR02QS1	,	at	=	3.340818531	;
+YR02DX1	,	at	=	3.557318531	;
+YR02DX2	,	at	=	4.298318531	;
+YR02QS2	,	at	=	4.514818531	;
+YR02QS3	,	at	=	5.688818531	;
+YR02MH	,	at	=	6.752977796	;
+endsequence;				

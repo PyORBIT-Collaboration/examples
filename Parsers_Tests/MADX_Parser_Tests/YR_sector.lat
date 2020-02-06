@@ -1,0 +1,25 @@
+//Main dipoles
+MH: sbend,l= 0.62831853071,angle= -0.52359877559, e1= -0.52359877559/2,e2= -0.52359877559/2,hgap= 0.04,fint= 0.56;
+
+//Main quadrupoles
+kqfl := 0.5086546699;
+kqdl := -0.6511149282;
+LQD := 0.289;
+MQF: quadrupole,l= LQD,k1=kqfl/LQD;
+MQD: quadrupole,l= LQD,k1=kqdl/LQD;
+
+//BPMs
+HBPM: DRIFT,l= 0.1;
+VBPM: DRIFT,l= 0.1;
+
+Drift0: drift, l= 1.96249999964;
+Drift1: drift, l= 0.605500000641;
+Drift2: drift, l= 0.022;
+Drift3: drift, l= 0.641;
+Drift4: drift, l= 0.022;
+Drift5: drift, l= 0.885;
+Drift6: drift, l= 0.605499999641;
+Drift7: drift, l= 1.96250000031;
+
+yring: line=(Drift0,MH,Drift1,MQF,Drift2,HBPM,Drift3,VBPM,Drift4,MQD,Drift5,MQF,Drift6,MH,Drift7);
+

@@ -1,0 +1,25 @@
+! Element definitions:
+! ------------------- horizontal quadrupole ----------------------------
+QS1F: QUADRUPOLE,L= 1.04,K1= 0.28339;
+QS2D: QUADRUPOLE,L= 1.04,K1= -0.494471;
+QS3T: QUADRUPOLE,L= 0.4804,K1= 0.656;
+!---------------------  DRIFT SPACES DEFINITION  ---------------------
+DR1: DRIFT, L=0.6450000;
+DR2: DRIFT, L=0.9700000;
+DR3: DRIFT, L=6.8390117;
+DR4: DRIFT, L=0.6000000;
+DR5: DRIFT, L=0.7098000;
+DR6: DRIFT, L=0.4998000;
+!--------------------------  BENDING MAGNET ---------------------------
+RB: sbend,l= 2.617993878,angle= 0.2617993878,e1= 0.1274090354,e2= 0.1274090354,hgap= 0.035,fint= 0.7;
+!--------------------------    ADDITIONAL   ---------------------------
+BPM: MONITOR;
+COR: KICKER;
+! ---------------------------  LINE DEFINITION --------------------------
+! Sections without injection devices, steeres and position monitors
+CELLA: LINE=(DR1, RB, DR2, RB, DR3, QS1F,COR, BPM, DR4, QS2D, DR5, QS3T, DR6);
+SIS18: LINE = (12*CELLA);
+
+
+RETURN;
+
