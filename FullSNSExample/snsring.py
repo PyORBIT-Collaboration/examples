@@ -15,11 +15,11 @@ from bunch import Bunch
 from orbit.utils.orbit_mpi_utils import bunch_orbit_to_pyorbit, bunch_pyorbit_to_orbit
 from orbit.injection import TeapotInjectionNode
 from orbit.injection import addTeapotInjectionNode
-from injection import InjectParts
-from injection import JohoTransverse, JohoLongitudinal, SNSESpreadDist
-from kickernodes import XKicker, YKicker
-from kickernodes import rootTWaveform, flatTopWaveform
-from kickernodes import TeapotXKickerNode, TeapotYKickerNode,addTeapotKickerNode
+from orbit.injection import InjectParts
+from orbit.injection import JohoTransverse, JohoLongitudinal, SNSESpreadDist
+from orbit.kickernodes import XKicker, YKicker
+from orbit.kickernodes import rootTWaveform, flatTopWaveform
+from orbit.kickernodes import TeapotXKickerNode, TeapotYKickerNode,addTeapotKickerNode
 from orbit.foils import TeapotFoilNode, addTeapotFoilNode
 from foil import Foil
 from orbit.collimation import TeapotCollimatorNode, addTeapotCollimatorNode
@@ -192,7 +192,7 @@ density_fac = 1.0
 shape = 1
 radius = 0.110
 
-collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., "Collimator 1")
+collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., pos = 0., name = "Collimator 1")
 addTeapotCollimatorNode(teapot_latt, 0.5, collimator)
 
 #-----------------------------
