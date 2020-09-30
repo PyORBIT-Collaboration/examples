@@ -7,6 +7,8 @@
 #
 # The generated bunch tracked through this lattice and we can see trajectory
 # and correlations at the end
+#
+# The lattice is for the test only. It is nonphysical.
 #------------------------------------------------------------------------
 
 import math
