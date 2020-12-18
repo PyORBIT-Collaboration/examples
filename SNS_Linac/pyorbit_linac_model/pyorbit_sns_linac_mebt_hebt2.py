@@ -20,7 +20,13 @@ import time
 from orbit.py_linac.linac_parsers import SNS_LinacLatticeFactory
 
 # from linac import the C++ RF gap classes
+#---- for these RF gap models parameters are defined by the synchronous particle
 from linac import BaseRfGap, MatrixRfGap, RfGapTTF
+
+#---- variants of slow RF gap models which updates all RF gap parameters
+#---- individually for each particle in the bunch
+from linac import BaseRfGap_slow, RfGapTTF_slow, RfGapThreePointTTF_slow
+
 
 from orbit.bunch_generators import TwissContainer
 from orbit.bunch_generators import WaterBagDist3D, GaussDist3D, KVDist3D
@@ -64,9 +70,13 @@ print "Linac lattice is ready. L=",accLattice.getLength()
 #---- BaseRfGap  uses only E0TL*cos(phi)*J0(kr) with E0TL = const
 #---- MatrixRfGap uses a matrix approach like envelope codes
 #---- RfGapTTF uses Transit Time Factors (TTF) like PARMILA
+#cppGapModel = BaseRfGap_slow
+#cppGapModel = MatrixRfGap_slow
+#cppGapModel = RfGapTTF_slow
 #cppGapModel = BaseRfGap
 #cppGapModel = MatrixRfGap
 cppGapModel = RfGapTTF
+
 rf_gaps = accLattice.getRF_Gaps()
 for rf_gap in rf_gaps:
 	rf_gap.setCppGapModel(cppGapModel())
@@ -82,40 +92,75 @@ for rf_gap in rf_gaps:
 #---- axis fields files location 
 dir_location = "../sns_rf_fields/"
 
-"""
-#Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,dir_location,["MEBT","CCL1","CCL2","CCL3","CCL4","SCLMed"])
-
 #---- longitudinal step along the distributed fields lattice
 z_step = 0.002
-accSeq_names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed"]
-#accSeq_names = ["MEBT","DTL1"]
-Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,accSeq_names,[],SNS_EngeFunctionFactory)	
+
+#--------- User can comment / uncomment the necessary RF and quad models 
+
+#------------------------------------------------------------------------------
+#----- only RF gaps will be replaced with non-zero length models
+#----- Quads stay hard-edged. 
+#----- Such approach will not work for DTL cavities - RF and quad fields are overlapped for DTL
+#Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice,z_step,dir_location,["MEBT","CCL1","CCL2","CCL3","CCL4","SCLMed"])
+
+#------------------------------------------------------------------------------
+#accSeq_names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed"]
+accSeq_names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6"]
+
+#---- hard-edge quad models will be replaced with soft-edge models
+#---- It is possible for DTL also - if the RF gap models are zero-length ones
+#Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,accSeq_names,[],SNS_EngeFunctionFactory)
+
+#---- hard-edge quad and zero-length RF gap models will be replaced with 
+#---- soft-edge quads and field-on-axis RF gap models
+#---- It can be used for any sequences, no limitations.
+#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,accSeq_names,[],SNS_EngeFunctionFactory)	
+
 print "Linac lattice has been modified. New L[m] = ",accLattice.getLength()
-"""
-#accLattice.setLinacTracker(True)
+
 
 #-----------------------------------------------------
 # Set up Space Charge Acc Nodes
 #-----------------------------------------------------
 from orbit.space_charge.sc3d import setSC3DAccNodes, setUniformEllipsesSCAccNodes
+from orbit.space_charge.sc2p5d  import setSC2p5DrbAccNodes
 from spacecharge import SpaceChargeCalcUnifEllipse, SpaceChargeCalc3D
+from spacecharge import SpaceChargeCalc2p5Drb
+
 sc_path_length_min = 0.01
 
 print "Set up Space Charge nodes. "
 
+#-------------------------------------------------------------
 # set of uniformly charged ellipses Space Charge
+#-------------------------------------------------------------
 nEllipses = 1
 calcUnifEllips = SpaceChargeCalcUnifEllipse(nEllipses)
 space_charge_nodes = setUniformEllipsesSCAccNodes(accLattice,sc_path_length_min,calcUnifEllips)
 
 """
+#-------------------------------------------------------------
 # set FFT 3D Space Charge
+#-------------------------------------------------------------
 sizeX = 64
 sizeY = 64
 sizeZ = 64
 calc3d = SpaceChargeCalc3D(sizeX,sizeY,sizeZ)
 space_charge_nodes =  setSC3DAccNodes(accLattice,sc_path_length_min,calc3d)
+
+#-------------------------------------------------------------
+# set 2.5D Rick Baartman's Space Charge model.
+# This model does not work for linac case
+# here it is just as example of setting another SC model
+#-------------------------------------------------------------
+sizeX = 32
+sizeY = 32
+sizeZ = 32
+calc3drb = SpaceChargeCalc2p5Drb(sizeX,sizeY,sizeZ)
+pipe_radius = 0.025
+space_charge_nodes =  setSC2p5DrbAccNodes(accLattice,sc_path_length_min,calc3drb,pipe_radius)
 """
+
 
 max_sc_length = 0.
 min_sc_length = accLattice.getLength()
@@ -144,6 +189,18 @@ for node in aprtNodes:
 """
 
 print "===== Aperture Nodes Added ======="
+
+
+
+#----------------------------------------------------------
+# Set Linac style quads and drifts instead of TEAPOT style 
+# That can be useful when energy spread is huge and TEAPOT
+# accuracy is not enough for tracking.
+# This will slow down tracking and it is not symplectic.
+#----------------------------------------------------------
+#accLattice.setLinacTracker(True)
+
+
 
 #-----TWISS Parameters at the entrance of MEBT ---------------
 # transverse emittances are unnormalized and in pi*mm*mrad
