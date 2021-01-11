@@ -3,7 +3,7 @@
 # and through the 3D lattice with Field Source class
 # instances that should be equivalent to the hard edge
 # quads and kickers.
-# This variant does not include any kickers fields.
+# This variant does include any kickers fields.
 # Tracking will be exactly along z-axis of the TEAPOT 
 # lattice.
 # User can play with number of steps and the accuracy eps parameter
@@ -68,8 +68,8 @@ kickers = accLattice.getNodesOfClass(ThickKick)
 n_kicker_parts = 100
 print "debug n_kicker_parts = ",n_kicker_parts
 for kicker in kickers:
-	kicker.setFieldBx(0.)
-	kicker.setFieldBy(0.)
+	kicker.setFieldBx(0.0)
+	kicker.setFieldBy(0.2)
 	kicker.setnParts(n_kicker_parts)
 	print "kicker=",kicker.getName()," field (X,Y) [T] = (%6.5f,%6.5f) "%(kicker.getFieldBx(),kicker.getFieldBy())
 	
@@ -140,8 +140,8 @@ twissY = TwissContainer(alphaY,betaY,emittY)
 twissZ = TwissContainer(alphaZ,betaZ,emittZ)
 
 distGen = GaussDist3D(twissX,twissY,twissZ)
-distGen = WaterBagDist3D(twissX,twissY,twissZ)
-distGen = KVDist3D(twissX,twissY,twissZ)
+#distGen = WaterBagDist3D(twissX,twissY,twissZ)
+#distGen = KVDist3D(twissX,twissY,twissZ)
 n_parts = 1000
 for i in range(n_parts):
 	(x,xp,y,yp,z,dE) = distGen.getCoordinates()
@@ -193,9 +193,12 @@ def action_account(paramsDict):
 	x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 	y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
 	z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-	print "debug i= %3d "%paramsDict["count"]," %35s "%name," pos= %8.3f "%(pos+pos_start)," (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
-	#(x,xp,y,yp,z,dE) = (bunchI.x(0)*1000.,bunchI.xp(0)*1000.,bunchI.y(0)*1000.,bunchI.yp(0)*1000.,bunchI.z(0)*1000.,bunchI.dE(0)*1000.)
-	#print "debug i=",paramsDict["count"]," name=",name," pos=",(pos+pos_start)," (x,xp,y,yp,z,dE)=",(x,xp,y,yp,z,dE)
+	synch_part_rvector = bunchI.getSyncParticle().rVector()
+	synch_part_pvector = bunchI.getSyncParticle().pVector()
+	st  = "i = %3d "%paramsDict["count"] + " %35s "%name + " pos = %8.3f "%(pos+pos_start)
+	st += " (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
+	st += "  synch_particle x = %8.4f  xp =  %8.4f "%(synch_part_rvector[0]*1000.,synch_part_pvector[0]*1000./synch_part_pvector[2])	
+	print st
 
 actionContainer.addAction(action_account, AccActionsContainer.ENTRANCE)
 actionContainer.addAction(action_account, AccActionsContainer.BODY)
@@ -378,7 +381,12 @@ for space_ind in range(n_space_parts):
 	x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 	y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
 	z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-	print "i = %3d "%space_ind," pos = %8.5f "%d_parameter," (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)	
+	synch_part_rvector = bunch_tmp.getSyncParticle().rVector()
+	synch_part_pvector = bunch_tmp.getSyncParticle().pVector()
+	st  = "i = %3d "%space_ind + " pos = %8.5f "%d_parameter
+	st += " (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
+	st += "  synch_particle x = %8.4f  xp =  %8.4f "%(synch_part_rvector[0]*1000.,synch_part_pvector[0]*1000./momentum)	
+	print st
 
 bunch_3d_final = bunch_tmp
 twiss_analysis.analyzeBunch(bunch_3d_final)

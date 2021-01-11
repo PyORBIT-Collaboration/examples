@@ -1,20 +1,18 @@
 #-----------------------------------------------------
-# Track ORBIT bunch through the TEAPOT lattice
+# Track ORBIT two particles through the TEAPOT lattice
 # and through the 3D lattice with Field Source class
 # instances that should be equivalent to the hard edge
 # quads and kickers.
-# This variant does not include any kickers fields.
-# Tracking will be exactly along z-axis of the TEAPOT 
-# lattice.
+# This variant does include any kickers fields.
 # User can play with number of steps and the accuracy eps parameter
 # in the Runge-Kutta tracker of 4th order.
 #
 # Author: Andrei Shishlo
 #-----------------------------------------------------
+
 import sys
 import math
-import random
-import time
+import random 
 
 from orbit.py_linac.linac_parsers import SNS_LinacLatticeFactory
 
@@ -68,8 +66,8 @@ kickers = accLattice.getNodesOfClass(ThickKick)
 n_kicker_parts = 100
 print "debug n_kicker_parts = ",n_kicker_parts
 for kicker in kickers:
-	kicker.setFieldBx(0.)
-	kicker.setFieldBy(0.)
+	kicker.setFieldBx(0.0)
+	kicker.setFieldBy(0.2)
 	kicker.setnParts(n_kicker_parts)
 	print "kicker=",kicker.getName()," field (X,Y) [T] = (%6.5f,%6.5f) "%(kicker.getFieldBx(),kicker.getFieldBy())
 	
@@ -93,72 +91,14 @@ bunch_ini = Bunch()
 eKin = 1.3
 bunch_ini.getSyncParticle().kinEnergy(eKin)
 
-#----------------------------------------------------
-# Let's calculate beta functions for 90 deg FODO
-# Brho[T*m] = (10/2.998)*beta_relativistic*E[GeV]
-# focusing_length[m] = Brho/(g*length_of_quad) g = [T/m] quad gradient
-# cappa = 2*focusing_length/L_between_quads
-# Twiss beta_max = L*cappa*(cappa + 1)/sqrt(cappa**2 - 1)
-# Twiss beta_min = L*cappa*(cappa - 1)/sqrt(cappa**2 - 1)
-# L = L_between_quads
-#-----------------------------------------------------
+#---- There are 2 macro-particles added to the bunch
+#---- User can change coordinates to see the difference 
+#---- between TEAPOT and 3D RK4 tracking.
+(x,xp,y,yp,z,dE) = (0.,0.,0.,0.,0.,0.)
+bunch_ini.addParticle(x,xp,y,yp,z,dE)
 
-L_between_quads = accLattice.getNodePositionsDict()[quads[1]][1] - accLattice.getNodePositionsDict()[quads[0]][1]
-print "Distance between quads [m] = ",L_between_quads
-Brho = (10/2.998)*bunch_ini.getSyncParticle().beta()*eKin
-length_of_quad = quads[0].getLength()
-grad = abs(quads[0].getParam("dB/dr"))
-focusing_length = Brho/(grad*length_of_quad)
-cappa = 2*focusing_length/L_between_quads
-beta_max = L_between_quads*cappa*(cappa + 1)/math.sqrt(cappa**2 - 1)
-beta_min = L_between_quads*cappa*(cappa - 1)/math.sqrt(cappa**2 - 1)
-print "Twiss beta max =",beta_max
-print "Twiss beta min =",beta_min
-
-rms_size_max = 0.025 
-emitt = rms_size_max**2/beta_max
-
-#---- let's generate particles ---------
-alphaX = 0.0
-alphaY = 0.0
-alphaZ = -30.
-
-betaX = beta_min
-betaY = beta_max
-betaZ = 1000.0
-
-emittX = emitt
-emittY = emitt
-emittZ = 1.*1.0e-6
-
-print " aplha beta emitt X= ( %8.2f, %8.2f, %10.3e )"%(alphaX,betaX,emittX)
-print " aplha beta emitt Y= ( %8.2f, %8.2f, %10.3e )"%(alphaY,betaY,emittY)
-print " aplha beta emitt Z= ( %8.2f, %8.2f, %10.3e )"%(alphaZ,betaZ,emittZ)
-
-twissX = TwissContainer(alphaX,betaX,emittX)
-twissY = TwissContainer(alphaY,betaY,emittY)
-twissZ = TwissContainer(alphaZ,betaZ,emittZ)
-
-distGen = GaussDist3D(twissX,twissY,twissZ)
-distGen = WaterBagDist3D(twissX,twissY,twissZ)
-distGen = KVDist3D(twissX,twissY,twissZ)
-n_parts = 1000
-for i in range(n_parts):
-	(x,xp,y,yp,z,dE) = distGen.getCoordinates()
-	bunch_ini.addParticle(x,xp,y,yp,z,dE)
-
-twiss_analysis = BunchTwissAnalysis()
-
-twiss_analysis.analyzeBunch(bunch_ini)
-print "============Initial Bunch Twiss parameters =================="
-print "X Twiss = ( %8.2f, %8.2f, %8.2f, %10.3e )"%twiss_analysis.getTwiss(0)
-print "Y Twiss = ( %8.2f, %8.2f, %8.2f, %10.3e )"%twiss_analysis.getTwiss(1)
-print "Z Twiss = ( %8.2f, %8.2f, %8.2f, %10.3e )"%twiss_analysis.getTwiss(2)
-x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
-z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-print "Initial Bunch (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
-print "============================================================"
+(x,xp,y,yp,z,dE) = (0.05,0.0,0.05,0.0,0.,0.001)
+bunch_ini.addParticle(x,xp,y,yp,z,dE)
 
 bunch_tmp = Bunch()
 bunch_ini.copyBunchTo(bunch_tmp)
@@ -172,7 +112,7 @@ traj_x_function  = Function()
 traj_xp_function = Function()
 
 #----- if you want more beam size points along the trajectory - change pos_step here
-paramsDict = {"old_pos":-1.,"count":0,"pos_step":0.3,"path_length":0.}
+paramsDict = {"old_pos":-1.,"count":0,"pos_step":0.1,"path_length":0.}
 actionContainer = AccActionsContainer("TEAPOT Bunch Tracking")
 
 #----- start of the 1st quad
@@ -189,13 +129,12 @@ def action_account(paramsDict):
 	paramsDict["count"] += 1
 	traj_x_function.add(pos+pos_start,bunchI.x(0)*1000.)
 	traj_xp_function.add(pos+pos_start,bunchI.xp(0)*1000.)
-	twiss_analysis.analyzeBunch(bunchI)
-	x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-	y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
-	z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-	print "debug i= %3d "%paramsDict["count"]," %35s "%name," pos= %8.3f "%(pos+pos_start)," (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
-	#(x,xp,y,yp,z,dE) = (bunchI.x(0)*1000.,bunchI.xp(0)*1000.,bunchI.y(0)*1000.,bunchI.yp(0)*1000.,bunchI.z(0)*1000.,bunchI.dE(0)*1000.)
-	#print "debug i=",paramsDict["count"]," name=",name," pos=",(pos+pos_start)," (x,xp,y,yp,z,dE)=",(x,xp,y,yp,z,dE)
+	st = "i= %3d "%paramsDict["count"] + " pos= %8.3f "%(pos+pos_start)
+	(x0,xp0,y0,yp0,z0,dE0) = (bunchI.x(0)*1000.,bunchI.xp(0)*1000.,bunchI.y(0)*1000.,bunchI.yp(0)*1000.,bunchI.z(0)*1000.,bunchI.dE(0)*1000.)
+	(x1,xp1,y1,yp1,z1,dE1) = (bunchI.x(1)*1000.,bunchI.xp(1)*1000.,bunchI.y(1)*1000.,bunchI.yp(1)*1000.,bunchI.z(1)*1000.,bunchI.dE(1)*1000.)
+	st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )"%(x1 - x0,xp1 - xp0,y1 - y0,yp1 - yp0,z1 -z0,dE1 -dE0)
+	st += " synch_part x = %8.4f  xp= %8.4f "%(bunchI.x(0)*1000.,bunchI.xp(0)*1000.)
+	print st
 
 actionContainer.addAction(action_account, AccActionsContainer.ENTRANCE)
 actionContainer.addAction(action_account, AccActionsContainer.BODY)
@@ -205,18 +144,13 @@ print "=========================================================================
 accLattice.trackBunch(bunch_tmp,paramsDict = paramsDict, actionContainer = actionContainer, index_start = start_ind, index_stop = stop_ind)
 print "============================================================================================"
 
-bunch_teapot_final = bunch_tmp
-twiss_analysis.analyzeBunch(bunch_teapot_final)
-print "debug =========These sizes should be same as for 3D tracking =="
-x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
-z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-print "After TEAPOT tracking (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
-print "debug ========================================================="
-
-#----------------------------------------------------------------
-# Let's define the Field Sources for quads and kickers
-#----------------------------------------------------------------
+print "============================ final TEAPOT bunch ==========================="
+st = ""
+(x0,xp0,y0,yp0,z0,dE0) = (bunch_tmp.x(0)*1000.,bunch_tmp.xp(0)*1000.,bunch_tmp.y(0)*1000.,bunch_tmp.yp(0)*1000.,bunch_tmp.z(0)*1000.,bunch_tmp.dE(0)*1000.)
+(x1,xp1,y1,yp1,z1,dE1) = (bunch_tmp.x(1)*1000.,bunch_tmp.xp(1)*1000.,bunch_tmp.y(1)*1000.,bunch_tmp.yp(1)*1000.,bunch_tmp.z(1)*1000.,bunch_tmp.dE(1)*1000.)
+st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )"%(x1 - x0,xp1 - xp0,y1 - y0,yp1 - yp0,z1 -z0,dE1 -dE0)
+print st
+print "==========================================================================="
 
 #----- 3D quads
 qv01_3d = QuadFieldSource()
@@ -328,39 +262,36 @@ tracker.exitPlane(0.,0.,1.,-(qh04_pos_end - qv01_pos_center))
 print "Tracker Entrance plane (a,b,c,d)=",tracker.entrancePlane()
 print "Tracker Exit     plane (a,b,c,d)=",tracker.exitPlane()
 
-time_start = time.clock()
-
 # we have to specify an initial guess for number of time steps
-tracker.stepsNumber(300)
+tracker.stepsNumber(10000)
 
 bunch_tmp = Bunch()
 bunch_ini.copyBunchTo(bunch_tmp)
 
-#----- we will define region into parts
 n_space_parts = 10
-
 (a_entr,b_entr,c_entr,d_entr) = tracker.entrancePlane() 
 (a_exit,b_exit,c_exit,d_exit) = tracker.exitPlane()
 d_start = - d_entr
 d_stop  = d_exit
 space_step = (d_stop + (-d_start))/n_space_parts
 
-twiss_analysis.analyzeBunch(bunch_tmp)
-x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
-z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-print "Start tracking pos = %8.5f "%d_start," (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)	
-print "Number of particles in the bunch = ",bunch_tmp.getSize()
+print "====================== Initial bunch before 3D tracking=============================="
+st = " pos = %8.5f "%d_entr
+(x0,xp0,y0,yp0,z0,dE0) = (bunch_tmp.x(0)*1000.,bunch_tmp.xp(0)*1000.,bunch_tmp.y(0)*1000.,bunch_tmp.yp(0)*1000.,bunch_tmp.z(0)*1000.,bunch_tmp.dE(0)*1000.)
+(x1,xp1,y1,yp1,z1,dE1) = (bunch_tmp.x(1)*1000.,bunch_tmp.xp(1)*1000.,bunch_tmp.y(1)*1000.,bunch_tmp.yp(1)*1000.,bunch_tmp.z(1)*1000.,bunch_tmp.dE(1)*1000.)
+st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )"%(x1 - x0,xp1 - xp0,y1 - y0,yp1 - yp0,z1 -z0,dE1 -dE0)
+print st
+print "======================================================================================"
+
 print "debug d_start=",d_start," d_stop=",d_stop," space_step=",space_step," n_space_parts=",n_space_parts
-print "debug initial number of steps =",tracker.stepsNumber()
-print "============================================================================================"
+print "======================================================================================"
+print "======================Results of 3D tracking ========================================="
 for space_ind in range(n_space_parts):
 	d_plane_start = -(d_start + space_step*space_ind)
 	d_plane_stop  = -d_plane_start + space_step
 	#print "debug d_plane_start=",d_plane_start," d_plane_stop=",d_plane_stop
 	tracker.entrancePlane(a_entr,b_entr,c_entr,d_plane_start)
 	tracker.exitPlane(a_exit,b_exit,c_exit,d_plane_stop)
-	#----- tracking only synchronous particle to define exit plane perpendicular for synch. particle momentum
 	bunch_synch_part = Bunch()
 	bunch_tmp.copyEmptyBunchTo(bunch_synch_part)	
 	tracker.trackBunch(bunch_synch_part,field_container)
@@ -370,25 +301,17 @@ for space_ind in range(n_space_parts):
 	norm_final_v = [synch_part_pvector[0]/momentum,synch_part_pvector[1]/momentum,synch_part_pvector[2]/momentum]
 	d_parameter = norm_final_v[0]*synch_part_rvector[0] + norm_final_v[1]*synch_part_rvector[1] + norm_final_v[2]*synch_part_rvector[2]	
 	tracker.exitPlane(norm_final_v[0],norm_final_v[1],norm_final_v[2],-d_parameter)
-	#----- the exit plane is defined and now we will track the whole bunch
 	tracker.trackBunch(bunch_tmp,field_container)
 	#----------------------------------------------------------------------------
-	#----- print bunch RMS sizes
-	twiss_analysis.analyzeBunch(bunch_tmp)
-	x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-	y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
-	z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-	print "i = %3d "%space_ind," pos = %8.5f "%d_parameter," (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)	
+	st = "i = %3d "%space_ind + " pos = %8.5f "%d_parameter
+	(x0,xp0,y0,yp0,z0,dE0) = (bunch_tmp.x(0)*1000.,bunch_tmp.xp(0)*1000.,bunch_tmp.y(0)*1000.,bunch_tmp.yp(0)*1000.,bunch_tmp.z(0)*1000.,bunch_tmp.dE(0)*1000.)
+	(x1,xp1,y1,yp1,z1,dE1) = (bunch_tmp.x(1)*1000.,bunch_tmp.xp(1)*1000.,bunch_tmp.y(1)*1000.,bunch_tmp.yp(1)*1000.,bunch_tmp.z(1)*1000.,bunch_tmp.dE(1)*1000.)
+	synch_part_rvector = bunch_tmp.getSyncParticle().rVector()
+	synch_part_pvector = bunch_tmp.getSyncParticle().pVector()
+	st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )"%(x1 - x0,xp1 - xp0,y1 - y0,yp1 - yp0,z1 -z0,dE1 -dE0)
+	st += "  synch_particle x = %8.4f  xp =  %8.4f "%(synch_part_rvector[0]*1000.,synch_part_pvector[0]*1000./momentum)
+	print st
 
-bunch_3d_final = bunch_tmp
-twiss_analysis.analyzeBunch(bunch_3d_final)
-print "debug ========We can compare these 3D tracking RMS sizes with TEAPOT results ================"
-x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
-z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-print "After 3D tracking (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
-print "debug ======================================================================================="
-
-print "tracking time = ",(time.clock() - time_start)
 print "======================================================================================"
 print "Stop."
+
