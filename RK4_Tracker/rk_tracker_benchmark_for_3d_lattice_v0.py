@@ -157,7 +157,7 @@ print "Z Twiss = ( %8.2f, %8.2f, %8.2f, %10.3e )"%twiss_analysis.getTwiss(2)
 x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
 z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-print "Initial Bunch (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
+print "Initial Bunch (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )"%(x_rms,y_rms,z_rms)
 print "============================================================"
 
 bunch_tmp = Bunch()
@@ -193,7 +193,7 @@ def action_account(paramsDict):
 	x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 	y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
 	z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-	print "debug i= %3d "%paramsDict["count"]," %35s "%name," pos= %8.3f "%(pos+pos_start)," (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
+	print "debug i= %3d "%paramsDict["count"]," %35s "%name," pos= %8.3f "%(pos+pos_start)," (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )"%(x_rms,y_rms,z_rms)
 	#(x,xp,y,yp,z,dE) = (bunchI.x(0)*1000.,bunchI.xp(0)*1000.,bunchI.y(0)*1000.,bunchI.yp(0)*1000.,bunchI.z(0)*1000.,bunchI.dE(0)*1000.)
 	#print "debug i=",paramsDict["count"]," name=",name," pos=",(pos+pos_start)," (x,xp,y,yp,z,dE)=",(x,xp,y,yp,z,dE)
 
@@ -211,7 +211,7 @@ print "debug =========These sizes should be same as for 3D tracking =="
 x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
 z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-print "After TEAPOT tracking (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
+print "After TEAPOT tracking (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )"%(x_rms,y_rms,z_rms)
 print "debug ========================================================="
 
 #----------------------------------------------------------------
@@ -349,7 +349,7 @@ twiss_analysis.analyzeBunch(bunch_tmp)
 x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
 z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-print "Start tracking pos = %8.5f "%d_start," (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)	
+print "Start tracking pos = %8.5f "%d_start," (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )"%(x_rms,y_rms,z_rms)	
 print "Number of particles in the bunch = ",bunch_tmp.getSize()
 print "debug d_start=",d_start," d_stop=",d_stop," space_step=",space_step," n_space_parts=",n_space_parts
 print "debug initial number of steps =",tracker.stepsNumber()
@@ -358,7 +358,8 @@ for space_ind in range(n_space_parts):
 	d_plane_start = -(d_start + space_step*space_ind)
 	d_plane_stop  = -d_plane_start + space_step
 	#print "debug d_plane_start=",d_plane_start," d_plane_stop=",d_plane_stop
-	tracker.entrancePlane(a_entr,b_entr,c_entr,d_plane_start)
+	if(space_ind == 0):
+		tracker.entrancePlane(a_entr,b_entr,c_entr,d_plane_start)
 	tracker.exitPlane(a_exit,b_exit,c_exit,d_plane_stop)
 	#----- tracking only synchronous particle to define exit plane perpendicular for synch. particle momentum
 	bunch_synch_part = Bunch()
@@ -372,13 +373,15 @@ for space_ind in range(n_space_parts):
 	tracker.exitPlane(norm_final_v[0],norm_final_v[1],norm_final_v[2],-d_parameter)
 	#----- the exit plane is defined and now we will track the whole bunch
 	tracker.trackBunch(bunch_tmp,field_container)
+	(a_exit,b_exit,c_exit,d_exit) = tracker.exitPlane()
+	tracker.entrancePlane(-a_exit,-b_exit,-c_exit,-d_exit) 
 	#----------------------------------------------------------------------------
 	#----- print bunch RMS sizes
 	twiss_analysis.analyzeBunch(bunch_tmp)
 	x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 	y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
 	z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-	print "i = %3d "%space_ind," pos = %8.5f "%d_parameter," (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)	
+	print "i = %3d "%space_ind," pos = %8.5f "%d_parameter," (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )"%(x_rms,y_rms,z_rms)	
 
 bunch_3d_final = bunch_tmp
 twiss_analysis.analyzeBunch(bunch_3d_final)
@@ -386,7 +389,7 @@ print "debug ========We can compare these 3D tracking RMS sizes with TEAPOT resu
 x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
 y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
 z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-print "After 3D tracking (x_rms,y_rms,z_rms) = ( %5.2f, %5.2f, %5.2f )"%(x_rms,y_rms,z_rms)
+print "After 3D tracking (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )"%(x_rms,y_rms,z_rms)
 print "debug ======================================================================================="
 
 print "tracking time = ",(time.clock() - time_start)

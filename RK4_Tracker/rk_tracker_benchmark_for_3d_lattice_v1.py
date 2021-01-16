@@ -292,7 +292,8 @@ for space_ind in range(n_space_parts):
 	d_plane_start = -(d_start + space_step*space_ind)
 	d_plane_stop  = -d_plane_start + space_step
 	#print "debug d_plane_start=",d_plane_start," d_plane_stop=",d_plane_stop
-	tracker.entrancePlane(a_entr,b_entr,c_entr,d_plane_start)
+	if(space_ind == 0):
+		tracker.entrancePlane(a_entr,b_entr,c_entr,d_plane_start)
 	tracker.exitPlane(a_exit,b_exit,c_exit,d_plane_stop)
 	bunch_synch_part = Bunch()
 	bunch_tmp.copyEmptyBunchTo(bunch_synch_part)	
@@ -304,6 +305,8 @@ for space_ind in range(n_space_parts):
 	d_parameter = norm_final_v[0]*synch_part_rvector[0] + norm_final_v[1]*synch_part_rvector[1] + norm_final_v[2]*synch_part_rvector[2]	
 	tracker.exitPlane(norm_final_v[0],norm_final_v[1],norm_final_v[2],-d_parameter)
 	tracker.trackBunch(bunch_tmp,field_container)
+	(a_exit,b_exit,c_exit,d_exit) = tracker.exitPlane()
+	tracker.entrancePlane(-a_exit,-b_exit,-c_exit,-d_exit)
 	#----------------------------------------------------------------------------
 	st = "i = %3d "%space_ind + " pos = %8.5f "%d_parameter
 	(x,xp,y,yp,z,dE) = (bunch_tmp.x(0)*1000.,bunch_tmp.xp(0)*1000.,bunch_tmp.y(0)*1000.,bunch_tmp.yp(0)*1000.,bunch_tmp.z(0)*1000.,bunch_tmp.dE(0)*1000.)
