@@ -125,10 +125,10 @@ class MyScorer(Scorer):
 		x1 = trialPoint.getVariableProxyArr()[1].getValue()
 		x2 = trialPoint.getVariableProxyArr()[2].getValue()
 		x3 = trialPoint.getVariableProxyArr()[3].getValue()
-		self.setScaleChicane(0,x0)
-		self.setScaleChicane(1,x1)
-		self.setScaleChicane(2,x2)
-		self.setScaleChicane(3,x3)
+		self.setScaleChicane(0,-x0)
+		self.setScaleChicane(1,-x1)
+		self.setScaleChicane(2,-x2)
+		self.setScaleChicane(3,-x3)
 
 		for i in range(self.turns):
 			self.teapot_latt.trackBunch(self.b, self.paramsDict)
@@ -140,7 +140,7 @@ class MyScorer(Scorer):
 		
 print "Start."
 parser = argparse.ArgumentParser(description="%prog [options]", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=True, help="print node list")
+parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=False, help="print node list")
 args = parser.parse_args()
 #=====Make a Teapot style lattice======
 teapot_latt = teapot.TEAPOT_Ring()

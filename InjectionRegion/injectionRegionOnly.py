@@ -53,10 +53,22 @@ parser.add_argument("--py",type=float, dest='py', default=0, help="yp rad")
 parser.add_argument("--z",type=float, dest='z', default=0, help="z position")
 parser.add_argument("--pz",type=float, dest='pz', default=0, help="dE position")
 parser.add_argument("--doNormalKickers",type=bool, dest='doNormalKickers', default=False, help="print node list")
-parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=1.040646, help="scaleChicane10")
-parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=1.246665, help="scaleChicane11")
-parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=0.3752553, help="scaleChicane12")
-parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=0.8411178, help="scaleChicane13")
+#parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=1.015811, help="scaleChicane10")
+#parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=1.000257, help="scaleChicane11")
+#parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=0.9997909, help="scaleChicane12")
+#parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=1.008058, help="scaleChicane13")
+#parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=0.9804517, help="scaleChicane10")
+#parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=0.9934917 , help="scaleChicane11")
+#parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=1.009009, help="scaleChicane12")
+#parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=1.042836, help="scaleChicane13")
+parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1.047686, help="scaleChicane10")
+parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-0.9969892, help="scaleChicane11")
+parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=-1.00911, help="scaleChicane12")
+parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=-0.9775873, help="scaleChicane13")
+#parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=1., help="scaleChicane10")
+#parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=1., help="scaleChicane11")
+#parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=1., help="scaleChicane12")
+#parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=1., help="scaleChicane13")
 #parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=1.017866, help="scaleChicane10")
 #parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=1.102997, help="scaleChicane11")
 #parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=0.6130163, help="scaleChicane12")
@@ -273,8 +285,6 @@ lFunc=notRandom(args.z,args.pz)
 
 nparts = macrosperturn
 injectparams = (xmin, xmax, ymin, ymax)
-#injectnode = TeapotInjectionNode(nparts, b, lostbunch, injectparams, xFunc, yFunc, lFunc)
-#addTeapotInjectionNode(teapot_latt, 0., injectnode) 
 
 print "(x,px,y,py,z,pz)= (%f,%f,%f,%f,%f,%f) " %(b.getSyncParticle().x(),b.getSyncParticle().px(),b.getSyncParticle().y(),b.getSyncParticle().py(),b.getSyncParticle().z(),b.getSyncParticle().pz())
 print "gamma= %f"%b.getSyncParticle().gamma()
@@ -283,47 +293,8 @@ print "momentum= %f"%b.getSyncParticle().momentum()
 inject = InjectParts(nparts, b, lostbunch, injectparams, xFunc, yFunc, lFunc)
 inject.addParticles()
 
-thick = 400.0
-foil = TeapotFoilNode(xmin, xmax, ymin, ymax, thick, "Foil 1")
-scatterchoice = 0
-foil.setScatterChoice(scatterchoice)
-#addTeapotFoilNode(teapot_latt,0.000001,foil)
-
-#----------------------------------------------
-# Add one black absorber collimator to act like
-# an aperture
-#----------------------------------------------
-colllength = 0.00001
-ma = 9
-density_fac = 1.0
-shape = 1
-radius = 0.110
-
-collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., pos = 0., name = "Collimator 1")
-#addTeapotCollimatorNode(teapot_latt, 0.5, collimator)
-
-#-----------------------------
-# Add RF Node
-#-----------------------------
 
 teapot_latt.initialize()
-
-
-#----------------------------------------------
-#make 2.5D space charge calculator
-#----------------------------------------------
-#set boundary
-nboundarypoints = 128
-n_freespacemodes = 32
-r_boundary = 0.220
-boundary = Boundary2D(nboundarypoints,n_freespacemodes,"Circle",r_boundary,r_boundary)
-
-sizeX = 64   #number of grid points in horizontal direction
-sizeY = 64  #number of grid points in vertical direction
-sizeZ = 1     #number of longitudinal slices in the 2.5D space charge solver
-calc2p5d = SpaceChargeCalc2p5D(sizeX,sizeY,sizeZ)
-sc_path_length_min = 0.00000001
-scLatticeModifications.setSC2p5DAccNodes(teapot_latt, sc_path_length_min,calc2p5d, boundary)
 
 
 

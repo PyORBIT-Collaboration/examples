@@ -34,29 +34,31 @@ from orbit.teapot import GeneralDipole
 from orbit.teapot import YDipole
 from orbit.teapot import XDipole
 from KevinPython.printNode import Print_Node
+from KevinPython.calculateEmit import Calc_Emit
 import argparse
 
 print "Start."
 parser = argparse.ArgumentParser(description="%prog [options]", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--fileName", dest='fileName', default="outputAddMagnet.txt", help="file to print node info into")
+parser.add_argument("--fileName2", dest='fileName2', default="outputAddMagnetEmit.txt", help="file to print node info into")
 parser.add_argument("--nParts",type=int, dest='nParts', default=260, help="number of particles")
-parser.add_argument("--turns",type=int, dest='turns', default=100, help="number of complete orbits")
-parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=35, help="What node to monitor")
+parser.add_argument("--turns",type=int, dest='turns', default=1, help="number of complete orbits")
+parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=200, help="What node to monitor")
 parser.add_argument("--printNodes",type=bool, dest='printNodes', default=False, help="print node list")
-parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=True, help="print node list")
-parser.add_argument("--doNormalKickers",type=bool, dest='doNormalKickers', default=True, help="print node list")
-parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=0.9804517, help="scaleChicane10")
-parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=0.9934917 , help="scaleChicane11")
-parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=1.009009, help="scaleChicane12")
-parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=1.042836, help="scaleChicane13")
+parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=False, help="print node list")
+parser.add_argument("--doNormalKickers",type=bool, dest='doNormalKickers', default=False, help="print node list")
+#parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=0.9804517, help="scaleChicane10")
+#parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=0.9934917 , help="scaleChicane11")
+#parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=1.009009, help="scaleChicane12")
+#parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=1.042836, help="scaleChicane13")
 #parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=1.015811, help="scaleChicane10")
 #parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=1.000257, help="scaleChicane11")
 #parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=0.9997909, help="scaleChicane12")
 #parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=1.008058, help="scaleChicane13")
-#parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=1., help="scaleChicane10")
-#parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=1., help="scaleChicane11")
-#parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=1., help="scaleChicane12")
-#parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=1., help="scaleChicane13")
+parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=1., help="scaleChicane10")
+parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=1., help="scaleChicane11")
+parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=1., help="scaleChicane12")
+parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=1., help="scaleChicane13")
 args = parser.parse_args()
 #=====Main bunch parameters============
 intensity = 7.8e13
@@ -433,10 +435,15 @@ addLongitudinalSpaceChargeNode(teapot_latt, position, sc1Dnode)
 
 fileOut=open(args.fileName,'w')
 fileOut.close()
+fileOut=open(args.fileName2,'w')
+fileOut.close()
 myPrintNode=Print_Node("MyPrintNode",True,args.fileName)
+
+myEmitNode=Calc_Emit("MyEmitNode",True,args.fileName2)
 
 nodes = teapot_latt.getNodes()
 nodes[args.nodeMonitor].addChildNode(myPrintNode,AccNode.EXIT)
+nodes[args.nodeMonitor].addChildNode(myEmitNode,AccNode.EXIT)
 i = 0
 path_length=0
 for node in nodes:

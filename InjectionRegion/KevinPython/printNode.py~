@@ -17,6 +17,7 @@ class Print_Node(NodeTEAPOT):
         The WS_AccNode class implementation of the AccNode class track(probe) method.
         """
         bunch = paramsDict["bunch"]
+        path_length = paramsDict["path_length"]
         if (self.toFile==False):
             for i in range(bunch.getSize()):        
                 print "%d (x,px,y,py,z,pz)= (%f,%f,%f,%f,%f,%f) " %(i,bunch.x(i),bunch.px(i),bunch.y(i),bunch.py(i),bunch.z(i),bunch.pz(i))
@@ -24,5 +25,5 @@ class Print_Node(NodeTEAPOT):
             fileOut=open(self.fileName,'a')
             for i in range(bunch.getSize()):   
                 #print self.getName()
-                fileOut.write("%d (x,px,y,py,z,pz)= (%f,%f,%f,%f,%f,%f)\n" %(i,bunch.x(i),bunch.px(i),bunch.y(i),bunch.py(i),bunch.z(i),bunch.pz(i)))
+                fileOut.write("%d (x,px,y,py,z,pz,s)= (%f,%f,%f,%f,%f,%f,%f)\n" %(i,bunch.x(i),bunch.px(i),bunch.y(i),bunch.py(i),bunch.z(i),bunch.pz(i),path_length))
             fileOut.close()
