@@ -41,7 +41,7 @@ from orbit.bunch_generators import TwissContainer
 from orbit.bunch_generators import WaterBagDist3D, GaussDist3D, KVDist3D
 from sns_linac_bunch_generator import SNS_Linac_BunchGenerator
 
-from orbit.utils import Function
+from orbit_utils import Function
 from KevinPython.function_stripping import probabilityStripping
 
 import argparse
@@ -56,7 +56,7 @@ parser.add_argument("--turns",type=int, dest='turns', default=1, help="number of
 parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=35, help="What node to monitor")
 #parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=35, help="What node to monitor")#35 should be currently used
 #parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=37, help="What node to monitor")
-parser.add_argument("--printNodes",type=bool, dest='printNodes', default=True, help="print node list")
+parser.add_argument("--printNodes",type=bool, dest='printNodes', default=False, help="print node list")
 parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=True, help="print node list")
 parser.add_argument("--doNormalKickers",type=bool, dest='doNormalKickers', default=False, help="print node list")
 #With Dipoles Neg optimizer
@@ -116,9 +116,135 @@ print "Read MAD."
 ring_latt.readMAD("MAD_Full_Ring/SNSring_pyOrbitBenchmark_Chicanes_Kickers_startEndof3rdChicane.LAT","RING")
 print "Lattice=",ring_latt.getName()," length [m] =",ring_latt.getLength()," nodes=",len(ring_latt.getNodes())
 
-theEffLength=0.0254
-fieldStrength=1.0
+#------------------------------
+#Initial Distribution Functions
+#------------------------------
 
+e_kin_ini = 1.0 # in [GeV]
+mass =  0.93827231 #0.939294    # in [GeV]
+gamma = (mass + e_kin_ini)/mass
+beta = math.sqrt(gamma*gamma - 1.0)/gamma
+print "relat. gamma=",gamma
+print "relat.  beta=",beta
+
+
+#------ emittances are normalized - transverse by gamma*beta and long. by gamma**3*beta 
+(alphaX,betaX,emittX) = (-1.9620, 0.1831, 0.21)
+(alphaY,betaY,emittY) = ( 1.7681, 0.1620, 0.21)
+(alphaZ,betaZ,emittZ) = ( 0.0196, 0.5844, 0.24153)
+
+#alphaZ = -alphaZ
+
+#---make emittances un-normalized XAL units [m*rad]
+emittX = 1.0e-6*emittX/(gamma*beta)
+emittY = 1.0e-6*emittY/(gamma*beta)
+emittZ = 1.0e-6*emittZ/(gamma**3*beta)
+print " ========= XAL Twiss ==========="
+print " aplha beta emitt[mm*mrad] X= %6.4f %6.4f %6.4f "%(alphaX,betaX,emittX*1.0e+6)
+print " aplha beta emitt[mm*mrad] Y= %6.4f %6.4f %6.4f "%(alphaY,betaY,emittY*1.0e+6)
+print " aplha beta emitt[mm*mrad] Z= %6.4f %6.4f %6.4f "%(alphaZ,betaZ,emittZ*1.0e+6)
+
+#---- long. size in mm
+sizeZ = math.sqrt(emittZ*betaZ)*1.0e+3
+
+#---- transform to pyORBIT emittance[GeV*m]
+emittZ = emittZ*gamma**3*beta**2*mass
+betaZ = betaZ/(gamma**3*beta**2*mass)
+
+print " ========= PyORBIT Twiss ==========="
+print " aplha beta emitt[mm*mrad] X= %6.4f %6.4f %6.4f "%(alphaX,betaX,emittX*1.0e+6)
+print " aplha beta emitt[mm*mrad] Y= %6.4f %6.4f %6.4f "%(alphaY,betaY,emittY*1.0e+6)
+print " aplha beta emitt[mm*MeV] Z= %6.4f %6.4f %6.4f "%(alphaZ,betaZ,emittZ*1.0e+6)
+
+twissX = TwissContainer(alphaX,betaX,emittX)
+twissY = TwissContainer(alphaY,betaY,emittY)
+twissZ = TwissContainer(alphaZ,betaZ,emittZ)
+
+print "Start Bunch Generation."
+bunch_gen = SNS_Linac_BunchGenerator(twissX,twissY,twissZ)
+
+#set the initial kinetic energy in GeV
+#bunch_gen.setKinEnergy(e_kin_ini)
+
+#set the beam peak current in mA
+#bunch_gen.setBeamCurrent(38.0)
+
+bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = WaterBagDist3D)
+#bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = GaussDist3D)
+#bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = KVDist3D)
+
+
+bunch_in.mass(mass) #mass
+bunch_in.macroSize(macrosize)
+energy = e_kin_ini # 1.0 #Gev
+bunch_in.getSyncParticle().kinEnergy(energy)
+bunch_in.charge(-1)
+
+paramsDict = {}
+firstChicaneFail = Bunch()
+firstChicaneFail.charge(-1)
+secondChicaneFail = Bunch()
+secondChicaneFail.charge(0)
+lostbunch = Bunch()
+paramsDict["lostbunch"]=lostbunch
+paramsDict["bunch"]= bunch_in
+paramsDict["firstChicaneFail"]=firstChicaneFail
+paramsDict["secondChicaneFail"]= secondChicaneFail
+lostbunch.addPartAttr("LostParticleAttributes") 
+
+theEffLength=0.03*2
+#theEffLength=0.01
+fieldStrength=1.3
+fieldStrengthMin=.1
+cutLength=0.03
+
+sp = bunch_in.getSyncParticle()
+beta= sp.beta()
+gamma=sp.gamma()
+
+print "beta= %f"%beta
+print "gamma= %f"%gamma
+
+A1=2.47e-6
+A2=4.49e9
+
+def constantField(x):
+	return fieldStrength
+def pieceWiseField(x):
+	if x<=0.0:
+		return 0
+	elif x<cutLength :
+		return fieldStrength/cutLength*x
+	elif x>=cutLength:
+		return fieldStrength
+	pass
+def pieceWiseField2(x):
+	if x<cutLength :
+		return (fieldStrength-fieldStrengthMin)/cutLength*x+fieldStrengthMin
+	elif x>=cutLength:
+		return fieldStrength
+	pass
+magneticField= Function()
+n=1000
+maxValue=theEffLength
+step=maxValue/n
+
+for i in range(n):
+	x = step*i;
+	#y = constantField(x)
+	y = pieceWiseField2(x)
+	magneticField.add(x,y)
+	
+theStrippingFunctions=probabilityStripping(magneticField,n,maxValue,gamma,beta)
+theStrippingFunctions.computeFunctions()
+notNormalizedFunction=theStrippingFunctions.getNotNormalizedFunction()
+NormalizedFunction=theStrippingFunctions.getNormalizedFunction()
+InverseFunction=theStrippingFunctions.getInverseFunction()
+
+print "notNormalizedFunction->getY(maxValue)"
+print notNormalizedFunction.getY(maxValue)
+print InverseFunction.getY(1)
+print InverseFunction.getY(.496)
 
 nodes2 = inj_latt.getNodes()
 #numberOfCustomDipoles=2
@@ -135,6 +261,8 @@ if args.doDipoleKickers:
 			print "segment length= ",node.getLength(3)
 			#myDipole_DH_A11=YDipole("Dipole_DH_A11")
 			myDipole_DH_A11=GeneralDipoleStrip("Dipole_DH_A11")
+			myDipole_DH_A11.setFunction1(notNormalizedFunction)
+			myDipole_DH_A11.setFunction2(InverseFunction)
 			myDipole_DH_A11.setMagneticFieldStrength(fieldStrength)
 			myDipole_DH_A11.setFieldDirection(math.pi/2)
 			myDipole_DH_A11.setEffLength(theEffLength)
@@ -145,6 +273,8 @@ if args.doDipoleKickers:
 			print "segment length= ",node.getLength(3)
 			#myDipole_DH_A12=YDipole("Dipole_DH_A12")
 			myDipole_DH_A12=GeneralDipoleStrip("Dipole_DH_A12")
+			myDipole_DH_A12.setFunction1(notNormalizedFunction)
+			myDipole_DH_A12.setFunction2(InverseFunction)			
 			myDipole_DH_A12.setMagneticFieldStrength(-fieldStrength)
 			myDipole_DH_A12.setFieldDirection(math.pi/2)
 			myDipole_DH_A12.setEffLength(theEffLength)
@@ -222,7 +352,7 @@ strength_chicane13 = -0.0398609*chicaneScale13
 #strength_chicane11 = -0.0398609*chicaneScale13
 
 lattlength = ring_latt.getLength()
-sp = b.getSyncParticle()
+sp = bunch_in.getSyncParticle()
 kickerwave = rootTWaveform(sp, lattlength, duration, startamp, endamp)
 chicanewave = flatTopWaveform(1.0)
 
@@ -315,182 +445,7 @@ chicane12.setWaveform(chicanewave)
 #print "node=", node.getName()," s start,stop = %4.3f %4.3f "%teapot_latt.getNodePositionsDict()[node]
 #print "There are ", node.getNumberOfBodyChildren()," child nodes."
 
-#------------------------------
-#Initial Distribution Functions
-#------------------------------
 
-
-sp = b.getSyncParticle()
-beta= sp.getBeta()
-gamma=sp.getGamma()
-
-print "beta= %f"%beta
-print "gamma= %f"%gamma
-
-A1=2.47e-6
-A2=4.49e9
-
-def constantField(x);
-	return fieldStrength
-
-magneticField= Function()
-n=1000
-maxValue=theEffLength
-step=maxValue/n
-
-for i in range(n):
-	x = step*i;
-	y = constantField(x)
-	magneticField.add(x,y)
-	
-theStrippingFunctions=probabilityStripping(magneticField,n,maxValue,gamma,beta)
-notNormalizedFunction=theStrippingFunctions.getNotNormalizedFunction()
-NormalizedFunction=theStrippingFunctions.getNormalizedFunction()
-InverseFunction=theStrippingFunctions.getInverseFunction()
-#------ emittances are normalized - transverse by gamma*beta and long. by gamma**3*beta 
-(alphaX,betaX,emittX) = (-1.9620, 0.1831, 0.21)
-(alphaY,betaY,emittY) = ( 1.7681, 0.1620, 0.21)
-(alphaZ,betaZ,emittZ) = ( 0.0196, 0.5844, 0.24153)
-
-#alphaZ = -alphaZ
-
-#---make emittances un-normalized XAL units [m*rad]
-emittX = 1.0e-6*emittX/(gamma*beta)
-emittY = 1.0e-6*emittY/(gamma*beta)
-emittZ = 1.0e-6*emittZ/(gamma**3*beta)
-print " ========= XAL Twiss ==========="
-print " aplha beta emitt[mm*mrad] X= %6.4f %6.4f %6.4f "%(alphaX,betaX,emittX*1.0e+6)
-print " aplha beta emitt[mm*mrad] Y= %6.4f %6.4f %6.4f "%(alphaY,betaY,emittY*1.0e+6)
-print " aplha beta emitt[mm*mrad] Z= %6.4f %6.4f %6.4f "%(alphaZ,betaZ,emittZ*1.0e+6)
-
-#---- long. size in mm
-sizeZ = math.sqrt(emittZ*betaZ)*1.0e+3
-
-#---- transform to pyORBIT emittance[GeV*m]
-emittZ = emittZ*gamma**3*beta**2*mass
-betaZ = betaZ/(gamma**3*beta**2*mass)
-
-print " ========= PyORBIT Twiss ==========="
-print " aplha beta emitt[mm*mrad] X= %6.4f %6.4f %6.4f "%(alphaX,betaX,emittX*1.0e+6)
-print " aplha beta emitt[mm*mrad] Y= %6.4f %6.4f %6.4f "%(alphaY,betaY,emittY*1.0e+6)
-print " aplha beta emitt[mm*MeV] Z= %6.4f %6.4f %6.4f "%(alphaZ,betaZ,emittZ*1.0e+6)
-
-twissX = TwissContainer(alphaX,betaX,emittX)
-twissY = TwissContainer(alphaY,betaY,emittY)
-twissZ = TwissContainer(alphaZ,betaZ,emittZ)
-
-print "Start Bunch Generation."
-bunch_gen = SNS_Linac_BunchGenerator(twissX,twissY,twissZ)
-
-#set the initial kinetic energy in GeV
-#bunch_gen.setKinEnergy(e_kin_ini)
-
-#set the beam peak current in mA
-#bunch_gen.setBeamCurrent(38.0)
-
-bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = WaterBagDist3D)
-#bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = GaussDist3D)
-#bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = KVDist3D)
-
-
-bunch_in.mass(0.93827231)
-bunch_in.macroSize(macrosize)
-energy = 1.0 #Gev
-bunch_in.getSyncParticle().kinEnergy(energy)
-bunch_in.setCharge(-1)
-
-paramsDict = {}
-firstChicaneFail = Bunch()
-firstChicaneFail.setCharge(-1)
-secondChicaneFail = Bunch()
-secondChicaneFail.setCharge(0)
-lostbunch = Bunch()
-paramsDict["lostbunch"]=lostbunch
-paramsDict["bunch"]= bunch_in
-paramsDict["firstChicaneFail"]=firstChicaneFail
-paramsDict["secondChicaneFail"]= secondChicaneFail
-lostbunch.addPartAttr("LostParticleAttributes") 
-
-#====Injection and foil aperature============
-
-xmin = xcenterpos - 0.0085
-xmax = xcenterpos + 0.0085
-ymin = ycenterpos - 0.0080
-ymax = ycenterpos + 0.100
-
-
-xFunc=notRandom(args.x,args.px)
-yFunc=notRandom(args.y,args.py)
-lFunc=notRandom(args.z,args.pz)
-
-#====Injection and foil aperature============
-
-xmin = xcenterpos - 0.0085
-xmax = xcenterpos + 0.0085
-ymin = ycenterpos - 0.0080
-ymax = ycenterpos + 0.100
-
-#print xmin
-#print xmax
-#print ymin
-#print ymax
-#=================Add the injection node and foil node==  ==============
-
-nparts = macrosperturn
-injectparams = (xmin, xmax, ymin, ymax)
-#injectnode = TeapotInjectionNode(nparts, b, lostbunch, injectparams, xFunc, yFunc, lFunc)
-#addTeapotInjectionNode(teapot_latt, 0., injectnode) 
-
-thick = 400.0
-foil = TeapotFoilNode(xmin, xmax, ymin, ymax, thick, "Foil 1")
-scatterchoice = 0
-foil.setScatterChoice(scatterchoice)
-#addTeapotFoilNode(teapot_latt,0.000001,foil)
-
-#----------------------------------------------
-# Add one black absorber collimator to act like
-# an aperture
-#----------------------------------------------
-colllength = 0.00001
-ma = 9
-density_fac = 1.0
-shape = 1
-radius = 0.110
-
-collimator = TeapotCollimatorNode(colllength, ma, density_fac, shape, radius, 0., 0., 0., 0., pos = 0., name = "Collimator 1")
-#addTeapotCollimatorNode(teapot_latt, 0.5, collimator)
-
-#-----------------------------
-# Add RF Node
-#-----------------------------
-
-teapot_latt.initialize()
-ZtoPhi = 2.0 * math.pi / lattlength;
-dESync = 0.0
-RF1HNum = 1.0
-RF1Voltage = 0.000016
-RF1Phase = 0.0
-RF2HNum = 2.0
-RF2Voltage = -0.000003
-RF2Phase = 0.0
-length = 0.0
-
-rf1_node = RFNode.Harmonic_RFNode(ZtoPhi, dESync, RF1HNum, RF1Voltage, RF1Phase, length, "RF1")
-rf2_node = RFNode.Harmonic_RFNode(ZtoPhi, dESync, RF2HNum, RF2Voltage, RF2Phase, length, "RF2")
-position1 = 196.0
-position2 = 196.5
-RFLatticeModifications.addRFNode(teapot_latt, position1, rf1_node)
-RFLatticeModifications.addRFNode(teapot_latt, position2, rf2_node)
-
-#----------------------------------------------
-#make 2.5D space charge calculator
-#----------------------------------------------
-#set boundary
-
-
-#-----------------------------------------------
-# Add longitudinal space charge node with Imped
-#-----------------------------------------------
 
 
 
@@ -498,39 +453,93 @@ RFLatticeModifications.addRFNode(teapot_latt, position2, rf2_node)
 #  Lattice is ready
 #-------------------------------
 
-fileOut=open(args.fileName,'w')
-fileOut.close()
-fileOut=open(args.fileName2,'w')
-fileOut.close()
-myPrintNode=Print_Node("MyPrintNode",True,args.fileName)
 
-myEmitNode=Calc_Emit("MyEmitNode",True,args.fileName2)
+#myPrintNode=Print_Node("MyPrintNode",True,args.fileName)
+fileOut=open("print_beg.txt",'w')
+fileOut.close()
+fileOut=open("print_beg_b23.txt",'w')
+fileOut.close()
+fileOut=open("print_mid_b23.txt",'w')
+fileOut.close()
+fileOut=open("print_end_b23.txt",'w')
+fileOut.close()
+fileOut=open("print_beg_DH12.txt",'w')
+fileOut.close()
+fileOut=open("print_end_DH12.txt",'w')
+fileOut.close()
+myPrintNode_beg=Print_Node("MyPrintNode_Beg",True,"print_beg.txt")
+myPrintNode_beg_b23=Print_Node("MyPrintNode_beg_b23",True,"print_beg_b23.txt")
+myPrintNode_mid_b23=Print_Node("MyPrintNode_mid_b23",True,"print_mid_b23.txt")
+myPrintNode_end_b23=Print_Node("MyPrintNode_end_b23",True,"print_end_b23.txt")
+myPrintNode_beg_DH12=Print_Node("MyPrintNode_beg_DH12",True,"print_beg_DH12.txt")
+myPrintNode_end_DH12=Print_Node("MyPrintNode_end_DH12",True,"print_end_DH12.txt")
 
-nodes = teapot_latt.getNodes()
-nodes[args.nodeMonitor].addChildNode(myPrintNode,AccNode.EXIT)
-nodes[args.nodeMonitor].addChildNode(myEmitNode,AccNode.EXIT)
+
+
+fileOut=open("emmit_beg.txt",'w')
+fileOut.close()
+fileOut=open("emmit_beg_b23.txt",'w')
+fileOut.close()
+fileOut=open("emmit_mid_b23.txt",'w')
+fileOut.close()
+fileOut=open("emmit_end_b23.txt",'w')
+fileOut.close()
+fileOut=open("emmit_beg_DH12.txt",'w')
+fileOut.close()
+fileOut=open("emmit_end_DH12.txt",'w')
+fileOut.close()
+myEmitNode_beg=Calc_Emit("MyEmitNode_Beg",True,"emmit_beg.txt")
+myEmitNode_beg_b23=Calc_Emit("myEmitNode_beg_b23",True,"emmit_beg_b23.txt")
+myEmitNode_mid_b23=Calc_Emit("myEmitNode_mid_b23",True,"emmit_mid_b23.txt")
+myEmitNode_end_b23=Calc_Emit("myEmitNode_end_b23",True,"emmit_end_b23.txt")
+myEmitNode_beg_DH12=Calc_Emit("myEmitNode_beg_DH12",True,"emmit_beg_DH12.txt")
+myEmitNode_end_DH12=Calc_Emit("myEmitNode_end_DH12",True,"emmit_end_DH12.txt")
+
+nodes = inj_latt.getNodes()
+nodes[0].addChildNode(myPrintNode_beg,AccNode.ENTRANCE)
+nodes[0].addChildNode(myEmitNode_beg,AccNode.ENTRANCE)
+#nodes[args.nodeMonitor].addChildNode(myEmitNode,AccNode.EXIT)
 i = 0
 path_length=0
 for node in nodes:
 	pass
+	if node.getName().strip() == "DB23":
+		node.setnParts(2)
+		node.addChildNode(myPrintNode_beg_b23,AccNode.ENTRANCE)
+		node.addChildNode(myPrintNode_mid_b23,AccNode.BODY,1)
+		node.addChildNode(myPrintNode_end_b23,AccNode.EXIT)		
+		
+		node.addChildNode(myEmitNode_beg_b23,AccNode.ENTRANCE)
+		node.addChildNode(myEmitNode_mid_b23,AccNode.BODY,1)
+		node.addChildNode(myEmitNode_end_b23,AccNode.EXIT)
+		pass
 	if node.getName().strip() == "DH_A12":
-		print node.getName().strip()
-		print node.getnParts()
+		#print node.getName().strip()
+		#print node.getnParts()
+		node.addChildNode(myPrintNode_beg_DH12,AccNode.ENTRANCE)
+		node.addChildNode(myPrintNode_end_DH12,AccNode.EXIT)		
+		
+		node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
+		node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)
 		#node.setnParts(10)
 	if args.printNodes==True:
 		path_length=path_length+node.getLength()
-		print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%teapot_latt.getNodePositionsDict()[node], " path_length= ",path_length
+		print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%ring_latt.getNodePositionsDict()[node], " path_length= ",path_length
 		#print "There are ", node.getNumberOfBodyChildren()," child nodes."
 		i=i+1
 
 #================Do some turns===========================================
+inj_latt.trackBunch(bunch_in, paramsDict)
+circulating_bunch=Bunch()
 for i in range(args.turns):
-	teapot_latt.trackBunch(b, paramsDict)
+	bunch_in.copyBunchTo(circulating_bunch)
+	#ring_latt.trackBunch(circulating_bunch, paramsDict)
+	pass
 
 
 #===========Dump bunch infomration=======================================
-bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch.dat")
-bunch_pyorbit_to_orbit(teapot_latt.getLength(), lostbunch, "lostbunch.dat")
+bunch_pyorbit_to_orbit(inj_latt.getLength(), bunch_in, "mainbunch.dat")
+bunch_pyorbit_to_orbit(inj_latt.getLength(), lostbunch, "lostbunch.dat")
 print "Stop."
 
 
