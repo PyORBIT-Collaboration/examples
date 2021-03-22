@@ -195,7 +195,7 @@ lostbunch.addPartAttr("LostParticleAttributes")
 theEffLength=0.03*2
 #theEffLength=0.01
 fieldStrength=1.3
-fieldStrengthMin=.1
+fieldStrengthMin=.2
 cutLength=0.03
 
 sp = bunch_in.getSyncParticle()
@@ -237,14 +237,20 @@ for i in range(n):
 	
 theStrippingFunctions=probabilityStripping(magneticField,n,maxValue,gamma,beta)
 theStrippingFunctions.computeFunctions()
-notNormalizedFunction=theStrippingFunctions.getNotNormalizedFunction()
-NormalizedFunction=theStrippingFunctions.getNormalizedFunction()
+accumlatedSum=theStrippingFunctions.getaccumlatedSum()
+CDF=theStrippingFunctions.getCDF()
+deltaxp_rigidity=theStrippingFunctions.getdeltaxp_rigidity()
+deltax_rigidity=theStrippingFunctions.getdeltax_rigidity()
 InverseFunction=theStrippingFunctions.getInverseFunction()
 
-print "notNormalizedFunction->getY(maxValue)"
-print notNormalizedFunction.getY(maxValue)
-print InverseFunction.getY(1)
-print InverseFunction.getY(.496)
+print "accumlatedSum->getY(maxValue)"
+print accumlatedSum.getY(maxValue)
+print "CDF->getY(maxValue)"
+print CDF.getY(maxValue)
+print "InverseFunction.getY(maxValue)"
+print InverseFunction.getY(.954)
+print deltaxp_rigidity.getY(maxValue)
+print deltax_rigidity.getY(maxValue)
 
 nodes2 = inj_latt.getNodes()
 #numberOfCustomDipoles=2
@@ -261,8 +267,10 @@ if args.doDipoleKickers:
 			print "segment length= ",node.getLength(3)
 			#myDipole_DH_A11=YDipole("Dipole_DH_A11")
 			myDipole_DH_A11=GeneralDipoleStrip("Dipole_DH_A11")
-			myDipole_DH_A11.setFunction1(notNormalizedFunction)
-			myDipole_DH_A11.setFunction2(InverseFunction)
+			myDipole_DH_A11.setFunctionCDF(CDF)
+			myDipole_DH_A11.setFunctionInverse(InverseFunction)
+			myDipole_DH_A11.setFunctionXPRigidity(deltaxp_rigidity)
+			myDipole_DH_A11.setFunctionXRigidity(deltax_rigidity)
 			myDipole_DH_A11.setMagneticFieldStrength(fieldStrength)
 			myDipole_DH_A11.setFieldDirection(math.pi/2)
 			myDipole_DH_A11.setEffLength(theEffLength)
@@ -273,8 +281,10 @@ if args.doDipoleKickers:
 			print "segment length= ",node.getLength(3)
 			#myDipole_DH_A12=YDipole("Dipole_DH_A12")
 			myDipole_DH_A12=GeneralDipoleStrip("Dipole_DH_A12")
-			myDipole_DH_A12.setFunction1(notNormalizedFunction)
-			myDipole_DH_A12.setFunction2(InverseFunction)			
+			myDipole_DH_A12.setFunctionCDF(CDF)
+			myDipole_DH_A12.setFunctionInverse(InverseFunction)
+			myDipole_DH_A12.setFunctionXPRigidity(deltaxp_rigidity)
+			myDipole_DH_A12.setFunctionXRigidity(deltax_rigidity)
 			myDipole_DH_A12.setMagneticFieldStrength(-fieldStrength)
 			myDipole_DH_A12.setFieldDirection(math.pi/2)
 			myDipole_DH_A12.setEffLength(theEffLength)

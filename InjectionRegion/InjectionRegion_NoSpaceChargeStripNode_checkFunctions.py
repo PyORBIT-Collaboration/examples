@@ -19,10 +19,10 @@ beta = math.sqrt(gamma*gamma - 1.0)/gamma
 print "relat. gamma=",gamma
 print "relat.  beta=",beta
 
-theEffLength=0.03*2
+theEffLength=0.03
 #theEffLength=0.01
-fieldStrength=1.3
-fieldStrengthMin=.1
+fieldStrength=1.
+fieldStrengthMin=.2
 cutLength=0.03
 
 A1=2.47e-6
@@ -53,24 +53,26 @@ step=maxValue/n
 
 for i in range(n):
 	x = step*i;
-	#y = constantField(x)
-	y = pieceWiseField2(x)
+	y = constantField(x)
+	#y = pieceWiseField2(x)
 	magneticField.add(x,y)
 	
 theStrippingFunctions=probabilityStripping(magneticField,n,maxValue,gamma,beta)
 theStrippingFunctions.computeFunctions()
-notNormalizedFunction=theStrippingFunctions.getNotNormalizedFunction()
-NormalizedFunction=theStrippingFunctions.getNormalizedFunction()
+accumlatedSum=theStrippingFunctions.getaccumlatedSum()
+CDF=theStrippingFunctions.getCDF()
+deltaxp_rigidity=theStrippingFunctions.getdeltaxp_rigidity()
+deltax_rigidity=theStrippingFunctions.getdeltax_rigidity()
 InverseFunction=theStrippingFunctions.getInverseFunction()
-
+  
 print "notNormalizedFunction->getY(maxValue)"
-print notNormalizedFunction.getY(maxValue)
-print NormalizedFunction.getY(maxValue)
-print InverseFunction.getY(1)
-print InverseFunction.getY(.496)
+print accumlatedSum.getY(maxValue)
+print CDF.getY(maxValue)
+print deltaxp_rigidity.getY(maxValue)
+print deltax_rigidity.getY(maxValue)
 
-theFunctions=[notNormalizedFunction,NormalizedFunction,InverseFunction,magneticField]
-titles=["notNormalizedFunction","NormalizedFunction","InverseFunction","magneticField"]
+theFunctions=[accumlatedSum,CDF,InverseFunction,magneticField,deltaxp_rigidity,deltax_rigidity]
+titles=["accumlatedSum","CDF","InverseFunction","magneticField","deltaxp_rigidity","deltax_rigidity"]
 notNormalizedGraph= TGraph()
 NormalizedGraph= TGraph()
 InverseGraph= TGraph()
