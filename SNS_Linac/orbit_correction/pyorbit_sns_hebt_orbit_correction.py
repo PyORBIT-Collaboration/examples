@@ -155,5 +155,11 @@ trnsvBPMs = trajCorrection.getQuadTransverseBPMs()
 for trnsvBPM in trnsvBPMs:
 	print "TransverseBPM = ",trnsvBPM.getName()
 	
+print "==============================="		
+
+bunch_init = Bunch()
+bunch.copyBunchTo(bunch_init)
+
+trajCorrection.correctTrajectory(bunch_init)	
 print "Done."
 
