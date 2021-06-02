@@ -135,8 +135,7 @@ print "relat.  beta=",beta
 
 (alphaX,betaX,emittX) = (.224, 10.5, 1.445)
 #(alphaX,betaX,emittX) = (22.4, 100, 1.445)
-(alphaY,betaY,emittY) = ( .224, 10.5, 1.445)
-#(alphaY,betaY,emittY) = ( 1.7681, 0.1620, 1.445)
+(alphaY,betaY,emittY) = ( 1.7681, 0.1620, 1.445)
 
 #alphaZ = -alphaZ
 
@@ -264,15 +263,8 @@ fileOut.close()
 fileOut=open("print_DH11_3pre.txt",'w')
 fileOut.close()
 
-fileOut=open("emmit_DH12_3pre.txt",'w')
-fileOut.close()
-fileOut=open("print_DH12_3pre.txt",'w')
-fileOut.close()
-
 myEmitNode_DH11_3pre=Calc_Emit("MyEmitNode_DH11_3pre",True,"emmit_DH11_3pre.txt")
 myPrintNode_DH11_3pre=Print_Node("MyPrintNode_DH11_3pre",True,"print_DH11_3pre.txt")
-myEmitNode_DH12_3pre=Calc_Emit("MyEmitNode_DH12_3pre",True,"emmit_DH12_3pre.txt")
-myPrintNode_DH12_3pre=Print_Node("MyPrintNode_DH12_3pre",True,"print_DH12_3pre.txt")
 
 nodes2 = inj_latt.getNodes()
 #numberOfCustomDipoles=2
@@ -314,10 +306,8 @@ if args.doDipoleKickers:
 			myDipole_DH_A12.setFunctionXP_mRigidity(deltaxp_m_rigidity)
 			myDipole_DH_A12.setFunctionX_mRigidity(deltax_m_rigidity)			
 			myDipole_DH_A12.setMagneticFieldStrength(fieldStrength)
-			myDipole_DH_A12.setFieldDirection(math.pi/2)
+			myDipole_DH_A12.setFieldDirection(-math.pi/2)
 			myDipole_DH_A12.setEffLength(theEffLength)
-			node.addChildNode(myEmitNode_DH12_3pre,AccNode.BODY,3)
-			node.addChildNode(myPrintNode_DH12_3pre,AccNode.BODY,3)			
 			node.addChildNode(myDipole_DH_A12,AccNode.BODY,3)	
 		
 print "counterDH_A11=",counterDH_A11
@@ -513,8 +503,6 @@ fileOut=open("print_end_b23.txt",'w')
 fileOut.close()
 fileOut=open("print_beg_DH12.txt",'w')
 fileOut.close()
-fileOut=open("print_DH12_3.txt",'w')
-fileOut.close()
 fileOut=open("print_end_DH12.txt",'w')
 fileOut.close()
 myPrintNode_beg=Print_Node("MyPrintNode_Beg",True,"print_beg.txt")
@@ -526,7 +514,6 @@ myPrintNode_beg_b23=Print_Node("MyPrintNode_beg_b23",True,"print_beg_b23.txt")
 myPrintNode_mid_b23=Print_Node("MyPrintNode_mid_b23",True,"print_mid_b23.txt")
 myPrintNode_end_b23=Print_Node("MyPrintNode_end_b23",True,"print_end_b23.txt")
 myPrintNode_beg_DH12=Print_Node("MyPrintNode_beg_DH12",True,"print_beg_DH12.txt")
-myPrintNode_DH12_3=Print_Node("MyPrintNode_DH12_3",True,"print_DH12_3.txt")
 myPrintNode_end_DH12=Print_Node("MyPrintNode_end_DH12",True,"print_end_DH12.txt")
 
 
@@ -549,8 +536,6 @@ fileOut=open("emmit_end_b23.txt",'w')
 fileOut.close()
 fileOut=open("emmit_beg_DH12.txt",'w')
 fileOut.close()
-fileOut=open("emmit_DH12_3.txt",'w')
-fileOut.close()
 fileOut=open("emmit_end_DH12.txt",'w')
 fileOut.close()
 myEmitNode_beg=Calc_Emit("MyEmitNode_Beg",True,"emmit_beg.txt")
@@ -562,7 +547,6 @@ myEmitNode_beg_b23=Calc_Emit("myEmitNode_beg_b23",True,"emmit_beg_b23.txt")
 myEmitNode_mid_b23=Calc_Emit("myEmitNode_mid_b23",True,"emmit_mid_b23.txt")
 myEmitNode_end_b23=Calc_Emit("myEmitNode_end_b23",True,"emmit_end_b23.txt")
 myEmitNode_beg_DH12=Calc_Emit("myEmitNode_beg_DH12",True,"emmit_beg_DH12.txt")
-myEmitNode_DH12_3=Calc_Emit("MyEmitNode_DH12_3",True,"emmit_DH12_3.txt")
 myEmitNode_end_DH12=Calc_Emit("myEmitNode_end_DH12",True,"emmit_end_DH12.txt")
 
 nodes = inj_latt.getNodes()
@@ -603,9 +587,6 @@ for node in nodes:
 		
 		node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
 		node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)
-		
-		node.addChildNode(myPrintNode_DH12_3,AccNode.BODY,3)
-		node.addChildNode(myEmitNode_DH12_3,AccNode.BODY,3)		
 		#node.setnParts(10)
 	if args.printNodes==True:
 		path_length=path_length+node.getLength()

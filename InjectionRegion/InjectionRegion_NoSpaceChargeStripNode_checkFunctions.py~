@@ -53,8 +53,8 @@ step=maxValue/n
 
 for i in range(n):
 	x = step*i;
-	#y = constantField(x)
-	y = pieceWiseField2(x)
+	y = constantField(x)
+	#y = pieceWiseField2(x)
 	magneticField.add(x,y)
 	
 theStrippingFunctions=probabilityStripping(magneticField,n,maxValue,gamma,beta)
