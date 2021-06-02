@@ -15,6 +15,8 @@ class probabilityStripping:
         self.CDF= None
         self.deltaxp_rigidity= None  
         self.deltax_rigidity= None 
+        self.deltaxp_m_rigidity= None  
+        self.deltax_m_rigidity= None         
         self.InverseFunction= None    
     def probabilityOfSurvival(self,x):
     	    A1=2.47e-6
@@ -39,10 +41,14 @@ class probabilityStripping:
     	    theSum=0;
     	    theSumDeltaxp=0
     	    theSumDeltax=0
+    	    theSumDeltaxp_m=0
+    	    theSumDeltax_m=0    	    
     	    self.accumlatedSum= Function()
     	    self.CDF= Function()    
     	    self.deltaxp_rigidity=Function()
     	    self.deltax_rigidity=Function()
+    	    self.deltaxp_m_rigidity=Function()
+    	    self.deltax_m_rigidity=Function()    	    
     	    self.InverseFunction=Function()
    	    #normalizeValue=1-self.probabilityOfSurvival(self.maxXValue)
    	    #print "normalizeValue= %d" %normalizeValue
@@ -57,7 +63,17 @@ class probabilityStripping:
     	    	    	    theSumDeltaxp=theSumDeltaxp+self.magneticField.getY(x)*stepSize
     	    	    	    theSumDeltax=theSumDeltax+theSumDeltaxp*stepSize
 			    self.deltaxp_rigidity.add(x,theSumDeltaxp)
-			    self.deltax_rigidity.add(x,theSumDeltax+(self.maxXValue-(x+stepSize))*theSumDeltaxp) 
+			    self.deltax_rigidity.add(x,theSumDeltax)
+    	    	    	    
+    	    		    theSumDeltaxp_m=0
+    	                    theSumDeltax_m=0  
+     	    	    	    for j in range(i,self.n):
+     	    	    	    	    x_m = stepSize*j
+     	    	    	    	    theSumDeltaxp_m=theSumDeltaxp_m+self.magneticField.getY(x_m)*stepSize
+     	    	    	    	    theSumDeltax_m=theSumDeltax_m+theSumDeltaxp_m*stepSize
+			    self.deltaxp_m_rigidity.add(x,theSumDeltaxp_m)
+			    self.deltax_m_rigidity.add(x,theSumDeltax_m)
+			    #self.deltax_rigidity.add(x,theSumDeltax+(self.maxXValue-(x+stepSize))*theSumDeltaxp) 
    	    	    	    self.accumlatedSum.add(x,theSum)
     	    	    	    #3e-7 gives 1-exp(-15)=exp(-3e-7)
     	    	    	    if theSum<15 and theSum>3e-7: 
@@ -71,7 +87,7 @@ class probabilityStripping:
     	    	    	    #self.NormalizedFunction.add(x,ynorm)
     	    	    	    #tempFunction.add(x,1-ynorm)
     	    	    	    #tempFunction.add(x,ynorm)
-    	    	    	    
+    	      
     	    wasSuccess=self.CDF.setInverse(self.InverseFunction)
     	    if wasSuccess is 1:
     	    	    print "successfully Inverted"
@@ -84,7 +100,11 @@ class probabilityStripping:
     def getdeltaxp_rigidity(self):
     	    return self.deltaxp_rigidity
     def getdeltax_rigidity(self):
-    	    return self.deltax_rigidity    	    
+    	    return self.deltax_rigidity    	
+    def getdeltaxp_m_rigidity(self):
+    	    return self.deltaxp_m_rigidity
+    def getdeltax_m_rigidity(self):
+    	    return self.deltax_m_rigidity     	    
     def getInverseFunction(self):
     	    return self.InverseFunction
     def getLength(self,atX):

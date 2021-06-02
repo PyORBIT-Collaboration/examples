@@ -47,7 +47,7 @@ parser.add_argument("--turns",type=int, dest='turns', default=1, help="number of
 parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=200, help="What node to monitor")
 #parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=35, help="What node to monitor")#35 should be currently used
 #parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=37, help="What node to monitor")
-parser.add_argument("--printNodes",type=bool, dest='printNodes', default=False, help="print node list")
+parser.add_argument("--printNodes",type=bool, dest='printNodes', default=True, help="print node list")
 parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=False, help="print node list")
 parser.add_argument("--doNormalKickers",type=bool, dest='doNormalKickers', default=False, help="print node list")
 #With Dipoles Neg optimizer
@@ -306,7 +306,7 @@ thick = 400.0
 foil = TeapotFoilNode(xmin, xmax, ymin, ymax, thick, "Foil 1")
 scatterchoice = 0
 foil.setScatterChoice(scatterchoice)
-#addTeapotFoilNode(teapot_latt,0.000001,foil)
+addTeapotFoilNode(teapot_latt,0.000001,foil)
 
 #----------------------------------------------
 # Add one black absorber collimator to act like
