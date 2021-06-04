@@ -62,8 +62,12 @@ parser.add_argument("--doNormalKickers",type=bool, dest='doNormalKickers', defau
 #With Dipoles Neg optimizer
 parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1.047686, help="scaleChicane10")
 parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-0.9969892 , help="scaleChicane11")
+#parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=0. , help="scaleChicane11")
 parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=-1.00911, help="scaleChicane12")
 parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=-0.9775873, help="scaleChicane13")
+
+parser.add_argument("--useChicaneScaleFile",type=bool, dest='useChicaneScaleFile', default=True, help="whether or not to use chicane scales from file")
+
 #With Dipoles
 #parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-0.9804517, help="scaleChicane10")
 #parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-0.9934917 , help="scaleChicane11")
@@ -102,13 +106,17 @@ turns = args.turns
 #macrosperturn = 260
 macrosperturn = args.nParts
 macrosize = intensity/turns/macrosperturn
+if args.useChicaneScaleFile==False:
+	chicaneScale10=args.scaleChicane10
+	chicaneScale11=args.scaleChicane11
+	chicaneScale12=args.scaleChicane12
+	chicaneScale13=args.scaleChicane13
+else:
+	chicaneScale10=1.
+	chicaneScale11=1.
+	chicaneScale12=1.
+	chicaneScale13=1.	
 
-
-#=====Make a Teapot style lattice======
-chicaneScale10=args.scaleChicane10
-chicaneScale11=args.scaleChicane11
-chicaneScale12=args.scaleChicane12
-chicaneScale13=args.scaleChicane13
 
 nPartsChicane=4
 outputDirectory="WasteBeam"
@@ -309,6 +317,7 @@ for currentPart in range(nPartsChicane+1):
 					node.addChildNode(myEmitNode_DH11_3pre,AccNode.BODY,currentPart)
 					node.addChildNode(myPrintNode_DH11_3pre,AccNode.BODY,currentPart)
 					node.addChildNode(myDipole_DH_A11,AccNode.BODY,currentPart)
+					print "currentPart==%d"%currentPart
 				else:
 					pass
 					#node.addChildNode(myEmitNode_DH11_3pre,AccNode.EXIT,currentPart-1)
@@ -329,7 +338,8 @@ for currentPart in range(nPartsChicane+1):
 					myDipole_DH_A11.setEffLength(theEffLength)					
 					node.addChildNode(myEmitNode_DH11_3pre,AccNode.BODY,0)
 					node.addChildNode(myPrintNode_DH11_3pre,AccNode.BODY,0)
-					node.addChildNode(myDipole_DH_A11,AccNode.BODY,0)				
+					#node.addChildNode(myDipole_DH_A11,AccNode.BODY,0)AccActionsContainer.BEFORE	
+					node.addChildNode(myDipole_DH_A11,AccNode.BODY,0)
 			if (node.getName().strip()=="DH_A12"):
 				node.setnParts(numberOfParts_DH_A12)
 				print "total length= ",node.getLength()
@@ -406,7 +416,16 @@ for currentPart in range(nPartsChicane+1):
 		strength_vkicker13 = strength_vkicker10
 		strength_vkicker11 = 0
 		strength_vkicker12 = strength_vkicker11	
-	
+		
+	if args.useChicaneScaleFile:
+		openedFile=open("%s/ChicaneScales_%d.txt"%(outputDirectory,currentPart),'r')
+		line=openedFile.readline()
+		print line
+		theScales=line.split(",")
+		chicaneScale10=-float(theScales[0].strip())
+		chicaneScale11=-float(theScales[1].strip())
+		chicaneScale12=-float(theScales[2].strip())
+		chicaneScale13=-float(theScales[3].strip())	
 	strength_chicane10 = -0.041456*chicaneScale10
 	strength_chicane11 = 0.052434*chicaneScale11
 	strength_chicane12 = 0.0298523*chicaneScale12
