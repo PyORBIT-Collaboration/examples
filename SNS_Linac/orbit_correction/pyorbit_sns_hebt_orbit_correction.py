@@ -121,6 +121,7 @@ file_out.close()
 
 trajCorrection = TrajectoryCorrection(accLattice)
 
+"""
 bpms = trajCorrection.getBPMs()
 for bpm in bpms:
 	print "bpm=",bpm.getName()
@@ -154,7 +155,8 @@ print "==============================="
 trnsvBPMs = trajCorrection.getQuadTransverseBPMs()
 for trnsvBPM in trnsvBPMs:
 	print "TransverseBPM = ",trnsvBPM.getName()
-	
+"""
+
 print "==============================="		
 
 bunch_init = Bunch()
