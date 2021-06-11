@@ -74,12 +74,9 @@ class probabilityStrippingWithChicane:
     	    	    else:
     	    	    	    theSum=theSum+stepSize/self.gamma/self.beta/c/y
     	    	    	    temp_theSumDeltaxp=theSumDeltaxp
-    	    	    	    theSumDeltaxp=theSumDeltaxp+self.magneticFieldy.getY(x)*stepSize
-    	    	    	    #this is new one
+    	    	    	    theSumDeltaxp=theSumDeltaxp+self.magneticFieldy.getY(x)*stepSize 
     	    	    	    theSumDeltax=theSumDeltax+(theSumDeltaxp+temp_theSumDeltaxp)/2.*stepSize
     	    	    	    
-    	    	    	    #this was the og 
-    	    	    	    #theSumDeltax=theSumDeltax+theSumDeltaxp*stepSize
 			    self.deltaxp_rigidity.add(x,theSumDeltaxp)
 			    self.deltax_rigidity.add(x,theSumDeltax)
     	    	    	    
@@ -95,11 +92,8 @@ class probabilityStrippingWithChicane:
 			    
     	    	    	    temp_theSumDeltayp=theSumDeltayp
     	    	    	    theSumDeltayp=theSumDeltayp+self.magneticFieldx.getY(x)*stepSize
-    	    	    	    #this is new one
     	    	    	    theSumDeltay=theSumDeltay+(theSumDeltayp+temp_theSumDeltayp)/2.*stepSize
     	    	    	    
-    	    	    	    #this was the og 
-    	    	    	    #theSumDeltay=theSumDeltay+theSumDeltayp*stepSize
 			    self.deltayp_rigidity.add(x,theSumDeltayp)
 			    self.deltay_rigidity.add(x,theSumDeltay)
     	    	    	    
@@ -112,21 +106,11 @@ class probabilityStrippingWithChicane:
      	    	    	    	    theSumDeltay_m=theSumDeltay_m+(theSumDeltayp_m+temp_theSumDeltayp_m)/2.*stepSize
 			    self.deltayp_m_rigidity.add(x,theSumDeltayp_m)
 			    self.deltay_m_rigidity.add(x,theSumDeltay_m)			    
-			    #self.deltax_rigidity.add(x,theSumDeltax+(self.maxXValue-(x+stepSize))*theSumDeltaxp) 
    	    	    	    self.accumlatedSum.add(x,theSum)
     	    	    	    #3e-7 gives 1-exp(-15)=exp(-3e-7)
     	    	    	    if theSum<15 and theSum>3e-7: 
     	    	    	    	    self.CDF.add(x,1-math.exp(-theSum))
 
-    	    	    #ynorm=y/normalizeValue
-    	    	    #ynorm=(1-y)/normalizeValue
-    	    	    #and ynorm <(1-1e-4)
-    	    	    #if y>1e-8 and y <(1-1e-9):
-    	    	    	    #self.notNormalizedFunction.add(x,y)
-    	    	    	    #self.NormalizedFunction.add(x,ynorm)
-    	    	    	    #tempFunction.add(x,1-ynorm)
-    	    	    	    #tempFunction.add(x,ynorm)
-    	      
     	    wasSuccess=self.CDF.setInverse(self.InverseFunction)
     	    if wasSuccess is 1:
     	    	    print "successfully Inverted"
