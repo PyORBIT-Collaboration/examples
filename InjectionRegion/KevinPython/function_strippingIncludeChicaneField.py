@@ -2,11 +2,12 @@ import random
 import math
 from orbit_utils import Function
 
-class probabilityStripping:
+class probabilityStrippingWithChicane:
 
-    def __init__ (self,function,n,maxXValue,gamma,beta):
-        self.name="probabilityStripping"
-        self.magneticField=function
+    def __init__ (self,functionx,functiony,n,maxXValue,gamma,beta):
+        self.name="probabilityStrippingWithChicane"
+        self.magneticFieldx=functionx
+        self.magneticFieldy=functiony
         self.maxXValue=maxXValue
         self.n=n
         self.gamma=gamma
@@ -16,25 +17,25 @@ class probabilityStripping:
         self.deltaxp_rigidity= None  
         self.deltax_rigidity= None 
         self.deltaxp_m_rigidity= None  
-        self.deltax_m_rigidity= None         
-        self.InverseFunction= None    
-    def probabilityOfSurvival(self,x):
-    	    A1=2.47e-6
-    	    A2=4.49e9
-    	    c=299792458
-    	    if self.magneticField.getY(x) ==0:
-    	    	    return 1
-    	    else :    	    	   
-    	    	    return math.exp(-x*self.magneticField.getY(x)/A1*math.exp(-A2/(self.gamma*self.beta*c*self.magneticField.getY(x))))    
+        self.deltax_m_rigidity= None  
+        
+        self.deltayp_rigidity= None  
+        self.deltay_rigidity= None 
+        self.deltayp_m_rigidity= None  
+        self.deltay_m_rigidity= None   
+        
+        self.InverseFunction= None     
     def tau(self,x):
     	    A1=2.47e-6
     	    A2=4.49e9
     	    c=299792458   
-    	    if self.magneticField.getY(x) ==0:
+    	    if self.magneticFieldx.getY(x) ==0 and self.magneticFieldy.getY(x) ==0:
     	    	    #tau is infinite. ie it cant be stripped
     	    	    return -1
-    	    else :    	    	   
-    	    	    return A1/self.gamma/self.beta/c/self.magneticField.getY(x)*math.exp(A2/self.gamma/self.beta/c/self.magneticField.getY(x))   	    
+    	    else : 
+    	    	    totalMagneticField=math.sqrt(self.magneticFieldx.getY(x)*self.magneticFieldx.getY(x)+self.magneticFieldy.getY(x)*self.magneticFieldy.getY(x))
+    	    	    #print "totalMagneticField= ",totalMagneticField
+    	    	    return A1/self.gamma/self.beta/c/totalMagneticField*math.exp(A2/self.gamma/self.beta/c/totalMagneticField)   	    
     def computeFunctions(self):
     	    c=299792458  
     	    stepSize=self.maxXValue/self.n
@@ -42,13 +43,25 @@ class probabilityStripping:
     	    theSumDeltaxp=0
     	    theSumDeltax=0
     	    theSumDeltaxp_m=0
-    	    theSumDeltax_m=0    	    
+    	    theSumDeltax_m=0    
+	    
+    	    theSumDeltayp=0
+    	    theSumDeltay=0
+    	    theSumDeltayp_m=0
+    	    theSumDeltay_m=0  
+	    
     	    self.accumlatedSum= Function()
     	    self.CDF= Function()    
     	    self.deltaxp_rigidity=Function()
     	    self.deltax_rigidity=Function()
     	    self.deltaxp_m_rigidity=Function()
-    	    self.deltax_m_rigidity=Function()    	    
+    	    self.deltax_m_rigidity=Function()    
+	    
+    	    self.deltayp_rigidity=Function()
+    	    self.deltay_rigidity=Function()
+    	    self.deltayp_m_rigidity=Function()
+    	    self.deltay_m_rigidity=Function()    	    
+	    
     	    self.InverseFunction=Function()
    	    #normalizeValue=1-self.probabilityOfSurvival(self.maxXValue)
    	    #print "normalizeValue= %d" %normalizeValue
@@ -61,7 +74,7 @@ class probabilityStripping:
     	    	    else:
     	    	    	    theSum=theSum+stepSize/self.gamma/self.beta/c/y
     	    	    	    temp_theSumDeltaxp=theSumDeltaxp
-    	    	    	    theSumDeltaxp=theSumDeltaxp+self.magneticField.getY(x)*stepSize
+    	    	    	    theSumDeltaxp=theSumDeltaxp+self.magneticFieldy.getY(x)*stepSize
     	    	    	    #this is new one
     	    	    	    theSumDeltax=theSumDeltax+(theSumDeltaxp+temp_theSumDeltaxp)/2.*stepSize
     	    	    	    
@@ -75,10 +88,30 @@ class probabilityStripping:
      	    	    	    for j in range(i,self.n):
      	    	    	    	    x_m = stepSize*j
      	    	    	    	    temp_theSumDeltaxp_m=theSumDeltaxp_m
-     	    	    	    	    theSumDeltaxp_m=theSumDeltaxp_m+self.magneticField.getY(x_m)*stepSize
+     	    	    	    	    theSumDeltaxp_m=theSumDeltaxp_m+self.magneticFieldy.getY(x_m)*stepSize
      	    	    	    	    theSumDeltax_m=theSumDeltax_m+(theSumDeltaxp_m+temp_theSumDeltaxp_m)/2.*stepSize
 			    self.deltaxp_m_rigidity.add(x,theSumDeltaxp_m)
 			    self.deltax_m_rigidity.add(x,theSumDeltax_m)
+			    
+    	    	    	    temp_theSumDeltayp=theSumDeltayp
+    	    	    	    theSumDeltayp=theSumDeltayp+self.magneticFieldx.getY(x)*stepSize
+    	    	    	    #this is new one
+    	    	    	    theSumDeltay=theSumDeltay+(theSumDeltayp+temp_theSumDeltayp)/2.*stepSize
+    	    	    	    
+    	    	    	    #this was the og 
+    	    	    	    #theSumDeltay=theSumDeltay+theSumDeltayp*stepSize
+			    self.deltayp_rigidity.add(x,theSumDeltayp)
+			    self.deltay_rigidity.add(x,theSumDeltay)
+    	    	    	    
+    	    		    theSumDeltayp_m=0
+    	                    theSumDeltay_m=0  
+     	    	    	    for j in range(i,self.n):
+     	    	    	    	    y_m = stepSize*j
+     	    	    	    	    temp_theSumDeltayp_m=theSumDeltayp_m
+     	    	    	    	    theSumDeltayp_m=theSumDeltayp_m+self.magneticFieldx.getY(y_m)*stepSize
+     	    	    	    	    theSumDeltay_m=theSumDeltay_m+(theSumDeltayp_m+temp_theSumDeltayp_m)/2.*stepSize
+			    self.deltayp_m_rigidity.add(x,theSumDeltayp_m)
+			    self.deltay_m_rigidity.add(x,theSumDeltay_m)			    
 			    #self.deltax_rigidity.add(x,theSumDeltax+(self.maxXValue-(x+stepSize))*theSumDeltaxp) 
    	    	    	    self.accumlatedSum.add(x,theSum)
     	    	    	    #3e-7 gives 1-exp(-15)=exp(-3e-7)
@@ -110,7 +143,16 @@ class probabilityStripping:
     def getdeltaxp_m_rigidity(self):
     	    return self.deltaxp_m_rigidity
     def getdeltax_m_rigidity(self):
-    	    return self.deltax_m_rigidity     	    
+    	    return self.deltax_m_rigidity    
+ 	    
+    def getdeltayp_rigidity(self):
+    	    return self.deltayp_rigidity
+    def getdeltay_rigidity(self):
+    	    return self.deltay_rigidity    	
+    def getdeltayp_m_rigidity(self):
+    	    return self.deltayp_m_rigidity
+    def getdeltay_m_rigidity(self):
+    	    return self.deltay_m_rigidity     	    
     def getInverseFunction(self):
     	    return self.InverseFunction
     def getLength(self,atX):

@@ -6,6 +6,7 @@
 
 import math
 import sys
+import os
 
 from orbit.teapot import teapot
 from orbit.teapot import TEAPOT_Lattice
@@ -34,6 +35,7 @@ from orbit.teapot import GeneralDipole
 from orbit.teapot import YDipole
 from orbit.teapot import XDipole
 from orbit.teapot import GeneralDipoleStrip
+from orbit.teapot import GeneralDipoleNoStrip
 from KevinPython.printNode import Print_Node
 from KevinPython.calculateEmit import Calc_Emit
 
@@ -43,6 +45,7 @@ from sns_linac_bunch_generator import SNS_Linac_BunchGenerator
 
 from orbit_utils import Function
 from KevinPython.function_stripping import probabilityStripping
+from orbit.teapot import addDipoleStripperNode
 
 import argparse
 
@@ -50,7 +53,7 @@ print "Start."
 parser = argparse.ArgumentParser(description="%prog [options]", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--fileName", dest='fileName', default="outputAddMagnet.txt", help="file to print node info into")
 parser.add_argument("--fileName2", dest='fileName2', default="outputAddMagnetEmitNoSpaceCharge.txt", help="file to print node info into")
-parser.add_argument("--nParts",type=int, dest='nParts', default=260, help="number of particles")
+parser.add_argument("--nParts",type=int, dest='nParts', default=10000, help="number of particles")
 #parser.add_argument("--turns",type=int, dest='turns', default=100, help="number of complete orbits")
 parser.add_argument("--turns",type=int, dest='turns', default=1, help="number of complete orbits")
 parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=35, help="What node to monitor")
@@ -68,6 +71,11 @@ parser.add_argument("--doNormalKickers",type=bool, dest='doNormalKickers', defau
 
 parser.add_argument("--useChicaneScaleFile",type=bool, dest='useChicaneScaleFile', default=False, help="whether or not to use chicane scales from file")
 parser.add_argument("--usePrintNode",type=bool, dest='usePrintNode', default=False, help="whether or not to use chicane scales from file")
+parser.add_argument("--pencilBeam",type=bool, dest='pencilBeam', default=False, help="Use a single macroparticle beam")
+parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=True, help="Create bunch reading particles from file")
+parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=False, help="use secondary foil in lattice")
+parser.add_argument("--bunchFromFileName", dest='bunchFromFileName', default="InitialBunches/print_beg_0.txt", help="What File to read bunch from")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralOnlyOneFieldNoFoilAdd2ndStripper", help="Where to put output")
 #With Dipoles
 #parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-0.9804517, help="scaleChicane10")
 #parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-0.9934917 , help="scaleChicane11")
@@ -119,8 +127,11 @@ else:
 	
 usePrintNode=args.usePrintNode
 
-nPartsChicane=100
-outputDirectory="WasteBeam"
+nPartsChicane=2
+outputDirectory=args.outputDirectory
+if not os.path.exists(outputDirectory):
+	os.mkdir(outputDirectory)
+#outputDirectory="WasteBeamSplitGeneral"
 outputDirectoryChicaneScales="WasteBeamClosed_100parts"
 for currentPart in range(nPartsChicane+1):
 	inj_latt_start = teapot.TEAPOT_Ring()
@@ -190,8 +201,28 @@ for currentPart in range(nPartsChicane+1):
 	
 	#set the beam peak current in mA
 	#bunch_gen.setBeamCurrent(38.0)
-	
-	bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = WaterBagDist3D)
+	bunch_in=Bunch()
+	if args.pencilBeam: 
+		bunch_in.addParticle(0,0,0,0,0,0)
+	elif args.bunchFromFile:
+		openedFile=open("%s"%(args.bunchFromFileName),'r')
+		lines=openedFile.readlines()
+		counter=0
+		for line in lines:
+			coordToken=line.split("=")[1]
+			#print coordToken
+			coordArr=coordToken.split(",")
+			#print coordArr[6].strip(')\n')
+			if counter <3:
+				print coordArr[0].strip('()\n '), "   ", float(coordArr[0].strip('()\n '))
+			bunch_in.addParticle(float(coordArr[0].strip('()\n ')),float(coordArr[1].strip('()\n ')),float(coordArr[2].strip('()\n ')),float(coordArr[3].strip('()\n ')),float(coordArr[4].strip('()\n ')),float(coordArr[5].strip('()\n ')))
+			counter+=1
+			#for coord in coordArr:
+				
+				#coord.strip('()\n ')
+				#print coord.strip('()\n ')
+	else:
+		bunch_in = bunch_gen.getBunch(nParticles = args.nParts, distributorClass = WaterBagDist3D)
 	#bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = GaussDist3D)
 	#bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = KVDist3D)
 	
@@ -302,103 +333,7 @@ for currentPart in range(nPartsChicane+1):
 	numberOfParts_DH_A12=4
 	counterDH_A11=0
 	counterDH_A12=0
-	if args.doDipoleKickers:
-		for node in nodes2:
-			if (node.getName().strip()=="DH_A11"):
-				#pass
-				node.setnParts(numberOfParts_DH_A11)
-				print "total length= ",node.getLength()
-				#print "segment length= ",node.getLength(3)
-				#myDipole_DH_A11=YDipole("Dipole_DH_A11")
-				myDipole_DH_A11=GeneralDipoleStrip("Dipole_DH_A11")
-				myDipole_DH_A11.setFunctionCDF(CDF)
-				myDipole_DH_A11.setFunctionInverse(InverseFunction)
-				myDipole_DH_A11.setFunctionXPRigidity(deltaxp_rigidity)
-				myDipole_DH_A11.setFunctionXRigidity(deltax_rigidity)
-				myDipole_DH_A11.setFunctionXP_mRigidity(deltaxp_m_rigidity)
-				myDipole_DH_A11.setFunctionX_mRigidity(deltax_m_rigidity)			
-				myDipole_DH_A11.setMagneticFieldStrength(fieldStrength)
-				myDipole_DH_A11.setFieldDirection(math.pi/2)
-				myDipole_DH_A11.setEffLength(theEffLength)
-				if currentPart is not nPartsChicane:
-					node.addChildNode(myEmitNode_DH11_3pre,AccNode.BODY,currentPart)
-					if usePrintNode:
-						node.addChildNode(myPrintNode_DH11_3pre,AccNode.BODY,currentPart)
-					node.addChildNode(myDipole_DH_A11,AccNode.BODY,currentPart)
-					print "currentPart==%d"%currentPart
-				else:
-					pass
-					#node.addChildNode(myEmitNode_DH11_3pre,AccNode.EXIT,currentPart-1)
-					#node.addChildNode(myPrintNode_DH11_3pre,AccNode.EXIT,currentPart-1)
-					#node.addChildNode(myDipole_DH_A11,AccNode.EXIT,currentPart-1)
-			if (node.getName().strip()=="DB23"):
-				node.setnParts(2)
-				if currentPart is nPartsChicane:
-					myDipole_DH_A11=GeneralDipoleStrip("Dipole_DH_A11")
-					myDipole_DH_A11.setFunctionCDF(CDF)
-					myDipole_DH_A11.setFunctionInverse(InverseFunction)
-					myDipole_DH_A11.setFunctionXPRigidity(deltaxp_rigidity)
-					myDipole_DH_A11.setFunctionXRigidity(deltax_rigidity)
-					myDipole_DH_A11.setFunctionXP_mRigidity(deltaxp_m_rigidity)
-					myDipole_DH_A11.setFunctionX_mRigidity(deltax_m_rigidity)			
-					myDipole_DH_A11.setMagneticFieldStrength(fieldStrength)
-					myDipole_DH_A11.setFieldDirection(math.pi/2)
-					myDipole_DH_A11.setEffLength(theEffLength)					
-					node.addChildNode(myEmitNode_DH11_3pre,AccNode.BODY,0)
-					if usePrintNode:
-						node.addChildNode(myPrintNode_DH11_3pre,AccNode.BODY,0)
-					#node.addChildNode(myDipole_DH_A11,AccNode.BODY,0)AccActionsContainer.BEFORE	
-					node.addChildNode(myDipole_DH_A11,AccNode.BODY,0)
-			if (node.getName().strip()=="DH_A12"):
-				node.setnParts(numberOfParts_DH_A12)
-				print "total length= ",node.getLength()
-				print "segment length= ",node.getLength(3)
-				#myDipole_DH_A12=YDipole("Dipole_DH_A12")
-				myDipole_DH_A12=GeneralDipole("Dipole_DH_A12")
-				myDipole_DH_A12.setMagneticFieldStrength(fieldStrength)
-				myDipole_DH_A12.setFieldDirection(math.pi/2)
-				myDipole_DH_A12.setEffLength(theEffLength)
-				node.addChildNode(myEmitNode_DH12_3pre,AccNode.BODY,3)
-				if usePrintNode:
-					node.addChildNode(myPrintNode_DH12_3pre,AccNode.BODY,3)			
-				node.addChildNode(myDipole_DH_A12,AccNode.BODY,3)
-			#drift before chicane 2
-			if (node.getName().strip()=="DB12"):
-				if (args.initialDriftLength>0):
-					node.setLength(args.initialDriftLength)
-	print "counterDH_A11=",counterDH_A11
-	print "counterDH_A12=",counterDH_A12
-	
-	nodes2 = inj_latt_end.getNodes()
-	#numberOfCustomDipoles=2
-	numberOfParts_DH_A11=4
-	numberOfParts_DH_A12=4
-	counterDH_A11=0
-	counterDH_A12=0
-	if args.doDipoleKickers:
-		for node in nodes2:
-			if (node.getName().strip()=="DH_A11"):
-				#pass
-				node.setnParts(numberOfParts_DH_A11)
-				print "total length= ",node.getLength()
-				print "segment length= ",node.getLength(3)
-				#myDipole_DH_A11=YDipole("Dipole_DH_A11")
-				myDipole_DH_A11=GeneralDipole("Dipole_DH_A11")
-				myDipole_DH_A11.setMagneticFieldStrength(fieldStrength)
-				myDipole_DH_A11.setFieldDirection(math.pi/2)
-				myDipole_DH_A11.setEffLength(theEffLength)
-				node.addChildNode(myDipole_DH_A11,AccNode.BODY,3)
-			if (node.getName().strip()=="DH_A12"):
-				node.setnParts(numberOfParts_DH_A12)
-				print "total length= ",node.getLength()
-				print "segment length= ",node.getLength(3)
-				#myDipole_DH_A12=YDipole("Dipole_DH_A12")
-				myDipole_DH_A12=GeneralDipole("Dipole_DH_A12")
-				myDipole_DH_A12.setMagneticFieldStrength(fieldStrength)
-				myDipole_DH_A12.setFieldDirection(math.pi/2)
-				myDipole_DH_A12.setEffLength(theEffLength)
-				node.addChildNode(myDipole_DH_A12,AccNode.BODY,3)	
-			
+
 	print "counterDH_A11=",counterDH_A11
 	print "counterDH_A12=",counterDH_A12
 	#====Add the injection kickers======
@@ -438,6 +373,7 @@ for currentPart in range(nPartsChicane+1):
 		chicaneScale13=-float(theScales[3].strip())	
 	strength_chicane10 = -0.041456*chicaneScale10
 	strength_chicane11 = 0.052434*chicaneScale11
+	#strength_chicane11 = 0.026217*chicaneScale11
 	strength_chicane12 = 0.0298523*chicaneScale12
 	strength_chicane13 = -0.0398609*chicaneScale13
 	
@@ -453,6 +389,12 @@ for currentPart in range(nPartsChicane+1):
 	kickerwave = rootTWaveform(sp, lattlength, duration, startamp, endamp)
 	chicanewave = flatTopWaveform(1.0)
 	
+	fileOut=open("%s/emmit_postS_DH11_%d.txt"%(outputDirectory,currentPart),'w')
+	fileOut.close()	
+	myEmitNode_postS_DH11=Calc_Emit("myEmitNode_postS_DH11_%d"%(currentPart),True,"%s/emmit_postS_DH11_%d.txt"%(outputDirectory,currentPart))	
+	fileOut=open("%s/emmit_postS_DH12_%d.txt"%(outputDirectory,currentPart),'w')
+	fileOut.close()	
+	myEmitNode_postS_DH12=Calc_Emit("myEmitNode_postS_DH12_%d"%(currentPart),True,"%s/emmit_postS_DH12_%d.txt"%(outputDirectory,currentPart))	
 	i = 0
 	path_length=0
 	print "inj_latt"
@@ -461,24 +403,75 @@ for currentPart in range(nPartsChicane+1):
 	foil = TeapotFoilNode(-100, 100, -100, 100, thick, "Foil 1")
 	scatterchoice = 0
 	foil.setScatterChoice(scatterchoice)
-	addTeapotFoilNode(inj_latt_start,5.3503,foil)	
+	#place foil at end of first lattice (ie after drift DB34)
+	if args.useSecondaryFoil:
+		addTeapotFoilNode(inj_latt_start,inj_latt_start.getLength(),foil)	
+	#addTeapotFoilNode(inj_latt_start,5.3503,foil)	
 	#addTeapotFoilNode(inj_latt_start,5.35,foil)	
 	nodes = inj_latt_start.getNodes()
 	chicane11 = nodes[1]
 	chicane11.setParam("kx", strength_chicane11)
 	chicane11.setWaveform(chicanewave)	
+
+	#chicane11.getLength()
+	#inj_latt_start.getNodePositionsDict()[1][0]
+	position=-100.
+	if currentPart==0:
+		position =inj_latt_start.getNodePositionsDict()[chicane11][0]
+	elif currentPart is nPartsChicane:
+		position =inj_latt_start.getNodePositionsDict()[chicane11][1]
+	else :
+		position =inj_latt_start.getNodePositionsDict()[chicane11][0]+chicane11.getLength()*currentPart/nPartsChicane
+	if args.doDipoleKickers:
+		myDipole_DH_A11=GeneralDipoleStrip("Dipole_DH_A11")
+		myDipole_DH_A11.setFunctionCDF(CDF)
+		myDipole_DH_A11.setFunctionInverse(InverseFunction)
+		myDipole_DH_A11.setFunctionXPRigidity(deltaxp_rigidity)
+		myDipole_DH_A11.setFunctionXRigidity(deltax_rigidity)
+		myDipole_DH_A11.setFunctionXP_mRigidity(deltaxp_m_rigidity)
+		myDipole_DH_A11.setFunctionX_mRigidity(deltax_m_rigidity)			
+		myDipole_DH_A11.setMagneticFieldStrength(fieldStrength)
+		myDipole_DH_A11.setFieldDirection(math.pi/2)
+		myDipole_DH_A11.setEffLength(theEffLength)
+		myDipole_DH_A11.setLength(theEffLength)
+		myDipole_DH_A11.addChildNode(myEmitNode_DH11_3pre,AccNode.ENTRANCE)
+		myDipole_DH_A11.addChildNode(myEmitNode_postS_DH11,AccNode.EXIT)
+		
+		addDipoleStripperNode(inj_latt_start,position,myDipole_DH_A11)
+	chicane12=None
+	for node in nodes:
+		if node.getName().strip() == "DH_A12":
+			chicane12=node
+	position=-100.
+	#place second stripper
+	position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*5./6.
+	if args.doDipoleKickers:
+		myDipole_DH_A12=GeneralDipoleNoStrip("Dipole_DH_A12")
+		myDipole_DH_A12.setFunctionCDF(CDF)
+		myDipole_DH_A12.setFunctionInverse(InverseFunction)
+		myDipole_DH_A12.setFunctionXPRigidity(deltaxp_rigidity)
+		myDipole_DH_A12.setFunctionXRigidity(deltax_rigidity)
+		myDipole_DH_A12.setFunctionXP_mRigidity(deltaxp_m_rigidity)
+		myDipole_DH_A12.setFunctionX_mRigidity(deltax_m_rigidity)			
+		myDipole_DH_A12.setMagneticFieldStrength(fieldStrength)
+		myDipole_DH_A12.setFieldDirection(math.pi/2)
+		myDipole_DH_A12.setEffLength(theEffLength)
+		myDipole_DH_A12.setLength(theEffLength)
+		myDipole_DH_A12.addChildNode(myEmitNode_DH12_3pre,AccNode.ENTRANCE)
+		myDipole_DH_A12.addChildNode(myEmitNode_postS_DH12,AccNode.EXIT)
+		
+		addDipoleStripperNode(inj_latt_start,position,myDipole_DH_A12)			
 	for node in nodes:
 		pass
 		if node.getName().strip() == "DH_A12":
 			print node.getName().strip()
-			print node.getnParts()
+			print node.getnParts()		
 			#node.setnParts(10)
 		if args.printNodes==True:
 			path_length=path_length+node.getLength()
 			print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%inj_latt_start.getNodePositionsDict()[node], " path_length= ",path_length
 			#print "There are ", node.getNumberOfBodyChildren()," child nodes."
-			i=i+1
-	
+			i=i+1	
 	i = 0
 	#path_length=0
 	print "ring_latt"
@@ -486,6 +479,7 @@ for currentPart in range(nPartsChicane+1):
 	chicane13 = nodes[0]
 	chicane13.setParam("kx", strength_chicane13)
 	chicane13.setWaveform(chicanewave)	
+
 	for node in nodes:
 		pass
 		if node.getName().strip() == "DH_A12":
@@ -567,8 +561,7 @@ for currentPart in range(nPartsChicane+1):
 	fileOut.close()
 	fileOut=open("%s/emmit_beg_DH11_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()
-	fileOut=open("%s/emmit_postS_DH11_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()	
+
 	fileOut=open("%s/emmit_end_DH11_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()
 	fileOut=open("%s/emmit_beg_b23_%d.txt"%(outputDirectory,currentPart),'w')
@@ -591,13 +584,11 @@ for currentPart in range(nPartsChicane+1):
 	fileOut.close()	
 	myEmitNode_beg=Calc_Emit("MyEmitNode_Beg_%d"%(currentPart),True,"%s/emmit_beg_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_beg_DH11=Calc_Emit("myEmitNode_beg_DH11_%d"%(currentPart),True,"%s/emmit_beg_DH11_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_postS_DH11=Calc_Emit("myEmitNode_postS_DH11_%d"%(currentPart),True,"%s/emmit_postS_DH11_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_end_DH11=Calc_Emit("myEmitNode_end_DH11_%d"%(currentPart),True,"%s/emmit_end_DH11_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_beg_b23=Calc_Emit("myEmitNode_beg_b23_%d"%(currentPart),True,"%s/emmit_beg_b23_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_mid_b23=Calc_Emit("myEmitNode_mid_b23_%d"%(currentPart),True,"%s/emmit_mid_b23_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_end_b23=Calc_Emit("myEmitNode_end_b23_%d"%(currentPart),True,"%s/emmit_end_b23_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_beg_DH12=Calc_Emit("myEmitNode_beg_DH12_%d"%(currentPart),True,"%s/emmit_beg_DH12_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_postS_DH12=Calc_Emit("myEmitNode_postS_DH12_%d"%(currentPart),True,"%s/emmit_postS_DH12_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_end_DH12=Calc_Emit("myEmitNode_end_DH12_%d"%(currentPart),True,"%s/emmit_end_DH12_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_beg_DH13=Calc_Emit("myEmitNode_beg_DH13_%d"%(currentPart),True,"%s/emmit_beg_DH13_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_end_DH13=Calc_Emit("myEmitNode_end_DH13_%d"%(currentPart),True,"%s/emmit_end_DH13_%d.txt"%(outputDirectory,currentPart))
@@ -620,13 +611,9 @@ for currentPart in range(nPartsChicane+1):
 				node.addChildNode(myPrintNode_end_b23,AccNode.EXIT)		
 			
 			node.addChildNode(myEmitNode_beg_b23,AccNode.ENTRANCE)
-			node.addChildNode(myEmitNode_mid_b23,AccNode.BODY,1)
+			#node.addChildNode(myEmitNode_mid_b23,AccNode.BODY,1)
 			node.addChildNode(myEmitNode_end_b23,AccNode.EXIT)
 			
-			if currentPart is nPartsChicane:
-				node.addChildNode(myEmitNode_postS_DH11,AccNode.BODY,0)	
-				if usePrintNode:
-					node.addChildNode(myPrintNode_postS_DH11,AccNode.BODY,0)
 			
 		if node.getName().strip() == "DH_A11":
 			if usePrintNode:
@@ -650,9 +637,7 @@ for currentPart in range(nPartsChicane+1):
 			node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)
 			#if currentPart is not nPartsChicane:
-			node.addChildNode(myEmitNode_postS_DH12,AccNode.BODY,3)	
-			if usePrintNode:
-				node.addChildNode(myPrintNode_postS_DH12,AccNode.BODY,0)		
+			#node.addChildNode(myEmitNode_postS_DH12,AccNode.BODY,3)		
 			#node.setnParts(10)
 			
 	nodes = inj_latt_end.getNodes()
@@ -689,10 +674,7 @@ for currentPart in range(nPartsChicane+1):
 			
 			node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)
-			if currentPart is not nPartsChicane:
-				node.addChildNode(myEmitNode_postS_DH12,AccNode.BODY,3)	
-				if usePrintNode:
-					node.addChildNode(myPrintNode_postS_DH12,AccNode.BODY,0)
+
 		if node.getName().strip() == "DH_A13":
 			#print node.getName().strip()
 			#print node.getnParts()
@@ -715,11 +697,13 @@ for currentPart in range(nPartsChicane+1):
 	pxOffset=args.pxOffset
 	yOffset=args.yOffset
 	pyOffset=args.pyOffset
-	for i in range(bunch_in.getSize()):
-		bunch_in.x(i,bunch_in.x(i)+xOffset)
-		bunch_in.px(i,bunch_in.px(i)+pxOffset)
-		bunch_in.y(i,bunch_in.y(i)+yOffset)
-		bunch_in.py(i,bunch_in.py(i)+pyOffset)		
+	#if reading bunch from file the offset should already have been added
+	if not args.bunchFromFile:
+		for i in range(bunch_in.getSize()):
+			bunch_in.x(i,bunch_in.x(i)+xOffset)
+			bunch_in.px(i,bunch_in.px(i)+pxOffset)
+			bunch_in.y(i,bunch_in.y(i)+yOffset)
+			bunch_in.py(i,bunch_in.py(i)+pyOffset)		
 	#track through drift after 3rd chicane and foil at end
 	inj_latt_start.trackBunch(bunch_in, paramsDict)
 	#change charge as its passed foil

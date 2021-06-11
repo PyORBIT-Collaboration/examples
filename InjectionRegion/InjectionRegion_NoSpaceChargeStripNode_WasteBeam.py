@@ -60,14 +60,14 @@ parser.add_argument("--printNodes",type=bool, dest='printNodes', default=True, h
 parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=True, help="print node list")
 parser.add_argument("--doNormalKickers",type=bool, dest='doNormalKickers', default=False, help="print node list")
 #With Dipoles Neg optimizer
-parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1.047686, help="scaleChicane10")
-parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-0.9969892 , help="scaleChicane11")
+#parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1.047686, help="scaleChicane10")
+#parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-0.9969892 , help="scaleChicane11")
 #parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=0. , help="scaleChicane11")
-parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=-1.00911, help="scaleChicane12")
-parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=-0.9775873, help="scaleChicane13")
+#parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=-1.00911, help="scaleChicane12")
+#parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=-0.9775873, help="scaleChicane13")
 
-parser.add_argument("--useChicaneScaleFile",type=bool, dest='useChicaneScaleFile', default=True, help="whether or not to use chicane scales from file")
-
+parser.add_argument("--useChicaneScaleFile",type=bool, dest='useChicaneScaleFile', default=False, help="whether or not to use chicane scales from file")
+parser.add_argument("--usePrintNode",type=bool, dest='usePrintNode', default=False, help="whether or not to use chicane scales from file")
 #With Dipoles
 #parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-0.9804517, help="scaleChicane10")
 #parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-0.9934917 , help="scaleChicane11")
@@ -78,10 +78,10 @@ parser.add_argument("--useChicaneScaleFile",type=bool, dest='useChicaneScaleFile
 #parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-1.000257, help="scaleChicane11")
 #parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=-0.9997909, help="scaleChicane12")
 #parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=-1.008058, help="scaleChicane13")
-#parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1., help="scaleChicane10")
-#parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-1., help="scaleChicane11")
-#parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=-1., help="scaleChicane12")
-#parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=-1., help="scaleChicane13")
+parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1., help="scaleChicane10")
+parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-1., help="scaleChicane11")
+parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=-1., help="scaleChicane12")
+parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=-1., help="scaleChicane13")
 #No Offset
 parser.add_argument("--xOffset",type=float, dest='xOffset', default=0.25671, help="x injection offset")
 parser.add_argument("--pxOffset",type=float, dest='pxOffset', default=-.042, help="px injection offset")
@@ -115,11 +115,13 @@ else:
 	chicaneScale10=1.
 	chicaneScale11=1.
 	chicaneScale12=1.
-	chicaneScale13=1.	
-
+	chicaneScale13=1.
+	
+usePrintNode=args.usePrintNode
 
 nPartsChicane=4
-outputDirectory="WasteBeam"
+outputDirectory="WasteBeamNew"
+outputDirectoryChicaneScales="WasteBeamClosed_100parts"
 for currentPart in range(nPartsChicane+1):
 	inj_latt_start = teapot.TEAPOT_Ring()
 	print "Read MAD."
@@ -276,18 +278,23 @@ for currentPart in range(nPartsChicane+1):
 	
 	fileOut=open("%s/emmit_DH11_3pre_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()
-	fileOut=open("%s/print_DH11_3pre_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
+
 	
 	fileOut=open("%s/emmit_DH12_3pre_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()
-	fileOut=open("%s/print_DH12_3pre_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
+	if usePrintNode:
+		fileOut=open("%s/print_DH11_3pre_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()		
+		fileOut=open("%s/print_DH12_3pre_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
 	
 	myEmitNode_DH11_3pre=Calc_Emit("MyEmitNode_DH11_3pre_%d"%(currentPart),True,"%s/emmit_DH11_3pre_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_DH11_3pre=Print_Node("MyPrintNode_DH11_3pre_%d"%(currentPart),True,"%s/print_DH11_3pre_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_DH12_3pre=Calc_Emit("MyEmitNode_DH12_3pre_%d"%(currentPart),True,"%s/emmit_DH12_3pre_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_DH12_3pre=Print_Node("MyPrintNode_DH12_3pre_%d"%(currentPart),True,"%s/print_DH12_3pre_%d.txt"%(outputDirectory,currentPart))
+	
+	if usePrintNode:
+		myPrintNode_DH12_3pre=Print_Node("MyPrintNode_DH12_3pre_%d"%(currentPart),True,"%s/print_DH12_3pre_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_DH11_3pre=Print_Node("MyPrintNode_DH11_3pre_%d"%(currentPart),True,"%s/print_DH11_3pre_%d.txt"%(outputDirectory,currentPart))
+	
 	
 	nodes2 = inj_latt_start.getNodes()
 	#numberOfCustomDipoles=2
@@ -315,7 +322,8 @@ for currentPart in range(nPartsChicane+1):
 				myDipole_DH_A11.setEffLength(theEffLength)
 				if currentPart is not nPartsChicane:
 					node.addChildNode(myEmitNode_DH11_3pre,AccNode.BODY,currentPart)
-					node.addChildNode(myPrintNode_DH11_3pre,AccNode.BODY,currentPart)
+					if usePrintNode:
+						node.addChildNode(myPrintNode_DH11_3pre,AccNode.BODY,currentPart)
 					node.addChildNode(myDipole_DH_A11,AccNode.BODY,currentPart)
 					print "currentPart==%d"%currentPart
 				else:
@@ -337,7 +345,8 @@ for currentPart in range(nPartsChicane+1):
 					myDipole_DH_A11.setFieldDirection(math.pi/2)
 					myDipole_DH_A11.setEffLength(theEffLength)					
 					node.addChildNode(myEmitNode_DH11_3pre,AccNode.BODY,0)
-					node.addChildNode(myPrintNode_DH11_3pre,AccNode.BODY,0)
+					if usePrintNode:
+						node.addChildNode(myPrintNode_DH11_3pre,AccNode.BODY,0)
 					#node.addChildNode(myDipole_DH_A11,AccNode.BODY,0)AccActionsContainer.BEFORE	
 					node.addChildNode(myDipole_DH_A11,AccNode.BODY,0)
 			if (node.getName().strip()=="DH_A12"):
@@ -350,7 +359,8 @@ for currentPart in range(nPartsChicane+1):
 				myDipole_DH_A12.setFieldDirection(math.pi/2)
 				myDipole_DH_A12.setEffLength(theEffLength)
 				node.addChildNode(myEmitNode_DH12_3pre,AccNode.BODY,3)
-				node.addChildNode(myPrintNode_DH12_3pre,AccNode.BODY,3)			
+				if usePrintNode:
+					node.addChildNode(myPrintNode_DH12_3pre,AccNode.BODY,3)			
 				node.addChildNode(myDipole_DH_A12,AccNode.BODY,3)
 			#drift before chicane 2
 			if (node.getName().strip()=="DB12"):
@@ -418,7 +428,7 @@ for currentPart in range(nPartsChicane+1):
 		strength_vkicker12 = strength_vkicker11	
 		
 	if args.useChicaneScaleFile:
-		openedFile=open("%s/ChicaneScales_%d.txt"%(outputDirectory,currentPart),'r')
+		openedFile=open("%s/ChicaneScales_%d.txt"%(outputDirectoryChicaneScales,currentPart),'r')
 		line=openedFile.readline()
 		print line
 		theScales=line.split(",")
@@ -512,45 +522,46 @@ for currentPart in range(nPartsChicane+1):
 	
 	
 	#myPrintNode=Print_Node("MyPrintNode",True,args.fileName)
-	fileOut=open("%s/print_beg_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/print_beg_DH11_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/print_postS_DH11_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()	
-	fileOut=open("%s/print_end_DH11_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/print_beg_b23_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/print_mid_b23_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/print_end_b23_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/print_beg_DH12_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/print_postS_DH12_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()	
-	fileOut=open("%s/print_end_DH12_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/print_beg_DH13_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/print_end_DH13_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()	
-	fileOut=open("%s/print_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()		
-	myPrintNode_beg=Print_Node("MyPrintNode_Beg_%d"%(currentPart),True,"%s/print_beg_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_beg_DH11=Print_Node("MyPrintNode_beg_DH11_%d"%(currentPart),True,"%s/print_beg_DH11_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_postS_DH11=Print_Node("MyPrintNode_postS_DH11_%d"%(currentPart),True,"%s/print_postS_DH11_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_end_DH11=Print_Node("MyPrintNode_end_DH11_%d"%(currentPart),True,"%s/print_end_DH11_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_beg_b23=Print_Node("MyPrintNode_beg_b23_%d"%(currentPart),True,"%s/print_beg_b23_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_mid_b23=Print_Node("MyPrintNode_mid_b23_%d"%(currentPart),True,"%s/print_mid_b23_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_end_b23=Print_Node("MyPrintNode_end_b23_%d"%(currentPart),True,"%s/print_end_b23_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_beg_DH12=Print_Node("MyPrintNode_beg_DH12_%d"%(currentPart),True,"%s/print_beg_DH12_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_postS_DH12=Print_Node("MyPrintNode_postS_DH12_%d"%(currentPart),True,"%s/print_postS_DH12_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_end_DH12=Print_Node("MyPrintNode_end_DH12_%d"%(currentPart),True,"%s/print_end_DH12_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_beg_DH13=Print_Node("MyPrintNode_beg_DH13_%d"%(currentPart),True,"%s/print_beg_DH13_%d.txt"%(outputDirectory,currentPart))
-	myPrintNode_end_DH13=Print_Node("MyPrintNode_end_DH13_%d"%(currentPart),True,"%s/print_end_DH13_%d.txt"%(outputDirectory,currentPart))	
-	myPrintNode_end_DB_WASTE=Print_Node("MyPrintNode_end_DB_WASTE_%d"%(currentPart),True,"%s/print_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart))	
+	if usePrintNode:
+		fileOut=open("%s/print_beg_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
+		fileOut=open("%s/print_beg_DH11_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
+		fileOut=open("%s/print_postS_DH11_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()	
+		fileOut=open("%s/print_end_DH11_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
+		fileOut=open("%s/print_beg_b23_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
+		fileOut=open("%s/print_mid_b23_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
+		fileOut=open("%s/print_end_b23_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
+		fileOut=open("%s/print_beg_DH12_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
+		fileOut=open("%s/print_postS_DH12_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()	
+		fileOut=open("%s/print_end_DH12_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
+		fileOut=open("%s/print_beg_DH13_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()
+		fileOut=open("%s/print_end_DH13_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()	
+		fileOut=open("%s/print_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()		
+		myPrintNode_beg=Print_Node("MyPrintNode_Beg_%d"%(currentPart),True,"%s/print_beg_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_beg_DH11=Print_Node("MyPrintNode_beg_DH11_%d"%(currentPart),True,"%s/print_beg_DH11_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_postS_DH11=Print_Node("MyPrintNode_postS_DH11_%d"%(currentPart),True,"%s/print_postS_DH11_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_end_DH11=Print_Node("MyPrintNode_end_DH11_%d"%(currentPart),True,"%s/print_end_DH11_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_beg_b23=Print_Node("MyPrintNode_beg_b23_%d"%(currentPart),True,"%s/print_beg_b23_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_mid_b23=Print_Node("MyPrintNode_mid_b23_%d"%(currentPart),True,"%s/print_mid_b23_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_end_b23=Print_Node("MyPrintNode_end_b23_%d"%(currentPart),True,"%s/print_end_b23_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_beg_DH12=Print_Node("MyPrintNode_beg_DH12_%d"%(currentPart),True,"%s/print_beg_DH12_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_postS_DH12=Print_Node("MyPrintNode_postS_DH12_%d"%(currentPart),True,"%s/print_postS_DH12_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_end_DH12=Print_Node("MyPrintNode_end_DH12_%d"%(currentPart),True,"%s/print_end_DH12_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_beg_DH13=Print_Node("MyPrintNode_beg_DH13_%d"%(currentPart),True,"%s/print_beg_DH13_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_end_DH13=Print_Node("MyPrintNode_end_DH13_%d"%(currentPart),True,"%s/print_end_DH13_%d.txt"%(outputDirectory,currentPart))	
+		myPrintNode_end_DB_WASTE=Print_Node("MyPrintNode_end_DB_WASTE_%d"%(currentPart),True,"%s/print_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart))	
 	
 	fileOut=open("%s/emmit_beg_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()
@@ -593,7 +604,8 @@ for currentPart in range(nPartsChicane+1):
 	myEmitNode_end_DB_WASTE=Calc_Emit("myEmitNode_end_DB_WASTE_%d"%(currentPart),True,"%s/emmit_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart))
 	
 	nodes = inj_latt_start.getNodes()
-	nodes[0].addChildNode(myPrintNode_beg,AccNode.ENTRANCE)
+	if usePrintNode:
+		nodes[0].addChildNode(myPrintNode_beg,AccNode.ENTRANCE)
 	nodes[0].addChildNode(myEmitNode_beg,AccNode.ENTRANCE)
 	#nodes[args.nodeMonitor].addChildNode(myEmitNode,AccNode.EXIT)
 	i = 0
@@ -602,9 +614,10 @@ for currentPart in range(nPartsChicane+1):
 		pass
 		if node.getName().strip() == "DB23":
 			#node.setnParts(2)
-			node.addChildNode(myPrintNode_beg_b23,AccNode.ENTRANCE)
-			node.addChildNode(myPrintNode_mid_b23,AccNode.BODY,1)
-			node.addChildNode(myPrintNode_end_b23,AccNode.EXIT)		
+			if usePrintNode:
+				node.addChildNode(myPrintNode_beg_b23,AccNode.ENTRANCE)
+				node.addChildNode(myPrintNode_mid_b23,AccNode.BODY,1)
+				node.addChildNode(myPrintNode_end_b23,AccNode.EXIT)		
 			
 			node.addChildNode(myEmitNode_beg_b23,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_mid_b23,AccNode.BODY,1)
@@ -612,29 +625,34 @@ for currentPart in range(nPartsChicane+1):
 			
 			if currentPart is nPartsChicane:
 				node.addChildNode(myEmitNode_postS_DH11,AccNode.BODY,0)	
-				node.addChildNode(myPrintNode_postS_DH11,AccNode.BODY,0)
+				if usePrintNode:
+					node.addChildNode(myPrintNode_postS_DH11,AccNode.BODY,0)
 			
 		if node.getName().strip() == "DH_A11":
-			node.addChildNode(myPrintNode_beg_DH11,AccNode.ENTRANCE)
-			node.addChildNode(myPrintNode_end_DH11,AccNode.EXIT)		
+			if usePrintNode:
+				node.addChildNode(myPrintNode_beg_DH11,AccNode.ENTRANCE)
+				node.addChildNode(myPrintNode_end_DH11,AccNode.EXIT)		
 			
 			node.addChildNode(myEmitNode_beg_DH11,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_end_DH11,AccNode.EXIT)
 			
 			if currentPart is not nPartsChicane:
 				node.addChildNode(myEmitNode_postS_DH11,AccNode.BODY,currentPart)
-				node.addChildNode(myPrintNode_postS_DH11,AccNode.BODY,currentPart)
+				if usePrintNode:
+					node.addChildNode(myPrintNode_postS_DH11,AccNode.BODY,currentPart)
 		if node.getName().strip() == "DH_A12":
 			#print node.getName().strip()
 			#print node.getnParts()
-			node.addChildNode(myPrintNode_beg_DH12,AccNode.ENTRANCE)
-			node.addChildNode(myPrintNode_end_DH12,AccNode.EXIT)		
+			if usePrintNode:
+				node.addChildNode(myPrintNode_beg_DH12,AccNode.ENTRANCE)
+				node.addChildNode(myPrintNode_end_DH12,AccNode.EXIT)		
 			
 			node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)
 			#if currentPart is not nPartsChicane:
 			node.addChildNode(myEmitNode_postS_DH12,AccNode.BODY,3)	
-			node.addChildNode(myPrintNode_postS_DH12,AccNode.BODY,0)		
+			if usePrintNode:
+				node.addChildNode(myPrintNode_postS_DH12,AccNode.BODY,0)		
 			#node.setnParts(10)
 			
 	nodes = inj_latt_end.getNodes()
@@ -645,17 +663,19 @@ for currentPart in range(nPartsChicane+1):
 		pass
 		if node.getName().strip() == "DB23":
 			#node.setnParts(2)
-			node.addChildNode(myPrintNode_beg_b23,AccNode.ENTRANCE)
-			node.addChildNode(myPrintNode_mid_b23,AccNode.BODY,1)
-			node.addChildNode(myPrintNode_end_b23,AccNode.EXIT)		
+			if usePrintNode:
+				node.addChildNode(myPrintNode_beg_b23,AccNode.ENTRANCE)
+				node.addChildNode(myPrintNode_mid_b23,AccNode.BODY,1)
+				node.addChildNode(myPrintNode_end_b23,AccNode.EXIT)		
 			
 			node.addChildNode(myEmitNode_beg_b23,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_mid_b23,AccNode.BODY,1)
 			node.addChildNode(myEmitNode_end_b23,AccNode.EXIT)
 			pass
 		if node.getName().strip() == "DH_A11":
-			node.addChildNode(myPrintNode_beg_DH11,AccNode.ENTRANCE)
-			node.addChildNode(myPrintNode_end_DH11,AccNode.EXIT)		
+			if usePrintNode:
+				node.addChildNode(myPrintNode_beg_DH11,AccNode.ENTRANCE)
+				node.addChildNode(myPrintNode_end_DH11,AccNode.EXIT)		
 			
 			node.addChildNode(myEmitNode_beg_DH11,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_end_DH11,AccNode.EXIT)
@@ -663,26 +683,30 @@ for currentPart in range(nPartsChicane+1):
 		if node.getName().strip() == "DH_A12":
 			#print node.getName().strip()
 			#print node.getnParts()
-			node.addChildNode(myPrintNode_beg_DH12,AccNode.ENTRANCE)
-			node.addChildNode(myPrintNode_end_DH12,AccNode.EXIT)		
+			if usePrintNode:
+				node.addChildNode(myPrintNode_beg_DH12,AccNode.ENTRANCE)
+				node.addChildNode(myPrintNode_end_DH12,AccNode.EXIT)		
 			
 			node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)
 			if currentPart is not nPartsChicane:
 				node.addChildNode(myEmitNode_postS_DH12,AccNode.BODY,3)	
-				node.addChildNode(myPrintNode_postS_DH12,AccNode.BODY,0)
+				if usePrintNode:
+					node.addChildNode(myPrintNode_postS_DH12,AccNode.BODY,0)
 		if node.getName().strip() == "DH_A13":
 			#print node.getName().strip()
 			#print node.getnParts()
-			node.addChildNode(myPrintNode_beg_DH13,AccNode.ENTRANCE)
-			node.addChildNode(myPrintNode_end_DH13,AccNode.EXIT)		
+			if usePrintNode:
+				node.addChildNode(myPrintNode_beg_DH13,AccNode.ENTRANCE)
+				node.addChildNode(myPrintNode_end_DH13,AccNode.EXIT)		
 			
 			node.addChildNode(myEmitNode_beg_DH13,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_end_DH13,AccNode.EXIT)		
 			#node.setnParts(10)
 			
 		if node.getName().strip() == "DB_Waste":
-			node.addChildNode(myPrintNode_end_DB_WASTE,AccNode.EXIT)		
+			if usePrintNode:
+				node.addChildNode(myPrintNode_end_DB_WASTE,AccNode.EXIT)		
 			
 			node.addChildNode(myEmitNode_end_DB_WASTE,AccNode.EXIT)			
 	#================Do some turns===========================================
