@@ -2,8 +2,9 @@
 
 """
 
+This is an example of TrajectoryCorrection usage.
 This script will correct orbit in HEBT1-HEBT2
-by using the existing DCorrectrs.
+by using the existing DCorrectors.
 
 """
 
@@ -156,12 +157,42 @@ trnsvBPMs = trajCorrection.getQuadTransverseBPMs()
 for trnsvBPM in trnsvBPMs:
 	print "TransverseBPM = ",trnsvBPM.getName()
 """
+	
+print "====================================="
+dch_arr = trajCorrection.getDCHs()
+dcv_arr = trajCorrection.getDCVs()
 
-print "==============================="		
-
+print "==============Initial Fields in Correctors "
+for dch in dch_arr:
+	print "dch=",dch.getName()," field [T] = %+8.7f"%dch.getParam("B")
+print "========"
+for dcv in dcv_arr:
+	print "dcv=",dcv.getName()," field [T] = %+8.7f"%dcv.getParam("B")
+	
+print "===============Trajectory============="
+#----- print initial trajectory 
 bunch_init = Bunch()
 bunch.copyBunchTo(bunch_init)
+trajCorrection.calculateTrajectory(bunch_init, print_info = True)
 
-trajCorrection.correctTrajectory(bunch_init)	
+#---- correct trajectory
+bunch_init = Bunch()
+bunch.copyBunchTo(bunch_init)
+trajCorrection.correctTrajectory(bunch_init)
+
+print "==============New Fields in Correctors "
+for dch in dch_arr:
+	print "dch=",dch.getName()," field [T] = %+8.7f"%dch.getParam("B")
+print "========"
+for dcv in dcv_arr:
+	print "dcv=",dcv.getName()," field [T] = %+8.7f"%dcv.getParam("B")
+
+print "===============Trajectory============="
+#----- print fixed trajectory 
+bunch_init = Bunch()
+bunch.copyBunchTo(bunch_init)
+trajCorrection.calculateTrajectory(bunch_init, print_info = True)
+print "====================================="	
+
 print "Done."
 
