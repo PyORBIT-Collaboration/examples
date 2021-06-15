@@ -135,7 +135,7 @@ class Calc_Emit(NodeTEAPOT):
 		    fileOut.write(" (x avg, y avy)= (%f,%f) \n" %(avg_x,avg_y))
 		    fileOut.write(" (xp avg, yp avg)= (%f,%f) \n" %(avg_px,avg_py))		    
 		    fileOut.write(" (emit x, emit y)= (%f,%f) \n" %(emit_x,emit_y))
-		    fileOut.write(" (normal emit x, normal emit y)= (%f,%f) " %(emit_x*beta*gamma,emit_y*beta*gamma))
+		    fileOut.write(" (normal emit x, normal emit y)= (%f,%f) \n" %(emit_x*beta*gamma,emit_y*beta*gamma))
 		    fileOut.close()
 	elif bunch.getSize() ==1:
 	    fileOut=open(self.fileName,'a')
@@ -151,5 +151,5 @@ class Calc_Emit(NodeTEAPOT):
 	    fileOut.write(" (x avg, y avy)= (%f,%f) \n" %(bunch.x(0),bunch.y(0)))
 	    fileOut.write(" (xp avg, yp avg)= (%f,%f) \n" %(bunch.px(0),bunch.py(0)))		    
 	    fileOut.write(" (emit x, emit y)= (%f,%f) \n" %(0,0))
-	    fileOut.write(" (normal emit x, normal emit y)= (%f,%f) " %(0,0))
+	    fileOut.write(" (normal emit x, normal emit y)= (%f,%f) \n" %(0,0))
 	    fileOut.close()		

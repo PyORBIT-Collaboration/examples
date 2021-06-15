@@ -69,9 +69,9 @@ parser.add_argument("--usePrintNode",type=bool, dest='usePrintNode', default=Fal
 parser.add_argument("--pencilBeam",type=bool, dest='pencilBeam', default=False, help="Use a single macroparticle beam")
 parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFieldToStripper', default=True, help="Include the chicane fields in the stripper if stripper is inside chicane")
 parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=False, help="Create bunch reading particles from file")
-parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=True, help="use secondary foil in lattice")
+parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=False, help="use secondary foil in lattice")
 parser.add_argument("--bunchFromFileName", dest='bunchFromFileName', default="InitialBunches/print_beg_0.txt", help="What File to read bunch from")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewOppisite", help="Where to put output")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralClosedBeamOpposite", help="Where to put output")
 
 
 parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1., help="scaleChicane10")
@@ -79,10 +79,10 @@ parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', defaul
 parser.add_argument("--scaleChicane12",type=float, dest='scaleChicane12', default=-1., help="scaleChicane12")
 parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', default=-1., help="scaleChicane13")
 
-parser.add_argument("--xOffset",type=float, dest='xOffset', default=0.25671, help="x injection offset")
-parser.add_argument("--pxOffset",type=float, dest='pxOffset', default=-.042, help="px injection offset")
-parser.add_argument("--yOffset",type=float, dest='yOffset', default=0.046, help="y injection offset")
-parser.add_argument("--pyOffset",type=float, dest='pyOffset', default=0, help="py injection offset")
+parser.add_argument("--xOffset",type=float, dest='xOffset', default=0., help="x injection offset")
+parser.add_argument("--pxOffset",type=float, dest='pxOffset', default=0., help="px injection offset")
+parser.add_argument("--yOffset",type=float, dest='yOffset', default=0., help="y injection offset")
+parser.add_argument("--pyOffset",type=float, dest='pyOffset', default=0., help="py injection offset")
 
 
 args = parser.parse_args()
@@ -94,6 +94,7 @@ macrosperturn = args.nParts
 macrosize = intensity/turns/macrosperturn
 
 #where to pull chicane scale values from if useChicaneScales is true.
+
 outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanOpposite"
 if args.useChicaneScaleFile==False:
 	chicaneScale10=args.scaleChicane10
@@ -124,16 +125,53 @@ for currentPart in range(nPartsChicane+1):
 	inj_latt_start = teapot.TEAPOT_Ring()
 	print "Read MAD."
 	#this lattice has the injection region from the start of the drift prior to chicane2 up to and including the drift after chicane3
-	inj_latt_start.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane2.LAT","RING")
+	inj_latt_start.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_ClosedWaste.LAT","RING")
 	print "Lattice=",inj_latt_start.getName()," length [m] =",inj_latt_start.getLength()," nodes=",len(inj_latt_start.getNodes())
+
+	#Turn off injection kickers
 	
-	inj_latt_end = teapot.TEAPOT_Ring()
-	print "Read MAD."
-	#this lattice contains chicane 4 and the drift leading to the waste septum
-	inj_latt_end.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane3.LAT","RING")
-	print "Lattice=",inj_latt_end.getName()," length [m] =",inj_latt_end.getLength()," nodes=",len(inj_latt_end.getNodes())
+	strength_hkicker10 = 0
+	strength_hkicker13 = strength_hkicker10
+	strength_hkicker11 = 0
+	strength_hkicker12 = strength_hkicker11
+	strength_vkicker10 = 0
+	strength_vkicker13 = strength_vkicker10
+	strength_vkicker11 = 0
+	strength_vkicker12 = strength_vkicker11	
 	
-	#------------------------------
+	kickerwave = flatTopWaveform(1.0)
+	
+	nodes = inj_latt_start.getNodes()
+	hkick10 = nodes[10]
+	vkick10 = nodes[12]
+	hkick11	= nodes[14]
+	vkick11 = nodes[16]
+	#vkick12 = nodes[49]
+	#hkick12 = nodes[51]
+	#vkick13 = nodes[53]
+	#hkick13 = nodes[55]
+	
+	vkick10.setParam("ky", strength_vkicker10)
+	hkick10.setParam("kx", strength_hkicker10)
+	vkick11.setParam("ky", strength_vkicker11)
+	hkick11.setParam("kx", strength_hkicker11)
+	#vkick12.setParam("ky", strength_vkicker12)
+	#hkick12.setParam("kx", strength_hkicker12)
+	#vkick13.setParam("ky", strength_vkicker13)
+	#hkick13.setParam("kx", strength_hkicker13)
+	
+	vkick10.setWaveform(kickerwave)
+	hkick10.setWaveform(kickerwave)
+	vkick11.setWaveform(kickerwave)
+	hkick11.setWaveform(kickerwave)
+	#vkick12.setWaveform(kickerwave)
+	#hkick12.setWaveform(kickerwave)
+	#vkick13.setWaveform(kickerwave)
+	#hkick13.setWaveform(kickerwave)
+		
+	inj_latt_start.initialize()
+	
+	#-----------
 	#Initial Distribution Functions
 	#------------------------------
 	
@@ -202,7 +240,7 @@ for currentPart in range(nPartsChicane+1):
 	bunch_in.macroSize(macrosize)
 	energy = e_kin_ini # 1.0 #Gev
 	bunch_in.getSyncParticle().kinEnergy(energy)
-	bunch_in.charge(-1)
+	bunch_in.charge(1)
 
 	#apply offset to initial beam
 	xOffset=args.xOffset
@@ -219,15 +257,10 @@ for currentPart in range(nPartsChicane+1):
 			
 	paramsDict = {}
 	#create failed to strip bunches
-	firstChicaneFail = Bunch()
-	firstChicaneFail.charge(-1)
-	secondChicaneFail = Bunch()
-	secondChicaneFail.charge(0)
+
 	lostbunch = Bunch()
 	paramsDict["lostbunch"]=lostbunch
 	paramsDict["bunch"]= bunch_in
-	paramsDict["firstChicaneFail"]=firstChicaneFail
-	paramsDict["secondChicaneFail"]= secondChicaneFail
 	lostbunch.addPartAttr("LostParticleAttributes") 
 	
 	#erase files for writing emmittance info immediately prior to stripping dipoles and immediately after stripping
@@ -285,10 +318,31 @@ for currentPart in range(nPartsChicane+1):
 	strength_chicane12 = chicaneStrengthArray[2]*chicaneScale12
 	strength_chicane13 = chicaneStrengthArray[3]*chicaneScale13
 		
-	chicanewave = flatTopWaveform(1.0)	
-	chicane11 = nodes[1]
+	#find chicanes
+	chicane10 = None
+	chicane11 = None
+	chicane12 = None
+	chicane13 = None	
+	for index in range(len(inj_latt_start.getNodes())):
+		if nodes[index].getName().strip() == "DH_A10":
+			chicane10=nodes[index]
+		elif nodes[index].getName().strip() == "DH_A11":
+			chicane11=nodes[index]
+		elif nodes[index].getName().strip() == "DH_A12":
+			chicane12=nodes[index]
+		elif nodes[index].getName().strip() == "DH_A13":
+			chicane13=nodes[index]		
+	chicanewave = flatTopWaveform(1.0)
+	print chicane10.getName()
+	print strength_chicane10
+	chicane10.setParam("kx", strength_chicane10)
 	chicane11.setParam("kx", strength_chicane11)
-	chicane11.setWaveform(chicanewave)	
+	chicane12.setParam("kx", strength_chicane12)
+	chicane13.setParam("kx", strength_chicane13)
+	chicane10.setWaveform(chicanewave)
+	chicane11.setWaveform(chicanewave)
+	chicane12.setWaveform(chicanewave)
+	chicane13.setWaveform(chicanewave)
 
 	#calculate where to place 1st stripper dipole
 	position=-100.
@@ -383,20 +437,12 @@ for currentPart in range(nPartsChicane+1):
 			magneticFieldx.add(x,y*math.cos(fieldDirection)+xkickerField)
 			magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
 		
-		myDipole_DH_A11=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A11")	
+		myDipole_DH_A11=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A11")	
 		myDipole_DH_A11.addChildNode(myEmitNode_DH11_3pre,AccNode.ENTRANCE)
 		myDipole_DH_A11.addChildNode(myEmitNode_postS_DH11,AccNode.EXIT)
 		
 		addDipoleStripperNode(inj_latt_start,position,myDipole_DH_A11)
-		
-	nodes = inj_latt_start.getNodes()		
-	#find chicane12 location
-	chicane12=None
-	for node in nodes:
-		if node.getName().strip() == "DH_A12":
-			chicane12=node	
-	chicane12.setParam("kx", strength_chicane12)
-	chicane12.setWaveform(chicanewave)			
+					
 	#add second stripper dipole without stripping
 	if args.doDipoleKickers:
 		position=-100.
@@ -477,17 +523,7 @@ for currentPart in range(nPartsChicane+1):
 			path_length=path_length+node.getLength()
 			print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%inj_latt_start.getNodePositionsDict()[node], " path_length= ",path_length
 			i=i+1	
-	i = 0
-	print "ring_latt"
-	nodes = inj_latt_end.getNodes()
-	chicane13 = nodes[0]
-	chicane13.setParam("kx", strength_chicane13)
-	chicane13.setWaveform(chicanewave)	
-	for node in nodes:
-		if args.printNodes==True:
-			path_length=path_length+node.getLength()
-			print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%inj_latt_end.getNodePositionsDict()[node], " path_length= ",path_length
-			i=i+1
+
 
 	#------------------------------
 	#  Lattice is ready
@@ -497,6 +533,8 @@ for currentPart in range(nPartsChicane+1):
 	if usePrintNode:
 		fileOut=open("%s/print_beg_%d.txt"%(outputDirectory,currentPart),'w')
 		fileOut.close()
+		fileOut=open("%s/print_begQ_%d.txt"%(outputDirectory,currentPart),'w')
+		fileOut.close()		
 		fileOut=open("%s/print_beg_DH11_%d.txt"%(outputDirectory,currentPart),'w')
 		fileOut.close()
 		fileOut=open("%s/print_postS_DH11_%d.txt"%(outputDirectory,currentPart),'w')
@@ -522,6 +560,7 @@ for currentPart in range(nPartsChicane+1):
 		fileOut=open("%s/print_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart),'w')
 		fileOut.close()		
 		myPrintNode_beg=Print_Node("MyPrintNode_Beg_%d"%(currentPart),True,"%s/print_beg_%d.txt"%(outputDirectory,currentPart))
+		myPrintNode_begQ=Print_Node("MyPrintNode_BegQ_%d"%(currentPart),True,"%s/print_begQ_%d.txt"%(outputDirectory,currentPart))
 		myPrintNode_beg_DH11=Print_Node("MyPrintNode_beg_DH11_%d"%(currentPart),True,"%s/print_beg_DH11_%d.txt"%(outputDirectory,currentPart))
 		myPrintNode_postS_DH11=Print_Node("MyPrintNode_postS_DH11_%d"%(currentPart),True,"%s/print_postS_DH11_%d.txt"%(outputDirectory,currentPart))
 		myPrintNode_end_DH11=Print_Node("MyPrintNode_end_DH11_%d"%(currentPart),True,"%s/print_end_DH11_%d.txt"%(outputDirectory,currentPart))
@@ -534,7 +573,8 @@ for currentPart in range(nPartsChicane+1):
 		myPrintNode_beg_DH13=Print_Node("MyPrintNode_beg_DH13_%d"%(currentPart),True,"%s/print_beg_DH13_%d.txt"%(outputDirectory,currentPart))
 		myPrintNode_end_DH13=Print_Node("MyPrintNode_end_DH13_%d"%(currentPart),True,"%s/print_end_DH13_%d.txt"%(outputDirectory,currentPart))	
 		myPrintNode_end_DB_WASTE=Print_Node("MyPrintNode_end_DB_WASTE_%d"%(currentPart),True,"%s/print_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart))	
-	
+	fileOut=open("%s/emmit_begQ_%d.txt"%(outputDirectory,currentPart),'w')
+	fileOut.close()	
 	fileOut=open("%s/emmit_beg_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()
 	fileOut=open("%s/emmit_beg_DH11_%d.txt"%(outputDirectory,currentPart),'w')
@@ -557,7 +597,8 @@ for currentPart in range(nPartsChicane+1):
 	fileOut=open("%s/emmit_end_DH13_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()	
 	fileOut=open("%s/emmit_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()	
+	fileOut.close()
+	myEmitNode_begQ=Calc_Emit("MyEmitNode_BegQ_%d"%(currentPart),True,"%s/emmit_begQ_%d.txt"%(outputDirectory,currentPart))	
 	myEmitNode_beg=Calc_Emit("MyEmitNode_Beg_%d"%(currentPart),True,"%s/emmit_beg_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_beg_DH11=Calc_Emit("myEmitNode_beg_DH11_%d"%(currentPart),True,"%s/emmit_beg_DH11_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_end_DH11=Calc_Emit("myEmitNode_end_DH11_%d"%(currentPart),True,"%s/emmit_end_DH11_%d.txt"%(outputDirectory,currentPart))
@@ -574,12 +615,16 @@ for currentPart in range(nPartsChicane+1):
 	#place the emmit and print monitoring child nodes into the appropriate places of the lattice
 	nodes = inj_latt_start.getNodes()
 	if usePrintNode:
-		nodes[0].addChildNode(myPrintNode_beg,AccNode.ENTRANCE)
-	nodes[0].addChildNode(myEmitNode_beg,AccNode.ENTRANCE)
+		nodes[0].addChildNode(myPrintNode_begQ,AccNode.ENTRANCE)
+	nodes[0].addChildNode(myEmitNode_begQ,AccNode.ENTRANCE)
 	i = 0
 	path_length=0
 	for node in nodes:
 		pass
+		if node.getName().strip() == "DB12":
+			if usePrintNode:
+				node.addChildNode(myPrintNode_beg,AccNode.ENTRANCE)
+			node.addChildNode(myEmitNode_beg,AccNode.ENTRANCE)	
 		if node.getName().strip() == "DB23":
 			if usePrintNode:
 				node.addChildNode(myPrintNode_beg_b23,AccNode.ENTRANCE)
@@ -607,33 +652,6 @@ for currentPart in range(nPartsChicane+1):
 			
 			node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)	
-	nodes = inj_latt_end.getNodes()
-	i = 0
-	for node in nodes:
-		pass
-		if node.getName().strip() == "DB23":
-			if usePrintNode:
-				node.addChildNode(myPrintNode_beg_b23,AccNode.ENTRANCE)
-				node.addChildNode(myPrintNode_end_b23,AccNode.EXIT)		
-			
-			node.addChildNode(myEmitNode_beg_b23,AccNode.ENTRANCE)
-			node.addChildNode(myEmitNode_end_b23,AccNode.EXIT)
-			pass
-		if node.getName().strip() == "DH_A11":
-			if usePrintNode:
-				node.addChildNode(myPrintNode_beg_DH11,AccNode.ENTRANCE)
-				node.addChildNode(myPrintNode_end_DH11,AccNode.EXIT)		
-			
-			node.addChildNode(myEmitNode_beg_DH11,AccNode.ENTRANCE)
-			node.addChildNode(myEmitNode_end_DH11,AccNode.EXIT)
-				
-		if node.getName().strip() == "DH_A12":
-			if usePrintNode:
-				node.addChildNode(myPrintNode_beg_DH12,AccNode.ENTRANCE)
-				node.addChildNode(myPrintNode_end_DH12,AccNode.EXIT)		
-			
-			node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
-			node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)
 
 		if node.getName().strip() == "DH_A13":
 			if usePrintNode:
@@ -653,10 +671,7 @@ for currentPart in range(nPartsChicane+1):
 	
 	#track through drift after 3rd chicane and foil at end
 	inj_latt_start.trackBunch(bunch_in, paramsDict)
-	#change charge as its passed foil
-	bunch_in.charge(1)
-	#track through 4th chicane
-	inj_latt_end.trackBunch(bunch_in, paramsDict)
+
 	
 	#===========Dump bunch infomration=======================================
 	#bunch_pyorbit_to_orbit(inj_latt.getLength(), bunch_in, "mainbunch.dat")

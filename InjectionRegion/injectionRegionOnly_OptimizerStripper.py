@@ -217,7 +217,7 @@ deltaxp_m_rigidity=theStrippingFunctions.getdeltaxp_m_rigidity()
 deltax_m_rigidity=theStrippingFunctions.getdeltax_m_rigidity()
 InverseFunction=theStrippingFunctions.getInverseFunction()
 
-nPartsChicane=100
+nPartsChicane=4
 for currentPart in range(nPartsChicane+1):
 	teapot_latt = teapot.TEAPOT_Ring()
 	teapot_latt.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers.LAT","RING")
