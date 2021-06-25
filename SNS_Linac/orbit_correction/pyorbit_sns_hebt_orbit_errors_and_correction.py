@@ -92,11 +92,8 @@ coordDisplModification.addLatticeNodes(quads)
 coordDisplModification.setGaussDistributedDisplacementParameter("dx",offset_error,cut_off_level)
 coordDisplModification.setGaussDistributedDisplacementParameter("dy",offset_error,cut_off_level)
 
-#---- setup random Z-axis roration angles
+#---- setup random roration angles
 angle_rms = 0.0001
-angleModificationZ = StraightRotationZ_NodesModification()
-angleModificationZ.addLatticeNodes(quads)
-angleModificationZ.setGaussDistributedAngle(angle_rms,cut_off_level)
 #---- setup random X-axis roration angles
 angleModificationX = StraightRotationX_NodesModification()
 angleModificationX.addLatticeNodes(quads)
@@ -105,6 +102,10 @@ angleModificationX.setGaussDistributedAngle(angle_rms,cut_off_level)
 angleModificationY = StraightRotationY_NodesModification()
 angleModificationY.addLatticeNodes(quads)
 angleModificationY.setGaussDistributedAngle(angle_rms,cut_off_level)
+#---- setup random Z-axis roration angles
+angleModificationZ = StraightRotationZ_NodesModification()
+angleModificationZ.addLatticeNodes(quads)
+angleModificationZ.setGaussDistributedAngle(angle_rms,cut_off_level)
 
 #---- setup random quads fields
 relative_error = 0.001
@@ -129,6 +130,16 @@ print "======================================"
 bunch = Bunch()
 bunch_init.copyBunchTo(bunch)
 trajCorrection.correctTrajectory(bunch)
+
+#---- print the DCH and DCV fields
+print "Maximal achivable field in DCH(V) in RTBT1 is 0.017 [T] " 
+dcvs = trajCorrection.getDCVs()
+for dc in dcvs:
+	print "DCV = ",dc.getName()," B [T] = %+6.5f "%dc.getParam("B")
+print "=============="
+dchs = trajCorrection.getDCHs()
+for dc in dchs:
+	print "DCH = ",dc.getName()," B [T] = %+6.5f "%dc.getParam("B")
 
 print "===============Corrected Trajectory============="
 bunch = Bunch()
