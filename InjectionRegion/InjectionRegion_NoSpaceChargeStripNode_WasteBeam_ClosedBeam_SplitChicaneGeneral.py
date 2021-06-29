@@ -71,7 +71,7 @@ parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFie
 parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=False, help="Create bunch reading particles from file")
 parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=False, help="use secondary foil in lattice")
 parser.add_argument("--bunchFromFileName", dest='bunchFromFileName', default="InitialBunches/print_beg_0.txt", help="What File to read bunch from")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralClosedBeamOpposite", help="Where to put output")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralClosedBeamNewY", help="Where to put output")
 
 
 parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1., help="scaleChicane10")
@@ -95,7 +95,8 @@ macrosize = intensity/turns/macrosperturn
 
 #where to pull chicane scale values from if useChicaneScales is true.
 
-outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanOpposite"
+#outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanOpposite"
+outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewY"
 if args.useChicaneScaleFile==False:
 	chicaneScale10=args.scaleChicane10
 	chicaneScale11=args.scaleChicane11
@@ -358,7 +359,8 @@ for currentPart in range(nPartsChicane+1):
 	fieldStrength=1.3
 	fieldStrengthMin=.2
 	cutLength=0.03
-	fieldDirection=math.pi/2.
+	#fieldDirection=math.pi/2.
+	fieldDirection=0
 	
 	sp = bunch_in.getSyncParticle()
 	beta= sp.beta()
@@ -445,6 +447,7 @@ for currentPart in range(nPartsChicane+1):
 					
 	#add second stripper dipole without stripping
 	if args.doDipoleKickers:
+		fieldDirection=math.pi
 		position=-100.
 		#place second stripper 5/6 of the way into chicane3/12. temporary position for consistency
 		position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*5./6.		

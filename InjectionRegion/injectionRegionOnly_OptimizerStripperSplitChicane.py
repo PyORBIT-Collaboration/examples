@@ -112,7 +112,10 @@ class MyScorer(Scorer):
 		self.fieldStrength=1.3
 		self.fieldStrengthMin=.2
 		self.cutLength=0.03
-		self.fieldDirection=math.pi/2.
+		#self.fieldDirection1=math.pi/2.
+		#self.fieldDirection2=math.pi/2.
+		self.fieldDirection1=0
+		self.fieldDirection2=math.pi	
 		self.n=1000
 		self.maxValue=self.theEffLength
 		self.step=self.maxValue/self.n
@@ -159,8 +162,8 @@ class MyScorer(Scorer):
 				x = self.step*i;
 				#y = constantField(x)
 				y = self.pieceWiseField2(x)
-				self.magneticFieldx.add(x,y*math.cos(self.fieldDirection)+xkickerField*scale)
-				self.magneticFieldy.add(x,y*math.sin(self.fieldDirection)+ykickerField*scale)	
+				self.magneticFieldx.add(x,y*math.cos(self.fieldDirection1)+xkickerField*scale)
+				self.magneticFieldy.add(x,y*math.sin(self.fieldDirection1)+ykickerField*scale)	
 				
 			nodes[self.firstDipoleNode].setFunctionMagneticFieldx(self.magneticFieldx)
 			nodes[self.firstDipoleNode].setFunctionMagneticFieldy(self.magneticFieldy)
@@ -175,8 +178,8 @@ class MyScorer(Scorer):
 				x = self.step*i;
 				#y = constantField(x)
 				y = self.pieceWiseField2(x)
-				self.magneticFieldx2.add(x,y*math.cos(self.fieldDirection)+xkickerField*scale)
-				self.magneticFieldy2.add(x,y*math.sin(self.fieldDirection)+ykickerField*scale)	
+				self.magneticFieldx2.add(x,y*math.cos(self.fieldDirection2)+xkickerField*scale)
+				self.magneticFieldy2.add(x,y*math.sin(self.fieldDirection2)+ykickerField*scale)	
 				
 			nodes[self.secondDipoleNode].setFunctionMagneticFieldx(self.magneticFieldx2)
 			nodes[self.secondDipoleNode].setFunctionMagneticFieldy(self.magneticFieldy2)
@@ -310,8 +313,8 @@ class MyScorer(Scorer):
 				x = self.step*i;
 				#y = constantField(x)
 				y = self.pieceWiseField2(x)
-				self.magneticFieldx.add(x,y*math.cos(self.fieldDirection)+xkickerField)
-				self.magneticFieldy.add(x,y*math.sin(self.fieldDirection)+ykickerField)
+				self.magneticFieldx.add(x,y*math.cos(self.fieldDirection1)+xkickerField)
+				self.magneticFieldy.add(x,y*math.sin(self.fieldDirection1)+ykickerField)
 			
 			myDipole_DH_A11=GeneralDipoleNoStripSeperateField(self.magneticFieldx,self.magneticFieldy,self.n,self.maxValue,self.gamma,self.beta,"Dipole_DH_A11")
 			#print "xkickerField=",xkickerField
@@ -367,8 +370,8 @@ class MyScorer(Scorer):
 				x = self.step*i;
 				#y = constantField(x)
 				y = self.pieceWiseField2(x)
-				self.magneticFieldx2.add(x,y*math.cos(self.fieldDirection)+xkickerField)
-				self.magneticFieldy2.add(x,y*math.sin(self.fieldDirection)+ykickerField)
+				self.magneticFieldx2.add(x,y*math.cos(self.fieldDirection2)+xkickerField)
+				self.magneticFieldy2.add(x,y*math.sin(self.fieldDirection2)+ykickerField)
 			
 			myDipole_DH_A12=GeneralDipoleNoStripSeperateField(self.magneticFieldx2,self.magneticFieldy2,self.n,self.maxValue,self.gamma,self.beta,"Dipole_DH_A12")
 			myDipole_DH_A12.setChicaneFieldx(xkickerField)
@@ -397,7 +400,7 @@ print "Start."
 parser = argparse.ArgumentParser(description="%prog [options]", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=True, help="print node list")
 parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFieldToStripper', default=False, help="Include the chicane fields in the stripper if stripper is inside chicane")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanOpposite", help="Where to put output")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewY", help="Where to put output")
 args = parser.parse_args()
 doDipoleKickers=args.doDipoleKickers
 outputDirectory=args.outputDirectory
@@ -413,7 +416,7 @@ chicaneNodes=[29,31,34,36]
 #this sets how to divide up chicane2/11 in terms of where 1st stripper is placed.
 nPartsChicane=6
 
-for currentPart in range(nPartsChicane+1):
+for currentPart in range(-1,nPartsChicane+1):
 	teapot_latt = teapot.TEAPOT_Ring()
 	teapot_latt.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers.LAT","RING")
 	#print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
@@ -497,7 +500,7 @@ for currentPart in range(nPartsChicane+1):
 	trialPoint = TrialPoint()
 	#trialPoint.addVariableProxy(VariableProxy(name = "x0", value = 1., step = 0.1))
 	trialPoint.addVariableProxy(VariableProxy(name = "x0", value = 1., step = 0.1))
-	trialPoint.addVariableProxy(VariableProxy(name = "x1", value = 1.15, step = 0.1))
+	trialPoint.addVariableProxy(VariableProxy(name = "x1", value = 1., step = 0.1))
 	trialPoint.addVariableProxy(VariableProxy(name = "x2", value = 1., step = 0.1))
 	trialPoint.addVariableProxy(VariableProxy(name = "x3", value = 1., step = 0.1))
 	x0 = trialPoint.getVariableProxyArr()[0]
@@ -505,7 +508,7 @@ for currentPart in range(nPartsChicane+1):
 	x2 = trialPoint.getVariableProxyArr()[2]
 	x3 = trialPoint.getVariableProxyArr()[3]
 	
-	x1.setUseInSolver(False)
+	#x1.setUseInSolver(False)
 	solver.solve(scorer,trialPoint)
 	
 	print "===== best score ========== fitting time = ", solver.getScoreboard().getRunTime()

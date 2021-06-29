@@ -22,8 +22,10 @@ print "relat.  beta=",beta
 
 theEffLength=0.03*2
 #theEffLength=0.01
-fieldStrength=1.3
-fieldStrengthMin=.2
+#fieldStrength=1.3
+#fieldStrengthMin=.2
+fieldStrength=.07
+fieldStrengthMin=.07
 cutLength=0.03
 fieldDirection=math.pi/2.
 
@@ -75,11 +77,7 @@ deltay_m_rigidity=theStrippingFunctions.getdeltay_m_rigidity()
 
 InverseFunction=theStrippingFunctions.getInverseFunction()
   
-print "notNormalizedFunction->getY(maxValue)"
-print accumlatedSum.getY(maxValue)
-print CDF.getY(maxValue)
-print deltaxp_rigidity.getY(maxValue)
-print deltax_rigidity.getY(maxValue)
+
 
 theFunctions=[accumlatedSum,CDF,InverseFunction,magneticFieldx,magneticFieldy,deltaxp_rigidity,deltax_rigidity,deltayp_rigidity,deltay_rigidity]
 titles=["accumlatedSum","CDF","InverseFunction","magneticFieldx","magneticFieldy","deltaxp_rigidity","deltax_rigidity","deltayp_rigidity","deltay_rigidity"]
@@ -99,3 +97,10 @@ for function in theFunctions:
 	counter=counter+1
 
 
+print "notNormalizedFunction->getY(maxValue)"
+#print accumlatedSum.getY(maxValue)
+print CDF.getY(maxValue)
+print deltaxp_rigidity.getY(maxValue)
+print deltax_rigidity.getY(maxValue)
+print magneticFieldy.getY(maxValue)
+print magneticFieldx.getY(maxValue)

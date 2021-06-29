@@ -148,7 +148,7 @@ class Calc_Emit(NodeTEAPOT):
 	    fileOut.write("pencilbeam \n")
 	    fileOut.write(" (x rms, y rms)= (%f,%f) \n" %(0,0))
 	    fileOut.write(" (xp rms, yp rms)= (%f,%f) \n" %(0,0))
-	    fileOut.write(" (x avg, y avy)= (%f,%f) \n" %(bunch.x(0),bunch.y(0)))
+	    fileOut.write(" (x avg, y avg)= (%f,%f) \n" %(bunch.x(0),bunch.y(0)))
 	    fileOut.write(" (xp avg, yp avg)= (%f,%f) \n" %(bunch.px(0),bunch.py(0)))		    
 	    fileOut.write(" (emit x, emit y)= (%f,%f) \n" %(0,0))
 	    fileOut.write(" (normal emit x, normal emit y)= (%f,%f) \n" %(0,0))

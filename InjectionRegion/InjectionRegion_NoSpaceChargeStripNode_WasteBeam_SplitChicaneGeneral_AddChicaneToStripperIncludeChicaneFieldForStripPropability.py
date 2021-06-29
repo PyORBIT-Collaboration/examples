@@ -71,7 +71,7 @@ parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFie
 parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=False, help="Create bunch reading particles from file")
 parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=True, help="use secondary foil in lattice")
 parser.add_argument("--bunchFromFileName", dest='bunchFromFileName', default="InitialBunches/print_beg_0.txt", help="What File to read bunch from")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewOppisite", help="Where to put output")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewTestY", help="Where to put output")
 
 
 parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1., help="scaleChicane10")
@@ -94,7 +94,8 @@ macrosperturn = args.nParts
 macrosize = intensity/turns/macrosperturn
 
 #where to pull chicane scale values from if useChicaneScales is true.
-outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanOpposite"
+#outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedClean"
+outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewY"
 if args.useChicaneScaleFile==False:
 	chicaneScale10=args.scaleChicane10
 	chicaneScale11=args.scaleChicane11
@@ -120,6 +121,7 @@ if not os.path.exists(outputDirectory):
 #currentPart=0 places it at begginging of chicane2/11
 #currentPart=nPartsChicane places it immediately after chicane2/11
 #0<currentPart<nPartsChicane places it currentPart/nPartsChicane fractionally into chicane2/11
+#for currentPart in range(-1,nPartsChicane+1):
 for currentPart in range(nPartsChicane+1):
 	inj_latt_start = teapot.TEAPOT_Ring()
 	print "Read MAD."
@@ -290,21 +292,28 @@ for currentPart in range(nPartsChicane+1):
 	chicane11.setParam("kx", strength_chicane11)
 	chicane11.setWaveform(chicanewave)	
 
+	#create stripping dipole magnetic field
+	theEffLength=0.03*2
+	fieldStrength=1.3
+	fieldStrengthMin=.2
+	#fieldStrength=.4
+	#fieldStrengthMin=.4
+	cutLength=0.03
+	#fieldDirection=math.pi/2.
+	fieldDirection=0
+	
 	#calculate where to place 1st stripper dipole
 	position=-100.
-	if currentPart==0:
+	if currentPart==-1:
+		position =inj_latt_start.getNodePositionsDict()[nodes[0]][1]-theEffLength
+	elif currentPart==0:
 		position =inj_latt_start.getNodePositionsDict()[chicane11][0]
 	elif currentPart is nPartsChicane:
 		position =inj_latt_start.getNodePositionsDict()[chicane11][1]
 	else :
 		position =inj_latt_start.getNodePositionsDict()[chicane11][0]+chicane11.getLength()*currentPart/nPartsChicane
 		
-	#create stripping dipole magnetic field
-	theEffLength=0.03*2
-	fieldStrength=1.3
-	fieldStrengthMin=.2
-	cutLength=0.03
-	fieldDirection=math.pi/2.
+
 	
 	sp = bunch_in.getSyncParticle()
 	beta= sp.beta()
@@ -399,6 +408,7 @@ for currentPart in range(nPartsChicane+1):
 	chicane12.setWaveform(chicanewave)			
 	#add second stripper dipole without stripping
 	if args.doDipoleKickers:
+		fieldDirection=math.pi
 		position=-100.
 		#place second stripper 5/6 of the way into chicane3/12. temporary position for consistency
 		position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*5./6.		
