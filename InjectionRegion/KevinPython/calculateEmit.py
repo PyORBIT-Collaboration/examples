@@ -21,7 +21,8 @@ class Calc_Emit(NodeTEAPOT):
         bunch = paramsDict["bunch"]
         gamma = bunch.getSyncParticle().gamma()
         beta = bunch.getSyncParticle().beta()
-        
+        c=299792458
+        rigidity= bunch.getSyncParticle().momentum()/(c/math.pow(10.,9))
         tot_x=0
         tot_px=0
         tot_y=0
@@ -33,7 +34,9 @@ class Calc_Emit(NodeTEAPOT):
         
         tot_y2=0
         tot_py2=0
-        tot_y_py=0       
+        tot_y_py=0   
+        
+        tot_pz=0
         if bunch.getSize() >1:
 		for i in range(bunch.getSize()):   
 			tot_x=tot_x+bunch.x(i)*1000.
@@ -45,7 +48,8 @@ class Calc_Emit(NodeTEAPOT):
 			tot_py=tot_py+bunch.py(i)*1000.
 			tot_py2=tot_py2+bunch.py(i)*1000.*bunch.py(i)*1000.
 			tot_x_px=tot_x_px+bunch.x(i)*1000.*bunch.px(i)*1000.
-			tot_y_py=tot_y_py+bunch.y(i)*1000.*bunch.py(i)*1000.       	
+			tot_y_py=tot_y_py+bunch.y(i)*1000.*bunch.py(i)*1000.
+			tot_pz=tot_pz+bunch.pz(i)
 		avg_x=tot_x/bunch.getSize()
 		avg_px=tot_px/bunch.getSize()
 		avg_y=tot_y/bunch.getSize()
@@ -65,7 +69,9 @@ class Calc_Emit(NodeTEAPOT):
 		
 		var_y=avg_y2-math.pow(avg_y,2)
 		var_py=avg_py2-math.pow(avg_py,2)
-		var_y_py=avg_y_py-avg_y*avg_py        
+		var_y_py=avg_y_py-avg_y*avg_py     
+		
+		avg_pz=tot_pz/bunch.getSize()
 		if debug==True:
 			print "(tot_x2) = %f"%(tot_x2)
 			print "(tot_px2) = %f"%(tot_px2)
@@ -104,6 +110,7 @@ class Calc_Emit(NodeTEAPOT):
 		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
 		xp_rms= math.sqrt(twiss_analysis.getTwiss(0)[2]*twiss_analysis.getTwiss(0)[3])*1000.
 		yp_rms= math.sqrt(twiss_analysis.getTwiss(1)[2]*twiss_analysis.getTwiss(1)[3])*1000.
+		zp_rms= math.sqrt(twiss_analysis.getTwiss(2)[2]*twiss_analysis.getTwiss(2)[3])*1000.
 		nParts = bunch.getSizeGlobal()
 		(alphaX,betaX,emittX) = (twiss_analysis.getTwiss(0)[0],twiss_analysis.getTwiss(0)[1],twiss_analysis.getTwiss(0)[3]*1.0e+6)
 		(alphaY,betaY,emittY) = (twiss_analysis.getTwiss(1)[0],twiss_analysis.getTwiss(1)[1],twiss_analysis.getTwiss(1)[3]*1.0e+6)
@@ -127,9 +134,12 @@ class Calc_Emit(NodeTEAPOT):
 		    s += "   %6.4f  %6.4f  %6.4f  %6.4f   \n"%(alphaY,betaY,emittY,norm_emittY)
 		    s += "   %5.3f  %5.3f \n"%(x_rms,y_rms)
 		    s += "   %5.3f  %5.3f \n"%(xp_rms,yp_rms)
+		    #s += "   %5.3f  \n"%(zp_rms)
 		    s += "  %10.6f   %8d "%(eKin,nParts)
 		    fileOut.write(s +"\n")
-		    fileOut.flush()            
+		    fileOut.flush()     
+		    fileOut.write(" (rigidity) = (%f) \n"%(rigidity))
+		    fileOut.write(" (pz avg) = (%0.9f) \n"%(avg_pz))
 		    fileOut.write(" (x rms, y rms)= (%f,%f) \n" %(math.sqrt(var_x),math.sqrt(var_y)))
 		    fileOut.write(" (xp rms, yp rms)= (%f,%f) \n" %(math.sqrt(var_px),math.sqrt(var_py)))
 		    fileOut.write(" (x avg, y avy)= (%f,%f) \n" %(avg_x,avg_y))
@@ -146,6 +156,7 @@ class Calc_Emit(NodeTEAPOT):
 	    fileOut.write(s +"\n")
 	    fileOut.flush()       
 	    fileOut.write("pencilbeam \n")
+	    fileOut.write(" (rigidity) = (%f) \n"%(rigidity))
 	    fileOut.write(" (x rms, y rms)= (%f,%f) \n" %(0,0))
 	    fileOut.write(" (xp rms, yp rms)= (%f,%f) \n" %(0,0))
 	    fileOut.write(" (x avg, y avg)= (%f,%f) \n" %(bunch.x(0),bunch.y(0)))
