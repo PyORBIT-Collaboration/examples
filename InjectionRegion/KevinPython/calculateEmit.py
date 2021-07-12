@@ -36,7 +36,14 @@ class Calc_Emit(NodeTEAPOT):
         tot_py2=0
         tot_y_py=0   
         
-        tot_pz=0
+        
+        tot_dE=0
+        tot_dE2=0
+        tot_x_dE=0
+        tot_px_dE=0
+        tot_y_dE=0
+        tot_py_dE=0
+        #tot_pz=0
         if bunch.getSize() >1:
 		for i in range(bunch.getSize()):   
 			tot_x=tot_x+bunch.x(i)*1000.
@@ -49,7 +56,12 @@ class Calc_Emit(NodeTEAPOT):
 			tot_py2=tot_py2+bunch.py(i)*1000.*bunch.py(i)*1000.
 			tot_x_px=tot_x_px+bunch.x(i)*1000.*bunch.px(i)*1000.
 			tot_y_py=tot_y_py+bunch.y(i)*1000.*bunch.py(i)*1000.
-			tot_pz=tot_pz+bunch.pz(i)
+			tot_dE=tot_dE+bunch.pz(i)
+			tot_dE2=tot_dE2+bunch.pz(i)*bunch.pz(i)
+			tot_x_dE=tot_x_dE+bunch.x(i)*1000.*bunch.pz(i)
+			tot_px_dE=tot_px_dE+bunch.px(i)*1000.*bunch.pz(i)
+			tot_y_dE=tot_y_dE+bunch.y(i)*1000.*bunch.pz(i)
+			tot_py_dE=tot_py_dE+bunch.py(i)*1000.*bunch.pz(i)			
 		avg_x=tot_x/bunch.getSize()
 		avg_px=tot_px/bunch.getSize()
 		avg_y=tot_y/bunch.getSize()
@@ -63,6 +75,19 @@ class Calc_Emit(NodeTEAPOT):
 		avg_py2=tot_py2/bunch.getSize()
 		avg_y_py=tot_y_py/bunch.getSize()  
 		
+		avg_dE=tot_dE/bunch.getSize()
+		avg_dE2=tot_dE2/bunch.getSize()
+		avg_x_dE=tot_x_dE/bunch.getSize()
+		avg_px_dE=tot_px_dE/bunch.getSize()
+		avg_y_dE=tot_y_dE/bunch.getSize()
+		avg_py_dE=tot_py_dE/bunch.getSize()
+		
+		var_dE=avg_dE2-math.pow(avg_dE,2)
+		var_x_dE=avg_x_dE-avg_x*avg_dE
+		var_px_dE=avg_px_dE-avg_px*avg_dE
+		var_y_dE=avg_y_dE-avg_y*avg_dE
+		var_py_dE=avg_py_dE-avg_py*avg_dE
+		
 		var_x=avg_x2-math.pow(avg_x,2)
 		var_px=avg_px2-math.pow(avg_px,2)
 		var_x_px=avg_x_px-avg_x*avg_px
@@ -71,7 +96,6 @@ class Calc_Emit(NodeTEAPOT):
 		var_py=avg_py2-math.pow(avg_py,2)
 		var_y_py=avg_y_py-avg_y*avg_py     
 		
-		avg_pz=tot_pz/bunch.getSize()
 		if debug==True:
 			print "(tot_x2) = %f"%(tot_x2)
 			print "(tot_px2) = %f"%(tot_px2)
@@ -97,6 +121,11 @@ class Calc_Emit(NodeTEAPOT):
 		emit_x=math.sqrt(var_x*var_px-var_x_px*var_x_px)
 		emit_y=math.sqrt(var_y*var_py-var_y_py*var_y_py)
 		
+		emit_pure_x=math.sqrt(var_x*var_px-var_x_px*var_x_px)
+		emit_pure_y=math.sqrt(var_y*var_py-var_y_py*var_y_py)
+		if avg_dE2>0:
+			emit_pure_x=math.sqrt((var_x-var_x_dE*var_x_dE/var_dE)*(var_px-var_px_dE*var_px_dE/var_dE)-(var_x_px-var_x_dE*var_px_dE/var_dE)*(var_x_px-var_x_dE*var_px_dE/var_dE))
+			emit_pure_y=math.sqrt((var_y-var_y_dE*var_y_dE/var_dE)*(var_py-var_py_dE*var_py_dE/var_dE)-(var_y_py-var_y_dE*var_py_dE/var_dE)*(var_y_py-var_y_dE*var_py_dE/var_dE))
 		twiss_analysis = BunchTwissAnalysis()        
 		node = paramsDict["node"]
 		bunch = paramsDict["bunch"]
@@ -130,22 +159,27 @@ class Calc_Emit(NodeTEAPOT):
 		    fileOut=open(self.fileName,'a')
 		    #print self.getName()
 		    s = " %35s  %4.5f \n"%(node.getName(),pos)
-		    s += "   %6.4f  %6.4f  %6.4f  %6.4f   \n"%(alphaX,betaX,emittX,norm_emittX)
-		    s += "   %6.4f  %6.4f  %6.4f  %6.4f   \n"%(alphaY,betaY,emittY,norm_emittY)
-		    s += "   %5.3f  %5.3f \n"%(x_rms,y_rms)
-		    s += "   %5.3f  %5.3f \n"%(xp_rms,yp_rms)
+		    s += "   %6.4f  %6.4f  %f  %f   \n"%(alphaX,betaX,emittX,norm_emittX)
+		    s += "   %6.4f  %6.4f  %f  %f   \n"%(alphaY,betaY,emittY,norm_emittY)
+		    s += " (twiss x rms,twiss y rms)=(%f,  %f) \n"%(x_rms,y_rms)
+		    s += "  (twiss xp rms,twiss  yp rms)= %f,  %f) \n"%(xp_rms,yp_rms)
+		    s += " (twiss x avg,twiss  y avg)=(%f,  %f) \n"%(twiss_analysis.getAverage(0),twiss_analysis.getAverage(2))
+		    s += "  (twiss xp avg,twiss yp avg)= %f,  %f) \n"%(twiss_analysis.getAverage(1),twiss_analysis.getAverage(3))	
+		    s += " (twiss emit eff x,twiss emit eff x)=(%f,  %f) \n"%(twiss_analysis.getEffectiveEmittance(0)*1.0e+6,twiss_analysis.getEffectiveEmittance(1)*1.0e+6)			    
 		    #s += "   %5.3f  \n"%(zp_rms)
 		    s += "  %10.6f   %8d "%(eKin,nParts)
 		    fileOut.write(s +"\n")
 		    fileOut.flush()     
 		    fileOut.write(" (rigidity) = (%f) \n"%(rigidity))
-		    fileOut.write(" (pz avg) = (%0.9f) \n"%(avg_pz))
+		    fileOut.write(" (avg_dE) = (%4.3f) \n"%(avg_dE))
 		    fileOut.write(" (x rms, y rms)= (%f,%f) \n" %(math.sqrt(var_x),math.sqrt(var_y)))
 		    fileOut.write(" (xp rms, yp rms)= (%f,%f) \n" %(math.sqrt(var_px),math.sqrt(var_py)))
 		    fileOut.write(" (x avg, y avy)= (%f,%f) \n" %(avg_x,avg_y))
 		    fileOut.write(" (xp avg, yp avg)= (%f,%f) \n" %(avg_px,avg_py))		    
 		    fileOut.write(" (emit x, emit y)= (%f,%f) \n" %(emit_x,emit_y))
 		    fileOut.write(" (normal emit x, normal emit y)= (%f,%f) \n" %(emit_x*beta*gamma,emit_y*beta*gamma))
+		    fileOut.write(" (emit pure x, emit pure y)= (%f,%f) \n" %(emit_pure_x,emit_pure_y))
+		    fileOut.write(" (normal emit pure x, normal emit pure y)= (%f,%f) \n" %(emit_pure_x*beta*gamma,emit_pure_y*beta*gamma))		    
 		    fileOut.close()
 	elif bunch.getSize() ==1:
 	    fileOut=open(self.fileName,'a')
