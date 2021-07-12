@@ -62,28 +62,29 @@ parser.add_argument("--turns",type=int, dest='turns', default=1, help="number of
 #parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=35, help="What node to monitor")#35 should be currently used
 #parser.add_argument("--nodeMonitor",type=int, dest='nodeMonitor', default=37, help="What node to monitor")
 parser.add_argument("--printNodes",type=bool, dest='printNodes', default=True, help="print node list")
-parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=True, help="use stripper dipoles")
+parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=False, help="use stripper dipoles")
 
-parser.add_argument("--useChicaneScaleFile",type=bool, dest='useChicaneScaleFile', default=True, help="whether or not to use chicane scales from file")
+parser.add_argument("--useChicaneScaleFile",type=bool, dest='useChicaneScaleFile', default=False, help="whether or not to use chicane scales from file")
 parser.add_argument("--usePrintNode",type=bool, dest='usePrintNode', default=False, help="whether or not to print bunch info to file")
 parser.add_argument("--pencilBeam",type=bool, dest='pencilBeam', default=False, help="Use a single macroparticle beam")
 parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFieldToStripper', default=True, help="Include the chicane fields in the stripper if stripper is inside chicane")
-parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=True, help="Create bunch reading particles from file")
-parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=True, help="use secondary foil in lattice")
+parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=False, help="Create bunch reading particles from file")
+parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=False, help="use secondary foil in lattice")
 parser.add_argument("--bunchFromFileName", dest='bunchFromFileName', default="InitialBunches/print_beg_0.txt", help="What File to read bunch from")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewTestY_Inject", help="Where to put output")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewTestY", help="Where to put output")
 
 parser.add_argument("--stripperLength1",type=float, dest='stripperLength1', default=0.06, help="length of first stripper dipole")
 parser.add_argument("--stripperStrengthMax1",type=float, dest='stripperStrengthMax1', default=1.3, help="Maximum field Strength of first stripper dipole")
 parser.add_argument("--stripperStrengthMin1",type=float, dest='stripperStrengthMin1', default=0.2, help="Minimum field Strength of first stripper dipole")
 parser.add_argument("--cutLength1",type=float, dest='cutLength1', default=0.03, help="length the field ramps up linearly from min to max strength")
-parser.add_argument("--fieldDirection1",type=float, dest='fieldDirection1', default=math.pi/2., help="The direction of the field of the first stripper dipole (0=positive x, Pi/2=positive y)")
+parser.add_argument("--fieldDirection1",type=float, dest='fieldDirection1', default=0, help="The direction of the field of the first stripper dipole (0=positive x, Pi/2=positive y)")
+parser.add_argument("--cancelFieldTest",type=bool, dest='cancelFieldTest', default=False, help="whether to create dipole field to cancel chicane field")
 
 parser.add_argument("--stripperLength2",type=float, dest='stripperLength2', default=0.06, help="length of second stripper dipole")
 parser.add_argument("--stripperStrengthMax2",type=float, dest='stripperStrengthMax2', default=1.3, help="Maximum field Strength of second stripper dipole")
 parser.add_argument("--stripperStrengthMin2",type=float, dest='stripperStrengthMin2', default=0.2, help="Minimum field Strength of second stripper dipole")
 parser.add_argument("--cutLength2",type=float, dest='cutLength2', default=0.03, help="length the field ramps up linearly from min to max strength")
-parser.add_argument("--fieldDirection2",type=float, dest='fieldDirection2', default=math.pi/2., help="The direction of the field of the second stripper dipole (0=positive x, Pi/2=positive y)")
+parser.add_argument("--fieldDirection2",type=float, dest='fieldDirection2', default=math.pi, help="The direction of the field of the second stripper dipole (0=positive x, Pi/2=positive y)")
 
 parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1., help="scaleChicane10")
 parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-1., help="scaleChicane11")
@@ -106,7 +107,7 @@ macrosize = intensity/turns/macrosperturn
 
 #where to pull chicane scale values from if useChicaneScales is true.
 #outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedClean"
-outputDirectoryChicaneScales="InjectBeam"
+outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewY"
 if args.useChicaneScaleFile==False:
 	chicaneScale10=args.scaleChicane10
 	chicaneScale11=args.scaleChicane11
@@ -123,7 +124,8 @@ chicaneStrengthArray=[-0.041456,0.052434,0.0298523,-0.0398609]
 
 usePrintNode=args.usePrintNode
 #this sets how to divide up chicane2/11 in terms of where 1st stripper is placed.
-nPartsChicane=6
+#nPartsChicane=6
+nPartsChicane=0
 outputDirectory=args.outputDirectory
 if not os.path.exists(outputDirectory):
 	os.mkdir(outputDirectory)
@@ -137,14 +139,9 @@ for currentPart in range(nPartsChicane+1):
 	inj_latt_start = teapot.TEAPOT_Ring()
 	print "Read MAD."
 	#this lattice has the injection region from the start of the drift prior to chicane2 up to and including the drift after chicane3
-	inj_latt_start.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane2.LAT","RING")
+	inj_latt_start.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane2Actually.LAT","RING")
 	print "Lattice=",inj_latt_start.getName()," length [m] =",inj_latt_start.getLength()," nodes=",len(inj_latt_start.getNodes())
-	
-	inj_latt_end = teapot.TEAPOT_Ring()
-	print "Read MAD."
-	#this lattice contains chicane 4 and the drift leading to the waste septum
-	inj_latt_end.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane3.LAT","RING")
-	print "Lattice=",inj_latt_end.getName()," length [m] =",inj_latt_end.getLength()," nodes=",len(inj_latt_end.getNodes())
+
 	
 	#------------------------------
 	#Initial Distribution Functions
@@ -246,38 +243,25 @@ for currentPart in range(nPartsChicane+1):
 	#erase files for writing emmittance info immediately prior to stripping dipoles and immediately after stripping
 	fileOut=open("%s/emmit_DH11_3pre_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()
-	fileOut=open("%s/emmit_DH12_3pre_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
+
 	if usePrintNode:
 		fileOut=open("%s/print_DH11_3pre_%d.txt"%(outputDirectory,currentPart),'w')
 		fileOut.close()		
-		fileOut=open("%s/print_DH12_3pre_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()
+
 	
 	myEmitNode_DH11_3pre=Calc_Emit("MyEmitNode_DH11_3pre_%d"%(currentPart),True,"%s/emmit_DH11_3pre_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_DH12_3pre=Calc_Emit("MyEmitNode_DH12_3pre_%d"%(currentPart),True,"%s/emmit_DH12_3pre_%d.txt"%(outputDirectory,currentPart))
 	
 	if usePrintNode:
-		myPrintNode_DH12_3pre=Print_Node("MyPrintNode_DH12_3pre_%d"%(currentPart),True,"%s/print_DH12_3pre_%d.txt"%(outputDirectory,currentPart))
 		myPrintNode_DH11_3pre=Print_Node("MyPrintNode_DH11_3pre_%d"%(currentPart),True,"%s/print_DH11_3pre_%d.txt"%(outputDirectory,currentPart))
 		
 	fileOut=open("%s/emmit_postS_DH11_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()	
-	fileOut=open("%s/emmit_postS_DH12_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()	
+
 	myEmitNode_postS_DH11=Calc_Emit("myEmitNode_postS_DH11_%d"%(currentPart),True,"%s/emmit_postS_DH11_%d.txt"%(outputDirectory,currentPart))	
-	myEmitNode_postS_DH12=Calc_Emit("myEmitNode_postS_DH12_%d"%(currentPart),True,"%s/emmit_postS_DH12_%d.txt"%(outputDirectory,currentPart))
 	
 	
 	print "inj_latt"
-	#create secondary foil
-	thick = 400.0
-	foil = TeapotFoilNode(-100, 100, -100, 100, thick, "Foil 2")
-	scatterchoice = 0
-	foil.setScatterChoice(scatterchoice)
-	#place foil at end of first lattice (ie after drift DB34) if secondary foil being used
-	if args.useSecondaryFoil:
-		addTeapotFoilNode(inj_latt_start,inj_latt_start.getLength(),foil)	
+
 
 	nodes = inj_latt_start.getNodes()
 	
@@ -302,9 +286,23 @@ for currentPart in range(nPartsChicane+1):
 	chicane11 = nodes[1]
 	chicane11.setParam("kx", strength_chicane11)
 	chicane11.setWaveform(chicanewave)	
-
+	
+	sp = bunch_in.getSyncParticle()
+	beta= sp.beta()
+	gamma=sp.gamma()
+	
+	print "beta= %f"%beta
+	print "gamma= %f"%gamma
+	print "momentum= %f"%sp.momentum()
+	print "beta*momentum= %f"%(sp.momentum()*beta)
+	c=299792458
+	
+	rigidity= sp.momentum()/(c/math.pow(10.,9))
+	print "rigidity= %f"%rigidity	
+	
 	#create stripping dipole magnetic field
-	theEffLength=args.stripperLength1
+	#theEffLength=args.stripperLength1
+	theEffLength=chicane11.getLength()
 	fieldStrength=args.stripperStrengthMax1
 	fieldStrengthMin=args.stripperStrengthMin1
 	#fieldStrength=.4
@@ -312,7 +310,10 @@ for currentPart in range(nPartsChicane+1):
 	cutLength=args.cutLength1
 	#fieldDirection=math.pi/2.
 	fieldDirection=args.fieldDirection1
-	
+	if args.cancelFieldTest:
+		fieldDirection=-math.pi/2.
+		fieldStrength=-strength_chicane11*rigidity/theEffLength
+		fieldStrengthMin=-strength_chicane11*rigidity/theEffLength
 	#calculate where to place 1st stripper dipole
 	position=-100.
 	if currentPart==-1:
@@ -326,17 +327,7 @@ for currentPart in range(nPartsChicane+1):
 		
 
 	
-	sp = bunch_in.getSyncParticle()
-	beta= sp.beta()
-	gamma=sp.gamma()
-	
-	print "beta= %f"%beta
-	print "gamma= %f"%gamma
-	c=299792458
-	
-	rigidity= sp.momentum()/(c/math.pow(10.,9))
-	print "rigidity= %f"%rigidity	
-	
+
 	if args.doDipoleKickers:
 		#check if we are in kicker or drift
 		position_start = position
@@ -402,101 +393,19 @@ for currentPart in range(nPartsChicane+1):
 			y = pieceWiseField2(x)
 			magneticFieldx.add(x,y*math.cos(fieldDirection)+xkickerField)
 			magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
+			
+			print "y*math.sin(fieldDirection)+ykickerField=",y*math.sin(fieldDirection)+ykickerField
+			print "y=", pieceWiseField2(x),", fieldDirection=",fieldDirection," ,math.sin(fieldDirection)= ",math.sin(fieldDirection)," ,ykickerField=",ykickerField
 		
-		myDipole_DH_A11=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A11")	
+		myDipole_DH_A11=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A11")	
 		myDipole_DH_A11.addChildNode(myEmitNode_DH11_3pre,AccNode.ENTRANCE)
 		myDipole_DH_A11.addChildNode(myEmitNode_postS_DH11,AccNode.EXIT)
 		
 		addDipoleStripperNode(inj_latt_start,position,myDipole_DH_A11)
 		
 	nodes = inj_latt_start.getNodes()		
-	#find chicane12 location
-	chicane12=None
-	for node in nodes:
-		if node.getName().strip() == "DH_A12":
-			chicane12=node	
-	chicane12.setParam("kx", strength_chicane12)
-	chicane12.setWaveform(chicanewave)			
-	#add second stripper dipole without stripping
-	if args.doDipoleKickers:
-		theEffLength=args.stripperLength2
-		fieldStrength=args.stripperStrengthMax2
-		fieldStrengthMin=args.stripperStrengthMin2
-		#fieldStrength=.4
-		#fieldStrengthMin=.4
-		cutLength=args.cutLength2
-		#fieldDirection=math.pi/2.
-		fieldDirection=args.fieldDirection2
-		position=-100.
-		#place second stripper 5/6 of the way into chicane3/12. temporary position for consistency
-		position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*5./6.		
-		#check if we are in kicker or drift
-		position_start = position
-		position_stop = position + theEffLength
-		(node_start_ind,node_stop_ind,z,ind) = (-1,-1, 0., 0)
-		for nodeCurrent in inj_latt_start.getNodes():
-			if(position_start >= z and position_start <= z + nodeCurrent.getLength()):
-				node_start_ind = ind
-			if(position_stop >= z and position_stop <= z + nodeCurrent.getLength()):
-				node_stop_ind = ind
-			ind += 1
-			z += nodeCurrent.getLength()	
-			
-		if node_start_ind!=node_stop_ind:
-			print "something is going to be broken2"
-			sys.exit(0)
-		nodeCurrent=inj_latt_start.getNodes()[node_start_ind]
-		xkickerField=0.
-		ykickerField=0.
-		#nothing to change
-		if(isinstance(nodeCurrent,DriftTEAPOT)):
-			print "stripper dipole is in drift"
-		elif (isinstance(nodeCurrent,KickTEAPOT)):
-			print "stripper dipole is in kick node"
-			if args.addChicaneFieldToStripper:
-				#compute field to create kick
-				length=nodeCurrent.getLength()
-				kx=nodeCurrent.getParam("kx")		
-				ykickerField=-kx*rigidity/length
-				ky=nodeCurrent.getParam("ky")
-				xkickerField=ky*rigidity/length
-				
-					
-		def constantField(x):
-			return fieldStrength
-		def pieceWiseField(x):
-			if x<=0.0:
-				return 0
-			elif x<cutLength :
-				return fieldStrength/cutLength*x
-			elif x>=cutLength:
-				return fieldStrength
-			pass
-		def pieceWiseField2(x):
-			if x<cutLength :
-				return (fieldStrength-fieldStrengthMin)/cutLength*x+fieldStrengthMin
-			elif x>=cutLength:
-				return fieldStrength
-			pass
-		magneticFieldx= Function()
-		magneticFieldy= Function()
-		n=1000
-		maxValue=theEffLength
-		step=maxValue/n
 		
-		for i in range(n):
-			x = step*i;
-			#y = constantField(x)
-			y = pieceWiseField2(x)
-			magneticFieldx.add(x,y*math.cos(fieldDirection)+xkickerField)
-			magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
-				
-		myDipole_DH_A12=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A12")
-		myDipole_DH_A12.addChildNode(myEmitNode_DH12_3pre,AccNode.ENTRANCE)
-		myDipole_DH_A12.addChildNode(myEmitNode_postS_DH12,AccNode.EXIT)
-		
-		addDipoleStripperNode(inj_latt_start,position,myDipole_DH_A12)	
-		
+
 	#print lattice info
 	i = 0
 	path_length=0
@@ -505,17 +414,6 @@ for currentPart in range(nPartsChicane+1):
 			path_length=path_length+node.getLength()
 			print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%inj_latt_start.getNodePositionsDict()[node], " path_length= ",path_length
 			i=i+1	
-	i = 0
-	print "ring_latt"
-	nodes = inj_latt_end.getNodes()
-	chicane13 = nodes[0]
-	chicane13.setParam("kx", strength_chicane13)
-	chicane13.setWaveform(chicanewave)	
-	for node in nodes:
-		if args.printNodes==True:
-			path_length=path_length+node.getLength()
-			print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%inj_latt_end.getNodePositionsDict()[node], " path_length= ",path_length
-			i=i+1
 
 	#------------------------------
 	#  Lattice is ready
@@ -531,37 +429,11 @@ for currentPart in range(nPartsChicane+1):
 		fileOut.close()	
 		fileOut=open("%s/print_end_DH11_%d.txt"%(outputDirectory,currentPart),'w')
 		fileOut.close()
-		fileOut=open("%s/print_beg_b23_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()
-		fileOut=open("%s/print_mid_b23_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()
-		fileOut=open("%s/print_end_b23_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()
-		fileOut=open("%s/print_beg_DH12_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()
-		fileOut=open("%s/print_postS_DH12_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()	
-		fileOut=open("%s/print_end_DH12_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()
-		fileOut=open("%s/print_beg_DH13_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()
-		fileOut=open("%s/print_end_DH13_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()	
-		fileOut=open("%s/print_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart),'w')
-		fileOut.close()		
+
 		myPrintNode_beg=Print_Node("MyPrintNode_Beg_%d"%(currentPart),True,"%s/print_beg_%d.txt"%(outputDirectory,currentPart))
 		myPrintNode_beg_DH11=Print_Node("MyPrintNode_beg_DH11_%d"%(currentPart),True,"%s/print_beg_DH11_%d.txt"%(outputDirectory,currentPart))
 		myPrintNode_postS_DH11=Print_Node("MyPrintNode_postS_DH11_%d"%(currentPart),True,"%s/print_postS_DH11_%d.txt"%(outputDirectory,currentPart))
 		myPrintNode_end_DH11=Print_Node("MyPrintNode_end_DH11_%d"%(currentPart),True,"%s/print_end_DH11_%d.txt"%(outputDirectory,currentPart))
-		myPrintNode_beg_b23=Print_Node("MyPrintNode_beg_b23_%d"%(currentPart),True,"%s/print_beg_b23_%d.txt"%(outputDirectory,currentPart))
-		myPrintNode_mid_b23=Print_Node("MyPrintNode_mid_b23_%d"%(currentPart),True,"%s/print_mid_b23_%d.txt"%(outputDirectory,currentPart))
-		myPrintNode_end_b23=Print_Node("MyPrintNode_end_b23_%d"%(currentPart),True,"%s/print_end_b23_%d.txt"%(outputDirectory,currentPart))
-		myPrintNode_beg_DH12=Print_Node("MyPrintNode_beg_DH12_%d"%(currentPart),True,"%s/print_beg_DH12_%d.txt"%(outputDirectory,currentPart))
-		myPrintNode_postS_DH12=Print_Node("MyPrintNode_postS_DH12_%d"%(currentPart),True,"%s/print_postS_DH12_%d.txt"%(outputDirectory,currentPart))
-		myPrintNode_end_DH12=Print_Node("MyPrintNode_end_DH12_%d"%(currentPart),True,"%s/print_end_DH12_%d.txt"%(outputDirectory,currentPart))
-		myPrintNode_beg_DH13=Print_Node("MyPrintNode_beg_DH13_%d"%(currentPart),True,"%s/print_beg_DH13_%d.txt"%(outputDirectory,currentPart))
-		myPrintNode_end_DH13=Print_Node("MyPrintNode_end_DH13_%d"%(currentPart),True,"%s/print_end_DH13_%d.txt"%(outputDirectory,currentPart))	
-		myPrintNode_end_DB_WASTE=Print_Node("MyPrintNode_end_DB_WASTE_%d"%(currentPart),True,"%s/print_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart))	
 	
 	fileOut=open("%s/emmit_beg_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()
@@ -570,33 +442,10 @@ for currentPart in range(nPartsChicane+1):
 
 	fileOut=open("%s/emmit_end_DH11_%d.txt"%(outputDirectory,currentPart),'w')
 	fileOut.close()
-	fileOut=open("%s/emmit_beg_b23_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/emmit_mid_b23_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/emmit_end_b23_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/emmit_beg_DH12_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/emmit_end_DH12_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/emmit_beg_DH13_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()
-	fileOut=open("%s/emmit_end_DH13_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()	
-	fileOut=open("%s/emmit_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart),'w')
-	fileOut.close()	
+
 	myEmitNode_beg=Calc_Emit("MyEmitNode_Beg_%d"%(currentPart),True,"%s/emmit_beg_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_beg_DH11=Calc_Emit("myEmitNode_beg_DH11_%d"%(currentPart),True,"%s/emmit_beg_DH11_%d.txt"%(outputDirectory,currentPart))
 	myEmitNode_end_DH11=Calc_Emit("myEmitNode_end_DH11_%d"%(currentPart),True,"%s/emmit_end_DH11_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_beg_b23=Calc_Emit("myEmitNode_beg_b23_%d"%(currentPart),True,"%s/emmit_beg_b23_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_mid_b23=Calc_Emit("myEmitNode_mid_b23_%d"%(currentPart),True,"%s/emmit_mid_b23_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_end_b23=Calc_Emit("myEmitNode_end_b23_%d"%(currentPart),True,"%s/emmit_end_b23_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_beg_DH12=Calc_Emit("myEmitNode_beg_DH12_%d"%(currentPart),True,"%s/emmit_beg_DH12_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_end_DH12=Calc_Emit("myEmitNode_end_DH12_%d"%(currentPart),True,"%s/emmit_end_DH12_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_beg_DH13=Calc_Emit("myEmitNode_beg_DH13_%d"%(currentPart),True,"%s/emmit_beg_DH13_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_end_DH13=Calc_Emit("myEmitNode_end_DH13_%d"%(currentPart),True,"%s/emmit_end_DH13_%d.txt"%(outputDirectory,currentPart))
-	myEmitNode_end_DB_WASTE=Calc_Emit("myEmitNode_end_DB_WASTE_%d"%(currentPart),True,"%s/emmit_end_DB_WASTE_%d.txt"%(outputDirectory,currentPart))
 	
 	
 	#place the emmit and print monitoring child nodes into the appropriate places of the lattice
@@ -635,56 +484,15 @@ for currentPart in range(nPartsChicane+1):
 			
 			node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
 			node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)	
-	nodes = inj_latt_end.getNodes()
-	i = 0
-	for node in nodes:
-		pass
-		if node.getName().strip() == "DB23":
-			if usePrintNode:
-				node.addChildNode(myPrintNode_beg_b23,AccNode.ENTRANCE)
-				node.addChildNode(myPrintNode_end_b23,AccNode.EXIT)		
-			
-			node.addChildNode(myEmitNode_beg_b23,AccNode.ENTRANCE)
-			node.addChildNode(myEmitNode_end_b23,AccNode.EXIT)
-			pass
-		if node.getName().strip() == "DH_A11":
-			if usePrintNode:
-				node.addChildNode(myPrintNode_beg_DH11,AccNode.ENTRANCE)
-				node.addChildNode(myPrintNode_end_DH11,AccNode.EXIT)		
-			
-			node.addChildNode(myEmitNode_beg_DH11,AccNode.ENTRANCE)
-			node.addChildNode(myEmitNode_end_DH11,AccNode.EXIT)
-				
-		if node.getName().strip() == "DH_A12":
-			if usePrintNode:
-				node.addChildNode(myPrintNode_beg_DH12,AccNode.ENTRANCE)
-				node.addChildNode(myPrintNode_end_DH12,AccNode.EXIT)		
-			
-			node.addChildNode(myEmitNode_beg_DH12,AccNode.ENTRANCE)
-			node.addChildNode(myEmitNode_end_DH12,AccNode.EXIT)
-
-		if node.getName().strip() == "DH_A13":
-			if usePrintNode:
-				node.addChildNode(myPrintNode_beg_DH13,AccNode.ENTRANCE)
-				node.addChildNode(myPrintNode_end_DH13,AccNode.EXIT)		
-			
-			node.addChildNode(myEmitNode_beg_DH13,AccNode.ENTRANCE)
-			node.addChildNode(myEmitNode_end_DH13,AccNode.EXIT)		
-			
-		if node.getName().strip() == "DB_Waste":
-			if usePrintNode:
-				node.addChildNode(myPrintNode_end_DB_WASTE,AccNode.EXIT)		
-			node.addChildNode(myEmitNode_end_DB_WASTE,AccNode.EXIT)			
+	
 	#================Do some turns===========================================
 	
 
 	
 	#track through drift after 3rd chicane and foil at end
 	inj_latt_start.trackBunch(bunch_in, paramsDict)
-	#change charge as its passed foil
-	bunch_in.charge(1)
-	#track through 4th chicane
-	inj_latt_end.trackBunch(bunch_in, paramsDict)
+
+
 	
 	#===========Dump bunch infomration=======================================
 	#bunch_pyorbit_to_orbit(inj_latt.getLength(), bunch_in, "mainbunch.dat")

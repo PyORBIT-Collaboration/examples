@@ -112,10 +112,10 @@ class MyScorer(Scorer):
 		self.fieldStrength=1.3
 		self.fieldStrengthMin=.2
 		self.cutLength=0.03
-		#self.fieldDirection1=math.pi/2.
-		#self.fieldDirection2=math.pi/2.
-		self.fieldDirection1=0
-		self.fieldDirection2=math.pi	
+		self.fieldDirection1=math.pi/2.
+		self.fieldDirection2=math.pi/2.
+		#self.fieldDirection1=0
+		#self.fieldDirection2=math.pi	
 		self.n=1000
 		self.maxValue=self.theEffLength
 		self.step=self.maxValue/self.n
@@ -399,8 +399,8 @@ class MyScorer(Scorer):
 print "Start."
 parser = argparse.ArgumentParser(description="%prog [options]", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=True, help="print node list")
-parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFieldToStripper', default=False, help="Include the chicane fields in the stripper if stripper is inside chicane")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewY", help="Where to put output")
+parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFieldToStripper', default=True, help="Include the chicane fields in the stripper if stripper is inside chicane")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="InjectBeam", help="Where to put output")
 args = parser.parse_args()
 doDipoleKickers=args.doDipoleKickers
 outputDirectory=args.outputDirectory

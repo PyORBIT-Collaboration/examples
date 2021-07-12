@@ -71,8 +71,19 @@ parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFie
 parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=False, help="Create bunch reading particles from file")
 parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=False, help="use secondary foil in lattice")
 parser.add_argument("--bunchFromFileName", dest='bunchFromFileName', default="InitialBunches/print_beg_0.txt", help="What File to read bunch from")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralClosedBeamNewY", help="Where to put output")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralClosedBeamNewY_Inject", help="Where to put output")
 
+parser.add_argument("--stripperLength1",type=float, dest='stripperLength1', default=0.06, help="length of first stripper dipole")
+parser.add_argument("--stripperStrengthMax1",type=float, dest='stripperStrengthMax1', default=1.3, help="Maximum field Strength of first stripper dipole")
+parser.add_argument("--stripperStrengthMin1",type=float, dest='stripperStrengthMin1', default=0.2, help="Minimum field Strength of first stripper dipole")
+parser.add_argument("--cutLength1",type=float, dest='cutLength1', default=0.03, help="length the field ramps up linearly from min to max strength")
+parser.add_argument("--fieldDirection1",type=float, dest='fieldDirection1', default=math.pi/2., help="The direction of the field of the first stripper dipole (0=positive x, Pi/2=positive y)")
+
+parser.add_argument("--stripperLength2",type=float, dest='stripperLength2', default=0.06, help="length of second stripper dipole")
+parser.add_argument("--stripperStrengthMax2",type=float, dest='stripperStrengthMax2', default=1.3, help="Maximum field Strength of second stripper dipole")
+parser.add_argument("--stripperStrengthMin2",type=float, dest='stripperStrengthMin2', default=0.2, help="Minimum field Strength of second stripper dipole")
+parser.add_argument("--cutLength2",type=float, dest='cutLength2', default=0.03, help="length the field ramps up linearly from min to max strength")
+parser.add_argument("--fieldDirection2",type=float, dest='fieldDirection2', default=math.pi/2., help="The direction of the field of the second stripper dipole (0=positive x, Pi/2=positive y)")
 
 parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1., help="scaleChicane10")
 parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-1., help="scaleChicane11")
@@ -96,7 +107,7 @@ macrosize = intensity/turns/macrosperturn
 #where to pull chicane scale values from if useChicaneScales is true.
 
 #outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanOpposite"
-outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewY"
+outputDirectoryChicaneScales="InjectBeam"
 if args.useChicaneScaleFile==False:
 	chicaneScale10=args.scaleChicane10
 	chicaneScale11=args.scaleChicane11
@@ -355,12 +366,14 @@ for currentPart in range(nPartsChicane+1):
 		position =inj_latt_start.getNodePositionsDict()[chicane11][0]+chicane11.getLength()*currentPart/nPartsChicane
 		
 	#create stripping dipole magnetic field
-	theEffLength=0.03*2
-	fieldStrength=1.3
-	fieldStrengthMin=.2
-	cutLength=0.03
+	theEffLength=args.stripperLength1
+	fieldStrength=args.stripperStrengthMax1
+	fieldStrengthMin=args.stripperStrengthMin1
+	#fieldStrength=.4
+	#fieldStrengthMin=.4
+	cutLength=args.cutLength1
 	#fieldDirection=math.pi/2.
-	fieldDirection=0
+	fieldDirection=args.fieldDirection1
 	
 	sp = bunch_in.getSyncParticle()
 	beta= sp.beta()
@@ -447,7 +460,14 @@ for currentPart in range(nPartsChicane+1):
 					
 	#add second stripper dipole without stripping
 	if args.doDipoleKickers:
-		fieldDirection=math.pi
+		theEffLength=args.stripperLength2
+		fieldStrength=args.stripperStrengthMax2
+		fieldStrengthMin=args.stripperStrengthMin2
+		#fieldStrength=.4
+		#fieldStrengthMin=.4
+		cutLength=args.cutLength2
+		#fieldDirection=math.pi/2.
+		fieldDirection=args.fieldDirection2
 		position=-100.
 		#place second stripper 5/6 of the way into chicane3/12. temporary position for consistency
 		position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*5./6.		

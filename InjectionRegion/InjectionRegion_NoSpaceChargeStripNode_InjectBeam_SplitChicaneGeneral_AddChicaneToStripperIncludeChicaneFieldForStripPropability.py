@@ -69,9 +69,9 @@ parser.add_argument("--usePrintNode",type=bool, dest='usePrintNode', default=Fal
 parser.add_argument("--pencilBeam",type=bool, dest='pencilBeam', default=False, help="Use a single macroparticle beam")
 parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFieldToStripper', default=True, help="Include the chicane fields in the stripper if stripper is inside chicane")
 parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=True, help="Create bunch reading particles from file")
-parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=True, help="use secondary foil in lattice")
+parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=False, help="use secondary foil in lattice")
 parser.add_argument("--bunchFromFileName", dest='bunchFromFileName', default="InitialBunches/print_beg_0.txt", help="What File to read bunch from")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="WasteBeamSplitGeneralNewStripperChicaneFieldAddedCleanNewTestY_Inject", help="Where to put output")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="InjectBeam", help="Where to put output")
 
 parser.add_argument("--stripperLength1",type=float, dest='stripperLength1', default=0.06, help="length of first stripper dipole")
 parser.add_argument("--stripperStrengthMax1",type=float, dest='stripperStrengthMax1', default=1.3, help="Maximum field Strength of first stripper dipole")
@@ -103,6 +103,7 @@ turns = args.turns
 #macrosperturn = 260
 macrosperturn = args.nParts
 macrosize = intensity/turns/macrosperturn
+secondStripperLength=0.02
 
 #where to pull chicane scale values from if useChicaneScales is true.
 #outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedClean"
@@ -124,6 +125,7 @@ chicaneStrengthArray=[-0.041456,0.052434,0.0298523,-0.0398609]
 usePrintNode=args.usePrintNode
 #this sets how to divide up chicane2/11 in terms of where 1st stripper is placed.
 nPartsChicane=6
+#nPartsChicane=0
 outputDirectory=args.outputDirectory
 if not os.path.exists(outputDirectory):
 	os.mkdir(outputDirectory)
@@ -312,7 +314,7 @@ for currentPart in range(nPartsChicane+1):
 	cutLength=args.cutLength1
 	#fieldDirection=math.pi/2.
 	fieldDirection=args.fieldDirection1
-	
+
 	#calculate where to place 1st stripper dipole
 	position=-100.
 	if currentPart==-1:
@@ -332,6 +334,8 @@ for currentPart in range(nPartsChicane+1):
 	
 	print "beta= %f"%beta
 	print "gamma= %f"%gamma
+	print "momentum= %f"%sp.momentum()
+	print "beta*momentum= %f"%(sp.momentum()*beta)
 	c=299792458
 	
 	rigidity= sp.momentum()/(c/math.pow(10.,9))
@@ -429,7 +433,8 @@ for currentPart in range(nPartsChicane+1):
 		fieldDirection=args.fieldDirection2
 		position=-100.
 		#place second stripper 5/6 of the way into chicane3/12. temporary position for consistency
-		position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*5./6.		
+		position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*5./6.	
+		#position =inj_latt_start.getNodePositionsDict()[chicane12][0]
 		#check if we are in kicker or drift
 		position_start = position
 		position_stop = position + theEffLength
@@ -491,7 +496,7 @@ for currentPart in range(nPartsChicane+1):
 			magneticFieldx.add(x,y*math.cos(fieldDirection)+xkickerField)
 			magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
 				
-		myDipole_DH_A12=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A12")
+		myDipole_DH_A12=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A12",secondStripperLength)
 		myDipole_DH_A12.addChildNode(myEmitNode_DH12_3pre,AccNode.ENTRANCE)
 		myDipole_DH_A12.addChildNode(myEmitNode_postS_DH12,AccNode.EXIT)
 		
@@ -682,7 +687,7 @@ for currentPart in range(nPartsChicane+1):
 	#track through drift after 3rd chicane and foil at end
 	inj_latt_start.trackBunch(bunch_in, paramsDict)
 	#change charge as its passed foil
-	bunch_in.charge(1)
+	#bunch_in.charge(1)
 	#track through 4th chicane
 	inj_latt_end.trackBunch(bunch_in, paramsDict)
 	

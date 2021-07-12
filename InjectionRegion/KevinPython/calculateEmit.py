@@ -174,7 +174,7 @@ class Calc_Emit(NodeTEAPOT):
 		    fileOut.write(" (avg_dE) = (%4.3f) \n"%(avg_dE))
 		    fileOut.write(" (x rms, y rms)= (%f,%f) \n" %(math.sqrt(var_x),math.sqrt(var_y)))
 		    fileOut.write(" (xp rms, yp rms)= (%f,%f) \n" %(math.sqrt(var_px),math.sqrt(var_py)))
-		    fileOut.write(" (x avg, y avy)= (%f,%f) \n" %(avg_x,avg_y))
+		    fileOut.write(" (x avg, y avg)= (%f,%f) \n" %(avg_x,avg_y))
 		    fileOut.write(" (xp avg, yp avg)= (%f,%f) \n" %(avg_px,avg_py))		    
 		    fileOut.write(" (emit x, emit y)= (%f,%f) \n" %(emit_x,emit_y))
 		    fileOut.write(" (normal emit x, normal emit y)= (%f,%f) \n" %(emit_x*beta*gamma,emit_y*beta*gamma))
