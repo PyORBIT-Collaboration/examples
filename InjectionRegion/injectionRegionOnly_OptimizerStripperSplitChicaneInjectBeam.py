@@ -54,12 +54,17 @@ from orbit.teapot import addDipoleStripperNode
 
 from orbit.bunch_generators import WaterBagDist3D, GaussDist3D, KVDist3D
 from sns_linac_bunch_generator import SNS_Linac_BunchGenerator
+from bunch import BunchTwissAnalysis
 
 class MyScorer(Scorer):
 	""" The implementation of the abstract Score class """
-	def __init__(self,teapot_latt,doDipoleKickers,currentPart=0,nPartsChicane=0,currentPart2=0,nPartsChicane2=0):
+	def __init__(self,teapot_latt,teapot_latt_partial,inject_start,inject_end,doDipoleKickers,currentPart=0,nPartsChicane=0,currentPart2=0,nPartsChicane2=0):
 		Scorer.__init__(self)
 		self.teapot_latt=teapot_latt
+		self.teapot_latt_full=teapot_latt
+		self.teapot_latt_partial=teapot_latt_partial
+		self.inject_start=inject_start
+		self.inject_end=inject_end
 		self.currentPart=currentPart
 		self.nPartsChicane=nPartsChicane
 		self.currentPart2=currentPart2
@@ -92,6 +97,7 @@ class MyScorer(Scorer):
 		macrosperturn = 1
 		macrosize = intensity/turns/macrosperturn
 		
+		#this is the pencil beam bunch for closed beam
 		self.b = Bunch()
 		self.b.mass(0.93827231)
 		self.b.macroSize(macrosize)
@@ -99,6 +105,9 @@ class MyScorer(Scorer):
 		energy = 1.3 #Gev
 		self.b.getSyncParticle().kinEnergy(energy)
 		self.b.addParticle(0,0,0,0,0,0)
+
+		#this is the injected bunch
+		self.b2 = Bunch()
 
 		sp = self.b.getSyncParticle()
 		self.beta= sp.beta()
@@ -108,6 +117,9 @@ class MyScorer(Scorer):
 		
 		self.paramsDict = {}
 		self.paramsDict["bunch"]= self.b
+
+		self.paramsDict2 = {}
+		self.paramsDict2["bunch"]= self.b2
 		
 		self.theEffLength=0.03*2
 		#theEffLength=0.01
@@ -143,6 +155,65 @@ class MyScorer(Scorer):
 		elif x>=self.cutLength:
 			return self.fieldStrength
 		pass		
+	def resetBunch2(self):
+		e_kin_ini = 1.3 # in [GeV]
+		mass =  0.93827231 #0.939294    # in [GeV]
+		gamma = (mass + e_kin_ini)/mass
+		beta = math.sqrt(gamma*gamma - 1.0)/gamma
+		print "relat. gamma=",gamma
+		print "relat.  beta=",beta
+		
+		
+		#------ emittances are normalized - transverse by gamma*beta and long. by gamma**3*beta 
+		(alphaZ,betaZ,emittZ) = ( 0.0196, 0.5844, 0.24153)
+		
+		(alphaX,betaX,emittX) = (.224, 10.5, 1.445)
+		(alphaY,betaY,emittY) = (.224, 10.5, 1.445)
+		
+		#---make emittances un-normalized XAL units [m*rad]
+		emittX = 1.0e-6*emittX/(gamma*beta)
+		emittY = 1.0e-6*emittY/(gamma*beta)
+		emittZ = 1.0e-6*emittZ/(gamma**3*beta)
+		
+		#---- long. size in mm
+		sizeZ = math.sqrt(emittZ*betaZ)*1.0e+3
+		
+		#---- transform to pyORBIT emittance[GeV*m]
+		emittZ = emittZ*gamma**3*beta**2*mass
+		betaZ = betaZ/(gamma**3*beta**2*mass)
+		
+		twissX = TwissContainer(alphaX,betaX,emittX)
+		twissY = TwissContainer(alphaY,betaY,emittY)
+		twissZ = TwissContainer(alphaZ,betaZ,emittZ)
+		
+		print "Start Bunch Generation."
+		bunch_gen = SNS_Linac_BunchGenerator(twissX,twissY,twissZ)
+		
+		self.b2 = Bunch()
+
+		#generate initial bunch
+		else:
+			self.b2 = bunch_gen.getBunch(nParticles = args.nParts, distributorClass = WaterBagDist3D)
+			#bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = GaussDist3D)
+			#bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = KVDist3D)
+	
+		xOffset=0.25671
+		pxOffset=-.042
+		yOffset=0.046
+		pyOffset=0
+		#if reading bunch from file the offset should already have been added
+		
+		for i in range(self.b2.getSize()):
+			self.b2.x(i,self.b2.x(i)+xOffset)
+			self.b2.px(i,self.b2.px(i)+pxOffset)
+			self.b2.y(i,self.b2.y(i)+yOffset)
+			self.b2.py(i,self.b2.py(i)+pyOffset)			
+		self.b2.mass(mass) #mass
+		self.b2.macroSize(macrosize)
+		self.b2 = e_kin_ini # 1.0 #Gev
+		self.b2.getSyncParticle().kinEnergy(energy)
+		self.b2.charge(-1)
+		self.paramsDict2["bunch"]= self.b2
 	#currently assumes bunch has just one macroparticle
 	def resetBunch(self):
 		self.b.x(0,self.xInit)
@@ -155,7 +226,8 @@ class MyScorer(Scorer):
 	def setScaleChicane(self,chicaneToScale,scale):
 		nodes=self.teapot_latt.getNodes()
 		for i in range(len(self.chicaneNodes[chicaneToScale])):
-			nodes[self.chicaneNodes[chicaneToScale][i]].setParam("kx", self.chicaneNodeStrength[chicaneToScale][i]*scale)
+			if self.chicaneNodes[chicaneToScale][i] >=0:
+				nodes[self.chicaneNodes[chicaneToScale][i]].setParam("kx", self.chicaneNodeStrength[chicaneToScale][i]*scale)
 			
 		#need to recompute dipole field if stripper is in chicane field because chicane field has been changed
 		if chicaneToScale==1 and self.firstDipoleInChicane and self.addChicaneFieldToStripper and self.rescaleChicaneFieldInStripper:
@@ -238,9 +310,17 @@ class MyScorer(Scorer):
 			elif node.getName().strip() == "DB23":
 				db23Nodes.append(index)				
 			index+=1
+		if len(chicane10Nodes)<1:
+			chicane10Nodes.append(-1)
 		self.chicaneNodes.append(chicane10Nodes)
+		if len(chicane11Nodes)<1:
+			chicane11Nodes.append(-1)		
 		self.chicaneNodes.append(chicane11Nodes)
+		if len(chicane12Nodes)<1:
+			chicane12Nodes.append(-1)		
 		self.chicaneNodes.append(chicane12Nodes)
+		if len(chicane13Nodes)<1:
+			chicane13Nodes.append(-1)		
 		self.chicaneNodes.append(chicane13Nodes)
 		self.driftNodes.append(db12Nodes)
 		self.driftNodes.append(db23Nodes)
@@ -254,7 +334,8 @@ class MyScorer(Scorer):
 		for chicane in self.chicaneNodes:
 			chicaneStr=[]
 			for i in chicane:
-				chicaneStr.append(self.teapot_latt.getNodes()[i].getParam("kx"))
+				if i>=0:
+					chicaneStr.append(self.teapot_latt.getNodes()[i].getParam("kx"))
 			self.chicaneNodeStrength.append(chicaneStr)
 	#initialize the chicanes in the teapot lattice.
 	def initChicanes(self):
@@ -263,10 +344,11 @@ class MyScorer(Scorer):
 		nodes = self.teapot_latt.getNodes()
 		for chicane in range(len(self.chicaneNodes)):
 			for i in range(len(self.chicaneNodes[chicane])):
-				nodes[self.chicaneNodes[chicane][i]].setWaveform(chicanewave)
-				print chicane, "i= ",i
-				print self.chicaneNodeStrength[chicane][i]
-				nodes[self.chicaneNodes[chicane][i]].setParam("kx",self.chicaneNodeStrength[chicane][i])	
+				if self.chicaneNodes[chicane][i] >=0:
+					nodes[self.chicaneNodes[chicane][i]].setWaveform(chicanewave)
+					print chicane, "i= ",i
+					print self.chicaneNodeStrength[chicane][i]
+					nodes[self.chicaneNodes[chicane][i]].setParam("kx",self.chicaneNodeStrength[chicane][i])	
 		self.addFirstStripperDipole()
 		self.addSecondStripperDipole()
 		self.findChicanes()
@@ -410,6 +492,7 @@ class MyScorer(Scorer):
 			addDipoleStripperNode(self.teapot_latt,position,myDipole_DH_A12)				
 	def getScore(self,trialPoint):
 		self.resetBunch()
+		self.resetBunch2()
 		x0 = trialPoint.getVariableProxyArr()[0].getValue()
 		x1 = trialPoint.getVariableProxyArr()[1].getValue()
 		x2 = trialPoint.getVariableProxyArr()[2].getValue()
@@ -424,7 +507,15 @@ class MyScorer(Scorer):
 			
 		#score = (b.x(0)-self.xTarget)**2 + (b.px(0)-self.pxTarget)**2 + (b.y(0)-self.yTarget)**2+(b.py(0)-self.pyTarget)**2+(b.z(0)-self.zTarget)**2+(b.pz(0)-self.dETarget)**2
 		score = (self.b.x(0)-self.xTarget)**2 + (self.b.px(0)-self.pxTarget)**2 + (self.b.y(0)-self.yTarget)**2+(self.b.py(0)-self.pyTarget)**2
-
+		self.resetBunch()
+		for i in range(self.turns):
+			self.teapot_latt_partial.trackBunch(self.b, self.paramsDict)
+		self.inject_start.trackBunch(self.b2, self.paramsDict2)
+		self.inject_end.trackBunch(self.b2, self.paramsDict2)
+		twiss_analysis = BunchTwissAnalysis()  
+		twiss_analysis.analyzeBunch(self.b2)
+		(xavg,xpavg,yavg,ypavg)=(twiss_analysis.getAverage(0),twiss_analysis.getAverage(1),twiss_analysis.getAverage(2),twiss_analysis.getAverage(3))
+		score =score +(self.b.px(0)-xpavg)**2 +(self.b.py(0)-ypavg)**2
 		return score	
 		
 print "Start."
@@ -450,10 +541,26 @@ nPartsChicane2=0
 
 for currentPart in range(-1,nPartsChicane+1):
 	for currentPart2 in range(-1,nPartsChicane2+1):
+		inj_latt_start = teapot.TEAPOT_Ring()
+		print "Read MAD."
+		#this lattice has the injection region from the start of the drift prior to chicane2 up to and including the drift after chicane3
+		inj_latt_start.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane2.LAT","RING")
+		print "Lattice=",inj_latt_start.getName()," length [m] =",inj_latt_start.getLength()," nodes=",len(inj_latt_start.getNodes())
+		
+		inj_latt_end = teapot.TEAPOT_Ring()
+		print "Read MAD."
+		#this lattice contains chicane 4 and the drift leading to the waste septum
+		inj_latt_end.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane3.LAT","RING")
+		print "Lattice=",inj_latt_end.getName()," length [m] =",inj_latt_end.getLength()," nodes=",len(inj_latt_end.getNodes())
+		
+
 		teapot_latt = teapot.TEAPOT_Ring()
 		teapot_latt.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers.LAT","RING")
 		#print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
-		nodes2 = teapot_latt.getNodes()
+		
+		teapot_latt_partial = teapot.TEAPOT_Ring()
+		teapot_latt_partial.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_Start_To_JustBeforeChicane4.LAT","RING")
+		#print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
 			
 		#Turn off injection kickers
 		
@@ -469,6 +576,7 @@ for currentPart in range(-1,nPartsChicane+1):
 		kickerwave = flatTopWaveform(1.0)
 		
 		nodes = teapot_latt.getNodes()
+		nodes2 = teapot_latt_partial.getNodes()
 		hkick10 = nodes[10]
 		vkick10 = nodes[12]
 		hkick11	= nodes[14]
@@ -477,6 +585,11 @@ for currentPart in range(-1,nPartsChicane+1):
 		hkick12 = nodes[51]
 		vkick13 = nodes[53]
 		hkick13	= nodes[55]
+
+		hkick10_2 = nodes2[10]
+		vkick10_2 = nodes2[12]
+		hkick11_2 = nodes2[14]
+		vkick11_2 = nodes2[16]
 		
 		vkick10.setParam("ky", strength_vkicker10)
 		hkick10.setParam("kx", strength_hkicker10)
@@ -486,6 +599,11 @@ for currentPart in range(-1,nPartsChicane+1):
 		hkick12.setParam("kx", strength_hkicker12)
 		vkick13.setParam("ky", strength_vkicker13)
 		hkick13.setParam("kx", strength_hkicker13)
+
+		vkick10_2.setParam("ky", strength_vkicker10)
+		hkick10_2.setParam("kx", strength_hkicker10)
+		vkick11_2.setParam("ky", strength_vkicker11)
+		hkick11_2.setParam("kx", strength_hkicker11)
 		
 		vkick10.setWaveform(kickerwave)
 		hkick10.setWaveform(kickerwave)
@@ -495,8 +613,14 @@ for currentPart in range(-1,nPartsChicane+1):
 		hkick12.setWaveform(kickerwave)
 		vkick13.setWaveform(kickerwave)
 		hkick13.setWaveform(kickerwave)
-			
+
+		vkick10_2.setWaveform(kickerwave)
+		hkick10_2.setWaveform(kickerwave)
+		vkick11_2.setWaveform(kickerwave)
+		hkick11_2.setWaveform(kickerwave)
+		
 		teapot_latt.initialize()
+		teapot_latt_partial.initialize()
 		
 		
 		
@@ -508,7 +632,7 @@ for currentPart in range(-1,nPartsChicane+1):
 		#scorer = MyScorer(0.004334,0.000192,0.001710,-0.000349,-0.004286,0.000000)
 		#scorer = MyScorer(0.000000,0.000000,0.000000,0.000000,0.000000,0.000000)
 		
-		scorer = MyScorer(teapot_latt,doDipoleKickers,currentPart,nPartsChicane,currentPart2,nPartsChicane2)
+		scorer = MyScorer(teapot_latt,teapot_latt_partial,inject_start,inject_end,doDipoleKickers,currentPart,nPartsChicane,currentPart2,nPartsChicane2)
 		scorer.initChicanes()
 		
 		#searchAlgorithm   = RandomSearchAlgorithm()
