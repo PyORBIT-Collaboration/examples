@@ -130,7 +130,7 @@ class MyScorer(Scorer):
 		self.fieldStrength=1.3
 		self.fieldStrengthMin=.2
 		self.cutLength=0.03
-		self.fieldDirection1=-math.pi/2.
+		self.fieldDirection1=math.pi/2.
 		self.fieldDirection2=-math.pi/2.
 		#self.fieldDirection1=0
 		#self.fieldDirection2=math.pi	
@@ -143,7 +143,7 @@ class MyScorer(Scorer):
 		self.magneticFieldx2= Function()
 		self.magneticFieldy2= Function()	
 		
-		self.pxOffset=-.042
+		self.pxOffset=-.052
 		self.pyOffset=0
 
 	def getpxOffset(self):
@@ -526,13 +526,10 @@ class MyScorer(Scorer):
 		x2 = trialPoint.getVariableProxyArr()[2].getValue()
 		x3 = trialPoint.getVariableProxyArr()[3].getValue()
 		x4 = trialPoint.getVariableProxyArr()[4].getValue()
+		x5 = trialPoint.getVariableProxyArr()[5].getValue()
 		self.setpxOffset(x4)
+		self.setpyOffset(x5)
 		self.resetBunch2()
-		self.changeLattice(self.OL_teapot_latt_full)
-		self.setScaleChicane(0,x0)
-		self.setScaleChicane(1,x1)
-		self.setScaleChicane(2,x2)
-		self.setScaleChicane(3,x3)
 		
 		self.changeLattice(self.OL_teapot_latt_partial)
 		self.setScaleChicane(0,x0)
@@ -551,16 +548,10 @@ class MyScorer(Scorer):
 		self.setScaleChicane(1,x1)
 		self.setScaleChicane(2,x2)
 		self.setScaleChicane(3,x3)		
-		for i in range(self.turns):
-			self.OL_teapot_latt_full.getTeapotLattice().trackBunch(self.b, self.paramsDict)
 			
 		#score = (b.x(0)-self.xTarget)**2 + (b.px(0)-self.pxTarget)**2 + (b.y(0)-self.yTarget)**2+(b.py(0)-self.pyTarget)**2+(b.z(0)-self.zTarget)**2+(b.pz(0)-self.dETarget)**2
 		score = (self.b.x(0)-self.xTarget)**2 + (self.b.px(0)-self.pxTarget)**2 + (self.b.y(0)-self.yTarget)**2+(self.b.py(0)-self.pyTarget)**2
-
-		#print "score= ",score, " self.b.x(0)=",self.b.x(0)
-		#print "score= ",score, " self.b.px(0)=",self.b.px(0)
 		self.resetBunch()
-		#print "score= ",score, " self.b.x(0)=",self.b.x(0)
 		for i in range(self.turns):
 			self.OL_teapot_latt_partial.getTeapotLattice().trackBunch(self.b, self.paramsDict)
 		self.OL_inject_start.getTeapotLattice().trackBunch(self.b2, self.paramsDict2)
@@ -568,20 +559,24 @@ class MyScorer(Scorer):
 		twiss_analysis = BunchTwissAnalysis()  
 		twiss_analysis.analyzeBunch(self.b2)
 		(xavg,xpavg,yavg,ypavg)=(twiss_analysis.getAverage(0),twiss_analysis.getAverage(1),twiss_analysis.getAverage(2),twiss_analysis.getAverage(3))
-		score =score +(self.b.px(0)-xpavg)**2 +(self.b.py(0)-ypavg)**2
-		#print "score= ",score, " self.b.x(0)=",self.b.x(0)
-		#print "self.b.px(0)=",self.b.px(0), " xpavg=",xpavg, " x4=",x4
+		score =(self.b.px(0)-xpavg)**2 +(self.b.py(0)-ypavg)**2
+		#print "self.b.px(0)=",self.b.px(0), " xpavg=",xpavg," score=",score, " x4=",x4
+		#print "self.b.py(0)=",self.b.py(0), " ypavg=",ypavg," score=",score, " x5=",x5
 		return score	
 		
 print "Start."
 parser = argparse.ArgumentParser(description="%prog [options]", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--doDipoleKickers",type=bool, dest='doDipoleKickers', default=True, help="print node list")
 parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFieldToStripper', default=True, help="Include the chicane fields in the stripper if stripper is inside chicane")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="ClosureTest", help="Where to put output")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="InjectBeam4_ReverseSecond_ChangeOffset", help="Where to put output")
+parser.add_argument("--inputDirectory", dest='chicaneScaleDirectory', default="InjectBeam4_ReverseSecond", help="Where to get chicane scales from")
+
 args = parser.parse_args()
 doDipoleKickers=args.doDipoleKickers
 outputDirectory=args.outputDirectory
 addChicaneFieldToStripper=args.addChicaneFieldToStripper
+outputDirectoryChicaneScales=args.chicaneScaleDirectory
+
 if not os.path.exists(outputDirectory):
 	os.mkdir(outputDirectory)
 #=====Make a Teapot style lattice======
@@ -597,11 +592,20 @@ nPartsChicane2=0
 #for currentPart in range(-1,nPartsChicane+1):
 for currentPart in range(1,nPartsChicane+1):
 	for currentPart2 in range(-1,nPartsChicane2):
+		openedFile=open("%s/ChicaneScales_%d_%d_%d_%d.txt"%(outputDirectoryChicaneScales,currentPart,currentPart2,nPartsChicane,nPartsChicane2),'r')
+		line=openedFile.readline()
+		print line
+		theScales=line.split(",")
+		chicaneScale10=float(theScales[0].strip())
+		chicaneScale11=float(theScales[1].strip())
+		chicaneScale12=float(theScales[2].strip())
+		chicaneScale13=float(theScales[3].strip())
+		openedFile.close()
 		inj_latt_start = teapot.TEAPOT_Ring()
 		print "Read MAD."
 		#this lattice has the injection region from the start of the drift prior to chicane2 up to and including the drift after chicane3
 		inj_latt_start.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane2.LAT","RING")
-		#print "Lattice=",inj_latt_start.getName()," length [m] =",inj_latt_start.getLength()," nodes=",len(inj_latt_start.getNodes())
+		print "Lattice=",inj_latt_start.getName()," length [m] =",inj_latt_start.getLength()," nodes=",len(inj_latt_start.getNodes())
 		
 		OL_inj_latt_start =OptimizerLattice(inj_latt_start)   
 		OL_inj_latt_start.setFirstDipoleIsStripper(True)
@@ -612,18 +616,18 @@ for currentPart in range(1,nPartsChicane+1):
 		print "Read MAD."
 		#this lattice contains chicane 4 and the drift leading to the waste septum
 		inj_latt_end.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane3.LAT","RING")
-		#print "Lattice=",inj_latt_end.getName()," length [m] =",inj_latt_end.getLength()," nodes=",len(inj_latt_end.getNodes())
+		print "Lattice=",inj_latt_end.getName()," length [m] =",inj_latt_end.getLength()," nodes=",len(inj_latt_end.getNodes())
 		
 		OL_inj_latt_end =OptimizerLattice(inj_latt_end)
 		teapot_latt_full = teapot.TEAPOT_Ring()
 		teapot_latt_full.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_KickersJustBeforeQuadAfterChicane4.LAT","RING")
-		print "Lattice=",teapot_latt_full.getName()," length [m] =",teapot_latt_full.getLength()," nodes=",len(teapot_latt_full.getNodes())
+		#print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
 		
 		
 		
 		teapot_latt_partial = teapot.TEAPOT_Ring()
 		teapot_latt_partial.readMAD("MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_Start_To_JustBeforeChicane4.LAT","RING")
-		print "Lattice=",teapot_latt_partial.getName()," length [m] =",teapot_latt_partial.getLength()," nodes=",len(teapot_latt_partial.getNodes())
+		#print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
 		
 		#Turn off injection kickers
 		
@@ -719,18 +723,24 @@ for currentPart in range(1,nPartsChicane+1):
 		
 		trialPoint = TrialPoint()
 		#trialPoint.addVariableProxy(VariableProxy(name = "x0", value = 1., step = 0.1))
-		trialPoint.addVariableProxy(VariableProxy(name = "x0", value = 1., step = 0.1))
-		trialPoint.addVariableProxy(VariableProxy(name = "x1", value = 1., step = 0.1))
-		trialPoint.addVariableProxy(VariableProxy(name = "x2", value = 1., step = 0.1))
-		trialPoint.addVariableProxy(VariableProxy(name = "x3", value = 1., step = 0.1))
-		trialPoint.addVariableProxy(VariableProxy(name = "x4", value = -.042, step = 0.01))
+		trialPoint.addVariableProxy(VariableProxy(name = "x0", value = chicaneScale10, step = 0.1))
+		trialPoint.addVariableProxy(VariableProxy(name = "x1", value = chicaneScale11, step = 0.1))
+		trialPoint.addVariableProxy(VariableProxy(name = "x2", value = chicaneScale12, step = 0.1))
+		trialPoint.addVariableProxy(VariableProxy(name = "x3", value = chicaneScale13, step = 0.1))
+		trialPoint.addVariableProxy(VariableProxy(name = "x4", value = -.052, step = 0.01))
+		trialPoint.addVariableProxy(VariableProxy(name = "x5", value = 0., step = 0.01))
 		x0 = trialPoint.getVariableProxyArr()[0]
 		x1 = trialPoint.getVariableProxyArr()[1]
 		x2 = trialPoint.getVariableProxyArr()[2]
 		x3 = trialPoint.getVariableProxyArr()[3]
 		x4 = trialPoint.getVariableProxyArr()[4]
+		x5 = trialPoint.getVariableProxyArr()[5]
 		
-		x4.setUseInSolver(False)
+		x0.setUseInSolver(False)
+		x1.setUseInSolver(False)
+		x2.setUseInSolver(False)
+		x3.setUseInSolver(False)
+		x5.setUseInSolver(False)
 		solver.solve(scorer,trialPoint)
 		
 		print "===== best score ========== fitting time = ", solver.getScoreboard().getRunTime()
@@ -745,9 +755,7 @@ for currentPart in range(1,nPartsChicane+1):
 		print "(%f,%f,%f,%f)"%(trialPoint.getVariableProxyValuesArr()[0],trialPoint.getVariableProxyValuesArr()[1],trialPoint.getVariableProxyValuesArr()[2],trialPoint.getVariableProxyValuesArr()[3])
 		#outputDirectory="WasteBeamClosed"
 		fileOut=open("%s/ChicaneScales_%d_%d_%d_%d.txt"%(outputDirectory,currentPart,currentPart2,nPartsChicane,nPartsChicane2),'w')
-		fileOut.write("%f,%f,%f,%f,%f"%(trialPoint.getVariableProxyValuesArr()[0],trialPoint.getVariableProxyValuesArr()[1],trialPoint.getVariableProxyValuesArr()[2],trialPoint.getVariableProxyValuesArr()[3],trialPoint.getVariableProxyValuesArr()[4]) +"\n")
+		fileOut.write("%f,%f,%f,%f,%f,%f"%(trialPoint.getVariableProxyValuesArr()[0],trialPoint.getVariableProxyValuesArr()[1],trialPoint.getVariableProxyValuesArr()[2],trialPoint.getVariableProxyValuesArr()[3],trialPoint.getVariableProxyValuesArr()[4],trialPoint.getVariableProxyValuesArr()[5]) +"\n")
 		fileOut.flush() 
 		fileOut.close() 
-		
-		#scorer.getScore(trialPoint)
 

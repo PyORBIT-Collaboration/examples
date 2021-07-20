@@ -68,22 +68,22 @@ parser.add_argument("--useChicaneScaleFile",type=bool, dest='useChicaneScaleFile
 parser.add_argument("--usePrintNode",type=bool, dest='usePrintNode', default=False, help="whether or not to print bunch info to file")
 parser.add_argument("--pencilBeam",type=bool, dest='pencilBeam', default=False, help="Use a single macroparticle beam")
 parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFieldToStripper', default=True, help="Include the chicane fields in the stripper if stripper is inside chicane")
-parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=True, help="Create bunch reading particles from file")
+parser.add_argument("--bunchFromFile",type=bool, dest='bunchFromFile', default=False, help="Create bunch reading particles from file")
 parser.add_argument("--useSecondaryFoil",type=bool, dest='useSecondaryFoil', default=False, help="use secondary foil in lattice")
 parser.add_argument("--bunchFromFileName", dest='bunchFromFileName', default="InitialBunches/print_beg_0.txt", help="What File to read bunch from")
-parser.add_argument("--outputDirectory", dest='outputDirectory', default="InjectBeam3", help="Where to put output")
+parser.add_argument("--outputDirectory", dest='outputDirectory', default="InjectBeam3NoScale", help="Where to put output")
 
 parser.add_argument("--stripperLength1",type=float, dest='stripperLength1', default=0.06, help="length of first stripper dipole")
 parser.add_argument("--stripperStrengthMax1",type=float, dest='stripperStrengthMax1', default=1.3, help="Maximum field Strength of first stripper dipole")
 parser.add_argument("--stripperStrengthMin1",type=float, dest='stripperStrengthMin1', default=0.2, help="Minimum field Strength of first stripper dipole")
 parser.add_argument("--cutLength1",type=float, dest='cutLength1', default=0.03, help="length the field ramps up linearly from min to max strength")
-parser.add_argument("--fieldDirection1",type=float, dest='fieldDirection1', default=math.pi/2., help="The direction of the field of the first stripper dipole (0=positive x, Pi/2=positive y)")
+parser.add_argument("--fieldDirection1",type=float, dest='fieldDirection1', default=-math.pi/2., help="The direction of the field of the first stripper dipole (0=positive x, Pi/2=positive y)")
 
 parser.add_argument("--stripperLength2",type=float, dest='stripperLength2', default=0.06, help="length of second stripper dipole")
 parser.add_argument("--stripperStrengthMax2",type=float, dest='stripperStrengthMax2', default=1.3, help="Maximum field Strength of second stripper dipole")
 parser.add_argument("--stripperStrengthMin2",type=float, dest='stripperStrengthMin2', default=0.2, help="Minimum field Strength of second stripper dipole")
 parser.add_argument("--cutLength2",type=float, dest='cutLength2', default=0.03, help="length the field ramps up linearly from min to max strength")
-parser.add_argument("--fieldDirection2",type=float, dest='fieldDirection2', default=math.pi/2., help="The direction of the field of the second stripper dipole (0=positive x, Pi/2=positive y)")
+parser.add_argument("--fieldDirection2",type=float, dest='fieldDirection2', default=-math.pi/2., help="The direction of the field of the second stripper dipole (0=positive x, Pi/2=positive y)")
 
 parser.add_argument("--scaleChicane10",type=float, dest='scaleChicane10', default=-1., help="scaleChicane10")
 parser.add_argument("--scaleChicane11",type=float, dest='scaleChicane11', default=-1., help="scaleChicane11")
@@ -92,9 +92,11 @@ parser.add_argument("--scaleChicane13",type=float, dest='scaleChicane13', defaul
 
 parser.add_argument("--xOffset",type=float, dest='xOffset', default=0.25671, help="x injection offset")
 parser.add_argument("--pxOffset",type=float, dest='pxOffset', default=-.042, help="px injection offset")
+#parser.add_argument("--pxOffset",type=float, dest='pxOffset', default=-0.06163547 , help="px injection offset")
 parser.add_argument("--yOffset",type=float, dest='yOffset', default=0.046, help="y injection offset")
 parser.add_argument("--pyOffset",type=float, dest='pyOffset', default=0, help="py injection offset")
 
+parser.add_argument("--chicaneScaleDirectory", dest='chicaneScaleDirectory', default="InjectBeam3_ChangeOffset", help="Where to get chicane scales from")
 
 args = parser.parse_args()
 #=====Main bunch parameters============
@@ -107,7 +109,7 @@ secondStripperLength=0.02
 
 #where to pull chicane scale values from if useChicaneScales is true.
 #outputDirectoryChicaneScales="WasteBeamSplitGeneralNewStripperChicaneFieldAddedClean"
-outputDirectoryChicaneScales="InjectBeam3"
+outputDirectoryChicaneScales=args.chicaneScaleDirectory
 if args.useChicaneScaleFile==False:
 	chicaneScale10=args.scaleChicane10
 	chicaneScale11=args.scaleChicane11
