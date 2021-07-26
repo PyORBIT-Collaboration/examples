@@ -46,8 +46,8 @@ from orbit.bunch_generators import WaterBagDist3D, GaussDist3D, KVDist3D
 from sns_linac_bunch_generator import SNS_Linac_BunchGenerator
 
 from orbit_utils import Function
-from KevinPython.function_stripping import probabilityStripping
-from KevinPython.function_strippingIncludeChicaneField import probabilityStrippingWithChicane
+#from KevinPython.function_stripping import probabilityStripping
+#from KevinPython.function_strippingIncludeChicaneField import probabilityStrippingWithChicane
 from orbit.teapot import addDipoleStripperNode
 
 import argparse
@@ -135,6 +135,8 @@ useChicaneScaleFile=False
 chicaneScaleFile_UseScales=False
 chicaneScaleFile_UsePX=False
 chicaneScaleFile_UsePY=False
+chicaneScaleFile_UsePX_Position=4
+chicaneScaleFile_UsePY_Position=5
 if beamLatticeDictionary.hasKey("useChicaneScaleFile") and beamLatticeDictionary.getValue("useChicaneScaleFile")=="True":
 	useChicaneScaleFile=True
 	if beamLatticeDictionary.hasKey("chicaneScaleFile_UseScales") and beamLatticeDictionary.getValue("chicaneScaleFile_UseScales")=="True":
@@ -142,7 +144,11 @@ if beamLatticeDictionary.hasKey("useChicaneScaleFile") and beamLatticeDictionary
 	if beamLatticeDictionary.hasKey("chicaneScaleFile_UsePX") and beamLatticeDictionary.getValue("chicaneScaleFile_UsePX")=="True":
 		chicaneScaleFile_UsePX=True
 	if beamLatticeDictionary.hasKey("chicaneScaleFile_UsePY") and beamLatticeDictionary.getValue("chicaneScaleFile_UsePY")=="True":
-		chicaneScaleFile_UsePY=True		
+		chicaneScaleFile_UsePY=True	
+	if beamLatticeDictionary.hasKey("chicaneScaleFile_UsePX_Position"):
+		chicaneScaleFile_UsePX_Position=int(beamLatticeDictionary.getValue("chicaneScaleFile_UsePX_Position"))
+	if beamLatticeDictionary.hasKey("chicaneScaleFile_UsePY_Position"):
+		chicaneScaleFile_UsePY_Position=int(beamLatticeDictionary.getValue("chicaneScaleFile_UsePY_Position"))		
 #------------------------------
 #Initial Distribution Functions
 #------------------------------
@@ -198,6 +204,9 @@ bunch_gen = SNS_Linac_BunchGenerator(twissX,twissY,twissZ)
 #currentPart=nPartsChicane places it immediately after chicane2/11
 #0<currentPart<nPartsChicane places it currentPart/nPartsChicane fractionally into chicane2/11
 #for currentPart in range(-1,nPartsChicane+1):
+
+#this is a temporary fix to not use chicane scale files ending in NA_NA_NA_NA
+useChicane_NA_NA_NA_NA_File=False
 for currentPart in stripperPositionArray:
 	currentPart=int(currentPart)
 	for currentPart2 in stripperPositionArray2:
@@ -222,8 +231,8 @@ for currentPart in stripperPositionArray:
 				addTeapotFoilNode(inj_latt_start,inj_latt_start.getLength(),foil)	
 			
 			#set the strength of the chicane kicks
-			if useChicaneScaleFile:
-				if not doDipoleStrippers:
+			if useChicaneScaleFile and useChicane_NA_NA_NA_NA_File:
+				if not doDipoleStrippers and useChicane_NA_NA_NA_NA_File:
 					openedFile=open("%s/ChicaneScales_%s_%s_%s_%s.txt"%(outputDirectoryChicaneScales,"NA","NA","NA","NA"),'r')
 				else:
 					openedFile=open("%s/ChicaneScales_%d_%d_%d_%d.txt"%(outputDirectoryChicaneScales,currentPart,currentPart2,nPartsChicane,nPartsChicane2),'r')
@@ -486,7 +495,7 @@ for currentPart in stripperPositionArray:
 				if usePrintNode:
 					myPrintNodeBeg=None
 					myPrintNodeEnd=None
-					if not doDipoleStrippers:
+					if not doDipoleStrippers and useChicane_NA_NA_NA_NA_File:
 						fileOut=open("%s/print_beg_%s_NA_NA_NA_NA.txt"%(outputDirectory,node.getName()),'w')
 						fileOut.close()		
 						fileOut=open("%s/print_end_%s_NA_NA_NA_NA.txt"%(outputDirectory,node.getName()),'w')
@@ -505,7 +514,7 @@ for currentPart in stripperPositionArray:
 					node.addChildNode(myPrintNodeEnd,AccNode.EXIT)
 				myEmitNodeBeg=None
 				myEmitNodeEnd=None
-				if not doDipoleStrippers:
+				if not doDipoleStrippers and useChicane_NA_NA_NA_NA_File:
 					fileOut=open("%s/emmit_beg_%s_NA_NA_NA_NA.txt"%(outputDirectory,node.getName()),'w')
 					fileOut.close()		
 					fileOut=open("%s/emmit_end_%s_NA_NA_NA_NA.txt"%(outputDirectory,node.getName()),'w')
@@ -584,7 +593,7 @@ for currentPart in stripperPositionArray:
 			
 		#overide offsets with values from chicane file if set to use them
 		if useChicaneScaleFile and (chicaneScaleFile_UsePX or chicaneScaleFile_UsePY):
-			if not doDipoleStrippers:
+			if not doDipoleStrippers and useChicane_NA_NA_NA_NA_File:
 				openedFile=open("%s/ChicaneScales_NA_NA_NA_NA.txt"%(outputDirectoryChicaneScales),'r')
 			else:
 				openedFile=open("%s/ChicaneScales_%d_%d_%d_%d.txt"%(outputDirectoryChicaneScales,currentPart,currentPart2,nPartsChicane,nPartsChicane2),'r')
@@ -592,9 +601,9 @@ for currentPart in stripperPositionArray:
 			print line
 			theScales=line.split(",")
 			if chicaneScaleFile_UsePX:
-				pxOffset=-float(theScales[4].strip())
+				pxOffset=-float(theScales[chicaneScaleFile_UsePX_Position].strip())
 			if chicaneScaleFile_UsePY:
-				pyOffset=-float(theScales[5].strip())				
+				pyOffset=-float(theScales[chicaneScaleFile_UsePY_Position].strip())				
 			openedFile.close()
 		#if reading bunch from file the offset should already have been added
 		if not bunchFromFile:

@@ -5,8 +5,7 @@ lattice=MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_K
 doDipoleStrippers=True
 #whether or not stripper node can strip
 firstStripperIsStripper=True
-secondStripperIsStripper=True
-secondStrippingLength=0.02
+secondStripperIsStripper=False
 
 firstStripperPositionArray=1
 firstStripperPositionMax=1
@@ -14,7 +13,7 @@ firstStripperPositionMax=1
 secondStripperPositionArray=-1,0
 secondStripperPositionMax=0
 
-useFoil=False
+useFoil=True
 #adds foil to end of the indexed lattice (index starts at 0)
 latticeToAddFoilTo=0
 
@@ -26,7 +25,7 @@ chicaneScaleFile_UsePY=False
 chicaneScaleFile_UsePY_Position=5
 
 #would prefer to make a foil node that changes the charge or a child node that does this but this is how it done currently (using this variable)
-latticeIndexToMakeBunchChargePlusOneAtEndOf=-1
+latticeIndexToMakeBunchChargePlusOneAtEndOf=0
 
 #beam info
 #GeV

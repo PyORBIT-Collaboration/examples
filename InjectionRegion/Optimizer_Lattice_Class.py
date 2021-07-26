@@ -3,6 +3,7 @@
 class OptimizerLattice():
 	def __init__(self,teapot_lattice):
 		self.teapot_lattice=teapot_lattice
+		self.doDipoleStrippers=False
 		self.firstDipoleIsStripper=False
 		self.secondDipoleIsStripper=False
 		self.firstDipoleFixedStripLength=-1
@@ -16,7 +17,11 @@ class OptimizerLattice():
 		#[0] is drift DB12 and [1] is drift DB23
 		self.driftNodes=[]
 		self.chicaneNodeStrength=[[0.041456],[-0.052434],[-0.0298523],[0.0398609]]
-		
+
+	def getDoDipoleStrippers(self):
+		return self.doDipoleStrippers
+	def setDoDipoleStrippers(self,value):
+		self.doDipoleStrippers=value	
 	def getFirstDipoleInChicane(self):
 		return self.firstDipoleInChicane
 	def setFirstDipoleInChicane(self,value):
