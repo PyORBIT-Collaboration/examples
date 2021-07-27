@@ -5,7 +5,7 @@ echo "Hello World"
 #directory is for injectbeam wastebeam
 #directory2 is for closed beam
 #directory3 is injectbeam ring
-directoryChicaneScales=ClosureTest
+directoryChicaneScales="ClosureTest"
 
 echo "HERE0"
 pyORBIT injectionRegionOnly_OptimizerStripperSplitChicaneInjectBeamClass.py 

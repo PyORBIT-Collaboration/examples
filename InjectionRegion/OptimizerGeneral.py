@@ -325,7 +325,7 @@ class MyScorer(Scorer):
 			self.b2.py(i,self.b2.py(i)+pyOffset)			
 		self.b2.mass(self.mass) #mass
 		self.b2.macroSize(self.macrosize2)
-		energy = e_kin_ini # 1.0 #Gev
+		energy = self.energy # 1.0 #Gev
 		self.b2.getSyncParticle().kinEnergy(energy)
 		self.b2.charge(self.initial_chargeInjection)
 		self.paramsDict2["bunch"]= self.b2
@@ -354,6 +354,7 @@ class MyScorer(Scorer):
 			
 		#need to recompute dipole field if stripper is in chicane field because chicane field has been changed
 		if chicaneToScale==1 and self.OL_teapot_latt.getFirstDipoleInChicane() and self.addChicaneFieldToStripper and self.rescaleChicaneFieldInStripper:
+			print "we are recomputing stripper1"
 			self.magneticFieldx= Function()
 			self.magneticFieldy= Function()				
 			xkickerField=nodes[self.OL_teapot_latt.getFirstDipoleNode()].getChicaneFieldx()
@@ -370,6 +371,7 @@ class MyScorer(Scorer):
 			nodes[self.OL_teapot_latt.getFirstDipoleNode()].computeFunctions()
 			
 		elif chicaneToScale==2 and self.OL_teapot_latt.getSecondDipoleInChicane() and self.addChicaneFieldToStripper and self.rescaleChicaneFieldInStripper:
+			print "we are recomputing stripper2"
 			self.magneticFieldx2= Function()
 			self.magneticFieldy2= Function()				
 			xkickerField=nodes[self.OL_teapot_latt.getSecondDipoleNode()].getChicaneFieldx()
@@ -490,7 +492,7 @@ class MyScorer(Scorer):
 			if self.currentPart==-1:
 				#position =self.teapot_latt.getNodePositionsDict()[self.teapot_latt.getNodes()[self.chicaneNodes[1][0]]][0]-self.theEffLength
 				#print self.OL_teapot_latt.getDriftNodes()
-				position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[self.OL_teapot_latt.getDriftNodes()[0][0]]][1]-self.theEffLength
+				position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[self.OL_teapot_latt.getDriftNodes()[0][0]]][1]-self.theEffLength1
 			elif self.currentPart==0:
 				print "OL_teapot_latt.getChicaneNodes()[1][0]= ",self.OL_teapot_latt.getChicaneNodes()[1][0]
 				position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[self.OL_teapot_latt.getChicaneNodes()[1][0]]][0]
@@ -501,7 +503,7 @@ class MyScorer(Scorer):
 								
 			#check if we are in kicker or drift
 			position_start = position
-			position_stop = position + self.theEffLength
+			position_stop = position + self.theEffLength1
 			(node_start_ind,node_stop_ind,z,ind) = (-1,-1, 0., 0)
 			for nodeCurrent in self.OL_teapot_latt.getTeapotLattice().getNodes():
 				if(position_start >= z and position_start <= z + nodeCurrent.getLength()):
@@ -537,17 +539,17 @@ class MyScorer(Scorer):
 					xkickerField=ky*self.rigidity/length
 			#actually creates the field functions
 		
-			for i in range(self.n):
-				x = self.step*i;
+			for i in range(self.n1):
+				x = self.step1*i;
 				#y = constantField(x)
-				y = self.pieceWiseField2(x)
+				y = self.pieceWiseField1(x)
 				self.magneticFieldx.add(x,y*math.cos(self.fieldDirection1)+xkickerField)
 				self.magneticFieldy.add(x,y*math.sin(self.fieldDirection1)+ykickerField)
 			
 			if self.OL_teapot_latt.getFirstDipoleIsStripper():
-				myDipole_DH_A11=GeneralDipoleStripSeperateField(self.magneticFieldx,self.magneticFieldy,self.n,self.maxValue,self.gamma,self.beta,"Dipole_DH_A11",self.OL_teapot_latt.getFirstDipoleFixedStripLength())
+				myDipole_DH_A11=GeneralDipoleStripSeperateField(self.magneticFieldx,self.magneticFieldy,self.n1,self.maxValue1,self.gamma,self.beta,"Dipole_DH_A11",self.OL_teapot_latt.getFirstDipoleFixedStripLength())
 			else:
-				myDipole_DH_A11=GeneralDipoleNoStripSeperateField(self.magneticFieldx,self.magneticFieldy,self.n,self.maxValue,self.gamma,self.beta,"Dipole_DH_A11")
+				myDipole_DH_A11=GeneralDipoleNoStripSeperateField(self.magneticFieldx,self.magneticFieldy,self.n1,self.maxValue1,self.gamma,self.beta,"Dipole_DH_A11")
 			#print "xkickerField=",xkickerField
 			myDipole_DH_A11.setChicaneFieldx(xkickerField)
 			myDipole_DH_A11.setChicaneFieldy(ykickerField)
@@ -563,7 +565,7 @@ class MyScorer(Scorer):
 			#position =self.teapot_latt.getNodePositionsDict()[self.teapot_latt.getNodes()[self.chicaneNodes[2][0]]][0]+self.teapot_latt.getNodes()[self.chicaneNodes[2][0]].getLength()*5./6.
 			if self.currentPart2==-1:
 				#position =self.teapot_latt.getNodePositionsDict()[self.teapot_latt.getNodes()[self.chicaneNodes[2][0]]][0]-self.theEffLength
-				position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[self.OL_teapot_latt.getDriftNodes()[1][0]]][1]-self.theEffLength
+				position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[self.OL_teapot_latt.getDriftNodes()[1][0]]][1]-self.theEffLength2
 			elif self.currentPart2==0:
 				print "self.chicaneNodes[1][0]= ",self.OL_teapot_latt.getChicaneNodes()[1][0]
 				position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[self.OL_teapot_latt.getChicaneNodes()[2][0]]][0]
@@ -573,7 +575,7 @@ class MyScorer(Scorer):
 				position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[self.OL_teapot_latt.getChicaneNodes()[2][0]]][0]+self.OL_teapot_latt.getTeapotLattice().getNodes()[self.OL_teapot_latt.getChicaneNodes()[2][0]].getLength()*self.currentPart2/self.nPartsChicane2			
 			#check if we are in kicker or drift
 			position_start = position
-			position_stop = position + self.theEffLength
+			position_stop = position + self.theEffLength2
 			(node_start_ind,node_stop_ind,z,ind) = (-1,-1, 0., 0)
 			for nodeCurrent in self.OL_teapot_latt.getTeapotLattice().getNodes():
 				if(position_start >= z and position_start <= z + nodeCurrent.getLength()):
@@ -607,17 +609,17 @@ class MyScorer(Scorer):
 					xkickerField=ky*self.rigidity/length	
 			#actually creates the field functions
 		
-			for i in range(self.n):
-				x = self.step*i;
+			for i in range(self.n2):
+				x = self.step2*i;
 				#y = constantField(x)
 				y = self.pieceWiseField2(x)
 				self.magneticFieldx2.add(x,y*math.cos(self.fieldDirection2)+xkickerField)
 				self.magneticFieldy2.add(x,y*math.sin(self.fieldDirection2)+ykickerField)
 			
 			if self.OL_teapot_latt.getSecondDipoleIsStripper():
-				myDipole_DH_A12=GeneralDipoleStripSeperateField(self.magneticFieldx2,self.magneticFieldy2,self.n,self.maxValue,self.gamma,self.beta,"Dipole_DH_A12",self.OL_teapot_latt.getSecondDipoleFixedStripLength())
+				myDipole_DH_A12=GeneralDipoleStripSeperateField(self.magneticFieldx2,self.magneticFieldy2,self.n2,self.maxValue2,self.gamma,self.beta,"Dipole_DH_A12",self.OL_teapot_latt.getSecondDipoleFixedStripLength())
 			else:
-				myDipole_DH_A12=GeneralDipoleNoStripSeperateField(self.magneticFieldx2,self.magneticFieldy2,self.n,self.maxValue,self.gamma,self.beta,"Dipole_DH_A12")
+				myDipole_DH_A12=GeneralDipoleNoStripSeperateField(self.magneticFieldx2,self.magneticFieldy2,self.n2,self.maxValue2,self.gamma,self.beta,"Dipole_DH_A12")
 			myDipole_DH_A12.setChicaneFieldx(xkickerField)
 			myDipole_DH_A12.setChicaneFieldy(ykickerField)			
 			addDipoleStripperNode(self.OL_teapot_latt.getTeapotLattice(),position,myDipole_DH_A12)				
@@ -634,8 +636,8 @@ class MyScorer(Scorer):
 		self.setpxOffsetClosed(x6)
 		self.setpyOffsetClosed(x7)
 		self.resetBunch()		
-		self.setpxOffset(x4)
-		self.setpyOffset(x5)
+		self.setpxOffsetInjection(x4)
+		self.setpyOffsetInjection(x5)
 		self.resetBunch2()
 		
 		self.changeLattice(self.OL_teapot_latt_full)
@@ -943,15 +945,18 @@ for currentPart in stripperPositionArray:
 		searchAlgorithm = SimplexSearchAlgorithm()
 		
 		#max_time = 0.05
-		max_time = 100
-		max_accuracy=1E-10
+		#max_time = 100
+		max_time = 200
+		min_score=1E-8
 		max_iterations=1000
 		
 		iterationStopper=SolveStopperFactory.maxIterationStopper(max_iterations)
 		timeStopper = SolveStopperFactory.maxTimeStopper(max_time)
+		accuracyStopper = SolveStopperFactory.minScoreStopper(min_score)
 		solverStopper=SolveStopperFactory.comboStopper()
 		solverStopper.addStopper(iterationStopper)
 		solverStopper.addStopper(timeStopper)
+		solverStopper.addStopper(accuracyStopper)
 		#solverStopper = SolveStopperFactory.maxAccuracyStopper(max_accuracy)
 		
 		solver = Solver()

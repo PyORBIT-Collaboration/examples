@@ -231,7 +231,7 @@ for currentPart in stripperPositionArray:
 				addTeapotFoilNode(inj_latt_start,inj_latt_start.getLength(),foil)	
 			
 			#set the strength of the chicane kicks
-			if useChicaneScaleFile and useChicane_NA_NA_NA_NA_File:
+			if useChicaneScaleFile:
 				if not doDipoleStrippers and useChicane_NA_NA_NA_NA_File:
 					openedFile=open("%s/ChicaneScales_%s_%s_%s_%s.txt"%(outputDirectoryChicaneScales,"NA","NA","NA","NA"),'r')
 				else:
