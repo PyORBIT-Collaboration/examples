@@ -5,21 +5,21 @@ echo "Hello World"
 #directory is for injectbeam wastebeam
 #directory2 is for closed beam
 #directory3 is injectbeam ring
-outputDirectory=Method1
+outputDirectory=Method3
 #outputDirectoryPrefix=Method1
 magneticFieldDirectory=MagneticFieldFiles   
 magneticFieldFilePrefix=magneticField
 magneticFieldFiles=(UpUp DownDown UpDown DownUp LeftLeft LeftRight)
 beamLatticeFileDirectory=BeamLatticeFiles
-chicaneScaleDirectory=Method1
-suffixInjection=InjectBeam_Method1
-suffixWaste=WasteBeam_Method1
-suffixClosed=ClosedBeam_Method1
+chicaneScaleDirectory=Method3_Part2
+suffixInjection=InjectBeam_Method3
+suffixWaste=WasteBeam_Method3
+suffixClosed=ClosedBeam_Method3
 
 suffix=($suffixInjection $suffixWaste $suffixClosed)
 
 #echo "$outputDirectoryPrefix"_"$suffixInjection"
-echo "Method1"
+echo "Method2"
 #pyORBIT InjectionRegion_NoSpaceChargeStripNode_General.py --outputDirectory "$outputDirectoryPrefix"_"$suffixInjection" --magneticFieldFile "$magneticFieldFile" --beamLatticeFile "$beamLatticeFileDirectory"/"$suffixInjection" --chicaneScaleDirectory "$chicaneScaleDirectory"
 for j in ${magneticFieldFiles[@]}
 do

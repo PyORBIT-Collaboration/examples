@@ -601,9 +601,9 @@ for currentPart in stripperPositionArray:
 			print line
 			theScales=line.split(",")
 			if chicaneScaleFile_UsePX:
-				pxOffset=-float(theScales[chicaneScaleFile_UsePX_Position].strip())
+				pxOffset=float(theScales[chicaneScaleFile_UsePX_Position].strip())
 			if chicaneScaleFile_UsePY:
-				pyOffset=-float(theScales[chicaneScaleFile_UsePY_Position].strip())				
+				pyOffset=float(theScales[chicaneScaleFile_UsePY_Position].strip())				
 			openedFile.close()
 		#if reading bunch from file the offset should already have been added
 		if not bunchFromFile:
