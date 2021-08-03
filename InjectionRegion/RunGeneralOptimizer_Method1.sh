@@ -5,13 +5,13 @@ echo "Hello World"
 #directory is for injectbeam wastebeam
 #directory2 is for closed beam
 #directory3 is injectbeam ring
-outputDirectory=Method1
+outputDirectory=Method1_strippersNotClosed
 magneticFieldDirectory=MagneticFieldFiles   
 magneticFieldFilePrefix=magneticField
 magneticFieldFiles=(UpUp DownDown UpDown DownUp LeftLeft LeftRight)
 optimizerConfigFile=OptimizerConfigFiles/Method1_Settings.txt
-beamLatticeFile=OptimizerConfigFiles/DefaultBeamLattice.txt
-#beamLatticeFile=OptimizerConfigFiles/BeamLattice_DIfferentClosed.txt
+#beamLatticeFile=OptimizerConfigFiles/DefaultBeamLattice.txt
+beamLatticeFile=OptimizerConfigFiles/DefaultBeamLattice_strippersNotClosed.txt
 chicaneScaleDirectory=blank
 
 echo "Method1"
