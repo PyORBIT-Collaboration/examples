@@ -115,6 +115,26 @@ print " ========= theory and simulation should agree! ============== "
 print "particles slope delta(pz)            = %12.5g +- %12.5g "%(slope_z_avg,slope_z_err)
 print "particles slope delta(pz) from theory= %12.5g"%slope_z_theory 
 
+#----------------------------------------------------------
+# Check the long_avg_n -points quadratic interpolations for
+# longitudinal derivative
+# longGrid - Grid1D density distribution
+# longDerivGrid - Grid1D density distribution derivative (normalized with 1/z_step)
+# --- Grid1D has its own derivative method
+#-----------------------------------------------------------
+print "========================================================="
+z_step = longGrid.getGridZ(1) - longGrid.getGridZ(0)
+for iz in range(sizeZ):
+	z_1 = longGrid.getGridZ(iz)
+	z_2 = longDerivGrid.getGridZ(iz)
+	dz = z_2 - z_1
+	val = longGrid.getValue(z_1)
+	grad_1 = longGrid.calcGradient(z_1)
+	grad_2 = longDerivGrid.getValue(z_1)*z_step
+	st = "ind =",iz," z[m]= %12.6g   dz= %12.6g    val= %12.6g    grad1,2 = ( %12.6g , %12.6g) "%(z_1,dz,val,grad_1,grad_2)
+	print st
+print "========================================================="
+
 #--------------------------------------------
 # plot the graphs for a longitudinal density and derivative
 #--------------------------------------------
@@ -132,7 +152,6 @@ for ix in range(nStep+1):
 	long_grad_rho = longDerivGrid.getValue(z)
 	long_grad_arr.append((z,long_grad_rho))
 		
-
 #-------------------------------------------------	
 #this is the example of using the Gnuplot package
 #Comment this part if you do not have this package installed.

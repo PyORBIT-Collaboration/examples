@@ -1,5 +1,7 @@
 #-----------------------------------------------------
-#Grid2D gradient test
+#Grid1D gradient test
+# There are grid1D.calcGradient(z) or grid1D.calcGradientSmoothed(z) functions.
+# The smoothed version should be more precise.
 #-----------------------------------------------------
 
 import sys

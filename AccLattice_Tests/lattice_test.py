@@ -37,32 +37,26 @@ elem2.addChildNode(elem1_2,AccNode.EXIT)
 
 acts = AccActionsContainer()
 
-def Blanks(n):
-    s = ""
-    for i in xrange(n):
-        s += " "
-    return s
-
 nLevel = [0]
 nElems = [0]
 
 def funcEntrance(paramsDict):
-    nLevel[0] += 1
-    node = paramsDict["node"]
-    if(paramsDict.has_key("print") and paramsDict["print"] == True):
-			print Blanks(nLevel[0]),"ENTER level=",nLevel[0]," node=",node.getName()
-			nElems[0] += 1
-
+	nLevel[0] += 1
+	node = paramsDict["node"]
+	if(paramsDict.has_key("print") and paramsDict["print"] == True):
+		print " "*nLevel[0],"ENTER level=",nLevel[0]," node=",node.getName()
+	nElems[0] += 1
+		
 def funcExit(paramsDict):
-    node = paramsDict["node"]
-    if(paramsDict.has_key("print") and paramsDict["print"] == True):
-        print Blanks(nLevel[0]),"EXIT  level=",nLevel[0]," node=",node.getName()
-    nLevel[0] -= 1
+	node = paramsDict["node"]
+	if(paramsDict.has_key("print") and paramsDict["print"] == True):
+		print " "*nLevel[0],"EXIT  level=",nLevel[0]," node=",node.getName()
+	nLevel[0] -= 1
 
 def funcTrack(paramsDict):
-    node = paramsDict["node"]
-    if(paramsDict.has_key("print") and paramsDict["print"] == True):
-        print Blanks(nLevel[0]),"BODY TRACK through node =",node.getName()," level=",nLevel[0]
+	node = paramsDict["node"]
+	if(paramsDict.has_key("print") and paramsDict["print"] == True):
+		print " "*nLevel[0],"BODY TRACK through node =",node.getName()," level=",nLevel[0]
 
 acts.addAction(funcEntrance,AccActionsContainer.ENTRANCE)
 acts.addAction(funcTrack,AccActionsContainer.BODY)
@@ -93,6 +87,6 @@ while(True):
 
 print "====STOP==="
 
-sys.exit(1)
+sys.exit(0)
 
 

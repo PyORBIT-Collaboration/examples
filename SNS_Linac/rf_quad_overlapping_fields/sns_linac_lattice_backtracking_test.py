@@ -1,9 +1,10 @@
 #! /usr/bin/env python
 
 """
-This script will track the bunch through the SNS Linac with
+This script will track back and forth the bunch through the SNS Linac with
 the modified lattice. The quads and RF gaps will be replaced by 
-elements with distributed fields. 
+elements with distributed fields. The results of tracking should be 
+reversible.
 """
 
 import sys
@@ -42,11 +43,19 @@ from orbit.py_linac.overlapping_fields import SNS_EngeFunctionFactory
 sys.path.append("../pyorbit_linac_model")
 from sns_linac_bunch_generator import SNS_Linac_BunchGenerator
 
+from bunch import Bunch
+
 random.seed(100)
 
 #names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
-names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1"]
+#names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1"]
 #names = ["MEBT","DTL1","DTL2","DTL3",]
+#names = ["MEBT","DTL1"]
+#names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed"]
+names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh"]
+#names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6"]
+#names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4"]
+
 #names = ["MEBT",]
 
 #---- create the factory instance
@@ -61,14 +70,26 @@ accLattice = sns_linac_factory.getLinacAccLattice(names,xml_file_name)
 
 print "Linac lattice is ready. L=",accLattice.getLength()
 
+print "===========Cavities' and gaps' pphases ================="
+
+cavs = accLattice.getRF_Cavities()
+for cav in cavs:
+	cav_phase = cav.getPhase()
+	rf_gaps = cav.getRF_GapNodes()
+	print "debug cav = ",cav.getName()," phase [deg] =",cav_phase*180./math.pi
+	for rf_gap in rf_gaps:
+		print "      debug rf_gap = ",rf_gap.getName()," gap phase [deg] =",rf_gap.getGapPhase()*180./math.pi
+
+print "============================================="
+
 #----set up RF Gap Model -------------
 #---- There are three available models at this moment
 #---- BaseRfGap  uses only E0TL*cos(phi)*J0(kr) with E0TL = const
 #---- MatrixRfGap uses a matrix approach like envelope codes
 #---- RfGapTTF uses Transit Time Factors (TTF) like PARMILA
-#cppGapModel = BaseRfGap
+cppGapModel = BaseRfGap
 #cppGapModel = MatrixRfGap
-cppGapModel = RfGapTTF
+#cppGapModel = RfGapTTF
 rf_gaps = accLattice.getRF_Gaps()
 for rf_gap in rf_gaps:
 	rf_gap.setCppGapModel(cppGapModel())
@@ -94,6 +115,9 @@ dir_location = "../sns_rf_fields/"
 #Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1","DTL2","DTL3",],[],SNS_EngeFunctionFactory)
 #Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["SCLMed","SCLHigh"],[],SNS_EngeFunctionFactory)
 #Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT",],[],SNS_EngeFunctionFactory)
+#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,["MEBT","DTL1"],[],SNS_EngeFunctionFactory)
+#Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(accLattice,z_step,dir_location,names,[],SNS_EngeFunctionFactory)
+
 
 #Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT",],[],SNS_EngeFunctionFactory)
 #Replace_Quads_to_OverlappingQuads_Nodes(accLattice,z_step,["MEBT","DTL1"],[],SNS_EngeFunctionFactory)
@@ -145,8 +169,6 @@ max_sc_length = 0.
 min_sc_length = accLattice.getLength()
 for sc_node in space_charge_nodes:
 	scL = sc_node.getLengthOfSC()
-	#if(scL > 0.028):
-	#	print "debug sc node = ",sc_node.getName()," L=",scL
 	if(scL > max_sc_length): max_sc_length = scL
 	if(scL < min_sc_length): min_sc_length = scL
 print "maximal SC length =",max_sc_length,"  min=",min_sc_length
@@ -225,90 +247,171 @@ bunch_gen.setKinEnergy(e_kin_ini)
 #set the beam peak current in mA
 bunch_gen.setBeamCurrent(38.0)
 
-bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = WaterBagDist3D)
-#bunch_in = bunch_gen.getBunch(nParticles = 100000, distributorClass = GaussDist3D)
-#bunch_in = bunch_gen.getBunch(nParticles = 10000, distributorClass = KVDist3D)
+bunch_rfq = bunch_gen.getBunch(nParticles = 5000, distributorClass = WaterBagDist3D)
+#bunch_rfq = bunch_gen.getBunch(nParticles = 5000, distributorClass = GaussDist3D)
+#bunch_rfq = bunch_gen.getBunch(nParticles = 5000, distributorClass = KVDist3D)
 
 print "Bunch Generation completed."
 
-#set up design
-accLattice.trackDesignBunch(bunch_in)
+bunch_forward = Bunch()
+bunch_rfq.copyBunchTo(bunch_forward)
 
-print "Design tracking completed."
-
-#track through the lattice 
-paramsDict = {"old_pos":-1.,"count":0,"pos_step":0.01}
-actionContainer = AccActionsContainer("Bunch Tracking")
-
-pos_start = 0.
-
-twiss_analysis = BunchTwissAnalysis()
-
-file_out = open("pyorbit_twiss_sizes_and_ekin.dat","w")
-
-s = " Node   position "
-s += "   alphaX betaX emittX  normEmittX"
-s += "   alphaY betaY emittY  normEmittY"
-s += "   alphaZ betaZ emittZ  emittZphiMeV"
-s += "   sizeX sizeY sizeZ_deg"
-s += "   eKin Nparts "
-file_out.write(s+"\n")
-print " N node   position    sizeX  sizeY  sizeZdeg  eKin Nparts "
-
-def action_entrance(paramsDict):
-	node = paramsDict["node"]
-	bunch = paramsDict["bunch"]
-	pos = paramsDict["path_length"]
-	if(paramsDict["old_pos"] == pos): return
-	if(paramsDict["old_pos"] + paramsDict["pos_step"] > pos): return
-	paramsDict["old_pos"] = pos
-	paramsDict["count"] += 1
-	gamma = bunch.getSyncParticle().gamma()
-	beta = bunch.getSyncParticle().beta()
-	twiss_analysis.analyzeBunch(bunch)
-	x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
-	y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
-	z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
-	z_to_phase_coeff = bunch_gen.getZtoPhaseCoeff(bunch)
-	z_rms_deg = z_to_phase_coeff*z_rms/1000.0
-	nParts = bunch.getSizeGlobal()
-	(alphaX,betaX,emittX) = (twiss_analysis.getTwiss(0)[0],twiss_analysis.getTwiss(0)[1],twiss_analysis.getTwiss(0)[3]*1.0e+6)
-	(alphaY,betaY,emittY) = (twiss_analysis.getTwiss(1)[0],twiss_analysis.getTwiss(1)[1],twiss_analysis.getTwiss(1)[3]*1.0e+6)
-	(alphaZ,betaZ,emittZ) = (twiss_analysis.getTwiss(2)[0],twiss_analysis.getTwiss(2)[1],twiss_analysis.getTwiss(2)[3]*1.0e+6)		 
-	norm_emittX = emittX*gamma*beta
-	norm_emittY = emittY*gamma*beta
-	#---- phi_de_emittZ will be in [pi*deg*MeV]
-	phi_de_emittZ = z_to_phase_coeff*emittZ	
-	eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
-	s = " %35s  %4.5f "%(node.getName(),pos+pos_start)
-	s += "   %6.4f  %6.4f  %6.4f  %6.4f   "%(alphaX,betaX,emittX,norm_emittX)
-	s += "   %6.4f  %6.4f  %6.4f  %6.4f   "%(alphaY,betaY,emittY,norm_emittY)
-	s += "   %6.4f  %6.4f  %6.4f  %6.4f   "%(alphaZ,betaZ,emittZ,phi_de_emittZ)
-	s += "   %5.3f  %5.3f  %5.3f "%(x_rms,y_rms,z_rms_deg)
-	s += "  %10.6f   %8d "%(eKin,nParts)
-	file_out.write(s +"\n")
-	file_out.flush()
-	s_prt = " %5d  %35s  %4.5f "%(paramsDict["count"],node.getName(),pos+pos_start)
-	s_prt += "  %5.3f  %5.3f   %5.3f "%(x_rms,y_rms,z_rms_deg)
-	s_prt += "  %10.6f   %8d "%(eKin,nParts)
-	print s_prt	
+#----------------------------------------------
+#  Bunch tracking function
+#----------------------------------------------
+def TrackingBunch(accLattice, bunch, print_info = False):
 	
-def action_exit(paramsDict):
-	action_entrance(paramsDict)
+	#set up design
+	accLattice.trackDesignBunch(bunch)
 	
+	#track through the lattice 
+	paramsDict = {"old_pos":-1.,"count":0,"pos_step":0.01}
+	actionContainer = AccActionsContainer("Bunch Tracking")
 	
-actionContainer.addAction(action_entrance, AccActionsContainer.ENTRANCE)
-actionContainer.addAction(action_exit, AccActionsContainer.EXIT)
+	pos_start = 0.
+	
+	twiss_analysis = BunchTwissAnalysis()
+	
+	results_arr = []
+	
+	def action_entrance(paramsDict):
+		node = paramsDict["node"]
+		bunch = paramsDict["bunch"]
+		pos = paramsDict["path_length"]
+		if(paramsDict["old_pos"] == pos): return
+		if(paramsDict["old_pos"] + paramsDict["pos_step"] > pos): return
+		paramsDict["old_pos"] = pos
+		paramsDict["count"] += 1
+		gamma = bunch.getSyncParticle().gamma()
+		beta = bunch.getSyncParticle().beta()
+		twiss_analysis.analyzeBunch(bunch)
+		x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1]*twiss_analysis.getTwiss(0)[3])*1000.
+		y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1]*twiss_analysis.getTwiss(1)[3])*1000.
+		z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1]*twiss_analysis.getTwiss(2)[3])*1000.
+		z_to_phase_coeff = bunch_gen.getZtoPhaseCoeff(bunch)
+		z_rms_deg = z_to_phase_coeff*z_rms/1000.0
+		nParts = bunch.getSizeGlobal()
+		(alphaX,betaX,emittX) = (twiss_analysis.getTwiss(0)[0],twiss_analysis.getTwiss(0)[1],twiss_analysis.getTwiss(0)[3]*1.0e+6)
+		(alphaY,betaY,emittY) = (twiss_analysis.getTwiss(1)[0],twiss_analysis.getTwiss(1)[1],twiss_analysis.getTwiss(1)[3]*1.0e+6)
+		(alphaZ,betaZ,emittZ) = (twiss_analysis.getTwiss(2)[0],twiss_analysis.getTwiss(2)[1],twiss_analysis.getTwiss(2)[3]*1.0e+6)		 
+		norm_emittX = emittX*gamma*beta
+		norm_emittY = emittY*gamma*beta
+		#---- phi_de_emittZ will be in [pi*deg*MeV]
+		phi_de_emittZ = z_to_phase_coeff*emittZ	
+		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
+		s_prt = " %5d  %35s  %4.5f "%(paramsDict["count"],node.getName(),pos+pos_start)
+		s_prt += "  %5.3f  %5.3f   %5.3f "%(x_rms,y_rms,z_rms_deg)
+		s_prt += "  %10.6f   %8d "%(eKin,nParts)
+		if(print_info): print s_prt
+		twiss_arr = [(alphaX,betaX,emittX,norm_emittX),(alphaY,betaY,emittY,norm_emittY),(alphaZ,betaZ,emittZ,phi_de_emittZ)]
+		rms_arr = [x_rms,y_rms,z_rms_deg]
+		results_arr.append([node.getName(),pos,rms_arr,twiss_arr,eKin,nParts])
+		
+	def action_exit(paramsDict):
+		action_entrance(paramsDict)
+	
+	actionContainer.addAction(action_entrance, AccActionsContainer.ENTRANCE)
+	actionContainer.addAction(action_exit, AccActionsContainer.EXIT)
+	
+	accLattice.trackBunch(bunch, paramsDict = paramsDict, actionContainer = actionContainer)
+	
+	return results_arr
+	
+print "====== Start forward tracking "
 
-time_start = time.clock()
+results_arr = TrackingBunch(accLattice, bunch_forward, False)
 
-accLattice.trackBunch(bunch_in, paramsDict = paramsDict, actionContainer = actionContainer)
 
-time_exec = time.clock() - time_start
-print "time[sec]=",time_exec
+def BunchTransformerFunc(bunch):
+	""" 
+	This function will reverse all xp, yp, z coordinates of the bunch.
+	We have to change the sign of the z because the tail will be the head
+	of the bunch, but the sign of dE will not change because of the same reason. 
+	"""
+	nParts = bunch.getSize()
+	for i in range(nParts):
+		(xp,yp,z,dE) = (bunch.xp(i),bunch.yp(i),bunch.z(i),bunch.dE(i))
+		bunch.xp(i,-xp)
+		bunch.yp(i,-yp)
+		bunch.z(i,-z)
+		#--- dE should not change the sign
+		#bunch.dE(i,-dE)
+	bunch.getSyncParticle().time(0.)
 
-#---- dump the final bunch
-#bunch_in.dumpBunch("bunch_test.dat")
 
-file_out.close()
+BunchTransformerFunc(bunch_forward)
+bunch_backward = bunch_forward
 
+
+#---- reverse the lattice for the backward tracking
+accLattice.reverseOrder()
+
+print "========== The lattice was reversed ================="
+
+cavs = accLattice.getRF_Cavities()
+for cav in cavs:
+	cav_phase = cav.getPhase()
+	rf_gaps = cav.getRF_GapNodes()
+	print "debug cav = ",cav.getName()," phase [deg] =",cav_phase*180./math.pi
+	for rf_gap in rf_gaps:
+		print "      debug rf_gap = ",rf_gap.getName()," gap phase [deg] =",rf_gap.getGapPhase()*180./math.pi
+		
+print "============================================="
+print "====== Start backward tracking "
+
+results_backward_arr = TrackingBunch(accLattice, bunch_backward, False)
+
+def GetPlottingArrays(results_arr,length,order = +1):
+	pos_arr = []
+	rms_x_arr = []
+	rms_y_arr = []
+	rms_phi_arr = []
+	for [name,pos,rms_arr,twiss_arr,eKin,nParts] in results_arr:
+		if(order < 0): pos = length - pos
+		pos_arr.append(pos)
+		rms_x_arr.append(rms_arr[0])
+		rms_y_arr.append(rms_arr[1])
+		rms_phi_arr.append(rms_arr[2])
+	return (pos_arr,rms_x_arr,rms_y_arr,rms_phi_arr)
+
+#---------------------------
+# Plot part
+#---------------------------
+import matplotlib.pyplot as plt	
+	
+length = accLattice.getLength()
+	
+(pos_arr,rms_x_arr,rms_y_arr,rms_phi_arr) = GetPlottingArrays(results_arr,length,order = +1)
+(pos_r_arr,rms_x_r_arr,rms_y_r_arr,rms_phi_r_arr) = GetPlottingArrays(results_backward_arr,length,order = -1)
+
+line_1, = plt.plot(pos_arr,rms_x_arr, label='Forward Tracking')
+line_2, = plt.plot(pos_r_arr,rms_x_r_arr, label='Backward Tracking')
+plt.legend(handles=[line_1, line_2])
+plt.title('Horizontal RMS Sizes')
+plt.ylabel('RMS x, mm')
+plt.xlabel('pos,m ')
+
+plt.show()
+
+line_1, = plt.plot(pos_arr,rms_y_arr, label='Forward Tracking')
+line_2, = plt.plot(pos_r_arr,rms_y_r_arr, label='Backward Tracking')
+plt.legend(handles=[line_1, line_2])
+plt.title('Vertical RMS Sizes')
+plt.ylabel('RMS y, mm')
+plt.xlabel('pos,m ')
+
+plt.show()
+
+line_1, = plt.plot(pos_arr,rms_phi_arr, label='Forward Tracking')
+line_2, = plt.plot(pos_r_arr,rms_phi_r_arr, label='Backward Tracking')
+plt.legend(handles=[line_1, line_2])
+plt.title('Longitudinal RMS Sizes')
+plt.ylabel('RMS Phi, deg')
+plt.xlabel('pos,m ')
+
+
+plt.show()
+
+
+print "Stop"
+sys.exit(0)
