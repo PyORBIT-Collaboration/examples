@@ -5,16 +5,16 @@ echo "Hello World"
 #directory is for injectbeam wastebeam
 #directory2 is for closed beam
 #directory3 is injectbeam ring
-outputDirectory=Method3
+outputDirectory=Method3_strippersNotClosed
 #outputDirectoryPrefix=Method1
 magneticFieldDirectory=MagneticFieldFiles   
 magneticFieldFilePrefix=magneticField
 magneticFieldFiles=(UpUp DownDown UpDown DownUp LeftLeft LeftRight)
 beamLatticeFileDirectory=BeamLatticeFiles
-chicaneScaleDirectory=Method3_Part2
+chicaneScaleDirectory=Method3_Part2_strippersNotClosed
 suffixInjection=InjectBeam_Method3
 suffixWaste=WasteBeam_Method3
-suffixClosed=ClosedBeam_Method3
+suffixClosed=ClosedBeam_Method3_strippersNotClosed
 
 suffix=($suffixInjection $suffixWaste $suffixClosed)
 

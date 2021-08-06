@@ -113,10 +113,10 @@ doDipoleStrippers=False
 if beamLatticeDictionary.hasKey("doDipoleStrippers") and beamLatticeDictionary.getValue("doDipoleStrippers")=="True":
 	#print "lets go"
 	doDipoleStrippers=True
-	nPartsChicane=int(beamLatticeDictionary.getValue("firstStripperPositionMax"))
-	nPartsChicane2=int(beamLatticeDictionary.getValue("secondStripperPositionMax"))	
-	stripperPositionArray=beamLatticeDictionary.getArray("firstStripperPositionArray")
-	stripperPositionArray2=beamLatticeDictionary.getArray("secondStripperPositionArray")
+nPartsChicane=int(beamLatticeDictionary.getValue("firstStripperPositionMax"))
+nPartsChicane2=int(beamLatticeDictionary.getValue("secondStripperPositionMax"))	
+stripperPositionArray=beamLatticeDictionary.getArray("firstStripperPositionArray")
+stripperPositionArray2=beamLatticeDictionary.getArray("secondStripperPositionArray")
 if doDipoleStrippers:
 	magneticFieldDictionary=ConfigureFileReader(args.magneticFieldFile)
 	magneticFieldDictionary.printDictionary()	
