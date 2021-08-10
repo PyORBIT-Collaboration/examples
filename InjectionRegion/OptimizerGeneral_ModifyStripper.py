@@ -4,6 +4,8 @@
 # injection nodes
 ##############################################################
 
+
+#This is completely broken if strippers are included in closed orbit
 import math
 import sys
 import os
@@ -74,12 +76,12 @@ class MyScorer(Scorer):
 		#forDebuggingShouldAlwaysBeTrue
 		self.rescaleChicaneFieldInStripper=True
 
-		beamLatticeDictionary=ConfigureFileReader(beamLatticeFileName)
-		beamLatticeDictionary.printDictionary()
-		optimizerSettingsDictionary=ConfigureFileReader(optimizerSettingsFileName)
-		optimizerSettingsDictionary.printDictionary()	
-		magneticFieldDictionary=ConfigureFileReader(magneticFieldFileName)
-		magneticFieldDictionary.printDictionary()		
+		self.beamLatticeDictionary=ConfigureFileReader(beamLatticeFileName)
+		self.beamLatticeDictionary.printDictionary()
+		self.optimizerSettingsDictionary=ConfigureFileReader(optimizerSettingsFileName)
+		self.optimizerSettingsDictionary.printDictionary()	
+		self.magneticFieldDictionary=ConfigureFileReader(magneticFieldFileName)
+		self.magneticFieldDictionary.printDictionary()		
 		
 		#these are the optimizer settings
 		
@@ -88,14 +90,14 @@ class MyScorer(Scorer):
 		self.pxTarget=0
 		self.yTarget=0
 		self.pyTarget=0
-		if optimizerSettingsDictionary.hasKey("target_xOffsetClosed"):
-			self.xTarget=float(optimizerSettingsDictionary.getValue("target_xOffsetClosed"))
-		if optimizerSettingsDictionary.hasKey("target_pxOffsetClosed"):
-			self.pxTarget=float(optimizerSettingsDictionary.getValue("target_pxOffsetClosed"))		
-		if optimizerSettingsDictionary.hasKey("target_yOffsetClosed"):
-			self.yTarget=float(optimizerSettingsDictionary.getValue("target_yOffsetClosed"))
-		if optimizerSettingsDictionary.hasKey("target_pyOffsetClosed"):
-			self.pyTarget=float(optimizerSettingsDictionary.getValue("target_pyOffsetClosed"))
+		if self.optimizerSettingsDictionary.hasKey("target_xOffsetClosed"):
+			self.xTarget=float(self.optimizerSettingsDictionary.getValue("target_xOffsetClosed"))
+		if self.optimizerSettingsDictionary.hasKey("target_pxOffsetClosed"):
+			self.pxTarget=float(self.optimizerSettingsDictionary.getValue("target_pxOffsetClosed"))		
+		if self.optimizerSettingsDictionary.hasKey("target_yOffsetClosed"):
+			self.yTarget=float(self.optimizerSettingsDictionary.getValue("target_yOffsetClosed"))
+		if self.optimizerSettingsDictionary.hasKey("target_pyOffsetClosed"):
+			self.pyTarget=float(self.optimizerSettingsDictionary.getValue("target_pyOffsetClosed"))
 			
 		#these are intial values for closed beam bunch
 		self.xInit=0
@@ -105,14 +107,14 @@ class MyScorer(Scorer):
 		self.zInit=0
 		self.dEInit=0	
 
-		if beamLatticeDictionary.hasKey("xOffsetClosed"):
-			self.xInit=float(beamLatticeDictionary.getValue("xOffsetClosed"))
-		if beamLatticeDictionary.hasKey("pxOffsetClosed"):
-			self.pxInit=float(beamLatticeDictionary.getValue("pxOffsetClosed"))		
-		if beamLatticeDictionary.hasKey("yOffsetClosed"):
-			self.yInit=float(beamLatticeDictionary.getValue("yOffsetClosed"))
-		if beamLatticeDictionary.hasKey("pyOffsetClosed"):
-			self.pyInit=float(beamLatticeDictionary.getValue("pyOffsetClosed"))
+		if self.beamLatticeDictionary.hasKey("xOffsetClosed"):
+			self.xInit=float(self.beamLatticeDictionary.getValue("xOffsetClosed"))
+		if self.beamLatticeDictionary.hasKey("pxOffsetClosed"):
+			self.pxInit=float(self.beamLatticeDictionary.getValue("pxOffsetClosed"))		
+		if self.beamLatticeDictionary.hasKey("yOffsetClosed"):
+			self.yInit=float(self.beamLatticeDictionary.getValue("yOffsetClosed"))
+		if self.beamLatticeDictionary.hasKey("pyOffsetClosed"):
+			self.pyInit=float(self.beamLatticeDictionary.getValue("pyOffsetClosed"))
 			
 		#=====Main bunch parameters============
 		intensity = 7.8e13
@@ -135,18 +137,18 @@ class MyScorer(Scorer):
 		#self.b.addParticle(0,0,0,0,0,0)
 		self.b.addParticle(self.xInit,self.pxInit,self.yInit,self.pyInit,self.zInit,self.dEInit)
 		self.initial_chargeClosed=1
-		if beamLatticeDictionary.hasKey("initial_chargeClosed"):
-			self.initial_chargeClosed=int(beamLatticeDictionary.getValue("initial_chargeClosed"))
+		if self.beamLatticeDictionary.hasKey("initial_chargeClosed"):
+			self.initial_chargeClosed=int(self.beamLatticeDictionary.getValue("initial_chargeClosed"))
 		self.b.charge(self.initial_chargeClosed)
 		
 		#this is the injected bunch
 		self.b2 = Bunch()
 		self.initial_chargeInjection=-1
-		if beamLatticeDictionary.hasKey("initial_chargeInjection"):
-			self.initial_chargeInjection=int(beamLatticeDictionary.getValue("initial_chargeInjection"))
+		if self.beamLatticeDictionary.hasKey("initial_chargeInjection"):
+			self.initial_chargeInjection=int(self.beamLatticeDictionary.getValue("initial_chargeInjection"))
 		self.nPartsInjection=10000
-		if beamLatticeDictionary.hasKey("nPartsInjection"):
-			self.nPartsInjection=int(beamLatticeDictionary.getValue("nPartsInjection"))
+		if self.beamLatticeDictionary.hasKey("nPartsInjection"):
+			self.nPartsInjection=int(self.beamLatticeDictionary.getValue("nPartsInjection"))
 			
 		sp = self.b.getSyncParticle()
 		self.beta= sp.beta()
@@ -172,40 +174,46 @@ class MyScorer(Scorer):
 		self.cutLength2=0.03		
 		self.fieldDirection2=math.pi/2.
 		
-		self.theEffLength1=float(magneticFieldDictionary.getValue("stripperLength1"))
-		self.fieldStrength1=float(magneticFieldDictionary.getValue("stripperStrengthMax1"))
-		self.fieldStrengthMin1=float(magneticFieldDictionary.getValue("stripperStrengthMin1"))
-		self.cutLength1=float(magneticFieldDictionary.getValue("cutLength1"))
-		if magneticFieldDictionary.getValue("fieldDirection1").lower()=="up":
+		self.theEffLength1=float(self.magneticFieldDictionary.getValue("stripperLength1"))
+		self.fieldStrength1=float(self.magneticFieldDictionary.getValue("stripperStrengthMax1"))
+		self.fieldStrengthMin1=float(self.magneticFieldDictionary.getValue("stripperStrengthMin1"))
+		self.cutLength1=float(self.magneticFieldDictionary.getValue("cutLength1"))
+		if self.magneticFieldDictionary.getValue("fieldDirection1").lower()=="up":
 			self.fieldDirection1=math.pi/2.
-		elif magneticFieldDictionary.getValue("fieldDirection1").lower()=="down":
+		elif self.magneticFieldDictionary.getValue("fieldDirection1").lower()=="down":
 			self.fieldDirection1=-math.pi/2.
-		elif magneticFieldDictionary.getValue("fieldDirection1").lower()=="left":
+		elif self.magneticFieldDictionary.getValue("fieldDirection1").lower()=="left":
 			self.fieldDirection1=0
-		elif magneticFieldDictionary.getValue("fieldDirection1").lower()=="right":
+		elif self.magneticFieldDictionary.getValue("fieldDirection1").lower()=="right":
 			self.fieldDirection1=math.pi
 		else:
-			self.fieldDirection1=float(magneticFieldDictionary.getValue("fieldDirection1"))	
+			self.fieldDirection1=float(self.magneticFieldDictionary.getValue("fieldDirection1"))	
 			
-		self.theEffLength2=float(magneticFieldDictionary.getValue("stripperLength2"))
-		self.fieldStrength2=float(magneticFieldDictionary.getValue("stripperStrengthMax2"))
-		self.fieldStrengthMin2=float(magneticFieldDictionary.getValue("stripperStrengthMin2"))
-		self.cutLength2=float(magneticFieldDictionary.getValue("cutLength2"))
-		if magneticFieldDictionary.getValue("fieldDirection2").lower()=="up":
+		self.theEffLength2=float(self.magneticFieldDictionary.getValue("stripperLength2"))
+		self.fieldStrength2=float(self.magneticFieldDictionary.getValue("stripperStrengthMax2"))
+		self.fieldStrengthMin2=float(self.magneticFieldDictionary.getValue("stripperStrengthMin2"))
+		self.cutLength2=float(self.magneticFieldDictionary.getValue("cutLength2"))
+		if self.magneticFieldDictionary.getValue("fieldDirection2").lower()=="up":
 			self.fieldDirection2=math.pi/2.
-		elif magneticFieldDictionary.getValue("fieldDirection2").lower()=="down":
+		elif self.magneticFieldDictionary.getValue("fieldDirection2").lower()=="down":
 			self.fieldDirection2=-math.pi/2.
-		elif magneticFieldDictionary.getValue("fieldDirection2").lower()=="left":
+		elif self.magneticFieldDictionary.getValue("fieldDirection2").lower()=="left":
 			self.fieldDirection2=0
-		elif magneticFieldDictionary.getValue("fieldDirection2").lower()=="right":
+		elif self.magneticFieldDictionary.getValue("fieldDirection2").lower()=="right":
 			self.fieldDirection2=math.pi
 		else:
-			self.fieldDirection2=float(magneticFieldDictionary.getValue("fieldDirection2"))	
+			self.fieldDirection2=float(self.magneticFieldDictionary.getValue("fieldDirection2"))	
 			
 		self.n1=1000
 		self.maxValue1=self.theEffLength1
 		self.step1=self.maxValue1/self.n1
-	
+
+		self.n2_Start=1000
+		self.maxValue2_Start=self.theEffLength2
+		self.step2_Start=self.maxValue2_Start/self.n2_Start
+		self.theEffLength2_Start=self.theEffLength2
+		self.fieldDirection2_Start=self.fieldDirection2
+		
 		self.n2=1000
 		self.maxValue2=self.theEffLength2
 		self.step2=self.maxValue2/self.n2
@@ -220,14 +228,14 @@ class MyScorer(Scorer):
 		self.pxOffsetInjection=-.042
 		self.yOffsetInjection=0.046
 		self.pyOffsetInjection=0
-		if beamLatticeDictionary.hasKey("xOffsetInjection"):
-			self.xOffsetInjection=float(beamLatticeDictionary.getValue("xOffsetInjection"))
-		if beamLatticeDictionary.hasKey("pxOffsetInjection"):
-			self.pxOffsetInjection=float(beamLatticeDictionary.getValue("pxOffsetInjection"))		
-		if beamLatticeDictionary.hasKey("yOffsetClosed"):
-			self.yOffsetInjection=float(beamLatticeDictionary.getValue("yOffsetInjection"))
-		if beamLatticeDictionary.hasKey("pyOffsetClosed"):
-			self.pyOffsetnjection=float(beamLatticeDictionary.getValue("pyOffsetInjection"))
+		if self.beamLatticeDictionary.hasKey("xOffsetInjection"):
+			self.xOffsetInjection=float(self.beamLatticeDictionary.getValue("xOffsetInjection"))
+		if self.beamLatticeDictionary.hasKey("pxOffsetInjection"):
+			self.pxOffsetInjection=float(self.beamLatticeDictionary.getValue("pxOffsetInjection"))		
+		if self.beamLatticeDictionary.hasKey("yOffsetClosed"):
+			self.yOffsetInjection=float(self.beamLatticeDictionary.getValue("yOffsetInjection"))
+		if self.beamLatticeDictionary.hasKey("pyOffsetClosed"):
+			self.pyOffsetnjection=float(self.beamLatticeDictionary.getValue("pyOffsetInjection"))
 			
 		intensity = 7.8e13
 		turns=1
@@ -241,10 +249,10 @@ class MyScorer(Scorer):
 		
 		
 		#------ emittances are normalized - transverse by gamma*beta and long. by gamma**3*beta 
-		(alphaZ,betaZ,emittZ) = ( float(beamLatticeDictionary.getValue("alphaZInjection")), float(beamLatticeDictionary.getValue("alphaZInjection")), float(beamLatticeDictionary.getValue("alphaZInjection")))
+		(alphaZ,betaZ,emittZ) = ( float(self.beamLatticeDictionary.getValue("alphaZInjection")), float(self.beamLatticeDictionary.getValue("alphaZInjection")), float(self.beamLatticeDictionary.getValue("alphaZInjection")))
 		
-		(alphaX,betaX,emittX) = ( float(beamLatticeDictionary.getValue("alphaXInjection")), float(beamLatticeDictionary.getValue("betaXInjection")), float(beamLatticeDictionary.getValue("emittXInjection")))
-		(alphaY,betaY,emittY) = ( float(beamLatticeDictionary.getValue("alphaYInjection")), float(beamLatticeDictionary.getValue("betaYInjection")), float(beamLatticeDictionary.getValue("emittYInjection")))
+		(alphaX,betaX,emittX) = ( float(self.beamLatticeDictionary.getValue("alphaXInjection")), float(self.beamLatticeDictionary.getValue("betaXInjection")), float(self.beamLatticeDictionary.getValue("emittXInjection")))
+		(alphaY,betaY,emittY) = ( float(self.beamLatticeDictionary.getValue("alphaYInjection")), float(self.beamLatticeDictionary.getValue("betaYInjection")), float(self.beamLatticeDictionary.getValue("emittYInjection")))
 		
 		#---make emittances un-normalized XAL units [m*rad]
 		emittX = 1.0e-6*emittX/(gamma*beta)
@@ -345,7 +353,45 @@ class MyScorer(Scorer):
 		self.b.py(0,self.pyInit)
 		self.b.z(0,self.zInit)
 		self.b.dE(0,self.dEInit)
-
+	def setSecondStripperLength(self,scale):
+		self.n2=int(self.n2_Start*scale)
+		self.theEffLength2=self.theEffLength2_Start*scale
+		self.maxValue2=self.theEffLength2
+		self.step2=self.maxValue2/self.n2
+	def makeNewInjectLattice(self):
+		inj_latt_start = teapot.TEAPOT_Ring()
+		print "Read MAD."
+		#this lattice has the injection region from the start of the drift prior to chicane2 up to and including the drift after chicane3
+		inj_latt_start.readMAD(self.beamLatticeDictionary.getValue("latticeInjection"),"RING")		
+		self.OL_inject_start =OptimizerLattice(inj_latt_start)
+		if (self.beamLatticeDictionary.hasKey("doDipoleStrippersInjection") and self.beamLatticeDictionary.getValue("doDipoleStrippersInjection")=="True"):
+			self.OL_inject_start.setDoDipoleStrippers(True)
+			if self.beamLatticeDictionary.hasKey("firstStripperIsStripperInjection") and self.beamLatticeDictionary.getValue("firstStripperIsStripperInjection")=="True":
+				self.OL_inject_start.setFirstDipoleIsStripper(True)
+			if self.beamLatticeDictionary.hasKey("secondStripperIsStripperInjection") and self.beamLatticeDictionary.getValue("secondStripperIsStripperInjection")=="True":
+				self.OL_inject_start.setSecondDipoleIsStripper(True)	
+			if self.beamLatticeDictionary.hasKey("secondStrippingLengthInjection"):
+				self.OL_inject_start.setSecondDipoleFixedStripLength(float(self.beamLatticeDictionary.getValue("secondStrippingLengthInjection")))
+		print "boom1"
+		self.changeLattice(self.OL_inject_start)
+		self.initChicanes()
+		print "boom2"
+		self.OL_teapot_latt=self.OL_inject_start
+	def rotateSecondStripperField(self,scale):
+		self.fieldDirection2=self.fieldDirection2_Start*scale
+		nodes=self.OL_teapot_latt.getTeapotLattice().getNodes()
+		
+		self.magneticFieldx2= Function()
+		self.magneticFieldy2= Function()	
+		for i in range(self.n2):
+			x = self.step2*i;
+			#y = constantField(x)
+			y = self.pieceWiseField2(x)
+			self.magneticFieldx2.add(x,y*math.cos(self.fieldDirection2))
+			self.magneticFieldy2.add(x,y*math.sin(self.fieldDirection2))	
+		nodes[self.OL_teapot_latt.getSecondDipoleNode()].setFunctionMagneticFieldx(self.magneticFieldx2)
+		nodes[self.OL_teapot_latt.getSecondDipoleNode()].setFunctionMagneticFieldy(self.magneticFieldy2)
+		nodes[self.OL_teapot_latt.getSecondDipoleNode()].computeFunctions()			
 	def setScaleChicane(self,chicaneToScale,scale):
 		nodes=self.OL_teapot_latt.getTeapotLattice().getNodes()
 		for i in range(len(self.OL_teapot_latt.getChicaneNodes()[chicaneToScale])):
@@ -633,6 +679,8 @@ class MyScorer(Scorer):
 		x5 = trialPoint.getVariableProxyArr()[5].getValue()
 		x6 = trialPoint.getVariableProxyArr()[6].getValue()
 		x7 = trialPoint.getVariableProxyArr()[7].getValue()
+		x8 = trialPoint.getVariableProxyArr()[8].getValue()
+		x9 = trialPoint.getVariableProxyArr()[9].getValue()
 		self.setpxOffsetClosed(x6)
 		self.setpyOffsetClosed(x7)
 		self.resetBunch()		
@@ -653,6 +701,14 @@ class MyScorer(Scorer):
 		self.setScaleChicane(3,x3)
 
 		self.changeLattice(self.OL_inject_start)
+		#if we are changing length need to remake lattice
+		if (optimizerSettingsDictionary.hasKey("floatSecondStripperLength") and optimizerSettingsDictionary.getValue("floatSecondStripperLength")=="True"):
+			self.setSecondStripperLength(x8)
+			self.makeNewInjectLattice()
+		#self.changeLattice(self.OL_inject_start)
+		#need to rotate field
+		if (optimizerSettingsDictionary.hasKey("floatSecondStripperAngle") and optimizerSettingsDictionary.getValue("floatSecondStripperAngle")=="True"):
+			self.rotateSecondStripperField(x9)
 		self.setScaleChicane(0,x0)
 		self.setScaleChicane(1,x1)
 		self.setScaleChicane(2,x2)
@@ -969,6 +1025,8 @@ for currentPart in stripperPositionArray:
 		#x5 is py inject offset
 		#x6 is px closed offset
 		#x7 is py closed offset
+		#x8 is length of stripper scale
+		#x9 is angle stripper scale
 		
 		trialPoint.addVariableProxy(VariableProxy(name = "x0", value = chicaneScale10, step = 0.1))
 		trialPoint.addVariableProxy(VariableProxy(name = "x1", value = chicaneScale11, step = 0.1))
@@ -978,6 +1036,8 @@ for currentPart in stripperPositionArray:
 		trialPoint.addVariableProxy(VariableProxy(name = "x5", value = initialPYInjection, step = 0.01))
 		trialPoint.addVariableProxy(VariableProxy(name = "x6", value = initialPXClosed, step = 0.01))
 		trialPoint.addVariableProxy(VariableProxy(name = "x7", value = initialPYClosed, step = 0.01))
+		trialPoint.addVariableProxy(VariableProxy(name = "x8", value = 1., step = 0.01))
+		trialPoint.addVariableProxy(VariableProxy(name = "x9", value = 1., step = 0.01))		
 		x0 = trialPoint.getVariableProxyArr()[0]
 		x1 = trialPoint.getVariableProxyArr()[1]
 		x2 = trialPoint.getVariableProxyArr()[2]
@@ -986,7 +1046,11 @@ for currentPart in stripperPositionArray:
 		x5 = trialPoint.getVariableProxyArr()[5]
 		x6 = trialPoint.getVariableProxyArr()[6]
 		x7 = trialPoint.getVariableProxyArr()[7]
+		x8 = trialPoint.getVariableProxyArr()[8]
+		x9 = trialPoint.getVariableProxyArr()[9]
 		
+		x8.setUseInSolver(False)
+		x9.setUseInSolver(False)
 		if optimizerSettingsDictionary.hasKey("fixChicaneScale10") and optimizerSettingsDictionary.getValue("fixChicaneScale10")=="True":
 			x0.setUseInSolver(False)
 		if optimizerSettingsDictionary.hasKey("fixChicaneScale11") and optimizerSettingsDictionary.getValue("fixChicaneScale11")=="True":
@@ -1003,6 +1067,10 @@ for currentPart in stripperPositionArray:
 			x6.setUseInSolver(False)
 		if optimizerSettingsDictionary.hasKey("fixInitialPYClosed") and optimizerSettingsDictionary.getValue("fixInitialPYClosed")=="True":
 			x7.setUseInSolver(False)
+		if optimizerSettingsDictionary.hasKey("floatSecondStripperLength") and optimizerSettingsDictionary.getValue("floatSecondStripperLength")=="True":
+			x8.setUseInSolver(True)
+		if optimizerSettingsDictionary.hasKey("floatSecondStripperAngle") and optimizerSettingsDictionary.getValue("floatSecondStripperAngle")=="True":
+			x9.setUseInSolver(True)			
 		solver.solve(scorer,trialPoint)
 		
 		print "===== best score ========== fitting time = ", solver.getScoreboard().getRunTime()
@@ -1017,7 +1085,7 @@ for currentPart in stripperPositionArray:
 		print "(%f,%f,%f,%f)"%(trialPoint.getVariableProxyValuesArr()[0],trialPoint.getVariableProxyValuesArr()[1],trialPoint.getVariableProxyValuesArr()[2],trialPoint.getVariableProxyValuesArr()[3])
 		#outputDirectory="WasteBeamClosed"
 		fileOut=open("%s/ChicaneScales_%d_%d_%d_%d.txt"%(outputDirectory,currentPart,currentPart2,nPartsChicane,nPartsChicane2),'w')
-		fileOut.write("%f,%f,%f,%f,%f,%f,%f,%f"%(trialPoint.getVariableProxyValuesArr()[0],trialPoint.getVariableProxyValuesArr()[1],trialPoint.getVariableProxyValuesArr()[2],trialPoint.getVariableProxyValuesArr()[3],trialPoint.getVariableProxyValuesArr()[4],trialPoint.getVariableProxyValuesArr()[5],trialPoint.getVariableProxyValuesArr()[6],trialPoint.getVariableProxyValuesArr()[7]) +"\n")
+		fileOut.write("%f,%f,%f,%f,%f,%f,%f,%f,%f,%f"%(trialPoint.getVariableProxyValuesArr()[0],trialPoint.getVariableProxyValuesArr()[1],trialPoint.getVariableProxyValuesArr()[2],trialPoint.getVariableProxyValuesArr()[3],trialPoint.getVariableProxyValuesArr()[4],trialPoint.getVariableProxyValuesArr()[5],trialPoint.getVariableProxyValuesArr()[6],trialPoint.getVariableProxyValuesArr()[7],trialPoint.getVariableProxyValuesArr()[8],trialPoint.getVariableProxyValuesArr()[9]) +"\n")
 		fileOut.flush() 
 		fileOut.close() 
 

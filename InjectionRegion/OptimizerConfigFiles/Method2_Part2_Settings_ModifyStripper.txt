@@ -1,0 +1,33 @@
+
+#whether or not to use parallelness at end of latticeInjection and latticeClosedCompareToInjection
+useParallelScore=True
+
+#whether or not to check if closed after tracking through latticeClosed
+usedClosedScore=False
+
+fixChicaneScale10=True
+fixChicaneScale11=True
+fixChicaneScale12=True
+fixChicaneScale13=True
+
+#whether or not to read the following values from chicaneScaleFile
+readChicaneScale10FromFile=True
+readChicaneScale11FromFile=True
+readChicaneScale12FromFile=True
+readChicaneScale13FromFile=True
+readInitialPXInjectionFromFile=False
+readInitialPYInjectionFromFile=False
+readInitialPXClosedFromFile=False
+readInitialPYClosedFromFile=False
+
+fixInitialPXInjection=True
+fixInitialPYInjection=True
+
+fixInitialPXClosed=True
+fixInitialPYClosed=True
+
+#units [m/rad]
+target_xOffsetClosed=0
+target_pxOffsetClosed=0
+target_yOffsetClosed=0
+target_pyOffsetClosed=0

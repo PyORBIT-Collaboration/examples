@@ -137,6 +137,10 @@ chicaneScaleFile_UsePX=False
 chicaneScaleFile_UsePY=False
 chicaneScaleFile_UsePX_Position=4
 chicaneScaleFile_UsePY_Position=5
+chicaneScaleFile_UseSecondStripperLength=False
+chicaneScaleFile_UseSecondStripperAngle=False
+chicaneScaleFile_SecondStripperLength_Position=8
+chicaneScaleFile_SecondStripperAngle_Position=9
 if beamLatticeDictionary.hasKey("useChicaneScaleFile") and beamLatticeDictionary.getValue("useChicaneScaleFile")=="True":
 	useChicaneScaleFile=True
 	if beamLatticeDictionary.hasKey("chicaneScaleFile_UseScales") and beamLatticeDictionary.getValue("chicaneScaleFile_UseScales")=="True":
@@ -149,6 +153,10 @@ if beamLatticeDictionary.hasKey("useChicaneScaleFile") and beamLatticeDictionary
 		chicaneScaleFile_UsePX_Position=int(beamLatticeDictionary.getValue("chicaneScaleFile_UsePX_Position"))
 	if beamLatticeDictionary.hasKey("chicaneScaleFile_UsePY_Position"):
 		chicaneScaleFile_UsePY_Position=int(beamLatticeDictionary.getValue("chicaneScaleFile_UsePY_Position"))		
+	if beamLatticeDictionary.hasKey("chicaneScaleFile_useSecondStripperLength") and beamLatticeDictionary.getValue("chicaneScaleFile_useSecondStripperLength")=="True":
+		chicaneScaleFile_UseSecondStripperLength=True
+	if beamLatticeDictionary.hasKey("chicaneScaleFile_useSecondStripperAngle") and beamLatticeDictionary.getValue("chicaneScaleFile_useSecondStripperAngle")=="True":
+		chicaneScaleFile_UseSecondStripperAngle=True			
 #------------------------------
 #Initial Distribution Functions
 #------------------------------
@@ -298,7 +306,7 @@ for currentPart in stripperPositionArray:
 				else:
 					fieldDirection=float(magneticFieldDictionary.getValue("fieldDirection1"))
 				
-			
+				
 				#calculate where to place 1st stripper dipole
 				position=-100.
 				if currentPart==-1:
@@ -401,6 +409,25 @@ for currentPart in stripperPositionArray:
 					fieldDirection=math.pi
 				else:
 					fieldDirection=float(magneticFieldDictionary.getValue("fieldDirection2"))
+					
+				if useChicaneScaleFile and chicaneScaleFile_UseSecondStripperAngle:
+					openedFile=open("%s/ChicaneScales_%d_%d_%d_%d.txt"%(outputDirectoryChicaneScales,currentPart,currentPart2,nPartsChicane,nPartsChicane2),'r')
+					line=openedFile.readline()
+					print line
+					theScales=line.split(",")
+					
+					angleScale=float(theScales[chicaneScaleFile_SecondStripperAngle_Position].strip())
+					openedFile.close()					
+					fieldDirection=fieldDirection*angleScale
+				if useChicaneScaleFile and chicaneScaleFile_UseSecondStripperLength:
+					openedFile=open("%s/ChicaneScales_%d_%d_%d_%d.txt"%(outputDirectoryChicaneScales,currentPart,currentPart2,nPartsChicane,nPartsChicane2),'r')
+					line=openedFile.readline()
+					print line
+					theScales=line.split(",")
+					
+					lengthScale=float(theScales[chicaneScaleFile_SecondStripperLength_Position].strip())
+					openedFile.close()					
+					theEffLength=theEffLength*lengthScale					
 				position=-100.
 				#place second stripper 5/6 of the way into chicane3/12. temporary position for consistency
 				#position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*5./6.	

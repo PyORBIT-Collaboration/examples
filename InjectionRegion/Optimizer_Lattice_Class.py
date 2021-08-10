@@ -6,12 +6,16 @@ class OptimizerLattice():
 		self.doDipoleStrippers=False
 		self.firstDipoleIsStripper=False
 		self.secondDipoleIsStripper=False
+		self.thirdDipoleIsStripper=False
 		self.firstDipoleFixedStripLength=-1
 		self.secondDipoleFixedStripLength=-1		
+		self.thirdDipoleFixedStripLength=-1
 		self.firstDipoleInChicane=False
 		self.secondDipoleInChicane=False
+		self.thirdDipoleInChicane=False
 		self.firstDipoleNode=-1
 		self.secondDipoleNode=-1	
+		self.thirdDipoleNode=-1
 		#[0-3] are chicane10-13, 
 		self.chicaneNodes=[]
 		#[0] is drift DB12 and [1] is drift DB23
@@ -30,6 +34,10 @@ class OptimizerLattice():
 		return self.secondDipoleInChicane
 	def setSecondDipoleInChicane(self,value):
 		self.secondDipoleInChicane=value	
+	def getThirdDipoleInChicane(self):
+		return self.thirdDipoleInChicane
+	def setThirdDipoleInChicane(self,value):
+		self.thirdDipoleInChicane=value	
 		
 	def getFirstDipoleNode(self):
 		return self.firstDipoleNode
@@ -39,6 +47,10 @@ class OptimizerLattice():
 		return self.secondDipoleNode
 	def setSecondDipoleNode(self,value):
 		self.secondDipoleNode=value	
+	def getThirdDipoleNode(self):
+		return self.thirdDipoleNode
+	def setThirdDipoleNode(self,value):
+		self.thirdDipoleNode=value
 		
 	def getTeapotLattice(self):
 		return self.teapot_lattice
@@ -69,6 +81,11 @@ class OptimizerLattice():
 		return self.secondDipoleIsStripper
 	def setSecondDipoleIsStripper(self,value):
 		self.secondDipoleIsStripper=value
+
+	def getThirdDipoleIsStripper(self):
+		return self.thirdDipoleIsStripper
+	def setThirdDipoleIsStripper(self,value):
+		self.thirdDipoleIsStripper=value
 		
 	def getFirstDipoleFixedStripLength(self):
 		return self.firstDipoleFixedStripLength
@@ -78,4 +95,9 @@ class OptimizerLattice():
 	def getSecondDipoleFixedStripLength(self):
 		return self.secondDipoleFixedStripLength
 	def setSecondDipoleFixedStripLength(self,value):
-		self.secondDipoleFixedStripLength=value				
+		self.secondDipoleFixedStripLength=value			
+		
+	def getThirdDipoleFixedStripLength(self):
+		return self.thirdDipoleFixedStripLength
+	def setThirdDipoleFixedStripLength(self,value):
+		self.thirdDipoleFixedStripLength=value				
