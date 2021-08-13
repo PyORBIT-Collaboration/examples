@@ -53,14 +53,18 @@ from orbit.teapot import addDipoleStripperNode
 import argparse
 
 from ConfigureFileClass import ConfigureFileReader
+from MagneticFieldClass import MagneticField
 
 
+#finds index of first instance of node with name
+#if it isnt found returns -1
 def findReferenceNode(theLattice,nameToFind):
 	counter=0
 	for node in theLattice.getNodes():
 		if node.getName().strip() == nameToFind:
 			return counter			
-		counter+=1			
+		counter+=1	
+	return -1
 print "Start."
 parser = argparse.ArgumentParser(description="%prog [options]", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--printNodes",type=bool, dest='printNodes', default=True, help="print node list")
@@ -80,6 +84,9 @@ beamLatticeDictionary=ConfigureFileReader(args.beamLatticeFile)
 beamLatticeDictionary.printDictionary()
 
 startingNumber=8
+#the fudgeFactor is the spacing used when inserting the stripping dipole immediately before or after a node
+#without it rounding errors can place its end or begginning extending past the edge of reference node. So it is shifted the fudgeFactor from the edge
+fudgeFactor=.00000001
 #=====Main bunch parameters============
 intensity = 7.8e13
 turns = 1
@@ -114,8 +121,8 @@ if beamLatticeDictionary.hasKey("doDipoleStrippers") and beamLatticeDictionary.g
 	doDipoleStrippers=True
 numberOfStripperDipoles=-1
 if doDipoleStrippers:
-	if self.beamLatticeDictionary.hasKey("numberOfStripperDipoles"):
-		numberOfStripperDipoles=int(self.beamLatticeDictionary.getValue("numberOfStripperDipoles"))
+	if beamLatticeDictionary.hasKey("numberOfStripperDipoles"):
+		numberOfStripperDipoles=int(beamLatticeDictionary.getValue("numberOfStripperDipoles"))
 	else:
 		print "numberOfStripperDipoles not in beamLattice config file, exiting"
 		sys.exit(0)
@@ -128,7 +135,7 @@ latticeIndexToAddFoilTo=-1
 if beamLatticeDictionary.hasKey("useFoil") and beamLatticeDictionary.getValue("useFoil")=="True":
 	useSecondaryFoil=True
 	#adds foil to end of this lattice
-	latticeIndexToAddFoilTo=beamLatticeDictionary.getValue("latticeToAddFoilTo")
+	latticeIndexToAddFoilTo=int(beamLatticeDictionary.getValue("latticeToAddFoilTo"))
 	
 useChicaneScaleFile=False
 chicaneScaleFile_UseScales=False
@@ -291,14 +298,14 @@ for currentLatticeName in latticeFileNameList:
 				print "stripper%d not in beamLattice config file, exiting"%(index+1)
 				sys.exit(0)	
 			
-			if useChicaneScaleFile and beamLatticeDictionary.hasKey("chicaneScaleFile_useStripperLength%d"%(index+1)) and optimizerSettingsDictionary.getValue("chicaneScaleFile_useStripperLength%d"%(index+1))=="True":
+			if useChicaneScaleFile and beamLatticeDictionary.hasKey("chicaneScaleFile_useStripperLength%d"%(index+1)) and beamLatticeDictionary.getValue("chicaneScaleFile_useStripperLength%d"%(index+1))=="True":
 				openedFile=open("%s/ChicaneScales.txt"%(outputDirectoryChicaneScales),'r')
 				line=openedFile.readline()
 				#print line
 				theScales=line.split(",")
 				scale=float(theScales[startingNumber+index*2].strip())			
 				magneticFields[index].setStripperLength(magneticFields[index].getStripperLength()*scale)
-			if useChicaneScaleFile and beamLatticeDictionary.hasKey("chicaneScaleFile_useStripperAngle%d"%(index+1)) and optimizerSettingsDictionary.getValue("chicaneScaleFile_useStripperAngle%d"%(index+1))=="True":
+			if useChicaneScaleFile and beamLatticeDictionary.hasKey("chicaneScaleFile_useStripperAngle%d"%(index+1)) and beamLatticeDictionary.getValue("chicaneScaleFile_useStripperAngle%d"%(index+1))=="True":
 				openedFile=open("%s/ChicaneScales.txt"%(outputDirectoryChicaneScales),'r')
 				line=openedFile.readline()
 				#print line
@@ -308,237 +315,82 @@ for currentLatticeName in latticeFileNameList:
 				
 		for index in range(numberOfStripperDipoles):
 			refNodeIndex=findReferenceNode(inj_latt_start,magneticFields[index].getRefNodeName().strip())
-			position=-100.
-			if magneticFields[index].getNodePosition().lower()=="before":
-				position =inj_latt_start.getNodePositionsDict()[inj_latt_start.getNodes()[refNodeIndex]][0]-float(magneticFields[index].getStripperLength())
-			elif magneticFields[index].getNodePosition().lower()=="after":
-				position =inj_latt_start.getNodePositionsDict()[inj_latt_start.getNodes()[refNodeIndex]][1]
-			else:
-				position =inj_latt_start.getNodePositionsDict()[inj_latt_start.getNodes()[refNodeIndex]][0]+inj_latt_start.getNodes()[refNodeIndex].getLength()*float(magneticFields[index].getNodePosition())			
-	#add first stripping dipole
-	if doDipoleStrippers and chicane11 is not None:
-		#create stripping dipole magnetic field
-		theEffLength=float(magneticFieldDictionary.getValue("stripperLength1"))
-		fieldStrength=float(magneticFieldDictionary.getValue("stripperStrengthMax1"))
-		fieldStrengthMin=float(magneticFieldDictionary.getValue("stripperStrengthMin1"))
-		cutLength=float(magneticFieldDictionary.getValue("cutLength1"))
-		if magneticFieldDictionary.getValue("fieldDirection1").lower()=="up":
-			fieldDirection=math.pi/2.
-		elif magneticFieldDictionary.getValue("fieldDirection1").lower()=="down":
-			fieldDirection=-math.pi/2.
-		elif magneticFieldDictionary.getValue("fieldDirection1").lower()=="left":
-			fieldDirection=0
-		elif magneticFieldDictionary.getValue("fieldDirection1").lower()=="right":
-			fieldDirection=math.pi
-		else:
-			fieldDirection=float(magneticFieldDictionary.getValue("fieldDirection1"))
-		
-		
-		#calculate where to place 1st stripper dipole
-		position=-100.
-		if currentPart==-1:
-			#position =inj_latt_start.getNodePositionsDict()[nodes[0]][1]-theEffLength
-			position =inj_latt_start.getNodePositionsDict()[chicane11][0]-theEffLength
-		elif currentPart==0:
-			position =inj_latt_start.getNodePositionsDict()[chicane11][0]
-		elif currentPart is nPartsChicane:
-			position =inj_latt_start.getNodePositionsDict()[chicane11][1]
-		else :
-			position =inj_latt_start.getNodePositionsDict()[chicane11][0]+chicane11.getLength()*currentPart/nPartsChicane
-			
-		
-		#check if we are in kicker or drift
-		position_start = position
-		position_stop = position + theEffLength
-		(node_start_ind,node_stop_ind,z,ind) = (-1,-1, 0., 0)
-		for nodeCurrent in inj_latt_start.getNodes():
-			if(position_start >= z and position_start <= z + nodeCurrent.getLength()):
-				node_start_ind = ind
-			if(position_stop > z and position_stop <= z + nodeCurrent.getLength()):
-				node_stop_ind = ind
-			ind += 1
-			z += nodeCurrent.getLength()	
-			
-		if node_start_ind!=node_stop_ind:
-			#the stripping dipole spans more than 1 node
-			print "something is going to be broken"
-			sys.exit(0)
-		nodeCurrent=inj_latt_start.getNodes()[node_start_ind]
-		xkickerField=0.
-		ykickerField=0.
-		#nothing to change because no field in drift
-		if(isinstance(nodeCurrent,DriftTEAPOT)):
-			print "stripper dipole is in drift"
-		#in kicker so add kicker field to stripping field
-		elif (isinstance(nodeCurrent,KickTEAPOT)):
-			print "stripper dipole is in kick node"
-			if args.addChicaneFieldToStripper:
-				#compute field to create kick
-				length=nodeCurrent.getLength()
-				kx=nodeCurrent.getParam("kx")
-				ykickerField=-kx*rigidity/length
-				ky=nodeCurrent.getParam("ky")
-				xkickerField=ky*rigidity/length
-				
-		def constantField(x):
-			return fieldStrength
-		def pieceWiseField(x):
-			if x<=0.0:
-				return 0
-			elif x<cutLength :
-				return fieldStrength/cutLength*x
-			elif x>=cutLength:
-				return fieldStrength
-			pass
-		#field starts at fieldStrengthMin, ramps up to fieldStrength linearly from x=0 to x=cutlength. THen from x=cutlength to end of magnet it is constant at fieldStrength
-		def pieceWiseField2(x):
-			if x<cutLength :
-				return (fieldStrength-fieldStrengthMin)/cutLength*x+fieldStrengthMin
-			elif x>=cutLength:
-				return fieldStrength
-			pass
-		magneticFieldx= Function()
-		magneticFieldy= Function()
-		#number of parts to break stripper dipole into
-		n=1000
-		maxValue=theEffLength
-		step=maxValue/n
-		
-		#actually creates the field functions
-		for i in range(n):
-			x = step*i;
-			#y = constantField(x)
-			y = pieceWiseField2(x)
-			magneticFieldx.add(x,y*math.cos(fieldDirection)+xkickerField)
-			magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
-		if beamLatticeDictionary.getValue("firstStripperIsStripper")=="True":
-			myDipole_DH_A11=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A11")
-		else:
-			myDipole_DH_A11=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A11")
-		#myDipole_DH_A11.addChildNode(myEmitNode_DH11_3pre,AccNode.ENTRANCE)
-		#myDipole_DH_A11.addChildNode(myEmitNode_postS_DH11,AccNode.EXIT)
-		
-		addDipoleStripperNode(inj_latt_start,position,myDipole_DH_A11)
-			
-	#add Second stripping dipole
-	if doDipoleStrippers and chicane12 is not None:
-		theEffLength=float(magneticFieldDictionary.getValue("stripperLength2"))
-		fieldStrength=float(magneticFieldDictionary.getValue("stripperStrengthMax2"))
-		fieldStrengthMin=float(magneticFieldDictionary.getValue("stripperStrengthMin2"))
-		cutLength=float(magneticFieldDictionary.getValue("cutLength2"))
-		if magneticFieldDictionary.getValue("fieldDirection2").lower()=="up":
-			fieldDirection=math.pi/2.
-		elif magneticFieldDictionary.getValue("fieldDirection2").lower()=="down":
-			fieldDirection=-math.pi/2.
-		elif magneticFieldDictionary.getValue("fieldDirection2").lower()=="left":
-			fieldDirection=0
-		elif magneticFieldDictionary.getValue("fieldDirection2").lower()=="right":
-			fieldDirection=math.pi
-		else:
-			fieldDirection=float(magneticFieldDictionary.getValue("fieldDirection2"))
-			
-		if useChicaneScaleFile and chicaneScaleFile_UseSecondStripperAngle:
-			openedFile=open("%s/ChicaneScales_%d_%d_%d_%d.txt"%(outputDirectoryChicaneScales,currentPart,currentPart2,nPartsChicane,nPartsChicane2),'r')
-			line=openedFile.readline()
-			print line
-			theScales=line.split(",")
-			
-			angleScale=float(theScales[chicaneScaleFile_SecondStripperAngle_Position].strip())
-			openedFile.close()					
-			fieldDirection=fieldDirection*angleScale
-		if useChicaneScaleFile and chicaneScaleFile_UseSecondStripperLength:
-			openedFile=open("%s/ChicaneScales_%d_%d_%d_%d.txt"%(outputDirectoryChicaneScales,currentPart,currentPart2,nPartsChicane,nPartsChicane2),'r')
-			line=openedFile.readline()
-			print line
-			theScales=line.split(",")
-			
-			lengthScale=float(theScales[chicaneScaleFile_SecondStripperLength_Position].strip())
-			openedFile.close()					
-			theEffLength=theEffLength*lengthScale					
-		position=-100.
-		#place second stripper 5/6 of the way into chicane3/12. temporary position for consistency
-		#position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*5./6.	
-		#position =inj_latt_start.getNodePositionsDict()[chicane12][0]
-		if currentPart2==-1:
-			#position =inj_latt_start.getNodePositionsDict()[driftDB23][1]-theEffLength
-			position =inj_latt_start.getNodePositionsDict()[chicane12][0]-theEffLength
-		elif currentPart2==0:
-			position =inj_latt_start.getNodePositionsDict()[chicane12][0]
-		elif currentPart2 is nPartsChicane2:
-			position =inj_latt_start.getNodePositionsDict()[chicane12][1]
-		else :
-			position =inj_latt_start.getNodePositionsDict()[chicane12][0]+chicane12.getLength()*currentPart2/nPartsChicane2	
-		#check if we are in kicker or drift
-		position_start = position
-		position_stop = position + theEffLength
-		(node_start_ind,node_stop_ind,z,ind) = (-1,-1, 0., 0)
-		for nodeCurrent in inj_latt_start.getNodes():
-			if(position_start >= z and position_start <= z + nodeCurrent.getLength()):
-				node_start_ind = ind
-			if(position_stop > z and position_stop <= z + nodeCurrent.getLength()):
-				node_stop_ind = ind
-			ind += 1
-			z += nodeCurrent.getLength()	
-			
-		if node_start_ind!=node_stop_ind:
-			print "something is going to be broken2"
-			sys.exit(0)
-		nodeCurrent=inj_latt_start.getNodes()[node_start_ind]
-		xkickerField=0.
-		ykickerField=0.
-		#nothing to change
-		if(isinstance(nodeCurrent,DriftTEAPOT)):
-			print "stripper dipole is in drift"
-		elif (isinstance(nodeCurrent,KickTEAPOT)):
-			print "stripper dipole is in kick node"
-			if args.addChicaneFieldToStripper:
-				#compute field to create kick
-				length=nodeCurrent.getLength()
-				kx=nodeCurrent.getParam("kx")		
-				ykickerField=-kx*rigidity/length
-				ky=nodeCurrent.getParam("ky")
-				xkickerField=ky*rigidity/length
-				
+			if refNodeIndex>=0:
+				position=-100.
+				if magneticFields[index].getNodePosition().lower()=="before":
+					position =inj_latt_start.getNodePositionsDict()[inj_latt_start.getNodes()[refNodeIndex]][0]-float(magneticFields[index].getStripperLength())-fudgeFactor
+				elif magneticFields[index].getNodePosition().lower()=="after":
+					position =inj_latt_start.getNodePositionsDict()[inj_latt_start.getNodes()[refNodeIndex]][1]+fudgeFactor
+				else:
+					position =inj_latt_start.getNodePositionsDict()[inj_latt_start.getNodes()[refNodeIndex]][0]+inj_latt_start.getNodes()[refNodeIndex].getLength()*float(magneticFields[index].getNodePosition())
 					
-		def constantField(x):
-			return fieldStrength
-		def pieceWiseField(x):
-			if x<=0.0:
-				return 0
-			elif x<cutLength :
-				return fieldStrength/cutLength*x
-			elif x>=cutLength:
-				return fieldStrength
-			pass
-		def pieceWiseField2(x):
-			if x<cutLength :
-				return (fieldStrength-fieldStrengthMin)/cutLength*x+fieldStrengthMin
-			elif x>=cutLength:
-				return fieldStrength
-			pass
-		magneticFieldx= Function()
-		magneticFieldy= Function()
-		n=1000
-		maxValue=theEffLength
-		step=maxValue/n
-		
-		for i in range(n):
-			x = step*i;
-			#y = constantField(x)
-			y = pieceWiseField2(x)
-			magneticFieldx.add(x,y*math.cos(fieldDirection)+xkickerField)
-			magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
-			
-		if beamLatticeDictionary.getValue("secondStripperIsStripper")=="True":
-			myDipole_DH_A12=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A12",secondStrippingLength)
-		else:
-			myDipole_DH_A12=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta,"Dipole_DH_A12")
-		#myDipole_DH_A12.addChildNode(myEmitNode_DH12_3pre,AccNode.ENTRANCE)
-		#myDipole_DH_A12.addChildNode(myEmitNode_postS_DH12,AccNode.EXIT)
-		
-		addDipoleStripperNode(inj_latt_start,position,myDipole_DH_A12)	
-		
-	#print lattice info and create nodes for printing emmit info
+				#check if we are in kicker or drift
+				position_start = position
+				position_stop = position + float(magneticFields[index].getStripperLength())
+				(node_start_ind,node_stop_ind,z,ind) = (-1,-1, 0., 0)
+				for nodeCurrent in inj_latt_start.getNodes():
+					if(position_start >= z and position_start <= z + nodeCurrent.getLength()):
+						node_start_ind = ind
+					if(position_stop > z and position_stop <= z + nodeCurrent.getLength()):
+						node_stop_ind = ind
+					ind += 1
+					z += nodeCurrent.getLength()	
+					
+				if node_start_ind!=node_stop_ind:
+					#the stripping dipole spans more than 1 node
+					print "something is going to be broken1"
+					print position_start
+					print position_stop
+					sys.exit(0)
+				nodeCurrent=inj_latt_start.getNodes()[node_start_ind]
+				xkickerField=0.
+				ykickerField=0.
+				#nothing to change because no field in drift
+				if(isinstance(nodeCurrent,DriftTEAPOT)):
+					magneticFields[index].setIsInsideChicane(False)
+					#print "stripper dipole is in drift"
+				#in kicker so add kicker field to stripping field
+				elif (isinstance(nodeCurrent,KickTEAPOT)):
+					#print "stripper dipole is in kick node"
+					if args.addChicaneFieldToStripper:
+						magneticFields[index].setIsInsideChicane(True)
+						if nodeCurrent.getName().strip() == "DH_A10":
+							magneticFields[index].setChicaneItIsInside(0)
+						elif nodeCurrent.getName().strip() == "DH_A11":
+							magneticFields[index].setChicaneItIsInside(1)
+						elif nodeCurrent.getName().strip() == "DH_A12":
+							magneticFields[index].setChicaneItIsInside(2)
+						elif nodeCurrent.getName().strip() == "DH_A13":
+							magneticFields[index].setChicaneItIsInside(3)							
+						#compute field to create kick
+						length=nodeCurrent.getLength()
+						kx=nodeCurrent.getParam("kx")
+						ykickerField=-kx*self.rigidity/length
+						ky=nodeCurrent.getParam("ky")
+						xkickerField=ky*self.rigidity/length
+				#actually creates the field functions
+				nParts=int(magneticFields[index].getNParts())
+				lengthStripper=float(magneticFields[index].getStripperLength())
+				stepSize=lengthStripper/nParts
+				fieldDirection=float(magneticFields[index].getFieldDirection())
+				magneticFieldx= Function()
+				magneticFieldy= Function()
+				for i in range(nParts):
+					x = stepSize*i;
+					#y = constantField(x)
+					y = float(magneticFields[index].getValueOfField(x))
+					magneticFieldx.add(x,y*math.cos(fieldDirection)+xkickerField)
+					magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
+				
+				if magneticFields[index].getIsStripper()=="True":
+					myDipole_DH_A11=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,gamma,beta,magneticFields[index].getNodeName(),float(magneticFields[index].getFixedStrippingLength()))
+				else:
+					myDipole_DH_A11=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,gamma,beta,magneticFields[index].getNodeName())
+				#print "xkickerField=",xkickerField
+				myDipole_DH_A11.setChicaneFieldx(xkickerField)
+				myDipole_DH_A11.setChicaneFieldy(ykickerField)
+				addDipoleStripperNode(inj_latt_start,position,myDipole_DH_A11)					
+
 	i = 0
 	path_length=0
 	for node in nodes:
@@ -557,12 +409,12 @@ for currentLatticeName in latticeFileNameList:
 				myPrintNodeBeg=Print_Node("MyPrintNode_beg_%s_NA_NA_NA_NA"%(node.getName()),True,"%s/print_beg_%s_NA_NA_NA_NA.txt"%(outputDirectory,node.getName()))
 				myPrintNodeEnd=Print_Node("MyPrintNode_end_%s_NA_NA_NA_NA"%(node.getName()),True,"%s/print_end_%s_NA_NA_NA_NA.txt"%(outputDirectory,node.getName()))
 			else:
-				fileOut=open("%s/print_beg_%s_%d_%d_%d_%d.txt"%(outputDirectory,node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2),'w')
+				fileOut=open("%s/print_beg_%s.txt"%(outputDirectory,node.getName()),'w')
 				fileOut.close()		
-				fileOut=open("%s/print_end_%s_%d_%d_%d_%d.txt"%(outputDirectory,node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2),'w')
+				fileOut=open("%s/print_end_%s.txt"%(outputDirectory,node.getName()),'w')
 				fileOut.close()	
-				myPrintNodeBeg=Print_Node("MyPrintNode_beg_%s_%d_%d_%d_%d"%(node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2),True,"%s/print_beg_%s_%d_%d_%d_%d.txt"%(outputDirectory,node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2))
-				myPrintNodeEnd=Print_Node("MyPrintNode_end_%s_%d_%d_%d_%d"%(node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2),True,"%s/print_end_%s_%d_%d_%d_%d.txt"%(outputDirectory,node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2))
+				myPrintNodeBeg=Print_Node("MyPrintNode_beg_%s"%(node.getName()),True,"%s/print_beg_%s.txt"%(outputDirectory,node.getName()))
+				myPrintNodeEnd=Print_Node("MyPrintNode_end_%s"%(node.getName()),True,"%s/print_end_%s.txt"%(outputDirectory,node.getName()))
 
 			node.addChildNode(myPrintNodeBeg,AccNode.ENTRANCE)
 			node.addChildNode(myPrintNodeEnd,AccNode.EXIT)
@@ -576,12 +428,12 @@ for currentLatticeName in latticeFileNameList:
 			myEmitNodeBeg=Calc_Emit("MyEmitNode_beg_%s_NA_NA_NA_NA"%(node.getName()),True,"%s/emmit_beg_%s_NA_NA_NA_NA.txt"%(outputDirectory,node.getName()))
 			myEmitNodeEnd=Calc_Emit("MyEmitNode_end_%s_NA_NA_NA_NA"%(node.getName()),True,"%s/emmit_end_%s_NA_NA_NA_NA.txt"%(outputDirectory,node.getName()))					
 		else:
-			fileOut=open("%s/emmit_beg_%s_%d_%d_%d_%d.txt"%(outputDirectory,node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2),'w')
+			fileOut=open("%s/emmit_beg_%s.txt"%(outputDirectory,node.getName()),'w')
 			fileOut.close()		
-			fileOut=open("%s/emmit_end_%s_%d_%d_%d_%d.txt"%(outputDirectory,node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2),'w')
+			fileOut=open("%s/emmit_end_%s.txt"%(outputDirectory,node.getName()),'w')
 			fileOut.close()	
-			myEmitNodeBeg=Calc_Emit("MyEmitNode_beg_%s_%d_%d_%d_%d"%(node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2),True,"%s/emmit_beg_%s_%d_%d_%d_%d.txt"%(outputDirectory,node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2))
-			myEmitNodeEnd=Calc_Emit("MyEmitNode_end_%s_%d_%d_%d_%d"%(node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2),True,"%s/emmit_end_%s_%d_%d_%d_%d.txt"%(outputDirectory,node.getName(),currentPart,currentPart2,nPartsChicane,nPartsChicane2))
+			myEmitNodeBeg=Calc_Emit("MyEmitNode_beg_%s"%(node.getName()),True,"%s/emmit_beg_%s.txt"%(outputDirectory,node.getName()))
+			myEmitNodeEnd=Calc_Emit("MyEmitNode_end_%s"%(node.getName()),True,"%s/emmit_end_%s.txt"%(outputDirectory,node.getName()))
 		node.addChildNode(myEmitNodeBeg,AccNode.ENTRANCE)
 		node.addChildNode(myEmitNodeEnd,AccNode.EXIT)					
 				

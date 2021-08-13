@@ -129,7 +129,7 @@ latticeIndexToAddFoilTo=-1
 if beamLatticeDictionary.hasKey("useFoil") and beamLatticeDictionary.getValue("useFoil")=="True":
 	useSecondaryFoil=True
 	#adds foil to end of this lattice
-	latticeIndexToAddFoilTo=beamLatticeDictionary.getValue("latticeToAddFoilTo")
+	latticeIndexToAddFoilTo=int(beamLatticeDictionary.getValue("latticeToAddFoilTo"))
 	
 useChicaneScaleFile=False
 chicaneScaleFile_UseScales=False
