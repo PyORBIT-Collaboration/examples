@@ -5,12 +5,12 @@ echo "Hello World"
 #directory is for injectbeam wastebeam
 #directory2 is for closed beam
 #directory3 is injectbeam ring
-outputDirectory=Method2_strippersNotClosed_ArrayConfig_p20_Early_Separate_Horiz
+outputDirectory=Method2_strippersNotClosed_ArrayConfig_FoilTest
 outputDirectorySub=Method2_Part1_strippersNotClosed_FloatLength
 #beamLatticeFileSuffix=(RUL LUR)
-beamLatticeFileSuffix=(ULLL URRR)
+beamLatticeFileSuffix=(FoilTest)
 #beamLatticeFileSuffix=(RUR)
-beamLatticeFilePrefix=OptimizerConfigFiles/DefaultBeamLattice_strippersNotClosed_ArrayConfig_p20_Early_
+beamLatticeFilePrefix=OptimizerConfigFiles/DefaultBeamLattice_strippersNotClosed_ArrayConfig_
 optimizerConfigFile=OptimizerConfigFiles/Method2_Part1_Settings_ModifyStripper.txt
 
 
@@ -23,17 +23,9 @@ do
 done
 chicaneScaleDirectory=Method2_Part1_strippersNotClosed_FloatLength
 echo "Method2 Part 2"
-optimizerConfigFile=OptimizerConfigFiles/Method2_Part2_Settings_ArrayConfig_FloatLength_JustY.txt
+optimizerConfigFile=OptimizerConfigFiles/Method2_Part2_Settings_ArrayConfig_FloatLength_FoilTest.txt
 outputDirectorySub=Method2_Part2_strippersNotClosed_FloatLength
 for i in ${beamLatticeFileSuffix[@]}
 do
 	pyORBIT OptimizerGeneral_ArrayConfig.py --outputDirectory "$outputDirectory/$outputDirectorySub"_"$i" --optimizerConfigFile "$optimizerConfigFile" --beamLatticeFile "$beamLatticeFilePrefix""$i.txt" --chicaneScaleDirectory "$outputDirectory/$chicaneScaleDirectory"_"$i"
 done
-chicaneScaleDirectory=Method2_Part2_strippersNotClosed_FloatLength
-optimizerConfigFile=OptimizerConfigFiles/Method2_Part3_Settings_ArrayConfig_FloatLength_JustX_1st.txt
-outputDirectorySub=Method2_Part3_strippersNotClosed_FloatLength
-for i in ${beamLatticeFileSuffix[@]}
-do
-	pyORBIT OptimizerGeneral_ArrayConfig.py --outputDirectory "$outputDirectory/$outputDirectorySub"_"$i" --optimizerConfigFile "$optimizerConfigFile" --beamLatticeFile "$beamLatticeFilePrefix""$i.txt" --chicaneScaleDirectory "$outputDirectory/$chicaneScaleDirectory"_"$i"
-done
-echo "Method2 Part 3"

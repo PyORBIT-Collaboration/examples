@@ -1,0 +1,68 @@
+#lattice info
+latticeInjection=MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane2.LAT
+latticeClosedCompareToInjection=MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_Start_To_JustBeforeChicane4.LAT
+latticeClosed=MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_KickersJustBeforeQuadAfterChicane4.LAT
+
+#whether or not to use Strippers
+doDipoleStrippersInjection=True
+doDipoleStrippersClosed=False
+
+
+numberOfStripperDipoles=4
+
+#stripperX=["<magnetic field file>","<Dipole Name>",isStripper<True/False>,<Name of node to place it in reference too>,<position with respect to reference node>,<fixed stripper length>]
+#<position with respect to reference node> can be "before"(places it right before reference), "after"(places it right after reference), or float [0-1](places it this fraction into reference),<fixed stripper length> sets stripping length same for all particles if >0, if <0 then does nothing
+stripper1=MagneticFieldFiles/magneticFieldRight.txt,Dipole_DH_A11,True,DH_A11,Before,-1
+stripper2=MagneticFieldFiles/magneticFieldUniformRightWeak.txt,Dipole_DH_A11B,False,Dipole_DH_A11,Before,-1
+stripper3=MagneticFieldFiles/magneticFieldUniformUpWeakp20.txt,Dipole_DH_A11C,False,Dipole_DH_A11B,Before,-1
+stripper4=MagneticFieldFiles/magneticFieldRight.txt,Dipole_DH_A12,True,DH_A12,Before,0.04
+
+#beam info
+#GeV
+e_kin_ini=1.3
+mass=0.93827231
+initial_chargeInjection=-1
+nPartsInjection=10000
+
+initial_chargeClosed=1
+#currently this does nothing. its always pencil for closed
+pencilBeamClosed=True
+#if pencil beam closed is true then nPartsClosed is irrelevant
+nPartsClosed=10000
+
+#units [m/rad]
+xOffsetInjection=0.25671
+pxOffsetInjection=-.042
+yOffsetInjection=0.046
+pyOffsetInjection=0
+
+alphaZInjection=0.0196
+betaZInjection=0.5844
+emittZInjection=0.24153
+
+alphaXInjection=.224
+betaXInjection=10.5
+emittXInjection=1.445
+
+alphaYInjection=.224
+betaYInjection=10.5
+emittYInjection=1.445
+
+#units [m/rad]
+xOffsetClosed=0
+pxOffsetClosed=0
+yOffsetClosed=0
+pyOffsetClosed=0
+
+#these values are irrelevent when using pencil beam
+alphaZClosed=0.0196
+betaZClosed=0.5844
+emittZClosed=0.24153
+
+alphaXClosed=.224
+betaXClosed=10.5
+emittXClosed=1.445
+
+alphaYClosed=.224
+betaYClosed=10.5
+emittYClosed=1.445

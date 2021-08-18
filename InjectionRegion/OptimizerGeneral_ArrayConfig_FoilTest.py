@@ -60,8 +60,6 @@ from Optimizer_Lattice_Class import OptimizerLattice
 from MagneticFieldClass import MagneticField
 from ConfigureFileClass import ConfigureFileReader
 
-from KevinPython.changeCharge import Change_Charge_Child
-
 class MyScorer(Scorer):
 	""" The implementation of the abstract Score class """
 	def __init__(self,OL_teapot_latt_full,OL_teapot_latt_partial,OL_inject_start,beamLatticeFileName,optimizerSettingsFileName):
@@ -345,9 +343,7 @@ class MyScorer(Scorer):
 		
 		for currentIndex in range(self.numberOfStripperDipoles):
 			#make sure we are inside the chicane being scaled
-			if self.OL_teapot_latt.getDoDipoleStrippers() and self.magneticFields[currentIndex].getIsInsideChicane() and chicaneToScale==self.magneticFields[currentIndex].getChicaneItIsInside() and self.addChicaneFieldToStripper and self.rescaleChicaneFieldInStripper:
-				#print self.magneticFields[currentIndex].getNodeIndex()
-				#print nodes[self.magneticFields[currentIndex].getNodeIndex()].getName()
+			if self.magneticFields[currentIndex].getIsInsideChicane() and chicaneToScale==self.magneticFields[currentIndex].getChicaneItIsInside() and self.addChicaneFieldToStripper and self.rescaleChicaneFieldInStripper:
 				xkickerField=nodes[self.magneticFields[currentIndex].getNodeIndex()].getChicaneFieldx()
 				ykickerField=nodes[self.magneticFields[currentIndex].getNodeIndex()].getChicaneFieldy()	
 				nParts=int(self.magneticFields[currentIndex].getNParts())
@@ -372,8 +368,6 @@ class MyScorer(Scorer):
 			for currentIndex in range(self.numberOfStripperDipoles):
 				nodeToFind=self.magneticFields[currentIndex].getNodeName().strip()
 				if node.getName().strip() == nodeToFind:
-					#print nodeToFind
-					#print index
 					self.magneticFields[currentIndex].setNodeIndex(index)
 					
 			index+=1		
@@ -548,7 +542,6 @@ class MyScorer(Scorer):
 					print position_stop
 					sys.exit(0)
 				nodeCurrent=self.OL_teapot_latt.getTeapotLattice().getNodes()[node_start_ind]
-				#print nodeCurrent.getName()
 				xkickerField=0.
 				ykickerField=0.
 				#nothing to change because no field in drift
@@ -592,9 +585,6 @@ class MyScorer(Scorer):
 					myDipole_DH_A11=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,self.gamma,self.beta,self.magneticFields[index].getNodeName(),float(self.magneticFields[index].getFixedStrippingLength()))
 				else:
 					myDipole_DH_A11=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,self.gamma,self.beta,self.magneticFields[index].getNodeName())
-					if self.magneticFields[index].getFoilTest():
-						chargeChangeNode=Change_Charge_Child("foil1",1)
-						myDipole_DH_A11.addChildNode(chargeChangeNode,AccNode.EXIT)	
 				#print "xkickerField=",xkickerField
 				myDipole_DH_A11.setChicaneFieldx(xkickerField)
 				myDipole_DH_A11.setChicaneFieldy(ykickerField)
@@ -671,7 +661,6 @@ class MyScorer(Scorer):
 			self.OL_teapot_latt_partial.getTeapotLattice().trackBunch(self.b, self.paramsDict)
 		self.OL_inject_start.getTeapotLattice().trackBunch(self.b2, self.paramsDict2)
 		#self.OL_inject_end.getTeapotLattice().trackBunch(self.b2, self.paramsDict2)
-		#print "charge= ",self.b2.charge()
 		twiss_analysis = BunchTwissAnalysis()  
 		twiss_analysis.analyzeBunch(self.b2)
 		(xavg,xpavg,yavg,ypavg)=(twiss_analysis.getAverage(0),twiss_analysis.getAverage(1),twiss_analysis.getAverage(2),twiss_analysis.getAverage(3))

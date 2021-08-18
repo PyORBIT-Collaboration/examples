@@ -25,6 +25,7 @@ class MagneticField():
 		#0 is uniform
 		#1 is linear ramp
 		self.magnetFunctionType=1
+		self.foilTest=False
 		self.initialize()
 	
 	def getStripperLength(self):
@@ -108,7 +109,13 @@ class MagneticField():
 	def getNParts(self):
 		return self.nParts
 	def setNParts(self,value):
-		self.nParts=value		
+		self.nParts=value	
+		
+	def getFoilTest(self):
+		return self.foilTest
+	def setFoilTest(self,value):
+		self.foilTest=value
+		
 	def getValueOfField(self,value):
 		y="temp"
 		if self.magnetFunctionType==1:
@@ -140,3 +147,6 @@ class MagneticField():
 		#self.isStripper=self.magneticFieldDictionary.getValue("isStripper")
 		self.magnetFunctionType=int(self.magneticFieldDictionary.getValue("magnetFunction"))
 		self.nParts=int(self.magneticFieldDictionary.getValue("nParts"))
+		if self.magneticFieldDictionary.hasKey("foilTest"):
+			if self.magneticFieldDictionary.getValue("foilTest") == "True":
+				self.foilTest=True

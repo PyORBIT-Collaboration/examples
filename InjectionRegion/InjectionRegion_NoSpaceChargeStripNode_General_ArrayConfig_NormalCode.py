@@ -224,68 +224,7 @@ for currentLatticeName in latticeFileNameList:
 	#this lattice has the injection region from the start of the drift prior to chicane2 up to and including the drift after chicane3
 	inj_latt_start.readMAD(currentLatticeName,"RING")
 	print "Lattice=",inj_latt_start.getName()," length [m] =",inj_latt_start.getLength()," nodes=",len(inj_latt_start.getNodes())
-	
-	#turn off kickers
-	kickerwave = flatTopWaveform(1.0)
-	strength_hkicker10 = 0
-	strength_hkicker13 = strength_hkicker10
-	strength_hkicker11 = 0
-	strength_hkicker12 = strength_hkicker11
-	strength_vkicker10 = 0
-	strength_vkicker13 = strength_vkicker10
-	strength_vkicker11 = 0
-	strength_vkicker12 = strength_vkicker11		
-	nodes = inj_latt_start.getNodes()
-	hkick10 = None
-	vkick10 = None
-	hkick11	= None
-	vkick11 = None
-	vkick12 = None
-	hkick12 = None
-	vkick13 = None
-	hkick13	= None		
-	for index in range(len(nodes)):
-		if nodes[index].getName().strip() == "IKICKH_A10":
-			hkick10=nodes[index]
-		elif nodes[index].getName().strip() == "IKICKV_A10":
-			vkick10=nodes[index]
-		elif nodes[index].getName().strip() == "IKICKH_A11":
-			hkick11=nodes[index]
-		elif nodes[index].getName().strip() == "IKICKV_A11":
-			vkick11=nodes[index]
-		elif nodes[index].getName().strip() == "IKICKV_A12":
-			vkick12=nodes[index]
-		elif nodes[index].getName().strip() == "IKICKH_A12":
-			hkick12=nodes[index]
-		elif nodes[index].getName().strip() == "IKICKV_A13":
-			vkick13=nodes[index]
-		elif nodes[index].getName().strip() == "IKICKH_A13":
-			hkick13=nodes[index]	
-	if hkick10 is not None:
-		print "turning off a kicker"
-		hkick10.setParam("kx", strength_hkicker10)
-		hkick10.setWaveform(kickerwave)
-	if vkick10 is not None:
-		vkick10.setParam("ky", strength_vkicker10)
-		vkick10.setWaveform(kickerwave)
-	if hkick11 is not None:
-		hkick11.setParam("kx", strength_hkicker11)
-		hkick11.setWaveform(kickerwave)
-	if vkick11 is not None:
-		vkick11.setParam("ky", strength_vkicker11)
-		vkick11.setWaveform(kickerwave)
-	if vkick12 is not None:
-		vkick12.setParam("ky", strength_vkicker12)
-		vkick12.setWaveform(kickerwave)
-	if hkick12 is not None:
-		hkick12.setParam("kx", strength_hkicker12)
-		hkick12.setWaveform(kickerwave)
-	if vkick13 is not None:
-		vkick13.setParam("ky", strength_vkicker13)
-		vkick13.setWaveform(kickerwave)
-	if hkick13 is not None:
-		hkick13.setParam("kx", strength_hkicker13)
-		hkick13.setWaveform(kickerwave)	
+
 	if useSecondaryFoil and currentLatticeIndex==latticeIndexToAddFoilTo:
 		#create secondary foil
 		thick = 400.0
@@ -448,7 +387,7 @@ for currentLatticeName in latticeFileNameList:
 				else:
 					myDipole_DH_A11=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,gamma,beta,magneticFields[index].getNodeName())
 					if magneticFields[index].getFoilTest():
-						chargeChangeNode=Change_Charge_Child("foil1",1)
+						chargeChangeNode=Change_Charge_Child("foil1",-1)
 						myDipole_DH_A11.addChildNode(chargeChangeNode,AccNode.EXIT)						
 				#print "xkickerField=",xkickerField
 				myDipole_DH_A11.setChicaneFieldx(xkickerField)
