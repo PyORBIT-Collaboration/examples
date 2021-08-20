@@ -64,7 +64,7 @@ from KevinPython.changeCharge import Change_Charge_Child
 
 class MyScorer(Scorer):
 	""" The implementation of the abstract Score class """
-	def __init__(self,OL_teapot_latt_full,OL_teapot_latt_partial,OL_inject_start,beamLatticeFileName,optimizerSettingsFileName):
+	def __init__(self,OL_teapot_latt_full,OL_teapot_latt_partial,OL_inject_start,OL_inject_full,beamLatticeFileName,optimizerSettingsFileName):
 		Scorer.__init__(self)
 		
 		#this might be temp. for now all added dipoles should be able to be added to inject lattice
@@ -72,7 +72,8 @@ class MyScorer(Scorer):
 		self.OL_teapot_latt=OL_teapot_latt_full
 		self.OL_teapot_latt_full=OL_teapot_latt_full
 		self.OL_teapot_latt_partial=OL_teapot_latt_partial
-		self.OL_inject_start=OL_inject_start	
+		self.OL_inject_start=OL_inject_start
+		self.OL_inject_full=OL_inject_full
 		#self.doDipoleKickers=doDipoleKickers
 		self.addChicaneFieldToStripper=True
 		#forDebuggingShouldAlwaysBeTrue
@@ -103,7 +104,19 @@ class MyScorer(Scorer):
 			self.yTarget=float(self.optimizerSettingsDictionary.getValue("target_yOffsetClosed"))
 		if self.optimizerSettingsDictionary.hasKey("target_pyOffsetClosed"):
 			self.pyTarget=float(self.optimizerSettingsDictionary.getValue("target_pyOffsetClosed"))
-			
+		
+		self.targetFullOffsetDifferenceX=0
+		self.targetFullOffsetDifferenceY=0
+		self.targetPartOffsetDifferenceX=0
+		self.targetPartOffsetDifferenceY=0	
+		if self.optimizerSettingsDictionary.hasKey("targetFullOffsetDifferenceX"):
+			self.targetFullOffsetDifferenceX=float(self.optimizerSettingsDictionary.getValue("targetFullOffsetDifferenceX"))
+		if self.optimizerSettingsDictionary.hasKey("targetFullOffsetDifferenceY"):
+			self.targetFullOffsetDifferenceY=float(self.optimizerSettingsDictionary.getValue("targetFullOffsetDifferenceY"))		
+		if self.optimizerSettingsDictionary.hasKey("targetPartOffsetDifferenceX"):
+			self.targetPartOffsetDifferenceX=float(self.optimizerSettingsDictionary.getValue("targetPartOffsetDifferenceX"))
+		if self.optimizerSettingsDictionary.hasKey("targetPartOffsetDifferenceY"):
+			self.targetPartOffsetDifferenceY=float(self.optimizerSettingsDictionary.getValue("targetPartOffsetDifferenceY"))		
 		#these are intial values for closed beam bunch
 		self.xInit=0
 		self.pxInit=0
@@ -310,15 +323,23 @@ class MyScorer(Scorer):
 	def setStripperLength(self,stripperToScale,scale):
 		self.magneticFields[stripperToScale].setStripperLength(self.magneticFields[stripperToScale].getStripperLength()*scale)
 	def setStripperAngle(self,stripperToRotate,offset):
-		self.magneticFields[stripperToRotate].setFieldDirection(self.magneticFields[stripperToRotate].getFieldDirection()+offset)		
-	def makeNewInjectLattice(self):
+		self.magneticFields[stripperToRotate].setFieldDirection(self.magneticFields[stripperToRotate].getFieldDirection()+offset)	
+	def setStripperOffset(self,stripperToOffset,offset):
+		self.magneticFields[stripperToOffset].setNodePositionOffset(self.magneticFields[stripperToOffset].getNodePositionOffset()+offset)			
+	def makeNewInjectLattice(self,full=False):
 		inj_latt_start = teapot.TEAPOT_Ring()
 		#print "Read MAD."
 		#this lattice has the injection region from the start of the drift prior to chicane2 up to and including the drift after chicane3
-		inj_latt_start.readMAD(self.beamLatticeDictionary.getValue("latticeInjection"),"RING")		
-		self.OL_inject_start =OptimizerLattice(inj_latt_start)
+		if not full:
+			inj_latt_start.readMAD(self.beamLatticeDictionary.getValue("latticeInjection"),"RING")
+		else:
+			if self.beamLatticeDictionary.hasKey("latticeInjectionFull"):
+				inj_latt_start.readMAD(self.beamLatticeDictionary.getValue("latticeInjectionFull"),"RING")
+			else:
+				inj_latt_start.readMAD(self.beamLatticeDictionary.getValue("latticeInjection"),"RING")
+		self.OL_teapot_latt =OptimizerLattice(inj_latt_start)
 		if (self.beamLatticeDictionary.hasKey("doDipoleStrippersInjection") and self.beamLatticeDictionary.getValue("doDipoleStrippersInjection")=="True"):
-			self.OL_inject_start.setDoDipoleStrippers(True)
+			self.OL_teapot_latt.setDoDipoleStrippers(True)
 		self.magneticFields=[]
 		for index in range(self.numberOfStripperDipoles):
 			if self.beamLatticeDictionary.hasKey("stripper%d"%(index+1)):
@@ -332,17 +353,17 @@ class MyScorer(Scorer):
 				print "stripper%d not in beamLattice config file, exiting"%(index+1)
 				sys.exit(0)				
 		#print "boom1"
-		self.changeLattice(self.OL_inject_start)
+		#self.changeLattice(self.OL_inject_start)
 		#self.initChicanes()
 		#print "boom2"
-		self.OL_teapot_latt=self.OL_inject_start			
+		#self.OL_teapot_latt=self.OL_inject_start				
 	def setScaleChicane(self,chicaneToScale,scale):
 		nodes=self.OL_teapot_latt.getTeapotLattice().getNodes()
 		for i in range(len(self.OL_teapot_latt.getChicaneNodes()[chicaneToScale])):
 			if self.OL_teapot_latt.getChicaneNodes()[chicaneToScale][i] >=0:
 				nodes[self.OL_teapot_latt.getChicaneNodes()[chicaneToScale][i]].setParam("kx", self.OL_teapot_latt.getChicaneNodeStrength()[chicaneToScale][i]*scale)
 			
-		
+		self.findStrippers()
 		for currentIndex in range(self.numberOfStripperDipoles):
 			#make sure we are inside the chicane being scaled
 			if self.OL_teapot_latt.getDoDipoleStrippers() and self.magneticFields[currentIndex].getIsInsideChicane() and chicaneToScale==self.magneticFields[currentIndex].getChicaneItIsInside() and self.addChicaneFieldToStripper and self.rescaleChicaneFieldInStripper:
@@ -442,6 +463,8 @@ class MyScorer(Scorer):
 		self.initChicanes()
 		self.changeLattice(self.OL_inject_start)
 		self.initChicanes()
+		self.changeLattice(self.OL_inject_full)
+		self.initChicanes()		
 		if False:
 			nodes=self.OL_inject_start.getTeapotLattice().getNodes()
 			i = 0
@@ -487,6 +510,7 @@ class MyScorer(Scorer):
 	def findReferenceNode(self,index=-1):
 		if index==-1:
 			for currentIndex in range(self.numberOfStripperDipoles):
+				self.magneticFields[currentIndex].setRefNodeIndex(-1)
 				counter=0
 				nodeToFind=self.magneticFields[currentIndex].getRefNodeName().strip()
 				for node in self.OL_teapot_latt.getTeapotLattice().getNodes():
@@ -496,6 +520,7 @@ class MyScorer(Scorer):
 		else:
 			counter=0
 			nodeToFind=self.magneticFields[index].getRefNodeName().strip()
+			self.magneticFields[index].setRefNodeIndex(-1)	
 			for node in self.OL_teapot_latt.getTeapotLattice().getNodes():
 				if node.getName().strip() == nodeToFind:
 					self.magneticFields[index].setRefNodeIndex(counter)			
@@ -507,98 +532,103 @@ class MyScorer(Scorer):
 			#self.magneticFields=[]
 			for index in range(self.numberOfStripperDipoles):
 				self.findChicanes()
-				self.findReferenceNode(index)				
-				#self.debug_Crash_If_Stripper_Dipole_Ref_Does_Not_Exist
-				#calculate where to place stripper dipole
-				position=-100.
-				if self.magneticFields[index].getNodePosition().lower()=="before":
-					position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())]][0]-float(self.magneticFields[index].getStripperLength())-self.fudgeFactor
-				elif self.magneticFields[index].getNodePosition().lower()=="after":
-					position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())]][1]+self.fudgeFactor
-				else:
-					position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())]][0]+self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())].getLength()*float(self.magneticFields[index].getNodePosition())
-						
-				#check if we are in kicker or drift
-				position_start = position
-				position_stop = position + float(self.magneticFields[index].getStripperLength())
-				#if self.magneticFields[index].getNodePosition().lower()=="before":
-					#position_stop=self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())]][0]
-					
-				(node_start_ind,node_stop_ind,z,ind) = (-1,-1, 0., 0)
-				for nodeCurrent in self.OL_teapot_latt.getTeapotLattice().getNodes():
-					if(position_start >= z and position_start <= z + nodeCurrent.getLength()):
-						node_start_ind = ind
-					if(position_stop > z and position_stop <= z + nodeCurrent.getLength()):
-						node_stop_ind = ind
-					ind += 1
-					z += nodeCurrent.getLength()	
-					
-				if node_start_ind!=node_stop_ind:
-					#the stripping dipole spans more than 1 node
-					print "something is going to be broken1"
-					if True:
-						nodes=self.OL_inject_start.getTeapotLattice().getNodes()
-						i = 0
-						path_length=0
-						for node in nodes:
-							path_length=path_length+node.getLength()
-							print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%self.OL_inject_start.getTeapotLattice().getNodePositionsDict()[node], " path_length= ",path_length
-							i=i+1						
-					print position_start
-					print position_stop
-					sys.exit(0)
-				nodeCurrent=self.OL_teapot_latt.getTeapotLattice().getNodes()[node_start_ind]
-				#print nodeCurrent.getName()
-				xkickerField=0.
-				ykickerField=0.
-				#nothing to change because no field in drift
-				if(isinstance(nodeCurrent,DriftTEAPOT)):
-					self.magneticFields[index].setIsInsideChicane(False)
-					#print "stripper dipole is in drift"
-				#in kicker so add kicker field to stripping field
-				elif (isinstance(nodeCurrent,KickTEAPOT)):
-					#print "stripper dipole is in kick node"
-					if self.addChicaneFieldToStripper:
-						self.magneticFields[index].setIsInsideChicane(True)
-						if nodeCurrent.getName().strip() == "DH_A10":
-							self.magneticFields[index].setChicaneItIsInside(0)
-						elif nodeCurrent.getName().strip() == "DH_A11":
-							self.magneticFields[index].setChicaneItIsInside(1)
-						elif nodeCurrent.getName().strip() == "DH_A12":
-							self.magneticFields[index].setChicaneItIsInside(2)
-						elif nodeCurrent.getName().strip() == "DH_A13":
-							self.magneticFields[index].setChicaneItIsInside(3)							
-						#compute field to create kick
-						length=nodeCurrent.getLength()
-						kx=nodeCurrent.getParam("kx")
-						ykickerField=-kx*self.rigidity/length
-						ky=nodeCurrent.getParam("ky")
-						xkickerField=ky*self.rigidity/length
-				#actually creates the field functions
-				nParts=int(self.magneticFields[index].getNParts())
-				lengthStripper=float(self.magneticFields[index].getStripperLength())
-				stepSize=lengthStripper/nParts
-				fieldDirection=float(self.magneticFields[index].getFieldDirection())
-				magneticFieldx= Function()
-				magneticFieldy= Function()
-				for i in range(nParts):
-					x = stepSize*i;
-					#y = constantField(x)
-					y = float(self.magneticFields[index].getValueOfField(x))
-					magneticFieldx.add(x,y*math.cos(fieldDirection)+xkickerField)
-					magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
+				self.findReferenceNode(index)		
 				
-				if self.magneticFields[index].getIsStripper()=="True":
-					myDipole_DH_A11=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,self.gamma,self.beta,self.magneticFields[index].getNodeName(),float(self.magneticFields[index].getFixedStrippingLength()))
-				else:
-					myDipole_DH_A11=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,self.gamma,self.beta,self.magneticFields[index].getNodeName())
-					if self.magneticFields[index].getFoilTest():
-						chargeChangeNode=Change_Charge_Child("foil1",1)
-						myDipole_DH_A11.addChildNode(chargeChangeNode,AccNode.EXIT)	
-				#print "xkickerField=",xkickerField
-				myDipole_DH_A11.setChicaneFieldx(xkickerField)
-				myDipole_DH_A11.setChicaneFieldy(ykickerField)
-				addDipoleStripperNode(self.OL_teapot_latt.getTeapotLattice(),position,myDipole_DH_A11)			
+				#if reference node isnt found skip
+				if int(self.magneticFields[index].getRefNodeIndex()) >=0:
+					#self.debug_Crash_If_Stripper_Dipole_Ref_Does_Not_Exist
+					#calculate where to place stripper dipole
+					position=-100.
+					if self.magneticFields[index].getNodePosition().lower()=="before":
+						position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())]][0]-float(self.magneticFields[index].getStripperLength())-self.fudgeFactor
+					elif self.magneticFields[index].getNodePosition().lower()=="after":
+						position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())]][1]+self.fudgeFactor
+					else:
+						position =self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())]][0]+self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())].getLength()*float(self.magneticFields[index].getNodePosition())
+						
+					#add possible offset
+					position= position+self.magneticFields[index].getNodePositionOffset()
+					#check if we are in kicker or drift
+					position_start = position
+					position_stop = position + float(self.magneticFields[index].getStripperLength())
+					#if self.magneticFields[index].getNodePosition().lower()=="before":
+						#position_stop=self.OL_teapot_latt.getTeapotLattice().getNodePositionsDict()[self.OL_teapot_latt.getTeapotLattice().getNodes()[int(self.magneticFields[index].getRefNodeIndex())]][0]
+						
+					(node_start_ind,node_stop_ind,z,ind) = (-1,-1, 0., 0)
+					for nodeCurrent in self.OL_teapot_latt.getTeapotLattice().getNodes():
+						if(position_start >= z and position_start <= z + nodeCurrent.getLength()):
+							node_start_ind = ind
+						if(position_stop > z and position_stop <= z + nodeCurrent.getLength()):
+							node_stop_ind = ind
+						ind += 1
+						z += nodeCurrent.getLength()	
+						
+					if node_start_ind!=node_stop_ind:
+						#the stripping dipole spans more than 1 node
+						print "something is going to be broken1"
+						if True:
+							nodes=self.OL_inject_start.getTeapotLattice().getNodes()
+							i = 0
+							path_length=0
+							for node in nodes:
+								path_length=path_length+node.getLength()
+								print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%self.OL_inject_start.getTeapotLattice().getNodePositionsDict()[node], " path_length= ",path_length
+								i=i+1						
+						print position_start
+						print position_stop
+						sys.exit(0)
+					nodeCurrent=self.OL_teapot_latt.getTeapotLattice().getNodes()[node_start_ind]
+					#print nodeCurrent.getName()
+					xkickerField=0.
+					ykickerField=0.
+					#nothing to change because no field in drift
+					if(isinstance(nodeCurrent,DriftTEAPOT)):
+						self.magneticFields[index].setIsInsideChicane(False)
+						#print "stripper dipole is in drift"
+					#in kicker so add kicker field to stripping field
+					elif (isinstance(nodeCurrent,KickTEAPOT)):
+						#print "stripper dipole is in kick node"
+						if self.addChicaneFieldToStripper:
+							self.magneticFields[index].setIsInsideChicane(True)
+							if nodeCurrent.getName().strip() == "DH_A10":
+								self.magneticFields[index].setChicaneItIsInside(0)
+							elif nodeCurrent.getName().strip() == "DH_A11":
+								self.magneticFields[index].setChicaneItIsInside(1)
+							elif nodeCurrent.getName().strip() == "DH_A12":
+								self.magneticFields[index].setChicaneItIsInside(2)
+							elif nodeCurrent.getName().strip() == "DH_A13":
+								self.magneticFields[index].setChicaneItIsInside(3)							
+							#compute field to create kick
+							length=nodeCurrent.getLength()
+							kx=nodeCurrent.getParam("kx")
+							ykickerField=-kx*self.rigidity/length
+							ky=nodeCurrent.getParam("ky")
+							xkickerField=ky*self.rigidity/length
+					#actually creates the field functions
+					nParts=int(self.magneticFields[index].getNParts())
+					lengthStripper=float(self.magneticFields[index].getStripperLength())
+					stepSize=lengthStripper/nParts
+					fieldDirection=float(self.magneticFields[index].getFieldDirection())
+					magneticFieldx= Function()
+					magneticFieldy= Function()
+					for i in range(nParts):
+						x = stepSize*i;
+						#y = constantField(x)
+						y = float(self.magneticFields[index].getValueOfField(x))
+						magneticFieldx.add(x,y*math.cos(fieldDirection)+xkickerField)
+						magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
+					
+					if self.magneticFields[index].getIsStripper()=="True":
+						myDipole_DH_A11=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,self.gamma,self.beta,self.magneticFields[index].getNodeName(),float(self.magneticFields[index].getFixedStrippingLength()))
+					else:
+						myDipole_DH_A11=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,self.gamma,self.beta,self.magneticFields[index].getNodeName())
+						if self.magneticFields[index].getFoilTest():
+							chargeChangeNode=Change_Charge_Child("foil1",1)
+							myDipole_DH_A11.addChildNode(chargeChangeNode,AccNode.EXIT)	
+					#print "xkickerField=",xkickerField
+					myDipole_DH_A11.setChicaneFieldx(xkickerField)
+					myDipole_DH_A11.setChicaneFieldy(ykickerField)
+					addDipoleStripperNode(self.OL_teapot_latt.getTeapotLattice(),position,myDipole_DH_A11)			
 			
 	def getScore(self,trialPoint):
 		#self.resetBunch2()
@@ -634,10 +664,13 @@ class MyScorer(Scorer):
 		self.changeLattice(self.OL_inject_start)
 		if (self.optimizerSettingsDictionary.hasKey("modifyAStripper") and self.optimizerSettingsDictionary.getValue("modifyAStripper")=="True"):
 			self.makeNewInjectLattice()
+			self.OL_inject_start=self.OL_teapot_latt
+			self.changeLattice(self.OL_inject_start)
 			#if we are changing length need to remake lattice
 			for currentIndex in range(self.numberOfStripperDipoles):
 				x8 = trialPoint.getVariableProxyArr()[(self.startingNumber+currentIndex*2)].getValue()
-				x9 = trialPoint.getVariableProxyArr()[(self.startingNumber+1+currentIndex*2)].getValue()				
+				x9 = trialPoint.getVariableProxyArr()[(self.startingNumber+1+currentIndex*2)].getValue()
+				x10 = trialPoint.getVariableProxyArr()[(self.startingNumber+self.numberOfStripperDipoles*2+currentIndex)].getValue()				
 				#if (self.optimizerSettingsDictionary.hasKey("floatStripperLength%d"%(currentIndex+1)) and self.optimizerSettingsDictionary.getValue("floatStripperLength%d"%(currentIndex+1))=="True"):
 					#self.setStripperLength(currentIndex,x8)
 				#need to rotate field
@@ -646,6 +679,7 @@ class MyScorer(Scorer):
 					
 				self.setStripperLength(currentIndex,x8)	
 				self.setStripperAngle(currentIndex,x9)
+				self.setStripperOffset(currentIndex,x10)
 			
 			self.initChicanes()
 			if False:
@@ -660,21 +694,70 @@ class MyScorer(Scorer):
 		self.setScaleChicane(1,x1)
 		self.setScaleChicane(2,x2)
 		self.setScaleChicane(3,x3)
+		
+		self.changeLattice(self.OL_inject_full)
+		if (self.optimizerSettingsDictionary.hasKey("modifyAStripper") and self.optimizerSettingsDictionary.getValue("modifyAStripper")=="True"):
+			self.makeNewInjectLattice(True)
+			self.OL_inject_full=self.OL_teapot_latt
+			self.changeLattice(self.OL_inject_full)
+			#if we are changing length need to remake lattice
+			for currentIndex in range(self.numberOfStripperDipoles):
+				x8 = trialPoint.getVariableProxyArr()[(self.startingNumber+currentIndex*2)].getValue()
+				x9 = trialPoint.getVariableProxyArr()[(self.startingNumber+1+currentIndex*2)].getValue()
+				x10 = trialPoint.getVariableProxyArr()[(self.startingNumber+self.numberOfStripperDipoles*2+currentIndex)].getValue()				
+				#if (self.optimizerSettingsDictionary.hasKey("floatStripperLength%d"%(currentIndex+1)) and self.optimizerSettingsDictionary.getValue("floatStripperLength%d"%(currentIndex+1))=="True"):
+					#self.setStripperLength(currentIndex,x8)
+				#need to rotate field
+				#if (self.optimizerSettingsDictionary.hasKey("floatStripperAngle%d"%(currentIndex+1)) and self.optimizerSettingsDictionary.getValue("floatStripperAngle%d"%(currentIndex+1))=="True"):
+					#self.rotateSecondStripperField(currentIndex,x9)
+					
+				self.setStripperLength(currentIndex,x8)	
+				self.setStripperAngle(currentIndex,x9)
+				self.setStripperOffset(currentIndex,x10)
 			
+			self.initChicanes()
+			if False:
+				nodes=self.OL_inject_full.getTeapotLattice().getNodes()
+				i = 0
+				path_length=0
+				for node in nodes:
+					path_length=path_length+node.getLength()
+					print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%self.OL_inject_full.getTeapotLattice().getNodePositionsDict()[node], " path_length= ",path_length
+					i=i+1				
+		self.setScaleChicane(0,x0)
+		self.setScaleChicane(1,x1)
+		self.setScaleChicane(2,x2)
+		self.setScaleChicane(3,x3)			
+
 		
 		score=0
 		self.OL_teapot_latt_full.getTeapotLattice().trackBunch(self.b, self.paramsDict)
+		self.OL_inject_full.getTeapotLattice().trackBunch(self.b2, self.paramsDict2)
+		twiss_analysis2 = BunchTwissAnalysis()  
+		twiss_analysis2.analyzeBunch(self.b2)	
+		(xavg2,xpavg2,yavg2,ypavg2)=(twiss_analysis2.getAverage(0),twiss_analysis2.getAverage(1),twiss_analysis2.getAverage(2),twiss_analysis2.getAverage(3))
 		if self.optimizerSettingsDictionary.hasKey("usedClosedScore") and self.optimizerSettingsDictionary.getValue("usedClosedScore")=="True":
 			score = score +(self.b.x(0)-self.xTarget)**2 + (self.b.px(0)-self.pxTarget)**2 + (self.b.y(0)-self.yTarget)**2+(self.b.py(0)-self.pyTarget)**2
+		if self.optimizerSettingsDictionary.hasKey("useFullOffsetDifferenceX") and self.optimizerSettingsDictionary.getValue("useFullOffsetDifferenceX")=="True":
+			score = score +(xavg2-self.b.x(0)-self.targetFullOffsetDifferenceX)**2
+		if self.optimizerSettingsDictionary.hasKey("useFullOffsetDifferenceY") and self.optimizerSettingsDictionary.getValue("useFullOffsetDifferenceY")=="True":
+			score = score +(yavg2-self.b.y(0)-self.targetFullOffsetDifferenceY)**2
+		print "xavg2=",xavg2, " self.b.x(0)=",self.b.x(0)," score=",score, " self.targetFullOffsetDifferenceX=",self.targetFullOffsetDifferenceX
+		#print "xpavg2=",xpavg2
 		self.resetBunch()
 		for i in range(self.turns):
 			self.OL_teapot_latt_partial.getTeapotLattice().trackBunch(self.b, self.paramsDict)
+			
+		self.resetBunch2()
 		self.OL_inject_start.getTeapotLattice().trackBunch(self.b2, self.paramsDict2)
-		#self.OL_inject_end.getTeapotLattice().trackBunch(self.b2, self.paramsDict2)
-		#print "charge= ",self.b2.charge()
 		twiss_analysis = BunchTwissAnalysis()  
 		twiss_analysis.analyzeBunch(self.b2)
-		(xavg,xpavg,yavg,ypavg)=(twiss_analysis.getAverage(0),twiss_analysis.getAverage(1),twiss_analysis.getAverage(2),twiss_analysis.getAverage(3))
+		(xavg,xpavg,yavg,ypavg)=(twiss_analysis.getAverage(0),twiss_analysis.getAverage(1),twiss_analysis.getAverage(2),twiss_analysis.getAverage(3))			
+		if self.optimizerSettingsDictionary.hasKey("usePartOffsetDifferenceX") and self.optimizerSettingsDictionary.getValue("usePartOffsetDifferenceX")=="True":
+			score = score +(xavg-self.b.x(0)-self.targetPartOffsetDifferenceX)**2
+		if self.optimizerSettingsDictionary.hasKey("usePartOffsetDifferenceY") and self.optimizerSettingsDictionary.getValue("usePartOffsetDifferenceY")=="True":
+			score = score +(yavg-self.b.y(0)-self.targetPartOffsetDifferenceY)**2	
+		
 		if self.optimizerSettingsDictionary.hasKey("useParallelScore") and self.optimizerSettingsDictionary.getValue("useParallelScore")=="True":
 			score = score+(self.b.px(0)-xpavg)**2 +(self.b.py(0)-ypavg)**2
 		if self.optimizerSettingsDictionary.hasKey("useParallelScoreY") and self.optimizerSettingsDictionary.getValue("useParallelScoreY")=="True":
@@ -684,6 +767,7 @@ class MyScorer(Scorer):
 		#print "self.b.px(0)=",self.b.px(0), " xpavg=",xpavg," score=",score, " x4=",x4
 		#print "self.b.py(0)=",self.b.py(0), " ypavg=",ypavg," score=",score, " x5=",x5
 		#print "self.b.py(0)=",self.b.py(0), " ypavg=",ypavg," score=",score, "x10=", trialPoint.getVariableProxyArr()[10].getValue()
+		#print "xavg2=",xavg2, " self.b.x(0)=",self.b.x(0)," score=",score, " self.targetFullOffsetDifferenceX=",self.targetFullOffsetDifferenceX
 		
 		return score	
 		
@@ -735,10 +819,15 @@ if (beamLatticeDictionary.hasKey("doDipoleStrippersInjection") and beamLatticeDi
 		doDipoleStrippersClosed=True
 
 latticeInjectionName="none.txt"
+latticeInjectionNameFull="none.txt"
 latticeClosedCompareToInjectionName="none.txt"
 latticeClosedName="none.txt"
 if beamLatticeDictionary.hasKey("latticeInjection"):
 	latticeInjectionName=beamLatticeDictionary.getValue("latticeInjection")
+if beamLatticeDictionary.hasKey("latticeInjectionFull"):
+	latticeInjectionNameFull=beamLatticeDictionary.getValue("latticeInjectionFull")
+else:
+	latticeInjectionNameFull=latticeInjectionName
 if beamLatticeDictionary.hasKey("latticeClosedCompareToInjection"):
 	latticeClosedCompareToInjectionName=beamLatticeDictionary.getValue("latticeClosedCompareToInjection")
 if beamLatticeDictionary.hasKey("latticeClosed"):
@@ -753,8 +842,17 @@ inj_latt_start.readMAD(latticeInjectionName,"RING")
 print "Lattice=",inj_latt_start.getName()," length [m] =",inj_latt_start.getLength()," nodes=",len(inj_latt_start.getNodes())
 
 OL_inj_latt_start =OptimizerLattice(inj_latt_start)
+
+inj_latt_full = teapot.TEAPOT_Ring()
+print "Read MAD."
+#this lattice has the injection region from the start of the drift prior to chicane2 up to and including the drift after chicane3
+inj_latt_full.readMAD(latticeInjectionNameFull,"RING")
+print "Lattice=",inj_latt_full.getName()," length [m] =",inj_latt_full.getLength()," nodes=",len(inj_latt_full.getNodes())
+
+OL_inj_latt_full =OptimizerLattice(inj_latt_full)
 if doDipoleStrippersInjection:
 	OL_inj_latt_start.setDoDipoleStrippers(True)
+	OL_inj_latt_full.setDoDipoleStrippers(True)
 
 #OL_inj_latt_start.setFirstDipoleIsStripper(True)
 #OL_inj_latt_start.setSecondDipoleIsStripper(True)
@@ -899,7 +997,7 @@ if doDipoleStrippersClosed:
 #scorer = MyScorer(0.004334,0.000192,0.001710,-0.000349,-0.004286,0.000000)
 #scorer = MyScorer(0.000000,0.000000,0.000000,0.000000,0.000000,0.000000)
 
-scorer = MyScorer(OL_teapot_latt_full,OL_teapot_latt_partial,OL_inj_latt_start,args.beamLatticeFile,args.optimizerConfigFile)
+scorer = MyScorer(OL_teapot_latt_full,OL_teapot_latt_partial,OL_inj_latt_start,OL_inj_latt_full,args.beamLatticeFile,args.optimizerConfigFile)
 scorer.initScorer()	
 
 #searchAlgorithm   = RandomSearchAlgorithm()
@@ -925,7 +1023,7 @@ solver.setAlgorithm(searchAlgorithm)
 solver.setStopper(solverStopper)
 
 useChicaneScaleFile=False
-if (optimizerSettingsDictionary.hasKey("readChicaneScale10FromFile") and optimizerSettingsDictionary.getValue("readChicaneScale10FromFile")=="True") or (optimizerSettingsDictionary.hasKey("readChicaneScale11FromFile") and optimizerSettingsDictionary.getValue("readChicaneScale11FromFile")=="True") or (optimizerSettingsDictionary.hasKey("readChicaneScale12FromFile") and optimizerSettingsDictionary.getValue("readChicaneScale12FromFile")=="True") or (optimizerSettingsDictionary.hasKey("readChicaneScale13FromFile") and optimizerSettingsDictionary.getValue("readChicaneScale13FromFile")=="True") or (optimizerSettingsDictionary.hasKey("readInitialPXInjectionFromFile") and optimizerSettingsDictionary.getValue("readInitialPXInjectionFromFile")=="True") or (optimizerSettingsDictionary.hasKey("readInitialPYInjectionFromFile") and optimizerSettingsDictionary.getValue("readInitialPYInjectionFromFile")=="True") or (optimizerSettingsDictionary.hasKey("readInitialPXClosedFromFile") and optimizerSettingsDictionary.getValue("readInitialPXClosedFromFile")=="True") or (optimizerSettingsDictionary.hasKey("readInitialPYClosedFromFile") and optimizerSettingsDictionary.getValue("readInitialPYClosedFromFile")=="True"):
+if (optimizerSettingsDictionary.hasKey("readChicaneFile") and optimizerSettingsDictionary.getValue("readChicaneFile")=="True") or (optimizerSettingsDictionary.hasKey("readChicaneScale10FromFile") and optimizerSettingsDictionary.getValue("readChicaneScale10FromFile")=="True") or (optimizerSettingsDictionary.hasKey("readChicaneScale11FromFile") and optimizerSettingsDictionary.getValue("readChicaneScale11FromFile")=="True") or (optimizerSettingsDictionary.hasKey("readChicaneScale12FromFile") and optimizerSettingsDictionary.getValue("readChicaneScale12FromFile")=="True") or (optimizerSettingsDictionary.hasKey("readChicaneScale13FromFile") and optimizerSettingsDictionary.getValue("readChicaneScale13FromFile")=="True") or (optimizerSettingsDictionary.hasKey("readInitialPXInjectionFromFile") and optimizerSettingsDictionary.getValue("readInitialPXInjectionFromFile")=="True") or (optimizerSettingsDictionary.hasKey("readInitialPYInjectionFromFile") and optimizerSettingsDictionary.getValue("readInitialPYInjectionFromFile")=="True") or (optimizerSettingsDictionary.hasKey("readInitialPXClosedFromFile") and optimizerSettingsDictionary.getValue("readInitialPXClosedFromFile")=="True") or (optimizerSettingsDictionary.hasKey("readInitialPYClosedFromFile") and optimizerSettingsDictionary.getValue("readInitialPYClosedFromFile")=="True"):
 	useChicaneScaleFile=True
 
 chicaneScale10=1.
@@ -937,11 +1035,13 @@ initialPYInjection=float(beamLatticeDictionary.getValue("pyOffsetInjection"))
 initialPXClosed=float(beamLatticeDictionary.getValue("pxOffsetClosed"))
 initialPYClosed=float(beamLatticeDictionary.getValue("pyOffsetClosed"))	
 initialLengthScaleAngleOffset=[]
+initialPositionOffset=[]
 for index in range(scorer.getNStripper()):
 	pair=[]
 	pair.append(1.)
 	pair.append(0.)
 	initialLengthScaleAngleOffset.append(pair)
+	initialPositionOffset.append(0.)		
 	
 if useChicaneScaleFile:
 	openedFile=open("%s/ChicaneScales.txt"%(inputDirectoryChicaneScales),'r')
@@ -968,7 +1068,9 @@ if useChicaneScaleFile:
 		if optimizerSettingsDictionary.hasKey("chicaneScaleFile_useStripperLength%d"%(index+1)) and optimizerSettingsDictionary.getValue("chicaneScaleFile_useStripperLength%d"%(index+1))=="True":
 			initialLengthScaleAngleOffset[index][0]=float(theScales[startingNumber+index*2].strip())
 		if optimizerSettingsDictionary.hasKey("chicaneScaleFile_useStripperAngle%d"%(index+1)) and optimizerSettingsDictionary.getValue("chicaneScaleFile_useStripperAngle%d"%(index+1))=="True":
-			initialLengthScaleAngleOffset[index][1]=float(theScales[startingNumber+1+index*2].strip())			
+			initialLengthScaleAngleOffset[index][1]=float(theScales[startingNumber+1+index*2].strip())	
+		if optimizerSettingsDictionary.hasKey("chicaneScaleFile_useStripperOffset%d"%(index+1)) and optimizerSettingsDictionary.getValue("chicaneScaleFile_useStripperOffset%d"%(index+1))=="True":
+			initialPositionOffset[index]=float(theScales[startingNumber+scorer.getNStripper()*2+index].strip())				
 	openedFile.close()
 
 trialPoint = TrialPoint()
@@ -991,7 +1093,9 @@ trialPoint.addVariableProxy(VariableProxy(name = "x7", value = initialPYClosed, 
 
 for index in range(scorer.getNStripper()):
 	trialPoint.addVariableProxy(VariableProxy(name = "x%d"%(startingNumber+index*2), value = initialLengthScaleAngleOffset[index][0], step = 0.01))
-	trialPoint.addVariableProxy(VariableProxy(name = "x%d"%(startingNumber+1+index*2), value = initialLengthScaleAngleOffset[index][1], step = 0.01))		
+	trialPoint.addVariableProxy(VariableProxy(name = "x%d"%(startingNumber+1+index*2), value = initialLengthScaleAngleOffset[index][1], step = 0.01))
+for index in range(scorer.getNStripper()):	
+	trialPoint.addVariableProxy(VariableProxy(name = "x%d"%(startingNumber+scorer.getNStripper()*2+index), value = initialPositionOffset[index], step = 0.01))
 x0 = trialPoint.getVariableProxyArr()[0]
 x1 = trialPoint.getVariableProxyArr()[1]
 x2 = trialPoint.getVariableProxyArr()[2]
@@ -1003,13 +1107,17 @@ x7 = trialPoint.getVariableProxyArr()[7]
 for index in range(scorer.getNStripper()):
 	x8 = trialPoint.getVariableProxyArr()[(startingNumber+index*2)]
 	x9 = trialPoint.getVariableProxyArr()[(startingNumber+1+index*2)]
+	x10 = trialPoint.getVariableProxyArr()[(startingNumber+scorer.getNStripper()*2+index)]
 	x8.setUseInSolver(False)
-	x9.setUseInSolver(False)	
+	x9.setUseInSolver(False)
+	x10.setUseInSolver(False)
 	if optimizerSettingsDictionary.hasKey("floatStripperLength%d"%(index+1)) and optimizerSettingsDictionary.getValue("floatStripperLength%d"%(index+1))=="True":
 		x8.setUseInSolver(True)
 		x8.setLowerLimit(.01)
 	if optimizerSettingsDictionary.hasKey("floatStripperAngle%d"%(index+1)) and optimizerSettingsDictionary.getValue("floatStripperAngle%d"%(index+1))=="True":
 		x9.setUseInSolver(True)		
+	if optimizerSettingsDictionary.hasKey("floatStripperOffset%d"%(index+1)) and optimizerSettingsDictionary.getValue("floatStripperOffset%d"%(index+1))=="True":
+		x10.setUseInSolver(True)			
 
 if optimizerSettingsDictionary.hasKey("fixChicaneScale10") and optimizerSettingsDictionary.getValue("fixChicaneScale10")=="True":
 	x0.setUseInSolver(False)
@@ -1027,7 +1135,8 @@ if optimizerSettingsDictionary.hasKey("fixInitialPXClosed") and optimizerSetting
 	x6.setUseInSolver(False)
 if optimizerSettingsDictionary.hasKey("fixInitialPYClosed") and optimizerSettingsDictionary.getValue("fixInitialPYClosed")=="True":
 	x7.setUseInSolver(False)
-	
+
+
 solver.solve(scorer,trialPoint)
 
 print "===== best score ========== fitting time = ", solver.getScoreboard().getRunTime()
@@ -1045,6 +1154,8 @@ fileOut=open("%s/ChicaneScales.txt"%(outputDirectory),'w')
 fileOut.write("%f,%f,%f,%f,%f,%f,%f,%f"%(trialPoint.getVariableProxyValuesArr()[0],trialPoint.getVariableProxyValuesArr()[1],trialPoint.getVariableProxyValuesArr()[2],trialPoint.getVariableProxyValuesArr()[3],trialPoint.getVariableProxyValuesArr()[4],trialPoint.getVariableProxyValuesArr()[5],trialPoint.getVariableProxyValuesArr()[6],trialPoint.getVariableProxyValuesArr()[7]))
 for index in range(scorer.getNStripper()):
 	fileOut.write(",%f,%f"%(trialPoint.getVariableProxyValuesArr()[startingNumber+index*2],trialPoint.getVariableProxyValuesArr()[startingNumber+1+index*2]))
+for index in range(scorer.getNStripper()):
+	fileOut.write(",%f"%(trialPoint.getVariableProxyValuesArr()[startingNumber+scorer.getNStripper()*2+index]))	
 fileOut.write("\n")
 fileOut.flush() 
 fileOut.close() 

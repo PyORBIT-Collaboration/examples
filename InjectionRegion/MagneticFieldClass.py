@@ -16,6 +16,7 @@ class MagneticField():
 		self.fixedStrippingLength=fixedStrippingLength
 		self.nodeName=nodeName
 		self.nodePosition=position
+		self.nodePositionOffset=0
 		self.nodeIndex=-1
 		self.refNodeName=refNodeName
 		self.refNodeIndex=-1
@@ -75,6 +76,11 @@ class MagneticField():
 		return self.nodePosition
 	def setNodePosition(self,value):
 		self.nodePosition=value
+
+	def getNodePositionOffset(self):
+		return self.nodePositionOffset
+	def setNodePositionOffset(self,value):
+		self.nodePositionOffset=value
 		
 	def getNodeIndex(self):
 		return self.nodeIndex

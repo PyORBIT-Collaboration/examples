@@ -3,20 +3,24 @@
 useParallelScore=False
 useParallelScoreY=False
 useParallelScoreX=True
-
 #whether or not to check if closed after tracking through latticeClosed
 usedClosedScore=False
 
-fixChicaneScale10=True
-fixChicaneScale11=True
+useFullOffsetDifferenceX=True
+
+targetFullOffsetDifferenceX=0.05
+
+fixChicaneScale10=False
+fixChicaneScale11=False
 fixChicaneScale12=True
 fixChicaneScale13=True
 
 #whether or not to read the following values from chicaneScaleFile
-readChicaneScale10FromFile=True
-readChicaneScale11FromFile=True
-readChicaneScale12FromFile=True
-readChicaneScale13FromFile=True
+readChicaneFile=True
+readChicaneScale10FromFile=False
+readChicaneScale11FromFile=False
+readChicaneScale12FromFile=False
+readChicaneScale13FromFile=False
 readInitialPXInjectionFromFile=False
 readInitialPYInjectionFromFile=False
 readInitialPXClosedFromFile=False
@@ -31,7 +35,6 @@ fixInitialPXClosed=True
 fixInitialPYClosed=True
 
 modifyAStripper=True
-
 floatStripperLength1=False
 floatStripperAngle1=False
 
@@ -40,9 +43,6 @@ floatStripperAngle2=False
 
 floatStripperLength3=True
 floatStripperAngle3=False
-
-floatStripperLength4=False
-floatStripperAngle4=False
 
 #units [m/rad]
 target_xOffsetClosed=0

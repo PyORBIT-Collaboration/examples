@@ -2,10 +2,13 @@
 #whether or not to use parallelness at end of latticeInjection and latticeClosedCompareToInjection
 useParallelScore=False
 useParallelScoreY=False
-useParallelScoreX=True
-
+useParallelScoreX=False
 #whether or not to check if closed after tracking through latticeClosed
 usedClosedScore=False
+
+usePartOffsetDifferenceX=True
+
+targetPartOffsetDifferenceX=0.04
 
 fixChicaneScale10=True
 fixChicaneScale11=True
@@ -23,6 +26,7 @@ readInitialPXClosedFromFile=False
 readInitialPYClosedFromFile=False
 
 chicaneScaleFile_useStripperLength2=True
+chicaneScaleFile_useStripperLength3=True
 
 fixInitialPXInjection=True
 fixInitialPYInjection=True
@@ -31,18 +35,15 @@ fixInitialPXClosed=True
 fixInitialPYClosed=True
 
 modifyAStripper=True
-
 floatStripperLength1=False
 floatStripperAngle1=False
 
 floatStripperLength2=False
 floatStripperAngle2=False
 
-floatStripperLength3=True
+floatStripperLength3=False
 floatStripperAngle3=False
-
-floatStripperLength4=False
-floatStripperAngle4=False
+floatStripperOffset3=True
 
 #units [m/rad]
 target_xOffsetClosed=0

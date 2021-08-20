@@ -373,6 +373,13 @@ for currentLatticeName in latticeFileNameList:
 				theScales=line.split(",")
 				offset=float(theScales[startingNumber+1+index*2].strip())			
 				magneticFields[index].setFieldDirection(magneticFields[index].getFieldDirection()+offset)	
+			if useChicaneScaleFile and beamLatticeDictionary.hasKey("chicaneScaleFile_useStripperOffset%d"%(index+1)) and beamLatticeDictionary.getValue("chicaneScaleFile_useStripperOffset%d"%(index+1))=="True":
+				openedFile=open("%s/ChicaneScales.txt"%(outputDirectoryChicaneScales),'r')
+				line=openedFile.readline()
+				#print line
+				theScales=line.split(",")
+				offset=float(theScales[startingNumber+numberOfStripperDipoles*2+index].strip())			
+				magneticFields[index].setNodePositionOffset(magneticFields[index].getNodePositionOffset()+offset)					
 				
 		for index in range(numberOfStripperDipoles):
 			refNodeIndex=findReferenceNode(inj_latt_start,magneticFields[index].getRefNodeName().strip())
@@ -385,6 +392,7 @@ for currentLatticeName in latticeFileNameList:
 				else:
 					position =inj_latt_start.getNodePositionsDict()[inj_latt_start.getNodes()[refNodeIndex]][0]+inj_latt_start.getNodes()[refNodeIndex].getLength()*float(magneticFields[index].getNodePosition())
 					
+				position=position+magneticFields[index].getNodePositionOffset()
 				#check if we are in kicker or drift
 				position_start = position
 				position_stop = position + float(magneticFields[index].getStripperLength())
