@@ -11605,6 +11605,12 @@
   <accElement length="0.0" name="HEBT_Diag:WS03" pos="10.2730" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp01L" pos="12.6965" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp01R" pos="12.6965" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH04" pos="13.0" type="QUAD">
    <parameters aperture="0.12" aprt_type="1" field="-4.14"/>
   </accElement>
@@ -11612,6 +11618,12 @@
    <parameters/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:WS04" pos="14.2730" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp01U" pos="16.6980" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp01D" pos="16.6980" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV05" pos="17.0" type="QUAD">
@@ -11623,6 +11635,12 @@
   <accElement length="0.0" name="HEBT_Mag:DCV05" pos="17.520192" type="DCV">
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp02L" pos="20.6610" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp02R" pos="20.6610" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH06" pos="21.0" type="QUAD">
    <parameters aperture="0.12" aprt_type="1" field="-4.14"/>
   </accElement>
@@ -11631,6 +11649,12 @@
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DCH06" pos="21.520192" type="DCH">
    <parameters B="0.0" effLength="0.33"/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp02U" pos="24.6980" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp02D" pos="24.6980" type="MARKER">
+   <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV07" pos="25.0" type="QUAD">
    <parameters aperture="0.12" aprt_type="1" field="4.14"/>
