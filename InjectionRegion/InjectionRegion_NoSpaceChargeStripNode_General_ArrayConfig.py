@@ -68,7 +68,6 @@ def findReferenceNode(theLattice,nameToFind):
 print "Start."
 parser = argparse.ArgumentParser(description="%prog [options]", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--printNodes",type=bool, dest='printNodes', default=True, help="print node list")
-parser.add_argument("--usePrintNode",type=bool, dest='usePrintNode', default=False, help="whether or not to print bunch info to file")
 parser.add_argument("--addChicaneFieldToStripper",type=bool, dest='addChicaneFieldToStripper', default=True, help="Include the chicane fields in the stripper if stripper is inside chicane")
 
 parser.add_argument("--outputDirectory", dest='outputDirectory', default="Test_InjectBeam3_General", help="Where to put output")
@@ -77,8 +76,6 @@ parser.add_argument("--beamLatticeFile", dest='beamLatticeFile', default="BeamLa
 parser.add_argument("--chicaneScaleDirectory", dest='chicaneScaleDirectory', default="InjectBeam3_ChangeOffset", help="Where to get chicane scales from")
 
 args = parser.parse_args()
-
-usePrintNode=args.usePrintNode
 
 beamLatticeDictionary=ConfigureFileReader(args.beamLatticeFile)
 beamLatticeDictionary.printDictionary()
@@ -107,7 +104,13 @@ chicaneScale13=-1.
 
 #the default chicane kick strength array
 chicaneStrengthArray=[-0.041456,0.052434,0.0298523,-0.0398609]
-
+#change them if doing soemthing different IE PPU
+if beamLatticeDictionary.hasKey("chicaneKickStrength"):
+	chicaneKickArray=beamLatticeDictionary.getArray("chicaneKickStrength")
+	chicaneStrengthArray[0]=-float(chicaneKickArray[0])
+	chicaneStrengthArray[1]=-float(chicaneKickArray[1])
+	chicaneStrengthArray[2]=-float(chicaneKickArray[2])
+	chicaneStrengthArray[3]=-float(chicaneKickArray[3])
 usePrintNode=False
 if beamLatticeDictionary.hasKey("usePrintNode") and beamLatticeDictionary.getValue("usePrintNode")=="True":
 	usePrintNode=True
@@ -467,8 +470,10 @@ for currentLatticeName in latticeFileNameList:
 	path_length=0
 	for node in nodes:
 		if args.printNodes==True:
+			path_length_center=path_length+node.getLength()/2.
 			path_length=path_length+node.getLength()
-			print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%inj_latt_start.getNodePositionsDict()[node], " path_length= ",path_length
+			print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%inj_latt_start.getNodePositionsDict()[node], " path_length= ",path_length, " path_length_center= ",path_length_center
+			
 			i=i+1	
 		if usePrintNode:
 			myPrintNodeBeg=None

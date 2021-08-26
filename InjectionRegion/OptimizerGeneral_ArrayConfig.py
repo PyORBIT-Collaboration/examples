@@ -248,7 +248,11 @@ class MyScorer(Scorer):
 		twissZ = TwissContainer(alphaZ,betaZ,emittZ)
 		
 		#print "Start Bunch Generation."
-		self.bunch_gen = SNS_Linac_BunchGenerator(twissX,twissY,twissZ)			
+		self.bunch_gen = SNS_Linac_BunchGenerator(twissX,twissY,twissZ)	
+	def printDebug(self,message):
+		debugDie=False
+		if debugDie:
+			print message
 	def getpxOffsetInjection(self):
 		return self.pxOffsetInjection
 	def getpyOffsetInjection(self):
@@ -456,6 +460,22 @@ class MyScorer(Scorer):
 			chicaneNodeStrength.append(chicaneStr)
 			
 		self.OL_teapot_latt.setChicaneNodeStrength(chicaneNodeStrength)
+	#used to change chicane strength if different from current system. IE for when doing PPU system
+	def findChicaneStrengthBeginning(self):	
+		if self.beamLatticeDictionary.hasKey("chicaneKickStrength"):
+			chicaneKickArray=self.beamLatticeDictionary.getArray("chicaneKickStrength")
+			self.findChicanes()
+			chicaneNodeStrength=[]
+			#chicane10Str=[]
+			#chicane11Str=[]
+			#chicane12Str=[]
+			#chicane13Str=[]
+			for i in range(4):
+				chicaneStr=[]							
+				chicaneStr.append(float(chicaneKickArray[i]))
+				chicaneNodeStrength.append(chicaneStr)
+				
+			self.OL_teapot_latt.setChicaneNodeStrength(chicaneNodeStrength)		
 	#initialize the chicanes in the teapot lattice.
 	def initScorer(self):
 		self.initChicanes()
@@ -488,6 +508,7 @@ class MyScorer(Scorer):
 	#initialize the chicanes in the teapot lattice.
 	def initChicanes(self):
 		self.findChicanes()
+		self.findChicaneStrengthBeginning()
 		#print self.OL_teapot_latt.getChicaneNodes()
 		chicanewave = flatTopWaveform(1.0)
 		nodes = self.OL_teapot_latt.getTeapotLattice().getNodes()
@@ -632,6 +653,7 @@ class MyScorer(Scorer):
 			
 	def getScore(self,trialPoint):
 		#self.resetBunch2()
+		self.printDebug("\ndie1")
 		
 		x0 = trialPoint.getVariableProxyArr()[0].getValue()
 		x1 = trialPoint.getVariableProxyArr()[1].getValue()
@@ -641,26 +663,26 @@ class MyScorer(Scorer):
 		x5 = trialPoint.getVariableProxyArr()[5].getValue()
 		x6 = trialPoint.getVariableProxyArr()[6].getValue()
 		x7 = trialPoint.getVariableProxyArr()[7].getValue()
-	
+		self.printDebug("die2")
 		self.setpxOffsetClosed(x6)
 		self.setpyOffsetClosed(x7)
 		self.resetBunch()		
 		self.setpxOffsetInjection(x4)
 		self.setpyOffsetInjection(x5)
 		self.resetBunch2()
-		
+		self.printDebug("die2b")
 		self.changeLattice(self.OL_teapot_latt_full)
 		self.setScaleChicane(0,x0)
 		self.setScaleChicane(1,x1)
 		self.setScaleChicane(2,x2)
 		self.setScaleChicane(3,x3)
-		
+		self.printDebug("die3")
 		self.changeLattice(self.OL_teapot_latt_partial)
 		self.setScaleChicane(0,x0)
 		self.setScaleChicane(1,x1)
 		self.setScaleChicane(2,x2)
 		self.setScaleChicane(3,x3)
-
+		self.printDebug("die4")
 		self.changeLattice(self.OL_inject_start)
 		if (self.optimizerSettingsDictionary.hasKey("modifyAStripper") and self.optimizerSettingsDictionary.getValue("modifyAStripper")=="True"):
 			self.makeNewInjectLattice()
@@ -694,7 +716,7 @@ class MyScorer(Scorer):
 		self.setScaleChicane(1,x1)
 		self.setScaleChicane(2,x2)
 		self.setScaleChicane(3,x3)
-		
+		self.printDebug("die5")
 		self.changeLattice(self.OL_inject_full)
 		if (self.optimizerSettingsDictionary.hasKey("modifyAStripper") and self.optimizerSettingsDictionary.getValue("modifyAStripper")=="True"):
 			self.makeNewInjectLattice(True)
@@ -729,7 +751,7 @@ class MyScorer(Scorer):
 		self.setScaleChicane(2,x2)
 		self.setScaleChicane(3,x3)			
 
-		
+		self.printDebug("die6")
 		score=0
 		self.OL_teapot_latt_full.getTeapotLattice().trackBunch(self.b, self.paramsDict)
 		self.OL_inject_full.getTeapotLattice().trackBunch(self.b2, self.paramsDict2)
@@ -738,16 +760,27 @@ class MyScorer(Scorer):
 		(xavg2,xpavg2,yavg2,ypavg2)=(twiss_analysis2.getAverage(0),twiss_analysis2.getAverage(1),twiss_analysis2.getAverage(2),twiss_analysis2.getAverage(3))
 		if self.optimizerSettingsDictionary.hasKey("usedClosedScore") and self.optimizerSettingsDictionary.getValue("usedClosedScore")=="True":
 			score = score +(self.b.x(0)-self.xTarget)**2 + (self.b.px(0)-self.pxTarget)**2 + (self.b.y(0)-self.yTarget)**2+(self.b.py(0)-self.pyTarget)**2
+			
+		#print "self.b.px(0)=",self.b.px(0), " self.b.x(0)=",self.b.x(0)," score=",score
 		if self.optimizerSettingsDictionary.hasKey("useFullOffsetDifferenceX") and self.optimizerSettingsDictionary.getValue("useFullOffsetDifferenceX")=="True":
 			score = score +(xavg2-self.b.x(0)-self.targetFullOffsetDifferenceX)**2
 		if self.optimizerSettingsDictionary.hasKey("useFullOffsetDifferenceY") and self.optimizerSettingsDictionary.getValue("useFullOffsetDifferenceY")=="True":
 			score = score +(yavg2-self.b.y(0)-self.targetFullOffsetDifferenceY)**2
-		print "xavg2=",xavg2, " self.b.x(0)=",self.b.x(0)," score=",score, " self.targetFullOffsetDifferenceX=",self.targetFullOffsetDifferenceX
+		#print "xavg2=",xavg2, " self.b.x(0)=",self.b.x(0)," score=",score, " self.targetFullOffsetDifferenceX=",self.targetFullOffsetDifferenceX
 		#print "xpavg2=",xpavg2
+		#x8 = trialPoint.getVariableProxyArr()[(self.startingNumber+2*2)].getValue()
+		#print "x8= ",x8
+		#print "\n"
+		#print "Lattice=",self.OL_inject_start.getTeapotLattice().getName()," length [m] =",self.OL_inject_start.getTeapotLattice().getLength()," nodes=",len(self.OL_inject_start.getTeapotLattice().getNodes())
+		#print "Lattice=",self.OL_inject_full.getTeapotLattice().getName()," length [m] =",self.OL_inject_full.getTeapotLattice().getLength()," nodes=",len(self.OL_inject_full.getTeapotLattice().getNodes())
+		#print "Lattice=",self.OL_teapot_latt_full.getTeapotLattice().getName()," length [m] =",self.OL_teapot_latt_full.getTeapotLattice().getLength()," nodes=",len(self.OL_teapot_latt_full.getTeapotLattice().getNodes())
+		#print "Lattice=",self.OL_teapot_latt_partial.getTeapotLattice().getName()," length [m] =",self.OL_teapot_latt_partial.getTeapotLattice().getLength()," nodes=",len(self.OL_teapot_latt_partial.getTeapotLattice().getNodes())
+		
 		self.resetBunch()
 		for i in range(self.turns):
 			self.OL_teapot_latt_partial.getTeapotLattice().trackBunch(self.b, self.paramsDict)
-			
+		#print "tracked"
+		
 		self.resetBunch2()
 		self.OL_inject_start.getTeapotLattice().trackBunch(self.b2, self.paramsDict2)
 		twiss_analysis = BunchTwissAnalysis()  
@@ -768,7 +801,9 @@ class MyScorer(Scorer):
 		#print "self.b.py(0)=",self.b.py(0), " ypavg=",ypavg," score=",score, " x5=",x5
 		#print "self.b.py(0)=",self.b.py(0), " ypavg=",ypavg," score=",score, "x10=", trialPoint.getVariableProxyArr()[10].getValue()
 		#print "xavg2=",xavg2, " self.b.x(0)=",self.b.x(0)," score=",score, " self.targetFullOffsetDifferenceX=",self.targetFullOffsetDifferenceX
-		
+		#print "self.b.px(0)=",self.b.px(0), " self.xTarget=",self.xTarget," score=",score
+		#print score
+		self.printDebug("dieDone")
 		return score	
 		
 print "Start."
@@ -860,11 +895,11 @@ if doDipoleStrippersInjection:
 
 teapot_latt_full = teapot.TEAPOT_Ring()
 teapot_latt_full.readMAD(latticeClosedName,"RING")
-#print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
+print "Lattice=",teapot_latt_full.getName()," length [m] =",teapot_latt_full.getLength()," nodes=",len(teapot_latt_full.getNodes())
 
 teapot_latt_partial = teapot.TEAPOT_Ring()
 teapot_latt_partial.readMAD(latticeClosedCompareToInjectionName,"RING")
-#print "Lattice=",teapot_latt.getName()," length [m] =",teapot_latt.getLength()," nodes=",len(teapot_latt.getNodes())
+print "Lattice=",teapot_latt_partial.getName()," length [m] =",teapot_latt_partial.getLength()," nodes=",len(teapot_latt_partial.getNodes())
 
 
 #Turn off injection kickers if present in clsoed lattices
@@ -1006,12 +1041,13 @@ searchAlgorithm = SimplexSearchAlgorithm()
 #max_time = 0.05
 #max_time = 100
 max_time = 200
+min_time = 1
 min_score=1E-8
 max_iterations=1000
 
 iterationStopper=SolveStopperFactory.maxIterationStopper(max_iterations)
 timeStopper = SolveStopperFactory.maxTimeStopper(max_time)
-accuracyStopper = SolveStopperFactory.minScoreStopper(min_score)
+accuracyStopper = SolveStopperFactory.minScoreStopper(min_score,min_time)
 solverStopper=SolveStopperFactory.comboStopper()
 solverStopper.addStopper(iterationStopper)
 solverStopper.addStopper(timeStopper)

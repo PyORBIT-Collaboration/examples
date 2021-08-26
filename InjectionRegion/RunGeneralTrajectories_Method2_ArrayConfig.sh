@@ -5,7 +5,7 @@ echo "Hello World"
 #directory is for injectbeam wastebeam
 #directory2 is for closed beam
 #directory3 is injectbeam ring
-outputDirectory=Method2_strippersNotClosed_ArrayConfig_p20_Early_Separate_Horiz
+outputDirectory=PPU_Method2_strippersNotClosed_ArrayConfig_p20_Early_Separate_Horiz
 #outputDirectoryPrefix=Method1
 #magneticFieldFiles=(UpUp DownDown UpDown DownUp LeftLeft LeftRight)
 magneticFieldFiles=(UpUp DownDown UpDown DownUp)
@@ -13,13 +13,14 @@ magneticFieldFiles=(UpUp DownDown UpDown DownUp)
 #magneticFieldFiles=(LeftUp)
 beamLatticeFileDirectory=BeamLatticeFiles
 #beamLatticeFileSuffix=(RUR LUL)
-beamLatticeFileSuffix=(ULLL URRR)
+beamLatticeFileSuffix=(ULRD)
 chicaneScaleDirectory=Method2_Part3_strippersNotClosed_FloatLength
-suffixInjection=InjectBeam_Method2_ArrayConfig_FloatLength_p20_1st_2nd_Early
-suffixWaste=WasteBeam_Method2_ArrayConfig_FloatLength_p20_1st_2nd_Early
-suffixClosed=ClosedBeam_Method2_strippersNotClosed_ArrayConfig
+suffixInjection=PPU_InjectBeam_Method2_ArrayConfig_FloatLength_p20_Early
+suffixWaste=PPU_WasteBeam_Method2_ArrayConfig_FloatLength_p20_Early
+suffixClosed=PPU_ClosedBeam_Method2_strippersNotClosed_ArrayConfig
 
 suffix=($suffixInjection $suffixWaste $suffixClosed)
+#suffix=($suffixClosed)
 
 #echo "$outputDirectoryPrefix"_"$suffixInjection"
 echo "Method2"
