@@ -1,6 +1,9 @@
 <?xml version="1.0" ?>
 <sns>
  <MEBT bpmFrequency="8.05E8" length="3.633" name="MEBT">
+  <accElement length="0.0" name="MEBT_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.061" name="MEBT_Mag:QH01" pos="0.128" type="QUAD">
    <parameters aperture="0.032" aprt_type="1" field="-34.636"/>
   </accElement>
@@ -132,10 +135,10 @@
   </accElement>
   <accElement length="0.0" name="MEBT_Diag:Slit2:Y" pos="2.814" type="MARKER">
    <parameters/>
-  </accElement> 
+  </accElement>
   <accElement length="0.0" name="MEBT_Diag:Slit2:X" pos="2.821" type="MARKER">
    <parameters/>
-  </accElement>   
+  </accElement>
   <accElement length="0.061" name="MEBT_Mag:QV11" pos="2.903" type="QUAD">
    <parameters aperture="0.032" aprt_type="1" field="16.63"/>
   </accElement>
@@ -178,6 +181,9 @@
   <accElement length="0.0" name="MEBT_Diag:WS14" pos="3.498" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="MEBT_END" pos="3.633" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="MEBT1" pos="0.528"/>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="MEBT2" pos="1.288"/>
@@ -186,7 +192,10 @@
   </Cavities>
  </MEBT>
  <DTL1 bpmFrequency="8.05E8" length="4.272517" name="DTL1">
-  <accElement length="0.035" name="DTL_Mag:PMQH100" pos="0.0175" type="QUAD">
+  <accElement length="0.0" name="DTL1_START" pos="0." type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.035" name="DTL_Mag:PMQH100" pos="0.017500001" type="QUAD">
    <parameters aperture="0.025" aprt_type="1" field="-37.182188"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav01:Rg01" pos="0.044601" type="RFGAP">
@@ -861,11 +870,20 @@
   <accElement length="0.035" name="DTL_Mag:PMQH160" pos="4.169825" type="QUAD">
    <parameters aperture="0.025" aprt_type="1" field="-37.099654"/>
   </accElement>
+  <accElement length="0.0" name="DTL_Diag:WS160" pos="4.2168" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="DTL1_END" pos="4.272517" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL1" pos="2.136258"/>
   </Cavities>
  </DTL1>
  <DTL2 bpmFrequency="8.05E8" length="6.1961" name="DTL2">
+  <accElement length="0.0" name="DTL2_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="DTL_RF:Cav02:Rg01" pos="0.0378323" type="RFGAP">
    <parameters E0L="0.00029048" E0TL="0.000229444" EzFile="./axis_fields/DTL2_Rg1.dat" aperture="0.025" aprt_type="1" cavity="DTL2" mode="0" phase="146.60"/>
    <TTFs beta_max="0.238863036778" beta_min="0.0651533180282">
@@ -1412,12 +1430,21 @@
     <polySP order="0" pcoefs="0 "/>
    </TTFs>
   </accElement>
+  <accElement length="0.0" name="DTL_Diag:WS248" pos="6.1586" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="DTL2_END" pos="6.1961" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL2" pos="3.09805"/>
   </Cavities>
  </DTL2>
  <DTL3 bpmFrequency="8.05E8" length="6.560294" name="DTL3">
-  <accElement length="0.035" name="DTL_Mag:PMQV300" pos="0.0175" type="QUAD">
+  <accElement length="0.0" name="DTL3_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.035" name="DTL_Mag:PMQV300" pos="0.01750001" type="QUAD">
    <parameters aperture="0.025" aprt_type="1" field="37.071177"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav03:Rg01" pos="0.099087" type="RFGAP">
@@ -1813,11 +1840,20 @@
   <accElement length="0.035" name="DTL_Mag:PMQH334" pos="6.34155" type="QUAD">
    <parameters aperture="0.025" aprt_type="1" field="-37.031303"/>
   </accElement>
+  <accElement length="0.0" name="DTL_Diag:WS334" pos="6.4960" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="DTL3_END" pos="6.560294" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL3" pos="3.280147"/>
   </Cavities>
  </DTL3>
  <DTL4 bpmFrequency="8.05E8" length="6.629533" name="DTL4">
+  <accElement length="0.0" name="DTL4_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="DTL_RF:Cav04:Rg01" pos="0.0963756" type="RFGAP">
    <parameters E0L="0.000772327" E0TL="0.000624936" EzFile="./axis_fields/DTL4_Rg1.dat" aperture="0.025" aprt_type="1" cavity="DTL4" mode="0" phase="148.31"/>
    <TTFs beta_max="0.365924375541" beta_min="0.102771034797">
@@ -2145,12 +2181,21 @@
   <accElement length="0.035" name="DTL_Mag:PMQH428" pos="6.400856" type="QUAD">
    <parameters aperture="0.025" aprt_type="1" field="-36.998861"/>
   </accElement>
+  <accElement length="0.0" name="DTL_Diag:WS428" pos="6.5924" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="DTL4_END" pos="6.629533" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL4" pos="3.314767"/>
   </Cavities>
  </DTL4>
  <DTL5 bpmFrequency="8.05E8" length="6.596593" name="DTL5">
-  <accElement length="0.035" name="DTL_Mag:PMQH500" pos="0.0175" type="QUAD">
+  <accElement length="0.0" name="DTL5_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.035" name="DTL_Mag:PMQH500" pos="0.01750001" type="QUAD">
    <parameters aperture="0.025" aprt_type="1" field="-36.993248"/>
   </accElement>
   <accElement length="0.0" name="DTL_RF:Cav05:Rg01" pos="0.142354" type="RFGAP">
@@ -2435,11 +2480,20 @@
   <accElement length="0.035" name="DTL_Mag:PMQH524" pos="6.31158" type="QUAD">
    <parameters aperture="0.025" aprt_type="1" field="-36.952373"/>
   </accElement>
+  <accElement length="0.0" name="DTL_Diag:WS524" pos="6.5323" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="DTL5_END" pos="6.596593" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL5" pos="3.298297"/>
   </Cavities>
  </DTL5>
  <DTL6 bpmFrequency="8.05E8" length="6.443724" name="DTL6">
+  <accElement length="0.0" name="DTL6_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="DTL_RF:Cav06:Rg01" pos="0.129979" type="RFGAP">
    <parameters E0L="0.00101049" E0TL="0.000761308" EzFile="./axis_fields/DTL6_Rg1.dat" aperture="0.025" aprt_type="1" cavity="DTL6" mode="0" phase="145.98"/>
    <TTFs beta_max="0.462312619582" beta_min="0.144766434118">
@@ -2698,11 +2752,17 @@
     <polySP order="0" pcoefs="0 "/>
    </TTFs>
   </accElement>
+  <accElement length="0.0" name="DTL6_END" pos="6.443724" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="   4.025e+08" name="DTL6" pos="3.221862"/>
   </Cavities>
  </DTL6>
  <CCL1 bpmFrequency="4.025E8" length="12.302676" name="CCL1">
+  <accElement length="0.0" name="CCL1_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.06075" name="CCL_Mag:QH00" pos="0.04" type="QUAD">
    <parameters aperture="0.030" aprt_type="1" field="-42.34"/>
   </accElement>
@@ -3018,6 +3078,9 @@
   <accElement length="0.0" name="CCL_Mag:DCH104" pos="3.842436" type="DCH">
    <parameters B="0.0" effLength="0.09769"/>
   </accElement>
+  <accElement length="0.0" name="CCL_Diag:WS104" pos="3.9808" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="CCL_RF:Cav01:Rg33" pos="4.094268" type="RFGAP">
    <parameters E0L="0.000262939" E0TL="0.000233774" EzFile="./axis_fields/CCL1_Rg33.dat" aperture="0.03" aprt_type="1" cavity="CCL1" mode="0" phase="150.71"/>
    <TTFs beta_max="0.604653799099" beta_min="0.313891356693">
@@ -3174,6 +3237,9 @@
   <accElement length="0.0" name="CCL_Mag:DCH106" pos="5.85797" type="DCH">
    <parameters B="0.0" effLength="0.09769"/>
   </accElement>
+  <accElement length="0.0" name="CCL_Diag:WS106" pos="5.9803" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="CCL_RF:Cav01:Rg49" pos="6.11932" type="RFGAP">
    <parameters E0L="0.000280858" E0TL="0.00024999" EzFile="./axis_fields/CCL1_Rg49.dat" aperture="0.03" aprt_type="1" cavity="CCL1" mode="0" phase="150.95"/>
    <TTFs beta_max="0.604653799099" beta_min="0.313891356693">
@@ -3323,6 +3389,9 @@
   </accElement>
   <accElement length="0.09769" name="CCL_Mag:QTH108" pos="7.907697" type="QUAD">
    <parameters aperture="0.030" aprt_type="1" field="-20.93725"/>
+  </accElement>
+  <accElement length="0.0" name="CCL_Diag:WS108" pos="8.0301" type="MARKER">
+   <parameters/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav01:Rg65" pos="8.175808" type="RFGAP">
    <parameters E0L="0.000299383" E0TL="0.000266771" EzFile="./axis_fields/CCL1_Rg65.dat" aperture="0.03" aprt_type="1" cavity="CCL1" mode="0" phase="150.48"/>
@@ -3479,6 +3548,9 @@
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH110" pos="9.989809" type="DCH">
    <parameters B="0.0" effLength="0.09769"/>
+  </accElement>
+  <accElement length="0.0" name="CCL_Diag:WS110" pos="10.1122" type="MARKER">
+   <parameters/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav01:Rg81" pos="10.26487" type="RFGAP">
    <parameters E0L="0.000304258" E0TL="0.000271398" EzFile="./axis_fields/CCL1_Rg81.dat" aperture="0.03" aprt_type="1" cavity="CCL1" mode="0" phase="149.66"/>
@@ -3639,11 +3711,17 @@
   <accElement length="0.0" name="CCL_Diag:BPM112" pos="12.187754" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="CCL1_END" pos="12.302676" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="    8.05e+08" name="CCL1" pos="6.151338"/>
   </Cavities>
  </CCL1>
  <CCL2 bpmFrequency="4.025E8" length="13.392076" name="CCL2">
+  <accElement length="0.0" name="CCL2_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="CCL_RF:Cav02:Rg01" pos="0.083837" type="RFGAP">
    <parameters E0L="0.000309638" E0TL="0.000275859" EzFile="./axis_fields/CCL2_Rg1.dat" aperture="0.03" aprt_type="1" cavity="CCL2" mode="0" phase="149.17"/>
    <TTFs beta_max="0.604653799099" beta_min="0.313891356693">
@@ -3952,6 +4030,9 @@
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH204" pos="4.128159" type="DCH">
    <parameters B="0.0" effLength="0.09769"/>
+  </accElement>
+  <accElement length="0.0" name="CCL_Diag:WS204" pos="4.2505" type="MARKER">
+   <parameters/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav02:Rg33" pos="4.4236" type="RFGAP">
    <parameters E0L="0.000318854" E0TL="0.000284504" EzFile="./axis_fields/CCL2_Rg33.dat" aperture="0.03" aprt_type="1" cavity="CCL2" mode="0" phase="149.30"/>
@@ -4415,6 +4496,9 @@
   <accElement length="0.0" name="CCL_Mag:DCH210" pos="10.854154" type="DCH">
    <parameters B="0.0" effLength="0.09769"/>
   </accElement>
+  <accElement length="0.0" name="CCL_Diag:WS210" pos="10.9765" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="CCL_RF:Cav02:Rg81" pos="11.16934" type="RFGAP">
    <parameters E0L="0.000332329" E0TL="0.000297033" EzFile="./axis_fields/CCL2_Rg81.dat" aperture="0.03" aprt_type="1" cavity="CCL2" mode="0" phase="150.46"/>
    <TTFs beta_max="0.604653799099" beta_min="0.313891356693">
@@ -4574,11 +4658,17 @@
   <accElement length="0.0" name="CCL_Diag:BPM212" pos="13.241052" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="CCL2_END" pos="13.392076" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="    8.05e+08" name="CCL2" pos="6.696038"/>
   </Cavities>
  </CCL2>
  <CCL3 bpmFrequency="4.025E8" length="14.481755" name="CCL3">
+  <accElement length="0.0" name="CCL3_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="CCL_RF:Cav03:Rg01" pos="0.167446" type="RFGAP">
    <parameters E0L="0.000337128" E0TL="0.000301112" EzFile="./axis_fields/CCL3_Rg1.dat" aperture="0.03" aprt_type="1" cavity="CCL3" mode="0" phase="149.33"/>
    <TTFs beta_max="0.604653799099" beta_min="0.313891356693">
@@ -4887,6 +4977,9 @@
   </accElement>
   <accElement length="0.0" name="CCL_Mag:DCH304" pos="4.463842" type="DCH">
    <parameters B="0.0" effLength="0.09769"/>
+  </accElement>
+  <accElement length="0.0" name="CCL_Diag:WS304" pos="4.5862" type="MARKER">
+   <parameters/>
   </accElement>
   <accElement length="0.0" name="CCL_RF:Cav03:Rg33" pos="4.878127" type="RFGAP">
    <parameters E0L="0.000345763" E0TL="0.000309017" EzFile="./axis_fields/CCL3_Rg33.dat" aperture="0.03" aprt_type="1" cavity="CCL3" mode="0" phase="149.21"/>
@@ -5350,6 +5443,9 @@
   <accElement length="0.0" name="CCL_Mag:DCH310" pos="11.732713" type="DCH">
    <parameters B="0.0" effLength="0.09769"/>
   </accElement>
+  <accElement length="0.0" name="CCL_Diag:WS310" pos="11.8551" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="CCL_RF:Cav03:Rg81" pos="12.16558" type="RFGAP">
    <parameters E0L="0.000358398" E0TL="0.000320539" EzFile="./axis_fields/CCL3_Rg81.dat" aperture="0.03" aprt_type="1" cavity="CCL3" mode="0" phase="151.26"/>
    <TTFs beta_max="0.604653799099" beta_min="0.313891356693">
@@ -5509,11 +5605,17 @@
   <accElement length="0.0" name="CCL_Diag:BPM312" pos="14.296811" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="CCL3_END" pos="14.481755" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="    8.05e+08" name="CCL3" pos="7.240877"/>
   </Cavities>
  </CCL3>
  <CCL4 bpmFrequency="4.025E8" length="15.097716" name="CCL4">
+  <accElement length="0.0" name="CCL4_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="CCL_RF:Cav04:Rg01" pos="0.130816" type="RFGAP">
    <parameters E0L="0.000362836" E0TL="0.000324317" EzFile="./axis_fields/CCL4_Rg1.dat" aperture="0.03" aprt_type="1" cavity="CCL4" mode="0" phase="150.70"/>
    <TTFs beta_max="0.604653799099" beta_min="0.313891356693">
@@ -5985,6 +6087,9 @@
   <accElement length="0.0" name="CCL_Mag:DCH406" pos="7.344886" type="DCH">
    <parameters B="0.0" effLength="0.09769"/>
   </accElement>
+  <accElement length="0.0" name="CCL_Diag:WS406" pos="7.4673" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="CCL_RF:Cav04:Rg49" pos="7.761642" type="RFGAP">
    <parameters E0L="0.000375016" E0TL="0.000335264" EzFile="./axis_fields/CCL4_Rg49.dat" aperture="0.03" aprt_type="1" cavity="CCL4" mode="0" phase="151.91"/>
    <TTFs beta_max="0.604653799099" beta_min="0.313891356693">
@@ -6453,12 +6558,21 @@
     <polySP order="4" pcoefs="-3.21409037e-07 1.04326472e-08 -9.39962423e-10 1.2400672e-11 -3.21817489e-14 "/>
    </TTFs>
   </accElement>
+  <accElement length="0.0" name="CCL4_END" pos="15.097716" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="    8.05e+08" name="CCL4" pos="7.548858"/>
   </Cavities>
  </CCL4>
  <SCLMed bpmFrequency="4.025E8" length="66.962" name="SCLMed">
+  <accElement length="0.0" name="SCLMed_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="SCL_Diag:BPM00a" pos="0.221842" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="SCL_Diag:WS00" pos="0.3040" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.104" name="SCL_Mag:QH00" pos="0.85" type="QUAD">
@@ -6644,6 +6758,9 @@
   <accElement length="0.0" name="SCL_Mag:DCH01" pos="6.91138" type="DCH">
    <parameters B="0.0" effLength="0.38"/>
   </accElement>
+  <accElement length="0.0" name="SCL_Diag:LW01" pos="7.3690" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="SCL_Diag:BPM01" pos="7.544653" type="MARKER">
    <parameters/>
   </accElement>
@@ -6820,6 +6937,9 @@
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH02" pos="12.75038" type="DCH">
    <parameters B="0.0" effLength="0.38"/>
+  </accElement>
+  <accElement length="0.0" name="SCL_Diag:LW02" pos="13.2080" type="MARKER">
+   <parameters/>
   </accElement>
   <accElement length="0.0" name="SCL_Diag:BPM02" pos="13.380743" type="MARKER">
    <parameters/>
@@ -7001,6 +7121,9 @@
   <accElement length="0.0" name="SCL_Diag:BPM03" pos="19.219623" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="SCL_Diag:LW03" pos="19.0470" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.38" name="SCL_Mag:QV03" pos="19.50462" type="QUAD">
    <parameters aperture="0.080" aprt_type="1" field="4.96"/>
   </accElement>
@@ -7174,6 +7297,9 @@
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH04" pos="24.42838" type="DCH">
    <parameters B="0.0" effLength="0.38"/>
+  </accElement>
+  <accElement length="0.0" name="SCL_Diag:LW04" pos="24.8860" type="MARKER">
+   <parameters/>
   </accElement>
   <accElement length="0.0" name="SCL_Diag:BPM04" pos="25.05902" type="MARKER">
    <parameters/>
@@ -8423,6 +8549,9 @@
   <accElement length="0.0" name="SCL_Mag:DCV11" pos="66.21662" type="DCV">
    <parameters B="0.0" effLength="0.38"/>
   </accElement>
+  <accElement length="0.0" name="SCLMed_END" pos="66.962" type="MARKER">
+   <parameters/>
+  </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="    8.05e+08" name="SCL:Cav01a" pos="3.175812"/>
    <Cavity ampl="1.0" frequency="    8.05e+08" name="SCL:Cav01b" pos="4.399238"/>
@@ -8460,6 +8589,9 @@
   </Cavities>
  </SCLMed>
  <SCLHigh bpmFrequency="4.025E8" length="171.294012" name="SCLHigh">
+  <accElement length="0.0" name="SCLHigh_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="SCL_RF:Cav12a:Rg01" pos="0.1553557" type="RFGAP">
    <parameters E0L="0.00379833" E0TL="0.00201473" EzFile="./axis_fields/SCLHigh_Rg1.dat" aperture="0.098" aprt_type="1" cavity="SCL:Cav12a" mode="0" phase="91.38"/>
    <TTFs beta_max="0.915846380563" beta_min="0.613375720599">
@@ -8683,6 +8815,9 @@
    <parameters B="0.0" effLength="0.38"/>
   </accElement>
   <accElement length="0.0" name="SCL_Diag:BPM12" pos="6.860967" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="SCL_Diag:LW12" pos="7.0563" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.38" name="SCL_Mag:QV12" pos="7.14562" type="QUAD">
@@ -8916,6 +9051,9 @@
   <accElement length="0.0" name="SCL_Diag:BPM13" pos="14.75162" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="SCL_Diag:LW13" pos="14.9473" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.38" name="SCL_Mag:QV13" pos="15.03662" type="QUAD">
    <parameters aperture="0.080" aprt_type="1" field="6.15"/>
   </accElement>
@@ -9147,6 +9285,9 @@
   <accElement length="0.0" name="SCL_Diag:BPM14" pos="22.6429" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="SCL_Diag:LW14" pos="22.8383" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.38" name="SCL_Mag:QV14" pos="22.92762" type="QUAD">
    <parameters aperture="0.080" aprt_type="1" field="6.255789"/>
   </accElement>
@@ -9376,6 +9517,9 @@
    <parameters B="0.0" effLength="0.38"/>
   </accElement>
   <accElement length="0.0" name="SCL_Diag:BPM15" pos="30.533363" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="SCL_Diag:LW15" pos="30.7293" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.38" name="SCL_Mag:QV15" pos="30.81862" type="QUAD">
@@ -11361,6 +11505,9 @@
   <accElement length="0.0" name="SCL_Diag:BPM32" pos="164.680459" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="SCL_Diag:LW32" pos="164.8763" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.38" name="SCL_Mag:QV32" pos="164.96562" type="QUAD">
    <parameters aperture="0.080" aprt_type="1" field="5.66"/>
   </accElement>
@@ -11372,6 +11519,9 @@
   </accElement>
   <accElement length="0.0" name="SCL_Mag:DCH33" pos="168.358" type="DCH">
    <parameters B="0.0" effLength="0.38"/>
+  </accElement>
+  <accElement length="0.0" name="SCLHigh_END" pos="171.294012" type="MARKER">
+   <parameters/>
   </accElement>
   <Cavities>
    <Cavity ampl="1.0" frequency="    8.05e+08" name="SCL:Cav12a" pos="0.535891"/>
@@ -11425,32 +11575,59 @@
   </Cavities>
  </SCLHigh>
  <HEBT1 bpmFrequency="4.025E8" length="41.973095" name="HEBT1">
+  <accElement length="0.0" name="HEBT1_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV01" pos="1.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="4.14"/>
+   <parameters aperture="0.12" aprt_type="1" field="4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM01" pos="1.383197" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Diag:WS01" pos="2.3625" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH02" pos="5.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="-4.14"/>
+   <parameters aperture="0.12" aprt_type="1" field="-4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM02" pos="5.383197" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Diag:WS02" pos="6.2730" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV03" pos="9.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="4.14"/>
+   <parameters aperture="0.12" aprt_type="1" field="4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM03" pos="9.383197" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Diag:WS03" pos="10.2730" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp01L" pos="12.6965" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp01R" pos="12.6965" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH04" pos="13.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="-4.14"/>
+   <parameters aperture="0.12" aprt_type="1" field="-4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM04" pos="13.383197" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Diag:WS04" pos="14.2730" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp01U" pos="16.6980" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp01D" pos="16.6980" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV05" pos="17.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="4.14"/>
+   <parameters aperture="0.12" aprt_type="1" field="4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM05" pos="17.383197" type="MARKER">
    <parameters/>
@@ -11458,8 +11635,14 @@
   <accElement length="0.0" name="HEBT_Mag:DCV05" pos="17.520192" type="DCV">
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp02L" pos="20.6610" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp02R" pos="20.6610" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH06" pos="21.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="-4.14"/>
+   <parameters aperture="0.12" aprt_type="1" field="-4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM06" pos="21.383197" type="MARKER">
    <parameters/>
@@ -11467,8 +11650,14 @@
   <accElement length="0.0" name="HEBT_Mag:DCH06" pos="21.520192" type="DCH">
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp02U" pos="24.6980" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT_Coll:Scrp02D" pos="24.6980" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV07" pos="25.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="4.14"/>
+   <parameters aperture="0.12" aprt_type="1" field="4.14"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM07" pos="25.383197" type="MARKER">
    <parameters/>
@@ -11477,7 +11666,7 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH08" pos="29.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="-3.54599"/>
+   <parameters aperture="0.12" aprt_type="1" field="-3.54599"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM08" pos="29.383197" type="MARKER">
    <parameters/>
@@ -11486,60 +11675,75 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV09" pos="33.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="3.15906"/>
+   <parameters aperture="0.12" aprt_type="1" field="3.15906"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM09" pos="33.383197" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Diag:WS09" pos="34.3625" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH10" pos="37.0" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="-2.94351"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.94351"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM10" pos="37.383197" type="MARKER">
    <parameters/>
   </accElement>
+  <accElement length="0.0" name="HEBT_Diag:EMS_X" pos="39.443" type="MARKER">
+   <parameters/>  
+  </accElement>  
+  <accElement length="0.0" name="HEBT_Diag:EMS_Y" pos="39.443" type="MARKER">
+   <parameters/>  
+  </accElement>  
   <accElement length="0.0" name="HEBT_Diag:BPM11" pos="41.116803" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV11" pos="41.5" type="QUAD">
-   <parameters aperture="0.240" aprt_type="1" field="2.4639"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.4639"/>
+  </accElement>
+  <accElement length="0.0" name="HEBT1_END" pos="41.973095" type="MARKER">
+   <parameters/>
   </accElement>
  </HEBT1>
  <HEBT2 bpmFrequency="4.025E8" length="132.053806" name="HEBT2">
+  <accElement length="0.0" name="HEBT2_START" pos="0.0" type="MARKER">
+   <parameters/>
+  </accElement>
   <accElement length="0.0" name="Begin_Of_HEBT2" pos="0.0" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH11" pos="2.943512" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-0.001403" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-0.001403" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QH12" pos="6.860119" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="2.219343130330302"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.219343130330302"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH12" pos="10.276726" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-6.38E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-6.38E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QV13" pos="14.193333" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-2.0701018709497716"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.0701018709497716"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH13" pos="17.60994" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-8.47E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-8.47E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DCH14" pos="20.973335" type="DCH">
    <parameters B="0.0" effLength="0.538"/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QH14" pos="21.526546" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="2.219343130330302"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.219343130330302"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH14" pos="24.943157" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="1.3E-5" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="1.3E-5" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DCV15" pos="28.306549" type="DCV">
    <parameters B="0.0" effLength="0.538"/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QV15" pos="28.859768" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-2.0701018709497716"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.0701018709497716"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH15" pos="32.276379" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-6.36E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-6.36E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:WS16" pos="35.321501" type="MARKER">
    <parameters/>
@@ -11551,10 +11755,10 @@
    <parameters/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QH16" pos="36.192989" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="2.219343130330302"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.219343130330302"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH16" pos="39.6096" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="4.14E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="4.14E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Mag:DCV17" pos="42.972977" type="DCV">
    <parameters B="0.0" effLength="0.538"/>
@@ -11563,31 +11767,31 @@
    <parameters/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QV17" pos="43.526211" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-2.0701018709497716"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.0701018709497716"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH17" pos="46.942821" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="1.14E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="1.14E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM18" pos="50.503498" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QH18" pos="50.859432" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="2.219343130330302"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.219343130330302"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH18" pos="54.276043" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-4.12E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-4.12E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM19" pos="57.836712" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QV19" pos="58.192654" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-2.0701018709497716"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.0701018709497716"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BSM19" pos="59.298" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH20" pos="63.692654" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="2.4488786935847133"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.4488786935847133"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM20" pos="64.075814" type="MARKER">
    <parameters/>
@@ -11599,7 +11803,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV21" pos="68.692654" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-2.5798161118205285"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.5798161118205285"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM21" pos="69.075814" type="MARKER">
    <parameters/>
@@ -11611,7 +11815,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH22" pos="73.192654" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="2.9729277865278836"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.9729277865278836"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM22" pos="73.575814" type="MARKER">
    <parameters/>
@@ -11623,7 +11827,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV23" pos="77.692654" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-2.8037353976964186"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.8037353976964186"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM23" pos="78.075814" type="MARKER">
    <parameters/>
@@ -11635,7 +11839,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH24" pos="82.192654" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="3.446954607217562"/>
+   <parameters aperture="0.12" aprt_type="1" field="3.446954607217562"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM24" pos="82.575814" type="MARKER">
    <parameters/>
@@ -11647,28 +11851,28 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV25" pos="86.192654" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-3.240630311943467"/>
+   <parameters aperture="0.12" aprt_type="1" field="-3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM25" pos="86.575814" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="4.13" name="HEBT_Mag:DH25" pos="89.514667" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="0.07640056627557539" ea2="0.07640056627557539" kls="-1.79E-4" poles="1.0" skews="0.0" theta="0.15280113255115077"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="0.07640056627557539" ea2="0.07640056627557539" kls="-1.79E-4" poles="1.0" skews="0.0" theta="0.15280113255115077"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH26" pos="92.336689" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="3.25169354612548"/>
+   <parameters aperture="0.12" aprt_type="1" field="3.25169354612548"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM26" pos="92.719834" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV27" pos="96.336689" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-3.240630311943467"/>
+   <parameters aperture="0.21" aprt_type="1" field="-3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM27" pos="96.719834" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH28" pos="100.336689" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="3.25169354612548"/>
+   <parameters aperture="0.21" aprt_type="1" field="3.25169354612548"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM28" pos="100.719834" type="MARKER">
    <parameters/>
@@ -11677,7 +11881,7 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV29" pos="104.336689" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-3.240630311943467"/>
+   <parameters aperture="0.21" aprt_type="1" field="-3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM29" pos="104.719834" type="MARKER">
    <parameters/>
@@ -11686,7 +11890,7 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH30" pos="107.836689" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="4.073370902047217"/>
+   <parameters aperture="0.21" aprt_type="1" field="4.073370902047217"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM30" pos="108.219834" type="MARKER">
    <parameters/>
@@ -11695,7 +11899,7 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV31" pos="111.836689" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-3.240630311943467"/>
+   <parameters aperture="0.21" aprt_type="1" field="-3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM31" pos="112.219834" type="MARKER">
    <parameters/>
@@ -11704,7 +11908,7 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH32" pos="115.836689" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="3.25169354612548"/>
+   <parameters aperture="0.21" aprt_type="1" field="3.25169354612548"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM32" pos="116.219834" type="MARKER">
    <parameters/>
@@ -11719,18 +11923,21 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV33" pos="122.451694" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="-5.294947104878765"/>
+   <parameters aperture="0.21" aprt_type="1" field="-5.294947104878765"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH34" pos="123.311695" type="QUAD">
-   <parameters aperture="0.420" aprt_type="1" field="4.7887321558919504"/>
+   <parameters aperture="0.21" aprt_type="1" field="4.7887321558919504"/>
   </accElement>
   <accElement length="3.064" name="HEBT_Mag:InjSptm" pos="126.343479" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="0.0" ea2="0.0" kls="0.0" poles="1.0" skews="0.0" theta="-0.11084586079415987"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="0.0" ea2="0.0" kls="0.0" poles="1.0" skews="0.0" theta="-0.11084586079415987"/>
   </accElement>
   <accElement length="0.94" name="Ring_Mag:DH_A11" pos="130.690932" type="BEND">
-   <parameters aperture_x="0.42" aperture_y="0.08" aprt_type="3" ea1="-0.042000004545719505" ea2="-0.011099997336711095" kls="0.0" poles="1.0" skews="0.0" theta="-0.05310000188243061"/>
+   <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.042000004545719505" ea2="-0.011099997336711095" kls="0.0" poles="1.0" skews="0.0" theta="-0.05310000188243061"/>
   </accElement>
   <accElement length="0.0" name="Ring_Inj:Foil" pos="131.053695" type="MARKER">
+   <parameters/>
+  </accElement>
+  <accElement length="0.0" name="HEBT2_END" pos="132.053806" type="MARKER">
    <parameters/>
   </accElement>
  </HEBT2>

@@ -27,6 +27,7 @@ from orbit.utils.xml import XmlDataAdaptor
 def setAprtParamsToBEND(node_da):
 	if(node_da.hasAttribute("type") and node_da.stringValue("type") == "BEND"):
 		params_da = node_da.childAdaptors("parameters")[0]
+		params_da.removeAttribute("aperture")
 		params_da.setValue("aprt_type",3)
 		params_da.setValue("aperture_x",0.420)
 		params_da.setValue("aperture_y",0.080)

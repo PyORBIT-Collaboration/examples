@@ -79,6 +79,7 @@ max_grad_diff_ix = -1
 max_grad_diff_iy = -1
 max_grad_diff_iz = -1
 max_diff_phi = 0.
+max_diff_solv_phi = 0.
 for ix in range(sizeX):
 	for iy in range(sizeY):
 		for iz in range(sizeZ):
@@ -96,6 +97,7 @@ for ix in range(sizeX):
 					max_diff_iy = iy
 					max_diff_iz = iz
 					max_diff_phi = phi_th
+					max_diff_solv_phi = phi
 				#-------gradient---------------------------
 				if(dist > 3*step_total):
 					(gradX,gradY,gradZ) = gridPhi.calcGradient(x,y,z)
@@ -115,8 +117,9 @@ print "charge position iy =",chrage_ind_y
 print "charge position iz =",chrage_ind_z
 print "potential at the cahrge position phi =",gridPhi.getValueOnGrid(chrage_ind_x,chrage_ind_y,chrage_ind_z)
 print "================================"
+print "phi theory at max deviation =",max_diff_phi
+print "phi Solver at max deviation =",max_diff_solv_phi
 print "max Solver-Theory deviation =",max_dev
-print "phi theory =",max_diff_phi
 print "max diff position ix = ",max_diff_ix
 print "max diff position iy = ",max_diff_iy
 print "max diff position iz = ",max_diff_iz
