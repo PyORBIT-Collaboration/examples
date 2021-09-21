@@ -357,6 +357,8 @@ for currentLatticeName in latticeFileNameList:
 				#<position with respect to reference node> can be "before"(places it right before reference), "after"(places it right after reference), or float [0-1](places it this fraction into reference)				
 				tempFieldArray=beamLatticeDictionary.getArray("stripper%d"%(index+1))
 				tempFieldClass=MagneticField(tempFieldArray[0],tempFieldArray[1],tempFieldArray[2],tempFieldArray[3],tempFieldArray[4],tempFieldArray[5])
+				if len(tempFieldArray)>=7:
+					tempFieldClass.setStrippingLifeTimeFileName(tempFieldArray[6])
 				magneticFields.append(tempFieldClass)
 			else:
 				print "stripper%d not in beamLattice config file, exiting"%(index+1)
@@ -455,7 +457,7 @@ for currentLatticeName in latticeFileNameList:
 					magneticFieldy.add(x,y*math.sin(fieldDirection)+ykickerField)
 				
 				if magneticFields[index].getIsStripper()=="True":
-					myDipole_DH_A11=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,gamma,beta,magneticFields[index].getNodeName(),float(magneticFields[index].getFixedStrippingLength()))
+					myDipole_DH_A11=GeneralDipoleStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,gamma,beta,magneticFields[index].getNodeName(),float(magneticFields[index].getFixedStrippingLength()),magneticFields[index].getStrippingLifeTimeFileWithDirectory())
 				else:
 					myDipole_DH_A11=GeneralDipoleNoStripSeperateField(magneticFieldx,magneticFieldy,nParts,lengthStripper,gamma,beta,magneticFields[index].getNodeName())
 					if magneticFields[index].getFoilTest():
@@ -610,6 +612,8 @@ paramsDict["firstChicaneFail"]=firstChicaneFail
 paramsDict["secondChicaneFail"]= secondChicaneFail
 lostbunch.addPartAttr("LostParticleAttributes") 
 
+
+bunch_in.dumpBunch()
 latticeIndexToMakeBunchChargePlusOneAtEndOf=-1
 if beamLatticeDictionary.hasKey("latticeIndexToMakeBunchChargePlusOneAtEndOf"):
 	latticeIndexToMakeBunchChargePlusOneAtEndOf=int(beamLatticeDictionary.getValue("latticeIndexToMakeBunchChargePlusOneAtEndOf"))
@@ -619,7 +623,7 @@ for currentLatticeIndex in range(len(theLatticesList)):
 	#set bunch charge to +1 at end of lattice. More desired approach would be to create child node that does this.
 	if currentLatticeIndex==latticeIndexToMakeBunchChargePlusOneAtEndOf:
 		bunch_in.charge(1)
-
+bunch_in.dumpBunch()
 #===========Dump bunch infomration=======================================
 #bunch_pyorbit_to_orbit(inj_latt.getLength(), bunch_in, "mainbunch.dat")
 #bunch_pyorbit_to_orbit(inj_latt.getLength(), lostbunch, "lostbunch.dat")

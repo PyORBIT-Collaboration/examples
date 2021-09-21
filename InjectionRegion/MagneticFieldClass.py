@@ -27,6 +27,8 @@ class MagneticField():
 		#1 is linear ramp
 		self.magnetFunctionType=1
 		self.foilTest=False
+		self.strippingLifeTimeDirectory="StrippingLifeTimes/"
+		self.strippingLifeTimeFileName="none"
 		self.initialize()
 	
 	def getStripperLength(self):
@@ -121,6 +123,22 @@ class MagneticField():
 		return self.foilTest
 	def setFoilTest(self,value):
 		self.foilTest=value
+		
+	def getStrippingLifeTimeDirectory(self):
+		return self.strippingLifeTimeDirectory
+	def setStrippingLifeTimeDirectory(self,value):
+		self.strippingLifeTimeDirectory=value
+
+	def getStrippingLifeTimeFileName(self):
+		return self.strippingLifeTimeFileName
+	def setStrippingLifeTimeFileName(self,value):
+		self.strippingLifeTimeFileName=value
+		
+	def getStrippingLifeTimeFileWithDirectory(self):
+		if self.strippingLifeTimeFileName=="none":
+			return "none"
+		else:
+			return "%s%s"%(self.strippingLifeTimeDirectory,self.strippingLifeTimeFileName)	
 		
 	def getValueOfField(self,value):
 		y="temp"

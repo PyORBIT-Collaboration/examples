@@ -10,10 +10,12 @@ import math
 import sys
 
 from orbit_utils import Function
-from KevinPython.function_stripping import probabilityStripping
-from KevinPython.function_strippingIncludeChicaneField import probabilityStrippingWithChicane
+#from KevinPython.function_stripping import probabilityStripping
+#from KevinPython.function_strippingIncludeChicaneField import probabilityStrippingWithChicane
+from orbit.teapot.function_strippingIncludeChicaneField import probabilityStrippingWithChicane
 
-e_kin_ini = 1.0 # in [GeV]
+e_kin_ini = 1.3 # in [GeV]
+#e_kin_ini = 4.0 # in [GeV]
 mass =  0.93827231 #0.939294    # in [GeV]
 gamma = (mass + e_kin_ini)/mass
 beta = math.sqrt(gamma*gamma - 1.0)/gamma
@@ -22,12 +24,14 @@ print "relat.  beta=",beta
 
 theEffLength=0.03*2
 #theEffLength=0.01
-#fieldStrength=1.3
-#fieldStrengthMin=.2
-fieldStrength=.07
-fieldStrengthMin=.07
+fieldStrength=1.3
+#fieldStrength=50.0
+fieldStrengthMin=.2
+#fieldStrength=.07
+#fieldStrengthMin=.07
 cutLength=0.03
-fieldDirection=math.pi/2.
+#cutLength=-5
+fieldDirection=-math.pi/2.
 
 A1=2.47e-6
 A2=4.49e9
@@ -60,47 +64,65 @@ for i in range(n):
 	y = pieceWiseField2(x)
 	magneticFieldx.add(x,y*math.cos(fieldDirection))
 	magneticFieldy.add(x,y*math.sin(fieldDirection))
+gROOT.SetBatch(True)   
+directory="CheckFunctions"
+fileNameArray={"000","001","010","100","200","020","110","101","011","none"}
+for fileName in fileNameArray:
+	theStrippingFunctions=probabilityStrippingWithChicane(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta)
+	if fileName!="none":
+		theStrippingFunctions.setStrippingLifeTimeFileName("StrippingLifeTimes/%s.txt"%fileName)
+	theStrippingFunctions.computeFunctions()
+	accumlatedSum=theStrippingFunctions.getaccumlatedSum()
+	CDF=theStrippingFunctions.getCDF()
+	deltaxp_rigidity=theStrippingFunctions.getdeltaxp_rigidity()
+	deltax_rigidity=theStrippingFunctions.getdeltax_rigidity()
+	deltaxp_m_rigidity=theStrippingFunctions.getdeltaxp_m_rigidity()
+	deltax_m_rigidity=theStrippingFunctions.getdeltax_m_rigidity()
 	
-theStrippingFunctions=probabilityStrippingWithChicane(magneticFieldx,magneticFieldy,n,maxValue,gamma,beta)
-theStrippingFunctions.computeFunctions()
-accumlatedSum=theStrippingFunctions.getaccumlatedSum()
-CDF=theStrippingFunctions.getCDF()
-deltaxp_rigidity=theStrippingFunctions.getdeltaxp_rigidity()
-deltax_rigidity=theStrippingFunctions.getdeltax_rigidity()
-deltaxp_m_rigidity=theStrippingFunctions.getdeltaxp_m_rigidity()
-deltax_m_rigidity=theStrippingFunctions.getdeltax_m_rigidity()
-
-deltayp_rigidity=theStrippingFunctions.getdeltayp_rigidity()
-deltay_rigidity=theStrippingFunctions.getdeltay_rigidity()
-deltayp_m_rigidity=theStrippingFunctions.getdeltayp_m_rigidity()
-deltay_m_rigidity=theStrippingFunctions.getdeltay_m_rigidity()	
-
-InverseFunction=theStrippingFunctions.getInverseFunction()
-  
-
-
-theFunctions=[accumlatedSum,CDF,InverseFunction,magneticFieldx,magneticFieldy,deltaxp_rigidity,deltax_rigidity,deltayp_rigidity,deltay_rigidity]
-titles=["accumlatedSum","CDF","InverseFunction","magneticFieldx","magneticFieldy","deltaxp_rigidity","deltax_rigidity","deltayp_rigidity","deltay_rigidity"]
-notNormalizedGraph= TGraph()
-NormalizedGraph= TGraph()
-InverseGraph= TGraph()
-counter=0
-for function in theFunctions:
-	currentGraph=TGraph()
-	for i in range(function.getSize()):
-		currentGraph.SetPoint(currentGraph.GetN(),float(function.x(i)),float(function.y(i)))
-	theCanvas=TCanvas("TGraph","TGraph",0,0,500,500)
-	currentGraph.Draw("AP")   
-	theCanvas.Print("%s.png"%(titles[counter]))
-	#theCanvas.SaveAs("temp%d.png"%counter)
-	theCanvas.Clear()
-	counter=counter+1
-
-
-print "notNormalizedFunction->getY(maxValue)"
-#print accumlatedSum.getY(maxValue)
-print CDF.getY(maxValue)
-print deltaxp_rigidity.getY(maxValue)
-print deltax_rigidity.getY(maxValue)
-print magneticFieldy.getY(maxValue)
-print magneticFieldx.getY(maxValue)
+	deltayp_rigidity=theStrippingFunctions.getdeltayp_rigidity()
+	deltay_rigidity=theStrippingFunctions.getdeltay_rigidity()
+	deltayp_m_rigidity=theStrippingFunctions.getdeltayp_m_rigidity()
+	deltay_m_rigidity=theStrippingFunctions.getdeltay_m_rigidity()	
+	
+	InverseFunction=theStrippingFunctions.getInverseFunction()
+	  
+	
+	
+	theFunctions=[accumlatedSum,CDF,InverseFunction,magneticFieldx,magneticFieldy,deltaxp_rigidity,deltax_rigidity,deltayp_rigidity,deltay_rigidity]
+	titles=["accumlatedSum","CDF","InverseFunction","magneticFieldx","magneticFieldy","deltaxp_rigidity","deltax_rigidity","deltayp_rigidity","deltay_rigidity"]
+	notNormalizedGraph= TGraph()
+	NormalizedGraph= TGraph()
+	InverseGraph= TGraph()
+	counter=0
+	for function in theFunctions:
+		currentGraph=TGraph()
+		currentGraphDeriv=TGraph()
+		for i in range(function.getSize()):
+			currentGraph.SetPoint(currentGraph.GetN(),float(function.x(i)),float(function.y(i)))
+			if titles[counter]=="CDF" and i!=0:
+				rise=currentGraph.GetPointY(i)-currentGraph.GetPointY(i-1)
+				run=currentGraph.GetPointX(i)-currentGraph.GetPointX(i-1)
+				slope=rise/run
+				currentGraphDeriv.SetPoint(currentGraphDeriv.GetN(),currentGraph.GetPointX(i)+run/2.,slope)
+		theCanvas=TCanvas("TGraph","TGraph",0,0,500,500)
+		currentGraph.Draw("AP")   
+		theCanvas.Print("%s/%s_%s.png"%(directory,fileName,titles[counter]))
+		#theCanvas.SaveAs("temp%d.png"%counter)
+		theCanvas.Clear()
+		if titles[counter]=="CDF":
+			theCanvas=TCanvas("TGraph","TGraph",0,0,500,500)
+			currentGraphDeriv.Draw("AP")   
+			theCanvas.Print("%s/%s_%s_deriv.png"%(directory,fileName,titles[counter]))
+			#theCanvas.SaveAs("temp%d.png"%counter)
+			theCanvas.Clear()		
+			
+		counter=counter+1
+	
+	
+	print "notNormalizedFunction->getY(maxValue)"
+	#print accumlatedSum.getY(maxValue)
+	print CDF.getY(maxValue)
+	print deltaxp_rigidity.getY(maxValue)
+	print deltax_rigidity.getY(maxValue)
+	print magneticFieldy.getY(maxValue)
+	print magneticFieldx.getY(maxValue)
