@@ -613,7 +613,7 @@ paramsDict["secondChicaneFail"]= secondChicaneFail
 lostbunch.addPartAttr("LostParticleAttributes") 
 
 
-bunch_in.dumpBunch()
+#bunch_in.dumpBunch()
 latticeIndexToMakeBunchChargePlusOneAtEndOf=-1
 if beamLatticeDictionary.hasKey("latticeIndexToMakeBunchChargePlusOneAtEndOf"):
 	latticeIndexToMakeBunchChargePlusOneAtEndOf=int(beamLatticeDictionary.getValue("latticeIndexToMakeBunchChargePlusOneAtEndOf"))
@@ -623,7 +623,7 @@ for currentLatticeIndex in range(len(theLatticesList)):
 	#set bunch charge to +1 at end of lattice. More desired approach would be to create child node that does this.
 	if currentLatticeIndex==latticeIndexToMakeBunchChargePlusOneAtEndOf:
 		bunch_in.charge(1)
-bunch_in.dumpBunch()
+#bunch_in.dumpBunch()
 #===========Dump bunch infomration=======================================
 #bunch_pyorbit_to_orbit(inj_latt.getLength(), bunch_in, "mainbunch.dat")
 #bunch_pyorbit_to_orbit(inj_latt.getLength(), lostbunch, "lostbunch.dat")

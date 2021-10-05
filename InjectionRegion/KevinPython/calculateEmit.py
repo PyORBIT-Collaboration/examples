@@ -126,10 +126,15 @@ class Calc_Emit(NodeTEAPOT):
 		if avg_dE2>0:
 			emit_pure_x=math.sqrt((var_x-var_x_dE*var_x_dE/var_dE)*(var_px-var_px_dE*var_px_dE/var_dE)-(var_x_px-var_x_dE*var_px_dE/var_dE)*(var_x_px-var_x_dE*var_px_dE/var_dE))
 			emit_pure_y=math.sqrt((var_y-var_y_dE*var_y_dE/var_dE)*(var_py-var_py_dE*var_py_dE/var_dE)-(var_y_py-var_y_dE*var_py_dE/var_dE)*(var_y_py-var_y_dE*var_py_dE/var_dE))
-		twiss_analysis = BunchTwissAnalysis()        
-		node = paramsDict["node"]
+		twiss_analysis = BunchTwissAnalysis() 
+		nodeName="noName"
+		if "node" in paramsDict:
+			node = paramsDict["node"]
+			nodeName=node.getName()
 		bunch = paramsDict["bunch"]
-		pos = paramsDict["path_length"]
+		pos =-1
+		if "path_length" in paramsDict:
+			pos = paramsDict["path_length"]
 	
 		gamma = bunch.getSyncParticle().gamma()
 		beta = bunch.getSyncParticle().beta()
@@ -148,7 +153,8 @@ class Calc_Emit(NodeTEAPOT):
 		#---- phi_de_emittZ will be in [pi*deg*MeV]
 		eKin = bunch.getSyncParticle().kinEnergy()*1.0e+3
 	
-		s_prt = " %35s  %4.5f "%(node.getName(),pos)
+		#s_prt = " %35s  %4.5f "%(node.getName(),pos)
+		s_prt = " %35s  %4.5f "%(nodeName,pos)
 		s_prt += "  %5.3f  %5.3f  "%(x_rms,y_rms)
 		s_prt += "  %10.6f   %8d "%(eKin,nParts)
 		print s_prt	        
@@ -158,7 +164,8 @@ class Calc_Emit(NodeTEAPOT):
 		else:
 		    fileOut=open(self.fileName,'a')
 		    #print self.getName()
-		    s = " %35s  %4.5f \n"%(node.getName(),pos)
+		    #s = " %35s  %4.5f \n"%(node.getName(),pos)
+		    s = " %35s  %4.5f \n"%(nodeName,pos)		
 		    s += "   %6.4f  %6.4f  %f  %f   \n"%(alphaX,betaX,emittX,norm_emittX)
 		    s += "   %6.4f  %6.4f  %f  %f   \n"%(alphaY,betaY,emittY,norm_emittY)
 		    s += " (twiss x rms,twiss y rms)=(%f,  %f) \n"%(x_rms,y_rms)
