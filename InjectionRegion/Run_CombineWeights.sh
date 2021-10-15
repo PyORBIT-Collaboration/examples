@@ -5,19 +5,19 @@ echo "Hello World"
 #directory is for injectbeam wastebeam
 #directory2 is for closed beam
 #directory3 is injectbeam ring
-outputDirectory=NoMethod_SecondDoneRight_LR
+outputDirectory=NoMethod_SecondDoneRight
 #outputDirectory=Method4_strippersNotClosed_ArrayConfig
 #outputDirectoryPrefix=Method1
 #magneticFieldFiles=(UpUp DownDown UpDown DownUp LeftLeft LeftRight)
 #magneticFieldFiles=(LeftUp RightUp LeftDown RightDown)
 #magneticFieldFiles=(LeftUp)
 configFileDirectory=ConfigFilesCombineWeightBunches
-#configFileName=(101_p5_011_p5.txt 101_1p0.txt)
-configFileName=(101_p5_011_p5_LR.txt 101_1p0_LR.txt)
+configFileName=(101_p5_011_p5.txt 101_1p0.txt)
+#configFileName=(101_p5_011_p5_LR.txt 101_1p0_LR.txt)
 #beamLatticeFileSuffix=(RUR LUL)
 #beamLatticeFileSuffix=(p20_ULRD p30_ULRD p40_ULRD p50_ULRD p60_ULRD p70_ULRD p80_ULRD)
-#inputDirectorySuffix=(p80_ULRD)
-inputDirectorySuffix=(p80_LR)
+inputDirectorySuffix=(p80_ULRD)
+#inputDirectorySuffix=(p80_LR)
 inputDirectoryPrefix=$outputDirectory/PPU_InjectBeam_NoMethod_ArrayConfig__Second
 
 #suffix=($suffixInjection $suffixWaste $suffixClosed)  

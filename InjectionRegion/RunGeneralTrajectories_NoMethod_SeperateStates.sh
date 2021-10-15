@@ -5,7 +5,7 @@ echo "Hello World"
 #directory is for injectbeam wastebeam
 #directory2 is for closed beam
 #directory3 is injectbeam ring
-outputDirectory=NoMethod_SecondDoneRight_LR
+outputDirectory=NoMethod_SecondDoneRight
 #outputDirectory=Method4_strippersNotClosed_ArrayConfig
 #outputDirectoryPrefix=Method1
 #magneticFieldFiles=(UpUp DownDown UpDown DownUp LeftLeft LeftRight)
