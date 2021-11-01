@@ -1,0 +1,8 @@
+stripperLength=0.00000001
+stripperStrengthMax=0
+stripperStrengthMin=0
+cutLength=0.0
+fieldDirection=Up
+magnetFunction=0
+nParts=1000
+foilTest=True
