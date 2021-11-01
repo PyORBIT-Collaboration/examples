@@ -5,7 +5,8 @@ echo "Hello World"
 #directory is for injectbeam wastebeam
 #directory2 is for closed beam
 #directory3 is injectbeam ring
-outputDirectory=Method4_strippersNotClosed_ArrayConfig_PPU_SecondDoneRight
+outputDirectory=Method4_strippersNotClosed_ArrayConfig_PPU
+#outputDirectory=Method4_strippersNotClosed_ArrayConfig_PPU_SecondDoneRight
 #outputDirectory=Method4_strippersNotClosed_ArrayConfig
 #outputDirectoryPrefix=Method1
 #magneticFieldFiles=(UpUp DownDown UpDown DownUp LeftLeft LeftRight)
@@ -17,8 +18,8 @@ beamLatticeFileDirectory=BeamLatticeFiles
 #beamLatticeFileSuffix=(p20_ULRD p30_ULRD p40_ULRD p50_ULRD p60_ULRD p70_ULRD p80_ULRD)
 beamLatticeFileSuffix=(p80_ULRD)
 chicaneScaleDirectory=Method4_Part4_strippersNotClosed_FloatLength
-#suffixInjection=PPU_InjectBeam_Method4_ArrayConfig_FloatLength
-suffixInjection=PPU_InjectBeam_Method4_ArrayConfig_FloatLength_Second000
+suffixInjection=PPU_InjectBeam_Method4_ArrayConfig_FloatLength
+#suffixInjection=PPU_InjectBeam_Method4_ArrayConfig_FloatLength_Second000
 suffixWaste=PPU_WasteBeam_Method4_ArrayConfig_FloatLength
 #suffixWaste=WasteBeam_Method4_ArrayConfig_FloatLength
 suffixClosed=PPU_ClosedBeam_Method4_strippersNotClosed_ArrayConfig
