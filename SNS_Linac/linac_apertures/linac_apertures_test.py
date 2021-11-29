@@ -41,6 +41,13 @@ from orbit.bunch_generators import TwissAnalysis
 from bunch import Bunch
 from bunch import BunchTwissAnalysis
 
+#---- These are convinience class and function for
+#---- particles attributes: Ids and Initial Coordinates
+#---- They will assign these values for the initial 
+#---- bunch and we should see them in the lost bunch
+from orbit.bunch_utils import ParticleIdNumber
+from bunch_utils_functions import copyCoordsToInitCoordsAttr
+
 #--------------------------------------------------------
 # This is an example of the custom AccNode subclass
 # that can be added to the lattice or attached as a child
@@ -208,6 +215,12 @@ nParticlesGlobal = bunch.getSizeGlobal()
 if(rank == 0):
 	print "total number of particles =",nParticlesGlobal
 bunch.macroSize(macrosize)
+
+#----- Assign the Ids to each particle
+ParticleIdNumber.addParticleIdNumbers(bunch)
+#---- Copy the coordinates to the initial coordinates 
+#---- array of Particles Attribute
+copyCoordsToInitCoordsAttr(bunch)
 
 #set up design
 accLattice.trackDesignBunch(bunch)
