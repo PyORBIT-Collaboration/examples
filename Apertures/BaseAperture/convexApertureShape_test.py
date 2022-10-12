@@ -1,7 +1,7 @@
 ##############################################################
-# This script test the BaseAperture and PrimitiveApertureShape
-# PrimitiveApertureShape class that is used for circle, ellipse,
-# and rectangular aperture shapes.
+# This script test the BaseAperture and ConvexApertureShape
+# class which is used to combine several [x,y] points in
+# one aperture that we call "convex".
 ##############################################################
 
 import math
@@ -11,20 +11,23 @@ from bunch import Bunch
 from aperture import BaseAperture
 from aperture import PyBaseApertureShape
 from aperture import PrimitiveApertureShape
+from aperture import CompositeApertureShape
+from aperture import ConvexApertureShape
 
-radius = 0.5
-x_half_size = 0.6
-y_half_size = 0.8
-apertureShape = PrimitiveApertureShape("circle",radius)
-#apertureShape.setParams(0.3)
-print "paramsDict =",apertureShape.getParamsDict()
-apertureShape = PrimitiveApertureShape("ellipse",x_half_size,y_half_size)
-#apertureShape.setParams(0.2,0.4)
-print "paramsDict =",apertureShape.getParamsDict()
-apertureShape = PrimitiveApertureShape("rectangular",x_half_size,y_half_size)
-#apertureShape.setParams(0.5,0.6)
-print "paramsDict =",apertureShape.getParamsDict()
-apertureShape.name("TestPyShape")
+#---- points should create a clockwise convex shape
+points_arr = [[-1.,+1.],[+1.,+1.],[+1.,-1.],[-1.,-1.]]
+
+#---- after reverse these points will give anti-clockwise shape
+#---- and script will complain about this.
+#points_arr.reverse()
+
+print "points_arr = ",points_arr
+
+apertureShape = ConvexApertureShape()
+apertureShape.setPoints(points_arr)
+print "Points = ",apertureShape.getPoints()
+
+apertureShape.name("TestConvexShape")
 print "Shape name=",apertureShape.name()
 print "Shape type=",apertureShape.typeName()
 
@@ -35,9 +38,9 @@ baseAperture.position(11.0)
 baseAperture.onOff(True)
 
 bunch = Bunch()
-nParts = 5
+nParts = 15
 for ind in xrange(nParts):
-	bunch.addParticle(0.1+ind ,0.2+ind ,0.3+ind ,0.4+ind ,0.5+ind ,0.6+ind )
+	bunch.addParticle(0.1*ind ,0.2*ind ,0.1*ind ,0.4+ind ,0.5+ind ,0.6+ind )
 	
 lostBunch = Bunch()	
 	
@@ -73,16 +76,14 @@ while( 1 < 2):
 		
 	baseAperture.checkBunch(bunch,lostBunch)
 	
-	apertureShape = PrimitiveApertureShape("circle",radius)
-	print "paramsDict =",apertureShape.getParamsDict()
-	apertureShape = PrimitiveApertureShape("ellipse",x_half_size,y_half_size)
-	print "paramsDict =",apertureShape.getParamsDict()
-	apertureShape = PrimitiveApertureShape("rectangular",x_half_size,y_half_size)
-	print "paramsDict =",apertureShape.getParamsDict()
+	apertureShape = ConvexApertureShape()
+	points_arr = [[-1.,+1.],[+1.,+1.],[+1.,-1.],[-1.,-1.]]
+	apertureShape.setPoints(points_arr)
 	
-	apertureShape.name("TestPyShape")
-	par_dict = apertureShape.getParamsDict()
-	apertureShape.name()
+	points_arr = [[-1.,+1.],[+1.,+1.],[+1.,-1.],[-1.,-1.]]
+	apertureShape.setPoints(points_arr)
+	
+	apertureShape.name("TestConvexShape")
 	baseAperture = BaseAperture()
 	baseAperture.setApertureShape(apertureShape)
 	baseAperture.position(11.0)

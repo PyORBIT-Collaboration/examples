@@ -41,6 +41,9 @@ print "Shape type=",compositeApertureShape.typeName()
 
 baseAperture = BaseAperture()
 baseAperture.setApertureShape(compositeApertureShape)
+baseAperture.position(11.0)
+#---- by default is True (1), but you can switch it to False (0
+baseAperture.onOff(True)
 
 bunch = Bunch()
 nParts = 7
@@ -62,7 +65,7 @@ lostBunch.dumpBunch()
 
 print "=============done=================="
 
-#sys.exit(0)
+sys.exit(0)
 
 #------------------------------------------------
 # Below is a memeory leak check for all classes
@@ -93,6 +96,8 @@ while( 1 < 2):
 	compositeApertureShape.name("TestCompositeShape")
 	baseAperture = BaseAperture()
 	baseAperture.setApertureShape(compositeApertureShape)
+	baseAperture.position(11.0)
+	baseAperture.onOff(True)	
 	apertureShape = baseAperture.getApertureShape()
 	
 	count += 1

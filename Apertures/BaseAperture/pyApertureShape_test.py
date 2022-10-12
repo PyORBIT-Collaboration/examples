@@ -42,6 +42,9 @@ print "Shape parameters=",apertureShape.getParamsDict()
 
 baseAperture = BaseAperture()
 baseAperture.setApertureShape(apertureShape)
+baseAperture.position(11.0)
+#---- by default is True (1), but you can switch it to False (0)
+baseAperture.onOff(True)
 
 bunch = Bunch()
 nParts = 5
@@ -63,7 +66,7 @@ lostBunch.dumpBunch()
 
 print "=============done=================="
 
-#sys.exit(0)
+sys.exit(0)
 
 #------------------------------------------------
 # Below is a memeory leak check for all classes
@@ -86,6 +89,8 @@ while( 1 < 2):
 	apertureShape.name()
 	baseAperture = BaseAperture()
 	baseAperture.setApertureShape(apertureShape)
+	baseAperture.position(11.0)
+	baseAperture.onOff(True)
 	apertureShape = baseAperture.getApertureShape()
 	
 	count += 1
