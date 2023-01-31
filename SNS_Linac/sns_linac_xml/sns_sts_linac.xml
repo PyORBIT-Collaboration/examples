@@ -13160,13 +13160,13 @@
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-0.001403" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QH12" pos="6.860119" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="2.219343130330302"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.219343130330302"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH12" pos="10.276726" type="BEND">
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-6.38E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QV13" pos="14.193333" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="-2.0701018709497716"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.0701018709497716"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH13" pos="17.60994" type="BEND">
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-8.47E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
@@ -13175,7 +13175,7 @@
    <parameters B="0.0" effLength="0.538"/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QH14" pos="21.526546" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="2.219343130330302"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.219343130330302"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH14" pos="24.943157" type="BEND">
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="1.3E-5" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
@@ -13184,7 +13184,7 @@
    <parameters B="0.0" effLength="0.538"/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QV15" pos="28.859768" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="-2.0701018709497716"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.0701018709497716"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH15" pos="32.276379" type="BEND">
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-6.36E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
@@ -13199,7 +13199,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QH16" pos="36.192989" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="2.219343130330302"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.219343130330302"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH16" pos="39.6096" type="BEND">
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="4.14E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
@@ -13211,7 +13211,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QV17" pos="43.526211" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="-2.0701018709497716"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.0701018709497716"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH17" pos="46.942821" type="BEND">
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="1.14E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
@@ -13220,7 +13220,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QH18" pos="50.859432" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="2.219343130330302"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.219343130330302"/>
   </accElement>
   <accElement length="5.432" name="HEBT_Mag:DH18" pos="54.276043" type="BEND">
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="-0.09817477042468103" ea2="-0.09817477042468103" kls="-4.12E-4" poles="1.0" skews="0.0" theta="-0.19634954084936207"/>
@@ -13229,13 +13229,13 @@
    <parameters/>
   </accElement>
   <accElement length="0.5" name="HEBT_Mag:QV19" pos="58.192654" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="-2.0701018709497716"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.0701018709497716"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BSM19" pos="59.298" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH20" pos="63.692654" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="2.4488786935847133"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.4488786935847133"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM20" pos="64.075814" type="MARKER">
    <parameters/>
@@ -13247,7 +13247,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV21" pos="68.692654" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="-2.5798161118205285"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.5798161118205285"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM21" pos="69.075814" type="MARKER">
    <parameters/>
@@ -13259,7 +13259,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH22" pos="73.192654" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="2.9729277865278836"/>
+   <parameters aperture="0.12" aprt_type="1" field="-2.9729277865278836"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM22" pos="73.575814" type="MARKER">
    <parameters/>
@@ -13271,7 +13271,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV23" pos="77.692654" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="-2.8037353976964186"/>
+   <parameters aperture="0.12" aprt_type="1" field="2.8037353976964186"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM23" pos="78.075814" type="MARKER">
    <parameters/>
@@ -13283,7 +13283,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH24" pos="82.192654" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="3.446954607217562"/>
+   <parameters aperture="0.12" aprt_type="1" field="-3.446954607217562"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM24" pos="82.575814" type="MARKER">
    <parameters/>
@@ -13295,7 +13295,7 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV25" pos="86.192654" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="-3.240630311943467"/>
+   <parameters aperture="0.12" aprt_type="1" field="3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM25" pos="86.575814" type="MARKER">
    <parameters/>
@@ -13304,19 +13304,19 @@
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="0.07640056627557539" ea2="0.07640056627557539" kls="-1.79E-4" poles="1.0" skews="0.0" theta="0.15280113255115077"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH26" pos="92.336689" type="QUAD">
-   <parameters aperture="0.12" aprt_type="1" field="3.25169354612548"/>
+   <parameters aperture="0.12" aprt_type="1" field="-3.25169354612548"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM26" pos="92.719834" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV27" pos="96.336689" type="QUAD">
-   <parameters aperture="0.21" aprt_type="1" field="-3.240630311943467"/>
+   <parameters aperture="0.21" aprt_type="1" field="3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM27" pos="96.719834" type="MARKER">
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH28" pos="100.336689" type="QUAD">
-   <parameters aperture="0.21" aprt_type="1" field="3.25169354612548"/>
+   <parameters aperture="0.21" aprt_type="1" field="-3.25169354612548"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM28" pos="100.719834" type="MARKER">
    <parameters/>
@@ -13325,7 +13325,7 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV29" pos="104.336689" type="QUAD">
-   <parameters aperture="0.21" aprt_type="1" field="-3.240630311943467"/>
+   <parameters aperture="0.21" aprt_type="1" field="3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM29" pos="104.719834" type="MARKER">
    <parameters/>
@@ -13334,7 +13334,7 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH30" pos="107.836689" type="QUAD">
-   <parameters aperture="0.21" aprt_type="1" field="4.073370902047217"/>
+   <parameters aperture="0.21" aprt_type="1" field="-4.073370902047217"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM30" pos="108.219834" type="MARKER">
    <parameters/>
@@ -13343,7 +13343,7 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV31" pos="111.836689" type="QUAD">
-   <parameters aperture="0.21" aprt_type="1" field="-3.240630311943467"/>
+   <parameters aperture="0.21" aprt_type="1" field="3.240630311943467"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM31" pos="112.219834" type="MARKER">
    <parameters/>
@@ -13352,7 +13352,7 @@
    <parameters B="0.0" effLength="0.33"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH32" pos="115.836689" type="QUAD">
-   <parameters aperture="0.21" aprt_type="1" field="3.25169354612548"/>
+   <parameters aperture="0.21" aprt_type="1" field="-3.25169354612548"/>
   </accElement>
   <accElement length="0.0" name="HEBT_Diag:BPM32" pos="116.219834" type="MARKER">
    <parameters/>
@@ -13367,10 +13367,10 @@
    <parameters/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QV33" pos="122.451694" type="QUAD">
-   <parameters aperture="0.21" aprt_type="1" field="-5.294947104878765"/>
+   <parameters aperture="0.21" aprt_type="1" field="5.294947104878765"/>
   </accElement>
   <accElement length="0.505" name="HEBT_Mag:QH34" pos="123.311695" type="QUAD">
-   <parameters aperture="0.21" aprt_type="1" field="4.7887321558919504"/>
+   <parameters aperture="0.21" aprt_type="1" field="-4.7887321558919504"/>
   </accElement>
   <accElement length="3.064" name="HEBT_Mag:InjSptm" pos="126.343479" type="BEND">
    <parameters aperture_x="0.21" aperture_y="0.08" aprt_type="3" ea1="0.0" ea2="0.0" kls="0.0" poles="1.0" skews="0.0" theta="-0.11084586079415987"/>
