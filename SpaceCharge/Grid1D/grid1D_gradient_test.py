@@ -12,7 +12,7 @@ from spacecharge import Grid1D
 
 print "Start."
 
-sizeZ = 100
+sizeZ = 10
 zMin =  1.0
 zMax = +4.0
 

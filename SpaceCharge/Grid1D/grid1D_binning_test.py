@@ -8,54 +8,78 @@
 
 import sys
 import math
+import random
 
+from bunch import Bunch
 from spacecharge import Grid1D
+from orbit.diagnostics import profiles
 
+random.seed(100)
 
 print "Start."
 
-sizeZ = 3
+sizeZ = 5
 zMin =  1.0
 zMax = +4.0
 
-extent = 1.0
+extent = 0.2
 
 grid1D = Grid1D(sizeZ,zMin,zMax)
-
-
-def FuncTest(z):
-	y = 2.0 + 0.5*(z-1.) + z**2
-	return y
 
 #-------------------------------------------
 # Bin the uniformly distributed values along z
 #-------------------------------------------
-nPlotPoints = 10000
+nPlotPoints = 100000
 x_polt_min = zMin - extent
 x_polt_max = zMax + extent
-step = (x_polt_max - x_polt_min)/(nPlotPoints - 1)
 
 value = 1.0
 
-for ind_p in range(nPlotPoints):
-	x = x_polt_min + ind_p*step
-	#grid1D.binValue(value,x)
-	grid1D.binValueSmoothed(value,x)
+bunch_test = Bunch()
+macrosize = 1.
+bunch_test.macroSize(macrosize)
 
-#---------------------------------
-# Plot the density
-#---------------------------------
+for ind_p in range(nPlotPoints):
+	x = random.uniform(x_polt_min,x_polt_max)
+	bunch_test.addParticle(x,2*x,3*x,4*x,5*x,6*x)
+	grid1D.binValue(value,x)
+	#grid1D.binValueSmoothed(value,x)
+	
+print "nParts in bunch=",bunch_test.getSizeGlobal()
+
+#---------------------------------------------------
+# Plot the density - it should be almost uniform
+#--------------------------------------------------
 
 x_arr = []
 y_arr = []
 for ind in range(sizeZ):
 	x = grid1D.getGridZ(ind)
 	y = grid1D.getValueOnGrid(ind)
-	print "debug z=",x," rho=",y
+	y_value = grid1D.getValueOnGrid(ind)
+	print "debug z=",x," rho=",y," rho_value=",y_value," err=",math.sqrt(y_value)
 	x_arr.append(x)
 	y_arr.append(y)
-		
-		
+
+#---- dump histogram into the file. profiles uses grid1D.binBunch(bunch)
+#---- so, the histogram.dat should have the same information as previous
+#---- debug printing
+coord = "x"
+histogram = "histogram.dat"
+profiles(bunch_test, coord, histogram, sizeZ, zMin, zMax)
+
+#---- check value interpolation
+print "debug ---check value interpolation ----"
+print "debug range zMin=",zMin," zMax=",zMax
+nPoints = 13
+step = (zMax - zMin)/(nPoints - 1)
+zMinNew = zMin - step
+for ind in range(nPoints + 2):
+	x = zMinNew  + ind*step
+	y = grid1D.getValue(x)
+	#y = grid1D.getValueSmoothed(x)
+	print "debug ind=",ind," z=",x," rho=",y
+
 #---------------------------
 # Plot part
 #---------------------------
