@@ -14,11 +14,11 @@ from spacecharge import Grid1D
 
 print "Start."
 
-sizeZ = 2
+sizeZ = 20
 zMin =  1.0
 zMax = +4.0
 
-extent = 1.0
+extent = 2.0
 
 grid1D = Grid1D(sizeZ,zMin,zMax)
 
@@ -40,7 +40,6 @@ for ind in range(sizeZ):
 	z = grid1D.getGridZ(ind)
 	val = FuncTest(z)
 	grid1D.setValue(val,ind)
-	print "debug z=",z," val=",val
 	z_arr.append(z)
 	val_arr.append(val)
 	
