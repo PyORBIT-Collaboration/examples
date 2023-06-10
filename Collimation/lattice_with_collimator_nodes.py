@@ -52,7 +52,7 @@ c = 0
 d = 0
 angle = 0
 
-collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle, "Collimator 1")
+collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, angle,0, "Collimator 1")
 
 addTeapotCollimatorNode(teapot_latt, 18.5,collimator)
 print "===========Lattice modified ======================================="

@@ -27,9 +27,9 @@ trans = orbit_path+"/ext/laserstripping/transitions/"
     
 
 n_states = 3
-
-pf = printf("ProjectX_%i.dat"%n_states,"level","polarization", "Bx [T]", "rmsAng. [mrad]", "emitt. [mm mrad]","em_norm. [mm mrad]", "efficiency")
-
+print "hi1"
+pf = printf("ProjectX_%i.dat"%n_states,["level","polarization", "Bx [T]", "rmsAng. [mrad]", "emitt. [mm mrad]","em_norm. [mm mrad]", "efficiency"])
+print "hi2"
 #for n_states, polar, Bx  in [(n_states, polar, By)
 #                        for n_states in [4]
 #                        for polar in [0, 1]
@@ -39,8 +39,11 @@ pf = printf("ProjectX_%i.dat"%n_states,"level","polarization", "Bx [T]", "rmsAng
 for polar, Bx  in [(polar, Bx)
                         for polar in [1]
                         for Bx in [0.35]]:
-    n_step = 1000000
-    Nevol=100000
+    #n_step = 1000000
+    #Nevol=100000
+
+    n_step = 100
+    Nevol=100
     
     h = 0.05
     
@@ -67,9 +70,9 @@ for polar, Bx  in [(polar, Bx)
     
  
     
-    
+    print "hi3"
     b.addPartAttr("Populations",{"size":levels+1})  
-    
+    print "hi3b"
     ####--------------------------distribution of populations for parallel and perpendicular polarization of laser field--------------------#### 
     n = n_states
     
@@ -88,20 +91,21 @@ for polar, Bx  in [(polar, Bx)
     ####--------------------------distribution of populations for parallel and perpendicular polarization of laser field--------------------####  
     
     
-    
+    print "hi3c"
     
     mag = FringeField(h,Bx,1)
 
+    print "hi3d"
 
-
-    evo = RecordEvolution("Populations",0,Nevol)
+    #evo = RecordEvolution("Populations",0,Nevol)
+    print "hi3e"
     St = Stark(trans, n_states) 
     eff = DM_noLaserField(St)
 
     
-
+    print "hi4"
     cont_eff = ExtEffectsContainer()
-    cont_eff.AddEffect(evo)
+    #cont_eff.AddEffect(evo)
     cont_eff.AddEffect(eff)
 
     
@@ -121,7 +125,7 @@ for polar, Bx  in [(polar, Bx)
     prob = b.partAttrValue("Evolution",0,Nevol)
     
 
-
+    print "hi5"
     ang_aver = 0
     for i in range(Nevol-1,-1,-1):
         fd[i] = abs((b.partAttrValue("Evolution",0,i+1) - b.partAttrValue("Evolution",0,i))/dz/prob)
@@ -134,7 +138,7 @@ for polar, Bx  in [(polar, Bx)
     for i in range(Nevol):
         ang_aver2 += (ang[i] - ang_aver)*(ang[i] - ang_aver)*fd[i]*dz
    
-
+    print "hi6"
     if(prob>0.01):
         pf.fdata(n_states,polar,Bx,1e3*math.sqrt(ang_aver2),ang_aver2*10*1e6, beta*gamma*ang_aver2*10*1e6,prob)  
 
@@ -146,7 +150,7 @@ for polar, Bx  in [(polar, Bx)
 #        print >>f, mag.getField(0,0,z1 + i*dz,0),"\t",abs(b.partAttrValue("Evolution",0,i))
         print >>f, abs(b.partAttrValue("Evolution",0,i))
     f.close()
-    
+    print "hi7"
 """     
     gen = BunchGen()
     bunch, bunch_unstr = gen.getAutoionizationBunch(100000,b,0)

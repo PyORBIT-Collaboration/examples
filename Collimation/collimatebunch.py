@@ -19,7 +19,7 @@ c = 0
 d = 0
 angle = 0
 
-collimator =Collimator(length, ma, density_fac, shape, a, b, c, d, angle)
+collimator =Collimator(length, ma, density_fac, shape, a, b, c, d, angle,0)
 
 #------------------------------
 #Main Bunch init

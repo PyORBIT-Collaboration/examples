@@ -1,0 +1,11 @@
+stripperLength1=0.06
+stripperStrengthMax1=1.3
+stripperStrengthMin1=0.2
+cutLength1=0.03
+fieldDirection1=Up
+
+stripperLength2=0.06
+stripperStrengthMax2=1.3
+stripperStrengthMin2=0.2
+cutLength2=0.03
+fieldDirection2=Down
