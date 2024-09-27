@@ -64,7 +64,8 @@ for i in range(b.getSize()):    #consider all particle as stripped
 
 
 
-n_step = 10000
+#n_step = 10000
+n_step = 1
 
 
 n_states = 3

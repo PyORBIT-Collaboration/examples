@@ -1,0 +1,74 @@
+#lattice info
+latticeInjection=MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_onlyChicane2.LAT
+latticeClosedCompareToInjection=MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_Kickers_Start_To_JustBeforeChicane4.LAT
+latticeClosed=MAD_Injection_Region_Lattice/InjectionRegionOnly_Chicane_Replaced_With_KickersJustBeforeQuadAfterChicane4.LAT
+
+#whether or not to use Strippers
+doDipoleStrippersInjection=True
+doDipoleStrippersClosed=False
+
+#whether or not stripper node can strip
+firstStripperIsStripperInjection=True
+secondStripperIsStripperInjection=False
+thirdStripperIsStripperInjection=False
+thirdStrippingLengthInjection=0.02
+
+thirdStripperReference=Dipole_DH_A12
+thirdStripperPosition=-1
+
+firstStripperPositionArray=1
+firstStripperPositionMax=1
+
+#secondStripperPositionArray=-1,0
+secondStripperPositionArray=-1
+secondStripperPositionMax=0
+
+#beam info
+#GeV
+e_kin_ini=1.3
+mass=0.93827231
+initial_chargeInjection=-1
+nPartsInjection=10000
+
+initial_chargeClosed=1
+#currently this does nothing. its always pencil for closed
+pencilBeamClosed=True
+#if pencil beam closed is true then nPartsClosed is irrelevant
+nPartsClosed=10000
+
+#units [m/rad]
+xOffsetInjection=0.25671
+pxOffsetInjection=-.042
+yOffsetInjection=0.046
+pyOffsetInjection=0
+
+alphaZInjection=0.0196
+betaZInjection=0.5844
+emittZInjection=0.24153
+
+alphaXInjection=.224
+betaXInjection=10.5
+emittXInjection=1.445
+
+alphaYInjection=.224
+betaYInjection=10.5
+emittYInjection=1.445
+
+#units [m/rad]
+xOffsetClosed=0
+pxOffsetClosed=0
+yOffsetClosed=0
+pyOffsetClosed=0
+
+#these values are irrelevent when using pencil beam
+alphaZClosed=0.0196
+betaZClosed=0.5844
+emittZClosed=0.24153
+
+alphaXClosed=.224
+betaXClosed=10.5
+emittXClosed=1.445
+
+alphaYClosed=.224
+betaYClosed=10.5
+emittYClosed=1.445

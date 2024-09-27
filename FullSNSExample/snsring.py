@@ -335,14 +335,22 @@ nodes = teapot_latt.getNodes()
 i = 0
 for node in nodes:
 	print i, " node=", node.getName()," s start,stop = %4.3f %4.3f "%teapot_latt.getNodePositionsDict()[node]
+	#if node.getName().strip() == "DH_A12":
+		#print node.getnParts()
+	print "nParts=",node.getnParts()
 	print "There are ", node.getNumberOfBodyChildren()," child nodes."
+	j=0
+	for childNode in node.getAllChildren():
+		print "		",j, " child node=", childNode.getName()
+		j=j+1
 	i=i+1
 
 #================Do some turns===========================================
 
 teapot_latt.trackBunch(b, paramsDict)
 bunch_pyorbit_to_orbit(teapot_latt.getLength(), b, "mainbunch_1.dat")
-
+b.dumpBunch()
+sys.exit(0)
 for i in xrange(99):
 	teapot_latt.trackBunch(b, paramsDict)
 	

@@ -1,0 +1,10 @@
+
+class notRandom:
+
+    def __init__ (self,pos,mom):
+        self.name="notRandom"
+        self.pos=pos
+        self.mom=mom
+        
+    def getCoordinates(self):
+        return (self.pos,self.mom)

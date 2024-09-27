@@ -1,0 +1,7 @@
+stripperLength=0.06
+stripperStrengthMax=1.3
+stripperStrengthMin=0.2
+cutLength=0.03
+fieldDirection=Left
+magnetFunction=0
+nParts=1000
